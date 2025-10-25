@@ -41,8 +41,6 @@ export default function WorkoutPage() {
   });
 
   const openExerciseModal = (exercise: WorkoutExercise) => {
-    console.log('Opening exercise modal with data:', exercise);
-    console.log('Exercise details:', exercise.exercise);
     setSelectedExercise(exercise);
     setIsExerciseModalOpen(true);
   };

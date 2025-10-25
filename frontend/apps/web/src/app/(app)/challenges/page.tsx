@@ -19,9 +19,13 @@ interface Challenge {
   title: string;
   type: string;
   targetValue: number;
+  currentValue: number;
   startDate: string;
   endDate: string;
   status: string;
+  targetType: number;
+  isDefault: boolean;
+  isParticipating: boolean;
   progresses: ChallengeProgress[];
 }
 
@@ -50,11 +54,11 @@ export default function ChallengesPage() {
 
   const queryClient = useQueryClient();
 
-  // Fetch challenges
+  // Fetch ALL challenges (with participation info)
   const { data: challenges = [], isLoading: loadingChallenges } = useQuery<Challenge[]>({
-    queryKey: ['challenges'],
+    queryKey: ['challenges', 'all'],
     queryFn: async () => {
-      return apiClient.get('/challenges');
+      return apiClient.get('/challenges/all');
     },
   });
 
@@ -152,9 +156,8 @@ export default function ChallengesPage() {
   };
 
   const getProgressPercentage = (challenge: Challenge) => {
-    if (!challenge.progresses || challenge.progresses.length === 0) return 0;
-    const myProgress = challenge.progresses[0]; // Assuming first is current user
-    return Math.min(100, (myProgress.currentValue / challenge.targetValue) * 100);
+    if (!challenge.isParticipating) return 0;
+    return Math.min(100, (challenge.currentValue / challenge.targetValue) * 100);
   };
 
   const getDaysRemaining = (endDate: string) => {
@@ -229,12 +232,24 @@ export default function ChallengesPage() {
             const participants = challenge.progresses?.length || 0;
 
             return (
-              <Card key={challenge.id} className="border-2">
+              <Card
+                key={challenge.id}
+                className={`border-2 transition-all ${
+                  !challenge.isParticipating
+                    ? 'opacity-50 bg-muted/30'
+                    : ''
+                }`}
+              >
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <CardTitle className="flex items-center gap-2">
                       <Trophy className="h-5 w-5 text-primary" />
                       {challenge.title}
+                      {!challenge.isParticipating && (
+                        <Badge variant="outline" className="ml-2">
+                          Não participando
+                        </Badge>
+                      )}
                     </CardTitle>
                     <Badge className={getStatusColor(challenge.status)}>
                       {challenge.status}
@@ -262,12 +277,17 @@ export default function ChallengesPage() {
 
                   {/* Stats */}
                   <div className="space-y-2 text-sm">
-                    {challenge.progresses && challenge.progresses.length > 0 && (
+                    {challenge.isParticipating ? (
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Atual:</span>
+                        <span className="text-muted-foreground">Seu Progresso:</span>
                         <span className="font-medium">
-                          {challenge.progresses[0].currentValue} / {challenge.targetValue}
+                          {challenge.currentValue} / {challenge.targetValue}
                         </span>
+                      </div>
+                    ) : (
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Meta:</span>
+                        <span className="font-medium">{challenge.targetValue}</span>
                       </div>
                     )}
                     {daysRemaining > 0 && (

@@ -1,3 +1,4 @@
+using GymHero.Shared.DTOs;
 using MediatR;
 namespace GymHero.Application.Features.Challenges.Commands;
 
@@ -8,4 +9,6 @@ public record CreateCustomChallengeCommand(
     double TargetValue,
     DateTime StartDate,
     DateTime EndDate,
-    List<Guid> FriendIds) : IRequest<Guid>; // Retorna o ID do novo desafio
+    List<Guid> FriendIds,
+    ChallengeTargetType TargetType = ChallengeTargetType.SpecificUsers,
+    bool IsDefault = false) : IRequest<Guid>; // Retorna o ID do novo desafio

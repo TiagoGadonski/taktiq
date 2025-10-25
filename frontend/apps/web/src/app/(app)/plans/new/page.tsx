@@ -202,9 +202,7 @@ export default function NewPlanPage() {
         goal: data.goal || null,
       };
 
-      console.log('Creating plan with data:', planData);
       const createdPlan = await apiClient.post('/workout-plans', planData);
-      console.log('Plan created:', createdPlan);
       const planId = createdPlan.id;
 
       if (!planId) {
@@ -216,8 +214,6 @@ export default function NewPlanPage() {
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e.id]));
 
       // Step 3: Create workouts (days) and add exercises to them
-      console.log(`Creating ${workoutDays.length} workout days`);
-
       for (let dayIndex = 0; dayIndex < workoutDays.length; dayIndex++) {
         const day = workoutDays[dayIndex];
 
@@ -228,7 +224,6 @@ export default function NewPlanPage() {
           order: dayIndex + 1,
         };
 
-        console.log(`Creating workout day "${day.name}":`, workoutData);
         const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
@@ -243,10 +238,8 @@ export default function NewPlanPage() {
           if (existingId) {
             // Exercise already exists, use its ID
             exerciseId = existingId;
-            console.log(`Exercise "${ex.name}" already exists with ID: ${exerciseId}`);
           } else {
             // Exercise doesn't exist, create it first
-            console.log(`Creating new exercise: ${ex.name}`);
             const newExercise = await apiClient.post('/exercises', {
               name: ex.name,
               muscleGroup: (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles[0] : 'Other',
@@ -267,12 +260,9 @@ export default function NewPlanPage() {
             targetLoad: 0, // Default load
           };
 
-          console.log(`Adding exercise to workout ${workoutId}:`, exerciseData);
           await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, exerciseData);
         }
       }
-
-      console.log('All workout days and exercises created successfully');
 
       toast({
         title: 'Plano criado!',
@@ -281,7 +271,6 @@ export default function NewPlanPage() {
 
       router.push('/plans');
     } catch (error: any) {
-      console.error('Error creating plan:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao criar plano',

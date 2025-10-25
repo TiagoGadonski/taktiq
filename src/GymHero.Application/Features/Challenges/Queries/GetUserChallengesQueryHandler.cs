@@ -32,7 +32,9 @@ public class GetUserChallengesQueryHandler : IRequestHandler<GetUserChallengesQu
                 c.Progresses.Sum(p => p.CurrentValue),
                 c.Status,
                 c.StartDate,
-                c.EndDate))
+                c.EndDate,
+                (ChallengeTargetType)c.TargetType,
+                c.IsDefault))
             .ToListAsync(cancellationToken);
 
         return challenges;

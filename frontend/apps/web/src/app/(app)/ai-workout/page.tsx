@@ -68,6 +68,7 @@ export default function AIWorkoutPage() {
   const [planFitnessLevel, setPlanFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [daysPerWeek, setDaysPerWeek] = useState(4);
   const [generatedPlan, setGeneratedPlan] = useState<AIWorkoutPlanResponse | null>(null);
+  const [savedPlanId, setSavedPlanId] = useState<string | null>(null);
 
   // Exercise detail modal state
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -133,8 +134,6 @@ export default function AIWorkoutPage() {
       return apiClient.post<AIWorkoutPlanResponse>('/ai/generate-plan', request);
     },
     onSuccess: (data) => {
-      console.log('AI Plan Response:', data);
-      console.log('First exercise from AI:', data.days?.[0]?.exercises?.[0]);
       setGeneratedPlan(data);
       toast({
         title: 'Plano de treino gerado com sucesso!',
@@ -272,7 +271,6 @@ export default function AIWorkoutPage() {
         goal: generatedPlan.goal,
       };
 
-      console.log('Creating plan from AI:', planData);
       const createdPlan = await apiClient.post('/workout-plans', planData);
       const planId = createdPlan.id;
 
@@ -285,8 +283,6 @@ export default function AIWorkoutPage() {
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e]));
 
       // Step 3: Create workouts (days) and add exercises to them
-      console.log(`Creating ${generatedPlan.days.length} workout days`);
-
       for (let dayIndex = 0; dayIndex < generatedPlan.days.length; dayIndex++) {
         const day = generatedPlan.days[dayIndex];
 
@@ -297,7 +293,6 @@ export default function AIWorkoutPage() {
           order: dayIndex + 1,
         };
 
-        console.log(`Creating workout day "${workoutData.name}":`, workoutData);
         const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
@@ -314,7 +309,6 @@ export default function AIWorkoutPage() {
             const needsUpdate = (!existingExercise.videoUrl && ex.videoUrl) || (!existingExercise.imageUrl && ex.gifUrl);
 
             if (needsUpdate) {
-              console.log(`Updating exercise "${ex.name}" with video URLs`);
               await apiClient.put(`/exercises/${existingExercise.id}`, {
                 name: existingExercise.name,
                 muscleGroup: existingExercise.muscleGroup,
@@ -327,10 +321,8 @@ export default function AIWorkoutPage() {
             }
 
             exerciseId = existingExercise.id;
-            console.log(`Exercise "${ex.name}" already exists with ID: ${exerciseId}`);
           } else {
             // Create new exercise
-            console.log(`Creating new exercise: ${ex.name}`);
             const newExercise = await apiClient.post('/exercises', {
               name: ex.name,
               muscleGroup: ex.bodyPart || 'Other',
@@ -353,7 +345,6 @@ export default function AIWorkoutPage() {
             targetLoad: 0,
           };
 
-          console.log(`Adding exercise to workout ${workoutId}:`, exerciseData);
           await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, exerciseData);
         }
       }
@@ -366,7 +357,6 @@ export default function AIWorkoutPage() {
       // Redirect to plans page
       router.push('/plans');
     } catch (error: any) {
-      console.error('Error saving AI plan:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao salvar plano',
@@ -385,13 +375,15 @@ export default function AIWorkoutPage() {
         goal: generatedPlan.goal,
       };
 
-      console.log('Creating plan from AI to start:', planData);
       const createdPlan = await apiClient.post('/workout-plans', planData);
       const planId = createdPlan.id;
 
       if (!planId) {
         throw new Error('Plan ID not returned from server');
       }
+
+      // Save plan ID in state for sharing
+      setSavedPlanId(planId);
 
       // Step 2: Get all exercises from the database to check which ones already exist
       const existingExercises = await apiClient.get('/exercises');
@@ -423,14 +415,6 @@ export default function AIWorkoutPage() {
             const needsUpdate = (!existingExercise.videoUrl && ex.videoUrl) || (!existingExercise.imageUrl && ex.gifUrl);
 
             if (needsUpdate) {
-              console.log('Updating existing exercise with video URLs:', {
-                name: ex.name,
-                oldVideoUrl: existingExercise.videoUrl,
-                newVideoUrl: ex.videoUrl,
-                oldImageUrl: existingExercise.imageUrl,
-                newImageUrl: ex.gifUrl
-              });
-
               await apiClient.put(`/exercises/${existingExercise.id}`, {
                 name: existingExercise.name,
                 muscleGroup: existingExercise.muscleGroup,
@@ -444,12 +428,6 @@ export default function AIWorkoutPage() {
 
             exerciseId = existingExercise.id;
           } else {
-            console.log('Creating new exercise with AI data:', {
-              name: ex.name,
-              videoUrl: ex.videoUrl,
-              gifUrl: ex.gifUrl,
-              fullExercise: ex
-            });
             const newExercise = await apiClient.post('/exercises', {
               name: ex.name,
               muscleGroup: ex.bodyPart || 'Other',
@@ -459,7 +437,6 @@ export default function AIWorkoutPage() {
               videoUrl: ex.videoUrl || null,
               imageUrl: ex.gifUrl || null,
             });
-            console.log('Exercise created:', newExercise);
             exerciseId = newExercise.id;
             exerciseMap.set(ex.name.toLowerCase(), newExercise);
           }
@@ -489,7 +466,6 @@ export default function AIWorkoutPage() {
         router.push('/workout');
       }, 1000);
     } catch (error: any) {
-      console.error('Error starting AI plan:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao iniciar plano',
@@ -1142,7 +1118,7 @@ export default function AIWorkoutPage() {
                 </Button>
                 <Button
                   className="flex-1"
-                  onClick={() => {
+                  onClick={async () => {
                     if (selectedFriends.length === 0) {
                       toast({
                         variant: 'destructive',
@@ -1151,12 +1127,35 @@ export default function AIWorkoutPage() {
                       });
                       return;
                     }
-                    toast({
-                      title: 'Funcionalidade em desenvolvimento',
-                      description: 'O compartilhamento de treinos estará disponível em breve! Por enquanto, você pode copiar e enviar manualmente.',
-                    });
-                    setIsShareDialogOpen(false);
-                    setSelectedFriends([]);
+
+                    if (!savedPlanId) {
+                      toast({
+                        variant: 'destructive',
+                        title: 'Erro ao compartilhar',
+                        description: 'Por favor, salve o treino primeiro usando o botão "Iniciar Este Plano"',
+                      });
+                      return;
+                    }
+
+                    try {
+                      await apiClient.post(`/workout-plans/${savedPlanId}/share`, {
+                        friendIds: selectedFriends,
+                      });
+
+                      toast({
+                        title: 'Treino compartilhado!',
+                        description: `Seu treino foi compartilhado com ${selectedFriends.length} ${selectedFriends.length === 1 ? 'amigo' : 'amigos'}.`,
+                      });
+
+                      setIsShareDialogOpen(false);
+                      setSelectedFriends([]);
+                    } catch (error) {
+                      toast({
+                        variant: 'destructive',
+                        title: 'Erro ao compartilhar',
+                        description: error instanceof Error ? error.message : 'Não foi possível compartilhar o treino',
+                      });
+                    }
                   }}
                   disabled={selectedFriends.length === 0}
                 >

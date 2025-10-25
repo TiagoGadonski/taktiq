@@ -24,6 +24,15 @@ public static class ChallengeEndpoints
             return Results.Ok(result);
         });
 
+        // Endpoint GET para listar TODOS os desafios do sistema (com informação de participação)
+        group.MapGet("/all", async (ClaimsPrincipal user, ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GetAllChallengesQuery(userId);
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        });
+
         // Endpoint POST para criar um desafio (já existente)
         group.MapPost("/", async (
             [FromBody] CreateChallengeRequest request,
@@ -37,7 +46,9 @@ public static class ChallengeEndpoints
                 request.Type,
                 request.TargetValue,
                 request.StartDate,
-                request.EndDate);
+                request.EndDate,
+                request.TargetType,
+                request.IsDefault);
 
             var result = await sender.Send(command);
             return Results.Created($"/api/v1/challenges/{result.Id}", result);
@@ -56,7 +67,9 @@ public static class ChallengeEndpoints
                 request.TargetValue,
                 request.StartDate,
                 request.EndDate,
-                request.FriendIds
+                request.FriendIds,
+                request.TargetType,
+                request.IsDefault
             );
 
             var challengeId = await sender.Send(command);

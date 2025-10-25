@@ -24,7 +24,9 @@ public class GetMyChallengesQueryHandler : IRequestHandler<GetMyChallengesQuery,
                 c.Progresses.Sum(p => p.CurrentValue), // Mostra o progresso total do desafio
                 c.Status,
                 c.StartDate,
-                c.EndDate))
+                c.EndDate,
+                (ChallengeTargetType)c.TargetType,
+                c.IsDefault))
             .ToListAsync(cancellationToken);
     }
 }

@@ -41,10 +41,43 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
         await _context.Users.AddAsync(user, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
+        // 3.1. Auto-atribuir desafios padrão ao novo utilizador
+        await AssignDefaultChallenges(user, cancellationToken);
+
         // 4. Gerar o token JWT
         var token = _jwtTokenGenerator.GenerateToken(user);
 
         // 5. Retornar a resposta
         return new AuthResponse(user.Id, user.Name, user.Email, token);
+    }
+
+    private async Task AssignDefaultChallenges(User user, CancellationToken cancellationToken)
+    {
+        // Obter todos os desafios padrão que se aplicam a este utilizador
+        var defaultChallenges = await _context.Challenges
+            .Where(c => c.IsDefault &&
+                       (c.TargetType == Domain.Enums.ChallengeTargetType.AllUsers ||
+                        (c.TargetType == Domain.Enums.ChallengeTargetType.AllTrainers && user.Role == "Personal")))
+            .ToListAsync(cancellationToken);
+
+        // Criar registos de progresso para cada desafio padrão
+        foreach (var challenge in defaultChallenges)
+        {
+            var progress = new ChallengeProgress
+            {
+                ChallengeId = challenge.Id,
+                ParticipantId = user.Id,
+                CurrentValue = 0,
+                LastUpdate = DateTime.UtcNow
+            };
+
+            await _context.ChallengeProgresses.AddAsync(progress, cancellationToken);
+        }
+
+        // Guardar as alterações
+        if (defaultChallenges.Any())
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

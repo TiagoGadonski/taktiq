@@ -17,7 +17,7 @@ import {
   LucideIcon,
   Shield,
   UserCog,
-  Mail,
+  Info,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -43,7 +43,7 @@ const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
   { name: 'Desafios', href: '/challenges', icon: Trophy },
   { name: 'Amigos', href: '/friends', icon: Users },
   { name: 'Progresso', href: '/progress', icon: TrendingUp },
-  { name: 'Contato', href: '/contact', icon: Mail },
+  { name: 'Sobre', href: '/about', icon: Info },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

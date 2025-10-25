@@ -67,3 +67,9 @@ public class WorkoutExerciseDto
     public int TargetReps { get; set; }
     public double TargetLoad { get; set; }
 }
+
+public class ShareWorkoutPlanRequest
+{
+    [Required(ErrorMessage = "Selecione pelo menos um amigo para compartilhar")]
+    public List<Guid> FriendIds { get; set; } = new();
+}

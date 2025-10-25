@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera } from 'lucide-react';
+import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
 import { ThemeSwitcher } from '@/components/theme-switcher';
@@ -29,7 +30,17 @@ const profileSchema = z.object({
   phoneNumber: z.string().optional(),
 });
 
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, 'Senha atual é obrigatória'),
+  newPassword: z.string().min(6, 'A nova senha deve ter pelo menos 6 caracteres'),
+  confirmPassword: z.string().min(1, 'Confirmação de senha é obrigatória'),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: 'As senhas não coincidem',
+  path: ['confirmPassword'],
+});
+
 type ProfileInput = z.infer<typeof profileSchema>;
+type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 
 export default function ProfilePage() {
   const { user, logout, refreshUser } = useAuth();
@@ -40,6 +51,8 @@ export default function ProfilePage() {
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isChangePasswordDialogOpen, setIsChangePasswordDialogOpen] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -55,11 +68,19 @@ export default function ProfilePage() {
     resolver: zodResolver(profileSchema),
   });
 
+  const {
+    register: registerPassword,
+    handleSubmit: handleSubmitPassword,
+    reset: resetPassword,
+    formState: { errors: passwordErrors },
+  } = useForm<ChangePasswordInput>({
+    resolver: zodResolver(changePasswordSchema),
+  });
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await apiClient.get('/me');
-        console.log('Profile response:', response);
 
         // The apiClient already unwraps the data
         const data = response.data || response;
@@ -88,8 +109,6 @@ export default function ProfilePage() {
           phoneNumber: data.phoneNumber || '',
         });
       } catch (error: any) {
-        console.error('Error fetching profile:', error);
-        console.error('Error response:', error.response);
         toast({
           variant: 'destructive',
           title: 'Erro ao carregar perfil',
@@ -206,6 +225,33 @@ export default function ProfilePage() {
       .join('')
       .toUpperCase()
       .slice(0, 2) || 'U';
+  };
+
+  const onChangePassword = async (data: ChangePasswordInput) => {
+    setIsChangingPassword(true);
+    try {
+      await apiClient.post('/auth/change-password', {
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
+      });
+
+      toast({
+        title: 'Senha alterada!',
+        description: 'Sua senha foi alterada com sucesso.',
+      });
+
+      setIsChangePasswordDialogOpen(false);
+      resetPassword();
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao alterar senha',
+        description: error.response?.data?.message || error.message || 'Não foi possível alterar a senha',
+      });
+    } finally {
+      setIsChangingPassword(false);
+    }
   };
 
   return (
@@ -474,7 +520,12 @@ export default function ProfilePage() {
           <CardDescription>Gerencie sua conta</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button variant="outline" className="w-full justify-start">
+          <Button
+            variant="outline"
+            className="w-full justify-start"
+            onClick={() => setIsChangePasswordDialogOpen(true)}
+          >
+            <Lock className="mr-2 h-4 w-4" />
             Alterar Senha
           </Button>
           <Button variant="outline" className="w-full justify-start text-destructive">
@@ -509,6 +560,90 @@ export default function ProfilePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Change Password Dialog */}
+      <Dialog open={isChangePasswordDialogOpen} onOpenChange={setIsChangePasswordDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Lock className="h-5 w-5" />
+              Alterar Senha
+            </DialogTitle>
+            <DialogDescription>
+              Digite sua senha atual e escolha uma nova senha
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmitPassword(onChangePassword)} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="currentPassword">Senha Atual</Label>
+              <Input
+                id="currentPassword"
+                type="password"
+                {...registerPassword('currentPassword')}
+                placeholder="Digite sua senha atual"
+              />
+              {passwordErrors.currentPassword && (
+                <p className="text-sm text-destructive">{passwordErrors.currentPassword.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="newPassword">Nova Senha</Label>
+              <Input
+                id="newPassword"
+                type="password"
+                {...registerPassword('newPassword')}
+                placeholder="Digite sua nova senha (mínimo 6 caracteres)"
+              />
+              {passwordErrors.newPassword && (
+                <p className="text-sm text-destructive">{passwordErrors.newPassword.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirmar Nova Senha</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                {...registerPassword('confirmPassword')}
+                placeholder="Digite sua nova senha novamente"
+              />
+              {passwordErrors.confirmPassword && (
+                <p className="text-sm text-destructive">{passwordErrors.confirmPassword.message}</p>
+              )}
+            </div>
+
+            <div className="flex gap-2 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                className="flex-1"
+                onClick={() => {
+                  setIsChangePasswordDialogOpen(false);
+                  resetPassword();
+                }}
+                disabled={isChangingPassword}
+              >
+                Cancelar
+              </Button>
+              <Button type="submit" className="flex-1" disabled={isChangingPassword}>
+                {isChangingPassword ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Alterando...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="mr-2 h-4 w-4" />
+                    Alterar Senha
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

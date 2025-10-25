@@ -286,7 +286,6 @@ export default function EditPlanPage() {
         goal: data.goal || null,
       };
 
-      console.log('Updating plan with data:', planData);
       await apiClient.put(`/workout-plans/${planId}`, planData);
 
       // Step 2: Get all exercises from the database to check which ones already exist
@@ -294,8 +293,6 @@ export default function EditPlanPage() {
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e.id]));
 
       // Step 3: Create workouts (days) and add exercises to them
-      console.log(`Creating ${workoutDays.length} workout days`);
-
       for (let dayIndex = 0; dayIndex < workoutDays.length; dayIndex++) {
         const day = workoutDays[dayIndex];
 
@@ -306,7 +303,6 @@ export default function EditPlanPage() {
           order: dayIndex + 1,
         };
 
-        console.log(`Creating workout day "${day.name}":`, workoutData);
         const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
@@ -321,10 +317,8 @@ export default function EditPlanPage() {
           if (existingId) {
             // Exercise already exists, use its ID
             exerciseId = existingId;
-            console.log(`Exercise "${ex.name}" already exists with ID: ${exerciseId}`);
           } else {
             // Exercise doesn't exist, create it first
-            console.log(`Creating new exercise: ${ex.name}`);
             const newExercise = await apiClient.post('/exercises', {
               name: ex.name,
               muscleGroup: (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles[0] : 'Other',
@@ -345,12 +339,9 @@ export default function EditPlanPage() {
             targetLoad: 0, // Default load
           };
 
-          console.log(`Adding exercise to workout ${workoutId}:`, exerciseData);
           await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, exerciseData);
         }
       }
-
-      console.log('All exercises updated successfully');
 
       toast({
         title: 'Plano atualizado!',
@@ -359,7 +350,6 @@ export default function EditPlanPage() {
 
       router.push('/plans');
     } catch (error: any) {
-      console.error('Error updating plan:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao atualizar plano',

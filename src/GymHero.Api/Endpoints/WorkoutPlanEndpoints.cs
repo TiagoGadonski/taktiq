@@ -290,5 +290,32 @@ public static class WorkoutPlanEndpoints
         })
         .WithName("AddExerciseToWorkout")
         .WithSummary("Adds an exercise to a specific workout day");
+
+        // Share workout plan with friends
+        group.MapPost("/{planId:guid}/share", async (
+            Guid planId,
+            [FromBody] ShareWorkoutPlanRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var sharerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new ShareWorkoutPlanCommand(planId, sharerId, request.FriendIds);
+
+            try
+            {
+                await sender.Send(command);
+                return Results.Ok(new { message = "Treino compartilhado com sucesso!" });
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (BadRequestException ex)
+            {
+                return Results.BadRequest(new { message = ex.Message });
+            }
+        })
+        .WithName("ShareWorkoutPlan")
+        .WithSummary("Shares a workout plan with friends");
     }
 }

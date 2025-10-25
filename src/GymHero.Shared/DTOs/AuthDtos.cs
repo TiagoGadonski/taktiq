@@ -29,8 +29,22 @@ public record LoginRequest
 }
 
 public record AuthResponse(
-    Guid Id, 
-    string Name, 
-    string Email, 
+    Guid Id,
+    string Name,
+    string Email,
     string Token
 );
+
+public record ChangePasswordRequest
+{
+    [Required(ErrorMessage = "A senha atual é obrigatória")]
+    public string CurrentPassword { get; set; } = "";
+
+    [Required(ErrorMessage = "A nova senha é obrigatória")]
+    [MinLength(6, ErrorMessage = "A nova senha deve ter pelo menos 6 caracteres")]
+    public string NewPassword { get; set; } = "";
+
+    [Required(ErrorMessage = "A confirmação de senha é obrigatória")]
+    [Compare(nameof(NewPassword), ErrorMessage = "As senhas não coincidem")]
+    public string ConfirmPassword { get; set; } = "";
+}

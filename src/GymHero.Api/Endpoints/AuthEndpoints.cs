@@ -99,5 +99,34 @@ public static class AuthEndpoints
         .Produces(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status401Unauthorized)
         .Produces(StatusCodes.Status404NotFound);
+
+        // Endpoint para alterar senha
+        group.MapPost("/change-password", async (
+            [FromBody] ChangePasswordRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            try
+            {
+                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var command = new ChangePasswordCommand(
+                    userId,
+                    request.CurrentPassword,
+                    request.NewPassword);
+
+                await sender.Send(command);
+                return Results.Ok(new { message = "Senha alterada com sucesso" });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Json(new { message = ex.Message }, statusCode: StatusCodes.Status400BadRequest);
+            }
+        })
+        .RequireAuthorization()
+        .WithName("ChangePassword")
+        .WithSummary("Change user password")
+        .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status400BadRequest)
+        .Produces(StatusCodes.Status401Unauthorized);
     }
 }

@@ -6,13 +6,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymHero.Application.Features.Sessions.Commands;
 
-public class LogSetCommandHandler : IRequestHandler<LogSetCommand, Guid>
+public class LogSetCommandHandler : IRequestHandler<LogSetCommand, LogSetResponse>
 {
     private readonly IApplicationDbContext _context;
 
+    private static readonly string[] MotivationalMessages =
+    {
+        "Ótima série! Mais uma conquista!",
+        "Excelente! Continue firme!",
+        "Muito bem! Cada série conta!",
+        "Fantástico! Você está arrasando!",
+        "Incrível! Sinta a força crescendo!",
+        "Perfeito! Foco total!",
+        "Arrasou! Nada te para!",
+        "Mandou bem! Siga em frente!",
+        "Espetacular! Você é forte!",
+        "Show! Cada rep te torna mais forte!"
+    };
+
     public LogSetCommandHandler(IApplicationDbContext context) => _context = context;
     
-    public async Task<Guid> Handle(LogSetCommand request, CancellationToken cancellationToken)
+    public async Task<LogSetResponse> Handle(LogSetCommand request, CancellationToken cancellationToken)
     {
         // Validação 1: A sessão de treino existe e pertence ao usuário?
         // Precisamos usar Include para acessar os dados do WorkoutPlan e verificar o OwnerId.
@@ -55,6 +69,10 @@ public class LogSetCommandHandler : IRequestHandler<LogSetCommand, Guid>
         await _context.WorkoutSets.AddAsync(workoutSet, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return workoutSet.Id;
+        // Selecionar uma mensagem motivacional aleatória
+        var random = new Random();
+        var message = MotivationalMessages[random.Next(MotivationalMessages.Length)];
+
+        return new LogSetResponse(workoutSet.Id, message);
     }
 }

@@ -8,4 +8,6 @@ public record CreateChallengeCommand(
     string Type,
     double TargetValue,
     DateTime StartDate,
-    DateTime EndDate) : IRequest<ChallengeResponse>;
+    DateTime EndDate,
+    ChallengeTargetType TargetType,
+    bool IsDefault) : IRequest<ChallengeResponse>;

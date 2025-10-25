@@ -105,8 +105,8 @@ public static class SessionEndpoints
 
             try
             {
-                await sender.Send(command);
-                return Results.NoContent();
+                var result = await sender.Send(command);
+                return Results.Ok(result);
             }
             catch (NotFoundException ex)
             {
