@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Play, CheckCircle2, XCircle, Clock, Sparkles, Share2 } from 'lucide-react';
+import { Play, CheckCircle2, XCircle, Clock, Sparkles } from 'lucide-react';
 import { api } from '@/lib/api';
 import { useSession } from '@/hooks/use-session';
 import { useSets } from '@/hooks/use-sets';
@@ -13,7 +13,6 @@ import { ExerciseCard } from '@/components/workout/exercise-card';
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { ShareWorkoutDialog } from '@/components/workout/share-workout-dialog';
 import type { CreateSetInput, Workout, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 
 export default function WorkoutPage() {
@@ -25,8 +24,6 @@ export default function WorkoutPage() {
   const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<WorkoutExercise | null>(null);
   const [isExerciseModalOpen, setIsExerciseModalOpen] = useState(false);
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const [planToShare, setPlanToShare] = useState<string | null>(null);
 
   // Auto-select first workout when session starts
   useEffect(() => {
@@ -46,11 +43,6 @@ export default function WorkoutPage() {
   const openExerciseModal = (exercise: WorkoutExercise) => {
     setSelectedExercise(exercise);
     setIsExerciseModalOpen(true);
-  };
-
-  const handleShareClick = (planId: string) => {
-    setPlanToShare(planId);
-    setShareDialogOpen(true);
   };
 
   const handleStartSession = async (workoutId?: string) => {
@@ -164,26 +156,17 @@ export default function WorkoutPage() {
                               {workout.exercises?.length || 0} exercícios
                             </CardDescription>
                           </div>
-                          <div className="flex gap-2">
-                            <Button
-                              variant="outline"
-                              onClick={() => handleShareClick(activePlan.id)}
-                              size="sm"
-                            >
-                              <Share2 className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              onClick={() => {
-                                setSelectedWorkoutId(workout.id);
-                                handleStartSession(activePlan.id);
-                              }}
-                              disabled={isStarting}
-                              size="sm"
-                            >
-                              <Play className="mr-2 h-4 w-4" />
-                              {isStarting ? 'Iniciando...' : 'Iniciar'}
-                            </Button>
-                          </div>
+                          <Button
+                            onClick={() => {
+                              setSelectedWorkoutId(workout.id);
+                              handleStartSession(activePlan.id);
+                            }}
+                            disabled={isStarting}
+                            size="sm"
+                          >
+                            <Play className="mr-2 h-4 w-4" />
+                            {isStarting ? 'Iniciando...' : 'Iniciar'}
+                          </Button>
                         </div>
                       </CardHeader>
                       <CardContent>
@@ -398,15 +381,6 @@ export default function WorkoutPage() {
             )}
           </DialogContent>
         </Dialog>
-
-        {/* Share Workout Dialog */}
-        {planToShare && (
-          <ShareWorkoutDialog
-            planId={planToShare}
-            open={shareDialogOpen}
-            onOpenChange={setShareDialogOpen}
-          />
-        )}
       </div>
     );
   }
