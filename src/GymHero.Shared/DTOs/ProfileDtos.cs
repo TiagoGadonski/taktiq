@@ -33,7 +33,8 @@ public record UserProfileResponse(
     double? Weight,
     string? ProfilePictureUrl,
     string? GymName,
-    string? PhoneNumber
+    string? PhoneNumber,
+    DateTime CreatedAt
 );
 
 public record PublicProfileResponse(

@@ -31,7 +31,8 @@ public static class MeEndpoints
                 currentUser.Weight,
                 currentUser.ProfilePictureUrl,
                 currentUser.GymName,
-                currentUser.PhoneNumber
+                currentUser.PhoneNumber,
+                currentUser.CreatedAt
             );
             return Results.Ok(response);
         });
