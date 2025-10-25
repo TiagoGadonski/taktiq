@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{869F912D-1B85-4EA5-B84E-AD54280F38F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymHero.Domain", "src\GymHero.Domain\GymHero.Domain.csproj", "{8D435F39-C722-43C0-B0FF-A35DA6458D3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymHero.Application", "src\GymHero.Application\GymHero.Application.csproj", "{35C0F223-0AE1-4560-A80F-8E81DB129C69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymHero.Infrastructure", "src\GymHero.Infrastructure\GymHero.Infrastructure.csproj", "{02C19D68-4086-459E-9EBC-F7F5E516F1A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymHero.Api", "src\GymHero.Api\GymHero.Api.csproj", "{D35CA663-2C92-4DC8-92C3-32C717FFDC05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymHero.Shared", "src\GymHero.Shared\GymHero.Shared.csproj", "{F73B6590-51A2-43BF-99BB-757DDEA80315}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D435F39-C722-43C0-B0FF-A35DA6458D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D435F39-C722-43C0-B0FF-A35DA6458D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D435F39-C722-43C0-B0FF-A35DA6458D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D435F39-C722-43C0-B0FF-A35DA6458D3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C0F223-0AE1-4560-A80F-8E81DB129C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C0F223-0AE1-4560-A80F-8E81DB129C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C0F223-0AE1-4560-A80F-8E81DB129C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C0F223-0AE1-4560-A80F-8E81DB129C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C19D68-4086-459E-9EBC-F7F5E516F1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C19D68-4086-459E-9EBC-F7F5E516F1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C19D68-4086-459E-9EBC-F7F5E516F1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C19D68-4086-459E-9EBC-F7F5E516F1A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35CA663-2C92-4DC8-92C3-32C717FFDC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35CA663-2C92-4DC8-92C3-32C717FFDC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35CA663-2C92-4DC8-92C3-32C717FFDC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35CA663-2C92-4DC8-92C3-32C717FFDC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73B6590-51A2-43BF-99BB-757DDEA80315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73B6590-51A2-43BF-99BB-757DDEA80315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73B6590-51A2-43BF-99BB-757DDEA80315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73B6590-51A2-43BF-99BB-757DDEA80315}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D435F39-C722-43C0-B0FF-A35DA6458D3C} = {869F912D-1B85-4EA5-B84E-AD54280F38F2}
+		{35C0F223-0AE1-4560-A80F-8E81DB129C69} = {869F912D-1B85-4EA5-B84E-AD54280F38F2}
+		{02C19D68-4086-459E-9EBC-F7F5E516F1A8} = {869F912D-1B85-4EA5-B84E-AD54280F38F2}
+		{D35CA663-2C92-4DC8-92C3-32C717FFDC05} = {869F912D-1B85-4EA5-B84E-AD54280F38F2}
+		{F73B6590-51A2-43BF-99BB-757DDEA80315} = {869F912D-1B85-4EA5-B84E-AD54280F38F2}
+	EndGlobalSection
+EndGlobal

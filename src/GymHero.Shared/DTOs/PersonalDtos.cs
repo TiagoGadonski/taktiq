@@ -1,0 +1,43 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace GymHero.Shared.DTOs;
+public class AddClientRequest
+{
+    [Required(ErrorMessage = "O email do aluno é obrigatório.")]
+    [EmailAddress(ErrorMessage = "Por favor, insira um email válido.")]
+    public string ClientEmail { get; set; } = "";
+}
+public record ClientResponse(Guid Id, string Name, string Email);
+public record ClientProgressDashboardResponse(
+    IEnumerable<ProgressMetricResponse> BodyMetrics,
+    IEnumerable<PersonalRecordResponse> PersonalRecords
+);
+public record GenerateWorkoutPlanRequest(
+    string Goal, // Ex: "Hipertrofia", "Força", "Resistência"
+    string Level, // Ex: "Iniciante", "Intermediário", "Avançado"
+    int DaysPerWeek // Ex: 3, 4, 5
+);
+
+public record ProgressMetricResponse(
+    Guid Id,
+    string Type,
+    double Value,
+    string Unit,
+    DateTime Date
+);
+
+// DTO para exibir um Recorde Pessoal
+public record PersonalRecordResponse(
+    Guid ExerciseId,
+    string ExerciseName,
+    int Reps,
+    double MaxLoad,
+    DateTime DateAchieved
+);
+
+/// <summary>
+/// DTO para adicionar notas sobre um cliente.
+/// </summary>
+public record AddClientNotesRequest(
+    string Notes
+);

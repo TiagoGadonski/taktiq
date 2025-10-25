@@ -1,0 +1,51 @@
+================================================================================
+                    TAKTIQ LOGO FILES - QUICK REFERENCE
+================================================================================
+
+Place these 4 files in this folder (frontend/apps/web/public/):
+
+📁 LOGO FILES (2 required):
+---------------------------
+1. taktiq-logo-light.png  → Dark/colored logo for LIGHT theme
+2. taktiq-logo-dark.png   → White/light logo for DARK theme
+
+📁 FAVICON FILES (2 required):
+------------------------------
+3. favicon.ico            → Browser tab icon (32x32 or 16x16)
+4. apple-icon.png         → iOS home screen icon (180x180)
+
+================================================================================
+                           LOGO SPECIFICATIONS
+================================================================================
+
+Both PNG logos should:
+----------------------
+✓ Include the "TaktIQ" text/wordmark (no separate text in menu)
+✓ Have transparent background
+✓ Be approximately 500-600px wide × 140-170px tall (aspect ratio ~3.5:1)
+✓ Be high resolution (144 DPI or higher)
+
+Color guidelines:
+-----------------
+• taktiq-logo-light.png → Use dark/colored design (for light backgrounds)
+• taktiq-logo-dark.png  → Use white/light design (#FFFFFF for dark backgrounds)
+
+Display sizes in app:
+---------------------
+• Desktop sidebar: 140×40 pixels
+• Mobile sidebar: 120×34 pixels
+• Mobile header: 100×28 pixels
+
+================================================================================
+                              HOW IT WORKS
+================================================================================
+
+The app will automatically:
+✓ Detect current theme (light/dark/system)
+✓ Show appropriate logo variant
+✓ Switch instantly when user changes theme
+✓ Follow system preference if theme is set to "System"
+
+No code changes needed - just add the files and refresh the page!
+
+================================================================================

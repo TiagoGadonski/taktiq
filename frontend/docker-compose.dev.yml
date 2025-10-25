@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web-dev:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "corepack enable && corepack prepare pnpm@9.1.4 --activate && pnpm install && pnpm dev:web"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/packages/shared/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL:-https://localhost:5001}
+    networks:
+      - gymhero-network
+
+networks:
+  gymhero-network:
+    driver: bridge

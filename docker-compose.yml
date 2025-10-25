@@ -1,0 +1,27 @@
+version: '3.8' # Versão da sintaxe do Compose
+
+services: # Aqui definimos os serviços (nossas "caixas")
+  
+  postgres-db: # Damos um nome para o nosso serviço de banco de dados
+    image: postgres:15-alpine # A imagem oficial do PostgreSQL que o Docker vai baixar
+    container_name: gymhero_postgres2 # Nome da "caixa" quando estiver rodando
+    
+    # Aqui está a mágica das "chaves" e senhas!
+    # Definimos as variáveis de ambiente que o PostgreSQL usará na inicialização.
+    environment:
+      - POSTGRES_USER=gymuser      # <<<--- Seu usuário do banco
+      - POSTGRES_PASSWORD=gympassword # <<<--- Sua senha! Use esta ou troque por uma de sua preferência.
+      - POSTGRES_DB=gymhero2_db     # <<<--- O nome do banco de dados que será criado.
+    
+    ports:
+      # Mapeia a porta 5432 de dentro da "caixa" para a porta 5432 do seu computador.
+      # Isso permite que sua API (rodando no seu PC) se conecte ao banco (rodando na caixa).
+      - "5432:5432"
+      
+    volumes:
+      # Esta linha garante que, mesmo que você apague a "caixa", seus dados não sejam perdidos.
+      # Eles ficam guardados em uma área gerenciada pelo Docker.
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: # Define o volume que usamos acima
