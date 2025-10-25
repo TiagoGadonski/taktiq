@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -60,5 +61,39 @@ public static class UsersEndpoints
             );
             return Results.Ok(response);
         });
+
+        // Endpoint para admin alterar senha de usuário
+        group.MapPut("/{userId:guid}/password", async (
+            Guid userId,
+            AdminChangePasswordRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken ct) =>
+        {
+            // Verificar se o usuário é Admin
+            var userRole = user.FindFirstValue(ClaimTypes.Role);
+            if (userRole != "Admin")
+            {
+                return Results.Forbid();
+            }
+
+            // Buscar o usuário a ser alterado
+            var targetUser = await context.Users.FirstOrDefaultAsync(u => u.Id == userId, ct);
+            if (targetUser is null)
+            {
+                return Results.NotFound(new { message = "Usuário não encontrado" });
+            }
+
+            // Hash da nova senha
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+
+            // Atualizar a senha
+            targetUser.PasswordHash = passwordHash;
+            await context.SaveChangesAsync(ct);
+
+            return Results.Ok(new { message = "Senha alterada com sucesso" });
+        }).RequireAuthorization();
     }
 }
+
+public record AdminChangePasswordRequest(string NewPassword);

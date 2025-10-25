@@ -43,7 +43,7 @@ const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
   { name: 'Desafios', href: '/challenges', icon: Trophy },
   { name: 'Amigos', href: '/friends', icon: Users },
   { name: 'Progresso', href: '/progress', icon: TrendingUp },
-  { name: 'Sobre', href: '/about', icon: Info },
+  { name: 'Sobre Nós', href: '/about', icon: Info },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

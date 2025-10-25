@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, MessageCircle, Github, Twitter, Linkedin, Instagram, Heart, Copy, Check, DollarSign, Info } from 'lucide-react';
+import { Mail, MessageCircle, Github, Twitter, Linkedin, Instagram, Heart, Copy, Check, DollarSign, Info, FacebookIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function AboutPage() {
@@ -16,55 +16,48 @@ export default function AboutPage() {
     {
       name: 'Email',
       icon: Mail,
-      href: 'mailto:contato@gymhero.app',
-      username: 'contato@gymhero.app',
+      href: 'mailto:contato@taktiq.app',
+      username: 'contato@taktiq.app',
       description: 'Entre em contato por e-mail',
       color: 'hover:text-red-500',
     },
     {
       name: 'Instagram',
       icon: Instagram,
-      href: 'https://instagram.com/gymhero',
-      username: '@gymhero',
+      href: 'https://www.instagram.com/taktiq.app/',
+      username: '@taktiq.app',
       description: 'Siga-nos no Instagram',
       color: 'hover:text-pink-500',
     },
     {
-      name: 'Twitter/X',
-      icon: Twitter,
-      href: 'https://twitter.com/gymhero',
-      username: '@gymhero',
-      description: 'Siga-nos no Twitter',
-      color: 'hover:text-blue-400',
+      name: 'Facebook',
+      icon: FacebookIcon,
+      href: 'https://www.facebook.com/taktiqapp/',
+      username: '@taktiq.app',
+      description: 'Siga-nos no Facebook',
+      color: 'hover:text-pink-500',
     },
+    // {
+    //   name: 'Twitter/X',
+    //   icon: Twitter,
+    //   href: 'https://twitter.com/gymhero',
+    //   username: '@gymhero',
+    //   description: 'Siga-nos no Twitter',
+    //   color: 'hover:text-blue-400',
+    // },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      href: 'https://linkedin.com/company/gymhero',
-      username: 'GymHero',
+      href: 'https://www.linkedin.com/company/taktiq-app/',
+      username: 'Taktiq App',
       description: 'Conecte-se no LinkedIn',
       color: 'hover:text-blue-600',
     },
-    {
-      name: 'GitHub',
-      icon: Github,
-      href: 'https://github.com/gymhero',
-      username: 'github.com/gymhero',
-      description: 'Veja nosso código',
-      color: 'hover:text-gray-900 dark:hover:text-gray-100',
-    },
-    {
-      name: 'Discord',
-      icon: MessageCircle,
-      href: 'https://discord.gg/gymhero',
-      username: 'discord.gg/gymhero',
-      description: 'Junte-se à nossa comunidade',
-      color: 'hover:text-indigo-500',
-    },
+    
   ];
 
   // TODO: Atualize esta chave Pix com a sua chave real (pode ser email, CPF, CNPJ, telefone ou chave aleatória)
-  const pixKey = 'suachavepix@email.com';
+  const pixKey = '4150461a-844d-4725-8d4d-5d4b5c428d91';
 
   const copyPixKey = () => {
     navigator.clipboard.writeText(pixKey);
@@ -83,7 +76,7 @@ export default function AboutPage() {
           Sobre Nós
         </h1>
         <p className="text-muted-foreground">
-          Conheça mais sobre o GymHero e como você pode apoiar este projeto.
+          Conheça mais sobre o TaktIQ e como você pode apoiar este projeto.
         </p>
       </div>
 
@@ -98,7 +91,7 @@ export default function AboutPage() {
         <CardContent className="space-y-4">
           <div className="prose dark:prose-invert max-w-none">
             <p className="text-muted-foreground">
-              O <strong className="text-foreground">GymHero</strong> é uma plataforma completa de gerenciamento de treinos desenvolvida para
+              O <strong className="text-foreground">TaktIQ</strong> é uma plataforma completa de gerenciamento de treinos desenvolvida para
               ajudar atletas, personal trainers e entusiastas do fitness a alcançarem seus objetivos de forma organizada e eficiente.
             </p>
             <p className="text-muted-foreground">
@@ -218,19 +211,19 @@ export default function AboutPage() {
             <Button
               variant="default"
               className="flex-1 hover-lift tap-scale"
-              onClick={() => window.open('mailto:contato@gymhero.app?subject=Contato pelo GymHero', '_blank')}
+              onClick={() => window.open('mailto:contato@taktiq.app?subject=Contato pelo TaktIQ', '_blank')}
             >
               <Mail className="mr-2 h-4 w-4" />
               Enviar E-mail
             </Button>
-            <Button
+            {/* <Button
               variant="outline"
               className="flex-1 hover-lift tap-scale"
               onClick={() => window.open('https://github.com/gymhero/gymhero/issues', '_blank')}
             >
               <Github className="mr-2 h-4 w-4" />
               Reportar Bug
-            </Button>
+            </Button> */}
           </div>
         </CardContent>
       </Card>
@@ -243,7 +236,7 @@ export default function AboutPage() {
             Apoie o Projeto
           </CardTitle>
           <CardDescription>
-            O GymHero é um projeto independente. Sua contribuição ajuda a manter e melhorar a plataforma!
+            O TaktIQ é um projeto independente. Sua contribuição ajuda a manter e melhorar a plataforma!
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -296,10 +289,10 @@ export default function AboutPage() {
         <CardContent className="p-6">
           <div className="text-center space-y-2">
             <p className="text-sm text-muted-foreground">
-              Desenvolvido com <Heart className="inline h-4 w-4 text-red-500" /> para a comunidade fitness
+              Desenvolvido com <Heart className="inline h-4 w-4 text-red-500" /> por Tiago Cordeiro.
             </p>
             <p className="text-xs text-muted-foreground">
-              GymHero • {new Date().getFullYear()}
+              TaktIQ • {new Date().getFullYear()}
             </p>
           </div>
         </CardContent>
