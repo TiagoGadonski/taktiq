@@ -27,6 +27,11 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   transpilePackages: ['@gymhero/shared'],
+  experimental: {
+    // Esta flag permite ao Next.js compilar ficheiros
+    // que estão fora do diretório da aplicação (ex: na pasta 'packages')
+    externalDir: true,
+  },
 };
 
 module.exports = nextConfig;
