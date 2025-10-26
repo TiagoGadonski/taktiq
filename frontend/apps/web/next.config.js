@@ -3,6 +3,7 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -44,6 +45,7 @@ const nextConfig = {
     };
     return config;
   },
+  
   // --- FIM DA CORREÇÃO ---
 };
 
