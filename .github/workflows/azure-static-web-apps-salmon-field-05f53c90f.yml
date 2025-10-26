@@ -33,7 +33,9 @@ jobs:
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
       # --- INÍCIO DAS NOVAS ALTERAÇÕES ---
-
+      - name: Clear Turborepo cache
+        run: |
+          rm -rf frontend/apps/web/.next/cache
       # 1. Nós executamos o build manualmente aqui
       - name: Install and Build Frontend
         run: |
