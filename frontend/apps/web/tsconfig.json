@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // Opções padrão do Next.js
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,13 +18,11 @@
         "name": "next"
       }
     ],
-
-    // --- A CONFIGURAÇÃO DO MONOREPO ESTÁ AQUI ---
-    // A base é esta pasta
+    // A configuração de atalhos
     "baseUrl": ".", 
     "paths": {
-      "@/*": ["./src/*"], // Atalho local
-      "@gymhero/shared": ["../../packages/shared/src"] // Atalho do monorepo
+      "@/*": ["./src/*"],
+      "@gymhero/shared": ["../../packages/shared/src"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
