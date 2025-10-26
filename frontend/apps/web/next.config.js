@@ -4,10 +4,16 @@ const path = require('path');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  
+  // 1. Diz ao Next.js para gerar uma pasta 'out' para o deploy estático
+  output: 'export', 
+  
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
   images: {
+    // 2. Desativa a otimização de imagens (necessário para 'export')
+    unoptimized: true, 
     remotePatterns: [
       {
         protocol: 'https',
@@ -26,25 +32,18 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
-  // Diz ao Next.js para compilar o pacote partilhado
+  // 3. Diz ao Next.js para compilar o pacote partilhado
   transpilePackages: ['@gymhero/shared'],
 
-  // --- INÍCIO DA CORREÇÃO ---
-  // Dizemos manualmente ao Webpack (o motor do 'next build')
-  // como encontrar os seus atalhos.
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      
-      // Atalho para "@/*": aponta para a pasta "src" dentro deste projeto
+  // 4. Diz ao Webpack (o motor do 'next build') como encontrar os atalhos
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
       "@/*": path.resolve(__dirname, "src"),
-      
-      // Atalho para "@gymhero/shared": aponta para a pasta "src" do pacote partilhado
-      "@gymhero/shared": path.resolve(__dirname, "../../packages/shared/src"),
-    };
-    return config;
-  },
-  // --- FIM DA CORREÇÃO ---
+      "@gymhero/shared": path.resolve(__dirname, "../../packages/shared/src"),
+    };
+    return config;
+  },
 };
 
 module.exports = nextConfig;
