@@ -1,15 +1,32 @@
 {
-  // Herda TUDO (incluindo 'baseUrl' e 'paths') do ficheiro de base
-  "extends": "../../tsconfig.json", 
-  
   "compilerOptions": {
-    // Apenas opções específicas do Next.js
+    // Opções padrão do Next.js
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noEmit": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
-    // A secção "paths" foi REMOVIDA daqui e movida para o ficheiro de base
+    ],
+
+    // --- A CONFIGURAÇÃO DO MONOREPO ESTÁ AQUI ---
+    // A base é esta pasta
+    "baseUrl": ".", 
+    "paths": {
+      "@/*": ["./src/*"], // Atalho local
+      "@gymhero/shared": ["../../packages/shared/src"] // Atalho do monorepo
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

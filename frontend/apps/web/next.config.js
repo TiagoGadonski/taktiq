@@ -32,6 +32,11 @@ const nextConfig = {
     // que estão fora do diretório da aplicação (ex: na pasta 'packages')
     externalDir: true,
   },
+  webpack: (config) => {
+    // aponta @gymhero/shared para o source da workspace
+    config.resolve.alias['@gymhero/shared'] = path.resolve(__dirname, '../../packages/shared/src');
+    return config;
+  },
 };
 
 module.exports = nextConfig;
