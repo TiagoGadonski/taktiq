@@ -27,6 +27,7 @@ const nextConfig = {
     // Ignora TODOS os avisos/erros do ESLint no build
     ignoreDuringBuilds: true,
   },
+  transpilePackages: ['@gymhero/shared'],
 };
 
 module.exports = nextConfig;
