@@ -2,24 +2,23 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -32,34 +31,36 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
-      # --- INÍCIO DAS NOVAS ALTERAÇÕES ---
-      - name: Clear Turborepo cache
+      # (Opcional) ajuda a depurar estrutura
+      - name: Show repo tree (debug)
         run: |
-          rm -rf frontend/apps/web/.next/cache
-      # 1. Nós executamos o build manualmente aqui
-      - name: Install and Build Frontend
-        run: |
-          cd frontend
-          pnpm install
-          pnpm turbo run build --filter='@gymhero/web^...'
+          ls -la
+          ls -la frontend
+          ls -la frontend/apps/web || true
 
-      # 2. Nós dizemos à Azure para NÃO fazer o build e apenas publicar
+      # >>> Deixe a Action do Azure buildar e fazer o upload <<<
       - name: Deploy to Azure Static Web Apps
-        id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_FIELD_05F53C90F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          
-          # Aponta para a pasta do build do Next.js (relativo à raiz do repo)
-          app_location: "frontend/apps/web/"
-          output_location: .next
-          
-          # Diz à Azure para não tentar fazer o build
-          skip_app_build: true
+          action: upload
 
-          # --- FIM DAS NOVAS ALTERAÇÕES ---
+          # Caminho do app Next (relativo à raiz do repositório)
+          app_location: frontend/apps/web
+
+          # Comando para buildar o monorepo a partir da pasta do app
+          # A Action muda o CWD para app_location antes de executar.
+          app_build_command: |
+            cd ../.. \
+            && pnpm install --frozen-lockfile \
+            && pnpm turbo run build --filter='@gymhero/web^...'
+
+          # Onde ficam os artefatos do Next dentro do app
+          output_location: .next
+
+          # IMPORTANTE: não pule o build (SSR precisa build no container)
+          skip_app_build: false
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -67,8 +68,7 @@ jobs:
     name: Close Pull Request Job
     steps:
       - name: Close Pull Request
-        id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_FIELD_05F53C90F }}
-          action: "close"
+          action: close
