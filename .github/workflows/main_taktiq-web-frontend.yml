@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy Next.js to Azure Web App - taktiq-web-frontend
+name: Build and deploy Node.js app to Azure Web App - taktiq-web-frontend
 
 on:
   push:
@@ -18,32 +18,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9.1.4
-
-      # 1. CORREÇÃO: Cache dependency path ajustado
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: 'pnpm'
-          cache-dependency-path: 'frontend/pnpm-lock.yaml' 
+          # Removemos o cache pnpm aqui para evitar o erro anterior
 
-      # 2. Build and Deploy (com os caminhos corrigidos)
-      - name: Install Dependencies and Build Frontend
-        # O diretório de trabalho é a raiz do monorepo frontend
-        working-directory: frontend 
+      - name: Install dependencies, build, and test
         run: |
-          pnpm install --frozen-lockfile
-          pnpm run build:web
+          npm install
+          # Se o seu monorepo usa turbo:
+          # npm install -g turbo
+          # turbo run build --filter=@gymhero/web
+          
+          # Se não usa turbo:
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: frontend/apps/web/.next/standalone
+          path: . # Vai fazer upload de toda a pasta
 
   deploy:
     runs-on: ubuntu-latest
