@@ -37,7 +37,7 @@ jobs:
       # Executamos TUDO a partir da raiz do frontend
       - name: Install and Build Frontend
         run: |
-          cd frontend
+          
           pnpm install --frozen-lockfile
           pnpm run build:web # Usamos o script do turbo a partir da raiz
 
