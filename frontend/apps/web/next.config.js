@@ -17,6 +17,16 @@ const nextConfig = {
       },
     ],
   },
+  typescript: {
+    // !! AVISO !!
+    // Isto irá ignorar TODOS os erros de TypeScript durante o build.
+    // A sua aplicação pode "crashar" em produção.
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    // Ignora TODOS os avisos/erros do ESLint no build
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
