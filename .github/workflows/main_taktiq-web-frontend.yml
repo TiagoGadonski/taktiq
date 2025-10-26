@@ -33,13 +33,12 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # 2. Construir o projeto web (usando o comando build:web)
       - name: Build Web App
-        run: pnpm run build:web # Chamamos o script corrigido
-        working-directory: frontend # Executa na raiz do frontend
-        env:
-          NODE_ENV: production
-          NEXT_PRIVATE_LOCAL_PACKAGE: true # Flag Next.js para forçar a leitura de pacotes locais
+        run: |
+          # 1. Executamos o build e o install em passos SEPARADOS.
+          # 2. O Next.js será executado na pasta 'apps/web'
+          cd frontend/apps/web
+          pnpm run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
