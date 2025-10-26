@@ -36,12 +36,19 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # 3. Construir o projeto web (O Passo Mais Importante)
-      - name: Build Web App
+      # --- NOVO BLOCO: FORÇAR A CÓPIA DO CÓDIGO PARTILHADO ---
+      - name: Copy Shared Package for Build Context
         run: |
-          # Executa o build que irá ler o next.config.js (com o webpack alias)
-          pnpm run build
-        working-directory: frontend/apps/web 
+          # 1. Criar a pasta onde o @gymhero/shared deveria estar
+          mkdir -p frontend/node_modules/@gymhero
+          
+          # 2. Copiar o código do pacote partilhado para onde o Webpack o espera
+          cp -R frontend/packages/shared frontend/node_modules/@gymhero/shared
+        
+      # 2. Construir o projeto web 
+      - name: Build Web App
+        run: pnpm run build
+        working-directory: frontend/apps/web
         env:
           # Adicione o Node Environment para garantir o build de produção
           NODE_ENV: production
