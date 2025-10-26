@@ -41,7 +41,7 @@ jobs:
         run: |
           cd frontend
           pnpm install
-          pnpm run build:web
+          pnpm turbo run build --filter='@gymhero/web^...'
 
       # 2. Nós dizemos à Azure para NÃO fazer o build e apenas publicar
       - name: Deploy to Azure Static Web Apps
