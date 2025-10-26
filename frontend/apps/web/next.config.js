@@ -30,6 +30,20 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    webpack: (config, { isServer }) => {
+        // Alias para resolver o atalho do pacote compartilhado
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            
+            // @/ deve apontar para o src local:
+            '@/': path.join(__dirname, 'src/'),
+            
+            // @gymhero/shared deve apontar para a pasta 'packages/shared'
+            // O uso de 'path.resolve' é o mais robusto.
+            '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
+        };
+        return config;
+    },
 };
 
 module.exports = nextConfig;
