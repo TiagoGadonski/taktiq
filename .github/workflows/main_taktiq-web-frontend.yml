@@ -18,31 +18,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # 1. Setup Node.js (sem cache pnpm, para simplificar)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.1.4
+
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+          cache: 'pnpm'
 
-      # 2. Instalação e Build (usando o contexto da pasta frontend)
-      - name: Install Dependencies and Build Frontend
-        # Define o diretório de trabalho para 'frontend'
-        working-directory: frontend 
-        run: |
-          # Usamos o NPM padrão, que o ambiente da Azure entende melhor
-          npm install
-          
-          # Entramos na pasta da aplicação web para o build
-          cd apps/web
-          npm run build
+      # 1. Instalar as dependências (na raiz do frontend)
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: frontend
 
-      # 3. Upload artifact for deployment job
+      # 2. Construir o projeto web (usando o comando turbo)
+      - name: Build Web App
+        run: pnpm run build:web
+        working-directory: frontend
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          # O caminho do artefato é a raiz da app 'web' com os ficheiros compilados
-          path: frontend/apps/web/.next/standalone # O Next.js Standalone
+          path: frontend/apps/web/.next/standalone
 
   deploy:
     runs-on: ubuntu-latest
