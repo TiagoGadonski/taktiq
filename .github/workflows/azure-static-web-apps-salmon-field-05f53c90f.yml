@@ -31,12 +31,17 @@ jobs:
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
       # ==== BUILD (fora do Oryx; usa pnpm + turbo) ====
-      - name: Install & Build (monorepo)
-        run: |
-          set -euxo pipefail
-          cd frontend
-          pnpm install --frozen-lockfile
-          pnpm turbo run build --filter='@gymhero/web^...'
+      - - name: Install & Build (direct in app)
+          run: |
+            set -euxo pipefail
+            cd frontend
+            pnpm install --frozen-lockfile
+            # garante upstreams antes, se necessário
+            pnpm turbo run build --filter='@gymhero/shared' || true
+            # build direto no app web (Next.js)
+            cd apps/web
+            pnpm run build
+
 
       # ==== CHECAGEM: a pasta .next precisa existir ====
       - name: Verify Next build output
