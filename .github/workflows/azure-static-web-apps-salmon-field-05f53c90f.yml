@@ -30,19 +30,23 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
+      # ==== BUILD (fora do Oryx; usa pnpm + turbo) ====
       - name: Install & Build (monorepo)
         run: |
+          set -euxo pipefail
           cd frontend
           pnpm install --frozen-lockfile
           pnpm turbo run build --filter='@gymhero/web^...'
 
-      # Só para garantir que .next existe onde a Action vai procurar
-      - name: Debug build output
+      # ==== CHECAGEM: a pasta .next precisa existir ====
+      - name: Verify Next build output
         run: |
-          ls -la
+          set -euxo pipefail
           ls -la frontend/apps/web || true
           ls -la frontend/apps/web/.next || true
+          test -d frontend/apps/web/.next
 
+      # ==== DEPLOY (sem build dentro do container do Azure) ====
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -50,10 +54,11 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
 
-          # Raiz do app Next (relativo ao repo root)
+          # raiz do app
           app_location: frontend/apps/web
-          # Pasta gerada pelo build dentro do app
+
+          # onde estão os artefatos gerados pelo Next dentro do app
           output_location: .next
 
-          # Crucial: NÃO construir dentro do container (evita Oryx/npm)
+          # IMPORTANTE: não buildar no Oryx (npm não entende workspace:*)
           skip_app_build: true
