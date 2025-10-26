@@ -13,8 +13,6 @@
     "jsx": "preserve",
     "incremental": true,
     "noEmit": true,
-
-    // --- A PARTE IMPORTANTE ---
     "baseUrl": ".",
     "paths": {
       "@gymhero/shared": ["./packages/shared/src/index.ts"]
