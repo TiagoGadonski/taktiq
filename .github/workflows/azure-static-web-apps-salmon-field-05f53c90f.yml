@@ -53,7 +53,8 @@ jobs:
           action: "upload"
           
           # Aponta para a pasta do build do Next.js (relativo à raiz do repo)
-          app_location: "frontend/apps/web/.next"
+          app_location: "frontend/apps/web/"
+          output_location: .next
           
           # Diz à Azure para não tentar fazer o build
           skip_app_build: true
