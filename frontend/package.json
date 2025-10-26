@@ -13,7 +13,7 @@
     "dev:mobile": "turbo run dev --filter=@gymhero/mobile",
     
     "build": "turbo run build",
-    "build:web": "cd apps/web && next build", 
+    "build:web": "NODE_ENV=production next build",
     "build:mobile": "turbo run build --filter=@gymhero/mobile",
     
     "test": "turbo run test",
