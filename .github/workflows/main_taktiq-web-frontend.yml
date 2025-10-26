@@ -18,11 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # 1. Instalar o pnpm no ambiente
+      # 1. Setup pnpm (necessário para o monorepo)
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 9.1.4 # A versão do seu lockfile
+          version: 9.1.4
 
       # 2. Configurar o Node.js com cache do pnpm
       - name: Set up Node.js version
@@ -30,19 +30,15 @@ jobs:
         with:
           node-version: '20.x'
           cache: 'pnpm' # Usar cache do pnpm
-          cache-dependency-path: 'frontend/pnpm-lock.yaml' # Caminho correto para o lockfile
+          cache-dependency-path: 'frontend/pnpm-lock.yaml' # Caminho do lockfile
 
-      # 3. COMANDOS DE INSTALAÇÃO E BUILD CORRIGIDOS
+      # 3. Instalamos e Construímos o Projeto Web (Build)
       - name: Install Dependencies and Build Frontend
+        # Define o diretório de trabalho para 'frontend', a raiz do monorepo
+        working-directory: ./frontend
         run: |
-          # 1. Navega para a raiz do seu frontend
-          cd frontend
-          
-          # 2. Instala todas as dependências do monorepo
           pnpm install --frozen-lockfile
-          
-          # 3. Executa o build da sua aplicação web (Next.js)
-          # Isso gera a pasta .next/standalone
+          # Executa o build da sua aplicação web (que usa o next.config.js corrigido)
           pnpm run build:web
 
       # 4. Upload artifact for deployment job
@@ -65,9 +61,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          path: . # Descarrega para o diretório atual
+          path: . 
       
-      # O login e o deploy continuam iguais
+      # O login já deve ter sido configurado pela Azure
       - name: Login to Azure
         uses: azure/login@v2
         with:
