@@ -16,7 +16,8 @@
     "baseUrl": ".",
     //agora vai
     "paths": {
-      "@gymhero/shared": ["./packages/shared/src/index.ts"]
+      "@gymhero/shared": ["./packages/shared/src/index.ts"],
+      "@/*": ["./apps/web/src/*"]
     }
   },
   "exclude": ["node_modules"]
