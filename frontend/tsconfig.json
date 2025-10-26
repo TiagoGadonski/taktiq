@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noEmit": true,
+
+    // Define a base para a resolução de módulos
+    "baseUrl": ".",
+    
+    // Configuração dos atalhos partilhados
+    "paths": {
+      "@gymhero/shared": ["./packages/shared/src/index.ts"]
+    }
+  },
+  // Incluímos as pastas apps e packages no workspace
+  "include": ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts", "packages/**/*.tsx"],
+  "exclude": ["node_modules"]
+}
