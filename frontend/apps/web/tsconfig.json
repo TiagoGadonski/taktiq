@@ -1,28 +1,20 @@
 {
+  // Diz a este ficheiro para herdar tudo do ficheiro base
+  "extends": "../../tsconfig.json", 
+  
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    // Mantém as opções específicas do Next.js
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": ".",
+    // Adiciona o atalho específico da app (para "./src/*")
+    // (O atalho @gymhero/shared já foi herdado)
     "paths": {
-      "@/*": ["./src/*"],
-      "@gymhero/shared": ["../../packages/shared/src/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/hooks/use-auth.test.tsx.bak"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
