@@ -11,9 +11,12 @@
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=@gymhero/web",
     "dev:mobile": "turbo run dev --filter=@gymhero/mobile",
+    
+    // Simplificamos o build para a CI/CD
     "build": "turbo run build",
-    "build:web": "turbo run build --filter=@gymhero/web",
+    "build:web": "cd apps/web && next build", // <-- Deixamos o comando mais simples
     "build:mobile": "turbo run build --filter=@gymhero/mobile",
+    
     "test": "turbo run test",
     "test:web": "turbo run test --filter=@gymhero/web",
     "test:mobile": "turbo run test --filter=@gymhero/mobile",
