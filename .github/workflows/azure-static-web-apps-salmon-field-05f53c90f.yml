@@ -32,15 +32,21 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
+      # --- INÍCIO DAS NOVAS ALTERAÇÕES ---
+
       - name: Install Dependencies
         run: |
           cd frontend
-          pnpm install
+          pnpm install --frozen-lockfile
         
-      - name: Build Frontend
+      - name: Build Web App
         run: |
-          cd frontend
-          pnpm run build:web
+          # 1. Navega para a pasta da app específica
+          cd frontend/apps/web
+          # 2. Executa o build (que é 'next build') diretamente
+          pnpm run build
+
+      # --- FIM DAS NOVAS ALTERAÇÕES ---
 
       - name: Deploy to Azure
         id: builddeploy
@@ -49,10 +55,13 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_FIELD_05F53C90F }} 
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "frontend/apps/web/out" # Aponta para a pasta de saída estática
+          
+          # Aponte para a pasta 'out' (o build do Next.js com 'output: export' irá criá-la)
+          app_location: "frontend/apps/web/out" 
+          
+          # Diz à Azure para NÃO tentar fazer o build
           skip_app_build: true
 
-  # --- ESTA É A PARTE QUE ESTAVA A FALTAR ---
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
