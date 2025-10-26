@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -33,8 +35,15 @@ const nextConfig = {
     externalDir: true,
   },
   webpack: (config) => {
-    // aponta @gymhero/shared para o source da workspace
-    config.resolve.alias['@gymhero/shared'] = path.resolve(__dirname, '../../packages/shared/src');
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      
+      // Diz ao Webpack: quando vires "@/*", procura na pasta "./src"
+      '@/*': path.resolve(__dirname, 'src'),
+      
+      // Diz ao Webpack: quando vires "@gymhero/shared", procura em "../../packages/shared/src"
+      '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
+    };
     return config;
   },
 };
