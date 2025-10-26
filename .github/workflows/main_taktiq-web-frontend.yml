@@ -23,18 +23,19 @@ jobs:
         with:
           version: 9.1.4
 
+      # 1. Configuração do Node.js (Sem Cache)
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: 'pnpm'
+          # Cache removido
 
-      # 1. Instalar as dependências (na raiz do frontend)
+      # 2. Instalar as dependências (na raiz do frontend)
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # 2. Construir o projeto web (usando o comando turbo)
+      # 3. Construir o projeto web 
       - name: Build Web App
         run: pnpm run build:web
         working-directory: frontend
