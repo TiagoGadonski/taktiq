@@ -1,33 +1,15 @@
 {
+  // Herda TUDO (incluindo 'baseUrl' e 'paths') do ficheiro de base
+  "extends": "../../tsconfig.json", 
+  
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noEmit": true,
-
-    // Opções do Next.js
+    // Apenas opções específicas do Next.js
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    
-    // --- A PARTE IMPORTANTE ---
-    // Definimos TUDO aqui, sem 'extends'
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@gymhero/shared": ["../../packages/shared/src"]
-    }
+    ]
+    // A secção "paths" foi REMOVIDA daqui e movida para o ficheiro de base
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
