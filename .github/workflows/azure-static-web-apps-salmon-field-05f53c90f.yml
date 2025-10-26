@@ -12,7 +12,6 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-
     steps:
       - uses: actions/checkout@v3
         with:
@@ -31,14 +30,19 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
-      # (Opcional) ajuda a depurar estrutura
-      - name: Show repo tree (debug)
+      - name: Install & Build (monorepo)
+        run: |
+          cd frontend
+          pnpm install --frozen-lockfile
+          pnpm turbo run build --filter='@gymhero/web^...'
+
+      # Só para garantir que .next existe onde a Action vai procurar
+      - name: Debug build output
         run: |
           ls -la
-          ls -la frontend
           ls -la frontend/apps/web || true
+          ls -la frontend/apps/web/.next || true
 
-      # >>> Deixe a Action do Azure buildar e fazer o upload <<<
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -46,29 +50,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
 
-          # Caminho do app Next (relativo à raiz do repositório)
+          # Raiz do app Next (relativo ao repo root)
           app_location: frontend/apps/web
-
-          # Comando para buildar o monorepo a partir da pasta do app
-          # A Action muda o CWD para app_location antes de executar.
-          app_build_command: |
-            cd ../.. \
-            && pnpm install --frozen-lockfile \
-            && pnpm turbo run build --filter='@gymhero/web^...'
-
-          # Onde ficam os artefatos do Next dentro do app
+          # Pasta gerada pelo build dentro do app
           output_location: .next
 
-          # IMPORTANTE: não pule o build (SSR precisa build no container)
-          skip_app_build: false
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_FIELD_05F53C90F }}
-          action: close
+          # Crucial: NÃO construir dentro do container (evita Oryx/npm)
+          skip_app_build: true
