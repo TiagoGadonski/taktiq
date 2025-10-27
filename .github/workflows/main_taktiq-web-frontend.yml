@@ -35,10 +35,11 @@ jobs:
 
       - name: Build Web App
         run: |
-          # 1. Executamos o build e o install em passos SEPARADOS.
-          # 2. O Next.js será executado na pasta 'apps/web'
-          cd frontend/apps/web
-          pnpm run build
+          # Usamos 'next build' diretamente para ler as configs
+          pnpm next build
+        working-directory: frontend/apps/web 
+        env:
+          NODE_ENV: production
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
