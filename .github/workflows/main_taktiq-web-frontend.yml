@@ -68,7 +68,8 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
       - name: 'Deploy to Azure Web App'
-        # ...
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
