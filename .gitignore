@@ -82,6 +82,8 @@ secrets.json
 *.snupkg
 .nuget/
 packages/
+!/frontend/packages/
+!/frontend/packages/**
 
 # Test coverage
 coverage/
