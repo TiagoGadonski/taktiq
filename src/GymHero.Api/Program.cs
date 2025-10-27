@@ -130,13 +130,14 @@ var app = builder.Build();
 
 // 2. CONFIGURAR O PIPELINE DE MIDDLEWARE HTTP
 // ============================================
-
-// Em ambiente de desenvolvimento, usamos a UI do Swagger
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
-}
+// Em ambiente de desenvolvimento, usamos a UI do Swagger
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
+// }
 
 // Enable HTTPS redirection in production
 if (!app.Environment.IsDevelopment())
