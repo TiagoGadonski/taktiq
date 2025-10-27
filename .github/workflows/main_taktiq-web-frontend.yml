@@ -42,7 +42,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: frontend/apps/web/.next/standalone
+          # CORREÇÃO: Enviamos a pasta que contém o server.js
+          path: frontend/apps/web
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,10 +68,11 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
+        # ...
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
+          # CORREÇÃO: Aponta para o local onde a pasta 'apps/web' foi descarregada
           package: . 
+          # Comando de arranque (Next.js Standalone)
           startup-command: "node apps/web/server.js"
