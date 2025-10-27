@@ -33,15 +33,20 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
+      # 2. Construir o projeto web (na pasta da app)
       - name: Build Web App
-        # MUDANÇA: O Next.js cria o build na pasta .next/, mas o Dockerfile move tudo para o 'standalone'
-        run: pnpm run build
-        working-directory: frontend/apps/web
+        run: |
+          # Navegamos explicitamente para a pasta da app web e executamos o build
+          cd apps/web 
+          pnpm run build
+        working-directory: frontend # O working-directory de base é o frontend
 
+      # 3. Upload artifact for deployment job
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
+          # O caminho do artefato é a raiz da app 'web' com os ficheiros compilados
           path: frontend/apps/web/.next/standalone
 
   deploy:
