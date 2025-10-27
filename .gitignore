@@ -81,7 +81,7 @@ secrets.json
 *.nupkg
 *.snupkg
 .nuget/
-packages/
+#packages/
 
 # Test coverage
 coverage/
