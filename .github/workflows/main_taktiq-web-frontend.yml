@@ -34,12 +34,9 @@ jobs:
         working-directory: frontend
 
       - name: Build Web App
-        run: |
-          # Usamos 'next build' diretamente para ler as configs
-          pnpm next build
-        working-directory: frontend/apps/web 
-        env:
-          NODE_ENV: production
+        # MUDANÇA: O Next.js cria o build na pasta .next/, mas o Dockerfile move tudo para o 'standalone'
+        run: pnpm run build
+        working-directory: frontend/apps/web
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
