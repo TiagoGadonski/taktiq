@@ -158,5 +158,16 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: 'bash -lc "HOST=0.0.0.0 PORT=${PORT:-8080} node frontend/apps/web/.next/standalone/frontend/apps/web/server.js"'
+          startup-command: >
+            bash -lc '
+              set -euo pipefail
+              export NODE_ENV=production
+              export HOST=0.0.0.0
+              export PORT="${PORT:-8080}"
+              APP_DIR="frontend/apps/web/.next/standalone/frontend/apps/web"
+              echo "Starting Next standalone at $APP_DIR on $HOST:$PORT"
+              cd "$APP_DIR"
+              node server.js
+            '
+
 
