@@ -45,4 +45,5 @@ jobs:
             --deployment-token "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}" \
             --env production \
             --api-language node \
-            --api-version 20
+            --api-version 20 \
+            --verbose
