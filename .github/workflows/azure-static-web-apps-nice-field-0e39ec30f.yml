@@ -20,7 +20,6 @@ jobs:
           submodules: true
           lfs: false
       
-      # 1. Setup pnpm (Mantido)
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -31,7 +30,16 @@ jobs:
         with:
           node-version: '20'
 
-      # 2. Deploy para a Static Web App (Com o comando correto)
+      # 1. Instalar dependências (na raiz do frontend)
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: frontend
+
+      # 2. Construir o projeto web (na pasta da app)
+      - name: Build Web App
+        run: pnpm run build:web
+        working-directory: frontend # Executa na raiz do frontend
+
       - name: Deploy to Azure
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -40,12 +48,12 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          # 1. app_location: Diz onde está o código-fonte (a pasta 'frontend')
-          app_location: "frontend/apps/web" 
+          # --- CORREÇÃO FINAL AQUI ---
+          # 1. app_location: Diz onde está a raiz do código
+          app_location: "frontend" 
           
           # 2. output_location: Diz onde está o resultado FINAL (relativo ao app_location)
-          output_location: "out" 
+          output_location: "apps/web/out" 
           
-          # 3. COMANDO DE BUILD CORRIGIDO
-          # O build deve usar o pnpm, que é injetado no comando de build.
-          app_build_command: "pnpm install && pnpm run build"
+          # 3. Adicionamos o comando de build explícito para o Oryx usar
+          app_build_command: "pnpm install --frozen-lockfile && pnpm run build:web"
