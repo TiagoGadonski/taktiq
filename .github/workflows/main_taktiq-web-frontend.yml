@@ -1,5 +1,5 @@
 # Docs: https://github.com/Azure/webapps-deploy
-name: Deploy Next.js to Azure Web App - taktiq-web-frontend
+name: Deploy Next.js to Azure Web App - taktiq-web-frontend (ZIP)
 
 on:
   push:
@@ -27,14 +27,17 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
+      # Instala o workspace do monorepo (onde está pnpm-workspace.yaml)
       - name: Install dependencies (workspace)
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
+      # Build do app Next em modo standalone (exige output:'standalone' no next.config.js)
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
+      # Prepara artefato: copia standalone + .next/static + BUILD_ID + manifests + public
       - name: Prepare Next standalone artifact
         shell: bash
         run: |
@@ -51,61 +54,73 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # Copia o standalone inteiro
+          # 1) copia tudo do standalone (inclui a árvore replicada e node_modules do Next)
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # Garante BUILD_ID no .next do app
-          if [ -f "$APP_DIR/.next/BUILD_ID" ]; then
-            BUILD_ID_VAL="$(cat "$APP_DIR/.next/BUILD_ID" || true)"
-          else
-            echo "WARN: .next/BUILD_ID não encontrado; gerando um novo..."
-            BUILD_ID_VAL="$(date +%s%N | md5sum | cut -c1-20)"
-            mkdir -p "$APP_DIR/.next"
-            echo "$BUILD_ID_VAL" > "$APP_DIR/.next/BUILD_ID"
+          # 2) localizar o server.js dentro do standalone (ex.: ./frontend/apps/web/server.js dentro do DEPLOY_DIR)
+          SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 8 -path '*/server.js' | head -n1 || true)
+          if [ -z "${SERVER_PATH:-}" ]; then
+            echo "ERROR: server.js NOT FOUND inside $DEPLOY_DIR" >&2
+            ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
+            exit 1
           fi
-          mkdir -p "$DEPLOY_DIR/frontend/apps/web/.next"
-          echo "$BUILD_ID_VAL" > "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID"
+          echo "Found server.js at: $SERVER_PATH"
 
-          # Copia static e manifests para o .next do app
+          APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"
+
+          # 3) cria a pasta .next ao lado do server e copia os assets estáticos
+          mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
+
           if [ -d "$APP_DIR/.next/static" ]; then
-            mkdir -p "$DEPLOY_DIR/frontend/apps/web/.next/static"
-            cp -a "$APP_DIR/.next/static/." "$DEPLOY_DIR/frontend/apps/web/.next/static/"
+            cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/static"
           fi
-          for f in routes-manifest.json prerender-manifest.json app-build-manifest.json build-manifest.json required-server-files.json; do
+
+          # 4) BUILD_ID obrigatório
+          if [ -f "$APP_DIR/.next/BUILD_ID" ]; then
+            cp "$APP_DIR/.next/BUILD_ID" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID"
+          else
+            echo "ERROR: BUILD_ID not found at $APP_DIR/.next/BUILD_ID" >&2
+            ls -la "$APP_DIR/.next" || true
+            exit 1
+          fi
+
+          # 5) Manifests úteis
+          for f in "routes-manifest.json" "prerender-manifest.json" "app-build-manifest.json" "build-manifest.json" "required-server-files.json"; do
             if [ -f "$APP_DIR/.next/$f" ]; then
-              cp "$APP_DIR/.next/$f" "$DEPLOY_DIR/frontend/apps/web/.next/$f"
+              cp "$APP_DIR/.next/$f" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/$f"
             fi
           done
 
-          # Copia public (se existir)
+          # 6) public (se existir)
           if [ -d "$APP_DIR/public" ]; then
-            mkdir -p "$DEPLOY_DIR/frontend/apps/web/public"
-            cp -a "$APP_DIR/public/." "$DEPLOY_DIR/frontend/apps/web/public/"
+            cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
 
-          echo "== Sanity check =="
-          test -f "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID" || { echo "ERROR: BUILD_ID faltando em frontend/apps/web/.next/BUILD_ID"; exit 1; }
-          echo "BUILD_ID=$(cat "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID")"
+          echo "== VERIFY BUILD_ID next to server.js =="
+          if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
+            echo "ERROR: BUILD_ID missing at $DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" >&2
+            exit 1
+          fi
+
           echo "=== Final artifact tree (first 200 lines) ==="
           ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
 
-
-      - name: Create ZIP artifact
+      # Cria ZIP com a RAIZ sendo o conteúdo de out-azure (sem a pasta out-azure no topo)
+      - name: Create deploy zip (flatten root)
         shell: bash
         run: |
-          cd "$GITHUB_WORKSPACE/frontend/apps/web"
-          rm -f out-azure.zip
-          # zip -r preserva diretórios ocultos (.next)
-          zip -r out-azure.zip out-azure
-          echo "== ZIP content (first 200) =="
-          unzip -l out-azure.zip | sed -n '1,200p'
-          echo "== Check BUILD_ID inside ZIP =="
-          unzip -l out-azure.zip | grep -E "/\.next/BUILD_ID$" || (echo "BUILD_ID not in ZIP!" >&2; exit 1)
+          set -euo pipefail
+          cd frontend/apps/web/out-azure
+          zip -r ../out-azure.zip .
+          cd ..
+          echo "== ZIP listing =="
+          unzip -l out-azure.zip | sed -n '1,80p'
 
-      - name: Upload artifact (ZIP)
+      - name: Upload artifact (zip)
         uses: actions/upload-artifact@v4
         with:
-          name: node-app-zip
+          name: deploy-zip
           path: frontend/apps/web/out-azure.zip
           if-no-files-found: error
 
@@ -117,32 +132,18 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact (ZIP)
+      - name: Download artifact (zip)
         uses: actions/download-artifact@v4
         with:
-          name: node-app-zip
+          name: deploy-zip
           path: .
 
-      - name: Debug artifact tree & verify server.js and BUILD_ID
-        shell: bash
+      - name: Verify zip
         run: |
-          echo "== Tree of node-app (first 200 lines) =="
-          ls -laR node-app | sed -n '1,200p'
-
-          echo "== Locate server.js (standalone) =="
-          SERVER_PATH=$( /usr/bin/find node-app -maxdepth 30 -path '*/.next/standalone/*/server.js' | head -n1 || true )
-          if [ -z "${SERVER_PATH:-}" ]; then
-            echo "ERROR: standalone server.js NOT FOUND in node-app" >&2
-            exit 1
-          fi
-          echo "server.js at: ${SERVER_PATH#node-app/}"
-
-          echo "== Verify BUILD_ID in app .next =="
-          if [ ! -f "node-app/frontend/apps/web/.next/BUILD_ID" ]; then
-            echo "ERROR: BUILD_ID missing at node-app/frontend/apps/web/.next/BUILD_ID" >&2
-            exit 1
-          fi
-          echo "BUILD_ID present."
+          echo "== Files =="
+          ls -la
+          echo "== ZIP listing =="
+          unzip -l out-azure.zip | sed -n '1,120p'
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -151,12 +152,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
-      - name: Deploy to Azure Web App (ZIP)
+      - name: Deploy to Azure Web App (zip)
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
           startup-command: 'node frontend/apps/web/.next/standalone/frontend/apps/web/server.js'
-
-
