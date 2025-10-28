@@ -98,8 +98,8 @@ jobs:
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
-          # CORREÇÃO: Aponta para o local onde a pasta 'apps/web' foi descarregada
-          package: frontend/apps/web/out-azure
+          # Deploy the downloaded standalone bundle directory
+          package: node-app
           # Comando de arranque (Next.js Standalone)
           startup-command: "node server.js"
 
