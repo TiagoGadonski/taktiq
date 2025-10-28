@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'               # Node LTS
+          node-version: '20'
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
@@ -40,6 +40,7 @@ jobs:
       # Prepara artefato standalone: server.js + deps mínimas + .next/static + public
       - name: Prepare Next standalone artifact
         run: |
+          set -euo pipefail
           APP_DIR="$GITHUB_WORKSPACE/frontend/apps/web"
           STANDALONE_DIR="$APP_DIR/.next/standalone"
           DEPLOY_DIR="$APP_DIR/out-azure"
@@ -52,17 +53,22 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) copia o server standalone e dependências mínimas
+          # 1) copia tudo do standalone
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) copia os assets estáticos para o caminho esperado
+          # 2) assets estáticos no caminho esperado
           mkdir -p "$DEPLOY_DIR/.next"
           cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/.next/static"
 
-          # 3) copia a pasta public, se existir
+          # 3) public (se existir)
           if [ -d "$APP_DIR/public" ]; then
             cp -a "$APP_DIR/public" "$DEPLOY_DIR/public"
           fi
+
+          echo "=== Conteúdo do deploy dir ==="
+          ls -la "$DEPLOY_DIR" || true
+          echo "=== Procura server.js ==="
+          (cd "$DEPLOY_DIR" && ( [ -f server.js ] && echo "Found: server.js at root" || ( [ -f apps/web/server.js ] && echo "Found: apps/web/server.js" || echo "server.js NOT FOUND" ) ) )
 
       # Sobe o artefato (pasta) para ser usado no job de deploy
       - name: Upload artifact for deployment job
@@ -85,6 +91,13 @@ jobs:
           name: node-app
           path: node-app            # baixa em ./node-app
 
+      - name: List artifact tree (debug)
+        run: |
+          echo "== Tree of node-app =="
+          ls -la node-app
+          echo "== Look for server.js =="
+          (cd node-app && ( [ -f server.js ] && echo "Found: server.js at root" || ( [ -f apps/web/server.js ] && echo "Found: apps/web/server.js" || (echo "server.js NOT FOUND" && exit 1) ) ) )
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -97,5 +110,7 @@ jobs:
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
-          package: node-app          # aponta para a PASTA baixada (contém server.js)
-          startup-command: 'node server.js'  # server.js do standalone
+          package: node-app
+          # 👇 Se o passo de "List artifact" mostrou server.js na raiz, mude para "node server.js".
+          # Em monorepo, é comum vir como apps/web/server.js:
+          startup-command: 'node apps/web/server.js'
