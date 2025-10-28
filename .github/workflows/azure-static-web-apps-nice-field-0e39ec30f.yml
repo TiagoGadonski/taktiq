@@ -25,7 +25,6 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          # 👇 diz à action onde está o lockfile
           cache-dependency-path: frontend/pnpm-lock.yaml
 
       # instala deps na raiz do workspace (onde está pnpm-workspace.yaml e o lockfile)
