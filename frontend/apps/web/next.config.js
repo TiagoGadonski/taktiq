@@ -12,7 +12,7 @@ const nextConfig = {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
   images: {
-   // unoptimized: true, 
+    unoptimized: true, 
     remotePatterns: [
       {
         protocol: 'https',
