@@ -48,8 +48,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
 
-          app_location: "frontend"
-          output_location: "apps/web/out"
+          # Aponte direto para a pasta que JÁ tem index.html
+          app_location: "frontend/apps/web/out"
 
+          # Remova output_location quando o app_location já é a pasta final
           skip_app_build: true
           skip_api_build: true
