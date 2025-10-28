@@ -27,18 +27,19 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
-      # Instala as dependências do monorepo (onde está o pnpm-workspace.yaml)
+      # Instala todas as deps do monorepo (onde está o pnpm-workspace.yaml)
       - name: Install dependencies (workspace)
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # Build do app Next (SSR) já em modo standalone
+      # Build do Next (SSR) em modo standalone
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
-      # Prepara artefato standalone: server.js + deps mínimas + .next/static + public
+      # Prepara artefato: copia standalone e posiciona .next/static + public
       - name: Prepare Next standalone artifact
+        shell: bash
         run: |
           set -euo pipefail
           APP_DIR="$GITHUB_WORKSPACE/frontend/apps/web"
@@ -53,22 +54,35 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) copia tudo do standalone
+          # 1) copia TUDO que o Next gerou no standalone (inclui árvore do monorepo)
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) assets estáticos no caminho esperado
-          mkdir -p "$DEPLOY_DIR/.next"
-          cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/.next/static"
+          # 2) descobrir onde ficou o server.js (ex.: frontend/apps/web/server.js)
+          SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 6 -path '*/server.js' | head -n1 || true)
+          if [ -z "${SERVER_PATH:-}" ]; then
+            echo "server.js NOT FOUND inside $DEPLOY_DIR" >&2
+            echo "Tree for debug:" >&2
+            ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
+            exit 1
+          fi
+          echo "Found server.js at: $SERVER_PATH"
 
-          # 3) public (se existir)
+          # 3) raiz do app onde o Next espera .next/static e public
+          APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
+          # remove prefixo './' se existir
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"
+
+          # 4) copia assets estáticos para a pasta do app (onde está o server.js)
+          mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
+          cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/static"
+
+          # 5) copia public (se existir) para a pasta do app
           if [ -d "$APP_DIR/public" ]; then
-            cp -a "$APP_DIR/public" "$DEPLOY_DIR/public"
+            cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
 
-          echo "=== Conteúdo do deploy dir ==="
-          ls -la "$DEPLOY_DIR" || true
-          echo "=== Procura server.js ==="
-          (cd "$DEPLOY_DIR" && ( [ -f server.js ] && echo "Found: server.js at root" || ( [ -f apps/web/server.js ] && echo "Found: apps/web/server.js" || echo "server.js NOT FOUND" ) ) )
+          echo "=== Final artifact tree (first 200 lines) ==="
+          ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
 
       # Sobe o artefato (pasta) para ser usado no job de deploy
       - name: Upload artifact for deployment job
@@ -89,14 +103,24 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          path: node-app            # baixa em ./node-app
+          path: node-app
 
-      - name: List artifact tree (debug)
+      - name: Debug artifact tree & verify server.js
+        shell: bash
         run: |
-          echo "== Tree of node-app =="
-          ls -la node-app
+          echo "== Tree of node-app (first 200 lines) =="
+          ls -laR node-app | sed -n '1,200p'
           echo "== Look for server.js =="
-          (cd node-app && ( [ -f server.js ] && echo "Found: server.js at root" || ( [ -f apps/web/server.js ] && echo "Found: apps/web/server.js" || (echo "server.js NOT FOUND" && exit 1) ) ) )
+          cd node-app
+          SERVER_PATH=$( /usr/bin/find . -maxdepth 6 -path '*/server.js' | head -n1 || true )
+          if [ -z "${SERVER_PATH:-}" ]; then
+            echo "server.js NOT FOUND in node-app" >&2
+            exit 1
+          fi
+          echo "server.js at: $SERVER_PATH"
+
+          # guarda para o passo seguinte
+          echo "SERVER_PATH=${SERVER_PATH#./}" >> $GITHUB_ENV
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -111,6 +135,5 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: node-app
-          # 👇 Se o passo de "List artifact" mostrou server.js na raiz, mude para "node server.js".
-          # Em monorepo, é comum vir como apps/web/server.js:
-          startup-command: 'node apps/web/server.js'
+          # inicia o server.js NA POSIÇÃO CORRETA (ex.: node frontend/apps/web/server.js)
+          startup-command: 'node ${{ env.SERVER_PATH }}'
