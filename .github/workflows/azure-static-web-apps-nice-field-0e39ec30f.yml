@@ -2,12 +2,10 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build_and_deploy_job:
@@ -27,18 +25,20 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+          # 👇 diz à action onde está o lockfile
+          cache-dependency-path: frontend/pnpm-lock.yaml
 
-      # instala deps na raiz onde está seu pnpm-workspace.yaml (ex.: frontend)
+      # instala deps na raiz do workspace (onde está pnpm-workspace.yaml e o lockfile)
       - name: Install deps
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # builda o Next (SSR) sem export
+      # builda o Next (SSR), sem export
       - name: Build Web App
         run: pnpm run build:web
         working-directory: frontend
 
-      # deploy SSR com SWA CLI (sem Oryx, sem "workspace:*" quebrar)
+      # deploy SSR com SWA CLI (sem Oryx)
       - name: Deploy (SWA CLI)
         run: |
           pnpm dlx @azure/static-web-apps-cli@latest deploy \
