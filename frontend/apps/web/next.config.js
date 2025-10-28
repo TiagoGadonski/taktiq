@@ -1,12 +1,9 @@
-// --- CORREÇÃO AQUI: A importação do 'path' deve estar no topo ---
-const path = require('path'); 
+const path = require('path');
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-experimental: {
-    // ajuste o caminho se a raiz do repositório estiver em outro nível
+  experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../..'),
   },
   env: {
@@ -15,33 +12,19 @@ experimental: {
   images: {
     unoptimized: true,
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-      },
+      { protocol: 'https', hostname: 'raw.githubusercontent.com' },
+      { protocol: 'http', hostname: 'localhost' },
     ],
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },
   transpilePackages: ['@gymhero/shared'],
-
-  // 2. A CORREÇÃO FINAL DOS ALIASES
   webpack: (config) => {
     config.resolve.alias = {
-  ...config.resolve.alias,
-  '@': path.resolve(__dirname, 'src'),
-  '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
-};
-
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
+      '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
+    };
     return config;
   },
 };
