@@ -27,27 +27,23 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
-      # Instala o monorepo (onde está pnpm-workspace.yaml)
       - name: Install dependencies (workspace)
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # Build do Next em modo standalone (precisa de output:'standalone' no next.config.js do app)
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
-      # Prepara o artefato: standalone + TODO o .next (BUILD_ID, static, manifests...) + public
       - name: Prepare Next standalone artifact
         shell: bash
         run: |
           set -euo pipefail
-
           APP_DIR="$GITHUB_WORKSPACE/frontend/apps/web"
           STANDALONE_DIR="$APP_DIR/.next/standalone"
           DEPLOY_DIR="$APP_DIR/out-azure"
 
-          echo "== Check standalone output =="
+          echo "== Check .next and standalone =="
           ls -la "$APP_DIR/.next" || true
           ls -la "$STANDALONE_DIR" || true
 
@@ -59,48 +55,57 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) Copia tudo do standalone (traz node_modules/ e o server.js em estrutura "replicada")
+          # 1) Copia tudo do standalone (traz a árvore replicada com node_modules e server.js)
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) Descobre onde ficou o server.js no standalone
+          # 2) Descobre o server.js dentro do standalone
           SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 12 -name 'server.js' | head -n1 || true)
           if [ -z "${SERVER_PATH:-}" ]; then
-            echo "ERROR: server.js NOT FOUND inside $DEPLOY_DIR" >&2
+            echo "ERROR: server.js NOT FOUND in $DEPLOY_DIR" >&2
             ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
             exit 1
           fi
           echo "Found server.js at: $SERVER_PATH"
 
           APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
-          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove './' prefixo para facilitar paths
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"
 
-          # 3) Garante a pasta .next AO LADO do server.js e copia TODO o conteúdo de apps/web/.next
+          # 3) Copia TODO o .next (inclui BUILD_ID, static, manifests) para ao lado do server.js
           mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
           cp -a "$APP_DIR/.next/." "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/"
 
-          # 4) Public (se existir)
+          # 4) Copia public (se existir)
           if [ -d "$APP_DIR/public" ]; then
             cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
 
-          echo "== VERIFY BUILD_ID next to server.js (build job) =="
+          # 5) Verifica BUILD_ID ao lado do server.js
           if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
             echo "ERROR: BUILD_ID missing at $DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" >&2
-            echo "Listing $DEPLOY_DIR/$APP_RUNTIME_DIR/.next :" >&2
             ls -la "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next" || true
             exit 1
           fi
-          echo "BUILD_ID:"
-          cat "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" || true
 
           echo "=== Final artifact tree (first 200 lines) ==="
           ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
 
-      - name: Upload artifact for deployment job
+      - name: Create ZIP artifact
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE/frontend/apps/web"
+          rm -f out-azure.zip
+          # zip -r preserva diretórios ocultos (.next)
+          zip -r out-azure.zip out-azure
+          echo "== ZIP content (first 200) =="
+          unzip -l out-azure.zip | sed -n '1,200p'
+          echo "== Check BUILD_ID inside ZIP =="
+          unzip -l out-azure.zip | grep -E "/\.next/BUILD_ID$" || (echo "BUILD_ID not in ZIP!" >&2; exit 1)
+
+      - name: Upload artifact (ZIP)
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: frontend/apps/web/out-azure
+          name: node-app-zip
+          path: frontend/apps/web/out-azure.zip
           if-no-files-found: error
 
   deploy:
@@ -111,37 +116,33 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact (ZIP)
         uses: actions/download-artifact@v4
         with:
-          name: node-app
-          path: node-app
+          name: node-app-zip
+          path: .
 
-      - name: Debug artifact tree & verify server.js and BUILD_ID
+      - name: Debug ZIP and locate server.js path inside
         shell: bash
         run: |
-          echo "== Tree of node-app (first 200 lines) =="
-          ls -laR node-app | sed -n '1,200p'
+          echo "== ZIP listing =="
+          unzip -l out-azure.zip | sed -n '1,200p'
 
-          echo "== Locate server.js =="
-          cd node-app
-          SERVER_PATH=$( /usr/bin/find . -maxdepth 12 -name 'server.js' | head -n1 || true )
+          # Extrai só a listagem para descobrir o diretório do server.js
+          SERVER_PATH=$(unzip -l out-azure.zip | awk '{print $4}' | grep -E "/server\.js$" | head -n1 || true)
           if [ -z "${SERVER_PATH:-}" ]; then
-            echo "ERROR: server.js NOT FOUND in node-app" >&2
+            echo "ERROR: server.js not found inside ZIP" >&2
             exit 1
           fi
           echo "server.js at: $SERVER_PATH"
 
-          APP_RUNTIME_DIR="${SERVER_PATH%/server.js}"
-          echo "APP_RUNTIME_DIR=${APP_RUNTIME_DIR#./}" >> $GITHUB_ENV
+          APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
+          echo "APP_RUNTIME_DIR_ZIP=$APP_RUNTIME_DIR" >> $GITHUB_ENV
 
-          echo "== Verify BUILD_ID next to server.js =="
-          if [ ! -f "${APP_RUNTIME_DIR}/.next/BUILD_ID" ]; then
-            echo "ERROR: BUILD_ID missing at ${APP_RUNTIME_DIR}/.next/BUILD_ID" >&2
-            ls -la "${APP_RUNTIME_DIR}/.next" || true
-            exit 1
-          fi
-          echo "BUILD_ID present."
+          # Confere se há BUILD_ID ao lado do server.js
+          BUILD_ID_PATH="${APP_RUNTIME_DIR}/.next/BUILD_ID"
+          unzip -l out-azure.zip | awk '{print $4}' | grep -qx "$BUILD_ID_PATH" || (echo "ERROR: BUILD_ID missing at $BUILD_ID_PATH" >&2; exit 1)
+          echo "BUILD_ID present in ZIP."
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -150,10 +151,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App (ZIP)
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
-          package: node-app
-          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
+          package: out-azure.zip
+          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR_ZIP }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
