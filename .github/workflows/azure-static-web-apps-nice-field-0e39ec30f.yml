@@ -37,28 +37,27 @@ jobs:
 
       # 2. Instalar dependências e Build (Executado na pasta raiz do frontend)
       - name: Install Dependencies and Build Frontend
-        working-directory: frontend # Executa os comandos dentro da pasta 'frontend'
         run: |
+          cd frontend
           pnpm install --frozen-lockfile
-          # O build:web que você tem no seu package.json cria a pasta 'out'
-          pnpm run build:web
+          pnpm run build:web # Cria a pasta frontend/apps/web/out
 
       # 3. Deploy para a Static Web App
       - name: Deploy to Azure
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Use o seu segredo completo aqui
+          # Use o seu segredo real aqui
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }} 
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          # --- CAMINHOS CORRIGIDOS ---
-          # app_location: A raiz do código-fonte (frontend)
-          app_location: "frontend" 
+          # --- CORREÇÃO FINAL AQUI ---
+          # 1. app_location: Diz onde está o código-fonte (raiz do repo)
+          app_location: "/" 
           
-          # output_location: A pasta 'out' gerada pelo seu 'next build' (relativa ao app_location)
-          output_location: "apps/web/out"
+          # 2. output_location: Diz onde a pasta 'out' foi gerada (o site estático final)
+          output_location: "frontend/apps/web/out" 
           
-          # Desativar o build interno da Azure (Oryx) para usar o nosso build do pnpm
+          # Diz à Azure para não tentar fazer o build
           skip_app_build: true
