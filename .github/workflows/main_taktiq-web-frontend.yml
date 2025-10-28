@@ -66,7 +66,7 @@ jobs:
           fi
           echo "Found server.js at: $SERVER_PATH"
           APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
-          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove prefixo './'
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove prefixo './' para montar caminhos no disco
 
           # 3) assets estáticos do Next ao lado do server.js
           mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
@@ -143,4 +143,5 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: node-app
-          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR#./ }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
+          # ✅ sem o operador '#./' (não suportado pelo GitHub Actions)
+          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
