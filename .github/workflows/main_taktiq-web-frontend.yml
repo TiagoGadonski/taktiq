@@ -27,17 +27,17 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
-      # instala as dependências do monorepo (onde está o pnpm-workspace.yaml)
+      # Instala o monorepo (onde está pnpm-workspace.yaml)
       - name: Install dependencies (workspace)
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # build do app Next em modo standalone
+      # Build do Next em modo standalone (precisa de output:'standalone' no next.config.js)
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
-      # prepara artefato: standalone + .next/static + BUILD_ID + public
+      # Prepara o artefato: standalone + .next/static + BUILD_ID + (manifests) + public
       - name: Prepare Next standalone artifact
         shell: bash
         run: |
@@ -47,49 +47,63 @@ jobs:
           DEPLOY_DIR="$APP_DIR/out-azure"
 
           if [ ! -d "$STANDALONE_DIR" ]; then
-            echo "Standalone build output not found at $STANDALONE_DIR" >&2
+            echo "ERROR: Standalone build not found at $STANDALONE_DIR" >&2
             exit 1
           fi
 
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) copia tudo do standalone (inclui árvore “replicada” do monorepo)
+          # 1) copia tudo do standalone (inclui node_modules empacotados pelo Next)
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) localizar o server.js dentro do standalone (ex.: frontend/apps/web/server.js)
+          # 2) localizar o server.js dentro do standalone (ex.: ./frontend/apps/web/server.js)
           SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 8 -path '*/server.js' | head -n1 || true)
           if [ -z "${SERVER_PATH:-}" ]; then
-            echo "server.js NOT FOUND inside $DEPLOY_DIR" >&2
+            echo "ERROR: server.js NOT FOUND inside $DEPLOY_DIR" >&2
             ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
             exit 1
           fi
           echo "Found server.js at: $SERVER_PATH"
+
           APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
-          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove prefixo './' para montar caminhos no disco
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove './' para montar caminhos
 
-          # 3) assets estáticos do Next ao lado do server.js
+          # 3) cria a pasta .next ao lado do server e copia os assets
           mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
-          cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/static"
 
-          # 4) BUILD_ID é obrigatório para start em produção
+          if [ -d "$APP_DIR/.next/static" ]; then
+            cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/static"
+          fi
+
+          # 4) BUILD_ID é obrigatório para o start em produção
           if [ -f "$APP_DIR/.next/BUILD_ID" ]; then
             cp "$APP_DIR/.next/BUILD_ID" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID"
           else
-            echo "WARN: BUILD_ID not found at $APP_DIR/.next/BUILD_ID" >&2
+            echo "ERROR: BUILD_ID not found at $APP_DIR/.next/BUILD_ID" >&2
+            ls -la "$APP_DIR/.next" || true
+            exit 1
           fi
 
-          # 5) manifests (opcional, mas ajuda em alguns cenários)
+          # 5) Manifests (opcional, ajuda em alguns cenários)
           for f in "routes-manifest.json" "prerender-manifest.json" "app-build-manifest.json"; do
             if [ -f "$APP_DIR/.next/$f" ]; then
               cp "$APP_DIR/.next/$f" "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/$f"
             fi
           done
 
-          # 6) pasta public (se existir)
+          # 6) public (se existir)
           if [ -d "$APP_DIR/public" ]; then
             cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
+
+          echo "== VERIFY BUILD_ID next to server.js =="
+          if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
+            echo "ERROR: BUILD_ID missing at $DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" >&2
+            exit 1
+          fi
+          echo "BUILD_ID content:"
+          cat "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" || true
 
           echo "=== Final artifact tree (first 200 lines) ==="
           ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
@@ -114,7 +128,7 @@ jobs:
           name: node-app
           path: node-app
 
-      - name: Debug artifact tree & verify server.js
+      - name: Debug artifact tree & verify server.js and BUILD_ID
         shell: bash
         run: |
           echo "== Tree of node-app (first 200 lines) =="
@@ -123,12 +137,19 @@ jobs:
           cd node-app
           SERVER_PATH=$( /usr/bin/find . -maxdepth 8 -path '*/server.js' | head -n1 || true )
           if [ -z "${SERVER_PATH:-}" ]; then
-            echo "server.js NOT FOUND in node-app" >&2
+            echo "ERROR: server.js NOT FOUND in node-app" >&2
             exit 1
           fi
           echo "server.js at: $SERVER_PATH"
           echo "APP_RUNTIME_DIR=${SERVER_PATH%/server.js}" >> $GITHUB_ENV
           echo "SERVER_PATH=${SERVER_PATH#./}" >> $GITHUB_ENV
+
+          echo "== Verify BUILD_ID next to server.js =="
+          if [ ! -f "${SERVER_PATH%/server.js}/.next/BUILD_ID" ]; then
+            echo "ERROR: BUILD_ID missing at ${SERVER_PATH%/server.js}/.next/BUILD_ID" >&2
+            exit 1
+          fi
+          echo "BUILD_ID present."
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -143,5 +164,4 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: node-app
-          # ✅ sem o operador '#./' (não suportado pelo GitHub Actions)
           startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'

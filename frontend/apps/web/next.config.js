@@ -37,11 +37,11 @@ experimental: {
   // 2. A CORREÇÃO FINAL DOS ALIASES
   webpack: (config) => {
     config.resolve.alias = {
-      ...config.resolve.alias,
-      // Usa __dirname que é mais robusto
-      '@/*': path.resolve(__dirname, 'src'),
-      '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
-    };
+  ...config.resolve.alias,
+  '@': path.resolve(__dirname, 'src'),
+  '@gymhero/shared': path.resolve(__dirname, '../../packages/shared/src'),
+};
+
     return config;
   },
 };
