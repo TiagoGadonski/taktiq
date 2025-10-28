@@ -16,39 +16,31 @@ jobs:
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9.1.4
 
-      - name: Set up Node.js version
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'pnpm'
 
-      # 1. Instalar dependências (na raiz do frontend)
-      - name: Install Dependencies
+      # instala deps na raiz onde está seu pnpm-workspace.yaml (ex.: frontend)
+      - name: Install deps
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # 2. Construir o projeto web (na pasta da app)
+      # builda o Next (SSR) sem export
       - name: Build Web App
         run: pnpm run build:web
-        working-directory: frontend # Executa na raiz do frontend
+        working-directory: frontend
 
-      - name: Deploy to Azure
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: upload
-
-          # Aponta direto para a pasta que contém index.html
-          app_location: "frontend/apps/web/out"
-
-          skip_app_build: true
-          skip_api_build: true
+      # deploy SSR com SWA CLI (sem Oryx, sem "workspace:*" quebrar)
+      - name: Deploy (SWA CLI)
+        run: |
+          pnpm dlx @azure/static-web-apps-cli@latest deploy \
+            --app-location "frontend/apps/web" \
+            --deployment-token "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}"

@@ -6,13 +6,13 @@ const nextConfig = {
   reactStrictMode: true,
   
   // 1. O Next.js sempre precisa da instrução 'output' para saber o que fazer
-  output: 'export', 
+  //output: 'export', 
   
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
   images: {
-    unoptimized: true, 
+   // unoptimized: true, 
     remotePatterns: [
       {
         protocol: 'https',
