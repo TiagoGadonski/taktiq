@@ -37,7 +37,7 @@ jobs:
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
-      # Prepara artefato: copia standalone + .next/static + BUILD_ID + manifests + public
+      # Prepara artefato: copia standalone + .next/static + BUILD_ID + manifests + public + start.sh
       - name: Prepare Next standalone artifact
         shell: bash
         run: |
@@ -97,6 +97,15 @@ jobs:
             cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
 
+          # 7) script de inicialização robusto
+          cat > "$DEPLOY_DIR/start.sh" << 'EOS'
+          #!/bin/sh
+          set -e
+          cd frontend/apps/web
+          HOST=0.0.0.0 PORT=${PORT:-8080} NODE_ENV=production exec node server.js
+          EOS
+          chmod +x "$DEPLOY_DIR/start.sh"
+
           echo "== VERIFY BUILD_ID next to server.js =="
           if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
             echo "ERROR: BUILD_ID missing at $DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" >&2
@@ -115,7 +124,7 @@ jobs:
           zip -r ../out-azure.zip .
           cd ..
           echo "== ZIP listing =="
-          unzip -l out-azure.zip | sed -n '1,80p'
+          unzip -l out-azure.zip | sed -n '1,120p'
 
       - name: Upload artifact (zip)
         uses: actions/upload-artifact@v4
@@ -158,5 +167,4 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: "cd .next/standalone/frontend/apps/web && HOST=0.0.0.0 PORT=${PORT:-8080} NODE_ENV=production exec node server.js"
-
+          startup-command: "./start.sh"
