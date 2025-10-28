@@ -47,13 +47,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          
-          # --- CORREÇÃO FINAL AQUI ---
-          # 1. app_location: Diz onde está a raiz do código
-          app_location: "frontend" 
-          
-          # 2. output_location: Diz onde está o resultado FINAL (relativo ao app_location)
-          output_location: "apps/web/out" 
-          
-          # 3. Adicionamos o comando de build explícito para o Oryx usar
-          app_build_command: "pnpm install --frozen-lockfile && pnpm run build:web"
+
+          app_location: "frontend"
+          output_location: "apps/web/out"
+
+          skip_app_build: true
+          skip_api_build: true
