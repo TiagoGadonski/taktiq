@@ -58,22 +58,18 @@ jobs:
           # 1) Copia tudo do standalone
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) Encontra o server.js dentro do standalone
-          SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 12 -name 'server.js' | head -n1 || true)
+          # 2) Encontra o server.js dentro do standalone copiado
+          SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 20 -name 'server.js' | head -n1 || true)
           if [ -z "${SERVER_PATH:-}" ]; then
             echo "ERROR: server.js NOT FOUND in $DEPLOY_DIR" >&2
             ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
             exit 1
           fi
           echo "Found server.js at: $SERVER_PATH"
-          APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
+          APP_RUNTIME_DIR="${SERVER_PATH%/server.js}"
           APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"
 
-          # 3) Copia TODO o .next ao lado do server.js
-          mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
-          cp -a "$APP_DIR/.next/." "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/" || true
-
-          # 4) BUILD_ID com fallback
+          # 3) Valor do BUILD_ID (copia se existir; senão, gera)
           if [ -f "$APP_DIR/.next/BUILD_ID" ]; then
             BUILD_ID_VAL="$(cat "$APP_DIR/.next/BUILD_ID" || true)"
           else
@@ -82,15 +78,28 @@ jobs:
             mkdir -p "$APP_DIR/.next"
             echo "$BUILD_ID_VAL" > "$APP_DIR/.next/BUILD_ID"
           fi
+          echo "BUILD_ID=$BUILD_ID_VAL"
+
+          # 4) Garante .next ao lado do server.js e escreve o BUILD_ID
+          mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
           echo "$BUILD_ID_VAL" > "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID"
 
-          # 5) public
+          # 5) Copia também o conteúdo do .next "raiz" (sem sobrescrever o BUILD_ID recém criado)
+          mkdir -p "$DEPLOY_DIR/frontend/apps/web/.next"
+          rsync -a --ignore-existing "$APP_DIR/.next/" "$DEPLOY_DIR/frontend/apps/web/.next/" || true
+
+          # 6) Cinto e suspensório: garante BUILD_ID também no .next raiz do artefato
+          echo "$BUILD_ID_VAL" > "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID"
+
+          # 7) Copia public (se existir)
           if [ -d "$APP_DIR/public" ]; then
-            cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
+            mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
+            cp -a "$APP_DIR/public/." "$DEPLOY_DIR/$APP_RUNTIME_DIR/public/"
           fi
 
-          echo "=== Final artifact tree (first 200 lines) ==="
-          ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
+          echo "=== Final artifact tree (first 250 lines) ==="
+          ls -laR "$DEPLOY_DIR" | sed -n '1,250p'
+
 
 
       - name: Create ZIP artifact
@@ -161,4 +170,5 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR_ZIP }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
+          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
+
