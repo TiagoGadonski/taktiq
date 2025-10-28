@@ -35,11 +35,14 @@ jobs:
 
       # 2. Executar o Build (Substituímos o passo que falha)
       - name: Build with pnpm
-        # Executa o pnpm na raiz do monorepo
-        working-directory: frontend
         run: |
+          # 1. Instala pnpm globalmente
+          pnpm install -g pnpm
+          # 2. Instala dependências (que agora é compatível com o monorepo)
           pnpm install --frozen-lockfile
+          # 3. Executa o build
           pnpm run build:web
+        working-directory: frontend
           
       # 3. Deploy para a Static Web App
       - name: Deploy to Azure
