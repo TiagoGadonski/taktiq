@@ -27,17 +27,17 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: frontend/pnpm-lock.yaml
 
-      # Instala dependências do monorepo (onde está pnpm-workspace.yaml)
+      # Instala o monorepo (onde está pnpm-workspace.yaml)
       - name: Install dependencies (workspace)
         run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      # Build Next em modo standalone (precisa de output:'standalone' no next.config.js)
+      # Build do Next em modo standalone (precisa de output:'standalone' no next.config.js do app)
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
 
-      # Prepara artefato: standalone + TODO o .next (BUILD_ID, static, manifests...) + public
+      # Prepara o artefato: standalone + TODO o .next (BUILD_ID, static, manifests...) + public
       - name: Prepare Next standalone artifact
         shell: bash
         run: |
@@ -47,9 +47,12 @@ jobs:
           STANDALONE_DIR="$APP_DIR/.next/standalone"
           DEPLOY_DIR="$APP_DIR/out-azure"
 
+          echo "== Check standalone output =="
+          ls -la "$APP_DIR/.next" || true
+          ls -la "$STANDALONE_DIR" || true
+
           if [ ! -d "$STANDALONE_DIR" ]; then
             echo "ERROR: Standalone build not found at $STANDALONE_DIR" >&2
-            ls -laR "$APP_DIR/.next" || true
             exit 1
           fi
 
@@ -69,11 +72,10 @@ jobs:
           echo "Found server.js at: $SERVER_PATH"
 
           APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
-          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove './' prefixo
+          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"  # remove './' prefixo para facilitar paths
 
-          # 3) Garante a pasta .next ao lado do server.js e copia TODO o conteúdo de apps/web/.next
+          # 3) Garante a pasta .next AO LADO do server.js e copia TODO o conteúdo de apps/web/.next
           mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
-          # Copia TODO o conteúdo (inclui BUILD_ID, static, app-build-manifest, etc.)
           cp -a "$APP_DIR/.next/." "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/"
 
           # 4) Public (se existir)
@@ -81,14 +83,15 @@ jobs:
             cp -a "$APP_DIR/public" "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
           fi
 
-          echo "== VERIFY BUILD_ID next to server.js =="
+          echo "== VERIFY BUILD_ID next to server.js (build job) =="
           if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
             echo "ERROR: BUILD_ID missing at $DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" >&2
+            echo "Listing $DEPLOY_DIR/$APP_RUNTIME_DIR/.next :" >&2
             ls -la "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next" || true
             exit 1
           fi
           echo "BUILD_ID:"
-          cat "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID"
+          cat "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" || true
 
           echo "=== Final artifact tree (first 200 lines) ==="
           ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
@@ -98,6 +101,7 @@ jobs:
         with:
           name: node-app
           path: frontend/apps/web/out-azure
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
