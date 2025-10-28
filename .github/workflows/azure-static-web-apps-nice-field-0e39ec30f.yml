@@ -41,15 +41,14 @@ jobs:
         working-directory: frontend # Executa na raiz do frontend
 
       - name: Deploy to Azure
-        id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
+          action: upload
 
-          app_location: "frontend"
-          app_artifact_location: "apps/web/out"  # relativo a app_location
+          # Aponta direto para a pasta que contém index.html
+          app_location: "frontend/apps/web/out"
 
           skip_app_build: true
           skip_api_build: true
