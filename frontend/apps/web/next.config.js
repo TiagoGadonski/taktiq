@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   
   // 1. O Next.js sempre precisa da instrução 'output' para saber o que fazer
-  output: 'standalone', 
+  //output: 'standalone', 
   
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
