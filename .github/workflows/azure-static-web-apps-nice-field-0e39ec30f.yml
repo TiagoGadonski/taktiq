@@ -53,11 +53,12 @@ jobs:
           action: "upload"
           
           # --- CORREÇÃO FINAL AQUI ---
-          # 1. app_location: Diz onde está o código-fonte (a pasta 'frontend')
-          app_location: "frontend" 
+          # 1. app_location: A raiz do projeto web (onde está o package.json)
+          # A Azure precisa deste caminho para executar o build, mesmo que o skip_app_build esteja ativo.
+          app_location: "frontend/apps/web" 
           
-          # 2. output_location: Diz onde a pasta 'out' foi gerada (relativo à pasta frontend)
-          output_location: "apps/web/out" 
+          # 2. output_location: O resultado do build 'export' (que é a pasta 'out')
+          output_location: "out" 
           
           # Diz à Azure para não tentar fazer o build
           skip_app_build: true
