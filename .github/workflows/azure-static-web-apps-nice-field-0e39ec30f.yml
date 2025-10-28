@@ -1,24 +1,25 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - taktiq-web-frontend
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
-  build:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    permissions:
-      contents: read 
-
+    name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
       
-      # 1. Setup pnpm (Essencial para o monorepo)
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -29,48 +30,30 @@ jobs:
         with:
           node-version: '20'
 
-      # 2. Instalar dependências e Build (Executado na pasta raiz do frontend)
-      - name: Install Dependencies and Build Frontend
-        run: |
-          cd frontend
-          pnpm install --frozen-lockfile
+      # 1. Instalar dependências (na raiz do frontend)
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: frontend
+
+      # 2. Construir o projeto web (na pasta da app)
+      - name: Build Web App
+        run: pnpm run build:web
+        working-directory: frontend # Executa na raiz do frontend
+
+      - name: Deploy to Azure
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
           
-          # 3. Mudar para o diretório da aplicação e executar o build
-          cd apps/web
-          pnpm run build
-        
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-app
-          path: frontend/apps/web/.next/standalone 
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      id-token: write
-      contents: read 
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: node-app
-          path: . 
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BEE9156CBCEE42579E234674CAED3201 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
-
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'taktiq-web-frontend'
-          slot-name: 'Production'
-          package: . 
-          startup-command: "node apps/web/server.js"
+          # --- CORREÇÃO FINAL AQUI ---
+          # 1. app_location: Diz onde está a raiz do código
+          app_location: "frontend" 
+          
+          # 2. output_location: Diz onde está o resultado FINAL (relativo ao app_location)
+          output_location: "apps/web/out" 
+          
+          # 3. Adicionamos o comando de build explícito para o Oryx usar
+          app_build_command: "pnpm install --frozen-lockfile && pnpm run build:web"
