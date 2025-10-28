@@ -158,6 +158,7 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: "cd frontend/apps/web/.next/standalone/frontend/apps/web && HOST=0.0.0.0 PORT=${PORT:-8080} NODE_ENV=production node server.js"
+          startup-command: "cd .next/standalone/frontend/apps/web && HOST=0.0.0.0 PORT=${PORT:-8080} NODE_ENV=production node server.js || (echo 'Server crashed with code $?' && sleep 3 && exit 1)"
+
 
 
