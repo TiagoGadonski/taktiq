@@ -135,5 +135,4 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: node-app
-          # inicia o server.js NA POSIÇÃO CORRETA (ex.: node frontend/apps/web/server.js)
-          startup-command: 'node ${{ env.SERVER_PATH }}'
+          startup-command: 'bash -c "cd frontend/apps/web && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
