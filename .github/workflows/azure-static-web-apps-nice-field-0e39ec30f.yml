@@ -29,16 +29,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'pnpm'
 
-      # 1. Instalar dependências (na raiz do frontend)
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: frontend
+      # --- INÍCIO DA CORREÇÃO: USAR COMANDOS EXPLÍCITOS ---
 
-      # 2. Construir o projeto web (na pasta da app)
-      - name: Build Web App
-        run: pnpm run build:web
-        working-directory: frontend # Executa na raiz do frontend
+      - name: Install Dependencies and Build Frontend
+        run: |
+          cd frontend
+          pnpm install --frozen-lockfile
+          pnpm run build:web
+        
+      # --- FIM DAS CORREÇÕES ---
 
       - name: Deploy to Azure
         id: builddeploy
@@ -48,12 +49,11 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          # --- CORREÇÃO FINAL AQUI ---
-          # 1. app_location: Diz onde está a raiz do código
+          # 1. app_location: A raiz do projeto
           app_location: "frontend" 
           
-          # 2. output_location: Diz onde está o resultado FINAL (relativo ao app_location)
+          # 2. output_location: A pasta 'out' gerada pelo build Next.js (relativa ao app_location)
           output_location: "apps/web/out" 
           
-          # 3. Adicionamos o comando de build explícito para o Oryx usar
+          # 3. Este comando é crucial, mas a Azure está a ignorá-lo
           app_build_command: "pnpm install --frozen-lockfile && pnpm run build:web"
