@@ -19,28 +19,43 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Build And Deploy
+      
+      # 1. Instalar o pnpm e o Node.js
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.1.4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # 2. Instalar dependências e Build (Executado na pasta raiz do frontend)
+      - name: Install Dependencies and Build Frontend
+        working-directory: frontend # Executa os comandos dentro da pasta 'frontend'
+        run: |
+          pnpm install --frozen-lockfile
+          # O build:web que você tem no seu package.json cria a pasta 'out'
+          pnpm run build:web
+
+      # 3. Deploy para a Static Web App
+      - name: Deploy to Azure
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          # Use o seu segredo completo aqui
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }} 
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "./frontend" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
-          action: "close"
+          
+          # --- CAMINHOS CORRIGIDOS ---
+          # app_location: A raiz do código-fonte (frontend)
+          app_location: "frontend" 
+          
+          # output_location: A pasta 'out' gerada pelo seu 'next build' (relativa ao app_location)
+          output_location: "apps/web/out"
+          
+          # Desativar o build interno da Azure (Oryx) para usar o nosso build do pnpm
+          skip_app_build: true
