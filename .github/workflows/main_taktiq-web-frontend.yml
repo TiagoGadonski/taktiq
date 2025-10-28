@@ -158,5 +158,5 @@ jobs:
           slot-name: 'Production'
           package: out-azure.zip
           startup-command: 'node frontend/apps/web/.next/standalone/frontend/apps/web/server.js'
-'
+
 
