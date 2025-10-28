@@ -20,7 +20,7 @@ jobs:
           submodules: true
           lfs: false
       
-      # 1. Setup pnpm e Node.js
+      # 1. Setup pnpm (Mantido)
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -30,39 +30,22 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'pnpm'
-          cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
-      # 2. Executar o Build (Substituímos o passo que falha)
-      - name: Build with pnpm
-        run: |
-          # 1. Instala pnpm globalmente
-          pnpm install -g pnpm
-          # 2. Instala dependências (que agora é compatível com o monorepo)
-          pnpm install --frozen-lockfile
-          # 3. Executa o build
-          pnpm run build:web
-        working-directory: frontend
-          
-      # 3. Deploy para a Static Web App
+      # 2. Deploy para a Static Web App (Com o comando correto)
       - name: Deploy to Azure
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Use o seu segredo real aqui
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }} 
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_FIELD_0E39EC30F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           
-          # --- CORREÇÃO FINAL AQUI ---
-          # 1. app_location: Diz onde está a raiz do código
+          # 1. app_location: Diz onde está o código-fonte (a pasta 'frontend')
           app_location: "frontend/apps/web" 
           
           # 2. output_location: Diz onde está o resultado FINAL (relativo ao app_location)
-          # Como o 'next build' cria o 'out' DENTRO da pasta 'web', o caminho é só 'out'.
           output_location: "out" 
           
-          # 3. Comando de build personalizado
-          app_build_command: "pnpm install && pnpm run build" # Este comando é executado dentro de app_location
-          
-          # REMOVEMOS O skip_app_build para que o GitHub use o 'app_build_command'
+          # 3. COMANDO DE BUILD CORRIGIDO
+          # O build deve usar o pnpm, que é injetado no comando de build.
+          app_build_command: "pnpm install && pnpm run build"
