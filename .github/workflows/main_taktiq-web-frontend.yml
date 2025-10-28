@@ -35,15 +35,40 @@ jobs:
 
       # 2. Construir o projeto web (na pasta da app)
       - name: Build Web App
-        run: pnpm run build
-        working-directory: frontend/apps/web # Mudar para o diretório da app web
+        run: pnpm --filter @gymhero/web run build
+        working-directory: frontend
+
+      - name: Prepare standalone bundle
+        run: |
+          APP_DIR="$GITHUB_WORKSPACE/frontend/apps/web"
+          STANDALONE_DIR="$APP_DIR/.next/standalone"
+          DEPLOY_DIR="$APP_DIR/out-azure"
+
+          if [ ! -d "$STANDALONE_DIR" ]; then
+            echo "Standalone build output not found at $STANDALONE_DIR" >&2
+            exit 1
+          fi
+
+          rm -rf "$DEPLOY_DIR"
+          mkdir -p "$DEPLOY_DIR"
+
+          cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
+
+          mkdir -p "$DEPLOY_DIR/.next"
+          rm -rf "$DEPLOY_DIR/.next/static"
+          cp -a "$APP_DIR/.next/static" "$DEPLOY_DIR/.next/static"
+
+          if [ -d "$APP_DIR/public" ]; then
+            rm -rf "$DEPLOY_DIR/public"
+            cp -a "$APP_DIR/public" "$DEPLOY_DIR/public"
+          fi
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
           # CORREÇÃO: Enviamos a pasta que contém o server.js
-          path: frontend/apps/web
+          path: frontend/apps/web/out-azure
 
   deploy:
     runs-on: ubuntu-latest
@@ -74,6 +99,7 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           # CORREÇÃO: Aponta para o local onde a pasta 'apps/web' foi descarregada
-          package: . 
+          package: frontend/apps/web/out-azure
           # Comando de arranque (Next.js Standalone)
-          startup-command: "node apps/web/server.js"
+          startup-command: "node server.js"
+
