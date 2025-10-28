@@ -39,6 +39,8 @@ jobs:
 
       # deploy SSR com SWA CLI (sem Oryx)
       - name: Deploy (SWA CLI)
+        env:
+          DEBUG: swa:*,StaticSitesClient*   # deixa o CLI verboso no log do Actions
         run: |
           pnpm dlx @azure/static-web-apps-cli@latest deploy \
             --app-location "frontend/apps/web" \
