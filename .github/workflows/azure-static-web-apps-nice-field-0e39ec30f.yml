@@ -53,11 +53,11 @@ jobs:
           action: "upload"
           
           # --- CORREÇÃO FINAL AQUI ---
-          # 1. app_location: Diz onde está o código-fonte (raiz do repo)
-          app_location: "/" 
+          # 1. app_location: Diz onde está o código-fonte (a pasta 'frontend')
+          app_location: "frontend" 
           
-          # 2. output_location: Diz onde a pasta 'out' foi gerada (o site estático final)
-          output_location: "frontend/apps/web/out" 
+          # 2. output_location: Diz onde a pasta 'out' foi gerada (relativo à pasta frontend)
+          output_location: "apps/web/out" 
           
           # Diz à Azure para não tentar fazer o build
           skip_app_build: true
