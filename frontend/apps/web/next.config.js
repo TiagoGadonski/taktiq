@@ -5,7 +5,10 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-
+experimental: {
+    // ajuste o caminho se a raiz do repositório estiver em outro nível
+    outputFileTracingRoot: path.join(__dirname, '../../..'),
+  },
   env: {
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
