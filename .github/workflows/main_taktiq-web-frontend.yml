@@ -43,10 +43,6 @@ jobs:
           STANDALONE_DIR="$APP_DIR/.next/standalone"
           DEPLOY_DIR="$APP_DIR/out-azure"
 
-          echo "== Check .next and standalone =="
-          ls -la "$APP_DIR/.next" || true
-          ls -la "$STANDALONE_DIR" || true
-
           if [ ! -d "$STANDALONE_DIR" ]; then
             echo "ERROR: Standalone build not found at $STANDALONE_DIR" >&2
             exit 1
@@ -55,21 +51,10 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) Copia tudo do standalone
+          # Copia o standalone inteiro
           cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
-          # 2) Encontra o server.js dentro do standalone copiado
-          SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 20 -name 'server.js' | head -n1 || true)
-          if [ -z "${SERVER_PATH:-}" ]; then
-            echo "ERROR: server.js NOT FOUND in $DEPLOY_DIR" >&2
-            ls -laR "$DEPLOY_DIR" | sed -n '1,200p' >&2
-            exit 1
-          fi
-          echo "Found server.js at: $SERVER_PATH"
-          APP_RUNTIME_DIR="${SERVER_PATH%/server.js}"
-          APP_RUNTIME_DIR="${APP_RUNTIME_DIR#./}"
-
-          # 3) Valor do BUILD_ID (copia se existir; senão, gera)
+          # Garante BUILD_ID no .next do app
           if [ -f "$APP_DIR/.next/BUILD_ID" ]; then
             BUILD_ID_VAL="$(cat "$APP_DIR/.next/BUILD_ID" || true)"
           else
@@ -78,28 +63,31 @@ jobs:
             mkdir -p "$APP_DIR/.next"
             echo "$BUILD_ID_VAL" > "$APP_DIR/.next/BUILD_ID"
           fi
-          echo "BUILD_ID=$BUILD_ID_VAL"
-
-          # 4) Garante .next ao lado do server.js e escreve o BUILD_ID
-          mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next"
-          echo "$BUILD_ID_VAL" > "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID"
-
-          # 5) Copia também o conteúdo do .next "raiz" (sem sobrescrever o BUILD_ID recém criado)
           mkdir -p "$DEPLOY_DIR/frontend/apps/web/.next"
-          rsync -a --ignore-existing "$APP_DIR/.next/" "$DEPLOY_DIR/frontend/apps/web/.next/" || true
-
-          # 6) Cinto e suspensório: garante BUILD_ID também no .next raiz do artefato
           echo "$BUILD_ID_VAL" > "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID"
 
-          # 7) Copia public (se existir)
+          # Copia static e manifests para o .next do app
+          if [ -d "$APP_DIR/.next/static" ]; then
+            mkdir -p "$DEPLOY_DIR/frontend/apps/web/.next/static"
+            cp -a "$APP_DIR/.next/static/." "$DEPLOY_DIR/frontend/apps/web/.next/static/"
+          fi
+          for f in routes-manifest.json prerender-manifest.json app-build-manifest.json build-manifest.json required-server-files.json; do
+            if [ -f "$APP_DIR/.next/$f" ]; then
+              cp "$APP_DIR/.next/$f" "$DEPLOY_DIR/frontend/apps/web/.next/$f"
+            fi
+          done
+
+          # Copia public (se existir)
           if [ -d "$APP_DIR/public" ]; then
-            mkdir -p "$DEPLOY_DIR/$APP_RUNTIME_DIR/public"
-            cp -a "$APP_DIR/public/." "$DEPLOY_DIR/$APP_RUNTIME_DIR/public/"
+            mkdir -p "$DEPLOY_DIR/frontend/apps/web/public"
+            cp -a "$APP_DIR/public/." "$DEPLOY_DIR/frontend/apps/web/public/"
           fi
 
-          echo "=== Final artifact tree (first 250 lines) ==="
-          ls -laR "$DEPLOY_DIR" | sed -n '1,250p'
-
+          echo "== Sanity check =="
+          test -f "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID" || { echo "ERROR: BUILD_ID faltando em frontend/apps/web/.next/BUILD_ID"; exit 1; }
+          echo "BUILD_ID=$(cat "$DEPLOY_DIR/frontend/apps/web/.next/BUILD_ID")"
+          echo "=== Final artifact tree (first 200 lines) ==="
+          ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
 
 
       - name: Create ZIP artifact
@@ -135,27 +123,26 @@ jobs:
           name: node-app-zip
           path: .
 
-      - name: Debug ZIP and locate server.js path inside
+      - name: Debug artifact tree & verify server.js and BUILD_ID
         shell: bash
         run: |
-          echo "== ZIP listing =="
-          unzip -l out-azure.zip | sed -n '1,200p'
+          echo "== Tree of node-app (first 200 lines) =="
+          ls -laR node-app | sed -n '1,200p'
 
-          # Extrai só a listagem para descobrir o diretório do server.js
-          SERVER_PATH=$(unzip -l out-azure.zip | awk '{print $4}' | grep -E "/server\.js$" | head -n1 || true)
+          echo "== Locate server.js (standalone) =="
+          SERVER_PATH=$( /usr/bin/find node-app -maxdepth 30 -path '*/.next/standalone/*/server.js' | head -n1 || true )
           if [ -z "${SERVER_PATH:-}" ]; then
-            echo "ERROR: server.js not found inside ZIP" >&2
+            echo "ERROR: standalone server.js NOT FOUND in node-app" >&2
             exit 1
           fi
-          echo "server.js at: $SERVER_PATH"
+          echo "server.js at: ${SERVER_PATH#node-app/}"
 
-          APP_RUNTIME_DIR="$(dirname "$SERVER_PATH")"
-          echo "APP_RUNTIME_DIR_ZIP=$APP_RUNTIME_DIR" >> $GITHUB_ENV
-
-          # Confere se há BUILD_ID ao lado do server.js
-          BUILD_ID_PATH="${APP_RUNTIME_DIR}/.next/BUILD_ID"
-          unzip -l out-azure.zip | awk '{print $4}' | grep -qx "$BUILD_ID_PATH" || (echo "ERROR: BUILD_ID missing at $BUILD_ID_PATH" >&2; exit 1)
-          echo "BUILD_ID present in ZIP."
+          echo "== Verify BUILD_ID in app .next =="
+          if [ ! -f "node-app/frontend/apps/web/.next/BUILD_ID" ]; then
+            echo "ERROR: BUILD_ID missing at node-app/frontend/apps/web/.next/BUILD_ID" >&2
+            exit 1
+          fi
+          echo "BUILD_ID present."
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -170,5 +157,6 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: 'bash -c "cd ${{ env.APP_RUNTIME_DIR }} && HOST=0.0.0.0 PORT=${PORT:-8080} node server.js"'
+          startup-command: 'node frontend/apps/web/.next/standalone/frontend/apps/web/server.js'
+'
 
