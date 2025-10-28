@@ -29,8 +29,11 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: '20.x'
+          cache: 'pnpm' 
+          # --- CORREÇÃO AQUI ---
+          # Dizemos explicitamente ao GitHub onde está o lockfile
+          cache-dependency-path: 'frontend/pnpm-lock.yaml'
 
       # 2. Instalar dependências e Build (Executado na pasta raiz do frontend)
       - name: Install Dependencies and Build Frontend
