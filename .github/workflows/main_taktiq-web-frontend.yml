@@ -158,4 +158,5 @@ jobs:
           app-name: 'taktiq-web-frontend'
           slot-name: 'Production'
           package: out-azure.zip
-          startup-command: 'node frontend/apps/web/.next/standalone/frontend/apps/web/server.js'
+          startup-command: 'bash -lc "HOST=0.0.0.0 PORT=${PORT:-8080} node frontend/apps/web/.next/standalone/frontend/apps/web/server.js"'
+
