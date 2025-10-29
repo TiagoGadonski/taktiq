@@ -80,7 +80,7 @@ export default function InstructorPage() {
       try {
         const token = localStorage.getItem('token');
         const response = await fetch(
-          'http://localhost:5001/api/personal/clients',
+          'https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api/personal/clients',
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ export default function InstructorPage() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:5001/api/personal/clients/${selectedClient.id}/notes`,
+        `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api/personal/clients/${selectedClient.id}/notes`,
         {
           method: 'POST',
           headers: {
@@ -286,7 +286,7 @@ export default function InstructorPage() {
                         <AvatarImage
                           src={
                             client.profilePictureUrl
-                              ? `http://localhost:5001${client.profilePictureUrl}`
+                              ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${client.profilePictureUrl}`
                               : undefined
                           }
                         />
