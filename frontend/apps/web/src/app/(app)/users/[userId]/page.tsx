@@ -110,7 +110,13 @@ export default function UserProfilePage() {
         <CardContent className="pt-6">
           <div className="flex flex-col md:flex-row gap-6">
             <Avatar className="h-24 w-24">
-              <AvatarImage src={profile.profilePictureUrl ? `http://localhost:5001${profile.profilePictureUrl}` : undefined} />
+              <AvatarImage
+                src={
+                  profile.profilePictureUrl
+                    ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${profile.profilePictureUrl}`
+                    : undefined
+                }
+              />
               <AvatarFallback className="text-2xl">
                 {getInitials(profile.name)}
               </AvatarFallback>
