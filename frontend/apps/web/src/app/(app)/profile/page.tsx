@@ -197,7 +197,7 @@ export default function ProfilePage() {
       // Force image reload by updating the src
       const avatarImage = document.querySelector('img[src*="uploads/profiles"]') as HTMLImageElement;
       if (avatarImage && newProfilePictureUrl) {
-        avatarImage.src = `http://localhost:5001${newProfilePictureUrl}?t=${Date.now()}`;
+        avatarImage.src = `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${newProfilePictureUrl}?t=${Date.now()}`;
       }
 
       toast({
@@ -270,7 +270,13 @@ export default function ProfilePage() {
         <CardContent>
           <div className="flex items-center gap-6">
             <Avatar className="h-24 w-24">
-              <AvatarImage src={profilePicture ? `http://localhost:5001${profilePicture}?t=${Date.now()}` : undefined} />
+              <AvatarImage
+                src={
+                  profilePicture
+                    ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${profilePicture}?t=${Date.now()}`
+                    : undefined
+                }
+              />
               <AvatarFallback className="text-2xl">
                 {getInitials(profileData?.name || user?.name || 'User')}
               </AvatarFallback>
