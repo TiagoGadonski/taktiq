@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using GymHero.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 using GymHero.Infrastructure.Services;
+using DomainChallengeTargetType = GymHero.Domain.Enums.ChallengeTargetType;
 
 namespace GymHero.Api.Endpoints;
 
@@ -119,12 +120,47 @@ public static class AdminEndpoints
             return Results.Ok(new { message = "User deactivated successfully" });
         });
 
+        // Change user password (admin only)
+        group.MapPost("/users/{userId}/change-password", async (
+            Guid userId,
+            [FromBody] AdminChangePasswordRequest request,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
+            if (user is null) return Results.NotFound("User not found.");
+
+            // Validate new password
+            if (string.IsNullOrWhiteSpace(request.NewPassword) || request.NewPassword.Length < 6)
+            {
+                return Results.BadRequest(new { message = "Password must be at least 6 characters long" });
+            }
+
+            // Hash the new password
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Password changed successfully" });
+        });
+
         // Delete user
         group.MapDelete("/users/{userId}", async (Guid userId, IApplicationDbContext context, CancellationToken cancellationToken) =>
         {
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
             if (user is null) return Results.NotFound("User not found.");
 
+            // First, delete all friendships where this user is involved
+            // This includes both sent and received friend requests
+            var friendships = await context.Friendships
+                .Where(f => f.RequesterId == userId || f.AddresseeId == userId)
+                .ToListAsync(cancellationToken);
+
+            if (friendships.Any())
+            {
+                context.Friendships.RemoveRange(friendships);
+            }
+
+            // Now delete the user (cascade will handle other related entities)
             context.Users.Remove(user);
             await context.SaveChangesAsync(cancellationToken);
             return Results.Ok(new { message = "User deleted successfully" });
@@ -277,5 +313,201 @@ public static class AdminEndpoints
 })
 .WithName("SeedExercisesFromApi")
 .WithSummary("Busca exercícios de uma API externa e povoa a base de dados.");
+
+        // Seed predefined system challenges
+        group.MapPost("/seed-challenges", async (IApplicationDbContext context, CancellationToken cancellationToken) =>
+        {
+            var existingChallenges = await context.Challenges
+                .Where(c => c.IsDefault)
+                .ToListAsync(cancellationToken);
+
+            if (existingChallenges.Any())
+            {
+                return Results.Ok(new { message = "System challenges already exist", count = existingChallenges.Count });
+            }
+
+            var systemChallenges = new List<Challenge>
+            {
+                // Onboarding and Setup Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty, // System-created
+                    Title = "TaktIQ Iniciante",
+                    Type = "Setup",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "user-check",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Planejador Pro",
+                    Type = "Planos",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "clipboard-list",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Meu Arsenal",
+                    Type = "Exercícios",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "dumbbell",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Consistency Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Primeira Semana",
+                    Type = "Treinos",
+                    TargetValue = 3,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "calendar-check",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Maratonista",
+                    Type = "Treinos",
+                    TargetValue = 10,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "footprints",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Fim de Semana Ativo",
+                    Type = "Treinos",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "sun",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Progress and Strength Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Força Bruta",
+                    Type = "PR",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "zap",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Monstro de Volume",
+                    Type = "Volume",
+                    TargetValue = 1000,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "weight",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Superador",
+                    Type = "PR",
+                    TargetValue = 3,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "star",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Social Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Conexão",
+                    Type = "Social",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "users",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Incentivador",
+                    Type = "Social",
+                    TargetValue = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "share-2",
+                    CreatedAt = DateTime.UtcNow
+                }
+            };
+
+            await context.Challenges.AddRangeAsync(systemChallenges, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "System challenges seeded successfully", count = systemChallenges.Count });
+        })
+        .WithName("SeedSystemChallenges")
+        .WithSummary("Creates predefined system challenges for all users");
     }
 }

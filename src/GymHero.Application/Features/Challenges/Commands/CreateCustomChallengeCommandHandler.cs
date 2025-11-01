@@ -23,7 +23,8 @@ public class CreateCustomChallengeCommandHandler : IRequestHandler<CreateCustomC
             EndDate = request.EndDate,
             Status = "InProgress",
             TargetType = (Domain.Enums.ChallengeTargetType)request.TargetType,
-            IsDefault = request.IsDefault
+            IsDefault = request.IsDefault,
+            IconName = request.IconName
         };
         
         // 2. Adicionar o próprio criador como participante

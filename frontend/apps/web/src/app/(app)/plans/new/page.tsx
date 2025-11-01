@@ -98,7 +98,7 @@ export default function NewPlanPage() {
       if (muscleFilter !== 'all') params.append('muscle', muscleFilter);
       if (difficultyFilter !== 'all') params.append('level', difficultyFilter);
 
-      const response = await apiClient.get(`/ai/search-exercises?${params.toString()}`);
+      const response = await apiClient.get<any>(`/ai/search-exercises?${params.toString()}`);
       const data = response.data || response;
       setSearchResults(data);
     } catch (error: any) {
@@ -202,7 +202,7 @@ export default function NewPlanPage() {
         goal: data.goal || null,
       };
 
-      const createdPlan = await apiClient.post('/workout-plans', planData);
+      const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
 
       if (!planId) {
@@ -210,7 +210,7 @@ export default function NewPlanPage() {
       }
 
       // Step 2: Get all exercises from the database to check which ones already exist
-      const existingExercises = await apiClient.get('/exercises');
+      const existingExercises = await apiClient.get<any[]>('/exercises');
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e.id]));
 
       // Step 3: Create workouts (days) and add exercises to them
@@ -224,7 +224,7 @@ export default function NewPlanPage() {
           order: dayIndex + 1,
         };
 
-        const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
+        const workoutResponse = await apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
         // Add exercises to this workout
@@ -240,7 +240,7 @@ export default function NewPlanPage() {
             exerciseId = existingId;
           } else {
             // Exercise doesn't exist, create it first
-            const newExercise = await apiClient.post('/exercises', {
+            const newExercise = await apiClient.post<{ id: string }>('/exercises', {
               name: ex.name,
               muscleGroup: (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles[0] : 'Other',
               category: ex.category || 'strength',

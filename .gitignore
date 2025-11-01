@@ -69,10 +69,9 @@ Migrations/
 Thumbs.db
 
 # Secrets and sensitive data
-appsettings.Production.json
 appsettings.*.json
 !appsettings.json
-!appsettings.Development.json
+!appsettings.*.json.example
 secrets.json
 *.pfx
 *.p12
@@ -104,3 +103,4 @@ _ReSharper*/
 *.temp
 *.bak
 *.swp
+nul

@@ -23,7 +23,8 @@ public class CreateChallengeCommandHandler : IRequestHandler<CreateChallengeComm
             EndDate = request.EndDate,
             Status = "InProgress", // O desafio começa em progresso
             TargetType = (Domain.Enums.ChallengeTargetType)request.TargetType,
-            IsDefault = request.IsDefault
+            IsDefault = request.IsDefault,
+            IconName = request.IconName
         };
 
         // Ao criar um desafio, também criamos o seu registo de progresso inicial
@@ -56,7 +57,8 @@ public class CreateChallengeCommandHandler : IRequestHandler<CreateChallengeComm
             challenge.StartDate,
             challenge.EndDate,
             (ChallengeTargetType)challenge.TargetType,
-            challenge.IsDefault
+            challenge.IsDefault,
+            challenge.IconName
         );
     }
 

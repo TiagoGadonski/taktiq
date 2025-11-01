@@ -53,7 +53,16 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(find:*)",
+      "Bash(pnpm build:*)",
+      "Bash(if exist node_modules rmdir /s /q node_modules)",
+      "Bash(if exist appswebnode_modules rmdir /s /q appswebnode_modules)",
+      "Bash(pnpm store prune:*)",
+      "Bash(del:*)",
+      "Bash(pnpm exec next build:*)",
+      "Bash(node:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

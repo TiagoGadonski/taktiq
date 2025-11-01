@@ -128,5 +128,88 @@ public static class AuthEndpoints
         .Produces(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status400BadRequest)
         .Produces(StatusCodes.Status401Unauthorized);
+
+        // Endpoint para solicitar recuperação de senha
+        group.MapPost("/forgot-password", async (
+            [FromBody] ForgotPasswordRequest request,
+            IApplicationDbContext context,
+            IEmailService emailService,
+            CancellationToken cancellationToken) =>
+        {
+            // Buscar usuário pelo email
+            var user = await context.Users
+                .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
+
+            // Por segurança, sempre retornamos sucesso mesmo se o email não existir
+            // Isso previne que atacantes descubram quais emails estão cadastrados
+            if (user == null)
+            {
+                return Results.Ok(new { message = "Se o email existir, você receberá um código de recuperação." });
+            }
+
+            // Gerar token de 6 dígitos
+            var resetToken = new Random().Next(100000, 999999).ToString();
+
+            // Criar registro de token no banco
+            var passwordResetToken = new Domain.Entities.PasswordResetToken
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                Token = resetToken,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddHours(1), // Token válido por 1 hora
+                IsUsed = false
+            };
+
+            await context.PasswordResetTokens.AddAsync(passwordResetToken, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+
+            // Enviar email com o token
+            await emailService.SendPasswordResetEmailAsync(user.Email, resetToken);
+
+            return Results.Ok(new { message = "Se o email existir, você receberá um código de recuperação." });
+        })
+        .WithName("ForgotPassword")
+        .WithSummary("Request a password reset token")
+        .Produces(StatusCodes.Status200OK);
+
+        // Endpoint para redefinir senha usando o token
+        group.MapPost("/reset-password", async (
+            [FromBody] ResetPasswordRequest request,
+            IApplicationDbContext context,
+            IPasswordHasher passwordHasher,
+            CancellationToken cancellationToken) =>
+        {
+            // Buscar token válido
+            var resetToken = await context.PasswordResetTokens
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(t =>
+                    t.Token == request.Token &&
+                    !t.IsUsed &&
+                    t.ExpiresAt > DateTime.UtcNow,
+                    cancellationToken);
+
+            if (resetToken == null)
+            {
+                return Results.Json(
+                    new { message = "Código de recuperação inválido ou expirado." },
+                    statusCode: StatusCodes.Status400BadRequest);
+            }
+
+            // Atualizar senha do usuário
+            resetToken.User.PasswordHash = passwordHasher.Hash(request.NewPassword);
+
+            // Marcar token como usado
+            resetToken.IsUsed = true;
+            resetToken.UsedAt = DateTime.UtcNow;
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Senha redefinida com sucesso!" });
+        })
+        .WithName("ResetPassword")
+        .WithSummary("Reset password using a valid token")
+        .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status400BadRequest);
     }
 }

@@ -64,7 +64,15 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Senha</Label>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Senha</Label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Esqueceu a senha?
+                </Link>
+              </div>
               <Input
                 id="password"
                 type="password"
@@ -87,17 +95,11 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">Precisa de acesso?</span>
-            </div>
-          </div>
-
-          <div className="text-center text-sm text-muted-foreground">
-            Entre em contato com um administrador para criar sua conta.
+          <div className="text-center text-sm">
+            <span className="text-muted-foreground">Não tem uma conta? </span>
+            <Link href="/signup" className="text-primary hover:underline font-medium">
+              Criar Conta
+            </Link>
           </div>
         </CardContent>
       </Card>

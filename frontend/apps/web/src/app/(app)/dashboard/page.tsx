@@ -341,7 +341,7 @@ export default function DashboardPage() {
                 <div key={index} className="flex items-center justify-between border-b pb-2">
                   <div>
                     <p className="font-medium">
-                      {(pr as any).exerciseName || pr.exercise?.name || 'Exercício'}
+                      {(pr as any).exerciseName || (pr as any).exercise?.name || 'Exercício'}
                     </p>
                     <p className="text-sm text-muted-foreground">
                       {new Date((pr as any).dateAchieved || pr.achievedAt).toLocaleDateString(

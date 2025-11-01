@@ -1,4 +1,5 @@
 using GymHero.Application.Common.Interfaces;
+using DomainVisibility = GymHero.Domain.Enums.VisibilityLevel;
 using GymHero.Shared.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,35 +14,45 @@ public class GetPublicWorkoutPlanByIdQueryHandler : IRequestHandler<GetPublicWor
 
     public async Task<WorkoutPlanDetailResponse?> Handle(GetPublicWorkoutPlanByIdQuery request, CancellationToken cancellationToken)
     {
-        var plan = await _context.WorkoutPlans
-            .AsNoTracking()
+        // First check if plan exists and is public
+        var planEntity = await _context.WorkoutPlans
             .Include(p => p.Workouts)
                 .ThenInclude(w => w.Exercises)
                     .ThenInclude(we => we.Exercise)
-            // A condição de segurança 'OwnerId' foi removida aqui.
-            // Buscamos apenas pelo ID do plano.
-            .Where(p => p.Id == request.PlanId)
-            .Select(p => new WorkoutPlanDetailResponse
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Goal = p.Goal,
-                IsActive = p.IsActive,
-                Exercises = p.Workouts
-                    .SelectMany(w => w.Exercises)
-                    .OrderBy(e => e.Order)
-                    .Select(we => new WorkoutExerciseDto
-                    {
-                        Id = we.Id,
-                        ExerciseId = we.ExerciseId,
-                        ExerciseName = we.Exercise.Name,
-                        Order = we.Order,
-                        TargetSets = we.TargetSets,
-                        TargetReps = we.TargetReps,
-                        TargetLoad = we.TargetLoad
-                    }).ToList()
-            })
-            .FirstOrDefaultAsync(cancellationToken);
+            .FirstOrDefaultAsync(p => p.Id == request.PlanId && p.IsPublic && p.VisibilityLevel == DomainVisibility.Public, cancellationToken);
+
+        if (planEntity == null)
+            return null;
+
+        // Increment view count (using a separate tracked context query)
+        var planToUpdate = await _context.WorkoutPlans.FindAsync(new object[] { request.PlanId }, cancellationToken);
+        if (planToUpdate != null)
+        {
+            planToUpdate.ViewCount++;
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        // Return the plan details
+        var plan = new WorkoutPlanDetailResponse
+        {
+            Id = planEntity.Id,
+            Name = planEntity.Name,
+            Goal = planEntity.Goal,
+            IsActive = planEntity.IsActive,
+            Exercises = planEntity.Workouts
+                .SelectMany(w => w.Exercises)
+                .OrderBy(e => e.Order)
+                .Select(we => new WorkoutExerciseDto
+                {
+                    Id = we.Id,
+                    ExerciseId = we.ExerciseId,
+                    ExerciseName = we.Exercise.Name,
+                    Order = we.Order,
+                    TargetSets = we.TargetSets,
+                    TargetReps = we.TargetReps,
+                    TargetLoad = we.TargetLoad
+                }).ToList()
+        };
 
         return plan;
     }

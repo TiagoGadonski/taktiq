@@ -19,7 +19,7 @@ export default function LoginScreen() {
     try {
       await login(data);
     } catch (error) {
-      console.error('Login error:', error);
+      // Error is handled by the auth hook
     }
   };
 

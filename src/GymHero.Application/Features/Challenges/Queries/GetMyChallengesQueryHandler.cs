@@ -26,7 +26,8 @@ public class GetMyChallengesQueryHandler : IRequestHandler<GetMyChallengesQuery,
                 c.StartDate,
                 c.EndDate,
                 (ChallengeTargetType)c.TargetType,
-                c.IsDefault))
+                c.IsDefault,
+                c.IconName))
             .ToListAsync(cancellationToken);
     }
 }

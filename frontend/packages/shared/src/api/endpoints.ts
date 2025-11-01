@@ -68,6 +68,18 @@ export class AuthApi {
   async updateProfile(data: Partial<User>): Promise<User> {
     return this.client.patch<User>('/me', data);
   }
+
+  async forgotPassword(data: { email: string }): Promise<{ message: string }> {
+    return this.client.post<{ message: string }>('/auth/forgot-password', data);
+  }
+
+  async resetPassword(data: {
+    token: string;
+    newPassword: string;
+    confirmPassword: string;
+  }): Promise<{ message: string }> {
+    return this.client.post<{ message: string }>('/auth/reset-password', data);
+  }
 }
 
 export class ExerciseApi {
@@ -127,6 +139,32 @@ export class WorkoutPlanApi {
 
   async setInactive(id: string): Promise<void> {
     return this.client.patch<void>(`/workout-plans/${id}/deactivate`, {});
+  }
+
+  async updateVisibility(
+    id: string,
+    data: { visibilityLevel: number; allowCopying: boolean }
+  ): Promise<{ message: string }> {
+    return this.client.patch<{ message: string }>(`/workout-plans/${id}/visibility`, data);
+  }
+
+  async getPublicPlans(params?: {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+    goal?: string;
+  }): Promise<{
+    plans: any[];
+    totalCount: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+  }> {
+    return this.client.get<any>('/workout-plans/public', { params });
+  }
+
+  async getPublicPlanById(id: string): Promise<WorkoutPlan> {
+    return this.client.get<WorkoutPlan>(`/workout-plans/public/${id}`);
   }
 }
 

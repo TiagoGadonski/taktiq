@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Star, Trash2, Edit } from 'lucide-react';
+import { Plus, Star, Trash2, Edit, Share2 } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
+import { ShareSettingsDialog } from '@/components/workout/share-settings-dialog';
 import type { WorkoutPlan } from '@gymhero/shared';
 
 export default function PlansPage() {
@@ -15,6 +16,7 @@ export default function PlansPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
 
   const { data: plans, isLoading } = useQuery({
     queryKey: ['workout-plans'],
@@ -69,15 +71,20 @@ export default function PlansPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Planos de Treino</h1>
-          <p className="text-muted-foreground">Gerencie seus programas de treinamento</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Planos de Treino</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">Gerencie seus programas de treinamento</p>
         </div>
-        <Button onClick={() => router.push('/plans/new')}>
-          <Plus className="mr-2 h-4 w-4" />
-          Criar Novo Plano
-        </Button>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Button variant="outline" onClick={() => router.push('/plans/discover')} className="w-full sm:w-auto">
+            Descobrir Planos
+          </Button>
+          <Button onClick={() => router.push('/plans/new')} className="w-full sm:w-auto">
+            <Plus className="mr-2 h-4 w-4" />
+            Criar Novo Plano
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
@@ -88,7 +95,9 @@ export default function PlansPage() {
         </Card>
       ) : plans && plans.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {plans.map((plan) => (
+          {plans.map((plan) => {
+            const planData = plan as any;
+            return (
             <Card
               key={plan.id}
               className={`transition-all ${
@@ -102,7 +111,7 @@ export default function PlansPage() {
                       {plan.name}
                       {plan.isActive && <Star className="h-4 w-4 fill-primary text-primary" />}
                     </CardTitle>
-                    <CardDescription>{plan.description || 'Sem descrição'}</CardDescription>
+                    <CardDescription>{planData.description || 'Sem descrição'}</CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -112,64 +121,80 @@ export default function PlansPage() {
                     <span className="text-muted-foreground">Treinos:</span>
                     <span className="font-medium">{plan.workouts?.length || 0}</span>
                   </div>
-                  {plan.duration && (
+                  {planData.duration && (
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Duração:</span>
-                      <span className="font-medium">{plan.duration} semanas</span>
+                      <span className="font-medium">{planData.duration} semanas</span>
                     </div>
                   )}
-                  {plan.goal && (
+                  {planData.goal && (
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Objetivo:</span>
-                      <span className="font-medium">{plan.goal}</span>
+                      <span className="font-medium">{planData.goal}</span>
                     </div>
                   )}
 
-                  <div className="flex gap-2 pt-4">
-                    {plan.isActive ? (
+                  <div className="space-y-2 pt-4">
+                    <div className="grid grid-cols-3 gap-2">
+                      {plan.isActive ? (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleSetInactive(plan.id)}
+                          disabled={setInactiveMutation.isPending}
+                          className="col-span-2"
+                        >
+                          <Star className="mr-1 h-3 w-3 fill-current" />
+                          <span className="hidden xs:inline">Desativar</span>
+                        </Button>
+                      ) : (
+                        <Button
+                          size="sm"
+                          onClick={() => handleSetActive(plan.id)}
+                          disabled={setActiveMutation.isPending}
+                          className="col-span-2"
+                        >
+                          <Star className="mr-1 h-3 w-3" />
+                          <span className="hidden xs:inline">Ativar</span>
+                        </Button>
+                      )}
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => handleSetInactive(plan.id)}
-                        disabled={setInactiveMutation.isPending}
-                        className="flex-1"
+                        onClick={() => handleDelete(plan.id)}
+                        disabled={plan.isActive || deleteMutation.isPending}
+                        className="aspect-square p-0"
                       >
-                        <Star className="mr-1 h-3 w-3 fill-current" />
-                        Desativar
+                        <Trash2 className="h-4 w-4" />
                       </Button>
-                    ) : (
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
                       <Button
                         size="sm"
-                        onClick={() => handleSetActive(plan.id)}
-                        disabled={setActiveMutation.isPending}
-                        className="flex-1"
+                        variant="outline"
+                        onClick={() => router.push(`/plans/${plan.id}/edit`)}
                       >
-                        <Star className="mr-1 h-3 w-3" />
-                        Ativar
+                        <Edit className="mr-1 h-3 w-3" />
+                        Editar
                       </Button>
-                    )}
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => router.push(`/plans/${plan.id}/edit`)}
-                    >
-                      <Edit className="mr-1 h-3 w-3" />
-                      Editar
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleDelete(plan.id)}
-                      disabled={plan.isActive || deleteMutation.isPending}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setShareDialogOpen(true);
+                        }}
+                      >
+                        <Share2 className="mr-1 h-3 w-3" />
+                        Compartilhar
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <Card>
@@ -189,6 +214,17 @@ export default function PlansPage() {
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {selectedPlan && (
+        <ShareSettingsDialog
+          planId={selectedPlan.id}
+          planName={selectedPlan.name}
+          currentVisibility={(selectedPlan as any).visibilityLevel ?? 0}
+          currentAllowCopying={(selectedPlan as any).allowCopying ?? true}
+          open={shareDialogOpen}
+          onOpenChange={setShareDialogOpen}
+        />
       )}
     </div>
   );

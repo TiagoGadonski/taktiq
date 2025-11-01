@@ -10,4 +10,5 @@ public record CreateChallengeCommand(
     DateTime StartDate,
     DateTime EndDate,
     ChallengeTargetType TargetType,
-    bool IsDefault) : IRequest<ChallengeResponse>;
+    bool IsDefault,
+    string? IconName = null) : IRequest<ChallengeResponse>;

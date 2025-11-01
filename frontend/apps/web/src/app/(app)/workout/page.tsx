@@ -14,6 +14,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import type { CreateSetInput, Workout, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
+import { getRandomSetMessage, getRandomWorkoutMessage, getMilestoneMessage } from '@gymhero/shared';
 
 export default function WorkoutPage() {
   const router = useRouter();
@@ -66,9 +67,10 @@ export default function WorkoutPage() {
 
     try {
       await completeSession({ sessionId: currentSession.id, notes });
+      const motivationalMessage = getRandomWorkoutMessage();
       toast({
-        title: 'Treino concluído!',
-        description: 'Parabéns pelo treino de hoje!',
+        title: motivationalMessage.title,
+        description: motivationalMessage.description,
       });
       router.push('/dashboard');
     } catch (error: any) {
@@ -94,9 +96,27 @@ export default function WorkoutPage() {
 
     try {
       await createSet(setData);
-      toast({
-        title: 'Série adicionada!',
-      });
+
+      // Get the total number of sets completed in this session
+      const totalSets = (currentSession.sets?.length || 0) + 1;
+
+      // Check for milestone messages first
+      const milestoneMessage = getMilestoneMessage(totalSets);
+
+      if (milestoneMessage) {
+        // Show milestone message for special achievements
+        toast({
+          title: milestoneMessage.title,
+          description: milestoneMessage.description,
+        });
+      } else {
+        // Show random motivational message
+        const motivationalMessage = getRandomSetMessage();
+        toast({
+          title: motivationalMessage.title,
+          description: motivationalMessage.description,
+        });
+      }
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -172,7 +192,9 @@ export default function WorkoutPage() {
                       <CardContent>
                         <div className="space-y-2">
                           {workout.exercises && workout.exercises.length > 0 ? (
-                            workout.exercises.map((exercise, index) => (
+                            workout.exercises.map((exercise, index) => {
+                              const exerciseData = exercise as any;
+                              return (
                               <div
                                 key={exercise.id || index}
                                 className="flex items-center justify-between py-2 px-3 bg-muted/50 rounded-md text-sm cursor-pointer hover:bg-muted transition-colors"
@@ -182,13 +204,14 @@ export default function WorkoutPage() {
                                   <span className="font-medium text-muted-foreground">
                                     {index + 1}.
                                   </span>
-                                  <span>{exercise.exerciseName || exercise.name}</span>
+                                  <span>{exerciseData.exerciseName || exerciseData.name}</span>
                                 </div>
                                 <span className="text-muted-foreground">
                                   {exercise.targetSets}x{exercise.targetReps}
                                 </span>
                               </div>
-                            ))
+                              );
+                            })
                           ) : (
                             <p className="text-sm text-muted-foreground">Nenhum exercício configurado</p>
                           )}
@@ -264,30 +287,32 @@ export default function WorkoutPage() {
               </DialogDescription>
               {selectedExercise?.exercise && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {selectedExercise.exercise.muscleGroup && (
-                    <Badge variant="secondary">{selectedExercise.exercise.muscleGroup}</Badge>
+                  {(selectedExercise.exercise as any).muscleGroup && (
+                    <Badge variant="secondary">{(selectedExercise.exercise as any).muscleGroup}</Badge>
                   )}
-                  {selectedExercise.exercise.equipment && (
-                    <Badge variant="secondary">{selectedExercise.exercise.equipment}</Badge>
+                  {(selectedExercise.exercise as any).equipment && (
+                    <Badge variant="secondary">{(selectedExercise.exercise as any).equipment}</Badge>
                   )}
-                  {selectedExercise.exercise.category && (
-                    <Badge variant="secondary">{selectedExercise.exercise.category}</Badge>
+                  {(selectedExercise.exercise as any).category && (
+                    <Badge variant="secondary">{(selectedExercise.exercise as any).category}</Badge>
                   )}
                 </div>
               )}
             </DialogHeader>
 
-            {selectedExercise?.exercise && (
+            {selectedExercise?.exercise && (() => {
+              const exerciseData = selectedExercise.exercise as any;
+              return (
               <div className="space-y-6 mt-4">
                 {/* Exercise Video/Image */}
-                {selectedExercise.exercise.videoUrl && (
+                {exerciseData.videoUrl && (
                   <div className="flex justify-center bg-muted rounded-lg p-4">
-                    {selectedExercise.exercise.videoUrl.includes('youtube.com') || selectedExercise.exercise.videoUrl.includes('youtu.be') ? (
+                    {exerciseData.videoUrl.includes('youtube.com') || exerciseData.videoUrl.includes('youtu.be') ? (
                       <iframe
                         width="100%"
                         height="400"
-                        src={selectedExercise.exercise.videoUrl.replace('watch?v=', 'embed/')}
-                        title={selectedExercise.exercise.name}
+                        src={exerciseData.videoUrl.replace('watch?v=', 'embed/')}
+                        title={exerciseData.name}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -295,7 +320,7 @@ export default function WorkoutPage() {
                       ></iframe>
                     ) : (
                       <video
-                        src={selectedExercise.exercise.videoUrl}
+                        src={exerciseData.videoUrl}
                         controls
                         className="w-full rounded-md"
                         style={{ maxHeight: '400px' }}
@@ -303,11 +328,11 @@ export default function WorkoutPage() {
                     )}
                   </div>
                 )}
-                {!selectedExercise.exercise.videoUrl && selectedExercise.exercise.imageUrl && (
+                {!exerciseData.videoUrl && exerciseData.imageUrl && (
                   <div className="flex justify-center bg-muted rounded-lg p-4">
                     <img
-                      src={selectedExercise.exercise.imageUrl}
-                      alt={selectedExercise.exercise.name}
+                      src={exerciseData.imageUrl}
+                      alt={exerciseData.name}
                       className="max-w-full h-auto rounded-md"
                       style={{ maxHeight: '400px' }}
                     />
@@ -337,13 +362,13 @@ export default function WorkoutPage() {
                 </div>
 
                 {/* Exercise Notes/Instructions */}
-                {selectedExercise.exercise.notes && (
+                {exerciseData.notes && (
                   <Card>
                     <CardHeader>
                       <CardTitle className="text-lg">Instruções</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="whitespace-pre-wrap text-sm">{selectedExercise.exercise.notes}</p>
+                      <p className="whitespace-pre-wrap text-sm">{exerciseData.notes}</p>
                     </CardContent>
                   </Card>
                 )}
@@ -378,7 +403,8 @@ export default function WorkoutPage() {
                   </CardContent>
                 </Card>
               </div>
-            )}
+              );
+            })()}
           </DialogContent>
         </Dialog>
       </div>
@@ -475,30 +501,32 @@ export default function WorkoutPage() {
             </DialogDescription>
             {selectedExercise?.exercise && (
               <div className="flex flex-wrap gap-2 mt-2">
-                {selectedExercise.exercise.muscleGroup && (
-                  <Badge variant="secondary">{selectedExercise.exercise.muscleGroup}</Badge>
+                {(selectedExercise.exercise as any).muscleGroup && (
+                  <Badge variant="secondary">{(selectedExercise.exercise as any).muscleGroup}</Badge>
                 )}
-                {selectedExercise.exercise.equipment && (
-                  <Badge variant="secondary">{selectedExercise.exercise.equipment}</Badge>
+                {(selectedExercise.exercise as any).equipment && (
+                  <Badge variant="secondary">{(selectedExercise.exercise as any).equipment}</Badge>
                 )}
-                {selectedExercise.exercise.category && (
-                  <Badge variant="secondary">{selectedExercise.exercise.category}</Badge>
+                {(selectedExercise.exercise as any).category && (
+                  <Badge variant="secondary">{(selectedExercise.exercise as any).category}</Badge>
                 )}
               </div>
             )}
           </DialogHeader>
 
-          {selectedExercise?.exercise && (
+          {selectedExercise?.exercise && (() => {
+            const exerciseData = selectedExercise.exercise as any;
+            return (
             <div className="space-y-6 mt-4">
                 {/* Exercise Video/Image */}
-                {selectedExercise.exercise.videoUrl && (
+                {exerciseData.videoUrl && (
                   <div className="flex justify-center bg-muted rounded-lg p-4">
-                    {selectedExercise.exercise.videoUrl.includes('youtube.com') || selectedExercise.exercise.videoUrl.includes('youtu.be') ? (
+                    {exerciseData.videoUrl.includes('youtube.com') || exerciseData.videoUrl.includes('youtu.be') ? (
                       <iframe
                         width="100%"
                         height="400"
-                        src={selectedExercise.exercise.videoUrl.replace('watch?v=', 'embed/')}
-                        title={selectedExercise.exercise.name}
+                        src={exerciseData.videoUrl.replace('watch?v=', 'embed/')}
+                        title={exerciseData.name}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -506,7 +534,7 @@ export default function WorkoutPage() {
                       ></iframe>
                     ) : (
                       <video
-                        src={selectedExercise.exercise.videoUrl}
+                        src={exerciseData.videoUrl}
                         controls
                         className="w-full rounded-md"
                         style={{ maxHeight: '400px' }}
@@ -514,11 +542,11 @@ export default function WorkoutPage() {
                     )}
                   </div>
                 )}
-                {!selectedExercise.exercise.videoUrl && selectedExercise.exercise.imageUrl && (
+                {!exerciseData.videoUrl && exerciseData.imageUrl && (
                   <div className="flex justify-center bg-muted rounded-lg p-4">
                     <img
-                      src={selectedExercise.exercise.imageUrl}
-                      alt={selectedExercise.exercise.name}
+                      src={exerciseData.imageUrl}
+                      alt={exerciseData.name}
                       className="max-w-full h-auto rounded-md"
                       style={{ maxHeight: '400px' }}
                     />
@@ -548,13 +576,13 @@ export default function WorkoutPage() {
                 </div>
 
                 {/* Exercise Notes/Instructions */}
-                {selectedExercise.exercise.notes && (
+                {exerciseData.notes && (
                   <Card>
                     <CardHeader>
                       <CardTitle className="text-lg">Instruções</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="whitespace-pre-wrap text-sm">{selectedExercise.exercise.notes}</p>
+                      <p className="whitespace-pre-wrap text-sm">{exerciseData.notes}</p>
                     </CardContent>
                   </Card>
                 )}
@@ -589,7 +617,8 @@ export default function WorkoutPage() {
                   </CardContent>
                 </Card>
               </div>
-            )}
+              );
+            })()}
         </DialogContent>
       </Dialog>
     </div>

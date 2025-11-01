@@ -2,7 +2,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using GymHero.Api.Services;
+using GymHero.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymHero.Api.Endpoints;
 
@@ -68,10 +70,26 @@ public static class AIEndpoints
             [FromBody] AIWorkoutRequest request,
             ClaimsPrincipal user,
             IConfiguration configuration,
+            IApplicationDbContext context,
             ILogger<Program> logger) =>
         {
             try
             {
+                // Fetch user profile data
+                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var userProfile = await context.Users
+                    .Where(u => u.Id == userId)
+                    .Select(u => new {
+                        u.Name,
+                        u.DateOfBirth,
+                        u.Height,
+                        u.Weight,
+                        u.Location,
+                        u.Bio,
+                        u.GymName
+                    })
+                    .FirstOrDefaultAsync();
+
                 var geminiApiKey = configuration["Gemini:ApiKey"];
                 var openAiApiKey = configuration["OpenAI:ApiKey"];
 
@@ -95,7 +113,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling Gemini API for workout generation...");
-                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!);
+                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!, userProfile);
                             logger.LogInformation("Successfully generated workout with Gemini");
                             generated = true;
                         }
@@ -110,7 +128,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling OpenAI API for workout generation...");
-                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!);
+                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!, userProfile);
                             logger.LogInformation("Successfully generated workout with OpenAI");
                             generated = true;
                         }
@@ -195,11 +213,27 @@ public static class AIEndpoints
             [FromBody] AIWorkoutPlanRequest request,
             ClaimsPrincipal user,
             IConfiguration configuration,
+            IApplicationDbContext context,
             IExerciseMediaService mediaService,
             ILogger<Program> logger) =>
         {
             try
             {
+                // Fetch user profile data
+                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var userProfile = await context.Users
+                    .Where(u => u.Id == userId)
+                    .Select(u => new {
+                        u.Name,
+                        u.DateOfBirth,
+                        u.Height,
+                        u.Weight,
+                        u.Location,
+                        u.Bio,
+                        u.GymName
+                    })
+                    .FirstOrDefaultAsync();
+
                 var geminiApiKey = configuration["Gemini:ApiKey"];
                 var openAiApiKey = configuration["OpenAI:ApiKey"];
 
@@ -223,7 +257,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling Gemini API for plan generation...");
-                            plan = await GeneratePlanWithGemini(request, geminiApiKey!);
+                            plan = await GeneratePlanWithGemini(request, geminiApiKey!, userProfile);
                             logger.LogInformation("Successfully generated plan with Gemini");
                             generated = true;
                         }
@@ -238,7 +272,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling OpenAI API for plan generation...");
-                            plan = await GeneratePlanWithAI(request, openAiApiKey!);
+                            plan = await GeneratePlanWithAI(request, openAiApiKey!, userProfile);
                             logger.LogInformation("Successfully generated plan with OpenAI");
                             generated = true;
                         }
@@ -834,11 +868,14 @@ public static class AIEndpoints
         return $"Treino completo com {exerciseCount} exercícios para {string.Join(", ", formattedGroups)}, focado em hipertrofia muscular";
     }
 
-    private static async Task<AIWorkoutResponse> GenerateWorkoutWithAI(AIWorkoutRequest request, string apiKey)
+    private static async Task<AIWorkoutResponse> GenerateWorkoutWithAI(AIWorkoutRequest request, string apiKey, dynamic? userProfile = null)
     {
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         httpClient.Timeout = TimeSpan.FromSeconds(45); // Reasonable timeout for single workout
+
+        // Build user profile context
+        var profileContext = BuildUserProfileContext(userProfile);
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado e certificado, especializado em prescrição de treinos personalizados e seguros. Crie treinos DETALHADOS, EFICAZES e CIENTIFICAMENTE EMBASADOS.
 
@@ -893,6 +930,8 @@ Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem comentári
 REQUISITOS DO USUÁRIO:
 {request.Prompt}
 
+{profileContext}
+
 PARÂMETROS OBRIGATÓRIOS:
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}
 - DURAÇÃO DO TREINO: {duration} minutos (ajuste o número de exercícios e sets para caber nesse tempo)
@@ -902,11 +941,13 @@ $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
 "- EQUIPAMENTOS: Academia completa - todos os equipamentos disponíveis")}
 
 INSTRUÇÕES CRÍTICAS:
-1. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE (incluindo variações)
-2. Calcule o número adequado de exercícios para caber no tempo especificado
-3. Mantenha o treino balanceado e eficiente
-4. Se equipamentos limitados, seja criativo com alternativas usando apenas o que está disponível
-5. Inclua sempre instruções de segurança e técnica correta";
+1. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
+2. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE (incluindo variações)
+3. Calcule o número adequado de exercícios para caber no tempo especificado
+4. Mantenha o treino balanceado e eficiente
+5. Se equipamentos limitados, seja criativo com alternativas usando apenas o que está disponível
+6. Inclua sempre instruções de segurança e técnica correta
+7. Considere possíveis limitações físicas baseadas na idade e condição física do usuário";
 
         var payload = new
         {
@@ -1007,11 +1048,14 @@ INSTRUÇÕES CRÍTICAS:
         }
     }
 
-    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithAI(AIWorkoutPlanRequest request, string apiKey)
+    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithAI(AIWorkoutPlanRequest request, string apiKey, dynamic? userProfile = null)
     {
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         httpClient.Timeout = TimeSpan.FromSeconds(60); // Longer timeout for plan generation
+
+        // Build user profile context
+        var profileContext = BuildUserProfileContext(userProfile);
 
         var daysPerWeek = request.DaysPerWeek ?? 4;
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
@@ -1083,6 +1127,8 @@ Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem ```json):
 REQUISITOS DO USUÁRIO:
 {request.Prompt}
 
+{profileContext}
+
 PARÂMETROS OBRIGATÓRIOS:
 - DIAS POR SEMANA: {daysPerWeek} dias
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}
@@ -1090,14 +1136,16 @@ PARÂMETROS OBRIGATÓRIOS:
 - EQUIPAMENTOS: Todos disponíveis (academia completa)
 
 INSTRUÇÕES ESPECIAIS:
-1. Crie EXATAMENTE {daysPerWeek} treinos diferentes (ex: ABC para 3 dias, ABCD para 4 dias, ABCDE para 5 dias)
-2. Distribua os grupos musculares de forma balanceada ao longo da semana
-3. Considere sinergias musculares (ex: peito+tríceps, costas+bíceps)
-4. Inclua notas de progressão semanal para CADA exercício
-5. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
-6. Garanta recuperação adequada - não treine o mesmo grupo muscular em dias consecutivos
-7. Inclua aquecimento e alongamento quando apropriado
-8. Adapte o volume total ao nível de condicionamento
+1. PERSONALIZE o plano baseado no perfil do usuário acima (idade, peso, altura, IMC, etc.)
+2. Crie EXATAMENTE {daysPerWeek} treinos diferentes (ex: ABC para 3 dias, ABCD para 4 dias, ABCDE para 5 dias)
+3. Distribua os grupos musculares de forma balanceada ao longo da semana
+4. Considere sinergias musculares (ex: peito+tríceps, costas+bíceps)
+5. Inclua notas de progressão semanal para CADA exercício
+6. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
+7. Garanta recuperação adequada - não treine o mesmo grupo muscular em dias consecutivos
+8. Inclua aquecimento e alongamento quando apropriado
+9. Adapte o volume total ao nível de condicionamento E ao perfil físico do usuário
+10. Considere possíveis limitações físicas baseadas na idade e condição física
 
 IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruções claras de como progredir a cada semana.";
 
@@ -1191,10 +1239,56 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         }
     }
 
-    private static async Task<AIWorkoutResponse> GenerateWorkoutWithGemini(AIWorkoutRequest request, string apiKey)
+    private static string BuildUserProfileContext(dynamic? userProfile)
+    {
+        if (userProfile == null) return "";
+
+        var context = new StringBuilder("PERFIL DO USUÁRIO:\n");
+
+        if (!string.IsNullOrEmpty(userProfile.Name))
+            context.AppendLine($"- Nome: {userProfile.Name}");
+
+        if (userProfile.DateOfBirth != null)
+        {
+            var age = DateTime.Now.Year - ((DateTime)userProfile.DateOfBirth).Year;
+            context.AppendLine($"- Idade: {age} anos");
+        }
+
+        if (userProfile.Height != null)
+            context.AppendLine($"- Altura: {userProfile.Height} cm");
+
+        if (userProfile.Weight != null)
+        {
+            context.AppendLine($"- Peso: {userProfile.Weight} kg");
+
+            // Calculate BMI if we have both height and weight
+            if (userProfile.Height != null)
+            {
+                double heightInMeters = (double)userProfile.Height / 100.0;
+                double bmi = (double)userProfile.Weight / (heightInMeters * heightInMeters);
+                context.AppendLine($"- IMC: {bmi:F1}");
+            }
+        }
+
+        if (!string.IsNullOrEmpty(userProfile.Location))
+            context.AppendLine($"- Localização: {userProfile.Location}");
+
+        if (!string.IsNullOrEmpty(userProfile.GymName))
+            context.AppendLine($"- Academia: {userProfile.GymName}");
+
+        if (!string.IsNullOrEmpty(userProfile.Bio))
+            context.AppendLine($"- Informações adicionais: {userProfile.Bio}");
+
+        return context.ToString();
+    }
+
+    private static async Task<AIWorkoutResponse> GenerateWorkoutWithGemini(AIWorkoutRequest request, string apiKey, dynamic? userProfile = null)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(45);
+
+        // Build user profile context
+        var profileContext = BuildUserProfileContext(userProfile);
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado e certificado, especializado em prescrição de treinos personalizados e seguros. Crie treinos DETALHADOS, EFICAZES e CIENTIFICAMENTE EMBASADOS.
 
@@ -1242,6 +1336,8 @@ Retorne APENAS um JSON válido no seguinte formato:
 REQUISITOS DO USUÁRIO:
 {request.Prompt}
 
+{profileContext}
+
 PARÂMETROS OBRIGATÓRIOS:
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}
 - DURAÇÃO DO TREINO: {duration} minutos (ajuste o número de exercícios e sets para caber nesse tempo)
@@ -1251,10 +1347,12 @@ $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
 "- EQUIPAMENTOS: Academia completa - todos os equipamentos disponíveis")}
 
 INSTRUÇÕES CRÍTICAS:
-1. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
-2. Calcule o número adequado de exercícios para caber no tempo especificado
-3. Mantenha o treino balanceado e eficiente
-4. Inclua sempre instruções de segurança e técnica correta";
+1. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
+2. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
+3. Calcule o número adequado de exercícios para caber no tempo especificado
+4. Mantenha o treino balanceado e eficiente
+5. Inclua sempre instruções de segurança e técnica correta
+6. Considere possíveis limitações físicas baseadas na idade e condição física do usuário";
 
         var payload = new
         {
@@ -1338,10 +1436,13 @@ INSTRUÇÕES CRÍTICAS:
         }
     }
 
-    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithGemini(AIWorkoutPlanRequest request, string apiKey)
+    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithGemini(AIWorkoutPlanRequest request, string apiKey, dynamic? userProfile = null)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(60);
+
+        // Build user profile context
+        var profileContext = BuildUserProfileContext(userProfile);
 
         var daysPerWeek = request.DaysPerWeek ?? 4;
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
@@ -1401,17 +1502,22 @@ Retorne APENAS um JSON válido:
 REQUISITOS:
 {request.Prompt}
 
+{profileContext}
+
 PARÂMETROS:
 - DIAS POR SEMANA: {daysPerWeek}
 - NÍVEL: {fitnessLevel}
 - OBJETIVO: {goal}
 
 INSTRUÇÕES:
-1. Crie EXATAMENTE {daysPerWeek} treinos diferentes
-2. Distribua grupos musculares de forma balanceada
-3. Inclua notas de progressão para CADA exercício
-4. Respeite todas as restrições do usuário
-5. Garanta recuperação adequada";
+1. PERSONALIZE baseado no perfil do usuário (idade, peso, altura, IMC)
+2. Crie EXATAMENTE {daysPerWeek} treinos diferentes
+3. Distribua grupos musculares de forma balanceada
+4. Inclua notas de progressão para CADA exercício
+5. Respeite todas as restrições do usuário
+6. Garanta recuperação adequada
+7. Adapte o volume ao perfil físico do usuário
+8. Considere limitações físicas baseadas na idade e condição";
 
         var payload = new
         {

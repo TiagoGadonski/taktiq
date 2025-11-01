@@ -11,4 +11,5 @@ public record CreateCustomChallengeCommand(
     DateTime EndDate,
     List<Guid> FriendIds,
     ChallengeTargetType TargetType = ChallengeTargetType.SpecificUsers,
-    bool IsDefault = false) : IRequest<Guid>; // Retorna o ID do novo desafio
+    bool IsDefault = false,
+    string? IconName = null) : IRequest<Guid>; // Retorna o ID do novo desafio

@@ -317,5 +317,67 @@ public static class WorkoutPlanEndpoints
         })
         .WithName("ShareWorkoutPlan")
         .WithSummary("Shares a workout plan with friends");
+
+        // Update workout plan visibility settings
+        group.MapPatch("/{planId:guid}/visibility", async (
+            Guid planId,
+            [FromBody] UpdateVisibilityRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new UpdateWorkoutPlanVisibilityCommand(
+                planId,
+                userId,
+                request.VisibilityLevel,
+                request.AllowCopying
+            );
+
+            var result = await sender.Send(command);
+            return result
+                ? Results.Ok(new { message = "Visibilidade atualizada com sucesso!" })
+                : Results.NotFound(new { message = "Plano não encontrado" });
+        })
+        .WithName("UpdateWorkoutPlanVisibility")
+        .WithSummary("Updates the visibility settings of a workout plan");
+
+        // Browse public workout plans (no auth required)
+        var publicGroup = app.MapGroup("/api/workout-plans/public")
+            .WithTags("Public Workout Plans")
+            .AllowAnonymous();
+
+        publicGroup.MapGet("/", async (
+            [FromQuery] int page,
+            [FromQuery] int pageSize,
+            [FromQuery] string? search,
+            [FromQuery] string? goal,
+            ISender sender) =>
+        {
+            var query = new GetPublicWorkoutPlansQuery(
+                page > 0 ? page : 1,
+                pageSize > 0 && pageSize <= 50 ? pageSize : 20,
+                search,
+                goal
+            );
+
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("BrowsePublicWorkoutPlans")
+        .WithSummary("Browse all public workout plans with optional search and filtering");
+
+        publicGroup.MapGet("/{planId:guid}", async (
+            Guid planId,
+            ISender sender) =>
+        {
+            var query = new GetPublicWorkoutPlanByIdQuery(planId);
+            var result = await sender.Send(query);
+
+            return result is not null
+                ? Results.Ok(result)
+                : Results.NotFound(new { message = "Plano público não encontrado" });
+        })
+        .WithName("GetPublicWorkoutPlanDetail")
+        .WithSummary("Get details of a public workout plan (increments view count)");
     }
 }
