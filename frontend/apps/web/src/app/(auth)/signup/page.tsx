@@ -8,9 +8,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Dumbbell, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { apiClient } from '@/lib/api';
 import { Checkbox } from '@/components/ui/checkbox';
+import { TaktIQLogo } from '@/components/taktiq-logo';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -85,14 +86,23 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 text-center">
-          <div className="flex justify-center mb-4">
-            <Dumbbell className="h-16 w-16 text-primary" />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden p-4 bg-background">
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+
+      {/* Gym pattern overlay */}
+      <div className="absolute inset-0 opacity-5 gym-pattern" />
+
+      {/* Signup card */}
+      <Card className="relative w-full max-w-md glass-card border-primary/20 shadow-2xl">
+        <CardHeader className="space-y-3 pb-6">
+          <div className="flex justify-center">
+            <TaktIQLogo width={200} height={57} className="drop-shadow-lg" />
           </div>
-          <CardTitle className="text-3xl font-bold">Criar Conta</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-center text-2xl font-bold">Criar Conta</CardTitle>
+          <CardDescription className="text-center">
             Cadastre-se para começar sua jornada fitness
           </CardDescription>
         </CardHeader>
@@ -107,6 +117,7 @@ export default function SignupPage() {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
                 disabled={isLoading}
+                className="h-11"
               />
             </div>
 
@@ -120,6 +131,7 @@ export default function SignupPage() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
                 disabled={isLoading}
+                className="h-11"
               />
             </div>
 
@@ -133,6 +145,7 @@ export default function SignupPage() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
                 disabled={isLoading}
+                className="h-11"
               />
             </div>
 
@@ -146,6 +159,7 @@ export default function SignupPage() {
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 required
                 disabled={isLoading}
+                className="h-11"
               />
             </div>
 
@@ -171,7 +185,7 @@ export default function SignupPage() {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full h-11 font-semibold hover-lift tap-scale"
               disabled={isLoading || !agreedToTerms}
             >
               {isLoading ? (
@@ -186,7 +200,7 @@ export default function SignupPage() {
 
             <div className="text-center text-sm">
               <span className="text-muted-foreground">Já tem uma conta? </span>
-              <Link href="/login" className="text-primary hover:underline">
+              <Link href="/login" className="text-primary hover:underline font-medium">
                 Fazer Login
               </Link>
             </div>
