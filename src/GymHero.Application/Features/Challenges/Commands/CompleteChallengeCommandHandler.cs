@@ -1,5 +1,4 @@
 using GymHero.Application.Common.Interfaces;
-using GymHero.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,7 +33,7 @@ public class CompleteChallengeCommandHandler : IRequestHandler<CompleteChallenge
         }
 
         // Update challenge status to Completed
-        challenge.Status = ChallengeStatus.Completed;
+        challenge.Status = "Completed";
 
         // Update progress to show completion
         progress.CurrentValue = challenge.TargetValue;
