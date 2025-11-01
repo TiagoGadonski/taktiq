@@ -34,6 +34,8 @@ jobs:
 
       # builda o Next (SSR), sem export
       - name: Build Web App
+        env:
+          NEXT_PUBLIC_API_BASE_URL: https://taktiq-api.azurewebsites.net/api
         run: pnpm run build:web
         working-directory: frontend
 
