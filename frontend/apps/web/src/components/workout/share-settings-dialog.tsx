@@ -102,7 +102,7 @@ export function ShareSettingsDialog({
             <span className="line-clamp-1">Configurações de Compartilhamento</span>
           </DialogTitle>
           <DialogDescription className="text-sm">
-            Configure quem pode visualizar "<span className="line-clamp-1 inline">{planName}</span>"
+            Configure quem pode visualizar <span className="line-clamp-1 inline">&quot;{planName}&quot;</span>
           </DialogDescription>
         </DialogHeader>
 
