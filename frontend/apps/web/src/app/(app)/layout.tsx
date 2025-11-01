@@ -18,6 +18,7 @@ import {
   Shield,
   UserCog,
   Info,
+  Activity,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -38,11 +39,10 @@ const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Treino IA', href: '/ai-workout', icon: Sparkles },
   { name: 'Treino do Dia', href: '/workout', icon: Dumbbell },
-  { name: 'Histórico', href: '/history', icon: Calendar },
+  { name: 'Atividade', href: '/activity', icon: Activity },
   { name: 'Planos', href: '/plans', icon: Target },
   { name: 'Desafios', href: '/challenges', icon: Trophy },
   { name: 'Amigos', href: '/friends', icon: Users },
-  { name: 'Progresso', href: '/progress', icon: TrendingUp },
   { name: 'Sobre Nós', href: '/about', icon: Info },
 ];
 

@@ -71,6 +71,8 @@ export default function AdminPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [newRole, setNewRole] = useState<string>('');
   const [newPassword, setNewPassword] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -112,11 +114,25 @@ export default function AdminPage() {
     }
   }, [user]);
 
-  const filteredUsers = users.filter(
-    (u) =>
-      u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      u.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter and sort users (most recent first)
+  const filteredUsers = users
+    .filter(
+      (u) =>
+        u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        u.email.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+  // Pagination
+  const totalPages = Math.ceil(filteredUsers.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+
+  // Reset to page 1 when search term changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const handleEditUser = (user: User) => {
     setSelectedUser(user);
@@ -391,7 +407,14 @@ export default function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user, index) => (
+              {paginatedUsers.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="p-8 text-center text-muted-foreground">
+                    Nenhum usuário encontrado
+                  </td>
+                </tr>
+              ) : (
+                paginatedUsers.map((user, index) => (
                 <tr
                   key={user.id}
                   className="border-b border-border/30 hover:bg-accent/50 transition-colors animate-slide-up"
@@ -488,10 +511,55 @@ export default function AdminPage() {
                     </DropdownMenu>
                   </td>
                 </tr>
-              ))}
+              ))
+              )}
             </tbody>
           </table>
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-6 py-4 border-t border-border/50">
+            <div className="text-sm text-muted-foreground">
+              Mostrando {startIndex + 1} a {Math.min(endIndex, filteredUsers.length)} de {filteredUsers.length} usuários
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="hover-lift tap-scale"
+              >
+                Anterior
+              </Button>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setCurrentPage(page)}
+                    className={`hover-lift tap-scale ${
+                      currentPage === page ? 'bg-primary text-primary-foreground' : ''
+                    }`}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="hover-lift tap-scale"
+              >
+                Próxima
+              </Button>
+            </div>
+          </div>
+        )}
       </Card>
 
       {/* Create User Dialog */}

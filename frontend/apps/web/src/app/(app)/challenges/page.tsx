@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus } from 'lucide-react';
+import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,7 @@ import { apiClient } from '@/lib/api';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
 import { challengeIcons, getChallengeIcon } from '@/components/challenge-icon-library';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 // Types
 interface Challenge {
@@ -53,6 +54,7 @@ export default function ChallengesPage() {
   const [endDate, setEndDate] = useState('');
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<string>('trophy');
+  const [activeTab, setActiveTab] = useState<'active' | 'completed'>('active');
 
   const queryClient = useQueryClient();
 
@@ -107,6 +109,27 @@ export default function ChallengesPage() {
       toast({
         variant: 'destructive',
         title: 'Erro ao criar desafio',
+        description: error instanceof Error ? error.message : 'Tente novamente',
+      });
+    },
+  });
+
+  // Complete challenge mutation
+  const completeChallengeMutation = useMutation({
+    mutationFn: async (challengeId: string) => {
+      return apiClient.post(`/challenges/${challengeId}/complete`, {});
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Desafio concluído!',
+        description: 'Parabéns! Você completou este desafio.',
+      });
+      queryClient.invalidateQueries({ queryKey: ['challenges'] });
+    },
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao completar desafio',
         description: error instanceof Error ? error.message : 'Tente novamente',
       });
     },
@@ -187,6 +210,20 @@ export default function ChallengesPage() {
     }
   };
 
+  // Filter challenges based on active tab
+  const filteredChallenges = challenges.filter((challenge) => {
+    const isCompleted = challenge.status.toLowerCase() === 'completed' || challenge.status.toLowerCase() === 'concluído';
+    return activeTab === 'completed' ? isCompleted : !isCompleted;
+  });
+
+  const activeChallengesCount = challenges.filter((c) =>
+    c.status.toLowerCase() !== 'completed' && c.status.toLowerCase() !== 'concluído'
+  ).length;
+
+  const completedChallengesCount = challenges.filter((c) =>
+    c.status.toLowerCase() === 'completed' || c.status.toLowerCase() === 'concluído'
+  ).length;
+
   return (
     <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -205,32 +242,56 @@ export default function ChallengesPage() {
         </Button>
       </div>
 
-      {/* Challenges Grid */}
-      {loadingChallenges ? (
-        <div className="flex justify-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      ) : challenges.length === 0 ? (
-        <Card>
-          <CardContent className="py-12 text-center">
-            <div className="mx-auto max-w-md space-y-4">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-                <Trophy className="h-10 w-10 text-muted-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold">Nenhum desafio criado</h3>
-              <p className="text-muted-foreground">
-                Crie desafios personalizados para manter sua motivação e competir com amigos
-              </p>
-              <Button onClick={() => setIsCreateDialogOpen(true)}>
-                <Plus className="mr-2 h-4 w-4" />
-                Criar Primeiro Desafio
-              </Button>
+      {/* Tabs for Active/Completed Challenges */}
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'active' | 'completed')} className="w-full">
+        <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsTrigger value="active" className="gap-2">
+            <Target className="h-4 w-4" />
+            Ativos ({activeChallengesCount})
+          </TabsTrigger>
+          <TabsTrigger value="completed" className="gap-2">
+            <CheckCircle2 className="h-4 w-4" />
+            Concluídos ({completedChallengesCount})
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value={activeTab} className="mt-6">
+          {/* Challenges Grid */}
+          {loadingChallenges ? (
+            <div className="flex justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {challenges.map((challenge) => {
+          ) : filteredChallenges.length === 0 ? (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <div className="mx-auto max-w-md space-y-4">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+                    {activeTab === 'completed' ? (
+                      <CheckCircle2 className="h-10 w-10 text-muted-foreground" />
+                    ) : (
+                      <Trophy className="h-10 w-10 text-muted-foreground" />
+                    )}
+                  </div>
+                  <h3 className="text-xl font-semibold">
+                    {activeTab === 'completed' ? 'Nenhum desafio concluído ainda' : 'Nenhum desafio ativo'}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {activeTab === 'completed'
+                      ? 'Complete desafios para vê-los aqui'
+                      : 'Crie desafios personalizados para manter sua motivação e competir com amigos'}
+                  </p>
+                  {activeTab === 'active' && (
+                    <Button onClick={() => setIsCreateDialogOpen(true)}>
+                      <Plus className="mr-2 h-4 w-4" />
+                      Criar Primeiro Desafio
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredChallenges.map((challenge) => {
             const progress = getProgressPercentage(challenge);
             const daysRemaining = getDaysRemaining(challenge.endDate);
             const participants = challenge.progresses?.length || 0;
@@ -337,12 +398,39 @@ export default function ChallengesPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* Mark as Complete Button */}
+                  {challenge.isParticipating && activeTab === 'active' && progress >= 80 && (
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        completeChallengeMutation.mutate(challenge.id);
+                      }}
+                      className="w-full mt-4"
+                      variant="default"
+                      disabled={completeChallengeMutation.isPending}
+                    >
+                      {completeChallengeMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Concluindo...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="mr-2 h-4 w-4" />
+                          Marcar como Concluído
+                        </>
+                      )}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             );
           })}
-        </div>
-      )}
+            </div>
+          )}
+        </TabsContent>
+      </Tabs>
 
       {/* Create Challenge Dialog */}
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>

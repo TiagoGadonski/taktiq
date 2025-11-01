@@ -76,5 +76,17 @@ public static class ChallengeEndpoints
 
             var challengeId = await sender.Send(command);
             return Results.Created($"/api/v1/challenges/{challengeId}", new { challengeId });});
+
+        // Endpoint POST para marcar um desafio como concluído
+        group.MapPost("/{challengeId}/complete", async (
+            Guid challengeId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new CompleteChallengeCommand(challengeId, userId);
+            await sender.Send(command);
+            return Results.Ok(new { message = "Desafio marcado como concluído!" });
+        });
     }
 }
