@@ -43,6 +43,7 @@ jobs:
       - name: Deploy (SWA CLI)
         env:
           DEBUG: swa:*,StaticSitesClient*   # deixa o CLI verboso no log do Actions
+          NEXT_PUBLIC_API_BASE_URL: https://taktiq-api.azurewebsites.net/api
         run: |
           pnpm dlx @azure/static-web-apps-cli@latest deploy \
             --app-location "frontend/apps/web" \
@@ -50,5 +51,6 @@ jobs:
             --env production \
             --api-language node \
             --api-version 20 \
+            --no-build \
             --verbose
 
