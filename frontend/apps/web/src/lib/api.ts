@@ -6,7 +6,7 @@ const tokenStorage = new TokenStorage(storage);
 export const apiClient = createApiClient({
   baseURL:
     process.env.NEXT_PUBLIC_API_BASE_URL ||
-    'https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api',
+    'http://localhost:5001/api',
   getAccessToken: () => tokenStorage.getAccessTokenSync(),
   getRefreshToken: () => tokenStorage.getRefreshTokenSync(),
   setTokens: (accessToken, refreshToken) => tokenStorage.setTokensSync(accessToken, refreshToken),

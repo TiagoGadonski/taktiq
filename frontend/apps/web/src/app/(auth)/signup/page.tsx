@@ -1,57 +1,196 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Shield, Mail } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
+import { Dumbbell, Loader2 } from 'lucide-react';
+import { apiClient } from '@/lib/api';
+import { Checkbox } from '@/components/ui/checkbox';
 
-/**
- * Signup page - DISABLED for public registration
- *
- * Only administrators can create new user accounts through the admin panel.
- * This ensures controlled access and better security for the application.
- */
 export default function SignupPage() {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validation
+    if (!agreedToTerms) {
+      toast({
+        title: 'Erro',
+        description: 'Você deve concordar com os termos de uso de dados.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: 'Erro',
+        description: 'As senhas não coincidem.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast({
+        title: 'Erro',
+        description: 'A senha deve ter no mínimo 6 caracteres.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await apiClient.post('/auth/signup', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      toast({
+        title: 'Conta criada!',
+        description: 'Sua conta foi criada com sucesso. Redirecionando...',
+      });
+
+      // Wait a moment and redirect to login
+      setTimeout(() => {
+        router.push('/login');
+      }, 1500);
+    } catch (error: any) {
+      toast({
+        title: 'Erro',
+        description: error.response?.data?.message || 'Não foi possível criar sua conta.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
-            <Shield className="h-16 w-16 text-primary" />
+            <Dumbbell className="h-16 w-16 text-primary" />
           </div>
-          <CardTitle className="text-3xl font-bold">Cadastro Desabilitado</CardTitle>
+          <CardTitle className="text-3xl font-bold">Criar Conta</CardTitle>
           <CardDescription>
-            O registro público de contas está desabilitado
+            Cadastre-se para começar sua jornada fitness
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="bg-muted/50 p-4 rounded-lg space-y-2">
-            <h3 className="font-semibold text-sm flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" />
-              Como obter acesso?
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Para criar uma conta no TaktIQ, entre em contato com um administrador do sistema.
-              Somente administradores podem criar novas contas de usuário.
-            </p>
-          </div>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nome</Label>
+              <Input
+                id="name"
+                placeholder="Seu nome completo"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
 
-          <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">
-              Já tem uma conta?
-            </p>
-            <Link href="/login" className="w-full block">
-              <Button className="w-full" variant="default">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="seu@email.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Mínimo 6 caracteres"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Digite a senha novamente"
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                required
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="flex items-start space-x-2 rounded-lg border border-border/50 p-4 bg-muted/30">
+              <Checkbox
+                id="terms"
+                checked={agreedToTerms}
+                onCheckedChange={(checked) => setAgreedToTerms(checked === true)}
+                disabled={isLoading}
+              />
+              <div className="flex-1">
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                >
+                  Ao me cadastrar, concordo que meus dados de treino e perfil serão utilizados para fins de teste e melhoria da aplicação TaktIQ.{' '}
+                  <Link href="/privacy" className="text-primary hover:underline" target="_blank">
+                    Política de Privacidade
+                  </Link>
+                </label>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isLoading || !agreedToTerms}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Criando conta...
+                </>
+              ) : (
+                'Criar Conta'
+              )}
+            </Button>
+
+            <div className="text-center text-sm">
+              <span className="text-muted-foreground">Já tem uma conta? </span>
+              <Link href="/login" className="text-primary hover:underline">
                 Fazer Login
-              </Button>
-            </Link>
-          </div>
-
-          <div className="pt-4 border-t">
-            <p className="text-xs text-center text-muted-foreground">
-              Este é um sistema de acesso controlado para garantir a segurança e qualidade do serviço.
-            </p>
-          </div>
+              </Link>
+            </div>
+          </form>
         </CardContent>
       </Card>
     </div>

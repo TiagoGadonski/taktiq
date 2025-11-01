@@ -13,10 +13,18 @@ import {
   Mail,
   Trophy,
   Calendar,
-  Target
+  Target,
+  Award,
+  Star,
+  Users,
+  TrendingUp,
+  Zap,
+  CheckCircle2
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
+import { getAssetUrl } from '@/lib/env';
+import { getChallengeIcon } from '@/components/challenge-icon-library';
 
 interface WorkoutSummary {
   id: string;
@@ -31,6 +39,7 @@ interface CompletedChallenge {
   targetValue: number;
   currentValue: number;
   completedAt: string;
+  iconName?: string;
 }
 
 interface UserProfile {
@@ -53,10 +62,52 @@ export default function UserProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
+
+  const getChallengeIconComponent = (challenge: CompletedChallenge) => {
+    // Use custom icon if available
+    if (challenge.iconName) {
+      const IconComponent = getChallengeIcon(challenge.iconName);
+      return <IconComponent className="h-6 w-6" />;
+    }
+
+    // Fallback to type-based icons
+    const typeMap: Record<string, React.ReactNode> = {
+      'Setup': <CheckCircle2 className="h-6 w-6" />,
+      'Planos': <Target className="h-6 w-6" />,
+      'Exercícios': <Dumbbell className="h-6 w-6" />,
+      'Treinos': <TrendingUp className="h-6 w-6" />,
+      'PR': <Zap className="h-6 w-6" />,
+      'Volume': <Award className="h-6 w-6" />,
+      'Social': <Users className="h-6 w-6" />,
+    };
+    return typeMap[challenge.type] || <Trophy className="h-6 w-6" />;
+  };
+
+  const getChallengeColor = (type: string) => {
+    const colorMap: Record<string, string> = {
+      'Setup': 'from-blue-500 to-cyan-500',
+      'Planos': 'from-purple-500 to-pink-500',
+      'Exercícios': 'from-orange-500 to-red-500',
+      'Treinos': 'from-green-500 to-emerald-500',
+      'PR': 'from-yellow-500 to-amber-500',
+      'Volume': 'from-indigo-500 to-violet-500',
+      'Social': 'from-rose-500 to-pink-500',
+    };
+    return colorMap[type] || 'from-gray-500 to-slate-500';
+  };
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await apiClient.get(`/users/${userId}/profile`);
+        const response = await apiClient.get<any>(`/users/${userId}/profile`);
         // Handle both wrapped and unwrapped responses
         const data = response.data || response;
         setProfile(data);
@@ -94,15 +145,6 @@ export default function UserProfilePage() {
     );
   }
 
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
   return (
     <div className="space-y-6">
       {/* Profile Header */}
@@ -111,11 +153,7 @@ export default function UserProfilePage() {
           <div className="flex flex-col md:flex-row gap-6">
             <Avatar className="h-24 w-24">
               <AvatarImage
-                src={
-                  profile.profilePictureUrl
-                    ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${profile.profilePictureUrl}`
-                    : undefined
-                }
+                src={getAssetUrl(profile.profilePictureUrl)}
               />
               <AvatarFallback className="text-2xl">
                 {getInitials(profile.name)}
@@ -210,40 +248,58 @@ export default function UserProfilePage() {
         </CardHeader>
         <CardContent>
           {profile.completedChallenges && profile.completedChallenges.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {profile.completedChallenges.map((challenge) => (
                 <div
                   key={challenge.challengeId}
-                  className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                  className="group relative flex flex-col items-center p-4 rounded-xl border-2 bg-card hover:scale-105 transition-all cursor-pointer"
+                  title={`${challenge.title} - Completado em ${new Date(challenge.completedAt).toLocaleDateString('pt-BR')}`}
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-full bg-yellow-500/10">
-                      <Trophy className="h-5 w-5 text-yellow-500" />
+                  {/* Badge Icon with Gradient Background */}
+                  <div className={`relative p-4 rounded-full bg-gradient-to-br ${getChallengeColor(challenge.type)} shadow-lg mb-3`}>
+                    <div className="text-white">
+                      {getChallengeIconComponent(challenge)}
                     </div>
-                    <div className="flex-1 space-y-2">
-                      <h3 className="font-semibold">{challenge.title}</h3>
-                      <Badge variant="secondary" className="text-xs">
-                        {challenge.type}
-                      </Badge>
-                      <div className="flex items-center gap-2 text-sm">
-                        <Target className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-muted-foreground">
-                          {challenge.currentValue} / {challenge.targetValue}
-                        </span>
-                      </div>
-                      <p className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        Completado em {new Date(challenge.completedAt).toLocaleDateString('pt-BR')}
-                      </p>
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+
+                  {/* Challenge Title */}
+                  <h3 className="font-semibold text-sm text-center line-clamp-2 mb-1">
+                    {challenge.title}
+                  </h3>
+
+                  {/* Progress Badge */}
+                  <Badge variant="secondary" className="text-[10px] mb-2">
+                    {challenge.type}
+                  </Badge>
+
+                  {/* Completion Date (shown on hover) */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-black/90 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                    <div className="font-medium mb-1">{challenge.title}</div>
+                    <div className="flex items-center gap-1 text-xs text-gray-300">
+                      <Calendar className="h-3 w-3" />
+                      {new Date(challenge.completedAt).toLocaleDateString('pt-BR')}
                     </div>
+                    <div className="flex items-center gap-1 text-xs text-gray-300 mt-1">
+                      <Target className="h-3 w-3" />
+                      {challenge.currentValue} / {challenge.targetValue}
+                    </div>
+                    {/* Tooltip arrow */}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-4 border-transparent border-t-black/90" />
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground text-center py-6">
-              Nenhum desafio completado ainda
-            </p>
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="p-4 rounded-full bg-muted mb-4">
+                <Trophy className="h-8 w-8 text-muted-foreground" />
+              </div>
+              <p className="text-sm text-muted-foreground text-center">
+                Nenhum desafio completado ainda
+              </p>
+            </div>
           )}
         </CardContent>
       </Card>

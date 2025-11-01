@@ -1,0 +1,43 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=gymhero2_db;Username=gymuser;Password=gympassword"
+  },
+  "JwtSettings": {
+    "Secret": "YOUR_SECRET_KEY_HERE_AT_LEAST_64_CHARACTERS_LONG_FOR_SECURITY",
+    "ExpiryMinutes": 60,
+    "Issuer": "TaktIQ",
+    "Audience": "TaktIQ"
+  },
+  "Gemini": {
+    "ApiKey": "YOUR_GEMINI_API_KEY_HERE"
+  },
+  "OpenAI": {
+    "ApiKey": "YOUR_OPENAI_API_KEY_HERE_OR_LEAVE_EMPTY"
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information"
+      }
+    },
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/gymhero-log-.txt",
+          "rollingInterval": "Day",
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}"
+        }
+      }
+    ]
+  }
+}

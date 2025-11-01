@@ -15,6 +15,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
+import { env } from '@/lib/env';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { useTheme } from 'next-themes';
 
@@ -80,7 +81,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await apiClient.get('/me');
+        const response = await apiClient.get<any>('/me');
 
         // The apiClient already unwraps the data
         const data = response.data || response;
@@ -181,7 +182,7 @@ export default function ProfilePage() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await apiClient.post('/me/profile-picture', formData, {
+      const response = await apiClient.post<any>('/me/profile-picture', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -197,7 +198,7 @@ export default function ProfilePage() {
       // Force image reload by updating the src
       const avatarImage = document.querySelector('img[src*="uploads/profiles"]') as HTMLImageElement;
       if (avatarImage && newProfilePictureUrl) {
-        avatarImage.src = `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${newProfilePictureUrl}?t=${Date.now()}`;
+        avatarImage.src = `${env.apiHost}${newProfilePictureUrl}?t=${Date.now()}`;
       }
 
       toast({
@@ -273,7 +274,7 @@ export default function ProfilePage() {
               <AvatarImage
                 src={
                   profilePicture
-                    ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${profilePicture}?t=${Date.now()}`
+                    ? `${env.apiHost}${profilePicture}?t=${Date.now()}`
                     : undefined
                 }
               />

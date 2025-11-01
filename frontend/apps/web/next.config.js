@@ -16,8 +16,7 @@ const nextConfig = {
       { protocol: 'http', hostname: 'localhost' },
     ],
   },
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
+  
   transpilePackages: ['@gymhero/shared'],
   webpack: (config) => {
     config.resolve.alias = {

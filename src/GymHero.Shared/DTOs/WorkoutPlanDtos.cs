@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using GymHero.Shared.Enums;
 
 namespace GymHero.Shared.DTOs;
 
@@ -73,3 +74,8 @@ public class ShareWorkoutPlanRequest
     [Required(ErrorMessage = "Selecione pelo menos um amigo para compartilhar")]
     public List<Guid> FriendIds { get; set; } = new();
 }
+
+public record UpdateVisibilityRequest(
+    VisibilityLevel VisibilityLevel,
+    bool AllowCopying
+);

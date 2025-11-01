@@ -13,10 +13,12 @@ import {
   CheckCircle,
   Edit,
   Trash2,
+  Key,
+  Trophy,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -65,8 +67,10 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [newRole, setNewRole] = useState<string>('');
+  const [newPassword, setNewPassword] = useState('');
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -202,6 +206,50 @@ export default function AdminPage() {
     }
   };
 
+  const handleChangePassword = (user: User) => {
+    setSelectedUser(user);
+    setNewPassword('');
+    setPasswordDialogOpen(true);
+  };
+
+  const handleSavePassword = async () => {
+    if (!selectedUser) return;
+
+    try {
+      await apiClient.post(`/admin/users/${selectedUser.id}/change-password`, {
+        newPassword: newPassword,
+      });
+      toast({
+        title: 'Sucesso',
+        description: 'Senha alterada com sucesso.',
+      });
+      setPasswordDialogOpen(false);
+      setNewPassword('');
+    } catch (error: any) {
+      toast({
+        title: 'Erro',
+        description: error.response?.data?.message || 'Não foi possível alterar a senha.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleSeedChallenges = async () => {
+    try {
+      const response = await apiClient.post<any>('/admin/seed-challenges', {});
+      toast({
+        title: 'Sucesso',
+        description: response.message || 'Desafios do sistema criados com sucesso.',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Erro',
+        description: error.response?.data?.message || 'Não foi possível criar os desafios.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   const getRoleBadge = (role: string) => {
     const styles = {
       Admin: 'bg-primary/20 text-primary border-primary/30',
@@ -240,6 +288,32 @@ export default function AdminPage() {
           Gerencie usuários, permissões e configurações do sistema
         </p>
       </div>
+
+      {/* System Actions */}
+      <Card className="glass border-primary/20">
+        <CardContent className="pt-6">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-primary/20 rounded-lg">
+                <Trophy className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Desafios do Sistema</h3>
+                <p className="text-sm text-muted-foreground">
+                  Criar desafios padrão para todos os usuários
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={handleSeedChallenges}
+              className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+            >
+              <Trophy className="mr-2 h-4 w-4" />
+              Criar Desafios
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-3">
@@ -376,6 +450,13 @@ export default function AdminPage() {
                         >
                           <Edit className="mr-2 h-4 w-4" />
                           Editar Tipo
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => handleChangePassword(user)}
+                          className="cursor-pointer"
+                        >
+                          <Key className="mr-2 h-4 w-4" />
+                          Alterar Senha
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() =>
@@ -533,6 +614,53 @@ export default function AdminPage() {
               className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
             >
               Salvar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Change Password Dialog */}
+      <Dialog open={passwordDialogOpen} onOpenChange={setPasswordDialogOpen}>
+        <DialogContent className="glass">
+          <DialogHeader>
+            <DialogTitle>Alterar Senha do Usuário</DialogTitle>
+            <DialogDescription>
+              Defina uma nova senha para {selectedUser?.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="new-password">Nova Senha</Label>
+              <Input
+                id="new-password"
+                type="password"
+                placeholder="Digite a nova senha"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="glass"
+              />
+              <p className="text-xs text-muted-foreground">
+                A senha deve ter no mínimo 6 caracteres.
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setPasswordDialogOpen(false);
+                setNewPassword('');
+              }}
+              className="hover-lift tap-scale"
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSavePassword}
+              className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+              disabled={!newPassword || newPassword.length < 6}
+            >
+              Alterar Senha
             </Button>
           </DialogFooter>
         </DialogContent>

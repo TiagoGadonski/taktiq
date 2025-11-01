@@ -53,3 +53,10 @@ public record CreateUserRequest(
     string Password,
     string Role
 );
+
+/// <summary>
+/// DTO para admin alterar senha de um usuário.
+/// </summary>
+public record AdminChangePasswordRequest(
+    string NewPassword
+);

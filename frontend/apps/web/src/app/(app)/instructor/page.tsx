@@ -40,6 +40,8 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { apiClient } from '@/lib/api';
+import { getAssetUrl } from '@/lib/env';
 
 interface Client {
   id: string;
@@ -78,20 +80,8 @@ export default function InstructorPage() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(
-          'https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api/personal/clients',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setClients(data);
-        }
+        const response = await apiClient.get<any>('/personal/clients');
+        setClients(response.data);
       } catch (error) {
         toast({
           title: 'Erro',
@@ -122,27 +112,17 @@ export default function InstructorPage() {
     if (!selectedClient) return;
 
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api/personal/clients/${selectedClient.id}/notes`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ notes: clientNotes }),
-        }
+      await apiClient.post(
+        `/personal/clients/${selectedClient.id}/notes`,
+        { notes: clientNotes }
       );
 
-      if (response.ok) {
-        toast({
-          title: 'Sucesso',
-          description: 'Notas salvas com sucesso.',
-        });
-        setNotesDialogOpen(false);
-        setClientNotes('');
-      }
+      toast({
+        title: 'Sucesso',
+        description: 'Notas salvas com sucesso.',
+      });
+      setNotesDialogOpen(false);
+      setClientNotes('');
     } catch (error) {
       toast({
         title: 'Erro',
@@ -284,11 +264,7 @@ export default function InstructorPage() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-12 w-12 ring-2 ring-primary/30">
                         <AvatarImage
-                          src={
-                            client.profilePictureUrl
-                              ? `https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net${client.profilePictureUrl}`
-                              : undefined
-                          }
+                          src={getAssetUrl(client.profilePictureUrl)}
                         />
                         <AvatarFallback className="bg-primary/20 text-primary font-bold">
                           {client.name.charAt(0).toUpperCase()}

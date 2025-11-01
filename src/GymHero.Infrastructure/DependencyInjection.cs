@@ -23,6 +23,7 @@ public static class DependencyInjection
         // Registra as implementações concretas dos serviços
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IEmailService, EmailService>();
 
         // --- Configuração do Banco de Dados ---
         services.AddDbContext<ApplicationDbContext>(options =>

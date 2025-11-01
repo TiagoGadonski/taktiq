@@ -14,6 +14,7 @@ export * from './api/endpoints';
 export * from './utils/storage';
 export * from './utils/format';
 export * from './utils/logger';
+export * from './utils/motivational-messages';
 
 // Hooks
 export * from './hooks/use-session';

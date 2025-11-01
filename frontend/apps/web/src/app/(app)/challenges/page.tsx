@@ -12,6 +12,7 @@ import { toast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
+import { challengeIcons, getChallengeIcon } from '@/components/challenge-icon-library';
 
 // Types
 interface Challenge {
@@ -51,6 +52,7 @@ export default function ChallengesPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
+  const [selectedIcon, setSelectedIcon] = useState<string>('trophy');
 
   const queryClient = useQueryClient();
 
@@ -117,6 +119,7 @@ export default function ChallengesPage() {
     setStartDate('');
     setEndDate('');
     setSelectedFriends([]);
+    setSelectedIcon('trophy');
   };
 
   const handleCreateChallenge = () => {
@@ -146,7 +149,8 @@ export default function ChallengesPage() {
       startDate,
       endDate,
       friendIds: selectedFriends,
-    });
+      iconName: selectedIcon,
+    } as any);
   };
 
   const toggleFriendSelection = (friendId: string) => {
@@ -364,19 +368,59 @@ export default function ChallengesPage() {
               />
             </div>
 
+            {/* Icon Selector */}
+            <div className="space-y-2">
+              <Label>Ícone do Desafio</Label>
+              <div className="h-64 overflow-y-auto rounded-lg border p-4">
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
+                  {challengeIcons.map((iconOption) => {
+                    const IconComponent = iconOption.icon;
+                    const isSelected = selectedIcon === iconOption.name;
+                    return (
+                      <button
+                        key={iconOption.name}
+                        type="button"
+                        onClick={() => setSelectedIcon(iconOption.name)}
+                        className={`
+                          flex flex-col items-center gap-1 p-3 rounded-lg border-2 transition-all
+                          hover:scale-105 hover:shadow-md
+                          ${isSelected
+                            ? 'border-primary bg-primary/10 shadow-lg'
+                            : 'border-border hover:border-primary/50'
+                          }
+                        `}
+                        title={iconOption.label}
+                      >
+                        <IconComponent className={`h-6 w-6 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
+                        <span className="text-[9px] text-center line-clamp-1">
+                          {iconOption.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Selecione um ícone para representar seu desafio
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="type">Tipo</Label>
+                <Label htmlFor="type">Tipo de Desafio</Label>
                 <Input
                   id="type"
-                  placeholder="Ex: Corrida, Musculação, etc."
+                  placeholder="Ex: Corrida, Musculação, Treinos"
                   value={challengeType}
                   onChange={(e) => setChallengeType(e.target.value)}
                 />
+                <p className="text-xs text-muted-foreground">
+                  Categoria ou tipo de atividade do desafio
+                </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="target">Meta (valor numérico)</Label>
+                <Label htmlFor="target">Meta a Alcançar</Label>
                 <Input
                   id="target"
                   type="number"
@@ -384,6 +428,9 @@ export default function ChallengesPage() {
                   value={targetValue}
                   onChange={(e) => setTargetValue(e.target.value)}
                 />
+                <p className="text-xs text-muted-foreground">
+                  Valor objetivo (Ex: 50km, 10 treinos, 1000kg)
+                </p>
               </div>
             </div>
 

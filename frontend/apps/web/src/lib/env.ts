@@ -6,11 +6,11 @@
 export const env = {
   apiBaseUrl:
     process.env.NEXT_PUBLIC_API_BASE_URL ||
-    'https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api',
+    'http://localhost:5001/api',
   apiHost: (() => {
     const url =
       process.env.NEXT_PUBLIC_API_BASE_URL ||
-      'https://taktiq-api-cua5a8aucpawb9fk.brazilsouth-01.azurewebsites.net/api';
+      'http://localhost:5001/api';
     // Remove /api or /api/v1 suffix to get the host
     return url.replace(/\/api(\/v1)?$/, '');
   })(),

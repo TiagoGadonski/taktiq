@@ -2,18 +2,22 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Calendar, Search, Filter, ChevronRight } from 'lucide-react';
+import { Calendar, Search, Filter, ChevronRight, X, Dumbbell } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { formatDate, formatDuration } from '@gymhero/shared';
+import type { WorkoutSession, WorkoutSet } from '@gymhero/shared';
 
 export default function HistoryPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [selectedSession, setSelectedSession] = useState<WorkoutSession | null>(null);
+  const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false);
 
   const { data: sessions, isLoading } = useQuery({
     queryKey: ['sessions', 'history', page, startDate, endDate],
@@ -28,11 +32,30 @@ export default function HistoryPage() {
 
   const filteredSessions = sessions?.data.filter((session) => {
     if (!search) return true;
+    const sessionData = session as any;
     return (
-      session.workout?.name?.toLowerCase().includes(search.toLowerCase()) ||
-      session.notes?.toLowerCase().includes(search.toLowerCase())
+      sessionData.workout?.name?.toLowerCase().includes(search.toLowerCase()) ||
+      sessionData.notes?.toLowerCase().includes(search.toLowerCase())
     );
   });
+
+  const handleSessionClick = (session: WorkoutSession) => {
+    setSelectedSession(session);
+    setIsDetailDialogOpen(true);
+  };
+
+  // Group sets by exercise for the selected session
+  const groupedExercises = selectedSession?.sets?.reduce((acc, set) => {
+    const exerciseName = set.exercise?.name || 'Exercício desconhecido';
+    if (!acc[exerciseName]) {
+      acc[exerciseName] = {
+        exercise: set.exercise,
+        sets: [],
+      };
+    }
+    acc[exerciseName].sets.push(set);
+    return acc;
+  }, {} as Record<string, { exercise: any; sets: WorkoutSet[] }>);
 
   return (
     <div className="space-y-6">
@@ -126,10 +149,13 @@ export default function HistoryPage() {
             </CardContent>
           </Card>
         ) : filteredSessions && filteredSessions.length > 0 ? (
-          filteredSessions.map((session) => (
+          filteredSessions.map((session) => {
+            const sessionData = session as any;
+            return (
             <Card
               key={session.id}
               className="cursor-pointer transition-colors hover:border-primary"
+              onClick={() => handleSessionClick(session)}
             >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
@@ -138,12 +164,12 @@ export default function HistoryPage() {
                       <Calendar className="h-5 w-5 text-muted-foreground" />
                       <div>
                         <h3 className="font-semibold">
-                          {session.workout?.name || 'Treino Livre'}
+                          {sessionData.workout?.name || 'Treino Livre'}
                         </h3>
                         <p className="text-sm text-muted-foreground">
                           {formatDate(session.startedAt, 'pt-BR')}
-                          {session.completedAt &&
-                            ` • ${formatDuration(session.duration || 0)}`}
+                          {sessionData.completedAt &&
+                            ` • ${formatDuration(sessionData.duration || 0)}`}
                         </p>
                       </div>
                     </div>
@@ -151,21 +177,21 @@ export default function HistoryPage() {
                     <div className="mt-4 flex gap-6 text-sm">
                       <div>
                         <span className="text-muted-foreground">Séries: </span>
-                        <span className="font-medium">{session.sets?.length || 0}</span>
+                        <span className="font-medium">{sessionData.sets?.length || 0}</span>
                       </div>
                       <div>
                         <span className="text-muted-foreground">Volume: </span>
                         <span className="font-medium">
-                          {session.sets
-                            ?.reduce((acc, set) => acc + (set.weight || 0) * set.reps, 0)
+                          {sessionData.sets
+                            ?.reduce((acc: number, set: any) => acc + (set.weight || 0) * set.reps, 0)
                             .toFixed(0) || 0}{' '}
                           kg
                         </span>
                       </div>
-                      {session.notes && (
+                      {sessionData.notes && (
                         <div className="flex-1">
                           <span className="text-muted-foreground">Notas: </span>
-                          <span className="italic">{session.notes}</span>
+                          <span className="italic">{sessionData.notes}</span>
                         </div>
                       )}
                     </div>
@@ -174,7 +200,8 @@ export default function HistoryPage() {
                 </div>
               </CardContent>
             </Card>
-          ))
+          );
+          })
         ) : (
           <Card>
             <CardContent className="py-8 text-center">
@@ -210,6 +237,145 @@ export default function HistoryPage() {
           </Button>
         </div>
       )}
+
+      {/* Session Detail Dialog */}
+      <Dialog open={isDetailDialogOpen} onOpenChange={setIsDetailDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">
+              {(selectedSession as any)?.workout?.name || 'Treino Livre'}
+            </DialogTitle>
+            <DialogDescription>
+              {selectedSession && (() => {
+                const sessionData = selectedSession as any;
+                return (
+                <div className="flex items-center gap-4 mt-2 text-sm">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    {formatDate(selectedSession.startedAt, 'pt-BR')}
+                  </div>
+                  {sessionData.completedAt && (
+                    <div>Duração: {formatDuration(sessionData.duration || 0)}</div>
+                  )}
+                </div>
+                );
+              })()}
+            </DialogDescription>
+          </DialogHeader>
+
+          {selectedSession && (() => {
+            const sessionData = selectedSession as any;
+            return (
+            <div className="space-y-6 mt-4">
+              {/* Session Stats */}
+              <div className="grid grid-cols-3 gap-4">
+                <Card>
+                  <CardContent className="pt-6 text-center">
+                    <p className="text-2xl font-bold text-primary">
+                      {sessionData.sets?.length || 0}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Séries Totais</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6 text-center">
+                    <p className="text-2xl font-bold text-primary">
+                      {Object.keys(groupedExercises || {}).length}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Exercícios</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6 text-center">
+                    <p className="text-2xl font-bold text-primary">
+                      {sessionData.sets
+                        ?.reduce((acc: number, set: any) => acc + (set.weight || 0) * set.reps, 0)
+                        .toFixed(0) || 0}{' '}
+                      kg
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">Volume Total</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Exercises and Sets */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Exercícios Realizados</h3>
+                {groupedExercises &&
+                  Object.entries(groupedExercises).map(([exerciseName, { exercise, sets }]) => (
+                    <Card key={exerciseName}>
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center gap-3">
+                          <Dumbbell className="h-5 w-5 text-primary" />
+                          <div>
+                            <CardTitle className="text-base">{exerciseName}</CardTitle>
+                            {exercise?.muscleGroup && (
+                              <p className="text-sm text-muted-foreground capitalize">
+                                {exercise.muscleGroup}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-2">
+                          {sets.map((set, index) => (
+                            <div
+                              key={set.id}
+                              className="flex items-center justify-between bg-muted/50 rounded-md px-3 py-2 text-sm"
+                            >
+                              <div className="flex items-center gap-4">
+                                <span className="font-medium text-primary">Série {index + 1}</span>
+                                <span>{set.reps} reps</span>
+                                {set.weight && (
+                                  <span className="font-medium">{set.weight} kg</span>
+                                )}
+                                {set.weight && (
+                                  <span className="text-muted-foreground">
+                                    • Volume: {(set.weight * set.reps).toFixed(0)} kg
+                                  </span>
+                                )}
+                              </div>
+                              {set.isPr && (
+                                <span className="text-xs font-semibold text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30 px-2 py-1 rounded">
+                                  PR
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                          <div className="mt-2 pt-2 border-t">
+                            <div className="flex items-center justify-between text-sm font-medium">
+                              <span>Total do exercício:</span>
+                              <div className="flex items-center gap-4">
+                                <span>{sets.length} séries</span>
+                                <span>
+                                  {sets.reduce((acc, set) => acc + (set.weight || 0) * set.reps, 0).toFixed(0)} kg
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+              </div>
+
+              {/* Session Notes */}
+              {sessionData.notes && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Notas do Treino</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm whitespace-pre-wrap">{sessionData.notes}</p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+            );
+          })()}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

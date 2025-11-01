@@ -18,7 +18,8 @@ public record CreateChallengeRequest(
     DateTime StartDate,
     DateTime EndDate,
     ChallengeTargetType TargetType = ChallengeTargetType.SpecificUsers,
-    bool IsDefault = false
+    bool IsDefault = false,
+    string? IconName = null
 );
 
 // DTO para exibir um desafio e o seu progresso
@@ -40,6 +41,8 @@ public class CreateCustomChallengeRequest
     public ChallengeTargetType TargetType { get; set; } = ChallengeTargetType.SpecificUsers;
 
     public bool IsDefault { get; set; } = false;
+
+    public string? IconName { get; set; }
 }
 
 // O DTO de resposta pode continuar a ser um record
@@ -53,7 +56,8 @@ public record ChallengeResponse(
     DateTime StartDate,
     DateTime EndDate,
     ChallengeTargetType TargetType,
-    bool IsDefault
+    bool IsDefault,
+    string? IconName = null
 );
 
 // DTO para progresso de desafio
@@ -78,5 +82,6 @@ public class ChallengeWithParticipationDto
     public ChallengeTargetType TargetType { get; set; }
     public bool IsDefault { get; set; }
     public bool IsParticipating { get; set; }
+    public string? IconName { get; set; }
     public List<ChallengeProgressDto> Progresses { get; set; } = new();
 }

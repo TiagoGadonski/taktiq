@@ -62,6 +62,7 @@ export default function AIWorkoutPage() {
   const [prompt, setPrompt] = useState('');
   const [fitnessLevel, setFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [generatedWorkout, setGeneratedWorkout] = useState<AIWorkoutResponse | null>(null);
+  const [rejectedExercises, setRejectedExercises] = useState<Record<number, string[]>>({});
 
   // Plan state
   const [planPrompt, setPlanPrompt] = useState('');
@@ -69,6 +70,7 @@ export default function AIWorkoutPage() {
   const [daysPerWeek, setDaysPerWeek] = useState(4);
   const [generatedPlan, setGeneratedPlan] = useState<AIWorkoutPlanResponse | null>(null);
   const [savedPlanId, setSavedPlanId] = useState<string | null>(null);
+  const [rejectedPlanExercises, setRejectedPlanExercises] = useState<Record<string, string[]>>({});
 
   // Exercise detail modal state
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -114,6 +116,7 @@ export default function AIWorkoutPage() {
     },
     onSuccess: (data) => {
       setGeneratedWorkout(data);
+      setRejectedExercises({}); // Reset rejected exercises for new workout
       toast({
         title: 'Treino gerado com sucesso!',
         description: 'Seu treino personalizado está pronto.',
@@ -135,6 +138,7 @@ export default function AIWorkoutPage() {
     },
     onSuccess: (data) => {
       setGeneratedPlan(data);
+      setRejectedPlanExercises({}); // Reset rejected exercises for new plan
       toast({
         title: 'Plano de treino gerado com sucesso!',
         description: `Seu plano de ${data.daysPerWeek} dias está pronto.`,
@@ -180,8 +184,15 @@ export default function AIWorkoutPage() {
     try {
       const exerciseToReplace = generatedWorkout.exercises[exerciseIndex];
 
-      // Generate a single-exercise workout targeting the same muscle group
-      const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de ${exerciseToReplace.name}`;
+      // Track this exercise as rejected
+      const currentRejected = rejectedExercises[exerciseIndex] || [];
+      const allRejected = [...currentRejected, exerciseToReplace.name];
+
+      // Build exclusion list for prompt
+      const exclusionList = allRejected.join(', ');
+
+      // Generate a single-exercise workout targeting the same muscle group, excluding all rejected ones
+      const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de: ${exclusionList}`;
 
       const response = await apiClient.post<AIWorkoutResponse>('/ai/generate-workout', {
         prompt: replacementPrompt,
@@ -190,6 +201,12 @@ export default function AIWorkoutPage() {
 
       if (response.exercises && response.exercises.length > 0) {
         const newExercise = response.exercises[0];
+
+        // Update rejected exercises list
+        setRejectedExercises({
+          ...rejectedExercises,
+          [exerciseIndex]: allRejected,
+        });
 
         // Update the workout with the new exercise
         const updatedExercises = [...generatedWorkout.exercises];
@@ -222,8 +239,18 @@ export default function AIWorkoutPage() {
       const day = generatedPlan.days[dayIndex];
       const exerciseToReplace = day.exercises[exerciseIndex];
 
-      // Generate a replacement
-      const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de ${exerciseToReplace.name}`;
+      // Create unique key for this position in the plan
+      const positionKey = `${dayIndex}-${exerciseIndex}`;
+
+      // Track this exercise as rejected
+      const currentRejected = rejectedPlanExercises[positionKey] || [];
+      const allRejected = [...currentRejected, exerciseToReplace.name];
+
+      // Build exclusion list for prompt
+      const exclusionList = allRejected.join(', ');
+
+      // Generate a replacement excluding all rejected ones
+      const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de: ${exclusionList}`;
 
       const response = await apiClient.post<AIWorkoutResponse>('/ai/generate-workout', {
         prompt: replacementPrompt,
@@ -232,6 +259,12 @@ export default function AIWorkoutPage() {
 
       if (response.exercises && response.exercises.length > 0) {
         const newExercise = response.exercises[0];
+
+        // Update rejected exercises list
+        setRejectedPlanExercises({
+          ...rejectedPlanExercises,
+          [positionKey]: allRejected,
+        });
 
         // Update the plan with the new exercise
         const updatedDays = [...generatedPlan.days];
@@ -271,7 +304,7 @@ export default function AIWorkoutPage() {
         goal: generatedPlan.goal,
       };
 
-      const createdPlan = await apiClient.post('/workout-plans', planData);
+      const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
 
       if (!planId) {
@@ -279,7 +312,7 @@ export default function AIWorkoutPage() {
       }
 
       // Step 2: Get all exercises from the database to check which ones already exist
-      const existingExercises = await apiClient.get('/exercises');
+      const existingExercises = await apiClient.get<any[]>('/exercises');
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e]));
 
       // Step 3: Create workouts (days) and add exercises to them
@@ -293,7 +326,7 @@ export default function AIWorkoutPage() {
           order: dayIndex + 1,
         };
 
-        const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
+        const workoutResponse = await apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
         // Add exercises to this workout
@@ -323,7 +356,7 @@ export default function AIWorkoutPage() {
             exerciseId = existingExercise.id;
           } else {
             // Create new exercise
-            const newExercise = await apiClient.post('/exercises', {
+            const newExercise = await apiClient.post<{ id: string }>('/exercises', {
               name: ex.name,
               muscleGroup: ex.bodyPart || 'Other',
               category: 'strength',
@@ -375,7 +408,7 @@ export default function AIWorkoutPage() {
         goal: generatedPlan.goal,
       };
 
-      const createdPlan = await apiClient.post('/workout-plans', planData);
+      const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
 
       if (!planId) {
@@ -386,7 +419,7 @@ export default function AIWorkoutPage() {
       setSavedPlanId(planId);
 
       // Step 2: Get all exercises from the database to check which ones already exist
-      const existingExercises = await apiClient.get('/exercises');
+      const existingExercises = await apiClient.get<any[]>('/exercises');
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e]));
 
       // Step 3: Create workouts (days) and add exercises to them
@@ -400,7 +433,7 @@ export default function AIWorkoutPage() {
           order: dayIndex + 1,
         };
 
-        const workoutResponse = await apiClient.post(`/workout-plans/${planId}/workouts`, workoutData);
+        const workoutResponse = await apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, workoutData);
         const workoutId = workoutResponse.id;
 
         // Add exercises to this workout
@@ -428,7 +461,7 @@ export default function AIWorkoutPage() {
 
             exerciseId = existingExercise.id;
           } else {
-            const newExercise = await apiClient.post('/exercises', {
+            const newExercise = await apiClient.post<{ id: string }>('/exercises', {
               name: ex.name,
               muscleGroup: ex.bodyPart || 'Other',
               category: 'strength',

@@ -21,6 +21,7 @@ public interface IApplicationDbContext
     DbSet<Badge> Badges { get; }
     DbSet<BadgeDefinition> BadgeDefinitions { get; }
     DbSet<Friendship> Friendships { get; }
+    DbSet<PasswordResetToken> PasswordResetTokens { get; }
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

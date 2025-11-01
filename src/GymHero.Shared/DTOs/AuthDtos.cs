@@ -48,3 +48,25 @@ public record ChangePasswordRequest
     [Compare(nameof(NewPassword), ErrorMessage = "As senhas não coincidem")]
     public string ConfirmPassword { get; set; } = "";
 }
+
+public record ForgotPasswordRequest
+{
+    [Required(ErrorMessage = "O email é obrigatório")]
+    [EmailAddress(ErrorMessage = "Por favor, insira um email válido")]
+    public string Email { get; set; } = "";
+}
+
+public record ResetPasswordRequest
+{
+    [Required(ErrorMessage = "O código de recuperação é obrigatório")]
+    [StringLength(6, MinimumLength = 6, ErrorMessage = "O código deve ter 6 dígitos")]
+    public string Token { get; set; } = "";
+
+    [Required(ErrorMessage = "A nova senha é obrigatória")]
+    [MinLength(6, ErrorMessage = "A nova senha deve ter pelo menos 6 caracteres")]
+    public string NewPassword { get; set; } = "";
+
+    [Required(ErrorMessage = "A confirmação de senha é obrigatória")]
+    [Compare(nameof(NewPassword), ErrorMessage = "As senhas não coincidem")]
+    public string ConfirmPassword { get; set; } = "";
+}

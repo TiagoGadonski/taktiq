@@ -16,6 +16,11 @@ public class Challenge : BaseEntity
     public string Status { get; set; } = string.Empty;
 
     /// <summary>
+    /// Nome do ícone a ser usado para este desafio (ex: "trophy", "flame", "star")
+    /// </summary>
+    public string? IconName { get; set; }
+
+    /// <summary>
     /// Define o público-alvo do desafio (Todos usuários, Todos trainers, ou Usuários específicos)
     /// </summary>
     public ChallengeTargetType TargetType { get; set; } = ChallengeTargetType.SpecificUsers;

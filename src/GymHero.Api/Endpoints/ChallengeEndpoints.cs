@@ -48,7 +48,8 @@ public static class ChallengeEndpoints
                 request.StartDate,
                 request.EndDate,
                 request.TargetType,
-                request.IsDefault);
+                request.IsDefault,
+                request.IconName);
 
             var result = await sender.Send(command);
             return Results.Created($"/api/v1/challenges/{result.Id}", result);
@@ -69,7 +70,8 @@ public static class ChallengeEndpoints
                 request.EndDate,
                 request.FriendIds,
                 request.TargetType,
-                request.IsDefault
+                request.IsDefault,
+                request.IconName
             );
 
             var challengeId = await sender.Send(command);
