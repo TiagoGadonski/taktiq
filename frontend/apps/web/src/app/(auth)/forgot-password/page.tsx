@@ -9,9 +9,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { useToast } from '@/components/ui/use-toast';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, AlertCircle, MessageCircle, Mail, Twitter, Instagram } from 'lucide-react';
 
 interface ForgotPasswordForm {
   email: string;
@@ -102,6 +103,57 @@ export default function ForgotPasswordPage() {
               {isLoading ? 'Enviando...' : 'Enviar código'}
             </Button>
           </form>
+
+          {/* Development Notice */}
+          {process.env.NODE_ENV === 'development' && (
+            <Alert className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
+              <AlertCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <AlertTitle className="text-blue-800 dark:text-blue-300">Modo Desenvolvimento</AlertTitle>
+              <AlertDescription className="text-blue-700 dark:text-blue-400 text-sm">
+                Os tokens de recuperação estão sendo registrados no console do servidor. Verifique os logs do backend para obter o código.
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {/* Contact Support */}
+          <Alert className="bg-muted/50">
+            <MessageCircle className="h-4 w-4" />
+            <AlertTitle>Precisa de ajuda?</AlertTitle>
+            <AlertDescription className="space-y-3">
+              <p className="text-sm">
+                Se você não conseguir redefinir sua senha, entre em contato conosco:
+              </p>
+              <div className="flex flex-col gap-2 text-sm">
+                <a
+                  href="mailto:suporte@taktiq.app"
+                  className="flex items-center gap-2 text-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Mail className="h-4 w-4" />
+                  suporte@taktiq.app
+                </a>
+                <a
+                  href="https://instagram.com/taktiq"
+                  className="flex items-center gap-2 text-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Instagram className="h-4 w-4" />
+                  @taktiq
+                </a>
+                <a
+                  href="https://twitter.com/taktiq"
+                  className="flex items-center gap-2 text-primary hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Twitter className="h-4 w-4" />
+                  @taktiq
+                </a>
+              </div>
+            </AlertDescription>
+          </Alert>
 
           <div className="text-center text-sm">
             <Link

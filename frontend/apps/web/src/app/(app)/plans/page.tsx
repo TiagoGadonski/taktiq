@@ -3,12 +3,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Star, Trash2, Edit, Share2 } from 'lucide-react';
+import { Plus, Star, Trash2, Edit, Share2, Send, Settings } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { ShareSettingsDialog } from '@/components/workout/share-settings-dialog';
+import { ShareWithFriendsDialog } from '@/components/workout/share-with-friends-dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import type { WorkoutPlan } from '@gymhero/shared';
 
 export default function PlansPage() {
@@ -17,6 +24,7 @@ export default function PlansPage() {
   const queryClient = useQueryClient();
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [shareWithFriendsDialogOpen, setShareWithFriendsDialogOpen] = useState(false);
 
   const { data: plans, isLoading } = useQuery({
     queryKey: ['workout-plans'],
@@ -177,17 +185,37 @@ export default function PlansPage() {
                         <Edit className="mr-1 h-3 w-3" />
                         Editar
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          setSelectedPlan(plan);
-                          setShareDialogOpen(true);
-                        }}
-                      >
-                        <Share2 className="mr-1 h-3 w-3" />
-                        Compartilhar
-                      </Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                          >
+                            <Share2 className="mr-1 h-3 w-3" />
+                            Compartilhar
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedPlan(plan);
+                              setShareWithFriendsDialogOpen(true);
+                            }}
+                          >
+                            <Send className="mr-2 h-4 w-4" />
+                            Enviar para Amigos
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedPlan(plan);
+                              setShareDialogOpen(true);
+                            }}
+                          >
+                            <Settings className="mr-2 h-4 w-4" />
+                            Configurações de Compartilhamento
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </div>
                 </div>
@@ -217,14 +245,22 @@ export default function PlansPage() {
       )}
 
       {selectedPlan && (
-        <ShareSettingsDialog
-          planId={selectedPlan.id}
-          planName={selectedPlan.name}
-          currentVisibility={(selectedPlan as any).visibilityLevel ?? 0}
-          currentAllowCopying={(selectedPlan as any).allowCopying ?? true}
-          open={shareDialogOpen}
-          onOpenChange={setShareDialogOpen}
-        />
+        <>
+          <ShareSettingsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            currentVisibility={(selectedPlan as any).visibilityLevel ?? 0}
+            currentAllowCopying={(selectedPlan as any).allowCopying ?? true}
+            open={shareDialogOpen}
+            onOpenChange={setShareDialogOpen}
+          />
+          <ShareWithFriendsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            open={shareWithFriendsDialogOpen}
+            onOpenChange={setShareWithFriendsDialogOpen}
+          />
+        </>
       )}
     </div>
   );
