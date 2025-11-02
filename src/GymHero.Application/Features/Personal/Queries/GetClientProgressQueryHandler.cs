@@ -32,7 +32,7 @@ public class GetClientProgressQueryHandler : IRequestHandler<GetClientProgressQu
 
         // 2. Buscar os recordes pessoais (PRs) do aluno
         var personalRecords = await _context.WorkoutSets
-            .Where(s => s.WorkoutSession.WorkoutPlan.OwnerId == request.ClientId &&
+            .Where(s => s.WorkoutSession.OwnerId == request.ClientId &&
                        s.WorkoutSession.CompletedAt != null &&
                        s.Reps.HasValue && s.Load.HasValue)
             .Include(s => s.Exercise)

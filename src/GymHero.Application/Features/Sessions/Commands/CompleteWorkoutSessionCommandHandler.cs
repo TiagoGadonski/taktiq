@@ -28,7 +28,6 @@ public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWork
     public async Task<CompleteWorkoutSessionResponse> Handle(CompleteWorkoutSessionCommand request, CancellationToken cancellationToken)
     {
         var session = await _context.WorkoutSessions
-            .Include(s => s.WorkoutPlan)
             .FirstOrDefaultAsync(s => s.Id == request.SessionId, cancellationToken);
 
         if (session is null)
@@ -36,9 +35,8 @@ public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWork
             throw new NotFoundException("Workout Session not found.");
         }
 
-        // Validate ownership: if there's a plan, check if it belongs to the user
-        // Free workouts (without a plan) can be completed by anyone who has the session ID
-        if (session.WorkoutPlan is not null && session.WorkoutPlan.OwnerId != request.OwnerId)
+        // Validate ownership
+        if (session.OwnerId != request.OwnerId)
         {
             throw new NotFoundException("Workout Session not found.");
         }

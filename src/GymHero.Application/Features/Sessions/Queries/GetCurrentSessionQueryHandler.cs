@@ -14,7 +14,6 @@ public class GetCurrentSessionQueryHandler : IRequestHandler<GetCurrentSessionQu
     public async Task<WorkoutSessionDto?> Handle(GetCurrentSessionQuery request, CancellationToken cancellationToken)
     {
         // Encontra a sessão ativa mais recente do usuário (sessão sem CompletedAt)
-        // Nota: WorkoutSession não tem OwnerId/UserId direto, então precisamos buscar através do WorkoutPlan
         var activeSession = await _context.WorkoutSessions
             .Include(s => s.WorkoutPlan)
                 .ThenInclude(p => p.Workouts)
@@ -23,7 +22,7 @@ public class GetCurrentSessionQueryHandler : IRequestHandler<GetCurrentSessionQu
             .Include(s => s.Sets)
                 .ThenInclude(set => set.Exercise)
             .Where(s => s.CompletedAt == null)
-            .Where(s => s.WorkoutPlan == null || s.WorkoutPlan.OwnerId == request.UserId)
+            .Where(s => s.OwnerId == request.UserId)
             .OrderByDescending(s => s.StartedAt)
             .FirstOrDefaultAsync(cancellationToken);
 

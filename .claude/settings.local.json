@@ -63,7 +63,8 @@
       "Bash(pnpm exec next build:*)",
       "Bash(node:*)",
       "Bash(grep:*)",
-      "Bash(gh run list:*)"
+      "Bash(gh run list:*)",
+      "Bash(dotnet ef migrations:*)"
     ],
     "deny": [],
     "ask": []

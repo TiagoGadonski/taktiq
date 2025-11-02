@@ -20,7 +20,7 @@ public class UpdateChallengeProgressHandler : INotificationHandler<WorkoutSessio
     public async Task Handle(WorkoutSessionCompletedEvent notification, CancellationToken cancellationToken)
     {
         var session = notification.Session;
-        var userId = session.WorkoutPlan.OwnerId;
+        var userId = session.OwnerId;
         var now = DateTime.UtcNow;
 
         // Encontrar os desafios onde o utilizador é participante e que estão ativos.

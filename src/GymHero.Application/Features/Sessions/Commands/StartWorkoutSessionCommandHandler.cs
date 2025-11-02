@@ -29,6 +29,7 @@ public class StartWorkoutSessionCommandHandler : IRequestHandler<StartWorkoutSes
         // Criamos a nova sessão de treino (com ou sem plano)
         var session = new WorkoutSession
         {
+            OwnerId = request.OwnerId,
             WorkoutPlanId = request.WorkoutPlanId,
             StartedAt = DateTime.UtcNow // Registra a data e hora de início
         };

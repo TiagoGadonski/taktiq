@@ -21,12 +21,12 @@ public static class UsersEndpoints
             var recentWorkouts = await context.WorkoutSessions
                 .AsNoTracking()
                 .Include(ws => ws.WorkoutPlan)
-                .Where(ws => ws.WorkoutPlan.OwnerId == userId && ws.CompletedAt != null)
+                .Where(ws => ws.OwnerId == userId && ws.CompletedAt != null)
                 .OrderByDescending(ws => ws.CompletedAt)
                 .Take(5)
                 .Select(ws => new WorkoutSummary(
                     ws.Id,
-                    ws.WorkoutPlan.Name,
+                    ws.WorkoutPlan != null ? ws.WorkoutPlan.Name : "Free Workout",
                     ws.CompletedAt!.Value
                 ))
                 .ToListAsync();

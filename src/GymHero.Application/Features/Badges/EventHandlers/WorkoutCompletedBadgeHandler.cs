@@ -20,7 +20,7 @@ public class WorkoutCompletedBadgeHandler : INotificationHandler<WorkoutSessionC
 
     public async Task Handle(WorkoutSessionCompletedEvent notification, CancellationToken cancellationToken)
     {
-        var userId = notification.Session.WorkoutPlan.OwnerId;
+        var userId = notification.Session.OwnerId;
 
         // 1. Obter todas as definições de medalhas que são acionadas pela conclusão de um treino.
         var badgeDefinitions = await _context.BadgeDefinitions
@@ -37,7 +37,7 @@ public class WorkoutCompletedBadgeHandler : INotificationHandler<WorkoutSessionC
 
         // 3. Obter o dado relevante para a regra (neste caso, a contagem de treinos)
         var completedCount = await _context.WorkoutSessions
-            .CountAsync(s => s.WorkoutPlan.OwnerId == userId && s.CompletedAt != null, cancellationToken);
+            .CountAsync(s => s.OwnerId == userId && s.CompletedAt != null, cancellationToken);
             
         _logger.LogInformation("User {UserId} has {Count} completed workouts. Checking for new badges...", userId, completedCount);
 

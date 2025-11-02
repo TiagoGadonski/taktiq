@@ -18,10 +18,9 @@ public class GetUserPersonalRecordsQueryHandler : IRequestHandler<GetUserPersona
             // Incluímos os dados relacionados de que vamos precisar
             .Include(s => s.Exercise)
             .Include(s => s.WorkoutSession)
-                .ThenInclude(session => session.WorkoutPlan)
             // Filtramos apenas por séries de sessões que pertencem ao utilizador E que já foram completadas
             // E que têm valores de Reps e Load preenchidos
-            .Where(s => s.WorkoutSession.WorkoutPlan.OwnerId == request.OwnerId &&
+            .Where(s => s.WorkoutSession.OwnerId == request.OwnerId &&
                        s.WorkoutSession.CompletedAt != null &&
                        s.Reps.HasValue && s.Load.HasValue)
             // Agrupamos todas as séries pelo ID do Exercício e pelo número de Repetições
