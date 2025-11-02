@@ -14,9 +14,10 @@ interface ExerciseCardProps {
   onAddSet: (data: { reps: number; weight?: number; rpe?: number }) => void;
   onDeleteSet: (setId: string) => void;
   onExerciseClick?: () => void;
+  isCreating?: boolean;
 }
 
-export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExerciseClick }: ExerciseCardProps) {
+export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExerciseClick, isCreating = false }: ExerciseCardProps) {
   const exerciseSets = sets.filter((s) => s.exerciseId === exercise.exerciseId);
   const isCompleted = exerciseSets.length >= exercise.targetSets;
   const [showSetForm, setShowSetForm] = useState(false);
@@ -180,14 +181,16 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                     onClick={handleAddSetWithValues}
                     size="sm"
                     className="flex-1"
+                    disabled={isCreating}
                   >
                     <Check className="h-4 w-4 mr-1" />
-                    Adicionar
+                    {isCreating ? 'Adicionando...' : 'Adicionar'}
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => setShowSetForm(false)}
                     size="sm"
+                    disabled={isCreating}
                   >
                     Cancelar
                   </Button>
@@ -200,6 +203,7 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                   size="sm"
                   onClick={() => setShowSetForm(true)}
                   className="flex-1"
+                  disabled={isCreating}
                 >
                   <Plus className="h-4 w-4 mr-1" />
                   Adicionar série
@@ -209,6 +213,7 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                     variant="outline"
                     size="sm"
                     onClick={handleCompleteExercise}
+                    disabled={isCreating}
                   >
                     Concluir ({exercise.targetSets - exerciseSets.length} restantes)
                   </Button>

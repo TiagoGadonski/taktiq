@@ -20,7 +20,7 @@ export default function WorkoutPage() {
   const router = useRouter();
   const { toast } = useToast();
   const { currentSession, hasActiveSession, startSession, completeSession, isStarting, isCompleting } = useSession();
-  const { createSet, deleteSet } = useSets();
+  const { createSet, deleteSet, isCreating } = useSets();
   const [notes, setNotes] = useState('');
   const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<WorkoutExercise | null>(null);
@@ -458,6 +458,7 @@ export default function WorkoutPage() {
               onAddSet={(data) => handleAddSet(exercise.exerciseId, data)}
               onDeleteSet={handleDeleteSet}
               onExerciseClick={() => openExerciseModal(exercise)}
+              isCreating={isCreating}
             />
           ))}
         </div>
