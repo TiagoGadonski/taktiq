@@ -27,7 +27,7 @@ public class GetDashboardQueryHandler : IRequestHandler<GetDashboardQuery, Dashb
             .Include(s => s.Sets)
             .Include(s => s.WorkoutPlan)
             .Where(s => s.CompletedAt != null)
-            .Where(s => s.WorkoutPlan == null || s.WorkoutPlan.OwnerId == request.UserId)
+            .Where(s => s.OwnerId == request.UserId)
             .OrderByDescending(s => s.CompletedAt)
             .ToListAsync(cancellationToken);
 
@@ -140,9 +140,7 @@ public class GetDashboardQueryHandler : IRequestHandler<GetDashboardQuery, Dashb
         var allSets = await _context.WorkoutSets
             .Include(s => s.Exercise)
             .Include(s => s.WorkoutSession)
-                .ThenInclude(ws => ws.WorkoutPlan)
-            .Where(s => s.WorkoutSession.WorkoutPlan != null &&
-                       s.WorkoutSession.WorkoutPlan.OwnerId == userId &&
+            .Where(s => s.WorkoutSession.OwnerId == userId &&
                        s.WorkoutSession.CompletedAt != null &&
                        s.Reps.HasValue && s.Load.HasValue)
             .ToListAsync(cancellationToken);

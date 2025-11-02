@@ -29,12 +29,10 @@ public class LogSetCommandHandler : IRequestHandler<LogSetCommand, LogSetRespons
     public async Task<LogSetResponse> Handle(LogSetCommand request, CancellationToken cancellationToken)
     {
         // Validação 1: A sessão de treino existe e pertence ao usuário?
-        // Precisamos usar Include para acessar os dados do WorkoutPlan e verificar o OwnerId.
         var session = await _context.WorkoutSessions
-            .Include(s => s.WorkoutPlan)
             .FirstOrDefaultAsync(s => s.Id == request.SessionId, cancellationToken);
 
-        if (session is null || session.WorkoutPlan.OwnerId != request.OwnerId)
+        if (session is null || session.OwnerId != request.OwnerId)
         {
             throw new NotFoundException("Workout Session not found.");
         }

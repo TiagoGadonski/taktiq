@@ -16,13 +16,12 @@ public class GetSessionHistoryQueryHandler : IRequestHandler<GetSessionHistoryQu
 
     public async Task<PaginatedResponse<WorkoutSessionDto>> Handle(GetSessionHistoryQuery request, CancellationToken cancellationToken)
     {
-        // WorkoutSession doesn't have OwnerId directly - it's accessed through WorkoutPlan
         var query = _context.WorkoutSessions
             .Include(s => s.WorkoutPlan)
             .Include(s => s.Sets)
                 .ThenInclude(set => set.Exercise)
             .Where(s => s.CompletedAt != null)
-            .Where(s => s.WorkoutPlan == null || s.WorkoutPlan.OwnerId == request.UserId);
+            .Where(s => s.OwnerId == request.UserId);
 
         // Apply date filters if provided
         if (request.StartDate.HasValue)
