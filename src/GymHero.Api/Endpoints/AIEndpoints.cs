@@ -1911,6 +1911,7 @@ INSTRUÇÕES CRÍTICAS:
                 ("Treino D", "Ombros e Abdômen", new[] { "ombros", "abdômen" })
             }
         };
+        }
 
         Console.WriteLine($"Using {workoutSplits.Length}-day split");
 
