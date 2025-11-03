@@ -84,8 +84,8 @@ public static class SessionEndpoints
 
             try
             {
-                var setId = await sender.Send(command);
-                return Results.Created($"/api/v1/sessions/{sessionId}/sets/{setId}", new { setId });
+                var response = await sender.Send(command);
+                return Results.Created($"/api/v1/sessions/{sessionId}/sets/{response.SetId}", response);
             }
             catch (NotFoundException ex)
             {
