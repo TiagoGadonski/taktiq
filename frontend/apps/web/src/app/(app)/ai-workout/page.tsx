@@ -188,10 +188,18 @@ export default function AIWorkoutPage() {
       const currentRejected = rejectedExercises[exerciseIndex] || [];
       const allRejected = [...currentRejected, exerciseToReplace.name];
 
-      // Build exclusion list for prompt
-      const exclusionList = allRejected.join(', ');
+      // Get all existing exercise names in the workout (excluding the one being replaced)
+      const existingExerciseNames = generatedWorkout.exercises
+        .filter((_, idx) => idx !== exerciseIndex)
+        .map(ex => ex.name);
 
-      // Generate a single-exercise workout targeting the same muscle group, excluding all rejected ones
+      // Combine rejected and existing exercises for exclusion
+      const allExcluded = [...new Set([...allRejected, ...existingExerciseNames])];
+
+      // Build exclusion list for prompt
+      const exclusionList = allExcluded.join(', ');
+
+      // Generate a single-exercise workout targeting the same muscle group, excluding all rejected and existing ones
       const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de: ${exclusionList}`;
 
       const response = await apiClient.post<AIWorkoutResponse>('/ai/generate-workout', {
@@ -201,6 +209,22 @@ export default function AIWorkoutPage() {
 
       if (response.exercises && response.exercises.length > 0) {
         const newExercise = response.exercises[0];
+
+        // Check if the new exercise is already in the workout
+        const isDuplicate = generatedWorkout.exercises.some(
+          (ex, idx) => idx !== exerciseIndex && ex.name.toLowerCase() === newExercise.name.toLowerCase()
+        );
+
+        if (isDuplicate) {
+          toast({
+            variant: 'destructive',
+            title: 'Exercício duplicado',
+            description: 'Este exercício já está no treino. Tentando novamente...',
+          });
+          // Recursively try again
+          await handleReplaceExercise(exerciseIndex);
+          return;
+        }
 
         // Update rejected exercises list
         setRejectedExercises({
@@ -246,10 +270,18 @@ export default function AIWorkoutPage() {
       const currentRejected = rejectedPlanExercises[positionKey] || [];
       const allRejected = [...currentRejected, exerciseToReplace.name];
 
-      // Build exclusion list for prompt
-      const exclusionList = allRejected.join(', ');
+      // Get all existing exercise names in THIS DAY (excluding the one being replaced)
+      const existingExerciseNamesInDay = day.exercises
+        .filter((_, idx) => idx !== exerciseIndex)
+        .map(ex => ex.name);
 
-      // Generate a replacement excluding all rejected ones
+      // Combine rejected and existing exercises for exclusion
+      const allExcluded = [...new Set([...allRejected, ...existingExerciseNamesInDay])];
+
+      // Build exclusion list for prompt
+      const exclusionList = allExcluded.join(', ');
+
+      // Generate a replacement excluding all rejected and existing ones
       const replacementPrompt = `Um exercício de ${exerciseToReplace.bodyPart} diferente de: ${exclusionList}`;
 
       const response = await apiClient.post<AIWorkoutResponse>('/ai/generate-workout', {
@@ -259,6 +291,22 @@ export default function AIWorkoutPage() {
 
       if (response.exercises && response.exercises.length > 0) {
         const newExercise = response.exercises[0];
+
+        // Check if the new exercise is already in this day's workout
+        const isDuplicate = day.exercises.some(
+          (ex, idx) => idx !== exerciseIndex && ex.name.toLowerCase() === newExercise.name.toLowerCase()
+        );
+
+        if (isDuplicate) {
+          toast({
+            variant: 'destructive',
+            title: 'Exercício duplicado',
+            description: 'Este exercício já está neste dia. Tentando novamente...',
+          });
+          // Recursively try again
+          await handleReplacePlanExercise(dayIndex, exerciseIndex);
+          return;
+        }
 
         // Update rejected exercises list
         setRejectedPlanExercises({

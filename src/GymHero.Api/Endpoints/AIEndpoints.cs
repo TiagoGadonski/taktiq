@@ -82,6 +82,7 @@ public static class AIEndpoints
                     .Select(u => new {
                         u.Name,
                         u.DateOfBirth,
+                        u.Gender,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -226,6 +227,7 @@ public static class AIEndpoints
                     .Select(u => new {
                         u.Name,
                         u.DateOfBirth,
+                        u.Gender,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -404,6 +406,22 @@ public static class AIEndpoints
             ("Mesa Flexora", "legs", "machine", false),
             ("Cadeira Abdutora", "legs", "machine", false),
             ("Cadeira Adutora", "legs", "machine", false)
+        },
+        ["glúteos"] = new()
+        {
+            ("Hip Thrust com Barra", "glutes", "barbell", true),
+            ("Agachamento Sumô", "glutes", "barbell", true),
+            ("Stiff", "glutes", "barbell", true),
+            ("Elevação Pélvica", "glutes", "barbell", true),
+            ("Agachamento Búlgaro", "glutes", "dumbbell", true),
+            ("Leg Press 45° com Pés Altos", "glutes", "machine", true),
+            ("Cadeira Abdutora", "glutes", "machine", false),
+            ("Kickback na Polia", "glutes", "cable", false),
+            ("Coice no Crossover", "glutes", "cable", false),
+            ("Step Up com Halteres", "glutes", "dumbbell", true),
+            ("Afundo Reverso", "glutes", "dumbbell", true),
+            ("Good Morning", "glutes", "barbell", true),
+            ("Cadeira Flexora em Pé", "glutes", "machine", false)
         },
         ["panturrilha"] = new()
         {
@@ -648,9 +666,14 @@ public static class AIEndpoints
             ["bicep"] = "bíceps",
             ["tríceps"] = "tríceps",
             ["tricep"] = "tríceps",
+            ["glúteo"] = "glúteos",
+            ["gluteo"] = "glúteos",
+            ["glute"] = "glúteos",
+            ["bumbum"] = "glúteos",
             ["perna"] = "pernas",
             ["leg"] = "pernas",
             ["quadríceps"] = "pernas",
+            ["coxa"] = "pernas",
             ["panturrilha"] = "panturrilha",
             ["calf"] = "panturrilha",
             ["abdômen"] = "abdômen",
@@ -881,16 +904,25 @@ public static class AIEndpoints
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino ou exercícios similares)
-3. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
-4. Adapte sets, reps, rest e exercícios ao nível do usuário:
-   - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s
-   - Intermediário: 3-4 exercícios/grupo, 3-5 sets, 8-12 reps, descanso 60-90s
-   - Avançado: 4-5 exercícios/grupo, 4-6 sets, 6-12 reps, descanso 45-90s
-5. Selecione exercícios apropriados ao equipamento disponível
-6. Priorize exercícios compostos primeiro, depois isolados
-7. Inclua aquecimento específico quando necessário
-8. Seja criativo mas realista com variações de exercícios
+2. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
+   - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
+   - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
+   - Se pedir foco em área específica (ex: ""quero focar em glúteos""), priorize exercícios que trabalhem DIRETAMENTE esse músculo
+   - NÃO inclua exercícios de outros grupos musculares a menos que o usuário explicitamente mencione
+3. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
+4. ADAPTE o treino ao GÊNERO do usuário:
+   - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
+   - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
+5. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
+6. Adapte sets, reps, rest e exercícios ao nível do usuário:
+   - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s, MÁXIMO 7 exercícios por treino
+   - Intermediário: 3-4 exercícios/grupo, 3-5 sets, 8-12 reps, descanso 60-90s, MÁXIMO 9 exercícios por treino
+   - Avançado: 4-5 exercícios/grupo, 4-6 sets, 6-12 reps, descanso 45-90s, MÁXIMO 11 exercícios por treino
+7. NUNCA crie treinos com mais de 12 exercícios - isso leva a overtraining e baixa qualidade de execução
+8. Selecione exercícios apropriados ao equipamento disponível
+9. Priorize exercícios compostos primeiro, depois isolados
+10. Inclua aquecimento específico quando necessário
+11. Seja criativo mas realista com variações de exercícios
 
 ESTRUTURA DE TREINO IDEAL:
 - Aquecimento (5-10 min) quando apropriado
@@ -1024,6 +1056,16 @@ INSTRUÇÕES CRÍTICAS:
             if (workout.Exercises == null || !workout.Exercises.Any())
             {
                 throw new Exception("AI returned workout without exercises");
+            }
+
+            // Enforce maximum exercise count
+            const int MAX_EXERCISES = 12;
+            if (workout.Exercises.Count > MAX_EXERCISES)
+            {
+                // Trim to maximum - keep first exercises which are usually compound/main exercises
+                workout = workout with {
+                    Exercises = workout.Exercises.Take(MAX_EXERCISES).ToList()
+                };
             }
 
             // Validate each exercise
@@ -1222,14 +1264,32 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
                 throw new Exception($"AI returned {plan.Days.Count} days but {daysPerWeek} were requested");
             }
 
-            // Validate each day has exercises
+            // Validate and enforce maximum exercises per day
+            const int MAX_EXERCISES_PER_DAY = 10;
+            var validatedDays = new List<WorkoutDay>();
+
             foreach (var day in plan.Days)
             {
                 if (day.Exercises == null || !day.Exercises.Any())
                 {
                     throw new Exception($"Day '{day.DayName}' has no exercises");
                 }
+
+                // Enforce maximum exercise count per day
+                if (day.Exercises.Count > MAX_EXERCISES_PER_DAY)
+                {
+                    validatedDays.Add(day with {
+                        Exercises = day.Exercises.Take(MAX_EXERCISES_PER_DAY).ToList()
+                    });
+                }
+                else
+                {
+                    validatedDays.Add(day);
+                }
             }
+
+            // Return plan with validated days
+            plan = plan with { Days = validatedDays };
 
             return plan;
         }
@@ -1252,6 +1312,12 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         {
             var age = DateTime.Now.Year - ((DateTime)userProfile.DateOfBirth).Year;
             context.AppendLine($"- Idade: {age} anos");
+        }
+
+        if (!string.IsNullOrEmpty(userProfile.Gender))
+        {
+            var genderLabel = userProfile.Gender == "M" ? "Masculino" : userProfile.Gender == "F" ? "Feminino" : userProfile.Gender;
+            context.AppendLine($"- Gênero: {genderLabel}");
         }
 
         if (userProfile.Height != null)
@@ -1294,16 +1360,25 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino ou exercícios similares)
-3. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
-4. Adapte sets, reps, rest e exercícios ao nível do usuário:
-   - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s
-   - Intermediário: 3-4 exercícios/grupo, 3-5 sets, 8-12 reps, descanso 60-90s
-   - Avançado: 4-5 exercícios/grupo, 4-6 sets, 6-12 reps, descanso 45-90s
-5. Selecione exercícios apropriados ao equipamento disponível
-6. Priorize exercícios compostos primeiro, depois isolados
-7. Inclua aquecimento específico quando necessário
-8. Seja criativo mas realista com variações de exercícios
+2. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
+   - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
+   - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
+   - Se pedir foco em área específica (ex: ""quero focar em glúteos""), priorize exercícios que trabalhem DIRETAMENTE esse músculo
+   - NÃO inclua exercícios de outros grupos musculares a menos que o usuário explicitamente mencione
+3. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
+4. ADAPTE o treino ao GÊNERO do usuário:
+   - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
+   - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
+5. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
+6. Adapte sets, reps, rest e exercícios ao nível do usuário:
+   - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s, MÁXIMO 7 exercícios por treino
+   - Intermediário: 3-4 exercícios/grupo, 3-5 sets, 8-12 reps, descanso 60-90s, MÁXIMO 9 exercícios por treino
+   - Avançado: 4-5 exercícios/grupo, 4-6 sets, 6-12 reps, descanso 45-90s, MÁXIMO 11 exercícios por treino
+7. NUNCA crie treinos com mais de 12 exercícios - isso leva a overtraining e baixa qualidade de execução
+8. Selecione exercícios apropriados ao equipamento disponível
+9. Priorize exercícios compostos primeiro, depois isolados
+10. Inclua aquecimento específico quando necessário
+11. Seja criativo mas realista com variações de exercícios
 
 Retorne APENAS um JSON válido no seguinte formato:
 {
@@ -1426,6 +1501,16 @@ INSTRUÇÕES CRÍTICAS:
             if (workout == null || workout.Exercises == null || !workout.Exercises.Any())
             {
                 throw new Exception("Gemini returned invalid workout structure");
+            }
+
+            // Enforce maximum exercise count
+            const int MAX_EXERCISES = 12;
+            if (workout.Exercises.Count > MAX_EXERCISES)
+            {
+                // Trim to maximum - keep first exercises which are usually compound/main exercises
+                workout = workout with {
+                    Exercises = workout.Exercises.Take(MAX_EXERCISES).ToList()
+                };
             }
 
             return workout;
@@ -1598,13 +1683,32 @@ INSTRUÇÕES:
                 throw new Exception($"Gemini returned {plan.Days.Count} days but {daysPerWeek} were requested");
             }
 
+            // Validate and enforce maximum exercises per day
+            const int MAX_EXERCISES_PER_DAY = 10;
+            var validatedDays = new List<WorkoutDay>();
+
             foreach (var day in plan.Days)
             {
                 if (day.Exercises == null || !day.Exercises.Any())
                 {
                     throw new Exception($"Day '{day.DayName}' has no exercises");
                 }
+
+                // Enforce maximum exercise count per day
+                if (day.Exercises.Count > MAX_EXERCISES_PER_DAY)
+                {
+                    validatedDays.Add(day with {
+                        Exercises = day.Exercises.Take(MAX_EXERCISES_PER_DAY).ToList()
+                    });
+                }
+                else
+                {
+                    validatedDays.Add(day);
+                }
             }
+
+            // Return plan with validated days
+            plan = plan with { Days = validatedDays };
 
             return plan;
         }
