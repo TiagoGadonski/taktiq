@@ -653,40 +653,69 @@ public static class AIEndpoints
         var muscleGroups = new List<string>();
         var restrictions = new List<string>();
 
-        // Detect muscle groups in prompt
-        var muscleKeywords = new Dictionary<string, string>
-        {
-            ["peito"] = "peito",
-            ["chest"] = "peito",
-            ["costas"] = "costas",
-            ["back"] = "costas",
-            ["ombro"] = "ombros",
-            ["shoulder"] = "ombros",
-            ["bíceps"] = "bíceps",
-            ["bicep"] = "bíceps",
-            ["tríceps"] = "tríceps",
-            ["tricep"] = "tríceps",
-            ["glúteo"] = "glúteos",
-            ["gluteo"] = "glúteos",
-            ["glute"] = "glúteos",
-            ["bumbum"] = "glúteos",
-            ["perna"] = "pernas",
-            ["leg"] = "pernas",
-            ["quadríceps"] = "pernas",
-            ["coxa"] = "pernas",
-            ["panturrilha"] = "panturrilha",
-            ["calf"] = "panturrilha",
-            ["abdômen"] = "abdômen",
-            ["abdominal"] = "abdômen",
-            ["abs"] = "abdômen",
-            ["core"] = "abdômen"
-        };
+        // PRIORITY: Detect compound phrases first (lower body, upper body, etc.)
+        // These override individual muscle detection
+        var lowerBodyPhrases = new[] { "lower body", "lower-body", "lowerbody", "membros inferiores", "inferior", "lower limb", "lower member" };
+        var upperBodyPhrases = new[] { "upper body", "upper-body", "upperbody", "membros superiores", "superior", "upper limb", "upper member" };
 
-        foreach (var (keyword, muscleGroup) in muscleKeywords)
+        var isLowerBodyFocus = lowerBodyPhrases.Any(phrase => prompt.Contains(phrase, StringComparison.OrdinalIgnoreCase));
+        var isUpperBodyFocus = upperBodyPhrases.Any(phrase => prompt.Contains(phrase, StringComparison.OrdinalIgnoreCase));
+
+        if (isLowerBodyFocus)
         {
-            if (prompt.Contains(keyword) && !muscleGroups.Contains(muscleGroup))
+            // Add all lower body muscle groups
+            muscleGroups.Add("glúteos");
+            muscleGroups.Add("pernas");
+            muscleGroups.Add("panturrilha");
+            Console.WriteLine("*** DETECTED LOWER BODY FOCUS FROM PHRASE ***");
+        }
+        else if (isUpperBodyFocus)
+        {
+            // Add all upper body muscle groups
+            muscleGroups.Add("peito");
+            muscleGroups.Add("costas");
+            muscleGroups.Add("ombros");
+            muscleGroups.Add("bíceps");
+            muscleGroups.Add("tríceps");
+            Console.WriteLine("*** DETECTED UPPER BODY FOCUS FROM PHRASE ***");
+        }
+        else
+        {
+            // Only check individual keywords if no compound phrase was detected
+            var muscleKeywords = new Dictionary<string, string>
             {
-                muscleGroups.Add(muscleGroup);
+                ["peito"] = "peito",
+                ["chest"] = "peito",
+                ["costas"] = "costas",
+                ["back"] = "costas",
+                ["ombro"] = "ombros",
+                ["shoulder"] = "ombros",
+                ["bíceps"] = "bíceps",
+                ["bicep"] = "bíceps",
+                ["tríceps"] = "tríceps",
+                ["tricep"] = "tríceps",
+                ["glúteo"] = "glúteos",
+                ["gluteo"] = "glúteos",
+                ["glute"] = "glúteos",
+                ["bumbum"] = "glúteos",
+                ["perna"] = "pernas",
+                ["leg"] = "pernas",
+                ["quadríceps"] = "pernas",
+                ["coxa"] = "pernas",
+                ["panturrilha"] = "panturrilha",
+                ["calf"] = "panturrilha",
+                ["abdômen"] = "abdômen",
+                ["abdominal"] = "abdômen",
+                ["abs"] = "abdômen",
+                ["core"] = "abdômen"
+            };
+
+            foreach (var (keyword, muscleGroup) in muscleKeywords)
+            {
+                if (prompt.Contains(keyword, StringComparison.OrdinalIgnoreCase) && !muscleGroups.Contains(muscleGroup))
+                {
+                    muscleGroups.Add(muscleGroup);
+                }
             }
         }
 
