@@ -56,6 +56,7 @@ interface User {
   isActive: boolean;
   createdAt: string;
   profilePictureUrl?: string;
+  lastLoginAt?: string;
 }
 
 export default function AdminPage() {
@@ -403,13 +404,14 @@ export default function AdminPage() {
                 <th className="p-4 font-semibold">Tipo</th>
                 <th className="p-4 font-semibold">Status</th>
                 <th className="p-4 font-semibold">Criado em</th>
+                <th className="p-4 font-semibold">Último Acesso</th>
                 <th className="p-4 font-semibold text-right">Ações</th>
               </tr>
             </thead>
             <tbody>
               {paginatedUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="p-8 text-center text-muted-foreground">
+                  <td colSpan={7} className="p-8 text-center text-muted-foreground">
                     Nenhum usuário encontrado
                   </td>
                 </tr>
@@ -454,6 +456,17 @@ export default function AdminPage() {
                   </td>
                   <td className="p-4 text-muted-foreground">
                     {new Date(user.createdAt).toLocaleDateString('pt-BR')}
+                  </td>
+                  <td className="p-4 text-muted-foreground">
+                    {user.lastLoginAt
+                      ? new Date(user.lastLoginAt).toLocaleDateString('pt-BR', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })
+                      : 'Nunca'}
                   </td>
                   <td className="p-4 text-right">
                     <DropdownMenu>

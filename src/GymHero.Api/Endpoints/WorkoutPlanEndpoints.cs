@@ -291,6 +291,38 @@ public static class WorkoutPlanEndpoints
         .WithName("AddExerciseToWorkout")
         .WithSummary("Adds an exercise to a specific workout day");
 
+        // Replace an exercise in a workout
+        group.MapPut("/{planId:guid}/workouts/{workoutId:guid}/exercises/{workoutExerciseId:guid}", async (
+            Guid planId,
+            Guid workoutId,
+            Guid workoutExerciseId,
+            [FromBody] ReplaceExerciseRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new ReplaceExerciseInWorkoutCommand(
+                workoutExerciseId,
+                ownerId,
+                request.NewExerciseId,
+                request.TargetSets,
+                request.TargetReps,
+                request.TargetLoad
+            );
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+        })
+        .WithName("ReplaceExerciseInWorkout")
+        .WithSummary("Replaces an exercise in a workout with a new one");
+
         // Share workout plan with friends
         group.MapPost("/{planId:guid}/share", async (
             Guid planId,

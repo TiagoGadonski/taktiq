@@ -72,7 +72,8 @@ public static class AdminEndpoints
                     u.Role,
                     IsActive = u.IsActive,
                     u.CreatedAt,
-                    u.ProfilePictureUrl
+                    u.ProfilePictureUrl,
+                    u.LastLoginAt
                 })
                 .ToListAsync(cancellationToken);
 

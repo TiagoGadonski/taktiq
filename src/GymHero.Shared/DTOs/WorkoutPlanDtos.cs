@@ -38,6 +38,13 @@ public record AddExerciseToWorkoutRequest(
     double TargetLoad
 );
 
+public record ReplaceExerciseRequest(
+    Guid NewExerciseId,
+    int? TargetSets = null,
+    int? TargetReps = null,
+    double? TargetLoad = null
+);
+
 public class WorkoutPlanDetailResponse
 {
     public Guid Id { get; set; }
