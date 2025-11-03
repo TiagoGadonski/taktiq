@@ -194,7 +194,7 @@ export default function AIWorkoutPage() {
         .map(ex => ex.name);
 
       // Combine rejected and existing exercises for exclusion
-      const allExcluded = [...new Set([...allRejected, ...existingExerciseNames])];
+      const allExcluded = Array.from(new Set([...allRejected, ...existingExerciseNames]));
 
       // Build exclusion list for prompt
       const exclusionList = allExcluded.join(', ');
@@ -276,7 +276,7 @@ export default function AIWorkoutPage() {
         .map(ex => ex.name);
 
       // Combine rejected and existing exercises for exclusion
-      const allExcluded = [...new Set([...allRejected, ...existingExerciseNamesInDay])];
+      const allExcluded = Array.from(new Set([...allRejected, ...existingExerciseNamesInDay]));
 
       // Build exclusion list for prompt
       const exclusionList = allExcluded.join(', ');
