@@ -1105,12 +1105,21 @@ INSTRUÇÕES CRÍTICAS:
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado e certificado, especializado em periodização e programação de treinos. Sua tarefa é criar planos de treino completos, personalizados e cientificamente embasados.
 
+REGRA CRÍTICA #1 - RESPEITAR O PEDIDO DO USUÁRIO:
+⚠️ ATENÇÃO MÁXIMA: O que o usuário pedir no prompt É LEI. Não interprete, não balance, não adicione nada que não foi pedido.
+- Se pedir ""treino focado em membros inferiores"" ou ""lower body"" → TODOS os dias devem ser de pernas/glúteos/panturrilhas
+- Se pedir ""treino focado em glúteos"" → MAIORIA dos exercícios devem trabalhar glúteos diretamente
+- Se pedir ""sem peito"" → ZERO exercícios de peito, nem ""para balancear""
+- Se mencionar problema/dor → EVITE completamente exercícios que afetem essa região
+- NÃO crie planos ""balanceados"" se o usuário pediu foco específico
+- NÃO adicione upper body em plano de lower body ""para completar""
+
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS (ex: ""Supino Reto com Barra"", ""Agachamento Livre"", ""Remada Curvada"")
 2. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
 3. Implemente PERIODIZAÇÃO adequada - varie volume e intensidade ao longo das semanas
 4. Aplique PROGRESSIVE OVERLOAD - aumente gradualmente carga, volume ou densidade
-5. Balanceie grupos musculares - evite overtraining e garanta recuperação adequada
+5. Se usuário NÃO especificou balanceamento, NÃO balance - respeite o foco dele
 6. Instruções devem ser claras, detalhadas e profissionais em português
 7. Adapte sets, reps e rest ao nível do usuário e objetivo específico
 
@@ -1166,8 +1175,10 @@ Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem ```json):
 
         var userPrompt = $@"Crie um plano de treino COMPLETO e PERSONALIZADO seguindo EXATAMENTE estas especificações:
 
-REQUISITOS DO USUÁRIO:
+⚠️⚠️⚠️ REQUISITO PRINCIPAL DO USUÁRIO (PRIORIDADE MÁXIMA): ⚠️⚠️⚠️
 {request.Prompt}
+
+👆 LEIA NOVAMENTE O PEDIDO ACIMA E CRIE O PLANO EXATAMENTE COMO SOLICITADO 👆
 
 {profileContext}
 
@@ -1177,17 +1188,16 @@ PARÂMETROS OBRIGATÓRIOS:
 - OBJETIVO PRINCIPAL: {goal}
 - EQUIPAMENTOS: Todos disponíveis (academia completa)
 
-INSTRUÇÕES ESPECIAIS:
-1. PERSONALIZE o plano baseado no perfil do usuário acima (idade, peso, altura, IMC, etc.)
-2. Crie EXATAMENTE {daysPerWeek} treinos diferentes (ex: ABC para 3 dias, ABCD para 4 dias, ABCDE para 5 dias)
-3. Distribua os grupos musculares de forma balanceada ao longo da semana
-4. Considere sinergias musculares (ex: peito+tríceps, costas+bíceps)
-5. Inclua notas de progressão semanal para CADA exercício
+INSTRUÇÕES CRÍTICAS:
+1. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", ""membros inferiores"", ou ""focado em pernas/glúteos"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
+2. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
+3. ⚠️ NÃO crie plano ""completo"" ou ""balanceado"" se o usuário pediu foco específico
+4. PERSONALIZE o plano baseado no perfil do usuário acima (idade, peso, altura, IMC, gênero)
+5. Crie EXATAMENTE {daysPerWeek} treinos diferentes respeitando o foco solicitado
 6. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
-7. Garanta recuperação adequada - não treine o mesmo grupo muscular em dias consecutivos
-8. Inclua aquecimento e alongamento quando apropriado
-9. Adapte o volume total ao nível de condicionamento E ao perfil físico do usuário
-10. Considere possíveis limitações físicas baseadas na idade e condição física
+7. Inclua notas de progressão semanal para CADA exercício
+8. Adapte o volume total ao nível de condicionamento E ao perfil físico do usuário
+9. Considere possíveis limitações físicas baseadas na idade e condição física
 
 IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruções claras de como progredir a cada semana.";
 
@@ -1535,12 +1545,19 @@ INSTRUÇÕES CRÍTICAS:
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado, especializado em periodização e programação de treinos. Crie planos completos, personalizados e cientificamente embasados.
 
+REGRA CRÍTICA #1 - RESPEITAR O PEDIDO DO USUÁRIO:
+⚠️ ATENÇÃO MÁXIMA: O que o usuário pedir no prompt É LEI. Não interprete, não balance, não adicione nada que não foi pedido.
+- Se pedir ""treino focado em membros inferiores"" ou ""lower body"" → TODOS os dias devem ser de pernas/glúteos/panturrilhas
+- Se pedir ""treino focado em glúteos"" → MAIORIA dos exercícios devem trabalhar glúteos diretamente
+- NÃO crie planos ""balanceados"" se o usuário pediu foco específico
+- NÃO adicione upper body em plano de lower body ""para completar""
+
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios em PORTUGUÊS (ex: ""Supino Reto com Barra"", ""Agachamento Livre"")
 2. RESPEITE ESTRITAMENTE todas as restrições do usuário
 3. Implemente PERIODIZAÇÃO adequada - varie volume e intensidade
 4. Aplique PROGRESSIVE OVERLOAD - aumente gradualmente carga, volume ou densidade
-5. Balanceie grupos musculares - evite overtraining
+5. Se usuário NÃO especificou balanceamento, NÃO balance - respeite o foco dele
 6. Instruções claras e profissionais em português
 7. Adapte sets, reps e rest ao nível do usuário
 
@@ -1584,8 +1601,10 @@ Retorne APENAS um JSON válido:
 
         var userPrompt = $@"Crie um plano de treino COMPLETO:
 
-REQUISITOS:
+⚠️⚠️⚠️ REQUISITO PRINCIPAL DO USUÁRIO (PRIORIDADE MÁXIMA): ⚠️⚠️⚠️
 {request.Prompt}
+
+👆 LEIA NOVAMENTE O PEDIDO ACIMA E CRIE O PLANO EXATAMENTE COMO SOLICITADO 👆
 
 {profileContext}
 
@@ -1594,15 +1613,15 @@ PARÂMETROS:
 - NÍVEL: {fitnessLevel}
 - OBJETIVO: {goal}
 
-INSTRUÇÕES:
-1. PERSONALIZE baseado no perfil do usuário (idade, peso, altura, IMC)
-2. Crie EXATAMENTE {daysPerWeek} treinos diferentes
-3. Distribua grupos musculares de forma balanceada
-4. Inclua notas de progressão para CADA exercício
-5. Respeite todas as restrições do usuário
-6. Garanta recuperação adequada
-7. Adapte o volume ao perfil físico do usuário
-8. Considere limitações físicas baseadas na idade e condição";
+INSTRUÇÕES CRÍTICAS:
+1. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
+2. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
+3. ⚠️ NÃO crie plano ""completo"" se o usuário pediu foco específico
+4. PERSONALIZE baseado no perfil do usuário (idade, peso, altura, IMC, gênero)
+5. Crie EXATAMENTE {daysPerWeek} treinos diferentes respeitando o foco solicitado
+6. Inclua notas de progressão para CADA exercício
+7. Respeite todas as restrições do usuário
+8. Adapte o volume ao perfil físico do usuário";
 
         var payload = new
         {
@@ -1721,6 +1740,7 @@ INSTRUÇÕES:
     private static AIWorkoutPlanResponse GenerateMockPlan(string prompt, int daysPerWeek, string? fitnessLevel = null)
     {
         Console.WriteLine("=== MOCK PLAN GENERATION DEBUG ===");
+        Console.WriteLine($"Prompt: {prompt}");
         Console.WriteLine($"Days Per Week: {daysPerWeek}");
         Console.WriteLine($"Fitness Level: '{fitnessLevel ?? "NULL"}'");
 
@@ -1738,9 +1758,121 @@ INSTRUÇÕES:
 
         Console.WriteLine($"Exercises Per Day Range: {minExercisesPerDay}-{maxExercisesPerDay}");
 
-        // Define workout splits based on days per week
+        // Parse user prompt to detect focus areas
+        var parsedPrompt = ParsePrompt(prompt.ToLower());
+        var focusMuscleGroups = parsedPrompt.MuscleGroups;
+
+        Console.WriteLine($"Focus Muscle Groups Detected: {string.Join(", ", focusMuscleGroups)}");
+
+        // Define workout splits based on user focus or default to standard splits
         // Format: (DayName, Title, MuscleGroups)
-        var workoutSplits = daysPerWeek switch
+        (string DayName, string Title, string[] MuscleGroups)[] workoutSplits;
+
+        // If user specified specific muscle groups, create a focused plan
+        if (focusMuscleGroups.Any())
+        {
+            Console.WriteLine("Creating FOCUSED plan based on user request");
+
+            // Check if focus is lower body
+            var isLowerBodyFocus = focusMuscleGroups.Any(m => m == "pernas" || m == "glúteos" || m == "panturrilha");
+            // Check if focus is upper body
+            var isUpperBodyFocus = focusMuscleGroups.Any(m => m == "peito" || m == "costas" || m == "ombros" || m == "bíceps" || m == "tríceps");
+
+            if (isLowerBodyFocus && !isUpperBodyFocus)
+            {
+                // Lower body focused plan
+                workoutSplits = daysPerWeek switch
+                {
+                    2 => new[] {
+                        ("Treino A", "Glúteos e Quadríceps", new[] { "glúteos", "pernas" }),
+                        ("Treino B", "Posteriores e Panturrilhas", new[] { "pernas", "panturrilha" })
+                    },
+                    3 => new[] {
+                        ("Treino A", "Glúteos e Quadríceps", new[] { "glúteos", "pernas" }),
+                        ("Treino B", "Posteriores e Panturrilhas", new[] { "pernas", "panturrilha" }),
+                        ("Treino C", "Glúteos e Pernas Completo", new[] { "glúteos", "pernas", "panturrilha" })
+                    },
+                    4 => new[] {
+                        ("Treino A", "Glúteos Foco", new[] { "glúteos" }),
+                        ("Treino B", "Quadríceps e Glúteos", new[] { "pernas", "glúteos" }),
+                        ("Treino C", "Posteriores e Panturrilhas", new[] { "pernas", "panturrilha" }),
+                        ("Treino D", "Lower Body Completo", new[] { "glúteos", "pernas", "panturrilha" })
+                    },
+                    5 => new[] {
+                        ("Treino A", "Glúteos Intenso", new[] { "glúteos" }),
+                        ("Treino B", "Quadríceps", new[] { "pernas" }),
+                        ("Treino C", "Glúteos e Posteriores", new[] { "glúteos", "pernas" }),
+                        ("Treino D", "Panturrilhas e Core", new[] { "panturrilha", "abdômen" }),
+                        ("Treino E", "Lower Body Full", new[] { "glúteos", "pernas", "panturrilha" })
+                    },
+                    _ => new[] {
+                        ("Treino A", "Glúteos Foco", new[] { "glúteos" }),
+                        ("Treino B", "Quadríceps e Glúteos", new[] { "pernas", "glúteos" }),
+                        ("Treino C", "Posteriores", new[] { "pernas" }),
+                        ("Treino D", "Panturrilhas e Core", new[] { "panturrilha", "abdômen" })
+                    }
+                };
+            }
+            else if (isUpperBodyFocus && !isLowerBodyFocus)
+            {
+                // Upper body focused plan
+                workoutSplits = daysPerWeek switch
+                {
+                    2 => new[] {
+                        ("Treino A", "Peito e Ombros", new[] { "peito", "ombros", "tríceps" }),
+                        ("Treino B", "Costas e Braços", new[] { "costas", "bíceps" })
+                    },
+                    3 => new[] {
+                        ("Treino A", "Peito e Tríceps", new[] { "peito", "tríceps" }),
+                        ("Treino B", "Costas e Bíceps", new[] { "costas", "bíceps" }),
+                        ("Treino C", "Ombros e Braços", new[] { "ombros", "bíceps", "tríceps" })
+                    },
+                    4 => new[] {
+                        ("Treino A", "Peito", new[] { "peito", "tríceps" }),
+                        ("Treino B", "Costas", new[] { "costas", "bíceps" }),
+                        ("Treino C", "Ombros", new[] { "ombros" }),
+                        ("Treino D", "Braços Completo", new[] { "bíceps", "tríceps" })
+                    },
+                    _ => new[] {
+                        ("Treino A", "Peito e Tríceps", new[] { "peito", "tríceps" }),
+                        ("Treino B", "Costas e Bíceps", new[] { "costas", "bíceps" }),
+                        ("Treino C", "Ombros", new[] { "ombros" }),
+                        ("Treino D", "Braços", new[] { "bíceps", "tríceps" })
+                    }
+                };
+            }
+            else
+            {
+                // Specific muscle group focus (e.g., just glutes, just chest, etc.)
+                var primaryMuscle = focusMuscleGroups.First();
+                var secondaryMuscles = focusMuscleGroups.Skip(1).ToArray();
+
+                workoutSplits = Enumerable.Range(0, daysPerWeek)
+                    .Select(i =>
+                    {
+                        var dayLetter = (char)('A' + i);
+                        if (i % 2 == 0)
+                        {
+                            return ($"Treino {dayLetter}", $"{char.ToUpper(primaryMuscle[0])}{primaryMuscle.Substring(1)} Foco", new[] { primaryMuscle });
+                        }
+                        else if (secondaryMuscles.Any())
+                        {
+                            var muscle = secondaryMuscles[i % secondaryMuscles.Length];
+                            return ($"Treino {dayLetter}", $"{char.ToUpper(muscle[0])}{muscle.Substring(1)}", new[] { muscle });
+                        }
+                        else
+                        {
+                            return ($"Treino {dayLetter}", $"{char.ToUpper(primaryMuscle[0])}{primaryMuscle.Substring(1)} Variação", new[] { primaryMuscle });
+                        }
+                    })
+                    .ToArray();
+            }
+        }
+        else
+        {
+            // Default balanced plan if no specific focus detected
+            Console.WriteLine("Creating DEFAULT balanced plan");
+            workoutSplits = daysPerWeek switch
         {
             2 => new[] {
                 ("Treino A", "Corpo Superior", new[] { "peito", "costas", "ombros" }),
