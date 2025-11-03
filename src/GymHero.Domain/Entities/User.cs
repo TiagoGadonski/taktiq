@@ -9,6 +9,7 @@ public class User : BaseEntity
     public ICollection<WorkoutPlan> WorkoutPlans { get; set; } = new List<WorkoutPlan>();
 
     public DateTime? DateOfBirth { get; set; }
+    public string? Gender { get; set; } // "M" (Masculino) ou "F" (Feminino)
     public string? Location { get; set; }
     public string? Bio { get; set; }
     public double? Height { get; set; } // em cm
