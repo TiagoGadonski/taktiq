@@ -64,7 +64,14 @@
       "Bash(node:*)",
       "Bash(grep:*)",
       "Bash(gh run list:*)",
-      "Bash(dotnet ef migrations:*)"
+      "Bash(dotnet ef migrations:*)",
+      "Bash(psql:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet script:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(az webapp deployment source config-zip:*)",
+      "Bash(az webapp list:*)"
     ],
     "deny": [],
     "ask": []

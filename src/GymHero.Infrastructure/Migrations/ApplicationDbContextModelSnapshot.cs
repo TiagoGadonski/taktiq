@@ -323,6 +323,9 @@ namespace GymHero.Infrastructure.Migrations
                     b.Property<double?>("Height")
                         .HasColumnType("double precision");
 
+                    b.Property<string>("Injuries")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 

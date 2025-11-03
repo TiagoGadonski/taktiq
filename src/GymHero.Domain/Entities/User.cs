@@ -10,6 +10,7 @@ public class User : BaseEntity
 
     public DateTime? DateOfBirth { get; set; }
     public string? Gender { get; set; } // "M" (Masculino) ou "F" (Feminino)
+    public string? Injuries { get; set; } // Lesões/limitações separadas por vírgula (ex: "knee pain,lower back,shoulder")
     public string? Location { get; set; }
     public string? Bio { get; set; }
     public double? Height { get; set; } // em cm
