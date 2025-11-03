@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, ArrowLeft } from 'lucide-react';
+import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, ArrowLeft, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -75,6 +75,8 @@ export default function EditPlanPage() {
   const [selectedDayId, setSelectedDayId] = useState('1');
   const [muscleFilter, setMuscleFilter] = useState<string>('all');
   const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
+  const [replacingExercise, setReplacingExercise] = useState<{ dayId: string; index: number } | null>(null);
+  const [rejectedExercises, setRejectedExercises] = useState<{ [key: string]: string[] }>({});
 
   const {
     register,
@@ -266,6 +268,106 @@ export default function EditPlanPage() {
           }
         : day
     ));
+  };
+
+  const handleReplaceExercise = async (dayId: string, exerciseIndex: number) => {
+    const day = workoutDays.find(d => d.id === dayId);
+    if (!day) return;
+
+    const exerciseToReplace = day.exercises[exerciseIndex];
+    const positionKey = `${dayId}-${exerciseIndex}`;
+
+    try {
+      // Track rejected exercises
+      const currentRejected = rejectedExercises[positionKey] || [];
+      const allRejected = [...currentRejected, exerciseToReplace.name];
+
+      // Get all existing exercise names in this day (excluding the one being replaced)
+      const existingExerciseNamesInDay = day.exercises
+        .filter((_, idx) => idx !== exerciseIndex)
+        .map(ex => ex.name);
+
+      // Combine rejected and existing exercises for exclusion
+      const allExcluded = Array.from(new Set([...allRejected, ...existingExerciseNamesInDay]));
+      const exclusionList = allExcluded.join(', ');
+
+      // Generate a replacement using AI
+      const muscleGroup = exerciseToReplace.primaryMuscles && exerciseToReplace.primaryMuscles.length > 0
+        ? exerciseToReplace.primaryMuscles[0]
+        : 'corpo todo';
+
+      const replacementPrompt = `Um exercício de ${muscleGroup} diferente de: ${exclusionList}`;
+
+      const response = await apiClient.post<any>('/ai/generate-workout', {
+        prompt: replacementPrompt,
+        fitnessLevel: 'intermediário',
+      });
+
+      if (response.exercises && response.exercises.length > 0) {
+        const newExercise = response.exercises[0];
+
+        // Check if the new exercise is already in this day
+        const isDuplicate = day.exercises.some(
+          (ex, idx) => idx !== exerciseIndex && ex.name.toLowerCase() === newExercise.name.toLowerCase()
+        );
+
+        if (isDuplicate) {
+          toast({
+            variant: 'destructive',
+            title: 'Exercício duplicado',
+            description: 'Este exercício já está neste dia. Tentando novamente...',
+          });
+          // Recursively try again
+          await handleReplaceExercise(dayId, exerciseIndex);
+          return;
+        }
+
+        // Update rejected exercises list
+        setRejectedExercises({
+          ...rejectedExercises,
+          [positionKey]: allRejected,
+        });
+
+        // Replace the exercise in the workout day
+        setWorkoutDays(workoutDays.map(d =>
+          d.id === dayId
+            ? {
+                ...d,
+                exercises: d.exercises.map((ex, idx) =>
+                  idx === exerciseIndex
+                    ? {
+                        id: '',
+                        name: newExercise.name,
+                        equipment: newExercise.equipment || 'bodyweight',
+                        primaryMuscles: [newExercise.bodyPart],
+                        secondaryMuscles: [],
+                        images: [],
+                        instructions: newExercise.instructions || [],
+                        sets: ex.sets, // Preserve existing sets/reps/rest
+                        reps: ex.reps,
+                        rest: ex.rest,
+                        notes: ex.notes,
+                        level: 'intermediate',
+                        gifUrl: newExercise.gifUrl || null,
+                      }
+                    : ex
+                )
+              }
+            : d
+        ));
+
+        toast({
+          title: 'Exercício substituído!',
+          description: `${exerciseToReplace.name} → ${newExercise.name}`,
+        });
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao substituir exercício',
+        description: 'Tente novamente',
+      });
+    }
   };
 
   const onSubmit = async (data: PlanFormData) => {
@@ -603,14 +705,26 @@ export default function EditPlanPage() {
                                 {(exercise.primaryMusclesPt || exercise.primaryMuscles).join(', ')} • {exercise.equipmentPt || exercise.equipment}
                               </p>
                             </div>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => removeExercise(day.id, index)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <div className="flex gap-1">
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleReplaceExercise(day.id, index)}
+                                title="Substituir exercício"
+                              >
+                                <RefreshCw className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeExercise(day.id, index)}
+                                title="Remover exercício"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
                           </div>
                           <div className="grid grid-cols-3 gap-3">
                             <div>

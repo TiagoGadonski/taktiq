@@ -23,7 +23,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResponse>
     {
         // 1. Encontrar o usuário pelo email
         var user = await _context.Users
-            .AsNoTracking() // Usamos AsNoTracking pois é uma operação de leitura
             .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
 
         // 2. Verificar se o usuário existe e se a senha está correta
@@ -33,10 +32,14 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResponse>
             throw new AuthenticationException("Invalid email or password.");
         }
 
-        // 3. Se tudo estiver correto, gerar o token
+        // 3. Atualizar o timestamp do último login
+        user.LastLoginAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync(cancellationToken);
+
+        // 4. Se tudo estiver correto, gerar o token
         var token = _jwtTokenGenerator.GenerateToken(user);
 
-        // 4. Retornar a resposta com os dados do usuário e o token
+        // 5. Retornar a resposta com os dados do usuário e o token
         return new AuthResponse(user.Id, user.Name, user.Email, token);
     }
 }

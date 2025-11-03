@@ -23,6 +23,7 @@ public class User : BaseEntity
 
     public string Role { get; set; } = "Aluno";
     public bool IsActive { get; set; } = true; // Indica se o usuário está ativo ou não
+    public DateTime? LastLoginAt { get; set; } // Data/hora do último login do usuário
     // --- RELAÇÃO PARA O ALUNO ---
     // Se este utilizador for um "Aluno", aqui guardaremos o ID do seu Personal Trainer.
     // A interrogação (?) indica que pode ser nulo (um aluno pode não ter um personal).

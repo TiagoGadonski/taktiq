@@ -603,6 +603,20 @@ public static class AIEndpoints
             }
         }
 
+        // Enforce maximum exercise count (5-7 exercises per workout)
+        // This prevents workouts with too many muscle groups from having excessive exercises
+        const int MAX_EXERCISES = 7;
+        if (selectedExercises.Count > MAX_EXERCISES)
+        {
+            Console.WriteLine($"Trimming workout from {selectedExercises.Count} to {MAX_EXERCISES} exercises");
+
+            // The exercises are already ordered with compound exercises first,
+            // so we can simply take the first MAX_EXERCISES
+            selectedExercises = selectedExercises.Take(MAX_EXERCISES).ToList();
+
+            Console.WriteLine($"Trimmed exercise list: {string.Join(", ", selectedExercises.Select(e => e.Name))}");
+        }
+
         // If no exercises selected (all were restricted), provide varied fallback
         if (!selectedExercises.Any())
         {

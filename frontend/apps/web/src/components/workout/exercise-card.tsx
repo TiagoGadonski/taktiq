@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, Plus, Trash2, Check } from 'lucide-react';
+import { ChevronDown, Plus, Trash2, Check, RefreshCw } from 'lucide-react';
 import type { WorkoutPlanExercise, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,10 +14,11 @@ interface ExerciseCardProps {
   onAddSet: (data: { reps: number; weight?: number; rpe?: number }) => void;
   onDeleteSet: (setId: string) => void;
   onExerciseClick?: () => void;
+  onReplaceExercise?: () => void;
   isCreating?: boolean;
 }
 
-export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExerciseClick, isCreating = false }: ExerciseCardProps) {
+export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExerciseClick, onReplaceExercise, isCreating = false }: ExerciseCardProps) {
   const exerciseSets = sets.filter((s) => s.exerciseId === exercise.exerciseId);
   const isCompleted = exerciseSets.length >= exercise.targetSets;
   const [showSetForm, setShowSetForm] = useState(false);
@@ -97,18 +98,30 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
               </div>
             </div>
 
-            {/* Details Button */}
-            {onExerciseClick && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onExerciseClick}
-                className="mt-2 -ml-2"
-              >
-                <ChevronDown className="h-4 w-4 mr-1" />
-                Ver detalhes
-              </Button>
-            )}
+            {/* Details and Replace Buttons */}
+            <div className="flex gap-2 mt-2 -ml-2">
+              {onExerciseClick && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onExerciseClick}
+                >
+                  <ChevronDown className="h-4 w-4 mr-1" />
+                  Ver detalhes
+                </Button>
+              )}
+              {onReplaceExercise && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onReplaceExercise}
+                  title="Substituir exercício"
+                >
+                  <RefreshCw className="h-4 w-4 mr-1" />
+                  Substituir
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </CardHeader>
