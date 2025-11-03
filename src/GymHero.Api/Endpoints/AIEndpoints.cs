@@ -83,6 +83,7 @@ public static class AIEndpoints
                         u.Name,
                         u.DateOfBirth,
                         u.Gender,
+                        u.Injuries,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -228,6 +229,7 @@ public static class AIEndpoints
                         u.Name,
                         u.DateOfBirth,
                         u.Gender,
+                        u.Injuries,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -1384,7 +1386,143 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         if (!string.IsNullOrEmpty(userProfile.Bio))
             context.AppendLine($"- Informações adicionais: {userProfile.Bio}");
 
+        // Add injuries/limitations with contraindications
+        if (!string.IsNullOrEmpty(userProfile.Injuries))
+        {
+            context.AppendLine($"\n⚠️ LESÕES/LIMITAÇÕES REPORTADAS: {userProfile.Injuries}");
+
+            var contraindications = GetContraindicatedExercises(userProfile.Injuries);
+            if (contraindications.Any())
+            {
+                context.AppendLine($"⚠️ EXERCÍCIOS A EVITAR COMPLETAMENTE:");
+                foreach (var exercise in contraindications)
+                {
+                    context.AppendLine($"   • {exercise}");
+                }
+            }
+
+            var safeAlternatives = GetSafeAlternatives(userProfile.Injuries);
+            if (safeAlternatives.Any())
+            {
+                context.AppendLine($"✅ ALTERNATIVAS SEGURAS RECOMENDADAS:");
+                foreach (var exercise in safeAlternatives)
+                {
+                    context.AppendLine($"   • {exercise}");
+                }
+            }
+        }
+
         return context.ToString();
+    }
+
+    private static List<string> GetContraindicatedExercises(string injuries)
+    {
+        var contraindicatedExercises = new List<string>();
+        var injuryList = injuries.ToLower().Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(i => i.Trim())
+                                .ToList();
+
+        // Comprehensive contraindications mapping
+        var contraindicationsMap = new Dictionary<string, string[]>
+        {
+            // Knee issues
+            ["knee"] = new[] { "Leg Extension", "Extensão de Perna", "Deep Squat", "Agachamento Profundo", "Lunges com Salto", "Jump Lunges", "Box Jumps", "Pistol Squat" },
+            ["joelho"] = new[] { "Leg Extension", "Extensão de Perna", "Deep Squat", "Agachamento Profundo", "Lunges com Salto", "Jump Lunges", "Box Jumps", "Pistol Squat" },
+
+            // Lower back issues
+            ["lower back"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada", "Hyperextension com Peso Excessivo" },
+            ["lombar"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada", "Hyperextension com Peso Excessivo" },
+            ["back pain"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada" },
+            ["costas"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada" },
+
+            // Shoulder issues
+            ["shoulder"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta", "Dips (deep)", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta" },
+            ["ombro"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta", "Dips (deep)", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta" },
+
+            // Wrist issues
+            ["wrist"] = new[] { "Heavy Barbell Curls", "Rosca Barra Pesada", "Front Squat", "Agachamento Frontal", "Overhead Press com Barra Pesada", "Push-ups com Rotação" },
+            ["punho"] = new[] { "Heavy Barbell Curls", "Rosca Barra Pesada", "Front Squat", "Agachamento Frontal", "Overhead Press com Barra Pesada", "Push-ups com Rotação" },
+
+            // Elbow issues
+            ["elbow"] = new[] { "Skull Crushers", "Tríceps Testa", "Close-Grip Bench Press", "Supino Pegada Fechada", "Overhead Tricep Extension", "Pull-ups com Pegada Supinada" },
+            ["cotovelo"] = new[] { "Skull Crushers", "Tríceps Testa", "Close-Grip Bench Press", "Supino Pegada Fechada", "Overhead Tricep Extension", "Pull-ups com Pegada Supinada" },
+
+            // Hip issues
+            ["hip"] = new[] { "Deep Squats", "Agachamento Profundo", "Sumo Deadlift", "Levantamento Terra Sumô", "High Step-Ups", "Bulgarian Split Squat Profundo" },
+            ["quadril"] = new[] { "Deep Squats", "Agachamento Profundo", "Sumo Deadlift", "Levantamento Terra Sumô", "High Step-Ups", "Bulgarian Split Squat Profundo" },
+
+            // Neck issues
+            ["neck"] = new[] { "Heavy Shrugs", "Encolhimento Pesado", "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta" },
+            ["pescoço"] = new[] { "Heavy Shrugs", "Encolhimento Pesado", "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta" },
+
+            // Ankle issues
+            ["ankle"] = new[] { "Jump Squats", "Agachamento com Salto", "Box Jumps", "Calf Raises com Carga Muito Pesada", "Lunges com Salto" },
+            ["tornozelo"] = new[] { "Jump Squats", "Agachamento com Salto", "Box Jumps", "Calf Raises com Carga Muito Pesada", "Lunges com Salto" }
+        };
+
+        foreach (var injury in injuryList)
+        {
+            foreach (var (key, exercises) in contraindicationsMap)
+            {
+                if (injury.Contains(key))
+                {
+                    contraindicatedExercises.AddRange(exercises);
+                }
+            }
+        }
+
+        return contraindicatedExercises.Distinct().ToList();
+    }
+
+    private static List<string> GetSafeAlternatives(string injuries)
+    {
+        var safeAlternatives = new List<string>();
+        var injuryList = injuries.ToLower().Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(i => i.Trim())
+                                .ToList();
+
+        // Safe alternatives mapping
+        var alternativesMap = new Dictionary<string, string[]>
+        {
+            ["knee"] = new[] { "Leg Press (ROM parcial)", "Cadeira Flexora", "Agachamento no Smith (ROM controlado)", "Bicicleta Ergométrica", "Step-Ups baixos" },
+            ["joelho"] = new[] { "Leg Press (ROM parcial)", "Cadeira Flexora", "Agachamento no Smith (ROM controlado)", "Bicicleta Ergométrica", "Step-Ups baixos" },
+
+            ["lower back"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust", "Ponte de Glúteo" },
+            ["lombar"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust", "Ponte de Glúteo" },
+            ["back pain"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust" },
+            ["costas"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust" },
+
+            ["shoulder"] = new[] { "Desenvolvimento com Halteres", "Lateral Raises (leve)", "Face Pulls", "Cable Flies", "Push-ups (ROM controlado)" },
+            ["ombro"] = new[] { "Desenvolvimento com Halteres", "Elevação Lateral (leve)", "Face Pulls", "Crucifixo no Cabo", "Flexões (ROM controlado)" },
+
+            ["wrist"] = new[] { "Rosca Martelo", "Rosca com Halteres", "Agachamento no Hack", "Desenvolvimento com Halteres", "Cabos para Tríceps" },
+            ["punho"] = new[] { "Rosca Martelo", "Rosca com Halteres", "Agachamento no Hack", "Desenvolvimento com Halteres", "Cabos para Tríceps" },
+
+            ["elbow"] = new[] { "Tríceps na Polia (corda)", "Extensão de Tríceps Unilateral", "Pulldown (neutro)", "Rosca Martelo" },
+            ["cotovelo"] = new[] { "Tríceps na Polia (corda)", "Extensão de Tríceps Unilateral", "Pulldown (neutro)", "Rosca Martelo" },
+
+            ["hip"] = new[] { "Leg Press (ROM confortável)", "Hip Thrust", "Cadeira Abdutora", "Cadeira Adutora", "Step-Ups moderados" },
+            ["quadril"] = new[] { "Leg Press (ROM confortável)", "Elevação Pélvica", "Cadeira Abdutora", "Cadeira Adutora", "Step-Ups moderados" },
+
+            ["neck"] = new[] { "Desenvolvimento com Halteres", "Elevação Lateral", "Remada com Apoio", "Face Pulls (leve)" },
+            ["pescoço"] = new[] { "Desenvolvimento com Halteres", "Elevação Lateral", "Remada com Apoio", "Face Pulls (leve)" },
+
+            ["ankle"] = new[] { "Leg Press", "Agachamento no Smith", "Cadeira Extensora", "Bicicleta Ergométrica" },
+            ["tornozelo"] = new[] { "Leg Press", "Agachamento no Smith", "Cadeira Extensora", "Bicicleta Ergométrica" }
+        };
+
+        foreach (var injury in injuryList)
+        {
+            foreach (var (key, exercises) in alternativesMap)
+            {
+                if (injury.Contains(key))
+                {
+                    safeAlternatives.AddRange(exercises);
+                }
+            }
+        }
+
+        return safeAlternatives.Distinct().ToList();
     }
 
     private static async Task<AIWorkoutResponse> GenerateWorkoutWithGemini(AIWorkoutRequest request, string apiKey, dynamic? userProfile = null)
