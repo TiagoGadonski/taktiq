@@ -81,7 +81,7 @@ export function WorkoutCompletionModal({
           {/* Motivational Quote */}
           <div className="text-center max-w-sm">
             <p className="text-sm text-muted-foreground italic">
-              "O sucesso é a soma de pequenos esforços repetidos dia após dia."
+              &ldquo;O sucesso é a soma de pequenos esforços repetidos dia após dia.&rdquo;
             </p>
           </div>
 
