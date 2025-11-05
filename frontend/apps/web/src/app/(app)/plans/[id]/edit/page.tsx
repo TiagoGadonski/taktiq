@@ -390,11 +390,20 @@ export default function EditPlanPage() {
 
       await apiClient.put(`/workout-plans/${planId}`, planData);
 
-      // Step 2: Get all exercises from the database to check which ones already exist
+      // Step 2: Delete all existing workouts from the plan to avoid duplication
+      const currentPlan = await apiClient.get<any>(`/workout-plans/${planId}`);
+      if (currentPlan.workouts && currentPlan.workouts.length > 0) {
+        // Delete each existing workout
+        for (const workout of currentPlan.workouts) {
+          await apiClient.delete(`/workout-plans/${planId}/workouts/${workout.id}`);
+        }
+      }
+
+      // Step 3: Get all exercises from the database to check which ones already exist
       const existingExercises = await apiClient.get<any[]>('/exercises');
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e.id]));
 
-      // Step 3: Create workouts (days) and add exercises to them
+      // Step 4: Create workouts (days) and add exercises to them
       for (let dayIndex = 0; dayIndex < workoutDays.length; dayIndex++) {
         const day = workoutDays[dayIndex];
 
