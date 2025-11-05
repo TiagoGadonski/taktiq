@@ -21,6 +21,7 @@ public static class MeEndpoints
             
             // Mapeamos a entidade User completa para o DTO de resposta
             var response = new UserProfileResponse(
+                currentUser.Id,
                 currentUser.Name,
                 currentUser.Email,
                 currentUser.Role,

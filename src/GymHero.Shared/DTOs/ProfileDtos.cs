@@ -26,6 +26,7 @@ public class UpdateProfileRequest
 
 // O DTO de resposta pode continuar a ser um record, pois não o modificamos.
 public record UserProfileResponse(
+    Guid Id,
     string Name,
     string Email,
     string Role,
