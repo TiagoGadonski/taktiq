@@ -11,6 +11,8 @@ public class User : BaseEntity
     public DateTime? DateOfBirth { get; set; }
     public string? Gender { get; set; } // "M" (Masculino) ou "F" (Feminino)
     public string? Injuries { get; set; } // Lesões/limitações separadas por vírgula (ex: "knee pain,lower back,shoulder")
+    public string? HealthConditions { get; set; } // Condições de saúde/doenças (ex: "diabetes,hipertensão,asma")
+    public string? ExerciseGoal { get; set; } // Objetivo do exercício (ex: "perder peso", "ganhar massa muscular", "melhorar saúde")
     public string? Location { get; set; }
     public string? Bio { get; set; }
     public double? Height { get; set; } // em cm

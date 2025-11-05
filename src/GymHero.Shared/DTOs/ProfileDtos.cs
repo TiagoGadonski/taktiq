@@ -20,6 +20,8 @@ public class UpdateProfileRequest
     public string? GymName { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Injuries { get; set; }
+    public string? HealthConditions { get; set; }
+    public string? ExerciseGoal { get; set; }
 }
 
 // O DTO de resposta pode continuar a ser um record, pois não o modificamos.
@@ -36,6 +38,8 @@ public record UserProfileResponse(
     string? GymName,
     string? PhoneNumber,
     string? Injuries,
+    string? HealthConditions,
+    string? ExerciseGoal,
     DateTime CreatedAt
 );
 
