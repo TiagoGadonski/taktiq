@@ -48,7 +48,7 @@ type ProfileInput = z.infer<typeof profileSchema>;
 type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 
 export default function ProfilePage() {
-  const { user, logout, refreshUser } = useAuth();
+  const { user, logout, refreshUser, isLoading: isAuthLoading } = useAuth();
   const { toast } = useToast();
   const { theme } = useTheme();
   const router = useRouter();
@@ -273,15 +273,16 @@ export default function ProfilePage() {
           <h1 className="text-3xl font-bold">Perfil</h1>
           <p className="text-muted-foreground">Gerencie suas informações e preferências</p>
         </div>
-        <Button
-          variant="outline"
-          onClick={() => router.push(`/users/${profileData?.id || user?.id}`)}
-          className="w-full sm:w-auto"
-          disabled={!profileData?.id && !user?.id}
-        >
-          <Eye className="mr-2 h-4 w-4" />
-          Ver Perfil Público
-        </Button>
+        {!isAuthLoading && user && (
+          <Button
+            variant="outline"
+            onClick={() => router.push(`/users/${user.id}`)}
+            className="w-full sm:w-auto"
+          >
+            <Eye className="mr-2 h-4 w-4" />
+            Ver Perfil Público
+          </Button>
+        )}
       </div>
 
       {/* Profile Picture */}
