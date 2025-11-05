@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2 } from 'lucide-react';
+import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,6 +29,7 @@ const profileSchema = z.object({
   weight: z.string().optional(),
   gymName: z.string().optional(),
   phoneNumber: z.string().optional(),
+  injuries: z.string().optional(),
 });
 
 const changePasswordSchema = z.object({
@@ -108,6 +109,7 @@ export default function ProfilePage() {
           weight: data.weight?.toString() || '',
           gymName: data.gymName || '',
           phoneNumber: data.phoneNumber || '',
+          injuries: data.injuries || '',
         });
       } catch (error: any) {
         toast({
@@ -133,6 +135,7 @@ export default function ProfilePage() {
         weight: data.weight ? parseFloat(data.weight) : null,
         gymName: data.gymName || null,
         phoneNumber: data.phoneNumber || null,
+        injuries: data.injuries || null,
       });
 
       toast({
@@ -444,6 +447,24 @@ export default function ProfilePage() {
                 placeholder="Conte um pouco sobre você..."
                 rows={4}
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="injuries" className="flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 text-orange-500" />
+                Lesões/Limitações
+              </Label>
+              <Textarea
+                id="injuries"
+                {...register('injuries')}
+                disabled={!isEditing}
+                placeholder="Ex: ombro, joelho, lombar (separe por vírgula)"
+                rows={3}
+              />
+              <p className="text-xs text-muted-foreground">
+                Informe lesões ou limitações físicas para treinos mais seguros e personalizados.
+                Exemplos: ombro, rotator cuff, impingement, lombar, joelho, etc.
+              </p>
             </div>
 
             {isEditing && (
