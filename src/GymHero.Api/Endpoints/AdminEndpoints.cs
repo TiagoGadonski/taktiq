@@ -183,7 +183,7 @@ public static class AdminEndpoints
             }
 
             // Validate role
-            var validRoles = new[] { "User", "PersonalTrainer", "Admin" };
+            var validRoles = new[] { "Aluno", "PersonalTrainer", "Admin" };
             if (!validRoles.Contains(request.Role))
             {
                 return Results.BadRequest(new { message = "Invalid role specified" });
