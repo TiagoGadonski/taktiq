@@ -84,6 +84,8 @@ public static class AIEndpoints
                         u.DateOfBirth,
                         u.Gender,
                         u.Injuries,
+                        u.HealthConditions,
+                        u.ExerciseGoal,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -230,6 +232,8 @@ public static class AIEndpoints
                         u.DateOfBirth,
                         u.Gender,
                         u.Injuries,
+                        u.HealthConditions,
+                        u.ExerciseGoal,
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -1399,6 +1403,14 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
 
         if (!string.IsNullOrEmpty(userProfile.Bio))
             context.AppendLine($"- Informações adicionais: {userProfile.Bio}");
+
+        // Add exercise goal
+        if (!string.IsNullOrEmpty(userProfile.ExerciseGoal))
+            context.AppendLine($"\n🎯 OBJETIVO DE TREINO: {userProfile.ExerciseGoal}");
+
+        // Add health conditions
+        if (!string.IsNullOrEmpty(userProfile.HealthConditions))
+            context.AppendLine($"\n🏥 CONDIÇÕES DE SAÚDE: {userProfile.HealthConditions}");
 
         // Add injuries/limitations with contraindications
         if (!string.IsNullOrEmpty(userProfile.Injuries))
