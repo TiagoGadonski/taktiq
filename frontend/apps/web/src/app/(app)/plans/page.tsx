@@ -143,16 +143,17 @@ export default function PlansPage() {
                   )}
 
                   <div className="space-y-2 pt-4">
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="flex gap-2">
                       {plan.isActive ? (
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => handleSetInactive(plan.id)}
                           disabled={setInactiveMutation.isPending}
-                          className="col-span-2"
+                          className="flex-1"
+                          aria-label="Desativar plano"
                         >
-                          <Star className="mr-1 h-3 w-3 fill-current" />
+                          <Star className="h-4 w-4 xs:mr-2 fill-current" />
                           <span className="hidden xs:inline">Desativar</span>
                         </Button>
                       ) : (
@@ -160,9 +161,10 @@ export default function PlansPage() {
                           size="sm"
                           onClick={() => handleSetActive(plan.id)}
                           disabled={setActiveMutation.isPending}
-                          className="col-span-2"
+                          className="flex-1"
+                          aria-label="Ativar plano"
                         >
-                          <Star className="mr-1 h-3 w-3" />
+                          <Star className="h-4 w-4 xs:mr-2" />
                           <span className="hidden xs:inline">Ativar</span>
                         </Button>
                       )}
@@ -171,28 +173,33 @@ export default function PlansPage() {
                         variant="outline"
                         onClick={() => handleDelete(plan.id)}
                         disabled={plan.isActive || deleteMutation.isPending}
-                        className="aspect-square p-0"
+                        className="px-3"
+                        aria-label="Excluir plano"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="flex gap-2">
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => router.push(`/plans/${plan.id}/edit`)}
+                        aria-label="Editar plano"
+                        className="flex-1 sm:flex-none"
                       >
-                        <Edit className="mr-1 h-3 w-3" />
-                        Editar
+                        <Edit className="h-4 w-4 md:mr-2" />
+                        <span className="hidden md:inline">Editar</span>
                       </Button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             size="sm"
                             variant="outline"
+                            aria-label="Compartilhar plano"
+                            className="flex-1 sm:flex-none"
                           >
-                            <Share2 className="mr-1 h-3 w-3" />
-                            Compartilhar
+                            <Share2 className="h-4 w-4 md:mr-2" />
+                            <span className="hidden md:inline">Compartilhar</span>
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
