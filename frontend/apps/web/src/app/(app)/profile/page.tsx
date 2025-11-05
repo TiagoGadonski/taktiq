@@ -267,45 +267,26 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Perfil</h1>
-          <p className="text-muted-foreground">Gerencie suas informações e preferências</p>
-        </div>
-        {!isAuthLoading && user && (
-          <Button
-            variant="outline"
-            onClick={() => router.push(`/users/${user.id}`)}
-            className="w-full sm:w-auto"
-          >
-            <Eye className="mr-2 h-4 w-4" />
-            Ver Perfil Público
-          </Button>
-        )}
-      </div>
-
-      {/* Profile Picture */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Foto de Perfil</CardTitle>
-          <CardDescription>Adicione ou atualize sua foto de perfil</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-6">
-            <Avatar className="h-24 w-24">
-              <AvatarImage
-                src={
-                  profilePicture
-                    ? `${env.apiHost}${profilePicture}?t=${Date.now()}`
-                    : undefined
-                }
-              />
-              <AvatarFallback className="text-2xl">
-                {getInitials(profileData?.name || user?.name || 'User')}
-              </AvatarFallback>
-            </Avatar>
-            <div className="space-y-2">
+    <div className="space-y-6 pb-8">
+      {/* Header with Profile Hero Section */}
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-background border">
+        <div className="absolute inset-0 bg-gym-pattern opacity-5"></div>
+        <div className="relative p-6 md:p-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+            {/* Profile Picture with Upload */}
+            <div className="relative group">
+              <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-background shadow-xl ring-2 ring-primary/20 transition-all group-hover:ring-primary/40">
+                <AvatarImage
+                  src={
+                    profilePicture
+                      ? `${env.apiHost}${profilePicture}?t=${Date.now()}`
+                      : undefined
+                  }
+                />
+                <AvatarFallback className="text-3xl md:text-4xl font-bold bg-gradient-to-br from-primary/20 to-primary/10">
+                  {getInitials(profileData?.name || user?.name || 'User')}
+                </AvatarFallback>
+              </Avatar>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -316,387 +297,548 @@ export default function ProfilePage() {
               <Button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                variant="outline"
+                size="sm"
+                className="absolute -bottom-2 -right-2 h-10 w-10 rounded-full p-0 shadow-lg"
               >
-                <Camera className="mr-2 h-4 w-4" />
-                {uploading ? 'Enviando...' : 'Alterar Foto'}
+                {uploading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Camera className="h-4 w-4" />
+                )}
               </Button>
-              <p className="text-xs text-muted-foreground">
-                JPG, PNG ou GIF. Máximo 5MB.
-              </p>
+            </div>
+
+            {/* User Info */}
+            <div className="flex-1 space-y-3">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                  {profileData?.name || user?.name || 'Carregando...'}
+                </h1>
+                <p className="text-muted-foreground text-sm md:text-base mt-1">
+                  {profileData?.email || user?.email}
+                </p>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="flex flex-wrap gap-4 md:gap-6 text-sm">
+                {profileData?.location && (
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                    <span>{profileData.location}</span>
+                  </div>
+                )}
+                {profileData?.gymName && (
+                  <div className="flex items-center gap-1.5">
+                    <Dumbbell className="h-4 w-4 text-muted-foreground" />
+                    <span>{profileData.gymName}</span>
+                  </div>
+                )}
+                {user?.createdAt && (
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    <span>Membro desde {new Date(user.createdAt).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-col gap-2 w-full md:w-auto">
+              {!isEditing && (
+                <Button
+                  onClick={() => setIsEditing(true)}
+                  className="w-full md:w-auto shadow-lg"
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  Editar Perfil
+                </Button>
+              )}
+              {!isAuthLoading && user && (
+                <Button
+                  variant="outline"
+                  onClick={() => router.push(`/users/${user.id}`)}
+                  className="w-full md:w-auto"
+                >
+                  <Eye className="mr-2 h-4 w-4" />
+                  Ver Perfil Público
+                </Button>
+              )}
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Profile Information */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Informações Pessoais</CardTitle>
-          <CardDescription>
-            Suas informações básicas de perfil
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nome *</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="name"
-                    {...register('name')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                  />
-                </div>
-                {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    {...register('email')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                  />
-                </div>
-                {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phoneNumber">Telefone</Label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="phoneNumber"
-                    {...register('phoneNumber')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                    placeholder="(11) 99999-9999"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="dateOfBirth">Data de Nascimento</Label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="dateOfBirth"
-                    type="date"
-                    {...register('dateOfBirth')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="location">Localização</Label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="location"
-                    {...register('location')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                    placeholder="Cidade, Estado"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="gymName">Academia</Label>
-                <div className="relative">
-                  <Dumbbell className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="gymName"
-                    {...register('gymName')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                    placeholder="Nome da sua academia"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="height">Altura (cm)</Label>
-                <div className="relative">
-                  <Ruler className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="height"
-                    type="number"
-                    step="0.1"
-                    {...register('height')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                    placeholder="170"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="weight">Peso (kg)</Label>
-                <div className="relative">
-                  <WeightIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="weight"
-                    type="number"
-                    step="0.1"
-                    {...register('weight')}
-                    disabled={!isEditing}
-                    className="pl-9"
-                    placeholder="70"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="bio">Biografia</Label>
-              <Textarea
-                id="bio"
-                {...register('bio')}
-                disabled={!isEditing}
-                placeholder="Conte um pouco sobre você..."
-                rows={4}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="injuries" className="flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-orange-500" />
-                Lesões/Limitações
-              </Label>
-              <Textarea
-                id="injuries"
-                {...register('injuries')}
-                disabled={!isEditing}
-                placeholder="Ex: ombro, joelho, lombar (separe por vírgula)"
-                rows={3}
-              />
-              <p className="text-xs text-muted-foreground">
-                Informe lesões ou limitações físicas para treinos mais seguros e personalizados.
-                Exemplos: ombro, rotator cuff, impingement, lombar, joelho, etc.
+          {/* Bio Preview */}
+          {!isEditing && profileData?.bio && (
+            <div className="mt-6 pt-6 border-t">
+              <p className="text-sm text-muted-foreground italic max-w-2xl">
+                "{profileData.bio}"
               </p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="healthConditions" className="flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-red-500" />
-                Condições de Saúde
-              </Label>
-              <Textarea
-                id="healthConditions"
-                {...register('healthConditions')}
-                disabled={!isEditing}
-                placeholder="Ex: diabetes, hipertensão, asma, problemas cardíacos"
-                rows={3}
-              />
-              <p className="text-xs text-muted-foreground">
-                Informe condições de saúde relevantes para treinos mais seguros.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="exerciseGoal" className="flex items-center gap-2">
-                <Dumbbell className="h-4 w-4 text-primary" />
-                Objetivo de Treino
-              </Label>
-              <Textarea
-                id="exerciseGoal"
-                {...register('exerciseGoal')}
-                disabled={!isEditing}
-                placeholder="Ex: perder peso, ganhar massa muscular, melhorar condicionamento físico"
-                rows={3}
-              />
-              <p className="text-xs text-muted-foreground">
-                Descreva seu objetivo principal com os exercícios para treinos mais direcionados.
-              </p>
-            </div>
-
-            {isEditing && (
-              <div className="flex gap-2">
-                <Button type="submit">
-                  <Save className="mr-2 h-4 w-4" />
-                  Salvar Alterações
-                </Button>
-                <Button type="button" variant="outline" onClick={() => setIsEditing(false)}>
-                  Cancelar
-                </Button>
-              </div>
-            )}
-          </form>
-
-          {!isEditing && (
-            <div className="flex gap-2 mt-4">
-              <Button type="button" onClick={(e) => {
-                e.preventDefault();
-                setIsEditing(true);
-              }}>
-                Editar Perfil
-              </Button>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Preferences */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Preferências</CardTitle>
-          <CardDescription>Configure suas preferências de uso</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
-                <Moon className="h-4 w-4" />
-                <Label>Tema</Label>
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column - Profile Information */}
+        <div className="lg:col-span-2 space-y-6">
+          <Card className="shadow-md">
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-xl">Informações Pessoais</CardTitle>
+                  <CardDescription className="mt-1">
+                    Suas informações básicas de perfil
+                  </CardDescription>
+                </div>
+                {isEditing && (
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground bg-primary/10 px-3 py-1.5 rounded-full">
+                    <div className="h-2 w-2 bg-primary rounded-full animate-pulse"></div>
+                    Editando
+                  </div>
+                )}
               </div>
-              <p className="text-sm text-muted-foreground">
-                {mounted ? (
-                  theme === 'system'
-                    ? 'Usando tema do sistema'
-                    : theme === 'dark'
-                    ? 'Tema escuro ativado'
-                    : 'Tema claro ativado'
-                ) : 'Carregando...'}
-              </p>
-            </div>
-            <ThemeSwitcher />
-          </div>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* Basic Info Section */}
+                <div className="space-y-4">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Informações Básicas</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Nome *</Label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="name"
+                          {...register('name')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                        />
+                      </div>
+                      {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
+                    </div>
 
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label>Idioma</Label>
-              <p className="text-sm text-muted-foreground">Idioma da interface</p>
-            </div>
-            <Button variant="outline" size="sm">
-              Português (BR)
-            </Button>
-          </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="email"
+                          type="email"
+                          {...register('email')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                        />
+                      </div>
+                      {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+                    </div>
 
-          <div className="flex items-center justify-between">
-            <div className="space-y-0.5">
-              <Label>Unidades</Label>
-              <p className="text-sm text-muted-foreground">Sistema de medidas preferido</p>
-            </div>
-            <Button variant="outline" size="sm">
-              Métrico (kg, km)
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+                    <div className="space-y-2">
+                      <Label htmlFor="phoneNumber">Telefone</Label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="phoneNumber"
+                          {...register('phoneNumber')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                          placeholder="(11) 99999-9999"
+                        />
+                      </div>
+                    </div>
 
-      {/* Account Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Ações da Conta</CardTitle>
-          <CardDescription>Gerencie sua conta</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Button
-            variant="outline"
-            className="w-full justify-start"
-            onClick={() => setIsChangePasswordDialogOpen(true)}
-          >
-            <Lock className="mr-2 h-4 w-4" />
-            Alterar Senha
-          </Button>
-          <Button variant="outline" className="w-full justify-start text-destructive">
-            Excluir Conta
-          </Button>
-          <div className="pt-4">
-            <Button variant="outline" onClick={() => logout()} className="w-full">
-              Sair da Conta
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+                    <div className="space-y-2">
+                      <Label htmlFor="dateOfBirth">Data de Nascimento</Label>
+                      <div className="relative">
+                        <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="dateOfBirth"
+                          type="date"
+                          {...register('dateOfBirth')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      {/* Stats Summary */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Estatísticas da Conta</CardTitle>
-          <CardDescription>Resumo da sua atividade</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Membro desde:</span>
-            <span className="font-medium">
-              {user?.createdAt
-                ? new Date(user.createdAt).toLocaleDateString('pt-BR')
-                : 'N/A'}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Último acesso:</span>
-            <span className="font-medium">Hoje</span>
-          </div>
-        </CardContent>
-      </Card>
+                {/* Location & Gym Section */}
+                <div className="space-y-4 pt-4 border-t">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Localização & Academia</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="location">Localização</Label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="location"
+                          {...register('location')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                          placeholder="Cidade, Estado"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="gymName">Academia</Label>
+                      <div className="relative">
+                        <Dumbbell className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="gymName"
+                          {...register('gymName')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                          placeholder="Nome da sua academia"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Physical Metrics Section */}
+                <div className="space-y-4 pt-4 border-t">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Métricas Físicas</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="height">Altura (cm)</Label>
+                      <div className="relative">
+                        <Ruler className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="height"
+                          type="number"
+                          step="0.1"
+                          {...register('height')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                          placeholder="170"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="weight">Peso (kg)</Label>
+                      <div className="relative">
+                        <WeightIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="weight"
+                          type="number"
+                          step="0.1"
+                          {...register('weight')}
+                          disabled={!isEditing}
+                          className="pl-9"
+                          placeholder="70"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bio Section */}
+                <div className="space-y-4 pt-4 border-t">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Sobre Você</h3>
+                  <div className="space-y-2">
+                    <Label htmlFor="bio">Biografia</Label>
+                    <Textarea
+                      id="bio"
+                      {...register('bio')}
+                      disabled={!isEditing}
+                      placeholder="Conte um pouco sobre você..."
+                      rows={4}
+                      className="resize-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Health & Fitness Section */}
+                <div className="space-y-4 pt-4 border-t">
+                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Saúde & Fitness</h3>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="exerciseGoal" className="flex items-center gap-2">
+                        <Dumbbell className="h-4 w-4 text-primary" />
+                        Objetivo de Treino
+                      </Label>
+                      <Textarea
+                        id="exerciseGoal"
+                        {...register('exerciseGoal')}
+                        disabled={!isEditing}
+                        placeholder="Ex: perder peso, ganhar massa muscular, melhorar condicionamento físico"
+                        rows={2}
+                        className="resize-none"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Descreva seu objetivo principal com os exercícios para treinos mais direcionados.
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="injuries" className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-orange-500" />
+                        Lesões/Limitações
+                      </Label>
+                      <Textarea
+                        id="injuries"
+                        {...register('injuries')}
+                        disabled={!isEditing}
+                        placeholder="Ex: ombro, joelho, lombar (separe por vírgula)"
+                        rows={2}
+                        className="resize-none"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Informe lesões ou limitações físicas para treinos mais seguros e personalizados.
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="healthConditions" className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-red-500" />
+                        Condições de Saúde
+                      </Label>
+                      <Textarea
+                        id="healthConditions"
+                        {...register('healthConditions')}
+                        disabled={!isEditing}
+                        placeholder="Ex: diabetes, hipertensão, asma, problemas cardíacos"
+                        rows={2}
+                        className="resize-none"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Informe condições de saúde relevantes para treinos mais seguros.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                {isEditing && (
+                  <div className="flex gap-3 pt-4 border-t">
+                    <Button type="submit" className="flex-1 shadow-md">
+                      <Save className="mr-2 h-4 w-4" />
+                      Salvar Alterações
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setIsEditing(false)}
+                      className="flex-1"
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                )}
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right Column - Preferences & Actions */}
+        <div className="space-y-6">
+          {/* Preferences Card */}
+          <Card className="shadow-md">
+            <CardHeader>
+              <CardTitle className="text-lg">Preferências</CardTitle>
+              <CardDescription>Configure suas preferências</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Moon className="h-4 w-4 text-muted-foreground" />
+                  <Label className="text-sm font-medium">Tema</Label>
+                </div>
+                <ThemeSwitcher />
+                <p className="text-xs text-muted-foreground">
+                  {mounted ? (
+                    theme === 'system'
+                      ? 'Usando tema do sistema'
+                      : theme === 'dark'
+                      ? 'Tema escuro ativado'
+                      : 'Tema claro ativado'
+                  ) : 'Carregando...'}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t space-y-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-sm font-medium">Idioma</Label>
+                    <p className="text-xs text-muted-foreground">Interface</p>
+                  </div>
+                  <Button variant="outline" size="sm" className="text-xs">
+                    PT-BR
+                  </Button>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t space-y-2">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-sm font-medium">Unidades</Label>
+                    <p className="text-xs text-muted-foreground">Sistema de medidas</p>
+                  </div>
+                  <Button variant="outline" size="sm" className="text-xs">
+                    Métrico
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Account Actions Card */}
+          <Card className="shadow-md">
+            <CardHeader>
+              <CardTitle className="text-lg">Segurança</CardTitle>
+              <CardDescription>Gerencie sua conta</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button
+                variant="outline"
+                className="w-full justify-start"
+                onClick={() => setIsChangePasswordDialogOpen(true)}
+              >
+                <Lock className="mr-2 h-4 w-4" />
+                Alterar Senha
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => logout()}
+                className="w-full justify-start"
+              >
+                Sair da Conta
+              </Button>
+              <div className="pt-3 border-t">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+                >
+                  Excluir Conta
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Stats Card */}
+          <Card className="shadow-md bg-gradient-to-br from-primary/5 to-background">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Estatísticas
+              </CardTitle>
+              <CardDescription>Resumo da sua atividade</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Membro desde</p>
+                    <p className="text-sm font-semibold">
+                      {user?.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString('pt-BR', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          })
+                        : 'N/A'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg bg-background/50 border">
+                  <div className="space-y-1">
+                    <p className="text-xs text-muted-foreground">Último acesso</p>
+                    <p className="text-sm font-semibold">Hoje</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       {/* Change Password Dialog */}
       <Dialog open={isChangePasswordDialogOpen} onOpenChange={setIsChangePasswordDialogOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Lock className="h-5 w-5" />
+            <DialogTitle className="flex items-center gap-2 text-xl">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Lock className="h-5 w-5 text-primary" />
+              </div>
               Alterar Senha
             </DialogTitle>
-            <DialogDescription>
-              Digite sua senha atual e escolha uma nova senha
+            <DialogDescription className="text-base">
+              Digite sua senha atual e escolha uma nova senha segura
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleSubmitPassword(onChangePassword)} className="space-y-4 mt-4">
+          <form onSubmit={handleSubmitPassword(onChangePassword)} className="space-y-5 mt-2">
             <div className="space-y-2">
-              <Label htmlFor="currentPassword">Senha Atual</Label>
-              <Input
-                id="currentPassword"
-                type="password"
-                {...registerPassword('currentPassword')}
-                placeholder="Digite sua senha atual"
-              />
+              <Label htmlFor="currentPassword" className="text-sm font-medium">
+                Senha Atual
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="currentPassword"
+                  type="password"
+                  {...registerPassword('currentPassword')}
+                  placeholder="Digite sua senha atual"
+                  className="pl-9"
+                />
+              </div>
               {passwordErrors.currentPassword && (
-                <p className="text-sm text-destructive">{passwordErrors.currentPassword.message}</p>
+                <p className="text-sm text-destructive flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" />
+                  {passwordErrors.currentPassword.message}
+                </p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="newPassword">Nova Senha</Label>
-              <Input
-                id="newPassword"
-                type="password"
-                {...registerPassword('newPassword')}
-                placeholder="Digite sua nova senha (mínimo 6 caracteres)"
-              />
+              <Label htmlFor="newPassword" className="text-sm font-medium">
+                Nova Senha
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="newPassword"
+                  type="password"
+                  {...registerPassword('newPassword')}
+                  placeholder="Mínimo 6 caracteres"
+                  className="pl-9"
+                />
+              </div>
               {passwordErrors.newPassword && (
-                <p className="text-sm text-destructive">{passwordErrors.newPassword.message}</p>
+                <p className="text-sm text-destructive flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" />
+                  {passwordErrors.newPassword.message}
+                </p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirmar Nova Senha</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                {...registerPassword('confirmPassword')}
-                placeholder="Digite sua nova senha novamente"
-              />
+              <Label htmlFor="confirmPassword" className="text-sm font-medium">
+                Confirmar Nova Senha
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  {...registerPassword('confirmPassword')}
+                  placeholder="Digite a senha novamente"
+                  className="pl-9"
+                />
+              </div>
               {passwordErrors.confirmPassword && (
-                <p className="text-sm text-destructive">{passwordErrors.confirmPassword.message}</p>
+                <p className="text-sm text-destructive flex items-center gap-1">
+                  <AlertCircle className="h-3 w-3" />
+                  {passwordErrors.confirmPassword.message}
+                </p>
               )}
             </div>
 
-            <div className="flex gap-2 pt-4">
+            <div className="flex gap-3 pt-2">
               <Button
                 type="button"
                 variant="outline"
@@ -709,7 +851,11 @@ export default function ProfilePage() {
               >
                 Cancelar
               </Button>
-              <Button type="submit" className="flex-1" disabled={isChangingPassword}>
+              <Button
+                type="submit"
+                className="flex-1 shadow-md"
+                disabled={isChangingPassword}
+              >
                 {isChangingPassword ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -717,8 +863,8 @@ export default function ProfilePage() {
                   </>
                 ) : (
                   <>
-                    <Lock className="mr-2 h-4 w-4" />
-                    Alterar Senha
+                    <Save className="mr-2 h-4 w-4" />
+                    Confirmar
                   </>
                 )}
               </Button>
