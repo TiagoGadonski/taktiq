@@ -272,7 +272,7 @@ export default function ProfilePage() {
       <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-background border">
         <div className="absolute inset-0 bg-gym-pattern opacity-5"></div>
         <div className="relative p-6 md:p-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <div className="flex flex-col md:flex-row items-center md:items-center gap-6">
             {/* Profile Picture with Upload */}
             <div className="relative group">
               <Avatar className="h-28 w-28 md:h-32 md:w-32 border-4 border-background shadow-xl ring-2 ring-primary/20 transition-all group-hover:ring-primary/40">
@@ -309,45 +309,45 @@ export default function ProfilePage() {
             </div>
 
             {/* User Info */}
-            <div className="flex-1 space-y-3">
+            <div className="flex-1 space-y-3 text-center md:text-left w-full md:w-auto">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
                   {profileData?.name || user?.name || 'Carregando...'}
                 </h1>
-                <p className="text-muted-foreground text-sm md:text-base mt-1">
+                <p className="text-muted-foreground text-sm md:text-base mt-1 break-all">
                   {profileData?.email || user?.email}
                 </p>
               </div>
 
               {/* Quick Stats */}
-              <div className="flex flex-wrap gap-4 md:gap-6 text-sm">
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-6 text-xs sm:text-sm">
                 {profileData?.location && (
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex items-center gap-1.5 bg-background/50 px-2 py-1 rounded-md">
+                    <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
                     <span>{profileData.location}</span>
                   </div>
                 )}
                 {profileData?.gymName && (
-                  <div className="flex items-center gap-1.5">
-                    <Dumbbell className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex items-center gap-1.5 bg-background/50 px-2 py-1 rounded-md">
+                    <Dumbbell className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
                     <span>{profileData.gymName}</span>
                   </div>
                 )}
                 {user?.createdAt && (
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    <span>Membro desde {new Date(user.createdAt).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
+                  <div className="flex items-center gap-1.5 bg-background/50 px-2 py-1 rounded-md">
+                    <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
+                    <span className="whitespace-nowrap">Desde {new Date(user.createdAt).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col gap-2 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row md:flex-col gap-2 w-full md:w-auto">
               {!isEditing && (
                 <Button
                   onClick={() => setIsEditing(true)}
-                  className="w-full md:w-auto shadow-lg"
+                  className="w-full sm:flex-1 md:w-auto shadow-lg"
                 >
                   <User className="mr-2 h-4 w-4" />
                   Editar Perfil
@@ -357,7 +357,7 @@ export default function ProfilePage() {
                 <Button
                   variant="outline"
                   onClick={() => router.push(`/users/${user.id}`)}
-                  className="w-full md:w-auto"
+                  className="w-full sm:flex-1 md:w-auto"
                 >
                   <Eye className="mr-2 h-4 w-4" />
                   Ver Perfil Público
@@ -369,7 +369,7 @@ export default function ProfilePage() {
           {/* Bio Preview */}
           {!isEditing && profileData?.bio && (
             <div className="mt-6 pt-6 border-t">
-              <p className="text-sm text-muted-foreground italic max-w-2xl">
+              <p className="text-sm text-muted-foreground italic max-w-2xl text-center md:text-left mx-auto md:mx-0">
                 &ldquo;{profileData.bio}&rdquo;
               </p>
             </div>
@@ -383,15 +383,15 @@ export default function ProfilePage() {
         <div className="lg:col-span-2 space-y-6">
           <Card className="shadow-md">
             <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-xl">Informações Pessoais</CardTitle>
-                  <CardDescription className="mt-1">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex-1">
+                  <CardTitle className="text-lg sm:text-xl">Informações Pessoais</CardTitle>
+                  <CardDescription className="mt-1 text-xs sm:text-sm">
                     Suas informações básicas de perfil
                   </CardDescription>
                 </div>
                 {isEditing && (
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground bg-primary/10 px-3 py-1.5 rounded-full">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground bg-primary/10 px-3 py-1.5 rounded-full w-fit">
                     <div className="h-2 w-2 bg-primary rounded-full animate-pulse"></div>
                     Editando
                   </div>
@@ -402,7 +402,7 @@ export default function ProfilePage() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Basic Info Section */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Informações Básicas</h3>
+                  <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">Informações Básicas</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Nome *</Label>
@@ -465,7 +465,7 @@ export default function ProfilePage() {
 
                 {/* Location & Gym Section */}
                 <div className="space-y-4 pt-4 border-t">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Localização & Academia</h3>
+                  <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">Localização & Academia</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="location">Localização</Label>
@@ -499,7 +499,7 @@ export default function ProfilePage() {
 
                 {/* Physical Metrics Section */}
                 <div className="space-y-4 pt-4 border-t">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Métricas Físicas</h3>
+                  <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">Métricas Físicas</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="height">Altura (cm)</Label>
@@ -537,7 +537,7 @@ export default function ProfilePage() {
 
                 {/* Bio Section */}
                 <div className="space-y-4 pt-4 border-t">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Sobre Você</h3>
+                  <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">Sobre Você</h3>
                   <div className="space-y-2">
                     <Label htmlFor="bio">Biografia</Label>
                     <Textarea
@@ -553,7 +553,7 @@ export default function ProfilePage() {
 
                 {/* Health & Fitness Section */}
                 <div className="space-y-4 pt-4 border-t">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Saúde & Fitness</h3>
+                  <h3 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">Saúde & Fitness</h3>
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="exerciseGoal" className="flex items-center gap-2">
@@ -613,10 +613,11 @@ export default function ProfilePage() {
 
                 {/* Action Buttons */}
                 {isEditing && (
-                  <div className="flex gap-3 pt-4 border-t">
+                  <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
                     <Button type="submit" className="flex-1 shadow-md">
                       <Save className="mr-2 h-4 w-4" />
-                      Salvar Alterações
+                      <span className="hidden xs:inline">Salvar Alterações</span>
+                      <span className="inline xs:hidden">Salvar</span>
                     </Button>
                     <Button
                       type="button"
@@ -638,8 +639,8 @@ export default function ProfilePage() {
           {/* Preferences Card */}
           <Card className="shadow-md">
             <CardHeader>
-              <CardTitle className="text-lg">Preferências</CardTitle>
-              <CardDescription>Configure suas preferências</CardDescription>
+              <CardTitle className="text-base sm:text-lg">Preferências</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Configure suas preferências</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
@@ -688,8 +689,8 @@ export default function ProfilePage() {
           {/* Account Actions Card */}
           <Card className="shadow-md">
             <CardHeader>
-              <CardTitle className="text-lg">Segurança</CardTitle>
-              <CardDescription>Gerencie sua conta</CardDescription>
+              <CardTitle className="text-base sm:text-lg">Segurança</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Gerencie sua conta</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button
@@ -721,11 +722,11 @@ export default function ProfilePage() {
           {/* Stats Card */}
           <Card className="shadow-md bg-gradient-to-br from-primary/5 to-background">
             <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
+              <CardTitle className="text-base sm:text-lg flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 Estatísticas
               </CardTitle>
-              <CardDescription>Resumo da sua atividade</CardDescription>
+              <CardDescription className="text-xs sm:text-sm">Resumo da sua atividade</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
