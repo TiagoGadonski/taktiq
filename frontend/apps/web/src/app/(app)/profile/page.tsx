@@ -30,6 +30,8 @@ const profileSchema = z.object({
   gymName: z.string().optional(),
   phoneNumber: z.string().optional(),
   injuries: z.string().optional(),
+  healthConditions: z.string().optional(),
+  exerciseGoal: z.string().optional(),
 });
 
 const changePasswordSchema = z.object({
@@ -110,6 +112,8 @@ export default function ProfilePage() {
           gymName: data.gymName || '',
           phoneNumber: data.phoneNumber || '',
           injuries: data.injuries || '',
+          healthConditions: data.healthConditions || '',
+          exerciseGoal: data.exerciseGoal || '',
         });
       } catch (error: any) {
         toast({
@@ -136,6 +140,8 @@ export default function ProfilePage() {
         gymName: data.gymName || null,
         phoneNumber: data.phoneNumber || null,
         injuries: data.injuries || null,
+        healthConditions: data.healthConditions || null,
+        exerciseGoal: data.exerciseGoal || null,
       });
 
       toast({
@@ -464,6 +470,40 @@ export default function ProfilePage() {
               <p className="text-xs text-muted-foreground">
                 Informe lesões ou limitações físicas para treinos mais seguros e personalizados.
                 Exemplos: ombro, rotator cuff, impingement, lombar, joelho, etc.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="healthConditions" className="flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 text-red-500" />
+                Condições de Saúde
+              </Label>
+              <Textarea
+                id="healthConditions"
+                {...register('healthConditions')}
+                disabled={!isEditing}
+                placeholder="Ex: diabetes, hipertensão, asma, problemas cardíacos"
+                rows={3}
+              />
+              <p className="text-xs text-muted-foreground">
+                Informe condições de saúde relevantes para treinos mais seguros.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="exerciseGoal" className="flex items-center gap-2">
+                <Dumbbell className="h-4 w-4 text-primary" />
+                Objetivo de Treino
+              </Label>
+              <Textarea
+                id="exerciseGoal"
+                {...register('exerciseGoal')}
+                disabled={!isEditing}
+                placeholder="Ex: perder peso, ganhar massa muscular, melhorar condicionamento físico"
+                rows={3}
+              />
+              <p className="text-xs text-muted-foreground">
+                Descreva seu objetivo principal com os exercícios para treinos mais direcionados.
               </p>
             </div>
 

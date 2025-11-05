@@ -314,10 +314,16 @@ namespace GymHero.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
+                    b.Property<string>("ExerciseGoal")
+                        .HasColumnType("text");
+
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
                     b.Property<string>("GymName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HealthConditions")
                         .HasColumnType("text");
 
                     b.Property<double?>("Height")

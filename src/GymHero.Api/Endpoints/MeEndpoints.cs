@@ -33,6 +33,8 @@ public static class MeEndpoints
                 currentUser.GymName,
                 currentUser.PhoneNumber,
                 currentUser.Injuries,
+                currentUser.HealthConditions,
+                currentUser.ExerciseGoal,
                 currentUser.CreatedAt
             );
             return Results.Ok(response);
@@ -58,6 +60,8 @@ public static class MeEndpoints
             userToUpdate.GymName = request.GymName;
             userToUpdate.PhoneNumber = request.PhoneNumber;
             userToUpdate.Injuries = request.Injuries;
+            userToUpdate.HealthConditions = request.HealthConditions;
+            userToUpdate.ExerciseGoal = request.ExerciseGoal;
 
             await context.SaveChangesAsync(ct);
             return Results.Ok();

@@ -48,7 +48,7 @@ export function useAuth() {
     onSuccess: async (tokens) => {
       await tokenStorage.setTokens(tokens.accessToken, tokens.refreshToken);
       await queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
-      router.push('/dashboard');
+      router.push('/onboarding');
       toast({
         title: 'Conta criada com sucesso!',
         description: 'Bem-vindo ao TaktIQ!',
