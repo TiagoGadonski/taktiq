@@ -10,6 +10,7 @@ import { useSets } from '@/hooks/use-sets';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExerciseCard } from '@/components/workout/exercise-card';
+import { ExerciseSelectorModal } from '@/components/workout/exercise-selector-modal';
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -25,6 +26,9 @@ export default function WorkoutPage() {
   const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<WorkoutExercise | null>(null);
   const [isExerciseModalOpen, setIsExerciseModalOpen] = useState(false);
+  const [replacedExercises, setReplacedExercises] = useState<Record<string, any>>({});
+  const [exerciseToReplace, setExerciseToReplace] = useState<WorkoutExercise | null>(null);
+  const [isReplaceSelectorOpen, setIsReplaceSelectorOpen] = useState(false);
 
   // Auto-select first workout when session starts
   useEffect(() => {
@@ -41,9 +45,44 @@ export default function WorkoutPage() {
     },
   });
 
+  const { data: allExercises = [] } = useQuery({
+    queryKey: ['exercises'],
+    queryFn: async () => {
+      return await api.exercises.getAll();
+    },
+  });
+
   const openExerciseModal = (exercise: WorkoutExercise) => {
     setSelectedExercise(exercise);
     setIsExerciseModalOpen(true);
+  };
+
+  const handleOpenReplaceModal = (exercise: WorkoutExercise) => {
+    setExerciseToReplace(exercise);
+    setIsReplaceSelectorOpen(true);
+  };
+
+  const handleReplaceExercise = (newExercise: any) => {
+    if (!exerciseToReplace) return;
+
+    // Store the replacement mapping
+    setReplacedExercises((prev) => ({
+      ...prev,
+      [exerciseToReplace.id]: {
+        ...exerciseToReplace,
+        exerciseId: newExercise.id,
+        exerciseName: newExercise.name,
+        exercise: newExercise,
+      },
+    }));
+
+    toast({
+      title: 'Exercício substituído!',
+      description: `${exerciseToReplace.exerciseName} → ${newExercise.name}`,
+    });
+
+    setIsReplaceSelectorOpen(false);
+    setExerciseToReplace(null);
   };
 
   const handleStartSession = async (workoutId?: string) => {
@@ -450,17 +489,23 @@ export default function WorkoutPage() {
       {/* Exercise List */}
       {exercisesToShow.length > 0 ? (
         <div className="space-y-4">
-          {exercisesToShow.map((exercise: WorkoutExercise) => (
-            <ExerciseCard
-              key={exercise.id}
-              exercise={exercise}
-              sets={currentSession.sets || []}
-              onAddSet={(data) => handleAddSet(exercise.exerciseId, data)}
-              onDeleteSet={handleDeleteSet}
-              onExerciseClick={() => openExerciseModal(exercise)}
-              isCreating={isCreating}
-            />
-          ))}
+          {exercisesToShow.map((exercise: WorkoutExercise) => {
+            // Use replaced exercise if it exists, otherwise use original
+            const displayExercise = replacedExercises[exercise.id] || exercise;
+
+            return (
+              <ExerciseCard
+                key={exercise.id}
+                exercise={displayExercise}
+                sets={currentSession.sets || []}
+                onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
+                onDeleteSet={handleDeleteSet}
+                onExerciseClick={() => openExerciseModal(displayExercise)}
+                onReplaceExercise={() => handleOpenReplaceModal(exercise)}
+                isCreating={isCreating}
+              />
+            );
+          })}
         </div>
       ) : (
         <Card>
@@ -622,6 +667,20 @@ export default function WorkoutPage() {
             })()}
         </DialogContent>
       </Dialog>
+
+      {/* Exercise Replacement Modal */}
+      <ExerciseSelectorModal
+        open={isReplaceSelectorOpen}
+        onClose={() => setIsReplaceSelectorOpen(false)}
+        onSelectExercise={handleReplaceExercise}
+        currentExercise={exerciseToReplace ? {
+          id: exerciseToReplace.exerciseId,
+          name: exerciseToReplace.exerciseName || 'Unknown Exercise',
+          muscleGroup: exerciseToReplace.exercise?.muscleGroup || 'Other',
+          equipment: exerciseToReplace.exercise?.equipment || '',
+        } : undefined}
+        exercises={allExercises}
+      />
     </div>
   );
 }
