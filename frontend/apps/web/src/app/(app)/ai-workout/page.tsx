@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw } from 'lucide-react';
+import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import Link from 'next/link';
 
 // Types
 interface Exercise {
@@ -108,6 +110,24 @@ export default function AIWorkoutPage() {
       return apiClient.get('/friends');
     },
   });
+
+  // Fetch user profile for completeness check
+  const { data: userProfile } = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: async () => {
+      return apiClient.get('/me');
+    },
+  });
+
+  // Calculate profile completeness
+  const profileFields = [
+    userProfile?.injuries,
+    userProfile?.healthConditions,
+    userProfile?.exerciseGoal,
+  ];
+  const filledFields = profileFields.filter(field => field && field.trim() !== '').length;
+  const profileCompleteness = Math.round((filledFields / profileFields.length) * 100);
+  const isProfileIncomplete = profileCompleteness < 100;
 
   // Single workout mutation
   const generateWorkoutMutation = useMutation({
@@ -566,6 +586,23 @@ export default function AIWorkoutPage() {
           Crie treinos únicos ou planos semanais completos com inteligência artificial
         </p>
       </div>
+
+      {/* Profile Completeness Banner */}
+      {isProfileIncomplete && (
+        <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950/20">
+          <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+          <AlertTitle className="text-blue-900 dark:text-blue-100">
+            Melhore seus treinos com IA
+          </AlertTitle>
+          <AlertDescription className="text-blue-800 dark:text-blue-200">
+            Seu perfil está {profileCompleteness}% completo. Quanto mais informações você fornecer sobre lesões,
+            condições de saúde e objetivos, melhor a IA poderá personalizar seus treinos para você!{' '}
+            <Link href="/profile" className="font-medium underline underline-offset-4 hover:text-blue-600">
+              Complete seu perfil
+            </Link>
+          </AlertDescription>
+        </Alert>
+      )}
 
       <Tabs defaultValue="workout" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
