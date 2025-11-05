@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle } from 'lucide-react';
+import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,6 +51,7 @@ export default function ProfilePage() {
   const { user, logout, refreshUser } = useAuth();
   const { toast } = useToast();
   const { theme } = useTheme();
+  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState<any>(null);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
@@ -266,9 +268,19 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Perfil</h1>
-        <p className="text-muted-foreground">Gerencie suas informações e preferências</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold">Perfil</h1>
+          <p className="text-muted-foreground">Gerencie suas informações e preferências</p>
+        </div>
+        <Button
+          variant="outline"
+          onClick={() => router.push(`/users/${user?.id}`)}
+          className="w-full sm:w-auto"
+        >
+          <Eye className="mr-2 h-4 w-4" />
+          Ver Perfil Público
+        </Button>
       </div>
 
       {/* Profile Picture */}
