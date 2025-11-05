@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 import { toast } from "sonner";
 import Link from "next/link";
 
@@ -25,11 +25,10 @@ export default function OnboardingPage() {
 
     try {
       // Get current user data first
-      const response = await api.get("/me");
-      const userData = response.data;
+      const userData = await apiClient.get("/me");
 
       // Update profile with onboarding data
-      await api.put("/me", {
+      await apiClient.put("/me", {
         ...userData,
         injuries: formData.injuries || undefined,
         healthConditions: formData.healthConditions || undefined,
