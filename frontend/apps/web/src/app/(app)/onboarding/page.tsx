@@ -10,6 +10,16 @@ import { apiClient } from "@/lib/api";
 import { toast } from "sonner";
 import Link from "next/link";
 
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  injuries?: string | null;
+  healthConditions?: string | null;
+  exerciseGoal?: string | null;
+  [key: string]: any;
+}
+
 export default function OnboardingPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +35,7 @@ export default function OnboardingPage() {
 
     try {
       // Get current user data first
-      const userData = await apiClient.get("/me");
+      const userData = await apiClient.get<UserData>("/me");
 
       // Update profile with onboarding data
       await apiClient.put("/me", {
