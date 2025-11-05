@@ -259,6 +259,29 @@ public static class WorkoutPlanEndpoints
         .WithName("AddWorkoutToPlan")
         .WithSummary("Adds a workout day to a workout plan");
 
+        // Delete a workout (day) from a plan
+        group.MapDelete("/{planId:guid}/workouts/{workoutId:guid}", async (
+            Guid planId,
+            Guid workoutId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new DeleteWorkoutCommand(workoutId, ownerId);
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+        })
+        .WithName("DeleteWorkout")
+        .WithSummary("Deletes a workout day from a workout plan");
+
         // Add an exercise to a specific workout (day)
         group.MapPost("/{planId:guid}/workouts/{workoutId:guid}/exercises", async (
             Guid planId,
