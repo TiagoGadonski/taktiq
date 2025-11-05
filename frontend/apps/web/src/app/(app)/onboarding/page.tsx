@@ -60,21 +60,21 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4 sm:p-6 lg:p-8">
       <Card className="w-full max-w-2xl">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Bem-vindo ao TaktIQ!</CardTitle>
-          <CardDescription>
+        <CardHeader className="space-y-2 sm:space-y-3">
+          <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold">Bem-vindo ao TaktIQ!</CardTitle>
+          <CardDescription className="text-sm sm:text-base">
             Conte-nos um pouco sobre você para personalizarmos seus treinos.
             Essas informações nos ajudam a criar treinos mais seguros e eficazes.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <CardContent className="px-4 sm:px-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="injuries">
+              <Label htmlFor="injuries" className="text-sm sm:text-base">
                 Lesões ou limitações físicas
-                <span className="text-muted-foreground text-sm ml-2">(opcional)</span>
+                <span className="text-muted-foreground text-xs sm:text-sm ml-2">(opcional)</span>
               </Label>
               <Textarea
                 id="injuries"
@@ -82,17 +82,17 @@ export default function OnboardingPage() {
                 value={formData.injuries}
                 onChange={(e) => setFormData({ ...formData, injuries: e.target.value })}
                 rows={3}
-                className="resize-none"
+                className="resize-none text-sm sm:text-base"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Informe qualquer lesão ou limitação física que devemos considerar ao criar seus treinos.
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="healthConditions">
+              <Label htmlFor="healthConditions" className="text-sm sm:text-base">
                 Condições de saúde ou doenças
-                <span className="text-muted-foreground text-sm ml-2">(opcional)</span>
+                <span className="text-muted-foreground text-xs sm:text-sm ml-2">(opcional)</span>
               </Label>
               <Textarea
                 id="healthConditions"
@@ -100,17 +100,17 @@ export default function OnboardingPage() {
                 value={formData.healthConditions}
                 onChange={(e) => setFormData({ ...formData, healthConditions: e.target.value })}
                 rows={3}
-                className="resize-none"
+                className="resize-none text-sm sm:text-base"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Informe qualquer condição de saúde que possamos considerar ao planejar seus treinos.
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="exerciseGoal">
+              <Label htmlFor="exerciseGoal" className="text-sm sm:text-base">
                 Qual é o seu objetivo principal?
-                <span className="text-muted-foreground text-sm ml-2">(opcional)</span>
+                <span className="text-muted-foreground text-xs sm:text-sm ml-2">(opcional)</span>
               </Label>
               <Textarea
                 id="exerciseGoal"
@@ -118,17 +118,17 @@ export default function OnboardingPage() {
                 value={formData.exerciseGoal}
                 onChange={(e) => setFormData({ ...formData, exerciseGoal: e.target.value })}
                 rows={3}
-                className="resize-none"
+                className="resize-none text-sm sm:text-base"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Conte-nos qual é o seu objetivo principal com os exercícios.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
                 type="submit"
-                className="flex-1"
+                className="flex-1 h-10 sm:h-11 text-sm sm:text-base"
                 disabled={isLoading}
               >
                 {isLoading ? "Salvando..." : "Continuar"}
@@ -138,13 +138,13 @@ export default function OnboardingPage() {
                 variant="outline"
                 onClick={handleSkip}
                 disabled={isLoading}
-                className="flex-1"
+                className="flex-1 h-10 sm:h-11 text-sm sm:text-base"
               >
                 Pular por agora
               </Button>
             </div>
 
-            <p className="text-xs text-center text-muted-foreground mt-4">
+            <p className="text-xs sm:text-sm text-center text-muted-foreground mt-4">
               Você pode adicionar ou editar essas informações mais tarde na página do seu perfil.
             </p>
           </form>
