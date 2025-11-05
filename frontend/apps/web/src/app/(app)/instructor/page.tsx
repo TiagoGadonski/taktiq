@@ -168,7 +168,7 @@ export default function InstructorPage() {
 
     try {
       await apiClient.post('/personal/clients', {
-        clientEmail: clientEmail.trim(),
+        ClientEmail: clientEmail.trim(),
       });
 
       toast({
@@ -183,8 +183,12 @@ export default function InstructorPage() {
       const response = await apiClient.get<any>('/personal/clients');
       setClients(Array.isArray(response.data) ? response.data : []);
     } catch (error: any) {
+      console.error('Error adding client:', error);
+      console.error('Error response:', error.response?.data);
+
       const errorMessage = error.response?.data?.message ||
         error.response?.data?.detail ||
+        error.response?.data?.title ||
         'Não foi possível adicionar o cliente.';
 
       toast({
