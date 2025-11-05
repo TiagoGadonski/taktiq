@@ -370,7 +370,7 @@ export default function ProfilePage() {
           {!isEditing && profileData?.bio && (
             <div className="mt-6 pt-6 border-t">
               <p className="text-sm text-muted-foreground italic max-w-2xl">
-                "{profileData.bio}"
+                &ldquo;{profileData.bio}&rdquo;
               </p>
             </div>
           )}
