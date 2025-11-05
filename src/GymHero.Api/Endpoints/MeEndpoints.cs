@@ -32,6 +32,7 @@ public static class MeEndpoints
                 currentUser.ProfilePictureUrl,
                 currentUser.GymName,
                 currentUser.PhoneNumber,
+                currentUser.Injuries,
                 currentUser.CreatedAt
             );
             return Results.Ok(response);
@@ -56,6 +57,7 @@ public static class MeEndpoints
             userToUpdate.Weight = request.Weight;
             userToUpdate.GymName = request.GymName;
             userToUpdate.PhoneNumber = request.PhoneNumber;
+            userToUpdate.Injuries = request.Injuries;
 
             await context.SaveChangesAsync(ct);
             return Results.Ok();
