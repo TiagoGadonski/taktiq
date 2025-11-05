@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExerciseCard } from '@/components/workout/exercise-card';
 import { ExerciseSelectorModal } from '@/components/workout/exercise-selector-modal';
+import { WorkoutCompletionModal } from '@/components/workout/workout-completion-modal';
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -29,6 +30,7 @@ export default function WorkoutPage() {
   const [replacedExercises, setReplacedExercises] = useState<Record<string, any>>({});
   const [exerciseToReplace, setExerciseToReplace] = useState<WorkoutExercise | null>(null);
   const [isReplaceSelectorOpen, setIsReplaceSelectorOpen] = useState(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
 
   // Auto-select first workout when session starts
   useEffect(() => {
@@ -83,6 +85,20 @@ export default function WorkoutPage() {
 
     setIsReplaceSelectorOpen(false);
     setExerciseToReplace(null);
+  };
+
+  const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[]) => {
+    // If no exercises, don't auto-complete
+    if (!exercises || exercises.length === 0) return false;
+
+    // Check if all exercises have completed their target sets
+    const allExercisesCompleted = exercises.every((exercise) => {
+      const displayExercise = replacedExercises[exercise.id] || exercise;
+      const exerciseSets = sets.filter((s) => s.exerciseId === displayExercise.exerciseId);
+      return exerciseSets.length >= exercise.targetSets;
+    });
+
+    return allExercisesCompleted;
   };
 
   const handleStartSession = async (workoutId?: string) => {
@@ -155,6 +171,23 @@ export default function WorkoutPage() {
           title: motivationalMessage.title,
           description: motivationalMessage.description,
         });
+      }
+
+      // Check if all exercises are completed after adding this set
+      // We need to simulate the updated sets array by adding the new set
+      const selectedWorkout = currentSession.workoutPlan?.workouts?.find(
+        (w: Workout) => w.id === selectedWorkoutId
+      );
+      const exercisesToCheck = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+
+      if (exercisesToCheck.length > 0) {
+        // Simulate the new sets array with the just-added set
+        const updatedSets = [...(currentSession.sets || []), { ...setData, id: 'temp', exerciseId } as WorkoutSet];
+
+        if (checkWorkoutCompletion(exercisesToCheck, updatedSets)) {
+          // All exercises completed! Show completion modal
+          setShowCompletionModal(true);
+        }
       }
     } catch (error: any) {
       toast({
@@ -680,6 +713,13 @@ export default function WorkoutPage() {
           equipment: exerciseToReplace.exercise?.equipment || '',
         } : undefined}
         exercises={allExercises}
+      />
+
+      {/* Workout Completion Modal */}
+      <WorkoutCompletionModal
+        open={showCompletionModal}
+        onComplete={handleCompleteSession}
+        autoCompleteDelay={5000}
       />
     </div>
   );
