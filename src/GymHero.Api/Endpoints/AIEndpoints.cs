@@ -1458,9 +1458,17 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
             ["back pain"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada" },
             ["costas"] = new[] { "Good Morning", "Straight-Leg Deadlift", "Levantamento Terra Rígido", "T-Bar Row", "Bent-Over Barbell Row com Carga Pesada" },
 
-            // Shoulder issues
-            ["shoulder"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta", "Dips (deep)", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta" },
-            ["ombro"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Upright Row", "Remada Alta", "Dips (deep)", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta" },
+            // Shoulder issues - comprehensive list for rotator cuff and impingement protection
+            ["shoulder"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Mergulho Profundo", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta", "Lateral Raises com Carga Pesada", "Heavy Lateral Raises", "Overhead Press com Carga Máxima", "Military Press Pesado", "Pec Deck com Amplitude Excessiva", "Flyes com Halteres Pesados e Amplitude Completa" },
+            ["ombro"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Mergulho Profundo", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta", "Elevação Lateral com Carga Pesada", "Heavy Lateral Raises", "Desenvolvimento Militar Pesado", "Overhead Press com Carga Máxima", "Crucifixo com Halteres Pesados", "Pec Deck com Amplitude Excessiva" },
+
+            // Specific shoulder injuries - rotator cuff
+            ["rotator cuff"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Mergulho Profundo", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta", "Lateral Raises com Carga Pesada", "Heavy Lateral Raises", "Overhead Press com Carga Máxima", "Military Press Pesado", "Pec Deck com Amplitude Excessiva", "Flyes com Halteres Pesados e Amplitude Completa", "Muscle-ups", "Handstand Push-ups" },
+            ["manguito rotador"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Mergulho Profundo", "Bench Press with Wide Grip", "Supino com Pegada Muito Aberta", "Elevação Lateral com Carga Pesada", "Desenvolvimento Militar Pesado", "Overhead Press com Carga Máxima", "Crucifixo com Halteres Pesados", "Pec Deck com Amplitude Excessiva", "Muscle-ups", "Parada de Mão" },
+
+            // Shoulder impingement - similar but may allow some lighter movements
+            ["impingement"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Overhead Press com Carga Máxima", "Military Press Pesado", "Lateral Raises acima de 90 graus", "Pec Deck com Amplitude Excessiva" },
+            ["impacto"] = new[] { "Behind-Neck Press", "Desenvolvimento por Trás", "Behind-Neck Lat Pulldown", "Pulldown por Trás da Nuca", "Upright Row", "Remada Alta", "Dips (deep)", "Overhead Press com Carga Máxima", "Desenvolvimento Militar Pesado", "Elevação Lateral acima de 90 graus", "Pec Deck com Amplitude Excessiva" },
 
             // Wrist issues
             ["wrist"] = new[] { "Heavy Barbell Curls", "Rosca Barra Pesada", "Front Squat", "Agachamento Frontal", "Overhead Press com Barra Pesada", "Push-ups com Rotação" },
@@ -1525,8 +1533,16 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
             ["back pain"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust" },
             ["costas"] = new[] { "Leg Press", "Cadeira Flexora", "Remada com Apoio no Peito", "Pulldown", "Hip Thrust" },
 
-            ["shoulder"] = new[] { "Desenvolvimento com Halteres", "Lateral Raises (leve)", "Face Pulls", "Cable Flies", "Push-ups (ROM controlado)" },
-            ["ombro"] = new[] { "Desenvolvimento com Halteres", "Elevação Lateral (leve)", "Face Pulls", "Crucifixo no Cabo", "Flexões (ROM controlado)" },
+            ["shoulder"] = new[] { "Desenvolvimento com Halteres (neutro)", "Elevação Frontal Moderada", "Face Pulls", "Crucifixo no Cabo (altura moderada)", "Push-ups (ROM controlado)", "Remada com Apoio no Peito", "Pulldown Neutro", "Lateral Raises com Cabo (leve)", "Rotação Externa com Banda", "Scapular Retraction", "Arnold Press (leve)" },
+            ["ombro"] = new[] { "Desenvolvimento com Halteres (pegada neutra)", "Elevação Frontal Moderada", "Face Pulls", "Crucifixo no Cabo (altura moderada)", "Flexões (ROM controlado)", "Remada com Apoio no Peito", "Pulldown Neutro", "Elevação Lateral no Cabo (leve)", "Rotação Externa com Elástico", "Retração Escapular", "Arnold Press (leve)" },
+
+            // Rotator cuff specific - focus on rehabilitation and strengthening
+            ["rotator cuff"] = new[] { "Rotação Externa com Banda Leve", "Rotação Interna com Banda Leve", "Face Pulls (leve)", "Scapular Wall Slides", "Prone Y-T-W", "Retração Escapular", "Isométricos de Ombro", "Pulldown Neutro (leve)", "Remada com Apoio no Peito (leve)", "Band Pull-Aparts" },
+            ["manguito rotador"] = new[] { "Rotação Externa com Elástico Leve", "Rotação Interna com Elástico Leve", "Face Pulls (leve)", "Wall Slides", "Prone Y-T-W", "Retração Escapular", "Isométricos de Ombro", "Pulldown Neutro (leve)", "Remada com Apoio no Peito (leve)", "Separação de Banda" },
+
+            // Impingement - focus on exercises that avoid overhead positions
+            ["impingement"] = new[] { "Face Pulls", "Elevação Frontal até 90 graus", "Lateral Raises até 90 graus (leve)", "Remada com Apoio no Peito", "Pulldown Neutro", "Push-ups em Superfície Elevada", "Rotação Externa com Banda", "Scapular Retraction", "Cable Rows (neutro)" },
+            ["impacto"] = new[] { "Face Pulls", "Elevação Frontal até 90 graus", "Elevação Lateral até 90 graus (leve)", "Remada com Apoio no Peito", "Pulldown Neutro", "Flexões em Superfície Elevada", "Rotação Externa com Elástico", "Retração Escapular", "Remada no Cabo (neutro)" },
 
             ["wrist"] = new[] { "Rosca Martelo", "Rosca com Halteres", "Agachamento no Hack", "Desenvolvimento com Halteres", "Cabos para Tríceps" },
             ["punho"] = new[] { "Rosca Martelo", "Rosca com Halteres", "Agachamento no Hack", "Desenvolvimento com Halteres", "Cabos para Tríceps" },
