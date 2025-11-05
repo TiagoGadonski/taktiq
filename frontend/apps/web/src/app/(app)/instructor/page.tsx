@@ -84,13 +84,16 @@ export default function InstructorPage() {
     const fetchClients = async () => {
       try {
         const response = await apiClient.get<any>('/personal/clients');
-        setClients(response.data);
+        // Ensure we always set an array, even if response.data is undefined or null
+        setClients(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         toast({
           title: 'Erro',
           description: 'Não foi possível carregar os clientes.',
           variant: 'destructive',
         });
+        // Set to empty array on error to prevent undefined issues
+        setClients([]);
       } finally {
         setIsLoading(false);
       }
@@ -101,7 +104,7 @@ export default function InstructorPage() {
     }
   }, [user, toast]);
 
-  const filteredClients = clients.filter((c) =>
+  const filteredClients = (clients || []).filter((c) =>
     c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     c.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -178,7 +181,7 @@ export default function InstructorPage() {
 
       // Refresh client list
       const response = await apiClient.get<any>('/personal/clients');
-      setClients(response.data);
+      setClients(Array.isArray(response.data) ? response.data : []);
     } catch (error: any) {
       const errorMessage = error.response?.data?.message ||
         error.response?.data?.detail ||
