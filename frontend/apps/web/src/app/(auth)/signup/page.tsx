@@ -2,21 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
-import { apiClient } from '@/lib/api';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TaktIQLogo } from '@/components/taktiq-logo';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function SignupPage() {
-  const router = useRouter();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { signup, isSignupPending } = useAuth();
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -47,41 +45,24 @@ export default function SignupPage() {
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (formData.password.length < 8) {
       toast({
         title: 'Erro',
-        description: 'A senha deve ter no mínimo 6 caracteres.',
+        description: 'A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, uma minúscula e um número.',
         variant: 'destructive',
       });
       return;
     }
 
-    setIsLoading(true);
-
     try {
-      const response = await apiClient.post('/auth/signup', {
+      await signup({
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
-
-      toast({
-        title: 'Conta criada!',
-        description: 'Sua conta foi criada com sucesso. Redirecionando...',
-      });
-
-      // Wait a moment and redirect to login
-      setTimeout(() => {
-        router.push('/login');
-      }, 1500);
-    } catch (error: any) {
-      toast({
-        title: 'Erro',
-        description: error.response?.data?.message || 'Não foi possível criar sua conta.',
-        variant: 'destructive',
-      });
-    } finally {
-      setIsLoading(false);
+      // The signup mutation handles token storage, redirect to dashboard, and success toast
+    } catch (error) {
+      // Error toast is handled by the mutation
     }
   };
 
@@ -116,7 +97,7 @@ export default function SignupPage() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
-                disabled={isLoading}
+                disabled={isSignupPending}
                 className="h-11"
               />
             </div>
@@ -130,7 +111,7 @@ export default function SignupPage() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
-                disabled={isLoading}
+                disabled={isSignupPending}
                 className="h-11"
               />
             </div>
@@ -140,11 +121,11 @@ export default function SignupPage() {
               <Input
                 id="password"
                 type="password"
-                placeholder="Mínimo 6 caracteres"
+                placeholder="Mínimo 8 caracteres (maiúscula, minúscula e número)"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
-                disabled={isLoading}
+                disabled={isSignupPending}
                 className="h-11"
               />
             </div>
@@ -158,7 +139,7 @@ export default function SignupPage() {
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 required
-                disabled={isLoading}
+                disabled={isSignupPending}
                 className="h-11"
               />
             </div>
@@ -168,7 +149,7 @@ export default function SignupPage() {
                 id="terms"
                 checked={agreedToTerms}
                 onCheckedChange={(checked) => setAgreedToTerms(checked === true)}
-                disabled={isLoading}
+                disabled={isSignupPending}
               />
               <div className="flex-1">
                 <label
@@ -186,9 +167,9 @@ export default function SignupPage() {
             <Button
               type="submit"
               className="w-full h-11 font-semibold hover-lift tap-scale"
-              disabled={isLoading || !agreedToTerms}
+              disabled={isSignupPending || !agreedToTerms}
             >
-              {isLoading ? (
+              {isSignupPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Criando conta...
