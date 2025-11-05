@@ -55,9 +55,9 @@ builder.Services.AddAuthentication(defaultScheme: JwtBearerDefaults.Authenticati
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequirePersonalRole", policy => policy.RequireRole("Personal"));
+    options.AddPolicy("RequirePersonalRole", policy => policy.RequireRole("PersonalTrainer"));
     options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("AdminOrPersonalPolicy", policy => policy.RequireRole("Admin", "Personal"));
+    options.AddPolicy("AdminOrPersonalPolicy", policy => policy.RequireRole("Admin", "PersonalTrainer"));
 });
 
 // Add rate limiting to prevent brute force and DOS attacks

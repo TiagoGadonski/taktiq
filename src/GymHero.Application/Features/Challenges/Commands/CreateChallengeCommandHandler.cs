@@ -69,7 +69,7 @@ public class CreateChallengeCommandHandler : IRequestHandler<CreateChallengeComm
 
         if (challenge.TargetType == Domain.Enums.ChallengeTargetType.AllTrainers)
         {
-            usersQuery = usersQuery.Where(u => u.Role == "Personal");
+            usersQuery = usersQuery.Where(u => u.Role == "PersonalTrainer");
         }
         // AllUsers não precisa de filtro, SpecificUsers não deve chegar aqui (IsDefault=true)
 

@@ -57,7 +57,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
         var defaultChallenges = await _context.Challenges
             .Where(c => c.IsDefault &&
                        (c.TargetType == Domain.Enums.ChallengeTargetType.AllUsers ||
-                        (c.TargetType == Domain.Enums.ChallengeTargetType.AllTrainers && user.Role == "Personal")))
+                        (c.TargetType == Domain.Enums.ChallengeTargetType.AllTrainers && user.Role == "PersonalTrainer")))
             .ToListAsync(cancellationToken);
 
         // Criar registos de progresso para cada desafio padrão
