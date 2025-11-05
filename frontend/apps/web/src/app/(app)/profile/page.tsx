@@ -275,8 +275,9 @@ export default function ProfilePage() {
         </div>
         <Button
           variant="outline"
-          onClick={() => router.push(`/users/${user?.id}`)}
+          onClick={() => router.push(`/users/${profileData?.id || user?.id}`)}
           className="w-full sm:w-auto"
+          disabled={!profileData?.id && !user?.id}
         >
           <Eye className="mr-2 h-4 w-4" />
           Ver Perfil Público
