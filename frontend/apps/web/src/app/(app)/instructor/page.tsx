@@ -61,8 +61,11 @@ export default function InstructorPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [notesDialogOpen, setNotesDialogOpen] = useState(false);
+  const [addClientDialogOpen, setAddClientDialogOpen] = useState(false);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [clientNotes, setClientNotes] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [isAddingClient, setIsAddingClient] = useState(false);
 
   // Redirect if not personal trainer
   useEffect(() => {
@@ -132,6 +135,65 @@ export default function InstructorPage() {
     }
   };
 
+  const handleAddClient = () => {
+    setClientEmail('');
+    setAddClientDialogOpen(true);
+  };
+
+  const handleSaveClient = async () => {
+    if (!clientEmail.trim()) {
+      toast({
+        title: 'Erro',
+        description: 'Por favor, insira o email do cliente.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(clientEmail)) {
+      toast({
+        title: 'Erro',
+        description: 'Por favor, insira um email válido.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsAddingClient(true);
+
+    try {
+      await apiClient.post('/personal/clients', {
+        clientEmail: clientEmail.trim(),
+      });
+
+      toast({
+        title: 'Sucesso',
+        description: 'Cliente adicionado com sucesso.',
+      });
+
+      setAddClientDialogOpen(false);
+      setClientEmail('');
+
+      // Refresh client list
+      const response = await apiClient.get<any>('/personal/clients');
+      setClients(response.data);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        error.response?.data?.detail ||
+        'Não foi possível adicionar o cliente.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsAddingClient(false);
+    }
+  };
+
   if (user?.role !== 'PersonalTrainer') {
     return null;
   }
@@ -163,7 +225,10 @@ export default function InstructorPage() {
               Gerencie seus clientes, treinos e progresso
             </p>
           </div>
-          <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale">
+          <Button
+            onClick={handleAddClient}
+            className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+          >
             <Plus className="mr-2 h-4 w-4" />
             Adicionar Cliente
           </Button>
@@ -360,7 +425,10 @@ export default function InstructorPage() {
                   ? 'Tente ajustar sua pesquisa'
                   : 'Comece adicionando seu primeiro cliente'}
               </p>
-              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale">
+              <Button
+                onClick={handleAddClient}
+                className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+              >
                 <Plus className="mr-2 h-4 w-4" />
                 Adicionar Cliente
               </Button>
@@ -437,6 +505,67 @@ export default function InstructorPage() {
               className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
             >
               Salvar Notas
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Client Dialog */}
+      <Dialog open={addClientDialogOpen} onOpenChange={setAddClientDialogOpen}>
+        <DialogContent className="glass">
+          <DialogHeader>
+            <DialogTitle>Adicionar Cliente</DialogTitle>
+            <DialogDescription>
+              Insira o email do cliente que deseja adicionar à sua lista
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="clientEmail">Email do Cliente</Label>
+              <Input
+                id="clientEmail"
+                type="email"
+                placeholder="cliente@exemplo.com"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isAddingClient) {
+                    handleSaveClient();
+                  }
+                }}
+                className="glass"
+                disabled={isAddingClient}
+              />
+              <p className="text-sm text-muted-foreground">
+                O cliente deve estar cadastrado no sistema e ter a função de Aluno
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setAddClientDialogOpen(false)}
+              className="hover-lift tap-scale"
+              disabled={isAddingClient}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSaveClient}
+              className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+              disabled={isAddingClient}
+            >
+              {isAddingClient ? (
+                <>
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                  Adicionando...
+                </>
+              ) : (
+                <>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Adicionar
+                </>
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
