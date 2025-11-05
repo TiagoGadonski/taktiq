@@ -59,6 +59,12 @@ interface Friend {
   friendEmail: string;
 }
 
+interface UserProfile {
+  injuries?: string | null;
+  healthConditions?: string | null;
+  exerciseGoal?: string | null;
+}
+
 export default function AIWorkoutPage() {
   // Single workout state
   const [prompt, setPrompt] = useState('');
@@ -112,7 +118,7 @@ export default function AIWorkoutPage() {
   });
 
   // Fetch user profile for completeness check
-  const { data: userProfile } = useQuery({
+  const { data: userProfile } = useQuery<UserProfile>({
     queryKey: ['user-profile'],
     queryFn: async () => {
       return apiClient.get('/me');
