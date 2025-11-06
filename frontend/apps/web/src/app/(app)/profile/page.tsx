@@ -616,8 +616,7 @@ export default function ProfilePage() {
                   <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
                     <Button type="submit" className="flex-1 shadow-md">
                       <Save className="mr-2 h-4 w-4" />
-                      <span className="hidden xs:inline">Salvar Alterações</span>
-                      <span className="inline xs:hidden">Salvar</span>
+                      Salvar Alterações
                     </Button>
                     <Button
                       type="button"
