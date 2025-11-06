@@ -133,7 +133,8 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("CreatorId")
+                        .HasDatabaseName("IX_Challenges_CreatorId");
 
                     b.ToTable("Challenges");
                 });
@@ -497,7 +498,8 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("OwnerId")
+                        .HasDatabaseName("IX_WorkoutPlans_OwnerId");
 
                     b.ToTable("WorkoutPlans");
                 });
@@ -528,7 +530,13 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OwnerId")
+                        .HasDatabaseName("IX_WorkoutSessions_OwnerId");
+
                     b.HasIndex("WorkoutPlanId");
+
+                    b.HasIndex("OwnerId", "CompletedAt")
+                        .HasDatabaseName("IX_WorkoutSessions_OwnerId_CompletedAt");
 
                     b.ToTable("WorkoutSessions");
                 });
@@ -565,9 +573,11 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ExerciseId")
+                        .HasDatabaseName("IX_WorkoutSets_ExerciseId");
 
-                    b.HasIndex("WorkoutSessionId");
+                    b.HasIndex("WorkoutSessionId")
+                        .HasDatabaseName("IX_WorkoutSets_WorkoutSessionId");
 
                     b.ToTable("WorkoutSets");
                 });

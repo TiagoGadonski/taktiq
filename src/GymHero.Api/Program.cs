@@ -26,6 +26,22 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+// Configure Redis distributed cache
+var redisConnection = builder.Configuration.GetConnectionString("Redis");
+if (!string.IsNullOrEmpty(redisConnection))
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = redisConnection;
+        options.InstanceName = "GymHero_";
+    });
+}
+else
+{
+    // Fallback to in-memory cache if Redis is not configured
+    builder.Services.AddDistributedMemoryCache();
+}
+
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<GymHero.Api.Services.ExerciseMediaService>();
 builder.Services.AddSingleton<GymHero.Api.Services.IExerciseMediaService, GymHero.Api.Services.ExerciseMediaService>(sp =>

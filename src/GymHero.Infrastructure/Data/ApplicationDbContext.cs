@@ -66,6 +66,43 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
               .OnDelete(DeleteBehavior.Restrict);
     });
 
+        // Performance indexes for frequently queried columns
+        modelBuilder.Entity<WorkoutSession>(entity =>
+        {
+            // Index for user-specific session queries
+            entity.HasIndex(s => s.OwnerId)
+                .HasDatabaseName("IX_WorkoutSessions_OwnerId");
+
+            // Composite index for common query pattern (user sessions by completion date)
+            entity.HasIndex(s => new { s.OwnerId, s.CompletedAt })
+                .HasDatabaseName("IX_WorkoutSessions_OwnerId_CompletedAt");
+        });
+
+        modelBuilder.Entity<WorkoutSet>(entity =>
+        {
+            // Index for personal records and exercise-specific queries
+            entity.HasIndex(s => s.ExerciseId)
+                .HasDatabaseName("IX_WorkoutSets_ExerciseId");
+
+            // Index for session-specific set queries
+            entity.HasIndex(s => s.WorkoutSessionId)
+                .HasDatabaseName("IX_WorkoutSets_WorkoutSessionId");
+        });
+
+        modelBuilder.Entity<Challenge>(entity =>
+        {
+            // Index for creator-specific challenge queries
+            entity.HasIndex(c => c.CreatorId)
+                .HasDatabaseName("IX_Challenges_CreatorId");
+        });
+
+        modelBuilder.Entity<WorkoutPlan>(entity =>
+        {
+            // Index for user-specific workout plan queries
+            entity.HasIndex(wp => wp.OwnerId)
+                .HasDatabaseName("IX_WorkoutPlans_OwnerId");
+        });
+
         base.OnModelCreating(modelBuilder);
     }
 }
