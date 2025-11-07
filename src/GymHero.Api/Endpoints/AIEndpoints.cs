@@ -448,6 +448,27 @@ public static class AIEndpoints
             ("Abdominal na Polia", "abs", "cable", false),
             ("Abdominal Canivete", "abs", "body only", false),
             ("Mountain Climbers", "abs", "body only", false)
+        },
+        ["cardio"] = new()
+        {
+            ("Corrida na Esteira", "cardio", "machine", true),
+            ("Corrida ao Ar Livre", "cardio", "body only", true),
+            ("Bicicleta Ergométrica", "cardio", "machine", true),
+            ("Elíptico", "cardio", "machine", true),
+            ("Remador", "cardio", "machine", true),
+            ("Pular Corda", "cardio", "body only", true),
+            ("Burpee", "cardio", "body only", true),
+            ("Polichinelo", "cardio", "body only", true),
+            ("High Knees", "cardio", "body only", true),
+            ("Bike Sprint", "cardio", "machine", true),
+            ("Escada Rolante", "cardio", "machine", true),
+            ("Caminhada Rápida", "cardio", "body only", true),
+            ("Corrida com Elevação", "cardio", "machine", true),
+            ("Assault Bike", "cardio", "machine", true),
+            ("Box Jump", "cardio", "body only", true),
+            ("Sprint Intervalado", "cardio", "body only", true),
+            ("Step (Subir e Descer)", "cardio", "body only", true),
+            ("Natação Simulada", "cardio", "body only", true)
         }
     };
 
@@ -727,7 +748,17 @@ public static class AIEndpoints
                 ["abdômen"] = "abdômen",
                 ["abdominal"] = "abdômen",
                 ["abs"] = "abdômen",
-                ["core"] = "abdômen"
+                ["core"] = "abdômen",
+                ["cardio"] = "cardio",
+                ["cardiovascular"] = "cardio",
+                ["aeróbico"] = "cardio",
+                ["aerobico"] = "cardio",
+                ["corrida"] = "cardio",
+                ["running"] = "cardio",
+                ["bike"] = "cardio",
+                ["bicicleta"] = "cardio",
+                ["esteira"] = "cardio",
+                ["treadmill"] = "cardio"
             };
 
             foreach (var (keyword, muscleGroup) in muscleKeywords)
@@ -792,20 +823,27 @@ public static class AIEndpoints
     private static ExerciseInstruction CreateExerciseInstruction(string name, string bodyPart, string equipment, bool isMainExercise, string fitnessLevel = "intermediário", bool isCompound = true)
     {
         // Generate progression notes based on fitness level and exercise type
-        var progressionNotes = (fitnessLevel.ToLower(), isCompound, isMainExercise) switch
-        {
-            ("iniciante", true, true) => "Semana 1-2: 3x10 | Semana 3-4: 3x12 | Foco em técnica e controle",
-            ("iniciante", true, false) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Aumente amplitude gradualmente",
-            ("iniciante", false, _) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Conexão mente-músculo",
+        var progressionNotes = bodyPart == "cardio"
+            ? fitnessLevel.ToLower() switch
+            {
+                "iniciante" => "Semana 1-2: 15 min ritmo leve | Semana 3-4: 20 min ritmo moderado | Foco na consistência",
+                "avançado" => "Semana 1: 30 min moderado | Semana 2: 35 min com intervalos | Semana 3: 40 min | Semana 4: 30 min (recuperação)",
+                _ => "Semana 1: 20 min ritmo moderado | Semana 2: 25 min | Semana 3: 30 min com intervalos | Semana 4: 20 min (recuperação)"
+            }
+            : (fitnessLevel.ToLower(), isCompound, isMainExercise) switch
+            {
+                ("iniciante", true, true) => "Semana 1-2: 3x10 | Semana 3-4: 3x12 | Foco em técnica e controle",
+                ("iniciante", true, false) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Aumente amplitude gradualmente",
+                ("iniciante", false, _) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Conexão mente-músculo",
 
-            ("avançado", true, true) => "Semana 1: 5x6 (pesado) | Semana 2: 4x8 | Semana 3: 5x5 (máximo) | Semana 4: 3x10 (deload)",
-            ("avançado", true, false) => "Semana 1: 4x8 | Semana 2: 4x10 | Semana 3: 5x8 (↑ carga) | Semana 4: 3x12 (deload)",
-            ("avançado", false, _) => "Semana 1: 4x10 | Semana 2: 4x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x15 (deload)",
+                ("avançado", true, true) => "Semana 1: 5x6 (pesado) | Semana 2: 4x8 | Semana 3: 5x5 (máximo) | Semana 4: 3x10 (deload)",
+                ("avançado", true, false) => "Semana 1: 4x8 | Semana 2: 4x10 | Semana 3: 5x8 (↑ carga) | Semana 4: 3x12 (deload)",
+                ("avançado", false, _) => "Semana 1: 4x10 | Semana 2: 4x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x15 (deload)",
 
-            (_, true, true) => "Semana 1: 3x10 | Semana 2: 4x10 | Semana 3: 4x8 (↑ carga) | Semana 4: 3x10 (deload)",
-            (_, true, false) => "Semana 1: 3x10 | Semana 2: 3x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x12",
-            _ => "Semana 1: 3x12 | Semana 2: 3x15 | Semana 3: 4x12 (↑ carga) | Semana 4: 3x15"
-        };
+                (_, true, true) => "Semana 1: 3x10 | Semana 2: 4x10 | Semana 3: 4x8 (↑ carga) | Semana 4: 3x10 (deload)",
+                (_, true, false) => "Semana 1: 3x10 | Semana 2: 3x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x12",
+                _ => "Semana 1: 3x12 | Semana 2: 3x15 | Semana 3: 4x12 (↑ carga) | Semana 4: 3x15"
+            };
 
         var instructionsMap = new Dictionary<string, List<string>>
         {
@@ -822,7 +860,21 @@ public static class AIEndpoints
             ["Elevação Lateral"] = new() { "Segure os halteres ao lado do corpo", "Com cotovelos ligeiramente flexionados, eleve os braços lateralmente", "Suba até a altura dos ombros", "Desça controladamente" },
             ["Prancha"] = new() { "Apoie os antebraços e pontas dos pés no chão", "Mantenha o corpo reto como uma prancha", "Contraia abdômen e glúteos", "Segure a posição pelo tempo determinado" },
             ["Abdominal Reto"] = new() { "Deite-se de costas com joelhos flexionados", "Coloque as mãos atrás da cabeça", "Contraia o abdômen elevando o tronco", "Desça controladamente sem relaxar completamente" },
-            ["Flexão de Braço"] = new() { "Posicione as mãos no chão, afastadas na largura dos ombros", "Mantenha o corpo reto dos pés à cabeça", "Desça o corpo flexionando os cotovelos", "Empurre de volta à posição inicial" }
+            ["Flexão de Braço"] = new() { "Posicione as mãos no chão, afastadas na largura dos ombros", "Mantenha o corpo reto dos pés à cabeça", "Desça o corpo flexionando os cotovelos", "Empurre de volta à posição inicial" },
+            ["Corrida na Esteira"] = new() { "Ajuste a velocidade e inclinação conforme seu nível", "Mantenha a postura ereta e olhar à frente", "Pise com a parte média do pé", "Mantenha os braços relaxados e balançando naturalmente" },
+            ["Corrida ao Ar Livre"] = new() { "Escolha um ritmo sustentável", "Mantenha a postura ereta durante toda a corrida", "Respire de forma rítmica e controlada", "Aumente a intensidade progressivamente" },
+            ["Bicicleta Ergométrica"] = new() { "Ajuste o selim na altura do quadril", "Mantenha as costas retas e core contraído", "Pedale com cadência constante", "Ajuste a resistência conforme necessário" },
+            ["Elíptico"] = new() { "Posicione os pés firmemente nas plataformas", "Segure as barras móveis para trabalho de braços", "Mantenha o movimento fluido e contínuo", "Varie a resistência e inclinação" },
+            ["Remador"] = new() { "Prenda os pés nas alças", "Puxe o cabo até o abdômen mantendo as costas retas", "Estenda as pernas primeiro, depois puxe com os braços", "Retorne controladamente à posição inicial" },
+            ["Pular Corda"] = new() { "Segure a corda com as mãos na altura do quadril", "Pule com as pontas dos pés", "Mantenha os cotovelos próximos ao corpo", "Gire a corda usando os pulsos" },
+            ["Burpee"] = new() { "Comece em pé, depois agache e apoie as mãos no chão", "Jogue as pernas para trás em posição de flexão", "Faça uma flexão de braço", "Pule de volta e salte com os braços para cima" },
+            ["Polichinelo"] = new() { "Fique em pé com os pés juntos e braços ao lado", "Salte abrindo as pernas e elevando os braços acima da cabeça", "Retorne à posição inicial saltando", "Mantenha o ritmo constante" },
+            ["High Knees"] = new() { "Corra no lugar elevando os joelhos até a altura do quadril", "Alterne as pernas rapidamente", "Balance os braços acompanhando o movimento", "Mantenha o core contraído" },
+            ["Bike Sprint"] = new() { "Ajuste a resistência da bike para sprints", "Pedale na máxima velocidade por intervalos curtos", "Mantenha o core estável", "Alterne entre sprints e recuperação ativa" },
+            ["Escada Rolante"] = new() { "Suba os degraus com postura ereta", "Use os corrimãos apenas para equilíbrio", "Pise com o pé inteiro em cada degrau", "Mantenha um ritmo consistente" },
+            ["Caminhada Rápida"] = new() { "Caminhe em ritmo acelerado", "Balance os braços naturalmente", "Mantenha os passos longos e firmes", "Respire profundamente" },
+            ["Sprint Intervalado"] = new() { "Aqueça por 5 minutos", "Corra na máxima velocidade por 20-30 segundos", "Recupere caminhando ou trotando por 60-90 segundos", "Repita o ciclo conforme planejado" },
+            ["Box Jump"] = new() { "Posicione-se na frente de uma caixa estável", "Agache ligeiramente e salte explosivamente", "Aterrisse suavemente com ambos os pés na caixa", "Desça controladamente e repita" }
         };
 
         // YouTube video demonstrations for each exercise
@@ -884,7 +936,21 @@ public static class AIEndpoints
             ["Abdominal Infra"] = "https://www.youtube.com/watch?v=JB2oyawG9KI",
             ["Abdominal Bicicleta"] = "https://www.youtube.com/watch?v=9FGilxCbdz8",
             ["Elevação de Pernas"] = "https://www.youtube.com/watch?v=JB2oyawG9KI",
-            ["Abdominal na Polia"] = "https://www.youtube.com/watch?v=LqH5tyDWpik"
+            ["Abdominal na Polia"] = "https://www.youtube.com/watch?v=LqH5tyDWpik",
+            ["Corrida na Esteira"] = "https://www.youtube.com/watch?v=wCVSv7UxB2E",
+            ["Corrida ao Ar Livre"] = "https://www.youtube.com/watch?v=brFHyOtTwH4",
+            ["Bicicleta Ergométrica"] = "https://www.youtube.com/watch?v=8-d1W8U_6kI",
+            ["Elíptico"] = "https://www.youtube.com/watch?v=4x5tP-LhfiY",
+            ["Remador"] = "https://www.youtube.com/watch?v=GiAVqkCT0RA",
+            ["Pular Corda"] = "https://www.youtube.com/watch?v=1BZM2Vre5oc",
+            ["Burpee"] = "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+            ["Polichinelo"] = "https://www.youtube.com/watch?v=iSSAk4XCsRA",
+            ["High Knees"] = "https://www.youtube.com/watch?v=8opcQdC-V-U",
+            ["Bike Sprint"] = "https://www.youtube.com/watch?v=8-d1W8U_6kI",
+            ["Escada Rolante"] = "https://www.youtube.com/watch?v=mRx-3LQbfvk",
+            ["Caminhada Rápida"] = "https://www.youtube.com/watch?v=gXvlz0JgBZ0",
+            ["Sprint Intervalado"] = "https://www.youtube.com/watch?v=M5gC6B5WXX8",
+            ["Box Jump"] = "https://www.youtube.com/watch?v=NBY9-kTuHEk"
         };
 
         var instructions = instructionsMap.ContainsKey(name)
@@ -893,16 +959,23 @@ public static class AIEndpoints
 
         var videoUrl = videoMap.ContainsKey(name) ? videoMap[name] : null;
 
-        // Adapt sets, reps, and rest based on fitness level
-        var (sets, reps, rest) = (fitnessLevel.ToLower(), isMainExercise) switch
-        {
-            ("iniciante" or "beginner", true) => (3, "10-12", "120s"),
-            ("iniciante" or "beginner", false) => (3, "12-15", "90s"),
-            ("avançado" or "advanced", true) => (5, "6-8", "90s"),
-            ("avançado" or "advanced", false) => (4, "8-10", "60s"),
-            (_, true) => (4, "8-10", "90s"),   // Intermediate main
-            _ => (3, "10-12", "60s")             // Intermediate secondary
-        };
+        // Adapt sets, reps, and rest based on fitness level and exercise type
+        var (sets, reps, rest) = bodyPart == "cardio"
+            ? fitnessLevel.ToLower() switch
+            {
+                "iniciante" or "beginner" => (1, "15-20 min", "60s"),
+                "avançado" or "advanced" => (1, "30-40 min", "60s"),
+                _ => (1, "20-30 min", "60s")  // Intermediate
+            }
+            : (fitnessLevel.ToLower(), isMainExercise) switch
+            {
+                ("iniciante" or "beginner", true) => (3, "10-12", "120s"),
+                ("iniciante" or "beginner", false) => (3, "12-15", "90s"),
+                ("avançado" or "advanced", true) => (5, "6-8", "90s"),
+                ("avançado" or "advanced", false) => (4, "8-10", "60s"),
+                (_, true) => (4, "8-10", "90s"),   // Intermediate main
+                _ => (3, "10-12", "60s")             // Intermediate secondary
+            };
 
         return new ExerciseInstruction(
             Name: name,
