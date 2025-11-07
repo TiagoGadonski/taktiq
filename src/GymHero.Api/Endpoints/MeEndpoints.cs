@@ -36,6 +36,7 @@ public static class MeEndpoints
                 currentUser.Injuries,
                 currentUser.HealthConditions,
                 currentUser.ExerciseGoal,
+                currentUser.TrainingSplit,
                 currentUser.CreatedAt
             );
             return Results.Ok(response);
@@ -63,6 +64,7 @@ public static class MeEndpoints
             userToUpdate.Injuries = request.Injuries;
             userToUpdate.HealthConditions = request.HealthConditions;
             userToUpdate.ExerciseGoal = request.ExerciseGoal;
+            userToUpdate.TrainingSplit = request.TrainingSplit;
 
             await context.SaveChangesAsync(ct);
             return Results.Ok();

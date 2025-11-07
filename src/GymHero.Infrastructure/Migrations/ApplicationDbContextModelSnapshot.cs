@@ -363,6 +363,9 @@ namespace GymHero.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("TrainingSplit")
+                        .HasColumnType("text");
+
                     b.Property<double?>("Weight")
                         .HasColumnType("double precision");
 
