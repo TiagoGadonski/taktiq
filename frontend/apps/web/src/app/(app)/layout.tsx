@@ -4,53 +4,52 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
-  Dumbbell,
   Home,
-  Trophy,
-  TrendingUp,
-  Calendar,
+  Dumbbell,
   Target,
-  LogOut,
-  Menu,
-  Sparkles,
+  Activity,
   Users,
   LucideIcon,
   Shield,
   UserCog,
   Info,
-  Activity,
+  Settings,
+  LogOut,
+  Bell,
+  User,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { ThemeSwitcher } from '@/components/theme-switcher';
-import { LevelUpIconSimple } from '@/components/level-up-icon';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { getAssetUrl } from '@/lib/env';
+import { useTheme } from 'next-themes';
 
+// Main navigation - 5 clean, intuitive tabs
 const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
-  { name: 'Dashboard', href: '/dashboard', icon: Home },
-  { name: 'Treino IA', href: '/ai-workout', icon: Sparkles },
-  { name: 'Treino do Dia', href: '/workout', icon: Dumbbell },
-  { name: 'Atividade', href: '/activity', icon: Activity },
+  { name: 'Início', href: '/dashboard', icon: Home },
+  { name: 'Treinar', href: '/ai-workout', icon: Dumbbell },
   { name: 'Planos', href: '/plans', icon: Target },
-  { name: 'Desafios', href: '/challenges', icon: Trophy },
-  { name: 'Amigos', href: '/friends', icon: Users },
-  { name: 'Sobre Nós', href: '/about', icon: Info },
+  { name: 'Atividade', href: '/activity', icon: Activity },
+  { name: 'Comunidade', href: '/friends', icon: Users },
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading, isAuthenticated, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -70,199 +69,282 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  const NavLinks = ({ onClick }: { onClick?: () => void }) => (
-    <>
-      {navigation.map((item) => {
-        const isActive = pathname === item.href;
-        return (
-          <Link
-            key={item.name}
-            href={item.href}
-            onClick={onClick}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover-lift tap-scale ${
-              isActive
-                ? 'bg-primary text-primary-foreground shadow-lg'
-                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-            }`}
-          >
-            <item.icon className="h-5 w-5" />
-            {item.name}
-          </Link>
-        );
-      })}
-    </>
-  );
+  // Helper to check if route is active (includes sub-routes)
+  const isRouteActive = (href: string) => {
+    if (href === '/dashboard') return pathname === href;
+    return pathname.startsWith(href);
+  };
 
-  // Add admin/instructor navigation based on user role
-  const additionalNavigation = [];
+  // Get current page title based on pathname
+  const getCurrentPageTitle = () => {
+    const currentNav = navigation.find((item) => isRouteActive(item.href));
+    return currentNav?.name || 'GymHero';
+  };
+
+  // Build additional navigation items based on role
+  const additionalNavItems = [];
   if (user?.role === 'Admin') {
-    additionalNavigation.push({ name: 'Admin', href: '/admin', icon: Shield });
+    additionalNavItems.push({ name: 'Admin', href: '/admin', icon: Shield });
   }
   if (user?.role === 'PersonalTrainer') {
-    additionalNavigation.push({ name: 'Instrutor', href: '/instructor', icon: UserCog });
+    additionalNavItems.push({ name: 'Instrutor', href: '/instructor', icon: UserCog });
   }
 
   return (
-    <div className="flex h-screen bg-background gym-pattern">
-      {/* Desktop Sidebar */}
-      <aside className="hidden w-64 border-r glass-strong lg:block">
-        <div className="flex h-full flex-col">
-          <div className="flex h-16 items-center justify-between border-b border-border/50 px-6">
-            <Link href="/dashboard" className="hover-lift tap-scale">
-              <TaktIQLogo width={140} height={40} className="transition-transform hover:scale-105" />
-            </Link>
-          </div>
+    <div className="flex min-h-screen flex-col bg-background gym-pattern">
+      {/* Top Navigation Bar - Desktop */}
+      <header className="sticky top-0 z-50 hidden border-b glass-strong lg:block">
+        <div className="container mx-auto flex h-16 items-center gap-8 px-6">
+          {/* Logo */}
+          <Link href="/dashboard" className="hover-lift tap-scale">
+            <TaktIQLogo width={140} height={40} className="transition-transform hover:scale-105" />
+          </Link>
 
-          <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
-            <NavLinks />
-            {additionalNavigation.length > 0 && (
-              <>
-                <div className="my-2 border-t border-border/50" />
-                {additionalNavigation.map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover-lift tap-scale ${
-                        isActive
-                          ? 'bg-primary text-primary-foreground shadow-lg'
-                          : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-                      }`}
-                    >
-                      <item.icon className="h-5 w-5" />
-                      {item.name}
-                    </Link>
-                  );
-                })}
-              </>
-            )}
+          {/* Desktop Navigation Tabs */}
+          <nav className="flex flex-1 items-center gap-1">
+            {navigation.map((item) => {
+              const isActive = isRouteActive(item.href);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover-lift tap-scale ${
+                    isActive
+                      ? 'bg-primary text-primary-foreground shadow-md'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                  }`}
+                >
+                  <item.icon className="h-4 w-4" />
+                  {item.name}
+                </Link>
+              );
+            })}
           </nav>
 
-          <div className="border-t border-border/50 p-4">
-            <Link
-              href="/profile"
-              className="mb-3 flex items-center gap-3 px-2 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer group hover-lift tap-scale"
-            >
-              <Avatar className="h-10 w-10 ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
-                <AvatarImage src={getAssetUrl(user?.profilePictureUrl)} />
-                <AvatarFallback className="bg-primary/20 text-primary font-bold">
-                  {user?.name?.charAt(0).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 overflow-hidden">
-                <p className="truncate text-sm font-medium">{user?.name}</p>
-                <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
-              </div>
-            </Link>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="flex-1 justify-start hover-lift tap-scale"
-                onClick={() => logout()}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Sair
-              </Button>
-              <ThemeSwitcher />
-            </div>
-          </div>
-        </div>
-      </aside>
+          {/* Right side - Notifications + Avatar Dropdown */}
+          <div className="flex items-center gap-3">
+            {/* Notifications */}
+            <Button variant="ghost" size="icon" className="hover-lift tap-scale">
+              <Bell className="h-5 w-5" />
+            </Button>
 
-      {/* Main content */}
-      <main className="flex-1 overflow-y-auto">
-        {/* Mobile Header */}
-        <div className="sticky top-0 z-40 flex h-16 items-center gap-4 border-b glass-strong px-4 lg:hidden">
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="hover-lift tap-scale">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-64 p-0 glass-strong">
-              <div className="flex h-full flex-col">
-                <SheetHeader className="border-b border-border/50 p-6">
-                  <SheetTitle>
-                    <TaktIQLogo width={120} height={34} />
-                  </SheetTitle>
-                </SheetHeader>
+            {/* Avatar Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="relative h-10 w-10 rounded-full hover-lift tap-scale"
+                >
+                  <Avatar className="h-10 w-10 ring-2 ring-primary/20 hover:ring-primary/50 transition-all">
+                    <AvatarImage src={getAssetUrl(user?.profilePictureUrl)} />
+                    <AvatarFallback className="bg-primary/20 text-primary font-bold">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 glass-card">
+                <DropdownMenuLabel>
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{user?.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Meu Perfil
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Configurações
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/about" className="cursor-pointer">
+                    <Info className="mr-2 h-4 w-4" />
+                    Sobre Nós
+                  </Link>
+                </DropdownMenuItem>
 
-                <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
-                  <NavLinks onClick={() => setMobileMenuOpen(false)} />
-                  {additionalNavigation.length > 0 && (
+                {/* Role-based items */}
+                {additionalNavItems.length > 0 && (
+                  <>
+                    <DropdownMenuSeparator />
+                    {additionalNavItems.map((item) => (
+                      <DropdownMenuItem key={item.name} asChild>
+                        <Link href={item.href} className="cursor-pointer">
+                          <item.icon className="mr-2 h-4 w-4" />
+                          {item.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </>
+                )}
+
+                <DropdownMenuSeparator />
+
+                {/* Theme Toggle */}
+                <DropdownMenuItem
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  className="cursor-pointer"
+                >
+                  {theme === 'dark' ? (
                     <>
-                      <div className="my-2 border-t border-border/50" />
-                      {additionalNavigation.map((item) => {
-                        const isActive = pathname === item.href;
-                        return (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover-lift tap-scale ${
-                              isActive
-                                ? 'bg-primary text-primary-foreground shadow-lg'
-                                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-                            }`}
-                          >
-                            <item.icon className="h-5 w-5" />
-                            {item.name}
-                          </Link>
-                        );
-                      })}
+                      <Sun className="mr-2 h-4 w-4" />
+                      Modo Claro
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="mr-2 h-4 w-4" />
+                      Modo Escuro
                     </>
                   )}
-                </nav>
+                </DropdownMenuItem>
 
-                <div className="border-t border-border/50 p-4">
-                  <Link
-                    href="/profile"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="mb-3 flex items-center gap-3 px-2 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer group hover-lift tap-scale"
-                  >
-                    <Avatar className="h-10 w-10 ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
-                      <AvatarImage src={getAssetUrl(user?.profilePictureUrl)} />
-                      <AvatarFallback className="bg-primary/20 text-primary font-bold">
-                        {user?.name?.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 overflow-hidden">
-                      <p className="truncate text-sm font-medium">{user?.name}</p>
-                      <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
-                    </div>
-                  </Link>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      className="flex-1 justify-start hover-lift tap-scale"
-                      onClick={() => {
-                        logout();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Sair
-                    </Button>
-                    <ThemeSwitcher />
-                  </div>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-
-          <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={100} height={28} />
-          </Link>
-          <div className="ml-auto">
-            <ThemeSwitcher />
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => logout()} className="cursor-pointer text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sair
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
+      </header>
 
-        {/* Page Content */}
+      {/* Mobile Top Bar */}
+      <header className="sticky top-0 z-50 border-b glass-strong lg:hidden">
+        <div className="flex h-14 items-center justify-between px-4">
+          {/* Page Title */}
+          <h1 className="text-lg font-semibold">{getCurrentPageTitle()}</h1>
+
+          {/* Right side - Notifications + Avatar */}
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="h-9 w-9 hover-lift tap-scale">
+              <Bell className="h-5 w-5" />
+            </Button>
+
+            {/* Avatar Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="relative h-9 w-9 rounded-full hover-lift tap-scale"
+                >
+                  <Avatar className="h-9 w-9 ring-2 ring-primary/20">
+                    <AvatarImage src={getAssetUrl(user?.profilePictureUrl)} />
+                    <AvatarFallback className="bg-primary/20 text-primary font-bold text-xs">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 glass-card">
+                <DropdownMenuLabel>
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{user?.name}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Meu Perfil
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Configurações
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/about" className="cursor-pointer">
+                    <Info className="mr-2 h-4 w-4" />
+                    Sobre Nós
+                  </Link>
+                </DropdownMenuItem>
+
+                {/* Role-based items */}
+                {additionalNavItems.length > 0 && (
+                  <>
+                    <DropdownMenuSeparator />
+                    {additionalNavItems.map((item) => (
+                      <DropdownMenuItem key={item.name} asChild>
+                        <Link href={item.href} className="cursor-pointer">
+                          <item.icon className="mr-2 h-4 w-4" />
+                          {item.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </>
+                )}
+
+                <DropdownMenuSeparator />
+
+                {/* Theme Toggle */}
+                <DropdownMenuItem
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  className="cursor-pointer"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <Sun className="mr-2 h-4 w-4" />
+                      Modo Claro
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="mr-2 h-4 w-4" />
+                      Modo Escuro
+                    </>
+                  )}
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => logout()} className="cursor-pointer text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sair
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto pb-20 lg:pb-6">
         <div className="container mx-auto p-3 sm:p-4 md:p-6">{children}</div>
       </main>
+
+      {/* Bottom Tab Navigation - Mobile Only */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t glass-strong lg:hidden">
+        <div className="flex h-16 items-center justify-around px-2">
+          {navigation.map((item) => {
+            const isActive = isRouteActive(item.href);
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`flex flex-1 flex-col items-center justify-center gap-1 rounded-lg py-2 transition-all tap-scale ${
+                  isActive
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <item.icon className={`h-6 w-6 ${isActive ? 'scale-110' : ''} transition-transform`} />
+                <span className={`text-xs font-medium ${isActive ? 'font-semibold' : ''}`}>
+                  {item.name}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }
