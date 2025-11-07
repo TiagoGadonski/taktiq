@@ -36,6 +36,8 @@ jobs:
       - name: Build @gymhero/web (Next standalone)
         run: pnpm --filter @gymhero/web run build
         working-directory: frontend
+        env:
+          NEXT_PUBLIC_API_BASE_URL: https://api.taktiq.app/api
 
       # Prepara artefato: copia standalone + .next/static + BUILD_ID + manifests + public + start.sh
       - name: Prepare Next standalone artifact
