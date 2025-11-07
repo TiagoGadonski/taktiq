@@ -53,7 +53,6 @@ export function TaktIQLogo({
       width={logoWidth}
       height={logoHeight}
       className={className}
-      style={{ width: 'auto', height: 'auto' }}
       priority
     />
   );
