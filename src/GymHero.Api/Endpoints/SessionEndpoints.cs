@@ -97,11 +97,12 @@ public static class SessionEndpoints
 
         group.MapPatch("/{sessionId:guid}/complete", async (
             Guid sessionId,
+            [FromBody] CompleteSessionRequest? request,
             ClaimsPrincipal user,
             ISender sender) =>
         {
             var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var command = new CompleteWorkoutSessionCommand(sessionId, ownerId);
+            var command = new CompleteWorkoutSessionCommand(sessionId, ownerId, request?.Notes);
 
             try
             {
@@ -114,6 +115,6 @@ public static class SessionEndpoints
             }
         })
         .WithName("CompleteWorkoutSession")
-        .WithSummary("Marks a workout session as complete");
+        .WithSummary("Marks a workout session as complete with optional notes");
     }
 }

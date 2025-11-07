@@ -41,8 +41,9 @@ public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWork
             throw new NotFoundException("Workout Session not found.");
         }
 
-        // A lógica principal é simplesmente registrar a data/hora da finalização.
+        // A lógica principal é simplesmente registrar a data/hora da finalização e notas opcionais.
         session.CompletedAt = DateTime.UtcNow;
+        session.Notes = request.Notes;
 
         await _context.SaveChangesAsync(cancellationToken);
 

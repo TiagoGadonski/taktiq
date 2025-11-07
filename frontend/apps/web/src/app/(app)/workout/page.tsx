@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Play, CheckCircle2, XCircle, Clock, Sparkles } from 'lucide-react';
+import { Play, CheckCircle2, XCircle, Clock, Sparkles, Plus } from 'lucide-react';
 import { api } from '@/lib/api';
 import { useSession } from '@/hooks/use-session';
 import { useSets } from '@/hooks/use-sets';
@@ -31,6 +31,8 @@ export default function WorkoutPage() {
   const [exerciseToReplace, setExerciseToReplace] = useState<WorkoutExercise | null>(null);
   const [isReplaceSelectorOpen, setIsReplaceSelectorOpen] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [addedExercises, setAddedExercises] = useState<WorkoutExercise[]>([]);
+  const [isAddExerciseOpen, setIsAddExerciseOpen] = useState(false);
 
   // Auto-select first workout when session starts
   useEffect(() => {
@@ -85,6 +87,29 @@ export default function WorkoutPage() {
 
     setIsReplaceSelectorOpen(false);
     setExerciseToReplace(null);
+  };
+
+  const handleAddExercise = (newExercise: any) => {
+    // Create a workout exercise from the selected exercise
+    const workoutExercise: WorkoutExercise = {
+      id: `added-${Date.now()}-${Math.random()}`,
+      exerciseId: newExercise.id,
+      exerciseName: newExercise.name,
+      exercise: newExercise,
+      order: addedExercises.length,
+      targetSets: 3,
+      targetReps: 10,
+      targetLoad: 0,
+    };
+
+    setAddedExercises((prev) => [...prev, workoutExercise]);
+
+    toast({
+      title: 'Exercício adicionado!',
+      description: `${newExercise.name} foi adicionado ao seu treino livre`,
+    });
+
+    setIsAddExerciseOpen(false);
   };
 
   const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[]) => {
@@ -487,7 +512,9 @@ export default function WorkoutPage() {
   const selectedWorkout = currentSession.workoutPlan?.workouts?.find(
     (w: Workout) => w.id === selectedWorkoutId
   );
-  const exercisesToShow = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+  const planExercises = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+  const exercisesToShow = planExercises.length > 0 ? planExercises : addedExercises;
+  const isFreeWorkout = !currentSession.workoutPlanId;
 
   // Active session - show workout execution
   return (
@@ -534,20 +561,41 @@ export default function WorkoutPage() {
                 onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
                 onDeleteSet={handleDeleteSet}
                 onExerciseClick={() => openExerciseModal(displayExercise)}
-                onReplaceExercise={() => handleOpenReplaceModal(exercise)}
+                onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
                 isCreating={isCreating}
               />
             );
           })}
+
+          {/* Add Exercise Button for Free Workouts */}
+          {isFreeWorkout && (
+            <Button
+              variant="outline"
+              onClick={() => setIsAddExerciseOpen(true)}
+              className="w-full"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Adicionar Exercício
+            </Button>
+          )}
         </div>
       ) : (
         <Card>
-          <CardContent className="py-8 text-center">
+          <CardContent className="py-8 text-center space-y-4">
             <p className="text-muted-foreground">
               {selectedWorkoutId
                 ? 'Este treino não tem exercícios configurados.'
                 : 'Este é um treino livre. Adicione exercícios conforme necessário.'}
             </p>
+            {isFreeWorkout && (
+              <Button
+                onClick={() => setIsAddExerciseOpen(true)}
+                className="mt-4"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Adicionar Primeiro Exercício
+              </Button>
+            )}
           </CardContent>
         </Card>
       )}
@@ -712,6 +760,14 @@ export default function WorkoutPage() {
           muscleGroup: exerciseToReplace.exercise?.muscleGroup || 'Other',
           equipment: exerciseToReplace.exercise?.equipment || '',
         } : undefined}
+        exercises={allExercises}
+      />
+
+      {/* Add Exercise Modal for Free Workouts */}
+      <ExerciseSelectorModal
+        open={isAddExerciseOpen}
+        onClose={() => setIsAddExerciseOpen(false)}
+        onSelectExercise={handleAddExercise}
         exercises={allExercises}
       />
 

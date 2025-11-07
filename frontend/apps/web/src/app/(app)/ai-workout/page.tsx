@@ -70,6 +70,7 @@ export default function AIWorkoutPage() {
   // Single workout state
   const [prompt, setPrompt] = useState('');
   const [fitnessLevel, setFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
+  const [duration, setDuration] = useState(45); // Default 45 minutes
   const [generatedWorkout, setGeneratedWorkout] = useState<AIWorkoutResponse | null>(null);
   const [rejectedExercises, setRejectedExercises] = useState<Record<number, string[]>>({});
 
@@ -213,7 +214,11 @@ export default function AIWorkoutPage() {
       });
       return;
     }
-    generateWorkoutMutation.mutate({ prompt, fitnessLevel });
+    // Add duration to prompt if not already mentioned
+    const finalPrompt = prompt.toLowerCase().includes('minuto')
+      ? prompt
+      : `${prompt}, ${duration} minutos`;
+    generateWorkoutMutation.mutate({ prompt: finalPrompt, fitnessLevel });
   };
 
   const handleGeneratePlan = () => {
@@ -710,10 +715,33 @@ export default function AIWorkoutPage() {
                   id="prompt"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Ex: Treino de peito e tríceps para hipertrofia, 45 minutos..."
+                  placeholder="Ex: Treino de peito e tríceps para hipertrofia..."
                   className="w-full min-h-[120px] p-3 rounded-md border border-input bg-background text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                   disabled={generateWorkoutMutation.isPending}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="duration">Duração do Treino: {duration} minutos</Label>
+                <input
+                  id="duration"
+                  type="range"
+                  min="15"
+                  max="120"
+                  step="15"
+                  value={duration}
+                  onChange={(e) => setDuration(parseInt(e.target.value))}
+                  disabled={generateWorkoutMutation.isPending}
+                  className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>15 min</span>
+                  <span>30 min</span>
+                  <span>45 min</span>
+                  <span>60 min</span>
+                  <span>90 min</span>
+                  <span>120 min</span>
+                </div>
               </div>
 
               <div className="space-y-2">
