@@ -120,6 +120,7 @@ export interface WorkoutSession {
   workoutPlan?: WorkoutPlan;
   startedAt: string;
   completedAt?: string;
+  notes?: string;
   sets: WorkoutSet[];
 }
 

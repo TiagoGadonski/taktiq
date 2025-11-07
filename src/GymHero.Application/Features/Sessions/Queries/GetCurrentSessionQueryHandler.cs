@@ -24,6 +24,7 @@ public class GetCurrentSessionQueryHandler : IRequestHandler<GetCurrentSessionQu
                 WorkoutPlanId = s.WorkoutPlanId,
                 StartedAt = s.StartedAt,
                 CompletedAt = s.CompletedAt,
+                Notes = s.Notes,
                 WorkoutPlan = s.WorkoutPlan == null ? null : new WorkoutPlanDetailResponse
                 {
                     Id = s.WorkoutPlan.Id,

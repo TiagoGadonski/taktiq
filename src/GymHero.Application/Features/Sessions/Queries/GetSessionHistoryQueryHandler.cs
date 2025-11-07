@@ -50,6 +50,7 @@ public class GetSessionHistoryQueryHandler : IRequestHandler<GetSessionHistoryQu
                 WorkoutPlanId = s.WorkoutPlanId,
                 StartedAt = s.StartedAt,
                 CompletedAt = s.CompletedAt,
+                Notes = s.Notes,
                 Sets = s.Sets.Select(set => new WorkoutSetDto
                 {
                     Id = set.Id,
