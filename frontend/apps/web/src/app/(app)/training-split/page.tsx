@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Dumbbell, Save, Calendar } from 'lucide-react';
+import { apiClient } from '@/lib/api';
 
 interface TrainingSplitData {
   [key: string]: string;
@@ -86,18 +87,10 @@ export default function TrainingSplitPage() {
     const loadTrainingSplit = async () => {
       setLoading(true);
       try {
-        const response = await fetch('/api/me', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.trainingSplit) {
-            const parsed = JSON.parse(data.trainingSplit);
-            setTrainingSplit(parsed);
-          }
+        const data = await apiClient.get('/me');
+        if (data.trainingSplit) {
+          const parsed = JSON.parse(data.trainingSplit);
+          setTrainingSplit(parsed);
         }
       } catch (error) {
         console.error('Error loading training split:', error);
@@ -128,37 +121,18 @@ export default function TrainingSplitPage() {
     setSaving(true);
     try {
       // Get current user profile
-      const getResponse = await fetch('/api/me', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-
-      if (!getResponse.ok) throw new Error('Failed to get profile');
-
-      const currentProfile = await getResponse.json();
+      const currentProfile = await apiClient.get('/me');
 
       // Update with training split
-      const response = await fetch('/api/me', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({
-          ...currentProfile,
-          trainingSplit: JSON.stringify(trainingSplit),
-        }),
+      await apiClient.put('/me', {
+        ...currentProfile,
+        trainingSplit: JSON.stringify(trainingSplit),
       });
 
-      if (response.ok) {
-        toast({
-          title: 'Divisão salva!',
-          description: 'Sua divisão de treinos foi atualizada com sucesso.',
-        });
-      } else {
-        throw new Error('Failed to save');
-      }
+      toast({
+        title: 'Divisão salva!',
+        description: 'Sua divisão de treinos foi atualizada com sucesso.',
+      });
     } catch (error) {
       toast({
         title: 'Erro',
