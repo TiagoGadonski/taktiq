@@ -212,7 +212,7 @@ export default function TrainingSplitPage() {
         <CardHeader>
           <CardTitle>Configure Sua Divisão</CardTitle>
           <CardDescription>
-            Defina o foco de cada dia. Exemplos: "Peito e Tríceps", "Pernas", "Descanso", etc.
+            Defina o foco de cada dia. Exemplos: Peito e Tríceps, Pernas, Descanso, etc.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
