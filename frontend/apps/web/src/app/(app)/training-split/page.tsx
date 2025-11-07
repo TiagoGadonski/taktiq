@@ -68,6 +68,7 @@ const SUGGESTED_SPLITS = [
 export default function TrainingSplitPage() {
   const { user } = useAuth();
   const { toast } = useToast();
+  // Force rebuild to pick up correct API URL
   const [trainingSplit, setTrainingSplit] = useState<TrainingSplitData>({
     '0': '',
     '1': '',
