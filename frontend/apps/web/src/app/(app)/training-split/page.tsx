@@ -14,6 +14,11 @@ interface TrainingSplitData {
   [key: string]: string;
 }
 
+interface UserProfile {
+  trainingSplit?: string | null;
+  [key: string]: any;
+}
+
 const DAYS_OF_WEEK = [
   { key: '0', label: 'Domingo', emoji: '☀️' },
   { key: '1', label: 'Segunda', emoji: '💪' },
@@ -87,7 +92,7 @@ export default function TrainingSplitPage() {
     const loadTrainingSplit = async () => {
       setLoading(true);
       try {
-        const data = await apiClient.get('/me');
+        const data = await apiClient.get<UserProfile>('/me');
         if (data.trainingSplit) {
           const parsed = JSON.parse(data.trainingSplit);
           setTrainingSplit(parsed);
@@ -121,10 +126,10 @@ export default function TrainingSplitPage() {
     setSaving(true);
     try {
       // Get current user profile
-      const currentProfile = await apiClient.get('/me');
+      const currentProfile = await apiClient.get<UserProfile>('/me');
 
       // Update with training split
-      await apiClient.put('/me', {
+      await apiClient.put<UserProfile>('/me', {
         ...currentProfile,
         trainingSplit: JSON.stringify(trainingSplit),
       });
