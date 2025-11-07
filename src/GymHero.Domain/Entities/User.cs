@@ -23,6 +23,11 @@ public class User : BaseEntity
     public string? GymName { get; set; } // Nome do ginásio onde treina
     public string? PhoneNumber { get; set; } // Número de telefone
 
+    // --- Training Split Configuration ---
+    // JSON string mapping day of week (0-6) to muscle group focus
+    // Example: {"0":"Rest","1":"Legs","2":"Chest & Triceps","3":"Back & Biceps","4":"Shoulders","5":"Full Body","6":"Rest"}
+    public string? TrainingSplit { get; set; }
+
     public string Role { get; set; } = "Aluno";
     public bool IsActive { get; set; } = true; // Indica se o usuário está ativo ou não
     public DateTime? LastLoginAt { get; set; } // Data/hora do último login do usuário

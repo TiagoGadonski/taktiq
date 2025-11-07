@@ -63,6 +63,7 @@ interface UserProfile {
   injuries?: string | null;
   healthConditions?: string | null;
   exerciseGoal?: string | null;
+  trainingSplit?: string | null;
 }
 
 export default function AIWorkoutPage() {
@@ -134,6 +135,30 @@ export default function AIWorkoutPage() {
   const filledFields = profileFields.filter(field => field && field.trim() !== '').length;
   const profileCompleteness = Math.round((filledFields / profileFields.length) * 100);
   const isProfileIncomplete = profileCompleteness < 100;
+
+  // Get today's training split suggestion
+  const getTodaySplit = () => {
+    if (!userProfile?.trainingSplit) return null;
+    try {
+      const split = JSON.parse(userProfile.trainingSplit);
+      const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
+      return split[today.toString()] || null;
+    } catch {
+      return null;
+    }
+  };
+
+  const todaysSplit = getTodaySplit();
+
+  const useTodaySuggestion = () => {
+    if (todaysSplit) {
+      setPrompt(`Treino de ${todaysSplit} para hipertrofia`);
+      toast({
+        title: 'Sugestão aplicada!',
+        description: `Prompt preenchido com o treino de hoje: ${todaysSplit}`,
+      });
+    }
+  };
 
   // Single workout mutation
   const generateWorkoutMutation = useMutation({
@@ -605,6 +630,53 @@ export default function AIWorkoutPage() {
             condições de saúde e objetivos, melhor a IA poderá personalizar seus treinos para você!{' '}
             <Link href="/profile" className="font-medium underline underline-offset-4 hover:text-blue-600">
               Complete seu perfil
+            </Link>
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {/* Training Split Suggestion Banner */}
+      {todaysSplit && (
+        <Alert className="border-primary/30 bg-primary/5 dark:bg-primary/10">
+          <Calendar className="h-4 w-4 text-primary" />
+          <AlertTitle className="text-foreground flex items-center gap-2">
+            📅 Sugestão de Hoje
+          </AlertTitle>
+          <AlertDescription className="text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <span>
+              Seu treino de hoje é: <strong className="text-foreground">{todaysSplit}</strong>
+            </span>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={useTodaySuggestion}
+                className="hover-lift tap-scale"
+              >
+                <Sparkles className="mr-1 h-3 w-3" />
+                Usar Sugestão
+              </Button>
+              <Link href="/training-split">
+                <Button size="sm" variant="ghost" className="hover-lift tap-scale">
+                  Configurar
+                </Button>
+              </Link>
+            </div>
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {/* No Training Split Banner */}
+      {!todaysSplit && userProfile && (
+        <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950/20">
+          <Info className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+          <AlertTitle className="text-amber-900 dark:text-amber-100">
+            Configure sua divisão de treinos
+          </AlertTitle>
+          <AlertDescription className="text-amber-800 dark:text-amber-200">
+            Crie uma divisão semanal e receba sugestões automáticas de treino para cada dia!{' '}
+            <Link href="/training-split" className="font-medium underline underline-offset-4 hover:text-amber-600">
+              Configurar agora
             </Link>
           </AlertDescription>
         </Alert>
