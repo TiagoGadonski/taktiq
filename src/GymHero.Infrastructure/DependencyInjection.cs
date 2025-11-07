@@ -26,8 +26,18 @@ public static class DependencyInjection
         services.AddScoped<IEmailService, EmailService>();
 
         // --- Configuração do Banco de Dados ---
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        {
+            options.UseNpgsql(connectionString, npgsqlOptions =>
+            {
+                npgsqlOptions.CommandTimeout(60); // 60 seconds command timeout
+                npgsqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 3,
+                    maxRetryDelay: TimeSpan.FromSeconds(30),
+                    errorCodesToAdd: null);
+            });
+        });
 
         // Registra o ApplicationDbContext como a implementação de IApplicationDbContext
         // Usamos Scoped para que a instância do DbContext dure por uma requisição HTTP.
