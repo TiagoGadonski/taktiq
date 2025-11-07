@@ -91,7 +91,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto flex h-16 items-center gap-8 px-6">
           {/* Logo */}
           <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={70} height={20} className="transition-transform hover:scale-105" />
+            <TaktIQLogo width={50} height={14} className="transition-transform hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation Tabs */}
@@ -215,7 +215,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="flex h-14 items-center justify-between px-4">
           {/* Logo */}
           <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={65} height={18} className="transition-transform" />
+            <TaktIQLogo width={45} height={13} className="transition-transform" />
           </Link>
 
           {/* Right side - Notifications + Avatar */}
