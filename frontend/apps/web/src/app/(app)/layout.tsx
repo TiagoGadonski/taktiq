@@ -75,12 +75,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return pathname.startsWith(href);
   };
 
-  // Get current page title based on pathname
-  const getCurrentPageTitle = () => {
-    const currentNav = navigation.find((item) => isRouteActive(item.href));
-    return currentNav?.name || 'GymHero';
-  };
-
   // Build additional navigation items based on role
   const additionalNavItems = [];
   if (user?.role === 'Admin') {
@@ -97,7 +91,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto flex h-16 items-center gap-8 px-6">
           {/* Logo */}
           <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={140} height={40} className="transition-transform hover:scale-105" />
+            <TaktIQLogo width={100} height={28} className="transition-transform hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation Tabs */}
@@ -219,8 +213,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Mobile Top Bar */}
       <header className="sticky top-0 z-50 border-b glass-strong lg:hidden">
         <div className="flex h-14 items-center justify-between px-4">
-          {/* Page Title */}
-          <h1 className="text-lg font-semibold">{getCurrentPageTitle()}</h1>
+          {/* Logo */}
+          <Link href="/dashboard" className="hover-lift tap-scale">
+            <TaktIQLogo width={90} height={26} className="transition-transform" />
+          </Link>
 
           {/* Right side - Notifications + Avatar */}
           <div className="flex items-center gap-2">
