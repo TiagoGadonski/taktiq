@@ -31,7 +31,7 @@ export function useNotifications(unreadOnly?: boolean) {
 
       const queryParam = unreadOnly ? '?unreadOnly=true' : '';
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notifications${queryParam}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notifications${queryParam}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ export function useNotifications(unreadOnly?: boolean) {
       if (!token) return;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notifications/unread-count`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notifications/unread-count`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ export function useNotifications(unreadOnly?: boolean) {
       if (!token) return;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notifications/${notificationId}/read`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notifications/${notificationId}/read`,
         {
           method: 'PATCH',
           headers: {
@@ -117,7 +117,7 @@ export function useNotifications(unreadOnly?: boolean) {
       if (!token) return;
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notifications/read-all`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/notifications/read-all`,
         {
           method: 'PATCH',
           headers: {
