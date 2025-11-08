@@ -17,7 +17,7 @@ import { useSets } from '@/hooks/use-sets';
 import type { CreateSetInput, WorkoutExercise } from '@gymhero/shared';
 
 export default function SessionScreen() {
-  const { currentSession, hasActiveSession, startSession, completeSession, isStarting } =
+  const { currentSession, hasActiveSession, startSession, completeSession, cancelSession, isStarting } =
     useSession();
   const { createSet, deleteSet } = useSets();
 
@@ -55,6 +55,30 @@ export default function SessionScreen() {
         },
       },
     ]);
+  };
+
+  const handleCancelSession = async () => {
+    if (!currentSession) return;
+
+    Alert.alert(
+      'Cancelar Treino?',
+      'Todo o progresso será perdido e nenhuma série será salva. Deseja continuar?',
+      [
+        { text: 'Voltar ao Treino', style: 'cancel' },
+        {
+          text: 'Sim, Cancelar',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await cancelSession(currentSession.id);
+              await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+            } catch (error: any) {
+              Alert.alert('Erro', error.message);
+            }
+          },
+        },
+      ]
+    );
   };
 
   const handleAddSet = async (
@@ -132,6 +156,22 @@ export default function SessionScreen() {
     (new Date().getTime() - new Date(currentSession.startedAt).getTime()) / 60000
   );
 
+  // Split exercises into active and completed
+  const exercises = currentSession.workout?.exercises || [];
+  const activeExercises: WorkoutExercise[] = [];
+  const completedExercises: WorkoutExercise[] = [];
+
+  exercises.forEach((exercise) => {
+    const exerciseSets = currentSession.sets?.filter((s) => s.exerciseId === exercise.exerciseId) || [];
+    const isCompleted = exerciseSets.length >= exercise.targetSets;
+
+    if (isCompleted) {
+      completedExercises.push(exercise);
+    } else {
+      activeExercises.push(exercise);
+    }
+  });
+
   return (
     <ScrollView className="flex-1 bg-background">
       {/* Header */}
@@ -148,25 +188,64 @@ export default function SessionScreen() {
         </View>
       </View>
 
-      {/* Exercises */}
-      <View className="px-6 space-y-4">
-        {currentSession.workout?.exercises?.map((exercise) => (
-          <ExerciseCard
-            key={exercise.id}
-            exercise={exercise}
-            sets={currentSession.sets || []}
-            onAddSet={(data) => handleAddSet(exercise.exerciseId, data)}
-          />
-        ))}
-      </View>
+      {/* Active Exercises */}
+      {activeExercises.length > 0 && (
+        <View className="px-6 mb-6">
+          <Text className="text-lg font-bold text-foreground mb-4">Exercícios Ativos</Text>
+          <View className="space-y-4">
+            {activeExercises.map((exercise) => (
+              <ExerciseCard
+                key={exercise.id}
+                exercise={exercise}
+                sets={currentSession.sets || []}
+                onAddSet={(data) => handleAddSet(exercise.exerciseId, data)}
+              />
+            ))}
+          </View>
+        </View>
+      )}
 
-      {/* Complete Button */}
-      <View className="px-6 py-6">
+      {/* Completed Exercises */}
+      {completedExercises.length > 0 && (
+        <View className="px-6 mb-6">
+          <View className="flex-row items-center gap-2 mb-4">
+            <Ionicons name="trophy" size={20} color="#16a34a" />
+            <Text className="text-lg font-bold text-green-600">
+              Exercícios Concluídos ({completedExercises.length})
+            </Text>
+          </View>
+          <View className="space-y-4 opacity-70">
+            {completedExercises.map((exercise) => (
+              <View key={exercise.id} className="relative">
+                <View className="absolute top-2 right-2 z-10 bg-green-600 rounded-full px-3 py-1 flex-row items-center gap-1">
+                  <Ionicons name="checkmark-circle" size={14} color="white" />
+                  <Text className="text-white text-xs font-bold">Concluído</Text>
+                </View>
+                <ExerciseCard
+                  exercise={exercise}
+                  sets={currentSession.sets || []}
+                  onAddSet={(data) => handleAddSet(exercise.exerciseId, data)}
+                  completed
+                />
+              </View>
+            ))}
+          </View>
+        </View>
+      )}
+
+      {/* Action Buttons */}
+      <View className="px-6 py-6 gap-3">
         <TouchableOpacity
           className="bg-primary rounded-lg py-4 items-center active:opacity-80"
           onPress={handleCompleteSession}
         >
           <Text className="text-primary-foreground font-bold text-base">Concluir Treino</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-destructive rounded-lg py-4 items-center active:opacity-80"
+          onPress={handleCancelSession}
+        >
+          <Text className="text-destructive-foreground font-bold text-base">Cancelar Treino</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -178,10 +257,12 @@ function ExerciseCard({
   exercise,
   sets,
   onAddSet,
+  completed = false,
 }: {
   exercise: WorkoutExercise;
   sets: any[];
   onAddSet: (data: { reps: number; weight?: number; rpe?: number }) => void;
+  completed?: boolean;
 }) {
   const [reps, setReps] = useState('');
   const [weight, setWeight] = useState('');
@@ -239,7 +320,7 @@ function ExerciseCard({
       ))}
 
       {/* Add Set Form */}
-      {exerciseSets.length < exercise.targetSets && (
+      {!completed && exerciseSets.length < exercise.targetSets && (
         <View className="border-2 border-dashed border-muted rounded-lg p-4 mt-2">
           <Text className="text-foreground font-medium mb-3">
             Série {exerciseSets.length + 1}:

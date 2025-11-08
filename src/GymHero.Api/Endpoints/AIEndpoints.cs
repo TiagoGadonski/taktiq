@@ -104,7 +104,7 @@ public static class AIEndpoints
                 if (!hasGemini && !hasOpenAI)
                 {
                     logger.LogWarning("No AI API keys configured. Using enhanced mock generation.");
-                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel);
+                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal);
                 }
                 else
                 {
@@ -145,7 +145,7 @@ public static class AIEndpoints
                     if (!generated)
                     {
                         logger.LogWarning("All AI APIs failed. Using enhanced mock generation.");
-                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel);
+                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal);
                     }
                 }
 
@@ -482,15 +482,26 @@ public static class AIEndpoints
         ["desenvolvimento"] = new() { "desenvolvimento com barra", "desenvolvimento com halteres", "desenvolvimento arnold", "shoulder press" }
     };
 
-    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null)
+    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null)
     {
         Console.WriteLine("=== MOCK GENERATION DEBUG ===");
         Console.WriteLine($"Prompt: {prompt}");
         Console.WriteLine($"Fitness Level Received: '{fitnessLevel ?? "NULL"}'");
+        Console.WriteLine($"Exercise Goal: '{exerciseGoal ?? "NULL"}'");
 
         var random = new Random();
         var parsedPrompt = ParsePrompt(prompt.ToLower());
         var level = fitnessLevel?.ToLower() ?? "intermediário";
+
+        // Check if user's goal mentions abs/core/six-pack
+        var absRelatedGoals = new[] { "six-pack", "six pack", "tanquinho", "definir abdômen", "abdômen definido", "abdominal", "abs", "core", "perder barriga" };
+        var goalMentionsAbs = !string.IsNullOrEmpty(exerciseGoal) && absRelatedGoals.Any(keyword => exerciseGoal.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+
+        if (goalMentionsAbs && !parsedPrompt.MuscleGroups.Contains("abdômen"))
+        {
+            Console.WriteLine("*** USER GOAL MENTIONS ABS - ADDING ABDÔMEN TO MUSCLE GROUPS ***");
+            parsedPrompt.MuscleGroups.Add("abdômen");
+        }
 
         Console.WriteLine($"Normalized Level: '{level}'");
 
@@ -1035,6 +1046,9 @@ REGRAS FUNDAMENTAIS:
 4. ADAPTE o treino ao GÊNERO do usuário:
    - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
    - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
+5. ATENÇÃO ESPECIAL AO OBJETIVO DO USUÁRIO:
+   - Se o objetivo mencionar ""six-pack"", ""tanquinho"", ""abdômen definido"", ""abs"", ""core"", ou ""perder barriga"", você DEVE SEMPRE incluir 2-3 exercícios abdominais eficazes no treino
+   - Exemplos de exercícios abdominais: Abdominal Reto, Prancha, Abdominal Bicicleta, Elevação de Pernas, Abdominal na Polia, Prancha Lateral, etc.
 5. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
 6. Adapte sets, reps, rest e exercícios ao nível do usuário:
    - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s, MÁXIMO 7 exercícios por treino
@@ -1680,6 +1694,9 @@ REGRAS FUNDAMENTAIS:
 4. ADAPTE o treino ao GÊNERO do usuário:
    - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
    - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
+5. ATENÇÃO ESPECIAL AO OBJETIVO DO USUÁRIO:
+   - Se o objetivo mencionar ""six-pack"", ""tanquinho"", ""abdômen definido"", ""abs"", ""core"", ou ""perder barriga"", você DEVE SEMPRE incluir 2-3 exercícios abdominais eficazes no treino
+   - Exemplos de exercícios abdominais: Abdominal Reto, Prancha, Abdominal Bicicleta, Elevação de Pernas, Abdominal na Polia, Prancha Lateral, etc.
 5. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
 6. Adapte sets, reps, rest e exercícios ao nível do usuário:
    - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s, MÁXIMO 7 exercícios por treino

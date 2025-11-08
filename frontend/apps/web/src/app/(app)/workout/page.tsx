@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Play, CheckCircle2, XCircle, Clock, Sparkles, Plus } from 'lucide-react';
+import { Play, CheckCircle2, XCircle, Clock, Sparkles, Plus, Trophy, Ban } from 'lucide-react';
 import { api } from '@/lib/api';
 import { useSession } from '@/hooks/use-session';
 import { useSets } from '@/hooks/use-sets';
@@ -21,7 +21,7 @@ import { getRandomSetMessage, getRandomWorkoutMessage, getMilestoneMessage } fro
 export default function WorkoutPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const { currentSession, hasActiveSession, startSession, completeSession, isStarting, isCompleting } = useSession();
+  const { currentSession, hasActiveSession, startSession, completeSession, cancelSession, isStarting, isCompleting } = useSession();
   const { createSet, deleteSet, isCreating } = useSets();
   const [notes, setNotes] = useState('');
   const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
@@ -33,6 +33,7 @@ export default function WorkoutPage() {
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [addedExercises, setAddedExercises] = useState<WorkoutExercise[]>([]);
   const [isAddExerciseOpen, setIsAddExerciseOpen] = useState(false);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
 
   // Auto-select first workout when session starts
   useEffect(() => {
@@ -160,6 +161,26 @@ export default function WorkoutPage() {
         description: error.message,
       });
     }
+  };
+
+  const handleCancelSession = async () => {
+    if (!currentSession) return;
+
+    try {
+      await cancelSession(currentSession.id);
+      toast({
+        title: 'Treino cancelado',
+        description: 'Seu treino foi cancelado. Nenhum progresso foi salvo.',
+      });
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao cancelar treino',
+        description: error.message,
+      });
+    }
+    setShowCancelDialog(false);
   };
 
   const handleAddSet = async (exerciseId: string, data: { reps: number; weight?: number; rpe?: number }) => {
@@ -516,6 +537,22 @@ export default function WorkoutPage() {
   const exercisesToShow = planExercises.length > 0 ? planExercises : addedExercises;
   const isFreeWorkout = !currentSession.workoutPlanId;
 
+  // Split exercises into active and completed
+  const activeExercises: WorkoutExercise[] = [];
+  const completedExercises: WorkoutExercise[] = [];
+
+  exercisesToShow.forEach((exercise: WorkoutExercise) => {
+    const displayExercise = replacedExercises[exercise.id] || exercise;
+    const exerciseSets = currentSession.sets?.filter((s: WorkoutSet) => s.exerciseId === displayExercise.exerciseId) || [];
+    const isCompleted = exerciseSets.length >= exercise.targetSets;
+
+    if (isCompleted) {
+      completedExercises.push(exercise);
+    } else {
+      activeExercises.push(exercise);
+    }
+  });
+
   // Active session - show workout execution
   return (
     <div className="space-y-6">
@@ -537,7 +574,11 @@ export default function WorkoutPage() {
         <div className="flex gap-2">
           <Button variant="outline" onClick={() => router.push('/dashboard')}>
             <XCircle className="mr-2 h-4 w-4" />
-            Pausar
+            Sair
+          </Button>
+          <Button variant="destructive" onClick={() => setShowCancelDialog(true)}>
+            <Ban className="mr-2 h-4 w-4" />
+            Cancelar
           </Button>
           <Button onClick={handleCompleteSession} disabled={isCompleting}>
             <CheckCircle2 className="mr-2 h-4 w-4" />
@@ -546,26 +587,69 @@ export default function WorkoutPage() {
         </div>
       </div>
 
-      {/* Exercise List */}
+      {/* Active Exercises List */}
       {exercisesToShow.length > 0 ? (
-        <div className="space-y-4">
-          {exercisesToShow.map((exercise: WorkoutExercise) => {
-            // Use replaced exercise if it exists, otherwise use original
-            const displayExercise = replacedExercises[exercise.id] || exercise;
+        <div className="space-y-6">
+          {/* Active Exercises */}
+          {activeExercises.length > 0 && (
+            <div className="space-y-4">
+              <h2 className="text-xl font-semibold">Exercícios Ativos</h2>
+              {activeExercises.map((exercise: WorkoutExercise) => {
+                // Use replaced exercise if it exists, otherwise use original
+                const displayExercise = replacedExercises[exercise.id] || exercise;
 
-            return (
-              <ExerciseCard
-                key={exercise.id}
-                exercise={displayExercise}
-                sets={currentSession.sets || []}
-                onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
-                onDeleteSet={handleDeleteSet}
-                onExerciseClick={() => openExerciseModal(displayExercise)}
-                onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
-                isCreating={isCreating}
-              />
-            );
-          })}
+                return (
+                  <ExerciseCard
+                    key={exercise.id}
+                    exercise={displayExercise}
+                    sets={currentSession.sets || []}
+                    onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
+                    onDeleteSet={handleDeleteSet}
+                    onExerciseClick={() => openExerciseModal(displayExercise)}
+                    onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
+                    isCreating={isCreating}
+                  />
+                );
+              })}
+            </div>
+          )}
+
+          {/* Completed Exercises Section */}
+          {completedExercises.length > 0 && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Trophy className="h-5 w-5 text-green-600" />
+                <h2 className="text-xl font-semibold text-green-600">
+                  Exercícios Concluídos ({completedExercises.length})
+                </h2>
+              </div>
+              <div className="space-y-4 opacity-70">
+                {completedExercises.map((exercise: WorkoutExercise) => {
+                  const displayExercise = replacedExercises[exercise.id] || exercise;
+
+                  return (
+                    <div key={exercise.id} className="relative">
+                      <div className="absolute top-4 right-4 z-10">
+                        <Badge className="bg-green-600 hover:bg-green-700">
+                          <CheckCircle2 className="mr-1 h-3 w-3" />
+                          Concluído
+                        </Badge>
+                      </div>
+                      <ExerciseCard
+                        exercise={displayExercise}
+                        sets={currentSession.sets || []}
+                        onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
+                        onDeleteSet={handleDeleteSet}
+                        onExerciseClick={() => openExerciseModal(displayExercise)}
+                        onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
+                        isCreating={isCreating}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Add Exercise Button for Free Workouts */}
           {isFreeWorkout && (
@@ -777,6 +861,34 @@ export default function WorkoutPage() {
         onComplete={handleCompleteSession}
         autoCompleteDelay={5000}
       />
+
+      {/* Cancel Workout Confirmation Dialog */}
+      <Dialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Cancelar Treino?</DialogTitle>
+            <DialogDescription>
+              Tem certeza que deseja cancelar este treino? Todo o progresso será perdido e nenhuma série será salva.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex gap-3 mt-4">
+            <Button
+              variant="outline"
+              onClick={() => setShowCancelDialog(false)}
+              className="flex-1"
+            >
+              Voltar ao Treino
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleCancelSession}
+              className="flex-1"
+            >
+              Sim, Cancelar Treino
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
