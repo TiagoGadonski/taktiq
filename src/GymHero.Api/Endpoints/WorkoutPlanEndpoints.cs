@@ -230,6 +230,48 @@ public static class WorkoutPlanEndpoints
         .WithName("DeactivateWorkoutPlan")
         .WithSummary("Desativa um plano de treino específico");
 
+        // Renew/extend a workout plan
+        group.MapPost("/{id:guid}/renew", async (
+            Guid id,
+            [FromBody] RenewWorkoutPlanRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new RenewWorkoutPlanCommand(id, ownerId, request.AdditionalWeeks);
+
+            var result = await sender.Send(command);
+
+            return result
+                ? Results.Ok(new { message = "Plano renovado com sucesso!" })
+                : Results.NotFound(new { message = "Plano não encontrado" });
+        })
+        .WithName("RenewWorkoutPlan")
+        .WithSummary("Renews/extends a workout plan by adding more weeks");
+
+        // Duplicate a workout plan
+        group.MapPost("/{id:guid}/duplicate", async (
+            Guid id,
+            [FromBody] DuplicateWorkoutPlanRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new DuplicateWorkoutPlanCommand(id, ownerId, request.Duration);
+
+            try
+            {
+                var result = await sender.Send(command);
+                return Results.Created($"/api/workout-plans/{result.Id}", result);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+        })
+        .WithName("DuplicateWorkoutPlan")
+        .WithSummary("Creates a new workout plan based on an existing one");
+
         // Add a workout (day) to a plan
         group.MapPost("/{planId:guid}/workouts", async (
             Guid planId,

@@ -47,7 +47,10 @@ public class CreateWorkoutPlanCommandHandler : IRequestHandler<CreateWorkoutPlan
             workoutPlan.Name,
             workoutPlan.Goal,
             workoutPlan.IsActive,
-            workoutPlan.CreatedAt
+            workoutPlan.CreatedAt,
+            workoutPlan.Duration,
+            workoutPlan.StartDate,
+            workoutPlan.ExpirationDate
         );
     }
 }

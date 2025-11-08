@@ -74,6 +74,9 @@ public class GetWorkoutPlanByIdQueryHandler : IRequestHandler<GetWorkoutPlanById
             Name = plan.Name,
             Goal = plan.Goal,
             IsActive = plan.IsActive,
+            Duration = plan.Duration,
+            StartDate = plan.StartDate,
+            ExpirationDate = plan.ExpirationDate,
             Workouts = workouts,
             Exercises = allExercises
         };
