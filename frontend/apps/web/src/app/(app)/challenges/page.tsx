@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus, CheckCircle2, Sparkles } from 'lucide-react';
+import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus, CheckCircle2, Sparkles, Info } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -45,6 +45,13 @@ interface Friend {
   friendEmail: string;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 export default function ChallengesPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [challengeTitle, setChallengeTitle] = useState('');
@@ -57,6 +64,14 @@ export default function ChallengesPage() {
   const [activeTab, setActiveTab] = useState<'active' | 'completed'>('active');
 
   const queryClient = useQueryClient();
+
+  // Get current user to check if admin
+  const { data: currentUser } = useQuery<User>({
+    queryKey: ['user', 'me'],
+    queryFn: async () => {
+      return apiClient.get('/users/me');
+    },
+  });
 
   // Fetch ALL challenges (with participation info)
   const { data: challenges = [], isLoading: loadingChallenges } = useQuery<Challenge[]>({
@@ -261,24 +276,26 @@ export default function ChallengesPage() {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-          <Button
-            variant="outline"
-            onClick={() => seedDefaultChallengesMutation.mutate()}
-            disabled={seedDefaultChallengesMutation.isPending}
-            className="w-full sm:w-auto"
-          >
-            {seedDefaultChallengesMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Criando...
-              </>
-            ) : (
-              <>
-                <Sparkles className="mr-2 h-4 w-4" />
-                Inicializar Padrão
-              </>
-            )}
-          </Button>
+          {currentUser?.role === 'Admin' && (
+            <Button
+              variant="outline"
+              onClick={() => seedDefaultChallengesMutation.mutate()}
+              disabled={seedDefaultChallengesMutation.isPending}
+              className="w-full sm:w-auto"
+            >
+              {seedDefaultChallengesMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Criando...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  Inicializar Padrão
+                </>
+              )}
+            </Button>
+          )}
           <Button onClick={() => setIsCreateDialogOpen(true)} className="w-full sm:w-auto">
             <Plus className="mr-2 h-4 w-4" />
             Criar Desafio
@@ -306,33 +323,62 @@ export default function ChallengesPage() {
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
           ) : filteredChallenges.length === 0 ? (
-            <Card>
-              <CardContent className="py-12 text-center">
-                <div className="mx-auto max-w-md space-y-4">
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-                    {activeTab === 'completed' ? (
-                      <CheckCircle2 className="h-10 w-10 text-muted-foreground" />
-                    ) : (
-                      <Trophy className="h-10 w-10 text-muted-foreground" />
+            <div className="space-y-4">
+              <Card>
+                <CardContent className="py-12 text-center">
+                  <div className="mx-auto max-w-md space-y-4">
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+                      {activeTab === 'completed' ? (
+                        <CheckCircle2 className="h-10 w-10 text-muted-foreground" />
+                      ) : (
+                        <Trophy className="h-10 w-10 text-muted-foreground" />
+                      )}
+                    </div>
+                    <h3 className="text-xl font-semibold">
+                      {activeTab === 'completed' ? 'Nenhum desafio concluído ainda' : 'Nenhum desafio ativo'}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {activeTab === 'completed'
+                        ? 'Complete desafios para vê-los aqui'
+                        : 'Crie desafios personalizados para manter sua motivação e competir com amigos'}
+                    </p>
+                    {activeTab === 'active' && (
+                      <Button onClick={() => setIsCreateDialogOpen(true)}>
+                        <Plus className="mr-2 h-4 w-4" />
+                        Criar Primeiro Desafio
+                      </Button>
                     )}
                   </div>
-                  <h3 className="text-xl font-semibold">
-                    {activeTab === 'completed' ? 'Nenhum desafio concluído ainda' : 'Nenhum desafio ativo'}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {activeTab === 'completed'
-                      ? 'Complete desafios para vê-los aqui'
-                      : 'Crie desafios personalizados para manter sua motivação e competir com amigos'}
-                  </p>
-                  {activeTab === 'active' && (
-                    <Button onClick={() => setIsCreateDialogOpen(true)}>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Criar Primeiro Desafio
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+
+              {/* Info card for non-admin users */}
+              {activeTab === 'active' && challenges.length === 0 && currentUser?.role !== 'Admin' && (
+                <Card className="border-blue-500/50 bg-blue-500/5">
+                  <CardContent className="py-6">
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
+                          <Info className="h-5 w-5 text-blue-500" />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-blue-500">Sobre Desafios Padrão</h4>
+                        <p className="text-sm text-muted-foreground">
+                          O TaktIQ oferece desafios padrão para todos os usuários, como &ldquo;Primeira Semana&rdquo; (3 treinos),
+                          &ldquo;Maratonista&rdquo; (10 treinos) e &ldquo;Monstro de Volume&rdquo; (1000kg total). Esses desafios são
+                          automaticamente atribuídos quando você cria sua conta.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Se você não vê nenhum desafio, significa que os desafios padrão ainda não foram
+                          inicializados no sistema. Entre em contato com um administrador para ativá-los.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredChallenges.map((challenge) => {
