@@ -170,3 +170,4 @@ jobs:
           slot-name: 'Production'
           package: out-azure.zip
           startup-command: "./start.sh"
+          clean: true
