@@ -59,7 +59,7 @@ export default function WorkoutPage() {
 
   // Load AI workout exercises from localStorage if available
   useEffect(() => {
-    if (hasActiveSession && addedExercises.length === 0 && allExercises.length > 0) {
+    const loadAIWorkout = async () => {
       const storedExercises = localStorage.getItem('ai_workout_exercises');
       const storedTitle = localStorage.getItem('ai_workout_title');
 
@@ -68,30 +68,69 @@ export default function WorkoutPage() {
           const aiExercises = JSON.parse(storedExercises);
 
           // Convert AI exercises to WorkoutExercise format by matching with DB exercises
-          const workoutExercises: WorkoutExercise[] = aiExercises
-            .map((ex: any, index: number) => {
-              // Try to find matching exercise in database by name (case insensitive)
-              const dbExercise = allExercises.find(
-                (dbEx: any) => dbEx.name.toLowerCase() === ex.name.toLowerCase()
-              );
+          const workoutExercises: WorkoutExercise[] = [];
+          let createdCount = 0;
 
-              if (!dbExercise) {
-                console.warn(`Exercise not found in database: ${ex.name}`);
-                return null;
+          for (let index = 0; index < aiExercises.length; index++) {
+            const ex = aiExercises[index];
+            const exNameLower = ex.name.toLowerCase();
+
+            // Try exact match (case insensitive)
+            let dbExercise = allExercises.find(
+              (dbEx: any) => dbEx.name.toLowerCase() === exNameLower
+            );
+
+            // Try partial match if exact match fails
+            if (!dbExercise) {
+              dbExercise = allExercises.find((dbEx: any) => {
+                const dbNameLower = dbEx.name.toLowerCase();
+                return dbNameLower.includes(exNameLower) || exNameLower.includes(dbNameLower);
+              });
+            }
+
+            // If still not found, create the exercise in the database
+            if (!dbExercise) {
+              console.log(`Creating new exercise in database: ${ex.name}`);
+              try {
+                // Create the exercise
+                const newExercise = await api.exercises.create({
+                  name: ex.name,
+                  muscleGroup: ex.bodyPart || 'full_body',
+                  category: 'strength' as any, // Type assertion for ExerciseCategory
+                  equipment: ex.equipment || '',
+                  description: ex.instructions?.join('\n') || '',
+                  videoUrl: ex.videoUrl || '',
+                  isPublic: false, // User's private exercise
+                });
+
+                createdCount++;
+                workoutExercises.push({
+                  id: `ai-${Date.now()}-${index}`,
+                  exerciseId: newExercise.id,
+                  exerciseName: newExercise.name,
+                  exercise: newExercise,
+                  order: index,
+                  targetSets: ex.sets || 3,
+                  targetReps: parseInt(ex.reps) || 10,
+                  targetLoad: 0,
+                });
+              } catch (error) {
+                console.error(`Failed to create exercise ${ex.name}:`, error);
+                // Skip this exercise
               }
-
-              return {
+            } else {
+              workoutExercises.push({
                 id: `ai-${Date.now()}-${index}`,
-                exerciseId: dbExercise.id, // Use DB exercise ID
+                exerciseId: dbExercise.id,
                 exerciseName: dbExercise.name,
                 exercise: dbExercise,
                 order: index,
                 targetSets: ex.sets || 3,
                 targetReps: parseInt(ex.reps) || 10,
                 targetLoad: 0,
-              };
-            })
-            .filter((ex: WorkoutExercise | null): ex is WorkoutExercise => ex !== null);
+              });
+            }
+          }
 
           if (workoutExercises.length > 0) {
             setAddedExercises(workoutExercises);
@@ -100,15 +139,19 @@ export default function WorkoutPage() {
             localStorage.removeItem('ai_workout_exercises');
             localStorage.removeItem('ai_workout_title');
 
+            const description = createdCount > 0
+              ? `${workoutExercises.length} exercícios adicionados (${createdCount} novos criados).`
+              : `${workoutExercises.length} exercícios adicionados ao seu treino.`;
+
             toast({
               title: storedTitle || 'Treino AI carregado!',
-              description: `${workoutExercises.length} exercícios adicionados ao seu treino.`,
+              description,
             });
           } else {
             toast({
               variant: 'destructive',
               title: 'Erro ao carregar treino AI',
-              description: 'Nenhum exercício foi encontrado no banco de dados. Use o botão "Adicionar Exercício" para adicionar manualmente.',
+              description: 'Não foi possível carregar os exercícios. Tente novamente.',
             });
             // Clear localStorage even on error
             localStorage.removeItem('ai_workout_exercises');
@@ -120,6 +163,10 @@ export default function WorkoutPage() {
           localStorage.removeItem('ai_workout_title');
         }
       }
+    };
+
+    if (hasActiveSession && addedExercises.length === 0 && allExercises.length > 0) {
+      loadAIWorkout();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasActiveSession, allExercises]);
