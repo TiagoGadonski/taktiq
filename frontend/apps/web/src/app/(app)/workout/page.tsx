@@ -655,17 +655,15 @@ export default function WorkoutPage() {
             </div>
           )}
 
-          {/* Add Exercise Button for Free Workouts */}
-          {isFreeWorkout && (
-            <Button
-              variant="outline"
-              onClick={() => setIsAddExerciseOpen(true)}
-              className="w-full"
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Adicionar Exercício
-            </Button>
-          )}
+          {/* Add Exercise Button */}
+          <Button
+            variant="outline"
+            onClick={() => setIsAddExerciseOpen(true)}
+            className="w-full"
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Adicionar Exercício
+          </Button>
         </div>
       ) : (
         <Card>
@@ -675,15 +673,13 @@ export default function WorkoutPage() {
                 ? 'Este treino não tem exercícios configurados.'
                 : 'Este é um treino livre. Adicione exercícios conforme necessário.'}
             </p>
-            {isFreeWorkout && (
-              <Button
-                onClick={() => setIsAddExerciseOpen(true)}
-                className="mt-4"
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Adicionar Primeiro Exercício
-              </Button>
-            )}
+            <Button
+              onClick={() => setIsAddExerciseOpen(true)}
+              className="mt-4"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Adicionar Primeiro Exercício
+            </Button>
           </CardContent>
         </Card>
       )}

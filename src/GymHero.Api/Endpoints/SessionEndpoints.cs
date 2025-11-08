@@ -117,5 +117,30 @@ public static class SessionEndpoints
         })
         .WithName("CompleteWorkoutSession")
         .WithSummary("Marks a workout session as complete with optional notes");
+
+        group.MapPatch("/{sessionId:guid}/cancel", async (
+            Guid sessionId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new CancelWorkoutSessionCommand(sessionId, ownerId);
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { message = ex.Message });
+            }
+        })
+        .WithName("CancelWorkoutSession")
+        .WithSummary("Cancels an active workout session and removes all progress");
     }
 }
