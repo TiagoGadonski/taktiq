@@ -24,6 +24,10 @@ public static class DependencyInjection
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<INotificationService, NotificationService>();
+
+        // --- Background Services ---
+        services.AddHostedService<PlanExpirationCheckService>();
 
         // --- Configuração do Banco de Dados ---
         var connectionString = configuration.GetConnectionString("DefaultConnection");

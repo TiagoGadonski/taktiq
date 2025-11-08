@@ -35,6 +35,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TaktIQLogo } from '@/components/taktiq-logo';
+import { NotificationsDropdown } from '@/components/notifications-dropdown';
 import { getAssetUrl } from '@/lib/env';
 import { useTheme } from 'next-themes';
 
@@ -120,9 +121,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           {/* Right side - Notifications + Avatar Dropdown */}
           <div className="flex items-center gap-3">
             {/* Notifications */}
-            <Button variant="ghost" size="icon" className="hover-lift tap-scale">
-              <Bell className="h-5 w-5" />
-            </Button>
+            <NotificationsDropdown />
 
             {/* Avatar Dropdown Menu */}
             <DropdownMenu>
@@ -234,9 +233,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
           {/* Right side - Notifications + Avatar */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="h-9 w-9 hover-lift tap-scale">
-              <Bell className="h-5 w-5" />
-            </Button>
+            <NotificationsDropdown />
 
             {/* Avatar Dropdown Menu */}
             <DropdownMenu>

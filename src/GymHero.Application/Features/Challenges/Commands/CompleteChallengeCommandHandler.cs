@@ -7,10 +7,12 @@ namespace GymHero.Application.Features.Challenges.Commands;
 public class CompleteChallengeCommandHandler : IRequestHandler<CompleteChallengeCommand, Unit>
 {
     private readonly IApplicationDbContext _context;
+    private readonly INotificationService _notificationService;
 
-    public CompleteChallengeCommandHandler(IApplicationDbContext context)
+    public CompleteChallengeCommandHandler(IApplicationDbContext context, INotificationService notificationService)
     {
         _context = context;
+        _notificationService = notificationService;
     }
 
     public async Task<Unit> Handle(CompleteChallengeCommand request, CancellationToken cancellationToken)
@@ -40,6 +42,13 @@ public class CompleteChallengeCommandHandler : IRequestHandler<CompleteChallenge
         progress.LastUpdate = DateTime.UtcNow;
 
         await _context.SaveChangesAsync(cancellationToken);
+
+        // Send notification to user who completed the challenge
+        await _notificationService.CreateChallengeCompletedNotificationAsync(
+            request.UserId,
+            challenge.Id,
+            challenge.Title,
+            cancellationToken);
 
         return Unit.Value;
     }
