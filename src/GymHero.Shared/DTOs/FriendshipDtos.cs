@@ -11,7 +11,13 @@ public record FriendRequestResponse(
 
 // DTO para enviar a resposta a um pedido
 public record RespondToFriendRequestRequest(bool Accept);
-public record UserSearchResponse(Guid Id, string Name);
+public record UserSearchResponse(
+    Guid Id,
+    string Name,
+    string Email,
+    bool IsFriend,
+    bool HasPendingRequest
+);
 
 public record FriendResponse(
     Guid FriendshipId,

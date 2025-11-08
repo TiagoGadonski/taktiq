@@ -1,4 +1,5 @@
 using GymHero.Application.Common.Interfaces;
+using GymHero.Domain.Enums;
 using GymHero.Shared.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,29 @@ public class SearchUsersQueryHandler : IRequestHandler<SearchUsersQuery, IEnumer
 
         var searchTermLower = request.SearchTerm.ToLower();
 
-        return await _context.Users
+        var users = await _context.Users
             .AsNoTracking()
-            .Where(u => u.Id != request.CurrentUserId && u.Name.ToLower().Contains(searchTermLower))
-            .Select(u => new UserSearchResponse(u.Id, u.Name))
-            .Take(10) // Limita o número de resultados
+            .Where(u => u.Id != request.CurrentUserId &&
+                       (u.Name.ToLower().Contains(searchTermLower) || u.Email.ToLower().Contains(searchTermLower)))
+            .Take(10)
             .ToListAsync(cancellationToken);
+
+        // Get all friendships involving the current user
+        var friendships = await _context.Friendships
+            .AsNoTracking()
+            .Where(f => f.RequesterId == request.CurrentUserId || f.AddresseeId == request.CurrentUserId)
+            .ToListAsync(cancellationToken);
+
+        return users.Select(u =>
+        {
+            var friendship = friendships.FirstOrDefault(f =>
+                (f.RequesterId == request.CurrentUserId && f.AddresseeId == u.Id) ||
+                (f.AddresseeId == request.CurrentUserId && f.RequesterId == u.Id));
+
+            var isFriend = friendship?.Status == FriendshipStatus.Accepted;
+            var hasPendingRequest = friendship?.Status == FriendshipStatus.Pending;
+
+            return new UserSearchResponse(u.Id, u.Name, u.Email, isFriend, hasPendingRequest);
+        });
     }
 }
