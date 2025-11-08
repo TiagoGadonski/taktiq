@@ -16,6 +16,8 @@ public class WorkoutPlan : BaseEntity
     public string? Goal { get; set; } // O '?' indica que a string pode ser nula (opcional).
     public int? Duration { get; set; } // Duração em semanas
     public bool IsActive { get; set; } = false; // Indica se este é o plano ativo do usuário
+    public DateTime? StartDate { get; set; } // Data de início do plano
+    public DateTime? ExpirationDate { get; set; } // Data de expiração calculada com base na duração
 
     // Sharing and visibility settings
     public VisibilityLevel VisibilityLevel { get; set; } = VisibilityLevel.Private;

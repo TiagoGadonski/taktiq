@@ -9,6 +9,7 @@ public class CreateWorkoutPlanRequest
     [Required(ErrorMessage = "O nome do plano é obrigatório")]
     public string Name { get; set; } = "";
     public string? Goal { get; set; }
+    public int? Duration { get; set; } // Duração em semanas
 }
 
 // Dados que retornamos após a criação

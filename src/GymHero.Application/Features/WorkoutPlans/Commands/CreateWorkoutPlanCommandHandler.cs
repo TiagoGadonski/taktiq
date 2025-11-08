@@ -17,11 +17,23 @@ public class CreateWorkoutPlanCommandHandler : IRequestHandler<CreateWorkoutPlan
     public async Task<WorkoutPlanResponse> Handle(CreateWorkoutPlanCommand request, CancellationToken cancellationToken)
     {
         // 1. Criar a entidade de domínio
+        var startDate = DateTime.UtcNow;
+        DateTime? expirationDate = null;
+
+        // Calculate expiration date if duration is provided
+        if (request.Duration.HasValue && request.Duration.Value > 0)
+        {
+            expirationDate = startDate.AddDays(request.Duration.Value * 7); // Duration is in weeks
+        }
+
         var workoutPlan = new WorkoutPlan
         {
             Name = request.Name,
             Goal = request.Goal,
-            OwnerId = request.OwnerId // Associamos o plano ao usuário logado
+            OwnerId = request.OwnerId, // Associamos o plano ao usuário logado
+            Duration = request.Duration,
+            StartDate = startDate,
+            ExpirationDate = expirationDate
         };
 
         // 2. Adicionar ao DbContext e salvar no banco
