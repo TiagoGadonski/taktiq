@@ -79,6 +79,8 @@ export default function AIWorkoutPage() {
   const [planPrompt, setPlanPrompt] = useState('');
   const [planFitnessLevel, setPlanFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [daysPerWeek, setDaysPerWeek] = useState(4);
+  const [planDuration, setPlanDuration] = useState(60); // Default 60 minutes per session
+  const [weeksCount, setWeeksCount] = useState(4); // Default 4 weeks
   const [generatedPlan, setGeneratedPlan] = useState<AIWorkoutPlanResponse | null>(null);
   const [savedPlanId, setSavedPlanId] = useState<string | null>(null);
   const [rejectedPlanExercises, setRejectedPlanExercises] = useState<Record<string, string[]>>({});
@@ -223,7 +225,13 @@ export default function AIWorkoutPage() {
 
   // Plan mutation
   const generatePlanMutation = useMutation({
-    mutationFn: async (request: { prompt: string; fitnessLevel?: string; daysPerWeek?: number }) => {
+    mutationFn: async (request: {
+      prompt: string;
+      fitnessLevel?: string;
+      daysPerWeek?: number;
+      duration?: number;
+      weeksCount?: number;
+    }) => {
       return apiClient.post<AIWorkoutPlanResponse>('/ai/generate-plan', request);
     },
     onSuccess: (data) => {
@@ -231,7 +239,7 @@ export default function AIWorkoutPage() {
       setRejectedPlanExercises({}); // Reset rejected exercises for new plan
       toast({
         title: 'Plano de treino gerado com sucesso!',
-        description: `Seu plano de ${data.daysPerWeek} dias está pronto.`,
+        description: `Seu plano de ${data.daysPerWeek} dias por ${data.weeksCount} semanas está pronto.`,
       });
     },
     onError: (error) => {
@@ -268,7 +276,23 @@ export default function AIWorkoutPage() {
       });
       return;
     }
-    generatePlanMutation.mutate({ prompt: planPrompt, fitnessLevel: planFitnessLevel, daysPerWeek });
+
+    // Add duration and weeks context to prompt if not already mentioned
+    let finalPlanPrompt = planPrompt;
+    if (!planPrompt.toLowerCase().includes('minuto')) {
+      finalPlanPrompt += `, ${planDuration} minutos por treino`;
+    }
+    if (!planPrompt.toLowerCase().includes('semana')) {
+      finalPlanPrompt += `, plano de ${weeksCount} semanas`;
+    }
+
+    generatePlanMutation.mutate({
+      prompt: finalPlanPrompt,
+      fitnessLevel: planFitnessLevel,
+      daysPerWeek,
+      duration: planDuration,
+      weeksCount,
+    });
   };
 
   // Replace exercise function - generates a new alternative
@@ -1022,6 +1046,48 @@ export default function AIWorkoutPage() {
                         }`}
                       >
                         {days}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Duração por Treino</Label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[30, 45, 60, 90].map((mins) => (
+                      <button
+                        key={mins}
+                        onClick={() => setPlanDuration(mins)}
+                        disabled={generatePlanMutation.isPending}
+                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                          planDuration === mins
+                            ? 'bg-primary text-primary-foreground border-primary'
+                            : 'bg-background border-input hover:bg-accent'
+                        }`}
+                      >
+                        {mins}min
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Duração do Plano</Label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[4, 6, 8, 12].map((weeks) => (
+                      <button
+                        key={weeks}
+                        onClick={() => setWeeksCount(weeks)}
+                        disabled={generatePlanMutation.isPending}
+                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                          weeksCount === weeks
+                            ? 'bg-primary text-primary-foreground border-primary'
+                            : 'bg-background border-input hover:bg-accent'
+                        }`}
+                      >
+                        {weeks}sem
                       </button>
                     ))}
                   </div>
