@@ -468,6 +468,7 @@ export default function AIWorkoutPage() {
       const planData = {
         name: generatedPlan.title,
         goal: generatedPlan.goal,
+        duration: weeksCount, // Send the weeks count as duration
       };
 
       const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);

@@ -474,6 +474,9 @@ namespace GymHero.Infrastructure.Migrations
                     b.Property<int?>("Duration")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Goal")
                         .HasColumnType("text");
 
@@ -491,6 +494,9 @@ namespace GymHero.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("ViewCount")

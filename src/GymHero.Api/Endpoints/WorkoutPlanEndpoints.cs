@@ -25,7 +25,7 @@ public static class WorkoutPlanEndpoints
             ISender sender) =>
         {
             var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var command = new CreateWorkoutPlanCommand(request.Name, request.Goal, ownerId);
+            var command = new CreateWorkoutPlanCommand(request.Name, request.Goal, ownerId, request.Duration);
             var result = await sender.Send(command);
             return Results.CreatedAtRoute("GetWorkoutPlanById", new { id = result.Id }, result);
         })
