@@ -77,6 +77,30 @@ export default function DashboardPage() {
         <p className="text-sm text-muted-foreground sm:text-base">Bem-vindo de volta! Vamos treinar hoje?</p>
       </div>
 
+      {/* Start Workout CTA */}
+      <Card className="border-primary bg-gradient-to-br from-primary/5 to-primary/10">
+        <CardContent className="pt-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="text-2xl font-bold mb-2">
+                {currentSession ? 'Treino em Andamento' : 'Pronto para Treinar?'}
+              </h2>
+              <p className="text-muted-foreground">
+                {currentSession
+                  ? 'Continue de onde parou e complete seu treino'
+                  : 'Inicie um novo treino e mantenha sua sequência'}
+              </p>
+            </div>
+            <Link href="/workout">
+              <Button size="lg" className="w-full sm:w-auto min-w-[200px]">
+                <Dumbbell className="mr-2 h-5 w-5" />
+                {currentSession ? 'Continuar Treino' : 'Iniciar Treino'}
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Stats Cards */}
       <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
