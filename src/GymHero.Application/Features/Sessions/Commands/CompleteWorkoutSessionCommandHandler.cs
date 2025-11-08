@@ -1,5 +1,6 @@
 using GymHero.Application.Common.Exceptions;
 using GymHero.Application.Common.Interfaces;
+using GymHero.Application.Features.Sessions.Events;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace GymHero.Application.Features.Sessions.Commands;
 public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWorkoutSessionCommand, CompleteWorkoutSessionResponse>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IPublisher _publisher;
 
     private static readonly string[] MotivationalMessages =
     {
@@ -23,11 +25,16 @@ public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWork
         "Perfeito! Você está construindo hábitos de campeão!"
     };
 
-    public CompleteWorkoutSessionCommandHandler(IApplicationDbContext context) => _context = context;
+    public CompleteWorkoutSessionCommandHandler(IApplicationDbContext context, IPublisher publisher)
+    {
+        _context = context;
+        _publisher = publisher;
+    }
 
     public async Task<CompleteWorkoutSessionResponse> Handle(CompleteWorkoutSessionCommand request, CancellationToken cancellationToken)
     {
         var session = await _context.WorkoutSessions
+            .Include(s => s.Sets)
             .FirstOrDefaultAsync(s => s.Id == request.SessionId, cancellationToken);
 
         if (session is null)
@@ -46,6 +53,9 @@ public class CompleteWorkoutSessionCommandHandler : IRequestHandler<CompleteWork
         session.Notes = request.Notes;
 
         await _context.SaveChangesAsync(cancellationToken);
+
+        // Publish event to trigger challenge progress updates
+        await _publisher.Publish(new WorkoutSessionCompletedEvent(session), cancellationToken);
 
         // Selecionar uma mensagem motivacional aleatória
         var random = new Random();
