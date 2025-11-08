@@ -510,5 +510,77 @@ public static class AdminEndpoints
         })
         .WithName("SeedSystemChallenges")
         .WithSummary("Creates predefined system challenges for all users");
+
+        // Assign default challenges to existing users who don't have them
+        group.MapPost("/assign-default-challenges", async (IApplicationDbContext context, CancellationToken cancellationToken) =>
+        {
+            // Get all default challenges
+            var defaultChallenges = await context.Challenges
+                .Where(c => c.IsDefault)
+                .ToListAsync(cancellationToken);
+
+            if (!defaultChallenges.Any())
+            {
+                return Results.BadRequest(new { message = "No default challenges found. Please seed challenges first using /api/admin/seed-challenges" });
+            }
+
+            // Get all users
+            var allUsers = await context.Users.ToListAsync(cancellationToken);
+
+            // Get all existing challenge progresses
+            var existingProgresses = await context.ChallengeProgresses
+                .Select(cp => new { cp.ParticipantId, cp.ChallengeId })
+                .ToListAsync(cancellationToken);
+
+            var existingProgressSet = existingProgresses
+                .Select(ep => $"{ep.ParticipantId}_{ep.ChallengeId}")
+                .ToHashSet();
+
+            int totalAssigned = 0;
+            int usersProcessed = 0;
+
+            foreach (var user in allUsers)
+            {
+                foreach (var challenge in defaultChallenges)
+                {
+                    // Check if challenge is applicable to this user
+                    bool isApplicable = challenge.TargetType == DomainChallengeTargetType.AllUsers ||
+                                       (challenge.TargetType == DomainChallengeTargetType.AllTrainers && user.Role == "PersonalTrainer");
+
+                    // Create a key for this user-challenge combination
+                    var progressKey = $"{user.Id}_{challenge.Id}";
+
+                    // If applicable and user doesn't have this challenge yet, assign it
+                    if (isApplicable && !existingProgressSet.Contains(progressKey))
+                    {
+                        var progress = new ChallengeProgress
+                        {
+                            ChallengeId = challenge.Id,
+                            ParticipantId = user.Id,
+                            CurrentValue = 0,
+                            LastUpdate = DateTime.UtcNow
+                        };
+
+                        await context.ChallengeProgresses.AddAsync(progress, cancellationToken);
+                        totalAssigned++;
+                    }
+                }
+
+                usersProcessed++;
+            }
+
+            if (totalAssigned > 0)
+            {
+                await context.SaveChangesAsync(cancellationToken);
+            }
+
+            return Results.Ok(new {
+                message = "Default challenges assigned successfully",
+                usersProcessed,
+                challengesAssigned = totalAssigned
+            });
+        })
+        .WithName("AssignDefaultChallenges")
+        .WithSummary("Assigns all default challenges to existing users who don't have them yet");
     }
 }
