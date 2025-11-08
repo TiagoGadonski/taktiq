@@ -559,6 +559,9 @@ namespace GymHero.Infrastructure.Migrations
                     b.Property<Guid>("ExerciseId")
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsAddedDuringSession")
+                        .HasColumnType("boolean");
+
                     b.Property<double?>("Load")
                         .HasColumnType("double precision");
 

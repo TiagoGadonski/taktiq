@@ -61,7 +61,8 @@ public class LogSetCommandHandler : IRequestHandler<LogSetCommand, LogSetRespons
             Reps = request.Reps,
             Load = request.Load,
             Rpe = request.Rpe,
-            Completed = true // Marcamos a série como completada
+            Completed = true, // Marcamos a série como completada
+            IsAddedDuringSession = request.IsAddedDuringSession
         };
 
         await _context.WorkoutSets.AddAsync(workoutSet, cancellationToken);

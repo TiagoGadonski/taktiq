@@ -59,7 +59,8 @@ public class GetSessionHistoryQueryHandler : IRequestHandler<GetSessionHistoryQu
                     SetNumber = set.SetNumber,
                     Reps = set.Reps,
                     Load = set.Load,
-                    Rpe = set.Rpe
+                    Rpe = set.Rpe,
+                    IsAddedDuringSession = set.IsAddedDuringSession
                 }).ToList()
             })
             .ToListAsync(cancellationToken);

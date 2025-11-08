@@ -144,6 +144,7 @@ export interface WorkoutSet {
   notes?: string;
   completedAt: string;
   isPr?: boolean;
+  isAddedDuringSession?: boolean;
 }
 
 export interface CreateSetRequest {

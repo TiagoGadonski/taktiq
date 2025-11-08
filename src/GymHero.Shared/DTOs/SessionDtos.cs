@@ -7,7 +7,8 @@ public record LogSetRequest(
     int SetNumber,
     int? Reps, // Opcional - usuário pode entrar apenas se quiser
     double? Load, // Opcional - usuário pode entrar apenas se quiser
-    int? Rpe // Rating of Perceived Exertion é opcional
+    int? Rpe, // Rating of Perceived Exertion é opcional
+    bool IsAddedDuringSession = false // Indicates if this exercise was added during the session
 );
 
 public class WorkoutSessionDto
@@ -30,4 +31,5 @@ public class WorkoutSetDto
     public int? Reps { get; set; }
     public double? Load { get; set; }
     public int? Rpe { get; set; }
+    public bool IsAddedDuringSession { get; set; }
 }

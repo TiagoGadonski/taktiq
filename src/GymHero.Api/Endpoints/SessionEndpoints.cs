@@ -79,7 +79,8 @@ public static class SessionEndpoints
                 request.SetNumber,
                 request.Reps,
                 request.Load,
-                request.Rpe
+                request.Rpe,
+                request.IsAddedDuringSession
             );
 
             try

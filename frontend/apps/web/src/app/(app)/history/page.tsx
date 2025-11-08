@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Calendar, Search, Filter, ChevronRight, X, Dumbbell } from 'lucide-react';
+import { Calendar, Search, Filter, ChevronRight, X, Dumbbell, Plus } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { formatDate, formatDuration } from '@gymhero/shared';
 import type { WorkoutSession, WorkoutSet } from '@gymhero/shared';
@@ -302,18 +303,32 @@ export default function HistoryPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Exercícios Realizados</h3>
                 {groupedExercises &&
-                  Object.entries(groupedExercises).map(([exerciseName, { exercise, sets }]) => (
+                  Object.entries(groupedExercises).map(([exerciseName, { exercise, sets }]) => {
+                    // Check if this exercise was added during the session
+                    const wasAdded = sets.some(set => set.isAddedDuringSession);
+
+                    return (
                     <Card key={exerciseName}>
                       <CardHeader className="pb-3">
-                        <div className="flex items-center gap-3">
-                          <Dumbbell className="h-5 w-5 text-primary" />
-                          <div>
-                            <CardTitle className="text-base">{exerciseName}</CardTitle>
-                            {exercise?.muscleGroup && (
-                              <p className="text-sm text-muted-foreground capitalize">
-                                {exercise.muscleGroup}
-                              </p>
-                            )}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Dumbbell className="h-5 w-5 text-primary" />
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <CardTitle className="text-base">{exerciseName}</CardTitle>
+                                {wasAdded && (
+                                  <Badge variant="secondary" className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                                    <Plus className="mr-1 h-3 w-3" />
+                                    Adicionado
+                                  </Badge>
+                                )}
+                              </div>
+                              {exercise?.muscleGroup && (
+                                <p className="text-sm text-muted-foreground capitalize">
+                                  {exercise.muscleGroup}
+                                </p>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </CardHeader>
@@ -357,7 +372,8 @@ export default function HistoryPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                    );
+                  })}
               </div>
 
               {/* Session Notes */}
