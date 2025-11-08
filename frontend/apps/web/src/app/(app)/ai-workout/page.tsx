@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info } from 'lucide-react';
+import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -15,6 +15,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
+import { useSession } from '@/hooks/use-session';
 
 // Types
 interface Exercise {
@@ -93,10 +94,47 @@ export default function AIWorkoutPage() {
 
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { startSession, hasActiveSession, isStarting } = useSession();
 
   const openExerciseModal = (exercise: Exercise) => {
     setSelectedExercise(exercise);
     setIsExerciseModalOpen(true);
+  };
+
+  const handleStartWorkout = async () => {
+    if (!generatedWorkout) return;
+
+    try {
+      if (hasActiveSession) {
+        toast({
+          variant: 'destructive',
+          title: 'Treino em andamento',
+          description: 'Você já tem um treino ativo. Complete ou cancele antes de iniciar outro.',
+        });
+        return;
+      }
+
+      // Store AI workout exercises in localStorage so they can be loaded on the workout page
+      localStorage.setItem('ai_workout_exercises', JSON.stringify(generatedWorkout.exercises));
+      localStorage.setItem('ai_workout_title', generatedWorkout.title);
+
+      // Start a free workout session (no plan ID = free workout)
+      await startSession(undefined);
+
+      toast({
+        title: 'Treino iniciado!',
+        description: 'Redirecionando para a página de treino...',
+      });
+
+      // Navigate to workout page
+      router.push('/workout');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao iniciar treino',
+        description: error.message,
+      });
+    }
   };
 
   const openShareDialog = (workoutType: 'single' | 'plan') => {
@@ -802,15 +840,28 @@ export default function AIWorkoutPage() {
                       Duração estimada: {generatedWorkout.duration} minutos
                     </p>
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => openShareDialog('single')}
-                    className="ml-2"
-                  >
-                    <Share2 className="h-4 w-4 mr-2" />
-                    Compartilhar
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={handleStartWorkout}
+                      disabled={isStarting}
+                      size="sm"
+                    >
+                      {isStarting ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Play className="h-4 w-4 mr-2" />
+                      )}
+                      Iniciar Treino
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => openShareDialog('single')}
+                    >
+                      <Share2 className="h-4 w-4 mr-2" />
+                      Compartilhar
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>

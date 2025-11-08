@@ -42,6 +42,54 @@ export default function WorkoutPage() {
     }
   }, [currentSession, selectedWorkoutId]);
 
+  // Load AI workout exercises from localStorage if available
+  useEffect(() => {
+    if (hasActiveSession && addedExercises.length === 0) {
+      const storedExercises = localStorage.getItem('ai_workout_exercises');
+      const storedTitle = localStorage.getItem('ai_workout_title');
+
+      if (storedExercises) {
+        try {
+          const aiExercises = JSON.parse(storedExercises);
+
+          // Convert AI exercises to WorkoutExercise format
+          const workoutExercises: WorkoutExercise[] = aiExercises.map((ex: any, index: number) => ({
+            id: `ai-${Date.now()}-${index}`,
+            exerciseId: ex.name, // Use name as ID since AI exercises don't have DB IDs
+            exerciseName: ex.name,
+            exercise: {
+              id: ex.name,
+              name: ex.name,
+              muscleGroup: ex.bodyPart,
+              equipment: ex.equipment,
+              instructions: ex.instructions?.join('\n'),
+              videoUrl: ex.videoUrl,
+            },
+            order: index,
+            targetSets: ex.sets || 3,
+            targetReps: parseInt(ex.reps) || 10,
+            targetLoad: 0,
+          }));
+
+          setAddedExercises(workoutExercises);
+
+          // Clear localStorage after loading
+          localStorage.removeItem('ai_workout_exercises');
+          localStorage.removeItem('ai_workout_title');
+
+          toast({
+            title: storedTitle || 'Treino AI carregado!',
+            description: `${workoutExercises.length} exercícios adicionados ao seu treino.`,
+          });
+        } catch (error) {
+          console.error('Error loading AI workout:', error);
+          localStorage.removeItem('ai_workout_exercises');
+          localStorage.removeItem('ai_workout_title');
+        }
+      }
+    }
+  }, [hasActiveSession]);
+
   const { data: activePlan } = useQuery({
     queryKey: ['workout-plans', 'active'],
     queryFn: async () => {
@@ -538,7 +586,8 @@ export default function WorkoutPage() {
     (w: Workout) => w.id === selectedWorkoutId
   );
   const planExercises = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
-  const exercisesToShow = planExercises.length > 0 ? planExercises : addedExercises;
+  // Combine plan exercises with added exercises so both show up
+  const exercisesToShow = [...planExercises, ...addedExercises];
   const isFreeWorkout = !currentSession.workoutPlanId;
 
   // Split exercises into active and completed
