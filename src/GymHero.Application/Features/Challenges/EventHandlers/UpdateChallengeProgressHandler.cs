@@ -59,9 +59,11 @@ public class UpdateChallengeProgressHandler : INotificationHandler<WorkoutSessio
             switch (challenge.Type)
             {
                 case "TOTAL_VOLUME":
+                case "Volume":
                     valueToAdd = sessionTotalVolume;
                     break;
                 case "SESSION_FREQUENCY":
+                case "Treinos":
                     valueToAdd = sessionFrequency;
                     break;
             }
