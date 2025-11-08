@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus, CheckCircle2 } from 'lucide-react';
+import { Plus, Trophy, Target, TrendingUp, Users, Calendar, Loader2, UserPlus, CheckCircle2, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -135,6 +135,30 @@ export default function ChallengesPage() {
     },
   });
 
+  // Seed default challenges mutation
+  const seedDefaultChallengesMutation = useMutation({
+    mutationFn: async () => {
+      // First, seed the system challenges
+      await apiClient.post('/admin/seed-challenges', {});
+      // Then, assign them to all existing users
+      await apiClient.post('/admin/assign-default-challenges', {});
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Desafios padrão criados!',
+        description: 'Desafios padrão foram criados e atribuídos a todos os usuários.',
+      });
+      queryClient.invalidateQueries({ queryKey: ['challenges'] });
+    },
+    onError: (error) => {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao criar desafios padrão',
+        description: error instanceof Error ? error.message : 'Tente novamente',
+      });
+    },
+  });
+
   const resetForm = () => {
     setChallengeTitle('');
     setChallengeType('');
@@ -236,10 +260,30 @@ export default function ChallengesPage() {
             Crie desafios e compita com amigos
           </p>
         </div>
-        <Button onClick={() => setIsCreateDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
-          Criar Desafio
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={() => seedDefaultChallengesMutation.mutate()}
+            disabled={seedDefaultChallengesMutation.isPending}
+            className="w-full sm:w-auto"
+          >
+            {seedDefaultChallengesMutation.isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Criando...
+              </>
+            ) : (
+              <>
+                <Sparkles className="mr-2 h-4 w-4" />
+                Inicializar Padrão
+              </>
+            )}
+          </Button>
+          <Button onClick={() => setIsCreateDialogOpen(true)} className="w-full sm:w-auto">
+            <Plus className="mr-2 h-4 w-4" />
+            Criar Desafio
+          </Button>
+        </div>
       </div>
 
       {/* Tabs for Active/Completed Challenges */}
