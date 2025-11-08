@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Checkbox } from '@/components/ui/checkbox';
 import { challengeIcons, getChallengeIcon } from '@/components/challenge-icon-library';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { useAuth } from '@/hooks/use-auth';
 
 // Types
 interface Challenge {
@@ -45,13 +46,6 @@ interface Friend {
   friendEmail: string;
 }
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-}
-
 export default function ChallengesPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [challengeTitle, setChallengeTitle] = useState('');
@@ -65,13 +59,8 @@ export default function ChallengesPage() {
 
   const queryClient = useQueryClient();
 
-  // Get current user to check if admin
-  const { data: currentUser } = useQuery<User>({
-    queryKey: ['user', 'me'],
-    queryFn: async () => {
-      return apiClient.get('/users/me');
-    },
-  });
+  // Get current user from auth hook to check if admin
+  const { user: currentUser } = useAuth();
 
   // Fetch ALL challenges (with participation info)
   const { data: challenges = [], isLoading: loadingChallenges } = useQuery<Challenge[]>({
