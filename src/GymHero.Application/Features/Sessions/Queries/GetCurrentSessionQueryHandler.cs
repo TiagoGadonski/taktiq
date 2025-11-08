@@ -96,7 +96,8 @@ public class GetCurrentSessionQueryHandler : IRequestHandler<GetCurrentSessionQu
                     SetNumber = set.SetNumber,
                     Reps = set.Reps,
                     Load = set.Load,
-                    Rpe = set.Rpe
+                    Rpe = set.Rpe,
+                    IsAddedDuringSession = set.IsAddedDuringSession
                 }).ToList()
             })
             .FirstOrDefaultAsync(cancellationToken);

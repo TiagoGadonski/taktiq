@@ -46,6 +46,7 @@ export const createSetSchema = z.object({
   duration: z.number().min(0).optional(),
   distance: z.number().min(0).optional(),
   notes: z.string().optional(),
+  isAddedDuringSession: z.boolean().optional(),
 });
 
 export const updateSetSchema = z.object({

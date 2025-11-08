@@ -11,4 +11,5 @@ public record LogSetCommand(
     int SetNumber,
     int? Reps,
     double? Load,
-    int? Rpe) : IRequest<LogSetResponse>; // Retorna o ID e mensagem motivacional
+    int? Rpe,
+    bool IsAddedDuringSession = false) : IRequest<LogSetResponse>; // Retorna o ID e mensagem motivacional

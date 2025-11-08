@@ -188,11 +188,15 @@ export default function WorkoutPage() {
 
     const setNumber = (currentSession.sets?.filter((s: WorkoutSet) => s.exerciseId === exerciseId).length || 0) + 1;
 
+    // Check if this exercise was added during the session
+    const isAddedExercise = addedExercises.some(ex => ex.exerciseId === exerciseId);
+
     const setData: CreateSetInput = {
       sessionId: currentSession.id,
       exerciseId,
       setNumber,
       ...data,
+      isAddedDuringSession: isAddedExercise,
     };
 
     try {
