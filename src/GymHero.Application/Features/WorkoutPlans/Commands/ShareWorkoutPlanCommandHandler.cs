@@ -10,10 +10,12 @@ namespace GymHero.Application.Features.WorkoutPlans.Commands;
 public class ShareWorkoutPlanCommandHandler : IRequestHandler<ShareWorkoutPlanCommand>
 {
     private readonly IApplicationDbContext _context;
+    private readonly INotificationService _notificationService;
 
-    public ShareWorkoutPlanCommandHandler(IApplicationDbContext context)
+    public ShareWorkoutPlanCommandHandler(IApplicationDbContext context, INotificationService notificationService)
     {
         _context = context;
+        _notificationService = notificationService;
     }
 
     public async Task Handle(ShareWorkoutPlanCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,10 @@ public class ShareWorkoutPlanCommandHandler : IRequestHandler<ShareWorkoutPlanCo
         {
             throw new NotFoundException("Workout plan not found or you don't have permission to share it.");
         }
+
+        // Get the sharer's name for notifications
+        var sharer = await _context.Users.FindAsync(new object[] { request.SharerId }, cancellationToken);
+        var sharerName = sharer?.Name ?? "Um amigo";
 
         // Verify all friends exist and are actually friends with the sharer
         var friendships = await _context.Friendships
@@ -103,6 +109,14 @@ public class ShareWorkoutPlanCommandHandler : IRequestHandler<ShareWorkoutPlanCo
                     _context.WorkoutExercises.Add(newExercise);
                 }
             }
+
+            // Send notification to friend
+            await _notificationService.CreatePlanSharedNotificationAsync(
+                friendId,
+                newPlan.Id,
+                originalPlan.Name,
+                sharerName,
+                cancellationToken);
         }
 
         await _context.SaveChangesAsync(cancellationToken);
