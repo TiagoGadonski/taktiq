@@ -42,54 +42,6 @@ export default function WorkoutPage() {
     }
   }, [currentSession, selectedWorkoutId]);
 
-  // Load AI workout exercises from localStorage if available
-  useEffect(() => {
-    if (hasActiveSession && addedExercises.length === 0) {
-      const storedExercises = localStorage.getItem('ai_workout_exercises');
-      const storedTitle = localStorage.getItem('ai_workout_title');
-
-      if (storedExercises) {
-        try {
-          const aiExercises = JSON.parse(storedExercises);
-
-          // Convert AI exercises to WorkoutExercise format
-          const workoutExercises: WorkoutExercise[] = aiExercises.map((ex: any, index: number) => ({
-            id: `ai-${Date.now()}-${index}`,
-            exerciseId: ex.name, // Use name as ID since AI exercises don't have DB IDs
-            exerciseName: ex.name,
-            exercise: {
-              id: ex.name,
-              name: ex.name,
-              muscleGroup: ex.bodyPart,
-              equipment: ex.equipment,
-              instructions: ex.instructions?.join('\n'),
-              videoUrl: ex.videoUrl,
-            },
-            order: index,
-            targetSets: ex.sets || 3,
-            targetReps: parseInt(ex.reps) || 10,
-            targetLoad: 0,
-          }));
-
-          setAddedExercises(workoutExercises);
-
-          // Clear localStorage after loading
-          localStorage.removeItem('ai_workout_exercises');
-          localStorage.removeItem('ai_workout_title');
-
-          toast({
-            title: storedTitle || 'Treino AI carregado!',
-            description: `${workoutExercises.length} exercícios adicionados ao seu treino.`,
-          });
-        } catch (error) {
-          console.error('Error loading AI workout:', error);
-          localStorage.removeItem('ai_workout_exercises');
-          localStorage.removeItem('ai_workout_title');
-        }
-      }
-    }
-  }, [hasActiveSession]);
-
   const { data: activePlan } = useQuery({
     queryKey: ['workout-plans', 'active'],
     queryFn: async () => {
@@ -104,6 +56,73 @@ export default function WorkoutPage() {
       return await api.exercises.getAll();
     },
   });
+
+  // Load AI workout exercises from localStorage if available
+  useEffect(() => {
+    if (hasActiveSession && addedExercises.length === 0 && allExercises.length > 0) {
+      const storedExercises = localStorage.getItem('ai_workout_exercises');
+      const storedTitle = localStorage.getItem('ai_workout_title');
+
+      if (storedExercises) {
+        try {
+          const aiExercises = JSON.parse(storedExercises);
+
+          // Convert AI exercises to WorkoutExercise format by matching with DB exercises
+          const workoutExercises: WorkoutExercise[] = aiExercises
+            .map((ex: any, index: number) => {
+              // Try to find matching exercise in database by name (case insensitive)
+              const dbExercise = allExercises.find(
+                (dbEx: any) => dbEx.name.toLowerCase() === ex.name.toLowerCase()
+              );
+
+              if (!dbExercise) {
+                console.warn(`Exercise not found in database: ${ex.name}`);
+                return null;
+              }
+
+              return {
+                id: `ai-${Date.now()}-${index}`,
+                exerciseId: dbExercise.id, // Use DB exercise ID
+                exerciseName: dbExercise.name,
+                exercise: dbExercise,
+                order: index,
+                targetSets: ex.sets || 3,
+                targetReps: parseInt(ex.reps) || 10,
+                targetLoad: 0,
+              };
+            })
+            .filter((ex: WorkoutExercise | null): ex is WorkoutExercise => ex !== null);
+
+          if (workoutExercises.length > 0) {
+            setAddedExercises(workoutExercises);
+
+            // Clear localStorage after loading
+            localStorage.removeItem('ai_workout_exercises');
+            localStorage.removeItem('ai_workout_title');
+
+            toast({
+              title: storedTitle || 'Treino AI carregado!',
+              description: `${workoutExercises.length} exercícios adicionados ao seu treino.`,
+            });
+          } else {
+            toast({
+              variant: 'destructive',
+              title: 'Erro ao carregar treino AI',
+              description: 'Nenhum exercício foi encontrado no banco de dados. Use o botão "Adicionar Exercício" para adicionar manualmente.',
+            });
+            // Clear localStorage even on error
+            localStorage.removeItem('ai_workout_exercises');
+            localStorage.removeItem('ai_workout_title');
+          }
+        } catch (error) {
+          console.error('Error loading AI workout:', error);
+          localStorage.removeItem('ai_workout_exercises');
+          localStorage.removeItem('ai_workout_title');
+        }
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasActiveSession, allExercises]);
 
   const openExerciseModal = (exercise: WorkoutExercise) => {
     setSelectedExercise(exercise);
