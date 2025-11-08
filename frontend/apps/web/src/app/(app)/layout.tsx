@@ -20,6 +20,7 @@ import {
   Moon,
   Sun,
   Calendar,
+  Trophy,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -165,6 +166,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link href="/challenges" className="cursor-pointer">
+                    <Trophy className="mr-2 h-4 w-4" />
+                    Desafios
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link href="/about" className="cursor-pointer">
                     <Info className="mr-2 h-4 w-4" />
                     Sobre Nós
@@ -270,6 +277,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   <Link href="/training-split" className="cursor-pointer">
                     <Calendar className="mr-2 h-4 w-4" />
                     Divisão de Treinos
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/challenges" className="cursor-pointer">
+                    <Trophy className="mr-2 h-4 w-4" />
+                    Desafios
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
