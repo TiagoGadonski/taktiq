@@ -32,6 +32,9 @@ public class GetAllWorkoutPlansQueryHandler : IRequestHandler<GetAllWorkoutPlans
                 Name = wp.Name,
                 Goal = wp.Goal,
                 IsActive = wp.IsActive,
+                Duration = wp.Duration,
+                StartDate = wp.StartDate,
+                ExpirationDate = wp.ExpirationDate,
                 // Include workouts with their exercises
                 Workouts = wp.Workouts
                     .OrderBy(w => w.Order)

@@ -166,6 +166,14 @@ export class WorkoutPlanApi {
   async getPublicPlanById(id: string): Promise<WorkoutPlan> {
     return this.client.get<WorkoutPlan>(`/workout-plans/public/${id}`);
   }
+
+  async renew(id: string, data: { additionalWeeks: number }): Promise<{ message: string }> {
+    return this.client.post<{ message: string }>(`/workout-plans/${id}/renew`, data);
+  }
+
+  async duplicate(id: string, data: { duration: number }): Promise<WorkoutPlan> {
+    return this.client.post<WorkoutPlan>(`/workout-plans/${id}/duplicate`, data);
+  }
 }
 
 export class WorkoutApi {

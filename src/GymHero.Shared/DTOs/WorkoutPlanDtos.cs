@@ -13,7 +13,17 @@ public class CreateWorkoutPlanRequest
 }
 
 // Dados que retornamos após a criação
-public record WorkoutPlanResponse(Guid Id, Guid OwnerId, string Name, string? Goal, bool IsActive, DateTime CreatedAt);
+public record WorkoutPlanResponse(
+    Guid Id,
+    Guid OwnerId,
+    string Name,
+    string? Goal,
+    bool IsActive,
+    DateTime CreatedAt,
+    int? Duration = null,
+    DateTime? StartDate = null,
+    DateTime? ExpirationDate = null
+);
 
 public record UpdateWorkoutPlanRequest(string Name, string? Goal);
 
@@ -52,6 +62,9 @@ public class WorkoutPlanDetailResponse
     public string Name { get; set; } = "";
     public string? Goal { get; set; }
     public bool IsActive { get; set; }
+    public int? Duration { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? ExpirationDate { get; set; }
     public List<WorkoutDto> Workouts { get; set; } = new();
     public List<WorkoutExerciseDto> Exercises { get; set; } = new();
 }
@@ -86,4 +99,12 @@ public class ShareWorkoutPlanRequest
 public record UpdateVisibilityRequest(
     VisibilityLevel VisibilityLevel,
     bool AllowCopying
+);
+
+public record RenewWorkoutPlanRequest(
+    int AdditionalWeeks
+);
+
+public record DuplicateWorkoutPlanRequest(
+    int Duration
 );

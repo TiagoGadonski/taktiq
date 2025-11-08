@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Star, Trash2, Edit, Share2, Send, Settings } from 'lucide-react';
+import { Plus, Star, Trash2, Edit, Share2, Send, Settings, AlertTriangle, Clock, RefreshCw } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { ShareSettingsDialog } from '@/components/workout/share-settings-dialog';
 import { ShareWithFriendsDialog } from '@/components/workout/share-with-friends-dialog';
+import { RenewPlanDialog } from '@/components/workout/renew-plan-dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +27,8 @@ export default function PlansPage() {
   const [selectedPlan, setSelectedPlan] = useState<WorkoutPlan | null>(null);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [shareWithFriendsDialogOpen, setShareWithFriendsDialogOpen] = useState(false);
+  const [renewDialogOpen, setRenewDialogOpen] = useState(false);
+  const [renewPlanData, setRenewPlanData] = useState<{ id: string; name: string; isExpired: boolean } | null>(null);
 
   const { data: plans, isLoading } = useQuery({
     queryKey: ['workout-plans'],
@@ -77,6 +81,45 @@ export default function PlansPage() {
     }
   };
 
+  const getExpirationStatus = (expirationDate?: string | null) => {
+    if (!expirationDate) {
+      return null;
+    }
+
+    const now = new Date();
+    const expiry = new Date(expirationDate);
+    const daysUntilExpiry = Math.ceil((expiry.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (daysUntilExpiry < 0) {
+      return {
+        status: 'expired' as const,
+        label: 'Expirado',
+        variant: 'destructive' as const,
+        icon: AlertTriangle,
+        daysRemaining: Math.abs(daysUntilExpiry),
+        message: `Expirou há ${Math.abs(daysUntilExpiry)} dia(s)`
+      };
+    } else if (daysUntilExpiry <= 7) {
+      return {
+        status: 'expiring' as const,
+        label: `Expira em ${daysUntilExpiry}d`,
+        variant: 'secondary' as const,
+        icon: Clock,
+        daysRemaining: daysUntilExpiry,
+        message: `Expira em ${daysUntilExpiry} dia(s)`
+      };
+    } else {
+      return {
+        status: 'active' as const,
+        label: `${daysUntilExpiry} dias`,
+        variant: 'default' as const,
+        icon: Clock,
+        daysRemaining: daysUntilExpiry,
+        message: `${daysUntilExpiry} dias restantes`
+      };
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -105,19 +148,26 @@ export default function PlansPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => {
             const planData = plan as any;
+            const expirationInfo = getExpirationStatus(planData.expirationDate);
             return (
             <Card
               key={plan.id}
               className={`transition-all ${
                 plan.isActive ? 'border-primary ring-2 ring-primary/20' : ''
-              }`}
+              } ${expirationInfo?.status === 'expired' ? 'border-destructive/50' : ''}`}
             >
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex items-center gap-2 flex-wrap">
                       {plan.name}
                       {plan.isActive && <Star className="h-4 w-4 fill-primary text-primary" />}
+                      {expirationInfo && (
+                        <Badge variant={expirationInfo.variant} className="text-xs">
+                          <expirationInfo.icon className="mr-1 h-3 w-3" />
+                          {expirationInfo.label}
+                        </Badge>
+                      )}
                     </CardTitle>
                     <CardDescription>{planData.description || 'Sem descrição'}</CardDescription>
                   </div>
@@ -141,8 +191,56 @@ export default function PlansPage() {
                       <span className="font-medium">{planData.goal}</span>
                     </div>
                   )}
+                  {expirationInfo && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Status:</span>
+                      <span className={`font-medium ${
+                        expirationInfo.status === 'expired' ? 'text-destructive' :
+                        expirationInfo.status === 'expiring' ? 'text-yellow-600 dark:text-yellow-500' :
+                        'text-green-600 dark:text-green-500'
+                      }`}>
+                        {expirationInfo.message}
+                      </span>
+                    </div>
+                  )}
+                  {expirationInfo?.status === 'expired' && (
+                    <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive">
+                      <div className="flex items-start gap-2">
+                        <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                        <p>Este plano expirou. Considere renovar ou criar um novo plano.</p>
+                      </div>
+                    </div>
+                  )}
+                  {expirationInfo?.status === 'expiring' && expirationInfo.daysRemaining <= 3 && (
+                    <div className="rounded-lg bg-yellow-500/10 p-3 text-sm text-yellow-600 dark:text-yellow-500">
+                      <div className="flex items-start gap-2">
+                        <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                        <p>Seu plano está próximo do fim. Planeje sua continuação em breve!</p>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="space-y-2 pt-4">
+                    {/* Renewal Button - Show for expired or expiring plans */}
+                    {expirationInfo && (expirationInfo.status === 'expired' || expirationInfo.status === 'expiring') && (
+                      <Button
+                        size="sm"
+                        onClick={() => {
+                          setRenewPlanData({
+                            id: plan.id,
+                            name: plan.name,
+                            isExpired: expirationInfo.status === 'expired'
+                          });
+                          setRenewDialogOpen(true);
+                        }}
+                        className="w-full"
+                        variant={expirationInfo.status === 'expired' ? 'default' : 'secondary'}
+                      >
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        {expirationInfo.status === 'expired' ? 'Renovar Plano' : 'Continuar Plano'}
+                      </Button>
+                    )}
+
                     <div className="flex gap-2">
                       {plan.isActive ? (
                         <Button
@@ -268,6 +366,16 @@ export default function PlansPage() {
             onOpenChange={setShareWithFriendsDialogOpen}
           />
         </>
+      )}
+
+      {renewPlanData && (
+        <RenewPlanDialog
+          planId={renewPlanData.id}
+          planName={renewPlanData.name}
+          isExpired={renewPlanData.isExpired}
+          open={renewDialogOpen}
+          onOpenChange={setRenewDialogOpen}
+        />
       )}
     </div>
   );
