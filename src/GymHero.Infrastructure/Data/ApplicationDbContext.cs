@@ -51,8 +51,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
         modelBuilder.Entity<Friendship>(entity =>
     {
-        // Define uma chave primária composta para evitar pedidos duplicados (A -> B)
-        entity.HasKey(f => new { f.RequesterId, f.AddresseeId });
+        // Primary key
+        entity.HasKey(f => f.Id);
 
         // Configura a relação do lado do "Requester" (quem envia)
         entity.HasOne(f => f.Requester)
@@ -65,6 +65,22 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
               .WithMany(u => u.ReceivedFriendRequests)
               .HasForeignKey(f => f.AddresseeId)
               .OnDelete(DeleteBehavior.Restrict);
+
+        // Composite index for finding friendships between two users (prevents duplicates)
+        entity.HasIndex(f => new { f.RequesterId, f.AddresseeId })
+              .IsUnique()
+              .HasDatabaseName("IX_Friendships_RequesterAddressee");
+
+        // Index for finding all friendships involving a user (for friend list queries)
+        entity.HasIndex(f => f.RequesterId)
+              .HasDatabaseName("IX_Friendships_RequesterId");
+
+        entity.HasIndex(f => f.AddresseeId)
+              .HasDatabaseName("IX_Friendships_AddresseeId");
+
+        // Index for finding pending requests by status
+        entity.HasIndex(f => new { f.AddresseeId, f.Status })
+              .HasDatabaseName("IX_Friendships_AddresseeStatus");
     });
 
         // Performance indexes for frequently queried columns
@@ -102,6 +118,43 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             // Index for user-specific workout plan queries
             entity.HasIndex(wp => wp.OwnerId)
                 .HasDatabaseName("IX_WorkoutPlans_OwnerId");
+
+            // Index for finding active plans
+            entity.HasIndex(wp => new { wp.OwnerId, wp.IsActive })
+                .HasDatabaseName("IX_WorkoutPlans_OwnerActive");
+        });
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            // Index for user-specific notification queries (most common query)
+            entity.HasIndex(n => n.UserId)
+                .HasDatabaseName("IX_Notifications_UserId");
+
+            // Composite index for unread notifications query
+            entity.HasIndex(n => new { n.UserId, n.IsRead, n.CreatedAt })
+                .HasDatabaseName("IX_Notifications_UserReadCreated");
+        });
+
+        modelBuilder.Entity<ChallengeProgress>(entity =>
+        {
+            // Index for user-specific challenge progress queries
+            entity.HasIndex(cp => cp.ParticipantId)
+                .HasDatabaseName("IX_ChallengeProgress_ParticipantId");
+
+            // Index for challenge-specific progress queries
+            entity.HasIndex(cp => cp.ChallengeId)
+                .HasDatabaseName("IX_ChallengeProgress_ChallengeId");
+        });
+
+        modelBuilder.Entity<ProgressMetric>(entity =>
+        {
+            // Index for user-specific metrics queries
+            entity.HasIndex(pm => pm.OwnerId)
+                .HasDatabaseName("IX_ProgressMetrics_OwnerId");
+
+            // Composite index for time-based metric queries
+            entity.HasIndex(pm => new { pm.OwnerId, pm.Date })
+                .HasDatabaseName("IX_ProgressMetrics_OwnerDate");
         });
 
         base.OnModelCreating(modelBuilder);

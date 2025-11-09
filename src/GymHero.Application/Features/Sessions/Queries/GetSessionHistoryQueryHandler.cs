@@ -16,10 +16,9 @@ public class GetSessionHistoryQueryHandler : IRequestHandler<GetSessionHistoryQu
 
     public async Task<PaginatedResponse<WorkoutSessionDto>> Handle(GetSessionHistoryQuery request, CancellationToken cancellationToken)
     {
+        // Build base query with filters (no includes for count performance)
         var query = _context.WorkoutSessions
-            .Include(s => s.WorkoutPlan)
-            .Include(s => s.Sets)
-                .ThenInclude(set => set.Exercise)
+            .AsNoTracking()
             .Where(s => s.CompletedAt != null)
             .Where(s => s.OwnerId == request.UserId);
 
@@ -34,14 +33,12 @@ public class GetSessionHistoryQueryHandler : IRequestHandler<GetSessionHistoryQu
             query = query.Where(s => s.StartedAt <= request.EndDate.Value);
         }
 
-        // Order by most recent first
-        query = query.OrderByDescending(s => s.StartedAt);
-
-        // Get total count
+        // Get total count BEFORE any joins/includes for better performance
         var totalCount = await query.CountAsync(cancellationToken);
 
-        // Apply pagination
+        // Order by most recent first and apply pagination
         var sessions = await query
+            .OrderByDescending(s => s.StartedAt)
             .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(s => new WorkoutSessionDto
