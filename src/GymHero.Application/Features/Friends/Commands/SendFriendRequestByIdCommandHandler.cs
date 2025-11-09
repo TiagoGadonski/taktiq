@@ -10,7 +10,13 @@ namespace GymHero.Application.Features.Friends.Commands;
 public class SendFriendRequestByIdCommandHandler : IRequestHandler<SendFriendRequestByIdCommand>
 {
     private readonly IApplicationDbContext _context;
-    public SendFriendRequestByIdCommandHandler(IApplicationDbContext context) => _context = context;
+    private readonly INotificationService _notificationService;
+
+    public SendFriendRequestByIdCommandHandler(IApplicationDbContext context, INotificationService notificationService)
+    {
+        _context = context;
+        _notificationService = notificationService;
+    }
 
     public async Task Handle(SendFriendRequestByIdCommand request, CancellationToken cancellationToken)
     {
@@ -46,5 +52,16 @@ public class SendFriendRequestByIdCommandHandler : IRequestHandler<SendFriendReq
 
         await _context.Friendships.AddAsync(newFriendship, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
+
+        // Send notification to the addressee
+        var requester = await _context.Users.FindAsync(new object[] { request.RequesterId }, cancellationToken);
+        if (requester != null)
+        {
+            await _notificationService.CreateFriendRequestNotificationAsync(
+                request.AddresseeId,
+                requester.Id,
+                requester.Name,
+                cancellationToken);
+        }
     }
 }
