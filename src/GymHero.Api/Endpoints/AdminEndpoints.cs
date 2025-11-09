@@ -539,6 +539,275 @@ public static class AdminEndpoints
                     IsDefault = true,
                     IconName = "share-2",
                     CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Círculo de Ferro",
+                    Type = "Social",
+                    TargetValue = 5,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "users",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Advanced Workout Consistency
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Disciplina de Aço",
+                    Type = "Treinos",
+                    TargetValue = 25,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "shield",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Centurião",
+                    Type = "Treinos",
+                    TargetValue = 50,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "award",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Lenda do Ginásio",
+                    Type = "Treinos",
+                    TargetValue = 100,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "crown",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Volume Challenges - Progressive
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Levantador",
+                    Type = "Volume",
+                    TargetValue = 5000,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "trending-up",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Titã de Ferro",
+                    Type = "Volume",
+                    TargetValue = 10000,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "activity",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Atlas",
+                    Type = "Volume",
+                    TargetValue = 25000,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "mountain",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // PR Challenges - More tiers
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Máquina de Recordes",
+                    Type = "PR",
+                    TargetValue = 5,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "target",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Imparável",
+                    Type = "PR",
+                    TargetValue = 10,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "zap",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Streak Challenges (consecutive days)
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Sequência de 7",
+                    Type = "Streak",
+                    TargetValue = 7,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "flame",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Mês Perfeito",
+                    Type = "Streak",
+                    TargetValue = 30,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "fire",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Time-based Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Madrugador",
+                    Type = "Timing",
+                    TargetValue = 5,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "sunrise",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Guerreiro Noturno",
+                    Type = "Timing",
+                    TargetValue = 5,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "moon",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Exercise Variety
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Explorador",
+                    Type = "Exercícios",
+                    TargetValue = 10,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "compass",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Mestre de Movimentos",
+                    Type = "Exercícios",
+                    TargetValue = 25,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "layers",
+                    CreatedAt = DateTime.UtcNow
+                },
+
+                // Workout Plan Challenges
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Arquiteto do Corpo",
+                    Type = "Planos",
+                    TargetValue = 3,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "layout",
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Challenge
+                {
+                    Id = Guid.NewGuid(),
+                    CreatorId = Guid.Empty,
+                    Title = "Estrategista",
+                    Type = "Planos",
+                    TargetValue = 5,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddYears(10),
+                    Status = "Ativo",
+                    TargetType = DomainChallengeTargetType.AllUsers,
+                    IsDefault = true,
+                    IconName = "book-open",
+                    CreatedAt = DateTime.UtcNow
                 }
             };
 
