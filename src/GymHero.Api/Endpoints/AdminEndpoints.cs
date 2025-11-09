@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using GymHero.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 using GymHero.Infrastructure.Services;
+using GymHero.Infrastructure.Data;
 using DomainChallengeTargetType = GymHero.Domain.Enums.ChallengeTargetType;
 
 namespace GymHero.Api.Endpoints;
@@ -15,6 +16,44 @@ public static class AdminEndpoints
         var group = app.MapGroup("/api/admin")
                        .WithTags("Admin")
                        .RequireAuthorization("RequireAdminRole");
+
+        // Apply database migrations
+        group.MapPost("/migrate-database", async (
+            ApplicationDbContext context) =>
+        {
+            try
+            {
+                var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+                var pendingList = pendingMigrations.ToList();
+
+                if (!pendingList.Any())
+                {
+                    return Results.Ok(new {
+                        message = "No pending migrations",
+                        timestamp = DateTime.UtcNow
+                    });
+                }
+
+                // Apply all pending migrations
+                await context.Database.MigrateAsync();
+
+                return Results.Ok(new {
+                    message = "Database migrations applied successfully",
+                    migrationsApplied = pendingList,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(
+                    title: "Migration failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("MigrateDatabase")
+        .WithSummary("Apply pending database migrations (Admin only)");
 
         group.MapPost("/badge-definitions", async (
             [FromBody] BadgeDefinition request,
