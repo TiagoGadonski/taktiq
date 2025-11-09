@@ -38,8 +38,17 @@ public class SendFriendRequestByIdCommandHandler : IRequestHandler<SendFriendReq
 
         if (existingFriendship is not null)
         {
-            if (existingFriendship.Status == FriendshipStatus.Accepted) throw new ValidationException("Vocês já são amigos.");
-            if (existingFriendship.Status == FriendshipStatus.Pending) throw new ValidationException("Já existe um pedido de amizade pendente.");
+            if (existingFriendship.Status == FriendshipStatus.Accepted)
+                throw new ValidationException("Vocês já são amigos.");
+
+            if (existingFriendship.Status == FriendshipStatus.Pending)
+                throw new ValidationException("Já existe um pedido de amizade pendente.");
+
+            // If the previous request was declined, delete it so a new one can be sent
+            if (existingFriendship.Status == FriendshipStatus.Declined)
+            {
+                _context.Friendships.Remove(existingFriendship);
+            }
         }
 
         // Se tudo estiver OK, criar o pedido
