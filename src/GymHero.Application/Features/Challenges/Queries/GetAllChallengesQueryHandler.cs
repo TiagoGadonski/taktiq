@@ -41,6 +41,7 @@ public class GetAllChallengesQueryHandler : IRequestHandler<GetAllChallengesQuer
             return new ChallengeWithParticipationDto
             {
                 Id = c.Id,
+                CreatorId = c.CreatorId,
                 Title = c.Title,
                 Type = c.Type,
                 TargetValue = c.TargetValue,
