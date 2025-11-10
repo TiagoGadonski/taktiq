@@ -672,6 +672,59 @@ public static class AIEndpoints
             }
         }
 
+        // Add finishers: abs exercises (always) and cardio (occasionally)
+        // Abs should be added to most workouts
+        if (!parsedPrompt.MuscleGroups.Contains("abdômen") && ExerciseDatabase.ContainsKey("abdômen"))
+        {
+            var absExercises = ExerciseDatabase["abdômen"]
+                .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                .OrderBy(x => random.Next())
+                .Take(random.Next(1, 3)) // 1-2 abs exercises
+                .ToList();
+
+            foreach (var absEx in absExercises)
+            {
+                selectedExercises.Add(CreateExerciseInstruction(
+                    absEx.Name,
+                    absEx.BodyPart,
+                    absEx.Equipment,
+                    false,
+                    level,
+                    absEx.IsCompound
+                ));
+            }
+        }
+
+        // Add cardio occasionally (40% chance, or if user goal involves cardio)
+        var shouldAddCardio = random.Next(0, 10) < 4 ||
+                             (exerciseGoal?.Contains("emagrecer", StringComparison.OrdinalIgnoreCase) ?? false) ||
+                             (exerciseGoal?.Contains("perder peso", StringComparison.OrdinalIgnoreCase) ?? false) ||
+                             (exerciseGoal?.Contains("definir", StringComparison.OrdinalIgnoreCase) ?? false);
+
+        if (shouldAddCardio && !parsedPrompt.MuscleGroups.Contains("cardio") && ExerciseDatabase.ContainsKey("cardio"))
+        {
+            // Filter out simulated exercises like "Natação (Simulada)"
+            var cardioExercises = ExerciseDatabase["cardio"]
+                .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                .Where(ex => !ex.Name.Contains("Simulada", StringComparison.OrdinalIgnoreCase) &&
+                            !ex.Name.Contains("Simulated", StringComparison.OrdinalIgnoreCase))
+                .OrderBy(x => random.Next())
+                .Take(1)
+                .ToList();
+
+            foreach (var cardioEx in cardioExercises)
+            {
+                selectedExercises.Add(CreateExerciseInstruction(
+                    cardioEx.Name,
+                    cardioEx.BodyPart,
+                    cardioEx.Equipment,
+                    false,
+                    level,
+                    cardioEx.IsCompound
+                ));
+            }
+        }
+
         // Generate title based on muscle groups or workout type
         var title = parsedPrompt.MuscleGroups.Any()
             ? GenerateWorkoutTitle(parsedPrompt.MuscleGroups)
@@ -2315,6 +2368,67 @@ INSTRUÇÕES CRÍTICAS:
                             randomExercise.IsCompound
                         ));
                     }
+                }
+            }
+
+            // Add finishers: abs (most days) and cardio (2-3x per week)
+            var shouldAddAbs = !muscleGroups.Contains("abdômen") && ExerciseDatabase.ContainsKey("abdômen");
+            if (shouldAddAbs)
+            {
+                var absExercises = ExerciseDatabase["abdômen"]
+                    .OrderBy(x => random.Next())
+                    .Take(random.Next(1, 3))
+                    .ToList();
+
+                foreach (var absEx in absExercises)
+                {
+                    exercisesForDay.Add(CreateExerciseInstruction(
+                        absEx.Name,
+                        absEx.BodyPart,
+                        absEx.Equipment,
+                        false,
+                        level,
+                        absEx.IsCompound
+                    ));
+                }
+            }
+
+            // Add cardio 2-3 times per week (randomly distributed across days)
+            // For a 5-day plan: 40-60% chance per day gives ~2-3 cardio sessions
+            // For fewer days: adjust probability accordingly
+            var cardioChance = daysPerWeek switch
+            {
+                2 => 0.5,  // 50% chance = ~1 day with cardio
+                3 => 0.4,  // 40% chance = ~1-2 days
+                4 => 0.4,  // 40% chance = ~1-2 days
+                5 => 0.5,  // 50% chance = ~2-3 days
+                _ => 0.4   // 40% chance for 6+ days
+            };
+
+            var shouldAddCardio = random.NextDouble() < cardioChance &&
+                                 !muscleGroups.Contains("cardio") &&
+                                 ExerciseDatabase.ContainsKey("cardio");
+
+            if (shouldAddCardio)
+            {
+                // Filter out simulated exercises
+                var cardioExercises = ExerciseDatabase["cardio"]
+                    .Where(ex => !ex.Name.Contains("Simulada", StringComparison.OrdinalIgnoreCase) &&
+                                !ex.Name.Contains("Simulated", StringComparison.OrdinalIgnoreCase))
+                    .OrderBy(x => random.Next())
+                    .Take(1)
+                    .ToList();
+
+                foreach (var cardioEx in cardioExercises)
+                {
+                    exercisesForDay.Add(CreateExerciseInstruction(
+                        cardioEx.Name,
+                        cardioEx.BodyPart,
+                        cardioEx.Equipment,
+                        false,
+                        level,
+                        cardioEx.IsCompound
+                    ));
                 }
             }
 

@@ -18,6 +18,21 @@ public class GetAllChallengesQueryHandler : IRequestHandler<GetAllChallengesQuer
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync(cancellationToken);
 
+        // Get all participant IDs to fetch their names
+        var participantIds = challenges
+            .SelectMany(c => c.Progresses.Select(p => p.ParticipantId))
+            .Distinct()
+            .ToList();
+
+        // Fetch participant names from Users table
+        var participants = await _context.Users
+            .AsNoTracking()
+            .Where(u => participantIds.Contains(u.Id))
+            .Select(u => new { u.Id, u.Name })
+            .ToListAsync(cancellationToken);
+
+        var participantNameMap = participants.ToDictionary(p => p.Id, p => p.Name);
+
         return challenges.Select(c =>
         {
             var userProgress = c.Progresses.FirstOrDefault(p => p.ParticipantId == request.UserId);
@@ -39,6 +54,7 @@ public class GetAllChallengesQueryHandler : IRequestHandler<GetAllChallengesQuer
                 Progresses = c.Progresses.Select(p => new ChallengeProgressDto
                 {
                     ParticipantId = p.ParticipantId,
+                    ParticipantName = participantNameMap.GetValueOrDefault(p.ParticipantId),
                     CurrentValue = p.CurrentValue,
                     LastUpdate = p.LastUpdate
                 }).ToList()

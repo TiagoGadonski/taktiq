@@ -64,6 +64,7 @@ public record ChallengeResponse(
 public class ChallengeProgressDto
 {
     public Guid ParticipantId { get; set; }
+    public string? ParticipantName { get; set; }
     public double CurrentValue { get; set; }
     public DateTime LastUpdate { get; set; }
 }
