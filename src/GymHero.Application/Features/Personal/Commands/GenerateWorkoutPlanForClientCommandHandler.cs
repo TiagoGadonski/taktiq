@@ -38,12 +38,19 @@ public class GenerateWorkoutPlanForClientCommandHandler : IRequestHandler<Genera
         var ombrosExercises = allExercises.Where(e => e.MuscleGroup == "Ombros").Take(1);
         var bicepsExercises = allExercises.Where(e => e.MuscleGroup == "Bíceps").Take(1);
         var tricepsExercises = allExercises.Where(e => e.MuscleGroup == "Tríceps").Take(1);
-        
+
+        // Selecionar exercícios de finalização (abs sempre, cardio ocasionalmente)
+        var absExercises = allExercises.Where(e => e.MuscleGroup == "Abdômen" || e.MuscleGroup == "Abdomen").Take(2);
+        var cardioExercises = allExercises.Where(e => e.MuscleGroup == "Cardio").Take(1);
+
         var selectedExercises = peitoExercises.Concat(costasExercises)
                                               .Concat(pernasExercises)
                                               .Concat(ombrosExercises)
                                               .Concat(bicepsExercises)
-                                              .Concat(tricepsExercises).ToList();
+                                              .Concat(tricepsExercises)
+                                              .Concat(absExercises)
+                                              .Concat(cardioExercises)
+                                              .ToList();
 
         // Regra 2: Definir séries e repetições com base no objetivo
         int targetSets = request.Goal == "Força" ? 5 : 4;
