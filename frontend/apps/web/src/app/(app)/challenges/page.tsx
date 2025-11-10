@@ -19,6 +19,7 @@ import { useAuth } from '@/hooks/use-auth';
 // Types
 interface Challenge {
   id: string;
+  creatorId: string;
   title: string;
   type: string;
   targetValue: number;
@@ -454,8 +455,9 @@ export default function ChallengesPage() {
                     )}
                   </div>
 
-                  {/* Participants Progress */}
-                  {challenge.progresses && challenge.progresses.length > 1 && (
+                  {/* Participants Progress - Only visible to challenge creator and admins */}
+                  {challenge.progresses && challenge.progresses.length > 1 &&
+                   (currentUser?.id === challenge.creatorId || currentUser?.role === 'Admin') && (
                     <div className="pt-2 space-y-2">
                       <p className="text-sm font-medium">Ranking:</p>
                       <div className="space-y-1">

@@ -73,6 +73,7 @@ public class ChallengeProgressDto
 public class ChallengeWithParticipationDto
 {
     public Guid Id { get; set; }
+    public Guid CreatorId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public double TargetValue { get; set; }
