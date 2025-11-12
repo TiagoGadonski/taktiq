@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye } from 'lucide-react';
+import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye, Home } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,13 @@ import { apiClient } from '@/lib/api';
 import { env } from '@/lib/env';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { useTheme } from 'next-themes';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Nome deve ter no mínimo 2 caracteres'),
@@ -33,6 +40,7 @@ const profileSchema = z.object({
   injuries: z.string().optional(),
   healthConditions: z.string().optional(),
   exerciseGoal: z.string().optional(),
+  preferredWorkoutLocation: z.string().optional(),
 });
 
 const changePasswordSchema = z.object({
@@ -116,6 +124,7 @@ export default function ProfilePage() {
           injuries: data.injuries || '',
           healthConditions: data.healthConditions || '',
           exerciseGoal: data.exerciseGoal || '',
+          preferredWorkoutLocation: data.preferredWorkoutLocation?.toString() || '0',
         });
       } catch (error: any) {
         toast({
@@ -144,6 +153,7 @@ export default function ProfilePage() {
         injuries: data.injuries || null,
         healthConditions: data.healthConditions || null,
         exerciseGoal: data.exerciseGoal || null,
+        preferredWorkoutLocation: data.preferredWorkoutLocation ? parseInt(data.preferredWorkoutLocation) : 0,
       });
 
       toast({
@@ -494,6 +504,33 @@ export default function ProfilePage() {
                         />
                       </div>
                     </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="preferredWorkoutLocation" className="flex items-center gap-2">
+                      <Home className="h-4 w-4 text-primary" />
+                      Local Preferido de Treino
+                    </Label>
+                    <Select
+                      value={profileData?.preferredWorkoutLocation?.toString() || '0'}
+                      onValueChange={(value) => {
+                        const event = { target: { value } };
+                        register('preferredWorkoutLocation').onChange(event as any);
+                      }}
+                      disabled={!isEditing}
+                    >
+                      <SelectTrigger id="preferredWorkoutLocation" className="glass">
+                        <SelectValue placeholder="Selecione o local" />
+                      </SelectTrigger>
+                      <SelectContent className="glass">
+                        <SelectItem value="0">Academia</SelectItem>
+                        <SelectItem value="1">Casa</SelectItem>
+                        <SelectItem value="2">Ambos</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground">
+                      Isso ajudará a IA a gerar treinos mais adequados aos equipamentos disponíveis.
+                    </p>
                   </div>
                 </div>
 
