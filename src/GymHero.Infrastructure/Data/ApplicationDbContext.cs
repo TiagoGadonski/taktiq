@@ -25,6 +25,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Friendship> Friendships => Set<Friendship>();
     public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
     public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<UserActivityLog> UserActivityLogs => Set<UserActivityLog>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Aplica todas as configurações de entidades que estiverem no mesmo assembly

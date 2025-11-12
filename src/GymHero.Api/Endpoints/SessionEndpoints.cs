@@ -50,7 +50,7 @@ public static class SessionEndpoints
             ISender sender) =>
         {
             var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var command = new StartWorkoutSessionCommand(request.WorkoutPlanId, ownerId);
+            var command = new StartWorkoutSessionCommand(request.WorkoutPlanId, request.WorkoutId, ownerId);
 
             try
             {

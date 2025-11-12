@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save } from 'lucide-react';
+import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, Dumbbell, Home, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
+import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
 import {
   Select,
   SelectContent,
@@ -63,6 +65,7 @@ interface WorkoutDay {
 export default function NewPlanPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Exercise[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -72,6 +75,15 @@ export default function NewPlanPage() {
   const [selectedDayId, setSelectedDayId] = useState('1');
   const [muscleFilter, setMuscleFilter] = useState<string>('all');
   const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
+  // Workout Location Filter: 0 = Gym, 1 = Home, 2 = Both/All
+  const [workoutLocationFilter, setWorkoutLocationFilter] = useState<number | null>(null);
+
+  // Initialize workout location filter based on user preference
+  useEffect(() => {
+    if (user && workoutLocationFilter === null) {
+      setWorkoutLocationFilter(user.preferredWorkoutLocation ?? 0);
+    }
+  }, [user, workoutLocationFilter]);
 
   const {
     register,
@@ -97,6 +109,10 @@ export default function NewPlanPage() {
       if (searchQuery.trim()) params.append('query', searchQuery);
       if (muscleFilter !== 'all') params.append('muscle', muscleFilter);
       if (difficultyFilter !== 'all') params.append('level', difficultyFilter);
+      // Add workout location filter if not "All"
+      if (workoutLocationFilter !== null && workoutLocationFilter !== 2) {
+        params.append('workoutLocation', workoutLocationFilter.toString());
+      }
 
       const response = await apiClient.get<any>(`/ai/search-exercises?${params.toString()}`);
       const data = response.data || response;
@@ -353,15 +369,93 @@ export default function NewPlanPage() {
             <CardDescription>Pesquise exercícios para adicionar ao seu plano</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex gap-2">
+            {/* Workout Location Filter */}
+            <div className="space-y-2">
+              <Label>Tipo de Treino</Label>
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setWorkoutLocationFilter(0)}
+                  className={cn(
+                    "flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    workoutLocationFilter === 0
+                      ? "border-primary bg-primary/10 shadow-md"
+                      : "border-border hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Dumbbell className={cn(
+                    "h-5 w-5 mb-1",
+                    workoutLocationFilter === 0 ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "text-xs font-medium",
+                    workoutLocationFilter === 0 ? "text-primary" : "text-foreground"
+                  )}>
+                    Academia
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setWorkoutLocationFilter(1)}
+                  className={cn(
+                    "flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    workoutLocationFilter === 1
+                      ? "border-primary bg-primary/10 shadow-md"
+                      : "border-border hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Home className={cn(
+                    "h-5 w-5 mb-1",
+                    workoutLocationFilter === 1 ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "text-xs font-medium",
+                    workoutLocationFilter === 1 ? "text-primary" : "text-foreground"
+                  )}>
+                    Em Casa
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setWorkoutLocationFilter(2)}
+                  className={cn(
+                    "flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    workoutLocationFilter === 2
+                      ? "border-primary bg-primary/10 shadow-md"
+                      : "border-border hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Globe className={cn(
+                    "h-5 w-5 mb-1",
+                    workoutLocationFilter === 2 ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "text-xs font-medium",
+                    workoutLocationFilter === 2 ? "text-primary" : "text-foreground"
+                  )}>
+                    Todos
+                  </span>
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground text-center">
+                {workoutLocationFilter === 0 && "Mostrando exercícios de academia"}
+                {workoutLocationFilter === 1 && "Mostrando exercícios para fazer em casa"}
+                {workoutLocationFilter === 2 && "Mostrando todos os exercícios"}
+              </p>
+            </div>
+
+            <div className="flex gap-2 flex-wrap sm:flex-nowrap">
               <Input
                 placeholder="Buscar exercício..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), searchExercises())}
+                className="flex-1 min-w-0"
               />
               <Select value={muscleFilter} onValueChange={setMuscleFilter}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full sm:w-40">
                   <SelectValue placeholder="Músculo" />
                 </SelectTrigger>
                 <SelectContent>
@@ -373,7 +467,7 @@ export default function NewPlanPage() {
                 </SelectContent>
               </Select>
               <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full sm:w-40">
                   <SelectValue placeholder="Nível" />
                 </SelectTrigger>
                 <SelectContent>
@@ -384,7 +478,7 @@ export default function NewPlanPage() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button type="button" onClick={searchExercises} disabled={isSearching}>
+              <Button type="button" onClick={searchExercises} disabled={isSearching} className="w-full sm:w-auto">
                 <Search className="h-4 w-4 mr-2" />
                 {isSearching ? 'Buscando...' : 'Buscar'}
               </Button>

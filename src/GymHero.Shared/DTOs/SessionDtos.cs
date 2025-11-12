@@ -1,6 +1,6 @@
 namespace GymHero.Shared.DTOs;
 
-public record StartSessionRequest(Guid? WorkoutPlanId);
+public record StartSessionRequest(Guid? WorkoutPlanId, Guid? WorkoutId = null);
 public record CompleteSessionRequest(string? Notes);
 public record LogSetRequest(
     Guid ExerciseId,
@@ -16,6 +16,7 @@ public class WorkoutSessionDto
     public Guid Id { get; set; }
     public Guid? WorkoutPlanId { get; set; }
     public WorkoutPlanDetailResponse? WorkoutPlan { get; set; }
+    public Guid? WorkoutId { get; set; }
     public DateTime StartedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
     public string? Notes { get; set; }

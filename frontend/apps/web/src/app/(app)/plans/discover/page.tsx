@@ -8,9 +8,11 @@ import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 export default function DiscoverPlansPage() {
   const router = useRouter();
+  const { toast } = useToast();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -29,6 +31,23 @@ export default function DiscoverPlansPage() {
     e.preventDefault();
     setSearch(searchInput);
     setPage(1);
+  };
+
+  const handleCopyPlan = async (planId: string, planName: string) => {
+    try {
+      await api.workoutPlans.clone(planId);
+      toast({
+        title: 'Plano copiado!',
+        description: `"${planName}" foi adicionado aos seus planos de treino.`,
+      });
+      router.push('/plans');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao copiar plano',
+        description: error.message || 'Não foi possível copiar o plano.',
+      });
+    }
   };
 
   return (
@@ -114,9 +133,7 @@ export default function DiscoverPlansPage() {
                       {plan.allowCopying && (
                         <Button
                           size="sm"
-                          onClick={() => {
-                            // TODO: Implement clone functionality
-                          }}
+                          onClick={() => handleCopyPlan(plan.id, plan.name)}
                         >
                           <Copy className="mr-1 h-3 w-3" />
                           <span className="hidden xs:inline">Copiar</span>

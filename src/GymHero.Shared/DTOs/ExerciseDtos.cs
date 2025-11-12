@@ -2,14 +2,15 @@ namespace GymHero.Shared.DTOs;
 
 // DTO para exibir exercícios em listas na nossa UI
 public record ExerciseResponse(
-    Guid Id, 
-    string Name, 
-    string MuscleGroup, 
+    Guid Id,
+    string Name,
+    string MuscleGroup,
     string? Category,
-    string? Equipment, 
+    string? Equipment,
     string? Notes,
     string? ImageUrl,
-    string? VideoUrl
+    string? VideoUrl,
+    int WorkoutLocation // 0 = Gym, 1 = Home, 2 = Both
 );
 
 // DTO para a requisição de CRIAR um exercício
@@ -22,6 +23,7 @@ public class CreateExerciseRequest
     public string? Notes { get; set; }
     public string? VideoUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public int WorkoutLocation { get; set; } = 2; // Default to Both
 }
 
 // DTO para a requisição de ATUALIZAR um exercício
@@ -34,6 +36,7 @@ public class UpdateExerciseRequest
     public string? Notes { get; set; }
     public string? VideoUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public int WorkoutLocation { get; set; } = 2; // Default to Both
 }
 
 // DTO para o formulário no frontend
@@ -47,4 +50,5 @@ public class ExerciseDto
     public string? Notes { get; set; }
     public string? VideoUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public int WorkoutLocation { get; set; } = 2; // 0 = Gym, 1 = Home, 2 = Both
 }

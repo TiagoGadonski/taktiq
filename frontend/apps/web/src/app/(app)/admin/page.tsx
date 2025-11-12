@@ -15,6 +15,7 @@ import {
   Trash2,
   Key,
   Trophy,
+  Activity,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -307,30 +308,57 @@ export default function AdminPage() {
       </div>
 
       {/* System Actions */}
-      <Card className="glass border-primary/20">
-        <CardContent className="pt-6">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/20 rounded-lg">
-                <Trophy className="h-6 w-6 text-primary" />
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card className="glass border-primary/20">
+          <CardContent className="pt-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-primary/20 rounded-lg">
+                  <Trophy className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Desafios do Sistema</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Criar desafios padrão para todos os usuários
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold">Desafios do Sistema</h3>
-                <p className="text-sm text-muted-foreground">
-                  Criar desafios padrão para todos os usuários
-                </p>
-              </div>
+              <Button
+                onClick={handleSeedChallenges}
+                className="bg-primary hover:bg-primary/90 hover-lift tap-scale w-full"
+              >
+                <Trophy className="mr-2 h-4 w-4" />
+                Criar Desafios
+              </Button>
             </div>
-            <Button
-              onClick={handleSeedChallenges}
-              className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
-            >
-              <Trophy className="mr-2 h-4 w-4" />
-              Criar Desafios
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+
+        <Card className="glass border-blue-500/20">
+          <CardContent className="pt-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-blue-500/20 rounded-lg">
+                  <Activity className="h-6 w-6 text-blue-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Logs de Atividade</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Monitorar atividades do sistema e erros
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={() => router.push('/admin/logs')}
+                className="bg-blue-500 hover:bg-blue-500/90 hover-lift tap-scale w-full"
+              >
+                <Activity className="mr-2 h-4 w-4" />
+                Ver Logs
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-3">

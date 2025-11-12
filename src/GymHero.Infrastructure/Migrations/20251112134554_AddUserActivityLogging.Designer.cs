@@ -3,6 +3,7 @@ using System;
 using GymHero.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GymHero.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251112134554_AddUserActivityLogging")]
+    partial class AddUserActivityLogging
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -660,9 +663,6 @@ namespace GymHero.Infrastructure.Migrations
                     b.Property<DateTime>("StartedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("WorkoutId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid?>("WorkoutPlanId")
                         .HasColumnType("uuid");
 
@@ -670,8 +670,6 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.HasIndex("OwnerId")
                         .HasDatabaseName("IX_WorkoutSessions_OwnerId");
-
-                    b.HasIndex("WorkoutId");
 
                     b.HasIndex("WorkoutPlanId");
 
@@ -880,15 +878,9 @@ namespace GymHero.Infrastructure.Migrations
 
             modelBuilder.Entity("GymHero.Domain.Entities.WorkoutSession", b =>
                 {
-                    b.HasOne("GymHero.Domain.Entities.Workout", "Workout")
-                        .WithMany()
-                        .HasForeignKey("WorkoutId");
-
                     b.HasOne("GymHero.Domain.Entities.WorkoutPlan", "WorkoutPlan")
                         .WithMany("WorkoutSessions")
                         .HasForeignKey("WorkoutPlanId");
-
-                    b.Navigation("Workout");
 
                     b.Navigation("WorkoutPlan");
                 });

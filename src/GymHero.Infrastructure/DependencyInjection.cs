@@ -25,6 +25,7 @@ public static class DependencyInjection
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IActivityLogService, ActivityLogService>();
 
         // --- Background Services ---
         services.AddHostedService<PlanExpirationCheckService>();

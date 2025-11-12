@@ -7,10 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Dumbbell, Home } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
 
 export default function SignupPage() {
   const { toast } = useToast();
@@ -21,6 +22,7 @@ export default function SignupPage() {
     email: '',
     password: '',
     confirmPassword: '',
+    preferredWorkoutLocation: 0, // 0 = Gym, 1 = Home
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,6 +61,7 @@ export default function SignupPage() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
+        preferredWorkoutLocation: formData.preferredWorkoutLocation,
       });
       // The signup mutation handles token storage, redirect to dashboard, and success toast
     } catch (error) {
@@ -142,6 +145,62 @@ export default function SignupPage() {
                 disabled={isSignupPending}
                 className="h-11"
               />
+            </div>
+
+            <div className="space-y-3">
+              <Label>Onde você treina?</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, preferredWorkoutLocation: 0 })}
+                  disabled={isSignupPending}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    formData.preferredWorkoutLocation === 0
+                      ? "border-primary bg-primary/10 shadow-lg"
+                      : "border-border/50 hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Dumbbell className={cn(
+                    "h-8 w-8 mb-2",
+                    formData.preferredWorkoutLocation === 0 ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "font-semibold text-sm",
+                    formData.preferredWorkoutLocation === 0 ? "text-primary" : "text-foreground"
+                  )}>
+                    Academia
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1">Treino com equipamentos</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, preferredWorkoutLocation: 1 })}
+                  disabled={isSignupPending}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    formData.preferredWorkoutLocation === 1
+                      ? "border-primary bg-primary/10 shadow-lg"
+                      : "border-border/50 hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Home className={cn(
+                    "h-8 w-8 mb-2",
+                    formData.preferredWorkoutLocation === 1 ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "font-semibold text-sm",
+                    formData.preferredWorkoutLocation === 1 ? "text-primary" : "text-foreground"
+                  )}>
+                    Em Casa
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1">Calistenia e peso corporal</span>
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground text-center">
+                Você poderá alterar isso depois nas configurações
+              </p>
             </div>
 
             <div className="flex items-start space-x-2 rounded-lg border border-border/50 p-4 bg-muted/30">

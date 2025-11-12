@@ -14,7 +14,8 @@ export function createUseSession(api: ReturnType<any>) {
     });
 
     const startSessionMutation = useMutation({
-      mutationFn: (workoutPlanId?: string) => api.sessions.start(workoutPlanId),
+      mutationFn: ({ workoutPlanId, workoutId }: { workoutPlanId?: string; workoutId?: string }) =>
+        api.sessions.start(workoutPlanId, workoutId),
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['sessions', 'current'] });
         queryClient.invalidateQueries({ queryKey: ['progress', 'dashboard'] });

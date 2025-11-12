@@ -23,6 +23,8 @@ public interface IApplicationDbContext
     DbSet<Friendship> Friendships { get; }
     DbSet<PasswordResetToken> PasswordResetTokens { get; }
     DbSet<Notification> Notifications { get; }
+    DbSet<UserActivityLog> UserActivityLogs { get; }
+
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

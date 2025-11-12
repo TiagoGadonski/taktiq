@@ -16,6 +16,9 @@ public record RegisterRequest
     [Required(ErrorMessage = "A senha é obrigatória")]
     [MinLength(6, ErrorMessage = "A senha deve ter pelo menos 6 caracteres")]
     public string Password { get; set; } = "";
+
+    // Workout Location: 0 = Gym, 1 = Home, 2 = Both
+    public int PreferredWorkoutLocation { get; set; } = 0;
 }
 
 public record LoginRequest

@@ -26,11 +26,24 @@ public class StartWorkoutSessionCommandHandler : IRequestHandler<StartWorkoutSes
             }
         }
 
+        // Validação: Se um workout específico foi fornecido, verificar se existe e pertence ao plano
+        if (request.WorkoutId.HasValue && request.WorkoutPlanId.HasValue)
+        {
+            var workoutExists = await _context.Workouts
+                .AnyAsync(w => w.Id == request.WorkoutId && w.PlanId == request.WorkoutPlanId, cancellationToken);
+
+            if (!workoutExists)
+            {
+                throw new NotFoundException("Workout not found in the specified plan.");
+            }
+        }
+
         // Criamos a nova sessão de treino (com ou sem plano)
         var session = new WorkoutSession
         {
             OwnerId = request.OwnerId,
             WorkoutPlanId = request.WorkoutPlanId,
+            WorkoutId = request.WorkoutId,
             StartedAt = DateTime.UtcNow // Registra a data e hora de início
         };
 
