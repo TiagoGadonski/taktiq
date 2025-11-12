@@ -71,12 +71,19 @@ export enum MuscleGroup {
 export interface WorkoutPlan {
   id: string;
   name: string;
+  description?: string;
   goal?: string;
+  duration?: number;
   isActive: boolean;
   workouts: Workout[];
   exercises: WorkoutPlanExercise[]; // Kept for backward compatibility
   createdAt?: string;
   updatedAt?: string;
+  // Public plan properties
+  allowCopying?: boolean;
+  creatorName?: string;
+  viewCount?: number;
+  workoutCount?: number;
 }
 
 export interface WorkoutPlanExercise {
