@@ -8,6 +8,7 @@ export interface User {
   profilePictureUrl?: string;
   createdAt: string;
   preferences?: UserPreferences;
+  preferredWorkoutLocation?: number;
 }
 
 export interface UserPreferences {
@@ -46,6 +47,7 @@ export interface Exercise {
   imageUrl?: string;
   createdBy?: string;
   isPublic: boolean;
+  workoutLocation?: number;
 }
 
 export enum ExerciseCategory {
@@ -117,6 +119,7 @@ export interface WorkoutExercise {
 export interface WorkoutSession {
   id: string;
   workoutPlanId?: string;
+  workoutId?: string;
   workoutPlan?: WorkoutPlan;
   startedAt: string;
   completedAt?: string;
