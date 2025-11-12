@@ -196,73 +196,74 @@ export default function NewPlanPage() {
     }
 
     try {
-      // Step 1: Create the workout plan (name + goal only)
-      const planData = {
-        name: data.name,
-        goal: data.goal || null,
-      };
+      // Step 1: Create the workout plan and fetch existing exercises in parallel
+      const [createdPlan, existingExercises] = await Promise.all([
+        apiClient.post<{ id: string }>('/workout-plans', {
+          name: data.name,
+          goal: data.goal || null,
+        }),
+        apiClient.get<any[]>('/exercises')
+      ]);
 
-      const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
-
       if (!planId) {
         throw new Error('Plan ID not returned from server');
       }
 
-      // Step 2: Get all exercises from the database to check which ones already exist
-      const existingExercises = await apiClient.get<any[]>('/exercises');
       const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e.id]));
 
-      // Step 3: Create workouts (days) and add exercises to them
-      for (let dayIndex = 0; dayIndex < workoutDays.length; dayIndex++) {
-        const day = workoutDays[dayIndex];
-
-        // Create the workout (day)
-        const workoutData = {
+      // Step 2: Create all workouts (days) in parallel
+      const workoutPromises = workoutDays.map((day, dayIndex) =>
+        apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, {
           name: day.name,
           dayOfWeek: null,
           order: dayIndex + 1,
-        };
+        }).then(workoutResponse => ({
+          workoutId: workoutResponse.id,
+          exercises: day.exercises,
+          dayIndex
+        }))
+      );
 
-        const workoutResponse = await apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, workoutData);
-        const workoutId = workoutResponse.id;
+      const createdWorkouts = await Promise.all(workoutPromises);
 
-        // Add exercises to this workout
-        for (let exIndex = 0; exIndex < day.exercises.length; exIndex++) {
-          const ex = day.exercises[exIndex];
-          let exerciseId: string;
+      // Step 3: For each workout, add its exercises (must be sequential within each workout for order)
+      // But we can process different workouts in parallel
+      await Promise.all(
+        createdWorkouts.map(async ({ workoutId, exercises }) => {
+          for (let exIndex = 0; exIndex < exercises.length; exIndex++) {
+            const ex = exercises[exIndex];
+            let exerciseId: string;
 
-          // Check if exercise already exists in database
-          const existingId = exerciseMap.get(ex.name.toLowerCase());
+            // Check if exercise already exists in database
+            const existingId = exerciseMap.get(ex.name.toLowerCase());
 
-          if (existingId) {
-            // Exercise already exists, use its ID
-            exerciseId = existingId;
-          } else {
-            // Exercise doesn't exist, create it first
-            const newExercise = await apiClient.post<{ id: string }>('/exercises', {
-              name: ex.name,
-              muscleGroup: (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles[0] : 'Other',
-              category: ex.category || 'strength',
-              equipment: ex.equipment || 'bodyweight',
-              notes: ex.instructions ? ex.instructions.join('. ') : null,
+            if (existingId) {
+              exerciseId = existingId;
+            } else {
+              // Exercise doesn't exist, create it first
+              const newExercise = await apiClient.post<{ id: string }>('/exercises', {
+                name: ex.name,
+                muscleGroup: (ex.primaryMuscles && ex.primaryMuscles.length > 0) ? ex.primaryMuscles[0] : 'Other',
+                category: ex.category || 'strength',
+                equipment: ex.equipment || 'bodyweight',
+                notes: ex.instructions ? ex.instructions.join('. ') : null,
+              });
+              exerciseId = newExercise.id;
+              exerciseMap.set(ex.name.toLowerCase(), exerciseId);
+            }
+
+            // Add the exercise to the workout day
+            await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, {
+              exerciseId: exerciseId,
+              order: exIndex + 1,
+              targetSets: ex.sets,
+              targetReps: ex.reps,
+              targetLoad: 0,
             });
-            exerciseId = newExercise.id;
-            exerciseMap.set(ex.name.toLowerCase(), exerciseId);
           }
-
-          // Now add the exercise to the workout day
-          const exerciseData = {
-            exerciseId: exerciseId,
-            order: exIndex + 1,
-            targetSets: ex.sets,
-            targetReps: ex.reps,
-            targetLoad: 0, // Default load
-          };
-
-          await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, exerciseData);
-        }
-      }
+        })
+      );
 
       toast({
         title: 'Plano criado!',

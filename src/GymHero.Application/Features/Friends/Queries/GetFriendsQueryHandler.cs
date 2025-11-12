@@ -23,7 +23,9 @@ public class GetFriendsQueryHandler : IRequestHandler<GetFriendsQuery, IEnumerab
                 f.Id,
                 // Se o nosso utilizador é o remetente, o amigo é o destinatário. Se não, é o contrário.
                 f.RequesterId == request.UserId ? f.AddresseeId : f.RequesterId,
-                f.RequesterId == request.UserId ? f.Addressee.Name : f.Requester.Name
+                f.RequesterId == request.UserId ? f.Addressee.Name : f.Requester.Name,
+                f.RequesterId == request.UserId ? f.Addressee.Email : f.Requester.Email,
+                f.RequesterId == request.UserId ? f.Addressee.ProfilePictureUrl : f.Requester.ProfilePictureUrl
             ))
             .ToListAsync(cancellationToken);
 

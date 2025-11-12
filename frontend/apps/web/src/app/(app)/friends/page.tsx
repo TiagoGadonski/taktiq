@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getAssetUrl } from '@/lib/env';
 
 // Types
 interface Friend {
@@ -18,6 +20,7 @@ interface Friend {
   friendId: string;
   friendName: string;
   friendEmail: string;
+  profilePictureUrl?: string;
 }
 
 interface FriendRequest {
@@ -26,6 +29,7 @@ interface FriendRequest {
   requesterName: string;
   requesterEmail: string;
   createdAt: string;
+  profilePictureUrl?: string;
 }
 
 interface SearchUser {
@@ -34,6 +38,7 @@ interface SearchUser {
   email: string;
   isFriend: boolean;
   hasPendingRequest: boolean;
+  profilePictureUrl?: string;
 }
 
 export default function FriendsPage() {
@@ -42,6 +47,15 @@ export default function FriendsPage() {
   const [searchResults, setSearchResults] = useState<SearchUser[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const queryClient = useQueryClient();
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
 
   // Fetch friends list
   const { data: friends = [], isLoading: loadingFriends } = useQuery<Friend[]>({
@@ -190,24 +204,24 @@ export default function FriendsPage() {
       </div>
 
       <Tabs defaultValue="friends" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="friends" className="flex items-center gap-2">
-            <Users className="h-4 w-4" />
-            Amigos
+        <TabsList className="grid w-full grid-cols-3 gap-1 sm:gap-2">
+          <TabsTrigger value="friends" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4">
+            <Users className="h-4 w-4 flex-shrink-0" />
+            <span className="hidden sm:inline">Amigos</span>
             {friends.length > 0 && (
-              <Badge variant="secondary" className="ml-1">{friends.length}</Badge>
+              <Badge variant="secondary" className="ml-0 sm:ml-1 text-xs px-1 sm:px-2">{friends.length}</Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="requests" className="flex items-center gap-2">
-            <UserPlus className="h-4 w-4" />
-            Pedidos
+          <TabsTrigger value="requests" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4">
+            <UserPlus className="h-4 w-4 flex-shrink-0" />
+            <span className="hidden sm:inline">Pedidos</span>
             {pendingRequests.length > 0 && (
-              <Badge variant="destructive" className="ml-1">{pendingRequests.length}</Badge>
+              <Badge variant="destructive" className="ml-0 sm:ml-1 text-xs px-1 sm:px-2">{pendingRequests.length}</Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="search" className="flex items-center gap-2">
-            <Search className="h-4 w-4" />
-            Buscar
+          <TabsTrigger value="search" className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4">
+            <Search className="h-4 w-4 flex-shrink-0" />
+            <span className="hidden sm:inline">Buscar</span>
           </TabsTrigger>
         </TabsList>
 
@@ -244,14 +258,15 @@ export default function FriendsPage() {
                           className="flex items-center gap-3 flex-1"
                           onClick={() => router.push(`/users/${friend.friendId}`)}
                         >
-                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span className="text-sm font-semibold text-primary">
-                              {friend.friendName.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div>
-                            <p className="font-medium">{friend.friendName}</p>
-                            <p className="text-sm text-muted-foreground">{friend.friendEmail}</p>
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={getAssetUrl(friend.profilePictureUrl)} />
+                            <AvatarFallback>
+                              {getInitials(friend.friendName)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{friend.friendName}</p>
+                            <p className="text-sm text-muted-foreground truncate">{friend.friendEmail}</p>
                           </div>
                         </div>
                         <Button
@@ -300,26 +315,27 @@ export default function FriendsPage() {
                 <div className="space-y-3">
                   {pendingRequests.map((request) => (
                     <Card key={request.friendshipId} className="border">
-                      <CardContent className="flex items-center justify-between p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span className="text-sm font-semibold text-primary">
-                              {request.requesterName.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div>
-                            <p className="font-medium">{request.requesterName}</p>
-                            <p className="text-sm text-muted-foreground">{request.requesterEmail}</p>
+                      <CardContent className="flex items-center justify-between p-4 gap-2">
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <Avatar className="h-10 w-10 flex-shrink-0">
+                            <AvatarImage src={getAssetUrl(request.profilePictureUrl)} />
+                            <AvatarFallback>
+                              {getInitials(request.requesterName)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{request.requesterName}</p>
+                            <p className="text-sm text-muted-foreground truncate">{request.requesterEmail}</p>
                           </div>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-shrink-0">
                           <Button
                             size="sm"
                             onClick={() => acceptRequestMutation.mutate(request.friendshipId)}
                             disabled={acceptRequestMutation.isPending || declineRequestMutation.isPending}
                           >
-                            <Check className="h-4 w-4 mr-2" />
-                            Aceitar
+                            <Check className="h-4 w-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Aceitar</span>
                           </Button>
                           <Button
                             variant="outline"
@@ -327,8 +343,8 @@ export default function FriendsPage() {
                             onClick={() => declineRequestMutation.mutate(request.friendshipId)}
                             disabled={acceptRequestMutation.isPending || declineRequestMutation.isPending}
                           >
-                            <X className="h-4 w-4 mr-2" />
-                            Recusar
+                            <X className="h-4 w-4 sm:mr-2" />
+                            <span className="hidden sm:inline">Recusar</span>
                           </Button>
                         </div>
                       </CardContent>
@@ -382,17 +398,18 @@ export default function FriendsPage() {
                     >
                       <CardContent className="flex items-center justify-between p-4">
                         <div
-                          className="flex items-center gap-3 flex-1"
+                          className="flex items-center gap-3 flex-1 min-w-0"
                           onClick={() => router.push(`/users/${user.id}`)}
                         >
-                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span className="text-sm font-semibold text-primary">
-                              {user.name.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <div>
-                            <p className="font-medium">{user.name}</p>
-                            <p className="text-sm text-muted-foreground">{user.email}</p>
+                          <Avatar className="h-10 w-10 flex-shrink-0">
+                            <AvatarImage src={getAssetUrl(user.profilePictureUrl)} />
+                            <AvatarFallback>
+                              {getInitials(user.name)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{user.name}</p>
+                            <p className="text-sm text-muted-foreground truncate">{user.email}</p>
                           </div>
                         </div>
                         <div onClick={(e) => e.stopPropagation()}>

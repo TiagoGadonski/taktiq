@@ -42,7 +42,7 @@ public class SearchUsersQueryHandler : IRequestHandler<SearchUsersQuery, IEnumer
             var isFriend = friendship?.Status == FriendshipStatus.Accepted;
             var hasPendingRequest = friendship?.Status == FriendshipStatus.Pending;
 
-            return new UserSearchResponse(u.Id, u.Name, u.Email, isFriend, hasPendingRequest);
+            return new UserSearchResponse(u.Id, u.Name, u.Email, isFriend, hasPendingRequest, u.ProfilePictureUrl);
         });
     }
 }
