@@ -121,7 +121,7 @@ export default function AIWorkoutPage() {
       localStorage.setItem('ai_workout_title', generatedWorkout.title);
 
       // Start a free workout session (no plan ID = free workout)
-      await startSession(undefined);
+      await startSession({});
 
       toast({
         title: 'Treino iniciado!',
