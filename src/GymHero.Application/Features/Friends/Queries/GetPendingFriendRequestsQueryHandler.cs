@@ -17,7 +17,7 @@ public class GetPendingFriendRequestsQueryHandler : IRequestHandler<GetPendingFr
             .AsNoTracking()
             .Where(f => f.AddresseeId == request.UserId && f.Status == FriendshipStatus.Pending)
             .Include(f => f.Requester)
-            .Select(f => new FriendRequestResponse(f.Id, f.RequesterId, f.Requester.Name))
+            .Select(f => new FriendRequestResponse(f.Id, f.RequesterId, f.Requester.Name, f.Requester.Email, f.Requester.ProfilePictureUrl))
             .ToListAsync(cancellationToken);
     }
 }

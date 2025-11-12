@@ -6,7 +6,9 @@ public record SendFriendRequestRequest(string AddresseeEmail);
 public record FriendRequestResponse(
     Guid FriendshipId,
     Guid RequesterId,
-    string RequesterName
+    string RequesterName,
+    string RequesterEmail,
+    string? ProfilePictureUrl
 );
 
 // DTO para enviar a resposta a um pedido
@@ -16,11 +18,14 @@ public record UserSearchResponse(
     string Name,
     string Email,
     bool IsFriend,
-    bool HasPendingRequest
+    bool HasPendingRequest,
+    string? ProfilePictureUrl
 );
 
 public record FriendResponse(
     Guid FriendshipId,
     Guid FriendId,
-    string FriendName
+    string FriendName,
+    string FriendEmail,
+    string? ProfilePictureUrl
 );
