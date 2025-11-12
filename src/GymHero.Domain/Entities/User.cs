@@ -1,3 +1,5 @@
+using GymHero.Domain.Enums;
+
 namespace GymHero.Domain.Entities;
 
 public class User : BaseEntity
@@ -17,6 +19,9 @@ public class User : BaseEntity
     public string? Bio { get; set; }
     public double? Height { get; set; } // em cm
     public double? Weight { get; set; } // em kg
+
+    // Workout Location Preference (Gym, Home, or Both)
+    public WorkoutLocation PreferredWorkoutLocation { get; set; } = WorkoutLocation.Gym;
 
     // --- Propriedade para a Etapa 2 ---
     public string? ProfilePictureUrl { get; set; }

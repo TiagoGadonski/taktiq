@@ -174,6 +174,10 @@ export class WorkoutPlanApi {
   async duplicate(id: string, data: { duration: number }): Promise<WorkoutPlan> {
     return this.client.post<WorkoutPlan>(`/workout-plans/${id}/duplicate`, data);
   }
+
+  async clone(id: string): Promise<WorkoutPlan> {
+    return this.client.post<WorkoutPlan>(`/workout-plans/${id}/clone`, {});
+  }
 }
 
 export class WorkoutApi {
@@ -207,8 +211,8 @@ export class WorkoutApi {
 export class SessionApi {
   constructor(private client: ApiClient) {}
 
-  async start(workoutPlanId?: string): Promise<WorkoutSession> {
-    return this.client.post<WorkoutSession>('/sessions/start', { workoutPlanId });
+  async start(workoutPlanId?: string, workoutId?: string): Promise<WorkoutSession> {
+    return this.client.post<WorkoutSession>('/sessions/start', { workoutPlanId, workoutId });
   }
 
   async complete(sessionId: string, notes?: string): Promise<WorkoutSession> {

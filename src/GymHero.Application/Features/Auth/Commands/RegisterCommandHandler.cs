@@ -34,7 +34,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
         {
             Name = request.Name,
             Email = request.Email,
-            PasswordHash = _passwordHasher.Hash(request.Password)
+            PasswordHash = _passwordHasher.Hash(request.Password),
+            PreferredWorkoutLocation = request.PreferredWorkoutLocation
         };
 
         // 3. Adicionar ao DbContext e salvar no banco

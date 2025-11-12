@@ -35,10 +35,12 @@ export default function WorkoutPage() {
   const [isAddExerciseOpen, setIsAddExerciseOpen] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
 
-  // Auto-select first workout when session starts
+  // Auto-select workout based on session's workoutId, or fall back to first workout
   useEffect(() => {
     if (currentSession?.workoutPlan?.workouts && currentSession.workoutPlan.workouts.length > 0 && !selectedWorkoutId) {
-      setSelectedWorkoutId(currentSession.workoutPlan.workouts[0].id);
+      // If session has a specific workoutId, use that; otherwise use first workout
+      const workoutToSelect = currentSession.workoutId || currentSession.workoutPlan.workouts[0].id;
+      setSelectedWorkoutId(workoutToSelect);
     }
   }, [currentSession, selectedWorkoutId]);
 
@@ -241,9 +243,9 @@ export default function WorkoutPage() {
     return allExercisesCompleted;
   };
 
-  const handleStartSession = async (workoutId?: string) => {
+  const handleStartSession = async (workoutPlanId?: string, workoutId?: string) => {
     try {
-      await startSession(workoutId);
+      await startSession({ workoutPlanId, workoutId });
       toast({
         title: 'Treino iniciado!',
         description: 'Boa sorte no treino de hoje!',
@@ -415,7 +417,7 @@ export default function WorkoutPage() {
                           <Button
                             onClick={() => {
                               setSelectedWorkoutId(workout.id);
-                              handleStartSession(activePlan.id);
+                              handleStartSession(activePlan.id, workout.id);
                             }}
                             disabled={isStarting}
                             size="sm"

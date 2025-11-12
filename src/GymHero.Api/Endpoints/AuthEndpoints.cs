@@ -23,7 +23,8 @@ public static class AuthEndpoints
         {
             try
             {
-                var command = new RegisterCommand(request.Name, request.Email, request.Password);
+                var workoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation;
+                var command = new RegisterCommand(request.Name, request.Email, request.Password, workoutLocation);
                 var result = await sender.Send(command);
                 return Results.Ok(result);
             }
@@ -90,7 +91,8 @@ public static class AuthEndpoints
                 role = dbUser.Role,
                 profilePictureUrl = dbUser.ProfilePictureUrl,
                 bio = dbUser.Bio,
-                location = dbUser.Location
+                location = dbUser.Location,
+                preferredWorkoutLocation = (int)dbUser.PreferredWorkoutLocation
             });
         })
         .RequireAuthorization()

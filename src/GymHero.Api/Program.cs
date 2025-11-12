@@ -163,6 +163,9 @@ if (!app.Environment.IsDevelopment())
 // Configurar o servidor de arquivos estáticos para servir as imagens de perfil
 app.UseStaticFiles();
 
+// Activity logging middleware - logs all HTTP requests
+app.UseMiddleware<ActivityLoggingMiddleware>();
+
 // Use appropriate CORS policy based on environment
 app.UseCors(app.Environment.IsDevelopment() ? "AllowDevelopment" : "Production");
 

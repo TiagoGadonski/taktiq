@@ -22,6 +22,7 @@ public class GetCurrentSessionQueryHandler : IRequestHandler<GetCurrentSessionQu
             {
                 Id = s.Id,
                 WorkoutPlanId = s.WorkoutPlanId,
+                WorkoutId = s.WorkoutId,
                 StartedAt = s.StartedAt,
                 CompletedAt = s.CompletedAt,
                 Notes = s.Notes,

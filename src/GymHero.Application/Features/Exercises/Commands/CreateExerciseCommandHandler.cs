@@ -21,22 +21,24 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
             Equipment = request.Equipment,
             Notes = request.Notes,
             VideoUrl = request.VideoUrl,
-            ImageUrl = request.ImageUrl
+            ImageUrl = request.ImageUrl,
+            WorkoutLocation = request.WorkoutLocation
         };
 
         await _context.Exercises.AddAsync(exercise, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
         return new ExerciseDto
-{
-    Id = exercise.Id,
-    Name = exercise.Name,
-    MuscleGroup = exercise.MuscleGroup,
-    Category = exercise.Category,
-    Equipment = exercise.Equipment,
-    Notes = exercise.Notes,
-    VideoUrl = exercise.VideoUrl,
-    ImageUrl = exercise.ImageUrl
-};
+        {
+            Id = exercise.Id,
+            Name = exercise.Name,
+            MuscleGroup = exercise.MuscleGroup,
+            Category = exercise.Category,
+            Equipment = exercise.Equipment,
+            Notes = exercise.Notes,
+            VideoUrl = exercise.VideoUrl,
+            ImageUrl = exercise.ImageUrl,
+            WorkoutLocation = (int)exercise.WorkoutLocation
+        };
     }
 }

@@ -206,6 +206,106 @@ public static class AdminEndpoints
             return Results.Ok(new { message = "User deleted successfully" });
         });
 
+        // Get activity logs with filtering and pagination
+        group.MapGet("/activity-logs", async (
+            IActivityLogService activityLogService,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 50,
+            [FromQuery] Guid? userId = null,
+            [FromQuery] string? action = null,
+            [FromQuery] DateTime? startDate = null,
+            [FromQuery] DateTime? endDate = null,
+            CancellationToken cancellationToken = default) =>
+        {
+            // Validation
+            page = Math.Max(1, page);
+            pageSize = Math.Clamp(pageSize, 1, 100);
+
+            var logs = await activityLogService.GetLogsAsync(
+                page,
+                pageSize,
+                userId,
+                action,
+                startDate,
+                endDate,
+                cancellationToken);
+
+            var totalCount = await activityLogService.GetLogCountAsync(
+                userId,
+                action,
+                startDate,
+                endDate,
+                cancellationToken);
+
+            return Results.Ok(new {
+                logs,
+                pagination = new {
+                    currentPage = page,
+                    pageSize,
+                    totalCount,
+                    totalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+                }
+            });
+        })
+        .WithName("GetActivityLogs")
+        .WithSummary("Get activity logs with filtering and pagination (Admin only)");
+
+        // Get activity log statistics
+        group.MapGet("/activity-logs/stats", async (
+            IApplicationDbContext context,
+            [FromQuery] DateTime? startDate = null,
+            [FromQuery] DateTime? endDate = null,
+            CancellationToken cancellationToken = default) =>
+        {
+            var query = context.UserActivityLogs.AsQueryable();
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(log => log.Timestamp >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(log => log.Timestamp <= endDate.Value);
+            }
+
+            var totalRequests = await query.CountAsync(cancellationToken);
+            var totalErrors = await query.Where(log => log.ErrorMessage != null).CountAsync(cancellationToken);
+            var uniqueUsers = await query.Where(log => log.UserId != null).Select(log => log.UserId).Distinct().CountAsync(cancellationToken);
+            var avgResponseTime = await query.Where(log => log.ResponseTimeMs.HasValue).AverageAsync(log => (double?)log.ResponseTimeMs, cancellationToken);
+
+            var topActions = await query
+                .GroupBy(log => log.Action)
+                .Select(g => new { action = g.Key, count = g.Count() })
+                .OrderByDescending(x => x.count)
+                .Take(10)
+                .ToListAsync(cancellationToken);
+
+            var recentErrors = await query
+                .Where(log => log.ErrorMessage != null)
+                .OrderByDescending(log => log.Timestamp)
+                .Take(10)
+                .Select(log => new {
+                    log.Timestamp,
+                    log.Action,
+                    log.Endpoint,
+                    log.ErrorMessage,
+                    log.StatusCode
+                })
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(new {
+                totalRequests,
+                totalErrors,
+                uniqueUsers,
+                avgResponseTimeMs = avgResponseTime,
+                topActions,
+                recentErrors
+            });
+        })
+        .WithName("GetActivityLogStats")
+        .WithSummary("Get activity log statistics (Admin only)");
+
         // Create user (admin only)
         group.MapPost("/users", async (
             [FromBody] CreateUserRequest request,

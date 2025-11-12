@@ -12,17 +12,27 @@ public class GetAllExercisesQueryHandler : IRequestHandler<GetAllExercisesQuery,
 
     public async Task<IEnumerable<ExerciseDto>> Handle(GetAllExercisesQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Exercises
-            .AsNoTracking()
+        var query = _context.Exercises.AsNoTracking();
+
+        // Filter by workout location if specified
+        if (request.WorkoutLocation.HasValue)
+        {
+            var locationFilter = (Domain.Enums.WorkoutLocation)request.WorkoutLocation.Value;
+            // Include exercises that match the requested location OR are marked as "Both"
+            query = query.Where(e => e.WorkoutLocation == locationFilter || e.WorkoutLocation == Domain.Enums.WorkoutLocation.Both);
+        }
+
+        return await query
             .Select(e => new ExerciseDto
-{
-    Id = e.Id,
-    Name = e.Name,
-    MuscleGroup = e.MuscleGroup,
-    Category = e.Category,
-    Equipment = e.Equipment,
-    Notes = e.Notes
-})
+            {
+                Id = e.Id,
+                Name = e.Name,
+                MuscleGroup = e.MuscleGroup,
+                Category = e.Category,
+                Equipment = e.Equipment,
+                Notes = e.Notes,
+                WorkoutLocation = (int)e.WorkoutLocation
+            })
             .ToListAsync(cancellationToken);
     }
 }

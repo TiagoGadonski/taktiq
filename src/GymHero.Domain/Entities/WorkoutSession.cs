@@ -9,6 +9,10 @@ public class WorkoutSession : BaseEntity
     public Guid? WorkoutPlanId { get; set; }
     public WorkoutPlan? WorkoutPlan { get; set; }
 
+    // Chave estrangeira para o treino específico dentro do plano (nullable para treinos livres)
+    public Guid? WorkoutId { get; set; }
+    public Workout? Workout { get; set; }
+
      public DateTime StartedAt { get; set; } // Renomeado de 'Date'
     public DateTime? CompletedAt { get; set; } // Data de finalização, pode ser nula
     public string? Notes { get; set; }

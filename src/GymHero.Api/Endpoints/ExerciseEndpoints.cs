@@ -14,9 +14,9 @@ public static class ExerciseEndpoints
         var group = app.MapGroup("/api/exercises").WithTags("Exercises");
 
         // GET /api/v1/exercises
-        group.MapGet("/", async (ISender sender) =>
+        group.MapGet("/", async (int? workoutLocation, ISender sender) =>
         {
-            var result = await sender.Send(new GetAllExercisesQuery());
+            var result = await sender.Send(new GetAllExercisesQuery(workoutLocation));
             return Results.Ok(result);
         });
 
@@ -31,7 +31,8 @@ public static class ExerciseEndpoints
         // POST /api/v1/exercises
         group.MapPost("/", async ([FromBody] CreateExerciseRequest request, ISender sender) =>
         {
-            var command = new CreateExerciseCommand(request.Name, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl);
+            var workoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.WorkoutLocation;
+            var command = new CreateExerciseCommand(request.Name, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl, workoutLocation);
             var result = await sender.Send(command);
             return Results.Created($"/api/exercises/{result.Id}", result);
         }).RequireAuthorization(); // Allow authenticated users to create exercises
