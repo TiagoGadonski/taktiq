@@ -90,7 +90,8 @@ public static class AIEndpoints
                         u.Weight,
                         u.Location,
                         u.Bio,
-                        u.GymName
+                        u.GymName,
+                        u.PreferredWorkoutLocation
                     })
                     .FirstOrDefaultAsync();
 
@@ -238,7 +239,8 @@ public static class AIEndpoints
                         u.Weight,
                         u.Location,
                         u.Bio,
-                        u.GymName
+                        u.GymName,
+                        u.PreferredWorkoutLocation
                     })
                     .FirstOrDefaultAsync();
 
@@ -1090,13 +1092,17 @@ public static class AIEndpoints
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
+2. ⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+   - Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+   - Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
+   - Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
+3. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
    - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
    - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
    - Se pedir foco em área específica (ex: ""quero focar em glúteos""), priorize exercícios que trabalhem DIRETAMENTE esse músculo
    - NÃO inclua exercícios de outros grupos musculares a menos que o usuário explicitamente mencione
-3. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
-4. ADAPTE o treino ao GÊNERO do usuário:
+4. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
+5. ADAPTE o treino ao GÊNERO do usuário:
    - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
    - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
 5. ATENÇÃO ESPECIAL AO OBJETIVO DO USUÁRIO:
@@ -1302,6 +1308,12 @@ REGRA CRÍTICA #1 - RESPEITAR O PEDIDO DO USUÁRIO:
 - Se mencionar problema/dor → EVITE completamente exercícios que afetem essa região
 - NÃO crie planos ""balanceados"" se o usuário pediu foco específico
 - NÃO adicione upper body em plano de lower body ""para completar""
+
+REGRA CRÍTICA #2 - LOCAL DE TREINO:
+⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+- Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+- Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
+- Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS (ex: ""Supino Reto com Barra"", ""Agachamento Livre"", ""Remada Curvada"")
@@ -1544,6 +1556,19 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         if (!string.IsNullOrEmpty(userProfile.Bio))
             context.AppendLine($"- Informações adicionais: {userProfile.Bio}");
 
+        // Add workout location preference - CRITICAL
+        if (userProfile.PreferredWorkoutLocation != null)
+        {
+            string locationText = userProfile.PreferredWorkoutLocation switch
+            {
+                0 => "ACADEMIA - Use apenas exercícios com equipamentos de academia (barras, halteres, máquinas, cabos, etc.)",
+                1 => "CASA - Use APENAS exercícios com equipamento mínimo ou peso corporal (flexões, agachamentos livres, prancha, etc.). NÃO inclua exercícios que exigem equipamento de academia",
+                2 => "AMBOS (Academia e Casa) - Pode usar tanto exercícios de academia quanto de casa",
+                _ => "Academia (padrão)"
+            };
+            context.AppendLine($"\n🏠 LOCAL DE TREINO PREFERIDO (OBRIGATÓRIO RESPEITAR): {locationText}");
+        }
+
         // Add exercise goal
         if (!string.IsNullOrEmpty(userProfile.ExerciseGoal))
             context.AppendLine($"\n🎯 OBJETIVO DE TREINO: {userProfile.ExerciseGoal}");
@@ -1738,13 +1763,17 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
+2. ⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+   - Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+   - Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
+   - Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
+3. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
    - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
    - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
    - Se pedir foco em área específica (ex: ""quero focar em glúteos""), priorize exercícios que trabalhem DIRETAMENTE esse músculo
    - NÃO inclua exercícios de outros grupos musculares a menos que o usuário explicitamente mencione
-3. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
-4. ADAPTE o treino ao GÊNERO do usuário:
+4. RESPEITE ESTRITAMENTE todas as restrições do usuário (ex: se pedir ""sem supino"", NÃO inclua nenhuma variação de supino)
+5. ADAPTE o treino ao GÊNERO do usuário:
    - Mulheres: Priorize glúteos, pernas, core quando mencionados; ajuste volume e intensidade considerando diferenças hormonais
    - Homens: Maior ênfase em força e hipertrofia de tronco superior quando apropriado
 5. ATENÇÃO ESPECIAL AO OBJETIVO DO USUÁRIO:
@@ -1922,6 +1951,12 @@ REGRA CRÍTICA #1 - RESPEITAR O PEDIDO DO USUÁRIO:
 - Se pedir ""treino focado em glúteos"" → MAIORIA dos exercícios devem trabalhar glúteos diretamente
 - NÃO crie planos ""balanceados"" se o usuário pediu foco específico
 - NÃO adicione upper body em plano de lower body ""para completar""
+
+REGRA CRÍTICA #2 - LOCAL DE TREINO:
+⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+- Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+- Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
+- Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios em PORTUGUÊS (ex: ""Supino Reto com Barra"", ""Agachamento Livre"")
