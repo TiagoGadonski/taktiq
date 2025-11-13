@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play } from 'lucide-react';
+import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -72,6 +72,7 @@ export default function AIWorkoutPage() {
   const [prompt, setPrompt] = useState('');
   const [fitnessLevel, setFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [duration, setDuration] = useState(45); // Default 45 minutes
+  const [workoutLocation, setWorkoutLocation] = useState<'gym' | 'home' | 'both'>('gym');
   const [generatedWorkout, setGeneratedWorkout] = useState<AIWorkoutResponse | null>(null);
   const [rejectedExercises, setRejectedExercises] = useState<Record<number, string[]>>({});
 
@@ -80,6 +81,7 @@ export default function AIWorkoutPage() {
   const [planFitnessLevel, setPlanFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [daysPerWeek, setDaysPerWeek] = useState(4);
   const [planDuration, setPlanDuration] = useState(60); // Default 60 minutes per session
+  const [planWorkoutLocation, setPlanWorkoutLocation] = useState<'gym' | 'home' | 'both'>('gym');
   const [weeksCount, setWeeksCount] = useState(4); // Default 4 weeks
   const [generatedPlan, setGeneratedPlan] = useState<AIWorkoutPlanResponse | null>(null);
   const [savedPlanId, setSavedPlanId] = useState<string | null>(null);
@@ -260,10 +262,22 @@ export default function AIWorkoutPage() {
       });
       return;
     }
-    // Add duration to prompt if not already mentioned
-    const finalPrompt = prompt.toLowerCase().includes('minuto')
+    // Add duration and location context to prompt if not already mentioned
+    let finalPrompt = prompt.toLowerCase().includes('minuto')
       ? prompt
       : `${prompt}, ${duration} minutos`;
+
+    // Add workout location context
+    const locationText = workoutLocation === 'gym'
+      ? 'na academia com equipamentos disponíveis'
+      : workoutLocation === 'home'
+      ? 'em casa com equipamento mínimo ou peso corporal'
+      : 'que pode ser feito tanto em academia quanto em casa';
+
+    if (!prompt.toLowerCase().includes('academia') && !prompt.toLowerCase().includes('casa')) {
+      finalPrompt += `, ${locationText}`;
+    }
+
     generateWorkoutMutation.mutate({ prompt: finalPrompt, fitnessLevel });
   };
 
@@ -277,13 +291,24 @@ export default function AIWorkoutPage() {
       return;
     }
 
-    // Add duration and weeks context to prompt if not already mentioned
+    // Add duration, weeks, and location context to prompt if not already mentioned
     let finalPlanPrompt = planPrompt;
     if (!planPrompt.toLowerCase().includes('minuto')) {
       finalPlanPrompt += `, ${planDuration} minutos por treino`;
     }
     if (!planPrompt.toLowerCase().includes('semana')) {
       finalPlanPrompt += `, plano de ${weeksCount} semanas`;
+    }
+
+    // Add workout location context
+    const locationText = planWorkoutLocation === 'gym'
+      ? 'na academia com equipamentos disponíveis'
+      : planWorkoutLocation === 'home'
+      ? 'em casa com equipamento mínimo ou peso corporal'
+      : 'que pode ser feito tanto em academia quanto em casa';
+
+    if (!planPrompt.toLowerCase().includes('academia') && !planPrompt.toLowerCase().includes('casa')) {
+      finalPlanPrompt += `, ${locationText}`;
     }
 
     generatePlanMutation.mutate({
@@ -807,25 +832,59 @@ export default function AIWorkoutPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label>Nível de Condicionamento</Label>
-                <div className="grid grid-cols-3 gap-2">
-                  {(['beginner', 'intermediate', 'advanced'] as const).map((level) => (
-                    <button
-                      key={level}
-                      onClick={() => setFitnessLevel(level)}
-                      disabled={generateWorkoutMutation.isPending}
-                      className={`px-3 py-2 text-sm rounded-md border transition-colors ${
-                        fitnessLevel === level
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-background border-input hover:bg-accent'
-                      }`}
-                    >
-                      {level === 'beginner' && 'Iniciante'}
-                      {level === 'intermediate' && 'Intermediário'}
-                      {level === 'advanced' && 'Avançado'}
-                    </button>
-                  ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Nível de Condicionamento</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['beginner', 'intermediate', 'advanced'] as const).map((level) => (
+                      <button
+                        key={level}
+                        onClick={() => setFitnessLevel(level)}
+                        disabled={generateWorkoutMutation.isPending}
+                        className={`px-3 py-2 text-sm rounded-md border transition-colors ${
+                          fitnessLevel === level
+                            ? 'bg-primary text-primary-foreground border-primary'
+                            : 'bg-background border-input hover:bg-accent'
+                        }`}
+                      >
+                        {level === 'beginner' && 'Iniciante'}
+                        {level === 'intermediate' && 'Interm.'}
+                        {level === 'advanced' && 'Avançado'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Local do Treino</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['gym', 'home', 'both'] as const).map((location) => (
+                      <button
+                        key={location}
+                        onClick={() => setWorkoutLocation(location)}
+                        disabled={generateWorkoutMutation.isPending}
+                        className={`px-3 py-2 text-sm rounded-md border transition-colors flex items-center justify-center gap-1 ${
+                          workoutLocation === location
+                            ? 'bg-primary text-primary-foreground border-primary'
+                            : 'bg-background border-input hover:bg-accent'
+                        }`}
+                      >
+                        {location === 'gym' && (
+                          <>
+                            <Building2 className="h-3 w-3" />
+                            Academia
+                          </>
+                        )}
+                        {location === 'home' && (
+                          <>
+                            <Home className="h-3 w-3" />
+                            Casa
+                          </>
+                        )}
+                        {location === 'both' && 'Ambos'}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -1009,7 +1068,7 @@ export default function AIWorkoutPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <Label>Nível de Condicionamento</Label>
                   <div className="grid grid-cols-3 gap-2">
@@ -1024,9 +1083,9 @@ export default function AIWorkoutPage() {
                             : 'bg-background border-input hover:bg-accent'
                         }`}
                       >
-                        {level === 'beginner' && 'Iniciante'}
-                        {level === 'intermediate' && 'Interm.'}
-                        {level === 'advanced' && 'Avançado'}
+                        {level === 'beginner' && 'Inic.'}
+                        {level === 'intermediate' && 'Int.'}
+                        {level === 'advanced' && 'Avanç.'}
                       </button>
                     ))}
                   </div>
@@ -1047,6 +1106,38 @@ export default function AIWorkoutPage() {
                         }`}
                       >
                         {days}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Local do Treino</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['gym', 'home', 'both'] as const).map((location) => (
+                      <button
+                        key={location}
+                        onClick={() => setPlanWorkoutLocation(location)}
+                        disabled={generatePlanMutation.isPending}
+                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors flex items-center justify-center gap-1 ${
+                          planWorkoutLocation === location
+                            ? 'bg-primary text-primary-foreground border-primary'
+                            : 'bg-background border-input hover:bg-accent'
+                        }`}
+                      >
+                        {location === 'gym' && (
+                          <>
+                            <Building2 className="h-3 w-3" />
+                            Acad.
+                          </>
+                        )}
+                        {location === 'home' && (
+                          <>
+                            <Home className="h-3 w-3" />
+                            Casa
+                          </>
+                        )}
+                        {location === 'both' && 'Ambos'}
                       </button>
                     ))}
                   </div>
