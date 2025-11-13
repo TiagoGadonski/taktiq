@@ -1165,10 +1165,11 @@ PARÂMETROS OBRIGATÓRIOS:
 {(request.Equipment != null && request.Equipment.Any() ?
 $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
   RESTRIÇÃO: Use APENAS os equipamentos listados acima. Não inclua exercícios que requerem outros equipamentos." :
-"- EQUIPAMENTOS: Academia completa - todos os equipamentos disponíveis")}
+"")}
 
 INSTRUÇÕES CRÍTICAS:
-1. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
+1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
+2. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
 2. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE (incluindo variações)
 3. Calcule o número adequado de exercícios para caber no tempo especificado
 4. Mantenha o treino balanceado e eficiente
@@ -1387,12 +1388,12 @@ PARÂMETROS OBRIGATÓRIOS:
 - DIAS POR SEMANA: {daysPerWeek} dias
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}
 - OBJETIVO PRINCIPAL: {goal}
-- EQUIPAMENTOS: Todos disponíveis (academia completa)
 
 INSTRUÇÕES CRÍTICAS:
-1. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", ""membros inferiores"", ou ""focado em pernas/glúteos"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
-2. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
-3. ⚠️ NÃO crie plano ""completo"" ou ""balanceado"" se o usuário pediu foco específico
+1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
+2. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", ""membros inferiores"", ou ""focado em pernas/glúteos"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
+3. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
+4. ⚠️ NÃO crie plano ""completo"" ou ""balanceado"" se o usuário pediu foco específico
 4. PERSONALIZE o plano baseado no perfil do usuário acima (idade, peso, altura, IMC, gênero)
 5. Crie EXATAMENTE {daysPerWeek} treinos diferentes respeitando o foco solicitado
 6. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
@@ -1561,12 +1562,21 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         {
             string locationText = userProfile.PreferredWorkoutLocation switch
             {
-                0 => "ACADEMIA - Use apenas exercícios com equipamentos de academia (barras, halteres, máquinas, cabos, etc.)",
-                1 => "CASA - Use APENAS exercícios com equipamento mínimo ou peso corporal (flexões, agachamentos livres, prancha, etc.). NÃO inclua exercícios que exigem equipamento de academia",
-                2 => "AMBOS (Academia e Casa) - Pode usar tanto exercícios de academia quanto de casa",
+                0 => @"ACADEMIA (Gym)
+   ✅ PODE: Barras, halteres, máquinas, cabos, leg press, supino, smith machine, etc.
+   ❌ NÃO precisa limitar a peso corporal",
+                1 => @"CASA (Home)
+   ✅ PODE: APENAS peso corporal e equipamento mínimo
+   ✅ Exemplos: Flexões, agachamentos livres, prancha, afundos, abdominais, burpees, polichinelos
+   ❌ NÃO PODE: Barras, halteres, máquinas, cabos, leg press, supino, qualquer equipamento de academia
+   ⚠️⚠️⚠️ CRÍTICO: Se você incluir QUALQUER exercício com barra, halter, máquina ou cabo, você FALHOU completamente",
+                2 => @"AMBOS (Both)
+   ✅ PODE: Tanto exercícios de academia quanto de casa",
                 _ => "Academia (padrão)"
             };
-            context.AppendLine($"\n🏠 LOCAL DE TREINO PREFERIDO (OBRIGATÓRIO RESPEITAR): {locationText}");
+            context.AppendLine($"\n🏠🏠🏠 LOCAL DE TREINO PREFERIDO - RESPEITE ISSO ACIMA DE TUDO 🏠🏠🏠");
+            context.AppendLine(locationText);
+            context.AppendLine("⚠️⚠️⚠️ ESSA É A REGRA #1 - RESPEITE O LOCAL ACIMA ⚠️⚠️⚠️\n");
         }
 
         // Add exercise goal
@@ -1829,11 +1839,12 @@ PARÂMETROS OBRIGATÓRIOS:
 {(request.Equipment != null && request.Equipment.Any() ?
 $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
   RESTRIÇÃO: Use APENAS os equipamentos listados acima." :
-"- EQUIPAMENTOS: Academia completa - todos os equipamentos disponíveis")}
+"")}
 
 INSTRUÇÕES CRÍTICAS:
-1. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
-2. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
+1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
+2. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
+3. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
 3. Calcule o número adequado de exercícios para caber no tempo especificado
 4. Mantenha o treino balanceado e eficiente
 5. Inclua sempre instruções de segurança e técnica correta
@@ -2020,10 +2031,11 @@ PARÂMETROS:
 - OBJETIVO: {goal}
 
 INSTRUÇÕES CRÍTICAS:
-1. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
-2. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
-3. ⚠️ NÃO crie plano ""completo"" se o usuário pediu foco específico
-4. PERSONALIZE baseado no perfil do usuário (idade, peso, altura, IMC, gênero)
+1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
+2. ⚠️ O PEDIDO DO USUÁRIO É ABSOLUTO - Se pedir ""lower body"", TODOS os {daysPerWeek} dias DEVEM ser de lower body
+3. ⚠️ NÃO adicione upper body ""para balancear"" se o usuário NÃO pediu
+4. ⚠️ NÃO crie plano ""completo"" se o usuário pediu foco específico
+5. PERSONALIZE baseado no perfil do usuário (idade, peso, altura, IMC, gênero)
 5. Crie EXATAMENTE {daysPerWeek} treinos diferentes respeitando o foco solicitado
 6. Inclua notas de progressão para CADA exercício
 7. Respeite todas as restrições do usuário
