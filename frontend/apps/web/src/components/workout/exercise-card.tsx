@@ -93,21 +93,23 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
 
               {/* Progress Indicator */}
               <div className="text-right flex-shrink-0">
-                <p className="text-2xl font-bold text-primary">{exerciseSets.length}</p>
+                <p className="text-xl sm:text-2xl font-bold text-primary">{exerciseSets.length}</p>
                 <p className="text-xs text-muted-foreground">de {exercise.targetSets}</p>
               </div>
             </div>
 
             {/* Details and Replace Buttons */}
-            <div className="flex gap-2 mt-2 -ml-2">
+            <div className="flex gap-1 sm:gap-2 mt-2 -ml-2">
               {onExerciseClick && (
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={onExerciseClick}
+                  className="text-xs sm:text-sm h-8 px-2 sm:px-3"
                 >
-                  <ChevronDown className="h-4 w-4 mr-1" />
-                  Ver detalhes
+                  <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">Ver detalhes</span>
+                  <span className="sm:hidden">Detalhes</span>
                 </Button>
               )}
               {onReplaceExercise && (
@@ -116,9 +118,11 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                   size="sm"
                   onClick={onReplaceExercise}
                   title="Substituir exercício"
+                  className="text-xs sm:text-sm h-8 px-2 sm:px-3"
                 >
-                  <RefreshCw className="h-4 w-4 mr-1" />
-                  Substituir
+                  <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">Substituir</span>
+                  <span className="sm:hidden">Trocar</span>
                 </Button>
               )}
             </div>
@@ -210,7 +214,7 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                 </div>
               </div>
             ) : (
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-col sm:flex-row">
                 <Button
                   variant="outline"
                   size="sm"
@@ -227,8 +231,14 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
                     size="sm"
                     onClick={handleCompleteExercise}
                     disabled={isCreating}
+                    className="whitespace-nowrap"
                   >
-                    Concluir ({exercise.targetSets - exerciseSets.length} restantes)
+                    <span className="hidden sm:inline">
+                      Concluir ({exercise.targetSets - exerciseSets.length} restantes)
+                    </span>
+                    <span className="sm:hidden">
+                      Concluir ({exercise.targetSets - exerciseSets.length})
+                    </span>
                   </Button>
                 )}
               </div>
