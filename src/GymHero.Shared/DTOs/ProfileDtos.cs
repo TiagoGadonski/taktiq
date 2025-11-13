@@ -23,6 +23,7 @@ public class UpdateProfileRequest
     public string? HealthConditions { get; set; }
     public string? ExerciseGoal { get; set; }
     public string? TrainingSplit { get; set; } // JSON string mapping day of week to muscle group
+    public int? PreferredWorkoutLocation { get; set; } // 0 = Gym, 1 = Home, 2 = Both
 }
 
 // O DTO de resposta pode continuar a ser um record, pois não o modificamos.
@@ -43,6 +44,7 @@ public record UserProfileResponse(
     string? HealthConditions,
     string? ExerciseGoal,
     string? TrainingSplit,
+    int PreferredWorkoutLocation, // 0 = Gym, 1 = Home, 2 = Both
     DateTime CreatedAt
 );
 
