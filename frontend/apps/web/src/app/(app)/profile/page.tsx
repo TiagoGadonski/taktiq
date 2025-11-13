@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye, Home } from 'lucide-react';
@@ -77,6 +77,7 @@ export default function ProfilePage() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<ProfileInput>({
     resolver: zodResolver(profileSchema),
@@ -511,23 +512,26 @@ export default function ProfilePage() {
                       <Home className="h-4 w-4 text-primary" />
                       Local Preferido de Treino
                     </Label>
-                    <Select
-                      value={profileData?.preferredWorkoutLocation?.toString() || '0'}
-                      onValueChange={(value) => {
-                        const event = { target: { value } };
-                        register('preferredWorkoutLocation').onChange(event as any);
-                      }}
-                      disabled={!isEditing}
-                    >
-                      <SelectTrigger id="preferredWorkoutLocation" className="glass">
-                        <SelectValue placeholder="Selecione o local" />
-                      </SelectTrigger>
-                      <SelectContent className="glass">
-                        <SelectItem value="0">Academia</SelectItem>
-                        <SelectItem value="1">Casa</SelectItem>
-                        <SelectItem value="2">Ambos</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Controller
+                      name="preferredWorkoutLocation"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value || '0'}
+                          onValueChange={field.onChange}
+                          disabled={!isEditing}
+                        >
+                          <SelectTrigger id="preferredWorkoutLocation" className="glass">
+                            <SelectValue placeholder="Selecione o local" />
+                          </SelectTrigger>
+                          <SelectContent className="glass">
+                            <SelectItem value="0">🏋️ Academia</SelectItem>
+                            <SelectItem value="1">🏠 Casa</SelectItem>
+                            <SelectItem value="2">🔄 Ambos</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
                     <p className="text-xs text-muted-foreground">
                       Isso ajudará a IA a gerar treinos mais adequados aos equipamentos disponíveis.
                     </p>

@@ -37,6 +37,7 @@ public static class MeEndpoints
                 currentUser.HealthConditions,
                 currentUser.ExerciseGoal,
                 currentUser.TrainingSplit,
+                (int)currentUser.PreferredWorkoutLocation,
                 currentUser.CreatedAt
             );
             return Results.Ok(response);
@@ -65,6 +66,12 @@ public static class MeEndpoints
             userToUpdate.HealthConditions = request.HealthConditions;
             userToUpdate.ExerciseGoal = request.ExerciseGoal;
             userToUpdate.TrainingSplit = request.TrainingSplit;
+
+            // Update workout location preference if provided
+            if (request.PreferredWorkoutLocation.HasValue)
+            {
+                userToUpdate.PreferredWorkoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation.Value;
+            }
 
             await context.SaveChangesAsync(ct);
             return Results.Ok();
