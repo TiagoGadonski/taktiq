@@ -389,8 +389,8 @@ export default function WorkoutPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Treino do Dia</h1>
-          <p className="text-muted-foreground">Escolha um treino para começar</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Treino do Dia</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">Escolha um treino para começar</p>
         </div>
 
         {activePlan ? (
@@ -407,10 +407,10 @@ export default function WorkoutPage() {
                   {activePlan.workouts.map((workout) => (
                     <Card key={workout.id}>
                       <CardHeader className="pb-3">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <CardTitle className="text-lg">{workout.name}</CardTitle>
-                            <CardDescription>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <CardTitle className="text-base sm:text-lg truncate">{workout.name}</CardTitle>
+                            <CardDescription className="text-xs sm:text-sm">
                               {workout.exercises?.length || 0} exercícios
                             </CardDescription>
                           </div>
@@ -421,6 +421,7 @@ export default function WorkoutPage() {
                             }}
                             disabled={isStarting}
                             size="sm"
+                            className="w-full sm:w-auto"
                           >
                             <Play className="mr-2 h-4 w-4" />
                             {isStarting ? 'Iniciando...' : 'Iniciar'}
@@ -677,33 +678,49 @@ export default function WorkoutPage() {
   // Active session - show workout execution
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex-1 min-w-0">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold truncate">
             {selectedWorkout?.name || currentSession.workoutPlan?.name || 'Treino Livre'}
           </h1>
-          <div className="mt-2 flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="mt-2 flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              {sessionDuration} minutos
+              <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
+              {sessionDuration} min
             </div>
             <div>
-              {currentSession.sets?.length || 0} séries completadas
+              {currentSession.sets?.length || 0} séries
             </div>
           </div>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => router.push('/dashboard')}>
-            <XCircle className="mr-2 h-4 w-4" />
-            Sair
+        <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+          <Button
+            variant="outline"
+            onClick={() => router.push('/dashboard')}
+            size="sm"
+            className="flex-1 sm:flex-initial"
+          >
+            <XCircle className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Sair</span>
           </Button>
-          <Button variant="destructive" onClick={() => setShowCancelDialog(true)}>
-            <Ban className="mr-2 h-4 w-4" />
-            Cancelar
+          <Button
+            variant="destructive"
+            onClick={() => setShowCancelDialog(true)}
+            size="sm"
+            className="flex-1 sm:flex-initial"
+          >
+            <Ban className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Cancelar</span>
           </Button>
-          <Button onClick={handleCompleteSession} disabled={isCompleting}>
-            <CheckCircle2 className="mr-2 h-4 w-4" />
-            {isCompleting ? 'Concluindo...' : 'Concluir Treino'}
+          <Button
+            onClick={handleCompleteSession}
+            disabled={isCompleting}
+            size="sm"
+            className="flex-1 sm:flex-initial"
+          >
+            <CheckCircle2 className="h-4 w-4 sm:mr-2" />
+            <span className="sm:hidden">{isCompleting ? 'Concluindo...' : 'Concluir'}</span>
+            <span className="hidden sm:inline">{isCompleting ? 'Concluindo...' : 'Concluir Treino'}</span>
           </Button>
         </div>
       </div>
