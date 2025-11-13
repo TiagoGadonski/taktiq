@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2 } from 'lucide-react';
@@ -65,6 +65,7 @@ interface UserProfile {
   healthConditions?: string | null;
   exerciseGoal?: string | null;
   trainingSplit?: string | null;
+  preferredWorkoutLocation?: number; // 0 = Gym, 1 = Home, 2 = Both
 }
 
 export default function AIWorkoutPage() {
@@ -192,6 +193,20 @@ export default function AIWorkoutPage() {
   };
 
   const todaysSplit = getTodaySplit();
+
+  // Load user's preferred workout location when profile is fetched
+  useEffect(() => {
+    if (userProfile?.preferredWorkoutLocation !== undefined) {
+      const locationMap: Record<number, 'gym' | 'home' | 'both'> = {
+        0: 'gym',
+        1: 'home',
+        2: 'both',
+      };
+      const preferredLocation = locationMap[userProfile.preferredWorkoutLocation] || 'gym';
+      setWorkoutLocation(preferredLocation);
+      setPlanWorkoutLocation(preferredLocation);
+    }
+  }, [userProfile?.preferredWorkoutLocation]);
 
   const useTodaySuggestion = () => {
     if (todaysSplit) {
