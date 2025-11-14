@@ -412,14 +412,19 @@ public static class AIEndpoints
             ("Crucifixo na Polia", "chest", "cable", false),
             ("Cross Over", "chest", "cable", false),
             ("Peck Deck", "chest", "machine", false),
+            ("Pullover com Halteres", "chest", "dumbbell", false),
+            // Bodyweight exercises for home
             ("Flexão de Braço", "chest", "body only", true),
-            ("Flexão com Elevação", "chest", "body only", true),
-            ("Pullover com Halteres", "chest", "dumbbell", false)
+            ("Flexão Diamante", "chest", "body only", true),
+            ("Flexão Declinada", "chest", "body only", true),
+            ("Flexão Inclinada", "chest", "body only", true),
+            ("Flexão Archer", "chest", "body only", true),
+            ("Flexão Hindu", "chest", "body only", true),
+            ("Flexão com Elevação", "chest", "body only", true)
         },
         ["costas"] = new()
         {
             ("Levantamento Terra", "back", "barbell", true),
-            ("Barra Fixa", "back", "body only", true),
             ("Puxada Frontal", "back", "cable", true),
             ("Remada Curvada com Barra", "back", "barbell", true),
             ("Remada com Halteres", "back", "dumbbell", true),
@@ -429,7 +434,15 @@ public static class AIEndpoints
             ("Remada na Máquina", "back", "machine", true),
             ("Remada Unilateral", "back", "dumbbell", true),
             ("Pullover na Polia", "back", "cable", false),
-            ("Serrote", "back", "dumbbell", true)
+            ("Serrote", "back", "dumbbell", true),
+            // Bodyweight exercises for home
+            ("Barra Fixa", "back", "body only", true),
+            ("Remada Invertida", "back", "body only", true),
+            ("Superman", "back", "body only", false),
+            ("Prancha Reversa", "back", "body only", false),
+            ("Extensão Lombar", "back", "body only", false),
+            ("Bird Dog", "back", "body only", false),
+            ("Ponte de Glúteos", "back", "body only", true)
         },
         ["ombros"] = new()
         {
@@ -444,7 +457,11 @@ public static class AIEndpoints
             ("Remada Alta", "shoulders", "barbell", true),
             ("Face Pull", "shoulders", "cable", false),
             ("Crucifixo Inverso", "shoulders", "dumbbell", false),
-            ("Voo Posterior", "shoulders", "cable", false)
+            ("Voo Posterior", "shoulders", "cable", false),
+            // Bodyweight exercises for home
+            ("Flexão Pike", "shoulders", "body only", true),
+            ("Prancha Lateral", "shoulders", "body only", false),
+            ("Handstand Push-up", "shoulders", "body only", true)
         },
         ["bíceps"] = new()
         {
@@ -456,92 +473,134 @@ public static class AIEndpoints
             ("Rosca Concentrada", "biceps", "dumbbell", false),
             ("Rosca 21", "biceps", "barbell", false),
             ("Rosca Inversa", "biceps", "barbell", false),
-            ("Rosca Zottman", "biceps", "dumbbell", false)
+            ("Rosca Zottman", "biceps", "dumbbell", false),
+            // Bodyweight exercises for home (limited options)
+            ("Chin-up Supinado", "biceps", "body only", true),
+            ("Rosca Isométrica com Toalha", "biceps", "body only", false)
         },
         ["tríceps"] = new()
         {
             ("Supino Fechado", "triceps", "barbell", true),
-            ("Mergulho entre Bancos", "triceps", "body only", true),
             ("Tríceps na Polia", "triceps", "cable", false),
             ("Tríceps Testa com Barra", "triceps", "barbell", false),
             ("Tríceps Francês", "triceps", "dumbbell", false),
             ("Tríceps Coice", "triceps", "dumbbell", false),
             ("Tríceps na Polia com Corda", "triceps", "cable", false),
-            ("Tríceps Testa com Halteres", "triceps", "dumbbell", false)
+            ("Tríceps Testa com Halteres", "triceps", "dumbbell", false),
+            // Bodyweight exercises for home
+            ("Mergulho entre Bancos", "triceps", "body only", true),
+            ("Flexão Diamante", "triceps", "body only", true),
+            ("Flexão Fechada", "triceps", "body only", true),
+            ("Tríceps no Chão", "triceps", "body only", false)
         },
         ["pernas"] = new()
         {
-            ("Agachamento Livre", "legs", "barbell", true),
+            ("Agachamento Livre com Barra", "legs", "barbell", true),
             ("Levantamento Terra", "legs", "barbell", true),
             ("Leg Press 45°", "legs", "machine", true),
-            ("Agachamento Sumô", "legs", "barbell", true),
+            ("Agachamento Sumô com Peso", "legs", "barbell", true),
             ("Agachamento Frontal", "legs", "barbell", true),
             ("Afundo com Halteres", "legs", "dumbbell", true),
             ("Afundo Caminhando", "legs", "dumbbell", true),
             ("Stiff", "legs", "barbell", true),
             ("Agachamento no Smith", "legs", "machine", true),
-            ("Agachamento Búlgaro", "legs", "dumbbell", true),
+            ("Agachamento Búlgaro com Peso", "legs", "dumbbell", true),
             ("Cadeira Extensora", "legs", "machine", false),
             ("Mesa Flexora", "legs", "machine", false),
             ("Cadeira Abdutora", "legs", "machine", false),
-            ("Cadeira Adutora", "legs", "machine", false)
+            ("Cadeira Adutora", "legs", "machine", false),
+            // Bodyweight exercises for home
+            ("Agachamento Livre", "legs", "body only", true),
+            ("Agachamento Pistol", "legs", "body only", true),
+            ("Agachamento Búlgaro", "legs", "body only", true),
+            ("Afundo", "legs", "body only", true),
+            ("Afundo Reverso", "legs", "body only", true),
+            ("Afundo Lateral", "legs", "body only", true),
+            ("Agachamento Sumô", "legs", "body only", true),
+            ("Step Up", "legs", "body only", true),
+            ("Wall Sit", "legs", "body only", false),
+            ("Salto Agachamento", "legs", "body only", true)
         },
         ["glúteos"] = new()
         {
             ("Hip Thrust com Barra", "glutes", "barbell", true),
-            ("Agachamento Sumô", "glutes", "barbell", true),
+            ("Agachamento Sumô com Peso", "glutes", "barbell", true),
             ("Stiff", "glutes", "barbell", true),
-            ("Elevação Pélvica", "glutes", "barbell", true),
-            ("Agachamento Búlgaro", "glutes", "dumbbell", true),
+            ("Elevação Pélvica com Barra", "glutes", "barbell", true),
+            ("Agachamento Búlgaro com Peso", "glutes", "dumbbell", true),
             ("Leg Press 45° com Pés Altos", "glutes", "machine", true),
             ("Cadeira Abdutora", "glutes", "machine", false),
             ("Kickback na Polia", "glutes", "cable", false),
             ("Coice no Crossover", "glutes", "cable", false),
             ("Step Up com Halteres", "glutes", "dumbbell", true),
-            ("Afundo Reverso", "glutes", "dumbbell", true),
+            ("Afundo Reverso com Peso", "glutes", "dumbbell", true),
             ("Good Morning", "glutes", "barbell", true),
-            ("Cadeira Flexora em Pé", "glutes", "machine", false)
+            ("Cadeira Flexora em Pé", "glutes", "machine", false),
+            // Bodyweight exercises for home
+            ("Ponte de Glúteos", "glutes", "body only", true),
+            ("Ponte de Glúteos Uma Perna", "glutes", "body only", true),
+            ("Agachamento Sumô", "glutes", "body only", true),
+            ("Agachamento Búlgaro", "glutes", "body only", true),
+            ("Afundo Reverso", "glutes", "body only", true),
+            ("Step Up", "glutes", "body only", true),
+            ("Coice de Glúteo", "glutes", "body only", false),
+            ("Fire Hydrant", "glutes", "body only", false)
         },
         ["panturrilha"] = new()
         {
-            ("Panturrilha em Pé", "calves", "machine", false),
+            ("Panturrilha em Pé na Máquina", "calves", "machine", false),
             ("Panturrilha Sentado", "calves", "machine", false),
             ("Panturrilha no Leg Press", "calves", "machine", false),
-            ("Elevação de Panturrilha Unilateral", "calves", "dumbbell", false)
+            ("Elevação de Panturrilha com Halteres", "calves", "dumbbell", false),
+            // Bodyweight exercises for home
+            ("Elevação de Panturrilha", "calves", "body only", false),
+            ("Elevação de Panturrilha Unilateral", "calves", "body only", false),
+            ("Salto na Ponta dos Pés", "calves", "body only", false)
         },
         ["abdômen"] = new()
         {
-            ("Abdominal Reto", "abs", "body only", false),
             ("Abdominal na Máquina", "abs", "machine", false),
+            ("Abdominal na Polia", "abs", "cable", false),
+            // Bodyweight exercises for home
+            ("Abdominal Reto", "abs", "body only", false),
             ("Prancha", "abs", "body only", false),
             ("Prancha Lateral", "abs", "body only", false),
             ("Abdominal Infra", "abs", "body only", false),
             ("Abdominal Bicicleta", "abs", "body only", false),
             ("Elevação de Pernas", "abs", "body only", false),
-            ("Abdominal na Polia", "abs", "cable", false),
             ("Abdominal Canivete", "abs", "body only", false),
-            ("Mountain Climbers", "abs", "body only", false)
+            ("Mountain Climbers", "abs", "body only", false),
+            ("Prancha com Toque no Ombro", "abs", "body only", false),
+            ("Russian Twist", "abs", "body only", false),
+            ("V-Up", "abs", "body only", false),
+            ("Dead Bug", "abs", "body only", false),
+            ("Hollow Body Hold", "abs", "body only", false)
         },
         ["cardio"] = new()
         {
             ("Corrida na Esteira", "cardio", "machine", true),
-            ("Corrida ao Ar Livre", "cardio", "body only", true),
             ("Bicicleta Ergométrica", "cardio", "machine", true),
             ("Elíptico", "cardio", "machine", true),
             ("Remador", "cardio", "machine", true),
+            ("Bike Sprint", "cardio", "machine", true),
+            ("Escada Rolante", "cardio", "machine", true),
+            ("Corrida com Elevação", "cardio", "machine", true),
+            ("Assault Bike", "cardio", "machine", true),
+            // Bodyweight exercises for home
+            ("Corrida ao Ar Livre", "cardio", "body only", true),
             ("Pular Corda", "cardio", "body only", true),
             ("Burpee", "cardio", "body only", true),
             ("Polichinelo", "cardio", "body only", true),
             ("High Knees", "cardio", "body only", true),
-            ("Bike Sprint", "cardio", "machine", true),
-            ("Escada Rolante", "cardio", "machine", true),
             ("Caminhada Rápida", "cardio", "body only", true),
-            ("Corrida com Elevação", "cardio", "machine", true),
-            ("Assault Bike", "cardio", "machine", true),
             ("Box Jump", "cardio", "body only", true),
             ("Sprint Intervalado", "cardio", "body only", true),
             ("Step (Subir e Descer)", "cardio", "body only", true),
-            ("Natação Simulada", "cardio", "body only", true)
+            ("Corrida Estacionária", "cardio", "body only", true),
+            ("Skaters", "cardio", "body only", true),
+            ("Bear Crawl", "cardio", "body only", true),
+            ("Crab Walk", "cardio", "body only", true),
+            ("Inchworms", "cardio", "body only", true)
         }
     };
 
