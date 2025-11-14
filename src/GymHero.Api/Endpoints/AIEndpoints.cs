@@ -153,7 +153,27 @@ public static class AIEndpoints
                 // SERVER-SIDE VALIDATION: Filter out gym equipment for home workouts
                 if (userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home)
                 {
-                    var gymEquipment = new[] { "halter", "barra", "anilha", "máquina", "cabo", "kettlebell", "smith", "leg press", "dumbbell", "barbell", "cable", "machine" };
+                    // Comprehensive list of gym equipment keywords in Portuguese and English
+                    var gymEquipment = new[] {
+                        // Portuguese equipment
+                        "halter", "halteres", "barra", "barras", "anilha", "anilhas",
+                        "máquina", "maquina", "cabo", "cabos", "kettlebell",
+                        "smith", "leg press", "supino", "banco", "polia", "polias",
+                        "elástico", "elastico", "corda naval", "medicine ball",
+                        "TRX", "aparelho", "equipamento", "peso", "pesos",
+                        "esteira", "bicicleta ergométrica", "elíptico",
+
+                        // English equipment
+                        "dumbbell", "dumbbells", "barbell", "barbells", "cable", "cables",
+                        "machine", "bench", "pulley", "kettlebell", "resistance band",
+                        "medicine ball", "weight plate", "weights", "equipment",
+                        "treadmill", "elliptical", "bike",
+
+                        // Exercise names that require equipment
+                        "rosca", "desenvolvimento", "crucifixo", "remada", "pulldown",
+                        "extensão", "flexão de braço na barra", "pull-up", "chin-up",
+                        "levantamento terra", "deadlift", "agachamento com", "squat with"
+                    };
                     var originalCount = workout.Exercises.Count;
 
                     var filteredExercises = workout.Exercises.Where(e =>
