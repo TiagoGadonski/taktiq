@@ -1092,10 +1092,11 @@ public static class AIEndpoints
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. ⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
-   - Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+2. ⚠️⚠️⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+   - Se o usuário preferir treinar em CASA: Use EXCLUSIVAMENTE exercícios de PESO CORPORAL (flexões, agachamentos livres, prancha, elevação de pernas, burpees, etc.). É ABSOLUTAMENTE PROIBIDO incluir QUALQUER exercício com halteres, barras, máquinas, cabos, kettlebells, anilhas ou peso externo
    - Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
-   - Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
+   - Esta preferência tem PRIORIDADE MÁXIMA E ABSOLUTA sobre qualquer outra consideração
+   - IMPORTANTE: Para treino em casa, o campo ""equipment"" de TODOS os exercícios DEVE ser ""peso corporal"". Se aparecer ""halteres"", ""barra"" ou qualquer equipamento, você FALHOU
 3. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
    - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
    - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
@@ -1565,11 +1566,42 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
                 0 => @"ACADEMIA (Gym)
    ✅ PODE: Barras, halteres, máquinas, cabos, leg press, supino, smith machine, etc.
    ❌ NÃO precisa limitar a peso corporal",
-                1 => @"CASA (Home)
-   ✅ PODE: APENAS peso corporal e equipamento mínimo
-   ✅ Exemplos: Flexões, agachamentos livres, prancha, afundos, abdominais, burpees, polichinelos
-   ❌ NÃO PODE: Barras, halteres, máquinas, cabos, leg press, supino, qualquer equipamento de academia
-   ⚠️⚠️⚠️ CRÍTICO: Se você incluir QUALQUER exercício com barra, halter, máquina ou cabo, você FALHOU completamente",
+                1 => @"🏠🏠🏠 TREINO EM CASA - ZERO EQUIPAMENTO DE ACADEMIA 🏠🏠🏠
+
+   ✅✅✅ PERMITIDO (PESO CORPORAL APENAS):
+   • Flexões (todas as variações)
+   • Agachamentos livres (sem peso)
+   • Afundos (sem peso)
+   • Prancha e variações
+   • Abdominais (todos os tipos sem peso)
+   • Burpees
+   • Polichinelos
+   • Mountain Climbers
+   • Elevação de pernas
+   • Pontes de glúteos
+   • Step-ups (usando escada/cadeira)
+   • Wall sits
+
+   ❌❌❌ ABSOLUTAMENTE PROIBIDO:
+   • Halteres
+   • Barras
+   • Anilhas
+   • Máquinas
+   • Cabos
+   • Kettlebells
+   • Elásticos
+   • Qualquer peso externo
+
+   ⚠️⚠️⚠️ ATENÇÃO MÁXIMA:
+   Se você incluir QUALQUER exercício que mencione ""halter"", ""barra"", ""peso"", ""máquina"", ""cabo"", ""kettlebell"", ""anilha"" ou similar, você FALHOU COMPLETAMENTE.
+
+   EXEMPLOS DE EXERCÍCIOS PROIBIDOS PARA CASA:
+   • ""Agachamento com halteres"" ❌
+   • ""Supino com barra"" ❌
+   • ""Rosca com halteres"" ❌
+   • ""Desenvolvimento com halteres"" ❌
+   • ""Stiff com barra"" ❌
+   • QUALQUER exercício que não seja 100% peso corporal ❌",
                 2 => @"AMBOS (Both)
    ✅ PODE: Tanto exercícios de academia quanto de casa",
                 _ => "Academia (padrão)"
@@ -1773,10 +1805,11 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
 
 REGRAS FUNDAMENTAIS:
 1. TODOS os nomes de exercícios DEVEM estar em PORTUGUÊS COMPLETO (ex: ""Supino Reto com Barra"", ""Agachamento Livre com Barra"", ""Rosca Direta com Halteres"")
-2. ⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
-   - Se o usuário preferir treinar em CASA: Use APENAS exercícios de peso corporal ou equipamento mínimo (flexões, agachamentos livres, prancha, elevação de pernas, etc.). NÃO inclua exercícios com barras, halteres, máquinas ou cabos
+2. ⚠️⚠️⚠️ RESPEITE OBRIGATORIAMENTE O LOCAL DE TREINO PREFERIDO DO USUÁRIO:
+   - Se o usuário preferir treinar em CASA: Use EXCLUSIVAMENTE exercícios de PESO CORPORAL (flexões, agachamentos livres, prancha, elevação de pernas, burpees, etc.). É ABSOLUTAMENTE PROIBIDO incluir QUALQUER exercício com halteres, barras, máquinas, cabos, kettlebells, anilhas ou peso externo
    - Se o usuário preferir ACADEMIA: Use exercícios com equipamentos de academia (barras, halteres, máquinas, cabos)
-   - Esta preferência tem PRIORIDADE MÁXIMA sobre qualquer outra consideração
+   - Esta preferência tem PRIORIDADE MÁXIMA E ABSOLUTA sobre qualquer outra consideração
+   - IMPORTANTE: Para treino em casa, o campo ""equipment"" de TODOS os exercícios DEVE ser ""peso corporal"". Se aparecer ""halteres"", ""barra"" ou qualquer equipamento, você FALHOU
 3. RESPEITE ABSOLUTAMENTE E LITERALMENTE o que o usuário pediu no prompt:
    - Se pedir ""treino focado em glúteos e pernas"", 100% dos exercícios DEVEM ser para glúteos e pernas
    - Se mencionar problema em algum músculo (ex: ""tenho dor no joelho""), EVITE exercícios que sobrecarreguem essa região
