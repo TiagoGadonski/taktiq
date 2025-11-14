@@ -2523,8 +2523,11 @@ INSTRUÇÕES CRÍTICAS:
             }
 
             // If we didn't get enough exercises, fill with random ones from the muscle groups
-            while (exercisesForDay.Count < minExercisesPerDay)
+            var fillAttempts = 0;
+            var maxFillAttempts = 50; // Prevent infinite loop
+            while (exercisesForDay.Count < minExercisesPerDay && fillAttempts < maxFillAttempts)
             {
+                fillAttempts++;
                 var randomMuscleGroup = muscleGroups[random.Next(muscleGroups.Length)];
                 if (ExerciseDatabase.ContainsKey(randomMuscleGroup))
                 {
@@ -2549,6 +2552,11 @@ INSTRUÇÕES CRÍTICAS:
                         ));
                     }
                 }
+            }
+
+            if (fillAttempts >= maxFillAttempts)
+            {
+                Console.WriteLine($"⚠️ Could not fill to minimum exercises. Got {exercisesForDay.Count}/{minExercisesPerDay}. Limited bodyweight exercises available.");
             }
 
             // Add finishers: abs (most days) and cardio (2-3x per week)
