@@ -159,6 +159,16 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                 .HasDatabaseName("IX_ProgressMetrics_OwnerDate");
         });
 
+        modelBuilder.Entity<UserActivityLog>(entity =>
+        {
+            // Configure relationship with User
+            // Use SetNull to preserve activity logs for audit purposes even after user deletion
+            entity.HasOne(log => log.User)
+                  .WithMany()
+                  .HasForeignKey(log => log.UserId)
+                  .OnDelete(DeleteBehavior.SetNull);
+        });
+
         base.OnModelCreating(modelBuilder);
     }
 }

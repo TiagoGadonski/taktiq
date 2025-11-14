@@ -48,9 +48,6 @@ wwwroot/uploads/
 wwwroot/profile-pictures/
 uploads/
 
-# Entity Framework
-Migrations/
-
 # User-specific files
 *.rsuser
 *.suo
