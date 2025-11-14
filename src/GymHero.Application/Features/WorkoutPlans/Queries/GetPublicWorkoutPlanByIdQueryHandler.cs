@@ -32,13 +32,49 @@ public class GetPublicWorkoutPlanByIdQueryHandler : IRequestHandler<GetPublicWor
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        // Return the plan details
+        // Return the plan details with workouts grouped properly
         var plan = new WorkoutPlanDetailResponse
         {
             Id = planEntity.Id,
             Name = planEntity.Name,
             Goal = planEntity.Goal,
             IsActive = planEntity.IsActive,
+            Duration = planEntity.Duration,
+            StartDate = planEntity.StartDate,
+            ExpirationDate = planEntity.ExpirationDate,
+
+            // Populate Workouts property with nested exercises
+            Workouts = planEntity.Workouts
+                .OrderBy(w => w.Order)
+                .Select(w => new WorkoutDto
+                {
+                    Id = w.Id,
+                    Name = w.Name,
+                    DayOfWeek = w.DayOfWeek,
+                    Order = w.Order,
+                    Exercises = w.Exercises
+                        .OrderBy(e => e.Order)
+                        .Select(we => new WorkoutExerciseDto
+                        {
+                            Id = we.Id,
+                            ExerciseId = we.ExerciseId,
+                            ExerciseName = we.Exercise.Name,
+                            Order = we.Order,
+                            TargetSets = we.TargetSets,
+                            TargetReps = we.TargetReps,
+                            TargetLoad = we.TargetLoad,
+                            Exercise = new ExerciseDto
+                            {
+                                Id = we.Exercise.Id,
+                                Name = we.Exercise.Name,
+                                MuscleGroup = we.Exercise.MuscleGroup,
+                                Equipment = we.Exercise.Equipment,
+                                Category = we.Exercise.Category
+                            }
+                        }).ToList()
+                }).ToList(),
+
+            // Also keep flat exercises list for backward compatibility
             Exercises = planEntity.Workouts
                 .SelectMany(w => w.Exercises)
                 .OrderBy(e => e.Order)

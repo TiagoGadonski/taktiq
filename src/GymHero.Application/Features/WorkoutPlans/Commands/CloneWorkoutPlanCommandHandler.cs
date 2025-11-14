@@ -14,9 +14,10 @@ public class CloneWorkoutPlanCommandHandler : IRequestHandler<CloneWorkoutPlanCo
 
     public async Task<WorkoutPlanResponse> Handle(CloneWorkoutPlanCommand request, CancellationToken cancellationToken)
     {
-        // 1. Encontrar o plano original, incluindo os seus workouts e exercícios.
+        // 1. Encontrar o plano original, incluindo os seus workouts, exercícios e o criador
         var originalPlan = await _context.WorkoutPlans
             .AsNoTracking() // Usamos AsNoTracking porque não vamos modificar o original.
+            .Include(p => p.Owner) // Incluir o dono original para mostrar o nome
             .Include(p => p.Workouts)
                 .ThenInclude(w => w.Exercises)
             .FirstOrDefaultAsync(p => p.Id == request.OriginalPlanId, cancellationToken);
@@ -26,10 +27,10 @@ public class CloneWorkoutPlanCommandHandler : IRequestHandler<CloneWorkoutPlanCo
             throw new NotFoundException("Plano de treino original não encontrado.");
         }
 
-        // 2. Criar a nova entidade WorkoutPlan (a cópia)
+        // 2. Criar a nova entidade WorkoutPlan (a cópia) com o nome do criador original
         var clonedPlan = new WorkoutPlan
         {
-            Name = $"{originalPlan.Name} (Cópia)",
+            Name = $"{originalPlan.Name} (de {originalPlan.Owner.Name})",
             Goal = originalPlan.Goal,
             Description = originalPlan.Description,
             Duration = originalPlan.Duration,
