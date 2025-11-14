@@ -105,7 +105,7 @@ public static class AIEndpoints
                 if (!hasGemini && !hasOpenAI)
                 {
                     logger.LogWarning("No AI API keys configured. Using enhanced mock generation.");
-                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal);
+                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ public static class AIEndpoints
                     if (!generated)
                     {
                         logger.LogWarning("All AI APIs failed. Using enhanced mock generation.");
-                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal);
+                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile);
                     }
                 }
 
@@ -555,12 +555,21 @@ public static class AIEndpoints
         ["desenvolvimento"] = new() { "desenvolvimento com barra", "desenvolvimento com halteres", "desenvolvimento arnold", "shoulder press" }
     };
 
-    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null)
+    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null)
     {
         Console.WriteLine("=== MOCK GENERATION DEBUG ===");
         Console.WriteLine($"Prompt: {prompt}");
         Console.WriteLine($"Fitness Level Received: '{fitnessLevel ?? "NULL"}'");
         Console.WriteLine($"Exercise Goal: '{exerciseGoal ?? "NULL"}'");
+
+        // Check if user prefers home workouts
+        var isHomeWorkout = userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+        Console.WriteLine($"Home Workout Preference: {isHomeWorkout}");
+
+        if (isHomeWorkout)
+        {
+            Console.WriteLine("🏠🏠🏠 MOCK GENERATION FOR HOME WORKOUT - BODYWEIGHT ONLY 🏠🏠🏠");
+        }
 
         var random = new Random();
         var parsedPrompt = ParsePrompt(prompt.ToLower());
@@ -607,6 +616,7 @@ public static class AIEndpoints
                 {
                     var availableExercises = ExerciseDatabase[muscleGroup]
                         .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                        .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                         .ToList();
 
                     // Prioritize compound exercises, then isolation
@@ -672,6 +682,7 @@ public static class AIEndpoints
                 {
                     var availableExercises = ExerciseDatabase[muscleGroup]
                         .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                        .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                         .ToList();
 
                     // Prioritize compound exercises, then isolation
@@ -751,6 +762,7 @@ public static class AIEndpoints
         {
             var absExercises = ExerciseDatabase["abdômen"]
                 .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                 .OrderBy(x => random.Next())
                 .Take(random.Next(1, 3)) // 1-2 abs exercises
                 .ToList();
@@ -779,6 +791,7 @@ public static class AIEndpoints
             // Filter out simulated exercises like "Natação (Simulada)"
             var cardioExercises = ExerciseDatabase["cardio"]
                 .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                 .Where(ex => !ex.Name.Contains("Simulada", StringComparison.OrdinalIgnoreCase) &&
                             !ex.Name.Contains("Simulated", StringComparison.OrdinalIgnoreCase))
                 .OrderBy(x => random.Next())
@@ -1975,7 +1988,7 @@ INSTRUÇÕES CRÍTICAS:
         };
 
         var response = await httpClient.PostAsync(
-            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}",
             new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
         );
 
@@ -2166,7 +2179,7 @@ INSTRUÇÕES CRÍTICAS:
         };
 
         var response = await httpClient.PostAsync(
-            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}",
             new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
         );
 
