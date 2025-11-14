@@ -150,6 +150,57 @@ public static class AIEndpoints
                     }
                 }
 
+                // SERVER-SIDE VALIDATION: Filter out gym equipment for home workouts
+                if (userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home)
+                {
+                    var gymEquipment = new[] { "halter", "barra", "anilha", "máquina", "cabo", "kettlebell", "smith", "leg press", "dumbbell", "barbell", "cable", "machine" };
+                    var originalCount = workout.Exercises.Count;
+
+                    var filteredExercises = workout.Exercises.Where(e =>
+                    {
+                        var equipmentLower = e.Equipment?.ToLower() ?? "";
+                        var nameLower = e.Name?.ToLower() ?? "";
+
+                        // Check if exercise contains any gym equipment keywords
+                        var hasGymEquipment = gymEquipment.Any(eq =>
+                            equipmentLower.Contains(eq) || nameLower.Contains(eq));
+
+                        return !hasGymEquipment; // Keep only bodyweight exercises
+                    }).ToList();
+
+                    var filteredCount = originalCount - filteredExercises.Count;
+                    if (filteredCount > 0)
+                    {
+                        logger.LogWarning($"⚠️ FILTERED {filteredCount} gym exercises from home workout! AI not following instructions.");
+
+                        var updatedDescription = workout.Description;
+                        // If we filtered out too many exercises, add a warning to the description
+                        if (filteredCount > 2)
+                        {
+                            updatedDescription += $"\n\n⚠️ Nota: Alguns exercícios com equipamento de academia foram removidos automaticamente pois você configurou treino em casa.";
+                        }
+
+                        // Create new workout with filtered exercises
+                        workout = new AIWorkoutResponse(
+                            workout.Title,
+                            updatedDescription,
+                            workout.Duration,
+                            filteredExercises
+                        );
+                    }
+
+                    // If ALL exercises were filtered out, return an error
+                    if (workout.Exercises.Count == 0)
+                    {
+                        logger.LogError("❌ ALL exercises were gym-based for a home workout request!");
+                        return Results.Json(new
+                        {
+                            message = "Erro: O AI gerou apenas exercícios de academia. Por favor, tente novamente ou ajuste sua preferência de local de treino.",
+                            error = "NO_HOME_EXERCISES_GENERATED"
+                        }, statusCode: StatusCodes.Status500InternalServerError);
+                    }
+                }
+
                 // Exercises already have YouTube video URLs embedded
                 return Results.Ok(workout);
             }
