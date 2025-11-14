@@ -325,7 +325,7 @@ public static class AIEndpoints
                 if (!hasGemini && !hasOpenAI)
                 {
                     logger.LogWarning("No AI API keys configured. Using enhanced mock plan generation.");
-                    plan = GenerateMockPlan(request.Prompt, request.DaysPerWeek ?? 4, request.FitnessLevel);
+                    plan = GenerateMockPlan(request.Prompt, request.DaysPerWeek ?? 4, request.FitnessLevel, userProfile);
                 }
                 else
                 {
@@ -366,7 +366,7 @@ public static class AIEndpoints
                     if (!generated)
                     {
                         logger.LogWarning("All AI APIs failed. Using enhanced mock plan generation.");
-                        plan = GenerateMockPlan(request.Prompt, request.DaysPerWeek ?? 4, request.FitnessLevel);
+                        plan = GenerateMockPlan(request.Prompt, request.DaysPerWeek ?? 4, request.FitnessLevel, userProfile);
                     }
                 }
 
@@ -1988,7 +1988,7 @@ INSTRUÇÕES CRÍTICAS:
         };
 
         var response = await httpClient.PostAsync(
-            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}",
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
             new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
         );
 
@@ -2179,7 +2179,7 @@ INSTRUÇÕES CRÍTICAS:
         };
 
         var response = await httpClient.PostAsync(
-            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}",
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
             new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
         );
 
@@ -2272,12 +2272,21 @@ INSTRUÇÕES CRÍTICAS:
         }
     }
 
-    private static AIWorkoutPlanResponse GenerateMockPlan(string prompt, int daysPerWeek, string? fitnessLevel = null)
+    private static AIWorkoutPlanResponse GenerateMockPlan(string prompt, int daysPerWeek, string? fitnessLevel = null, dynamic? userProfile = null)
     {
         Console.WriteLine("=== MOCK PLAN GENERATION DEBUG ===");
         Console.WriteLine($"Prompt: {prompt}");
         Console.WriteLine($"Days Per Week: {daysPerWeek}");
         Console.WriteLine($"Fitness Level: '{fitnessLevel ?? "NULL"}'");
+
+        // Check if user prefers home workouts
+        var isHomeWorkout = userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+        Console.WriteLine($"Home Workout Preference: {isHomeWorkout}");
+
+        if (isHomeWorkout)
+        {
+            Console.WriteLine("🏠🏠🏠 MOCK PLAN GENERATION FOR HOME WORKOUT - BODYWEIGHT ONLY 🏠🏠🏠");
+        }
 
         var random = new Random();
         var level = fitnessLevel?.ToLower() ?? "intermediário";
@@ -2462,7 +2471,9 @@ INSTRUÇÕES CRÍTICAS:
             {
                 if (ExerciseDatabase.ContainsKey(muscleGroup))
                 {
-                    var availableExercises = ExerciseDatabase[muscleGroup];
+                    var availableExercises = ExerciseDatabase[muscleGroup]
+                        .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
+                        .ToList();
 
                     // Separate compound and isolation exercises
                     var compoundExercises = availableExercises.Where(ex => ex.IsCompound).OrderBy(x => random.Next()).ToList();
@@ -2517,7 +2528,12 @@ INSTRUÇÕES CRÍTICAS:
                 var randomMuscleGroup = muscleGroups[random.Next(muscleGroups.Length)];
                 if (ExerciseDatabase.ContainsKey(randomMuscleGroup))
                 {
-                    var availableExercises = ExerciseDatabase[randomMuscleGroup];
+                    var availableExercises = ExerciseDatabase[randomMuscleGroup]
+                        .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
+                        .ToList();
+
+                    if (availableExercises.Count == 0) continue; // Skip if no exercises available
+
                     var randomExercise = availableExercises[random.Next(availableExercises.Count)];
 
                     // Avoid duplicates
@@ -2540,6 +2556,7 @@ INSTRUÇÕES CRÍTICAS:
             if (shouldAddAbs)
             {
                 var absExercises = ExerciseDatabase["abdômen"]
+                    .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                     .OrderBy(x => random.Next())
                     .Take(random.Next(1, 3))
                     .ToList();
@@ -2577,6 +2594,7 @@ INSTRUÇÕES CRÍTICAS:
             {
                 // Filter out simulated exercises
                 var cardioExercises = ExerciseDatabase["cardio"]
+                    .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                     .Where(ex => !ex.Name.Contains("Simulada", StringComparison.OrdinalIgnoreCase) &&
                                 !ex.Name.Contains("Simulated", StringComparison.OrdinalIgnoreCase))
                     .OrderBy(x => random.Next())
