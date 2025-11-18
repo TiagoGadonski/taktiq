@@ -647,11 +647,12 @@ public static class AIEndpoints
         Console.WriteLine($"Normalized Level: '{level}'");
 
         // Determine exercise count based on fitness level
+        // Beginners need fewer exercises to focus on form, advanced can handle more volume
         var (minExercises, maxExercises) = level switch
         {
-            "iniciante" or "beginner" => (5, 7),
-            "avançado" or "advanced" => (8, 10),
-            _ => (6, 8) // intermediário
+            "iniciante" or "beginner" => (4, 6),    // Fewer exercises, focus on basics
+            "avançado" or "advanced" => (8, 12),    // More exercises, higher volume
+            _ => (6, 8)                              // Intermediate: moderate volume
         };
 
         Console.WriteLine($"Exercise Count Range: {minExercises}-{maxExercises}");
@@ -879,11 +880,12 @@ public static class AIEndpoints
             ? GenerateWorkoutDescription(parsedPrompt.MuscleGroups, selectedExercises.Count)
             : $"Treino completo com {selectedExercises.Count} exercícios variados para desenvolvimento muscular equilibrado. Nível: {level}.";
 
+        // Duration varies significantly by level due to rest periods and exercise count
         var duration = level switch
         {
-            "iniciante" => random.Next(40, 50),
-            "avançado" => random.Next(60, 75),
-            _ => random.Next(50, 60)
+            "iniciante" or "beginner" => random.Next(30, 45),   // Shorter workouts, more rest
+            "avançado" or "advanced" => random.Next(70, 90),    // Longer workouts, more volume
+            _ => random.Next(50, 65)                             // Intermediate duration
         };
 
         Console.WriteLine($"FINAL EXERCISE COUNT: {selectedExercises.Count}");
@@ -1035,23 +1037,23 @@ public static class AIEndpoints
         var progressionNotes = bodyPart == "cardio"
             ? fitnessLevel.ToLower() switch
             {
-                "iniciante" => "Semana 1-2: 15 min ritmo leve | Semana 3-4: 20 min ritmo moderado | Foco na consistência",
-                "avançado" => "Semana 1: 30 min moderado | Semana 2: 35 min com intervalos | Semana 3: 40 min | Semana 4: 30 min (recuperação)",
+                "iniciante" or "beginner" => "Semana 1-2: 15 min ritmo leve | Semana 3-4: 20 min ritmo moderado | Foco na consistência",
+                "avançado" or "advanced" => "Semana 1: 30 min moderado | Semana 2: 35 min com intervalos | Semana 3: 40 min | Semana 4: 30 min (recuperação)",
                 _ => "Semana 1: 20 min ritmo moderado | Semana 2: 25 min | Semana 3: 30 min com intervalos | Semana 4: 20 min (recuperação)"
             }
-            : (fitnessLevel.ToLower(), isCompound, isMainExercise) switch
+            : (fitnessLevel.ToLower(), isCompound) switch
             {
-                ("iniciante", true, true) => "Semana 1-2: 3x10 | Semana 3-4: 3x12 | Foco em técnica e controle",
-                ("iniciante", true, false) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Aumente amplitude gradualmente",
-                ("iniciante", false, _) => "Semana 1-2: 3x12 | Semana 3-4: 3x15 | Conexão mente-músculo",
+                // BEGINNER: Focus on form, gradual increases, lighter loads
+                ("iniciante" or "beginner", true) => "INICIANTE: Semana 1-2: 3x12-15 (leve) | Semana 3-4: 3x15 (mesma carga) | Priorize TÉCNICA sobre carga",
+                ("iniciante" or "beginner", false) => "INICIANTE: Semana 1-2: 2x15-20 | Semana 3-4: 2x20 | Foco em sentir o músculo trabalhando",
 
-                ("avançado", true, true) => "Semana 1: 5x6 (pesado) | Semana 2: 4x8 | Semana 3: 5x5 (máximo) | Semana 4: 3x10 (deload)",
-                ("avançado", true, false) => "Semana 1: 4x8 | Semana 2: 4x10 | Semana 3: 5x8 (↑ carga) | Semana 4: 3x12 (deload)",
-                ("avançado", false, _) => "Semana 1: 4x10 | Semana 2: 4x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x15 (deload)",
+                // ADVANCED: Heavy loads, progressive overload, periodization with deload
+                ("avançado" or "advanced", true) => "AVANÇADO: Sem 1: 5x5-8 (80-85% 1RM) | Sem 2: 5x6 (85% 1RM) | Sem 3: 5x5 (87-90% 1RM) | Sem 4: 3x8 (deload 70%)",
+                ("avançado" or "advanced", false) => "AVANÇADO: Sem 1: 4x10-12 | Sem 2: 4x12 (↑carga) | Sem 3: 5x10 (↑volume) | Sem 4: 3x12 (deload)",
 
-                (_, true, true) => "Semana 1: 3x10 | Semana 2: 4x10 | Semana 3: 4x8 (↑ carga) | Semana 4: 3x10 (deload)",
-                (_, true, false) => "Semana 1: 3x10 | Semana 2: 3x12 | Semana 3: 4x10 (↑ carga) | Semana 4: 3x12",
-                _ => "Semana 1: 3x12 | Semana 2: 3x15 | Semana 3: 4x12 (↑ carga) | Semana 4: 3x15"
+                // INTERMEDIATE: Balance between volume and intensity
+                (_, true) => "INTERMEDIÁRIO: Sem 1: 4x8-10 | Sem 2: 4x10 (mesma carga) | Sem 3: 4x8 (↑carga 5%) | Sem 4: 3x10 (deload)",
+                _ => "INTERMEDIÁRIO: Sem 1: 3x12-15 | Sem 2: 3x15 | Sem 3: 4x12 (↑volume) | Sem 4: 3x15"
             };
 
         var instructionsMap = new Dictionary<string, List<string>>
@@ -1169,6 +1171,7 @@ public static class AIEndpoints
         var videoUrl = videoMap.ContainsKey(name) ? videoMap[name] : null;
 
         // Adapt sets, reps, and rest based on fitness level and exercise type
+        // Use isCompound to differentiate ALL compound exercises, not just the first one
         var (sets, reps, rest) = bodyPart == "cardio"
             ? fitnessLevel.ToLower() switch
             {
@@ -1176,14 +1179,19 @@ public static class AIEndpoints
                 "avançado" or "advanced" => (1, "30-40 min", "60s"),
                 _ => (1, "20-30 min", "60s")  // Intermediate
             }
-            : (fitnessLevel.ToLower(), isMainExercise) switch
+            : (fitnessLevel.ToLower(), isCompound) switch
             {
-                ("iniciante" or "beginner", true) => (3, "10-12", "120s"),
-                ("iniciante" or "beginner", false) => (3, "12-15", "90s"),
-                ("avançado" or "advanced", true) => (5, "6-8", "90s"),
-                ("avançado" or "advanced", false) => (4, "8-10", "60s"),
-                (_, true) => (4, "8-10", "90s"),   // Intermediate main
-                _ => (3, "10-12", "60s")             // Intermediate secondary
+                // BEGINNER: Lower volume, higher reps, more rest
+                ("iniciante" or "beginner", true) => (3, "12-15", "120s"),      // Compound: 3x12-15
+                ("iniciante" or "beginner", false) => (2, "15-20", "90s"),      // Isolation: 2x15-20
+
+                // ADVANCED: Higher volume, lower reps, less rest
+                ("avançado" or "advanced", true) => (5, "5-8", "90s"),          // Compound: 5x5-8
+                ("avançado" or "advanced", false) => (4, "10-12", "60s"),       // Isolation: 4x10-12
+
+                // INTERMEDIATE: Moderate volume and intensity
+                (_, true) => (4, "8-10", "90s"),                                 // Compound: 4x8-10
+                _ => (3, "12-15", "60s")                                         // Isolation: 3x12-15
             };
 
         return new ExerciseInstruction(
@@ -1253,10 +1261,29 @@ REGRAS FUNDAMENTAIS:
    - Se o objetivo mencionar ""six-pack"", ""tanquinho"", ""abdômen definido"", ""abs"", ""core"", ou ""perder barriga"", você DEVE SEMPRE incluir 2-3 exercícios abdominais eficazes no treino
    - Exemplos de exercícios abdominais: Abdominal Reto, Prancha, Abdominal Bicicleta, Elevação de Pernas, Abdominal na Polia, Prancha Lateral, etc.
 5. Instruções devem ser claras, detalhadas e profissionais em português, incluindo técnica correta e dicas de segurança
-6. Adapte sets, reps, rest e exercícios ao nível do usuário:
-   - Iniciante: 2-3 exercícios/grupo, 3-4 sets, 10-12 reps, descanso 90-120s, MÁXIMO 7 exercícios por treino
-   - Intermediário: 3-4 exercícios/grupo, 3-5 sets, 8-12 reps, descanso 60-90s, MÁXIMO 9 exercícios por treino
-   - Avançado: 4-5 exercícios/grupo, 4-6 sets, 6-12 reps, descanso 45-90s, MÁXIMO 11 exercícios por treino
+6. ⚠️ DIFERENCIE CLARAMENTE por nível de condicionamento - use parâmetros MUITO DIFERENTES:
+
+   INICIANTE (Beginner):
+   - Exercícios compostos: 3 sets x 12-15 reps, descanso 120s
+   - Exercícios isolados: 2 sets x 15-20 reps, descanso 90s
+   - Total de exercícios: 4-6 exercícios (foco em QUALIDADE e TÉCNICA)
+   - Duração: 30-45 minutos
+   - Foco: aprender movimentos, construir base de força, evitar lesões
+
+   INTERMEDIÁRIO (Intermediate):
+   - Exercícios compostos: 4 sets x 8-10 reps, descanso 90s
+   - Exercícios isolados: 3 sets x 12-15 reps, descanso 60s
+   - Total de exercícios: 6-8 exercícios (equilíbrio volume/intensidade)
+   - Duração: 50-65 minutos
+   - Foco: progressão de carga, volume moderado-alto
+
+   AVANÇADO (Advanced):
+   - Exercícios compostos: 5 sets x 5-8 reps, descanso 90s (cargas pesadas)
+   - Exercícios isolados: 4 sets x 10-12 reps, descanso 60s
+   - Total de exercícios: 8-12 exercícios (alto volume total)
+   - Duração: 70-90 minutos
+   - Foco: máxima hipertrofia/força, periodização, técnicas avançadas
+
 7. NUNCA crie treinos com mais de 12 exercícios - isso leva a overtraining e baixa qualidade de execução
 8. Selecione exercícios apropriados ao equipamento disponível
 9. Priorize exercícios compostos primeiro, depois isolados
@@ -2352,11 +2379,12 @@ INSTRUÇÕES CRÍTICAS:
         var days = new List<WorkoutDay>();
 
         // Determine exercise count per day based on fitness level
+        // Beginners need fewer exercises per session to avoid overtraining
         var (minExercisesPerDay, maxExercisesPerDay) = level switch
         {
-            "iniciante" or "beginner" => (4, 5),
-            "avançado" or "advanced" => (6, 8),
-            _ => (5, 7) // intermediário
+            "iniciante" or "beginner" => (3, 5),    // Fewer exercises, focus on recovery
+            "avançado" or "advanced" => (7, 10),    // More exercises, higher work capacity
+            _ => (5, 7)                              // Intermediate: moderate volume
         };
 
         Console.WriteLine($"Exercises Per Day Range: {minExercisesPerDay}-{maxExercisesPerDay}");
