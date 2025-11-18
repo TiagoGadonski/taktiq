@@ -22,7 +22,7 @@ export default function WorkoutPage() {
   const router = useRouter();
   const { toast } = useToast();
   const { currentSession, hasActiveSession, startSession, completeSession, cancelSession, isStarting, isCompleting } = useSession();
-  const { createSet, deleteSet, isCreating } = useSets();
+  const { createSet, deleteSet, updateSet, isCreating, isUpdating } = useSets();
   const [notes, setNotes] = useState('');
   const [selectedWorkoutId, setSelectedWorkoutId] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<WorkoutExercise | null>(null);
@@ -374,6 +374,23 @@ export default function WorkoutPage() {
       toast({
         variant: 'destructive',
         title: 'Erro ao remover série',
+        description: error.message,
+      });
+    }
+  };
+
+  // ✅ NEW: Edit set handler
+  const handleEditSet = async (setId: string, data: { reps: number; weight?: number; rpe?: number }) => {
+    try {
+      await updateSet({ id: setId, data });
+      toast({
+        title: 'Série atualizada',
+        description: `${data.reps} reps${data.weight ? ` @ ${data.weight} kg` : ''}`,
+      });
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao atualizar série',
         description: error.message,
       });
     }
@@ -743,9 +760,10 @@ export default function WorkoutPage() {
                     sets={currentSession.sets || []}
                     onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
                     onDeleteSet={handleDeleteSet}
+                    onEditSet={handleEditSet}
                     onExerciseClick={() => openExerciseModal(displayExercise)}
                     onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
-                    isCreating={isCreating}
+                    isCreating={isCreating || isUpdating}
                   />
                 );
               })}
@@ -778,9 +796,10 @@ export default function WorkoutPage() {
                         sets={currentSession.sets || []}
                         onAddSet={(data) => handleAddSet(displayExercise.exerciseId, data)}
                         onDeleteSet={handleDeleteSet}
+                        onEditSet={handleEditSet}
                         onExerciseClick={() => openExerciseModal(displayExercise)}
                         onReplaceExercise={isFreeWorkout ? undefined : () => handleOpenReplaceModal(exercise)}
-                        isCreating={isCreating}
+                        isCreating={isCreating || isUpdating}
                       />
                     </div>
                   );

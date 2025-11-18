@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, Plus, Trash2, Check, RefreshCw } from 'lucide-react';
+import { ChevronDown, Plus, Trash2, Check, RefreshCw, Pencil } from 'lucide-react';
 import type { WorkoutPlanExercise, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,17 +13,23 @@ interface ExerciseCardProps {
   sets: WorkoutSet[];
   onAddSet: (data: { reps: number; weight?: number; rpe?: number }) => void;
   onDeleteSet: (setId: string) => void;
+  onEditSet?: (setId: string, data: { reps: number; weight?: number; rpe?: number }) => void;
   onExerciseClick?: () => void;
   onReplaceExercise?: () => void;
   isCreating?: boolean;
 }
 
-export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExerciseClick, onReplaceExercise, isCreating = false }: ExerciseCardProps) {
+export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onEditSet, onExerciseClick, onReplaceExercise, isCreating = false }: ExerciseCardProps) {
   const exerciseSets = sets.filter((s) => s.exerciseId === exercise.exerciseId);
   const isCompleted = exerciseSets.length >= exercise.targetSets;
   const [showSetForm, setShowSetForm] = useState(false);
   const [newSetReps, setNewSetReps] = useState(exercise.targetReps);
   const [newSetWeight, setNewSetWeight] = useState(exercise.targetLoad || 0);
+
+  // ✅ NEW: Edit set state
+  const [editingSetId, setEditingSetId] = useState<string | null>(null);
+  const [editSetReps, setEditSetReps] = useState(0);
+  const [editSetWeight, setEditSetWeight] = useState(0);
 
   const handleAddSetWithValues = () => {
     onAddSet({
@@ -52,6 +58,28 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
         rpe: undefined,
       });
     }
+  };
+
+  // ✅ NEW: Edit set handlers
+  const handleStartEdit = (set: WorkoutSet) => {
+    setEditingSetId(set.id);
+    setEditSetReps(set.reps);
+    setEditSetWeight(set.weight || 0);
+  };
+
+  const handleSaveEdit = () => {
+    if (editingSetId && onEditSet) {
+      onEditSet(editingSetId, {
+        reps: editSetReps,
+        weight: editSetWeight > 0 ? editSetWeight : undefined,
+        rpe: undefined,
+      });
+      setEditingSetId(null);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingSetId(null);
   };
 
   return (
@@ -136,23 +164,95 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onExercise
           <div className="space-y-2">
             <p className="text-xs font-medium text-muted-foreground mb-2">Séries completadas:</p>
             {exerciseSets.map((set, index) => (
-              <div
-                key={set.id}
-                className="flex items-center justify-between bg-muted/50 rounded-md px-3 py-2 text-sm"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="font-medium text-primary">#{index + 1}</span>
-                  <span>{set.reps} reps</span>
-                  {set.weight && <span className="font-medium">{set.weight} kg</span>}
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => onDeleteSet(set.id)}
-                  className="h-7 w-7 p-0 hover:bg-destructive/10 hover:text-destructive"
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </Button>
+              <div key={set.id}>
+                {/* ✅ EDIT MODE: Show edit form */}
+                {editingSetId === set.id ? (
+                  <div className="bg-muted/30 rounded-lg p-3 space-y-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-medium text-primary text-sm">#{index + 1}</span>
+                      <span className="text-xs text-muted-foreground">Editando série</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                          Repetições
+                        </label>
+                        <Input
+                          type="number"
+                          value={editSetReps}
+                          onChange={(e) => setEditSetReps(parseInt(e.target.value) || 0)}
+                          className="h-9"
+                          min="1"
+                          autoFocus
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                          Peso (kg)
+                        </label>
+                        <Input
+                          type="number"
+                          value={editSetWeight}
+                          onChange={(e) => setEditSetWeight(parseFloat(e.target.value) || 0)}
+                          className="h-9"
+                          min="0"
+                          step="0.5"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={handleSaveEdit}
+                        size="sm"
+                        className="flex-1"
+                        disabled={isCreating}
+                      >
+                        <Check className="h-4 w-4 mr-1" />
+                        Salvar
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={handleCancelEdit}
+                        size="sm"
+                        disabled={isCreating}
+                      >
+                        Cancelar
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  /* ✅ NORMAL MODE: Show set info with edit/delete buttons */
+                  <div className="flex items-center justify-between bg-muted/50 rounded-md px-3 py-2 text-sm">
+                    <div className="flex items-center gap-3">
+                      <span className="font-medium text-primary">#{index + 1}</span>
+                      <span>{set.reps} reps</span>
+                      {set.weight && <span className="font-medium">{set.weight} kg</span>}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {/* ✅ NEW: Edit button */}
+                      {onEditSet && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleStartEdit(set)}
+                          className="h-7 w-7 p-0 hover:bg-primary/10 hover:text-primary"
+                          title="Editar série"
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onDeleteSet(set.id)}
+                        className="h-7 w-7 p-0 hover:bg-destructive/10 hover:text-destructive"
+                        title="Deletar série"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
