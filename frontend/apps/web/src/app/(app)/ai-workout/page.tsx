@@ -878,25 +878,16 @@ export default function AIWorkoutPage() {
                         key={location}
                         onClick={() => setWorkoutLocation(location)}
                         disabled={generateWorkoutMutation.isPending}
-                        className={`px-3 py-2 text-sm rounded-md border transition-colors flex items-center justify-center gap-1 ${
+                        title={location === 'gym' ? 'Academia' : location === 'home' ? 'Casa' : 'Ambos'}
+                        className={`px-3 py-2 text-sm rounded-md border transition-colors flex items-center justify-center ${
                           workoutLocation === location
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-background border-input hover:bg-accent'
                         }`}
                       >
-                        {location === 'gym' && (
-                          <>
-                            <Building2 className="h-3 w-3" />
-                            Academia
-                          </>
-                        )}
-                        {location === 'home' && (
-                          <>
-                            <Home className="h-3 w-3" />
-                            Casa
-                          </>
-                        )}
-                        {location === 'both' && 'Ambos'}
+                        {location === 'gym' && <Building2 className="h-5 w-5" />}
+                        {location === 'home' && <Home className="h-5 w-5" />}
+                        {location === 'both' && '🏠🏋️'}
                       </button>
                     ))}
                   </div>
@@ -1134,25 +1125,16 @@ export default function AIWorkoutPage() {
                         key={location}
                         onClick={() => setPlanWorkoutLocation(location)}
                         disabled={generatePlanMutation.isPending}
-                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors flex items-center justify-center gap-1 ${
+                        title={location === 'gym' ? 'Academia' : location === 'home' ? 'Casa' : 'Ambos'}
+                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors flex items-center justify-center ${
                           planWorkoutLocation === location
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-background border-input hover:bg-accent'
                         }`}
                       >
-                        {location === 'gym' && (
-                          <>
-                            <Building2 className="h-3 w-3" />
-                            Acad.
-                          </>
-                        )}
-                        {location === 'home' && (
-                          <>
-                            <Home className="h-3 w-3" />
-                            Casa
-                          </>
-                        )}
-                        {location === 'both' && 'Ambos'}
+                        {location === 'gym' && <Building2 className="h-5 w-5" />}
+                        {location === 'home' && <Home className="h-5 w-5" />}
+                        {location === 'both' && '🏠🏋️'}
                       </button>
                     ))}
                   </div>

@@ -23,6 +23,9 @@ public class User : BaseEntity
     // Workout Location Preference (Gym, Home, or Both)
     public WorkoutLocation PreferredWorkoutLocation { get; set; } = WorkoutLocation.Gym;
 
+    // ✅ NEW: Boxing Practice - User practices boxing as supplementary training
+    public bool PracticesBoxing { get; set; } = false;
+
     // --- Propriedade para a Etapa 2 ---
     public string? ProfilePictureUrl { get; set; }
     public string? GymName { get; set; } // Nome do ginásio onde treina

@@ -94,7 +94,8 @@ public static class AIEndpoints
                         u.Location,
                         u.Bio,
                         u.GymName,
-                        u.PreferredWorkoutLocation
+                        u.PreferredWorkoutLocation,
+                        u.PracticesBoxing
                     })
                     .FirstOrDefaultAsync();
 
@@ -314,7 +315,8 @@ public static class AIEndpoints
                         u.Location,
                         u.Bio,
                         u.GymName,
-                        u.PreferredWorkoutLocation
+                        u.PreferredWorkoutLocation,
+                        u.PracticesBoxing
                     })
                     .FirstOrDefaultAsync();
 
@@ -416,14 +418,22 @@ public static class AIEndpoints
             ("Cross Over", "chest", "cable", false),
             ("Peck Deck", "chest", "machine", false),
             ("Pullover com Halteres", "chest", "dumbbell", false),
-            // Bodyweight exercises for home
+            // Bodyweight exercises for home - EXPANDED
             ("Flexão de Braço", "chest", "body only", true),
             ("Flexão Diamante", "chest", "body only", true),
             ("Flexão Declinada", "chest", "body only", true),
             ("Flexão Inclinada", "chest", "body only", true),
             ("Flexão Archer", "chest", "body only", true),
             ("Flexão Hindu", "chest", "body only", true),
-            ("Flexão com Elevação", "chest", "body only", true)
+            ("Flexão com Elevação", "chest", "body only", true),
+            ("Flexão Espartana", "chest", "body only", true),
+            ("Flexão com Rotação", "chest", "body only", true),
+            ("Flexão Explosiva", "chest", "body only", true),
+            ("Flexão de Borboleta", "chest", "body only", true),
+            ("Flexão com Apoio Unilateral", "chest", "body only", true),
+            ("Dips entre Cadeiras", "chest", "body only", true),
+            ("Flexão Spiderman", "chest", "body only", true),
+            ("Flexão Typewriter", "chest", "body only", true)
         },
         ["costas"] = new()
         {
@@ -438,14 +448,22 @@ public static class AIEndpoints
             ("Remada Unilateral", "back", "dumbbell", true),
             ("Pullover na Polia", "back", "cable", false),
             ("Serrote", "back", "dumbbell", true),
-            // Bodyweight exercises for home
+            // Bodyweight exercises for home - EXPANDED
             ("Barra Fixa", "back", "body only", true),
+            ("Barra Fixa Supinada", "back", "body only", true),
+            ("Barra Fixa Neutra", "back", "body only", true),
             ("Remada Invertida", "back", "body only", true),
+            ("Remada Invertida em Cadeira", "back", "body only", true),
             ("Superman", "back", "body only", false),
             ("Prancha Reversa", "back", "body only", false),
             ("Extensão Lombar", "back", "body only", false),
             ("Bird Dog", "back", "body only", false),
-            ("Ponte de Glúteos", "back", "body only", true)
+            ("Ponte de Glúteos", "back", "body only", true),
+            ("Nadador", "back", "body only", false),
+            ("Snow Angels", "back", "body only", false),
+            ("Y-T-W Raises", "back", "body only", false),
+            ("Cobra Stretch Dinâmico", "back", "body only", false),
+            ("Aquaman", "back", "body only", false)
         },
         ["ombros"] = new()
         {
@@ -604,6 +622,65 @@ public static class AIEndpoints
             ("Bear Crawl", "cardio", "body only", true),
             ("Crab Walk", "cardio", "body only", true),
             ("Inchworms", "cardio", "body only", true)
+        },
+        // ✅ NEW: Functional Calisthenics - Advanced bodyweight movements
+        ["calistenia"] = new()
+        {
+            // Pull Progressions
+            ("Australian Pull-up", "back", "body only", true),
+            ("Archer Pull-up", "back", "body only", true),
+            ("Typewriter Pull-up", "back", "body only", true),
+            ("L-Sit Pull-up", "back", "body only", true),
+            ("Muscle-up", "back", "body only", true),
+            // Push Progressions
+            ("Pseudo Planche Push-up", "chest", "body only", true),
+            ("Pike Push-up Elevado", "shoulders", "body only", true),
+            ("Ring Push-up", "chest", "body only", true),
+            ("Korean Dips", "triceps", "body only", true),
+            // Core & Skills
+            ("L-Sit", "abs", "body only", false),
+            ("Dragon Flag", "abs", "body only", false),
+            ("Human Flag Progressão", "abs", "body only", false),
+            ("Tuck Front Lever", "back", "body only", true),
+            ("Tuck Back Lever", "back", "body only", true),
+            ("Handstand Hold", "shoulders", "body only", false),
+            ("Crow Pose", "shoulders", "body only", false),
+            // Leg Progressions
+            ("Pistol Squat Assistido", "legs", "body only", true),
+            ("Shrimp Squat", "legs", "body only", true),
+            ("Nordic Curl Assistido", "legs", "body only", true),
+            ("Sissy Squat", "legs", "body only", true),
+            // Dynamic Movements
+            ("Explosive Pull-up", "back", "body only", true),
+            ("Clapping Push-up", "chest", "body only", true),
+            ("Jump Squat", "legs", "body only", true),
+            ("Tuck Planche Hold", "shoulders", "body only", false)
+        },
+        // ✅ NEW: Boxing & Combat Training
+        ["boxe"] = new()
+        {
+            // Shadowboxing & Technique
+            ("Shadowboxing", "cardio", "body only", true),
+            ("Soco Jab", "shoulders", "body only", false),
+            ("Soco Direto (Cross)", "chest", "body only", false),
+            ("Gancho (Hook)", "shoulders", "body only", false),
+            ("Uppercut", "shoulders", "body only", false),
+            ("Combinações de Socos", "cardio", "body only", true),
+            // Footwork & Movement
+            ("Footwork Básico", "legs", "body only", true),
+            ("Esquivas Laterais (Slip)", "abs", "body only", true),
+            ("Giro de Cintura (Roll)", "abs", "body only", true),
+            ("Pivot e Movimentação", "legs", "body only", true),
+            // Conditioning
+            ("Soco no Ar (Air Punching)", "shoulders", "body only", false),
+            ("Burpee com Soco", "cardio", "body only", true),
+            ("Mountain Climber para Boxeador", "cardio", "body only", true),
+            ("Abdominais de Boxeador", "abs", "body only", false),
+            ("Prancha com Socos Alternados", "abs", "body only", false),
+            // Power & Explosiveness
+            ("Medicine Ball Slam", "abs", "body only", true),
+            ("Rotação de Tronco Explosiva", "abs", "body only", true),
+            ("Sprint com Mudança de Direção", "legs", "body only", true)
         }
     };
 
@@ -631,10 +708,16 @@ public static class AIEndpoints
             nameLower.Contains("power clean") || nameLower.Contains("clean") ||
             nameLower.Contains("snatch") || nameLower.Contains("arranco") ||
             nameLower.Contains("pistol") || nameLower.Contains("handstand") ||
-            nameLower.Contains("muscle up") || nameLower.Contains("dragon flag") ||
-            nameLower.Contains("front lever") || nameLower.Contains("planche") ||
-            nameLower.Contains("good morning") ||
-            nameLower.Contains("archer") || nameLower.Contains("unilateral"))
+            nameLower.Contains("muscle-up") || nameLower.Contains("muscle up") ||
+            nameLower.Contains("dragon flag") || nameLower.Contains("front lever") ||
+            nameLower.Contains("back lever") || nameLower.Contains("planche") ||
+            nameLower.Contains("human flag") || nameLower.Contains("good morning") ||
+            nameLower.Contains("archer") || nameLower.Contains("typewriter") ||
+            nameLower.Contains("pseudo planche") || nameLower.Contains("l-sit pull") ||
+            nameLower.Contains("korean dips") || nameLower.Contains("nordic curl") ||
+            nameLower.Contains("shrimp squat") || nameLower.Contains("sissy squat") ||
+            nameLower.Contains("explosiv") || nameLower.Contains("clapping") ||
+            nameLower.Contains("unilateral"))
         {
             return "advanced";
         }
@@ -970,6 +1053,33 @@ public static class AIEndpoints
                     // ✅ NEW: Filter by fitness level (beginner-friendly vs advanced exercises)
                     availableExercises = FilterExercisesByLevel(availableExercises, level);
 
+                    // ✅ NEW: Further differentiate GYM workouts by equipment preference based on level
+                    if (!isHomeWorkout)
+                    {
+                        if (level == "iniciante" || level == "beginner")
+                        {
+                            // Beginners: HEAVILY prioritize machines, then dumbbells, avoid barbells
+                            availableExercises = availableExercises
+                                .OrderBy(ex => ex.Equipment == "machine" ? 0 :
+                                              ex.Equipment == "dumbbell" ? 1 :
+                                              ex.Equipment == "cable" ? 2 : 3)
+                                .ThenBy(x => random.Next())
+                                .ToList();
+                            Console.WriteLine($"   👶 BEGINNER: Prioritizing machines and dumbbells over barbells");
+                        }
+                        else if (level == "avançado" || level == "advanced")
+                        {
+                            // Advanced: HEAVILY prioritize free weights (barbells, dumbbells), then machines
+                            availableExercises = availableExercises
+                                .OrderBy(ex => ex.Equipment == "barbell" ? 0 :
+                                              ex.Equipment == "dumbbell" ? 1 :
+                                              ex.Equipment == "cable" ? 2 : 3)
+                                .ThenBy(x => random.Next())
+                                .ToList();
+                            Console.WriteLine($"   💪 ADVANCED: Prioritizing barbells and free weights over machines");
+                        }
+                    }
+
                     // Prioritize compound exercises, then isolation
                     var compoundExercises = availableExercises.Where(ex => ex.IsCompound).OrderBy(x => random.Next()).ToList();
                     var isolationExercises = availableExercises.Where(ex => !ex.IsCompound).OrderBy(x => random.Next()).ToList();
@@ -1038,6 +1148,33 @@ public static class AIEndpoints
 
                     // ✅ NEW: Filter by fitness level (beginner-friendly vs advanced exercises)
                     availableExercises = FilterExercisesByLevel(availableExercises, level);
+
+                    // ✅ NEW: Further differentiate GYM workouts by equipment preference based on level
+                    if (!isHomeWorkout)
+                    {
+                        if (level == "iniciante" || level == "beginner")
+                        {
+                            // Beginners: HEAVILY prioritize machines, then dumbbells, avoid barbells
+                            availableExercises = availableExercises
+                                .OrderBy(ex => ex.Equipment == "machine" ? 0 :
+                                              ex.Equipment == "dumbbell" ? 1 :
+                                              ex.Equipment == "cable" ? 2 : 3)
+                                .ThenBy(x => random.Next())
+                                .ToList();
+                            Console.WriteLine($"   👶 BEGINNER: Prioritizing machines and dumbbells over barbells");
+                        }
+                        else if (level == "avançado" || level == "advanced")
+                        {
+                            // Advanced: HEAVILY prioritize free weights (barbells, dumbbells), then machines
+                            availableExercises = availableExercises
+                                .OrderBy(ex => ex.Equipment == "barbell" ? 0 :
+                                              ex.Equipment == "dumbbell" ? 1 :
+                                              ex.Equipment == "cable" ? 2 : 3)
+                                .ThenBy(x => random.Next())
+                                .ToList();
+                            Console.WriteLine($"   💪 ADVANCED: Prioritizing barbells and free weights over machines");
+                        }
+                    }
 
                     // Prioritize compound exercises, then isolation
                     var compoundExercises = availableExercises.Where(ex => ex.IsCompound).OrderBy(x => random.Next()).ToList();
@@ -1165,7 +1302,31 @@ public static class AIEndpoints
             }
         }
 
-        // ✅ NEW: Apply strict exercise ordering (compound first, isolation last, abs/cardio at end)
+        // ✅ NEW: Add boxing exercises if user practices boxing
+        var practicesBoxing = userProfile?.PracticesBoxing ?? false;
+        if (practicesBoxing && ExerciseDatabase.ContainsKey("boxe"))
+        {
+            Console.WriteLine("🥊 User practices boxing - adding boxing exercises");
+            var boxingExercises = ExerciseDatabase["boxe"]
+                .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
+                .OrderBy(x => random.Next())
+                .Take(random.Next(2, 4)) // 2-3 boxing exercises
+                .ToList();
+
+            foreach (var boxingEx in boxingExercises)
+            {
+                selectedExercises.Add(CreateExerciseInstruction(
+                    boxingEx.Name,
+                    boxingEx.BodyPart,
+                    boxingEx.Equipment,
+                    false,
+                    level,
+                    boxingEx.IsCompound
+                ));
+            }
+        }
+
+        // ✅ NEW: Apply strict exercise ordering (compound first, isolation last, abs/cardio/boxing at end)
         selectedExercises = OrderExercisesOptimally(selectedExercises);
 
         // Generate title based on muscle groups or workout type
