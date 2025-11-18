@@ -48,7 +48,10 @@ public record ExerciseInstruction(
     List<string> Instructions,
     string? GifUrl = null,
     string? VideoUrl = null,
-    string? ProgressionNotes = null
+    string? ProgressionNotes = null,
+    string? RPE = null,              // Rate of Perceived Exertion guidance
+    string? Tempo = null,             // Tempo prescription (e.g., "3-0-1-0")
+    string? WarmupSets = null         // Warm-up guidance for beginners
 );
 
 public record AIWorkoutResponse(
@@ -614,6 +617,291 @@ public static class AIEndpoints
         ["desenvolvimento"] = new() { "desenvolvimento com barra", "desenvolvimento com halteres", "desenvolvimento arnold", "shoulder press" }
     };
 
+    // Helper method: Determine exercise difficulty level
+    // Beginner: Machines, simple bodyweight, easier movements
+    // Intermediate: Dumbbells, cables, moderate complexity
+    // Advanced: Barbells, complex movements, unilateral, high skill
+    private static string GetExerciseDifficulty(string exerciseName, string equipment, bool isCompound)
+    {
+        var nameLower = exerciseName.ToLower();
+
+        // Advanced exercises (complex, high skill, or dangerous if done wrong)
+        if (nameLower.Contains("levantamento terra") || nameLower.Contains("deadlift") ||
+            nameLower.Contains("agachamento livre com barra") ||
+            nameLower.Contains("power clean") || nameLower.Contains("clean") ||
+            nameLower.Contains("snatch") || nameLower.Contains("arranco") ||
+            nameLower.Contains("pistol") || nameLower.Contains("handstand") ||
+            nameLower.Contains("muscle up") || nameLower.Contains("dragon flag") ||
+            nameLower.Contains("front lever") || nameLower.Contains("planche") ||
+            nameLower.Contains("good morning") ||
+            nameLower.Contains("archer") || nameLower.Contains("unilateral"))
+        {
+            return "advanced";
+        }
+
+        // Beginner-friendly (machines, simple movements)
+        if (equipment == "machine" ||
+            nameLower.Contains("flexão de braço") || nameLower.Contains("flexão inclinada") ||
+            nameLower.Contains("wall sit") || nameLower.Contains("prancha") ||
+            nameLower.Contains("elevação de panturrilha") ||
+            nameLower.Contains("abdominal reto") || nameLower.Contains("ponte"))
+        {
+            return "beginner";
+        }
+
+        // Equipment-based difficulty
+        if (equipment == "barbell" && isCompound) return "advanced";
+        if (equipment == "barbell" && !isCompound) return "intermediate";
+        if (equipment == "dumbbell" && isCompound) return "intermediate";
+        if (equipment == "cable") return "intermediate";
+
+        // Bodyweight compound exercises
+        if (equipment == "body only" && isCompound)
+        {
+            if (nameLower.Contains("barra fixa") || nameLower.Contains("pull-up") ||
+                nameLower.Contains("mergulho") || nameLower.Contains("dips"))
+                return "intermediate";
+            return "beginner";
+        }
+
+        return "beginner"; // Default for isolation and simple movements
+    }
+
+    // Helper method: Get movement pattern for balance tracking
+    private static string GetMovementPattern(string exerciseName, string bodyPart)
+    {
+        var nameLower = exerciseName.ToLower();
+
+        // Horizontal Push
+        if (nameLower.Contains("supino") || nameLower.Contains("bench press") ||
+            nameLower.Contains("flexão") || nameLower.Contains("push-up"))
+            return "horizontal_push";
+
+        // Vertical Push
+        if (nameLower.Contains("desenvolvimento") || nameLower.Contains("press") && bodyPart == "shoulders" ||
+            nameLower.Contains("pike"))
+            return "vertical_push";
+
+        // Horizontal Pull
+        if (nameLower.Contains("remada") || nameLower.Contains("row"))
+            return "horizontal_pull";
+
+        // Vertical Pull
+        if (nameLower.Contains("barra fixa") || nameLower.Contains("pull-up") ||
+            nameLower.Contains("puxada") || nameLower.Contains("pulldown"))
+            return "vertical_pull";
+
+        // Hip Hinge
+        if (nameLower.Contains("levantamento terra") || nameLower.Contains("deadlift") ||
+            nameLower.Contains("stiff") || nameLower.Contains("good morning") ||
+            nameLower.Contains("hip thrust") || nameLower.Contains("ponte"))
+            return "hip_hinge";
+
+        // Knee Dominant
+        if (nameLower.Contains("agachamento") || nameLower.Contains("squat") ||
+            nameLower.Contains("leg press") || nameLower.Contains("afundo") || nameLower.Contains("lunge") ||
+            nameLower.Contains("extensora"))
+            return "knee_dominant";
+
+        // Isolation patterns
+        if (bodyPart == "biceps" || bodyPart == "triceps") return "arm_isolation";
+        if (bodyPart == "shoulders" && (nameLower.Contains("elevação") || nameLower.Contains("lateral")))
+            return "shoulder_isolation";
+
+        return "other";
+    }
+
+    // Helper method: Filter exercises by fitness level
+    private static List<(string Name, string BodyPart, string Equipment, bool IsCompound)> FilterExercisesByLevel(
+        List<(string Name, string BodyPart, string Equipment, bool IsCompound)> exercises,
+        string fitnessLevel)
+    {
+        var level = fitnessLevel?.ToLower() ?? "intermediário";
+
+        return exercises.Where(ex =>
+        {
+            var difficulty = GetExerciseDifficulty(ex.Name, ex.Equipment, ex.IsCompound);
+
+            return level switch
+            {
+                "iniciante" or "beginner" => difficulty == "beginner" || difficulty == "intermediate",
+                "intermediário" or "intermediate" => true, // Can do all exercises
+                "avançado" or "advanced" => true, // Can do all exercises
+                _ => true
+            };
+        }).ToList();
+    }
+
+    // Helper method: Order exercises optimally (compound first, isolation last, abs/cardio at end)
+    private static List<ExerciseInstruction> OrderExercisesOptimally(List<ExerciseInstruction> exercises)
+    {
+        return exercises.OrderBy(ex =>
+        {
+            var name = ex.Name.ToLower();
+
+            // Priority 1: Olympic lifts (advanced only) - highest priority
+            if (name.Contains("power clean") || name.Contains("clean and jerk") ||
+                name.Contains("snatch") || name.Contains("arranco"))
+                return 1;
+
+            // Priority 2: Heavy compound barbell lifts
+            if (ex.Equipment == "barbell" && ex.BodyPart != "cardio" && ex.BodyPart != "abs" &&
+                (name.Contains("agachamento livre com barra") || name.Contains("levantamento terra") ||
+                 name.Contains("supino reto com barra") || name.Contains("deadlift")))
+                return 2;
+
+            // Priority 3: Other compound exercises
+            if ((ex.Equipment == "barbell" || ex.Equipment == "dumbbell") &&
+                ex.BodyPart != "cardio" && ex.BodyPart != "abs" &&
+                (name.Contains("agachamento") || name.Contains("remada") || name.Contains("supino") ||
+                 name.Contains("desenvolvimento") || name.Contains("leg press") || name.Contains("barra fixa")))
+                return 3;
+
+            // Priority 4: Compound bodyweight & machines
+            if (ex.BodyPart != "cardio" && ex.BodyPart != "abs" &&
+                (name.Contains("flexão") || name.Contains("mergulho") ||
+                 ex.Equipment == "machine" && name.Contains("press")))
+                return 4;
+
+            // Priority 5: Isolation exercises
+            if (ex.BodyPart != "cardio" && ex.BodyPart != "abs")
+                return 5;
+
+            // Priority 6: Core/abs exercises
+            if (ex.BodyPart == "abs")
+                return 6;
+
+            // Priority 7: Cardio at the end
+            if (ex.BodyPart == "cardio")
+                return 7;
+
+            return 5; // Default to isolation priority
+        }).ToList();
+    }
+
+    // Helper method: Validate volume landmarks (total sets per muscle per week)
+    private static void ValidateVolumeLandmarks(List<WorkoutDay> days, string fitnessLevel)
+    {
+        Console.WriteLine("\n=== VOLUME LANDMARKS VALIDATION ===");
+
+        // Map body parts to muscle groups
+        var muscleSets = new Dictionary<string, int>();
+
+        foreach (var day in days)
+        {
+            foreach (var exercise in day.Exercises)
+            {
+                var muscle = exercise.BodyPart.ToLower();
+                if (muscle != "cardio") // Don't count cardio
+                {
+                    muscleSets[muscle] = muscleSets.GetValueOrDefault(muscle) + exercise.Sets;
+                }
+            }
+        }
+
+        // Define volume guidelines per level
+        var (minLarge, maxLarge, minMedium, maxMedium, minSmall, maxSmall) = fitnessLevel?.ToLower() switch
+        {
+            "iniciante" or "beginner" => (8, 12, 6, 10, 4, 8),
+            "avançado" or "advanced" => (16, 24, 12, 18, 10, 16),
+            _ => (12, 18, 10, 14, 8, 12) // Intermediate
+        };
+
+        // Categorize muscles
+        var largeMuscles = new[] { "chest", "back", "legs", "glutes" };
+        var mediumMuscles = new[] { "shoulders" };
+        var smallMuscles = new[] { "biceps", "triceps", "calves", "abs" };
+
+        foreach (var (muscle, sets) in muscleSets)
+        {
+            var (min, max) = muscle switch
+            {
+                var m when largeMuscles.Contains(m) => (minLarge, maxLarge),
+                var m when mediumMuscles.Contains(m) => (minMedium, maxMedium),
+                var m when smallMuscles.Contains(m) => (minSmall, maxSmall),
+                _ => (minSmall, maxSmall)
+            };
+
+            var status = sets < min ? "⚠️ TOO LOW" : sets > max ? "⚠️ TOO HIGH" : "✅ OK";
+            Console.WriteLine($"{muscle}: {sets} sets/week (guideline: {min}-{max}) {status}");
+        }
+    }
+
+    // Helper method: Check recovery time between muscle groups
+    private static void ValidateRecoveryTime(List<WorkoutDay> days)
+    {
+        Console.WriteLine("\n=== RECOVERY TIME VALIDATION ===");
+
+        for (int i = 0; i < days.Count - 1; i++)
+        {
+            var today = days[i];
+            var tomorrow = days[i + 1];
+
+            var todayMuscles = today.Exercises.Select(e => e.BodyPart.ToLower()).Distinct().ToList();
+            var tomorrowMuscles = tomorrow.Exercises.Select(e => e.BodyPart.ToLower()).Distinct().ToList();
+
+            var overlap = todayMuscles.Intersect(tomorrowMuscles).Where(m => m != "abs" && m != "cardio").ToList();
+
+            if (overlap.Any())
+            {
+                Console.WriteLine($"⚠️ Day {i + 1} ({today.Title}) → Day {i + 2} ({tomorrow.Title}): Same muscles trained consecutively: {string.Join(", ", overlap)}");
+            }
+            else
+            {
+                Console.WriteLine($"✅ Day {i + 1} → Day {i + 2}: Proper recovery (no muscle overlap)");
+            }
+        }
+    }
+
+    // Helper method: Check movement pattern balance (push/pull ratio)
+    private static void ValidateMovementPatternBalance(List<WorkoutDay> days)
+    {
+        Console.WriteLine("\n=== MOVEMENT PATTERN BALANCE ===");
+
+        var patternCounts = new Dictionary<string, int>();
+
+        foreach (var day in days)
+        {
+            foreach (var exercise in day.Exercises)
+            {
+                var pattern = GetMovementPattern(exercise.Name, exercise.BodyPart);
+                if (pattern != "other" && pattern != "arm_isolation" && pattern != "shoulder_isolation")
+                {
+                    patternCounts[pattern] = patternCounts.GetValueOrDefault(pattern) + 1;
+                }
+            }
+        }
+
+        // Check ratios
+        var horizontalPush = patternCounts.GetValueOrDefault("horizontal_push");
+        var horizontalPull = patternCounts.GetValueOrDefault("horizontal_pull");
+        var verticalPush = patternCounts.GetValueOrDefault("vertical_push");
+        var verticalPull = patternCounts.GetValueOrDefault("vertical_pull");
+        var hipHinge = patternCounts.GetValueOrDefault("hip_hinge");
+        var kneeDominant = patternCounts.GetValueOrDefault("knee_dominant");
+
+        Console.WriteLine($"Horizontal Push: {horizontalPush} | Horizontal Pull: {horizontalPull}");
+        if (horizontalPush > 0 && horizontalPull > 0)
+        {
+            var ratio = (double)horizontalPush / horizontalPull;
+            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
+        }
+
+        Console.WriteLine($"Vertical Push: {verticalPush} | Vertical Pull: {verticalPull}");
+        if (verticalPush > 0 && verticalPull > 0)
+        {
+            var ratio = (double)verticalPush / verticalPull;
+            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
+        }
+
+        Console.WriteLine($"Hip Hinge: {hipHinge} | Knee Dominant: {kneeDominant}");
+        if (hipHinge > 0 && kneeDominant > 0)
+        {
+            var ratio = (double)hipHinge / kneeDominant;
+            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
+        }
+    }
+
     private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null)
     {
         Console.WriteLine("=== MOCK GENERATION DEBUG ===");
@@ -678,6 +966,9 @@ public static class AIEndpoints
                         .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
                         .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                         .ToList();
+
+                    // ✅ NEW: Filter by fitness level (beginner-friendly vs advanced exercises)
+                    availableExercises = FilterExercisesByLevel(availableExercises, level);
 
                     // Prioritize compound exercises, then isolation
                     var compoundExercises = availableExercises.Where(ex => ex.IsCompound).OrderBy(x => random.Next()).ToList();
@@ -744,6 +1035,9 @@ public static class AIEndpoints
                         .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
                         .Where(ex => !isHomeWorkout || ex.Equipment == "body only") // Filter for home workouts
                         .ToList();
+
+                    // ✅ NEW: Filter by fitness level (beginner-friendly vs advanced exercises)
+                    availableExercises = FilterExercisesByLevel(availableExercises, level);
 
                     // Prioritize compound exercises, then isolation
                     var compoundExercises = availableExercises.Where(ex => ex.IsCompound).OrderBy(x => random.Next()).ToList();
@@ -870,6 +1164,9 @@ public static class AIEndpoints
                 ));
             }
         }
+
+        // ✅ NEW: Apply strict exercise ordering (compound first, isolation last, abs/cardio at end)
+        selectedExercises = OrderExercisesOptimally(selectedExercises);
 
         // Generate title based on muscle groups or workout type
         var title = parsedPrompt.MuscleGroups.Any()
@@ -1194,6 +1491,34 @@ public static class AIEndpoints
                 _ => (3, "12-15", "60s")                                         // Isolation: 3x12-15
             };
 
+        // ✅ NEW: Calculate RPE (Rate of Perceived Exertion) / RIR (Reps in Reserve)
+        var rpe = bodyPart == "cardio" ? null : fitnessLevel.ToLower() switch
+        {
+            "iniciante" or "beginner" => "RPE 6-7 (poderia fazer 3-4 reps a mais) - Foco em TÉCNICA, não em carga máxima",
+            "intermediário" or "intermediate" => "RPE 7-8 (poderia fazer 2-3 reps a mais) - Busque progressão gradual",
+            "avançado" or "advanced" => isCompound
+                ? "RPE 8-9 (poderia fazer 1-2 reps a mais) - Treine próximo à falha muscular"
+                : "RPE 8-9 (poderia fazer 1-2 reps a mais) - Última série até a falha",
+            _ => "RPE 7-8 (poderia fazer 2-3 reps a mais)"
+        };
+
+        // ✅ NEW: Calculate Tempo (Eccentric-Pause-Concentric-Pause)
+        var tempo = bodyPart == "cardio" ? null : fitnessLevel.ToLower() switch
+        {
+            "iniciante" or "beginner" => "3-0-1-0 (3 seg descendo, 1 seg subindo) - Controle TOTAL do movimento",
+            "intermediário" or "intermediate" => "2-0-1-0 (2 seg descendo, 1 seg subindo) - Ritmo controlado",
+            "avançado" or "advanced" => isCompound
+                ? "2-0-X-0 (2 seg descendo, explosivo subindo) - Força e potência"
+                : "3-0-1-1 (3 seg descendo, pausa de 1 seg) - Máxima contração",
+            _ => "2-0-1-0"
+        };
+
+        // ✅ NEW: Add warm-up sets for beginners on compound exercises
+        var warmupSets = bodyPart == "cardio" ? null :
+            (fitnessLevel.ToLower() == "iniciante" || fitnessLevel.ToLower() == "beginner") && isCompound
+            ? "AQUECIMENTO: 1x10 @ 50% da carga | 1x5 @ 70% da carga | Depois: séries de trabalho"
+            : null;
+
         return new ExerciseInstruction(
             Name: name,
             BodyPart: bodyPart,
@@ -1204,7 +1529,10 @@ public static class AIEndpoints
             Instructions: instructions,
             GifUrl: null, // Will be populated by media service if available
             VideoUrl: videoUrl,
-            ProgressionNotes: progressionNotes
+            ProgressionNotes: progressionNotes,
+            RPE: rpe,
+            Tempo: tempo,
+            WarmupSets: warmupSets
         );
     }
 
@@ -2733,6 +3061,18 @@ INSTRUÇÕES CRÍTICAS:
         {
             Console.WriteLine($"  {day.Title}: {day.Exercises.Count} exercises ({string.Join(", ", day.Exercises.Select(e => e.Name))})");
         }
+
+        // ✅ NEW: Apply exercise ordering to each day
+        for (int i = 0; i < days.Count; i++)
+        {
+            days[i] = days[i] with { Exercises = OrderExercisesOptimally(days[i].Exercises) };
+        }
+
+        // ✅ NEW: Validate workout plan quality
+        ValidateVolumeLandmarks(days, level);
+        ValidateRecoveryTime(days);
+        ValidateMovementPatternBalance(days);
+
         Console.WriteLine("=== END MOCK PLAN GENERATION DEBUG ===");
 
         return new AIWorkoutPlanResponse(
