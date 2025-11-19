@@ -92,10 +92,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col bg-background gym-pattern overflow-x-hidden">
       {/* Top Navigation Bar - Desktop */}
       <header className="sticky top-0 z-50 hidden border-b glass-strong lg:block">
-        <div className="container mx-auto flex h-16 items-center gap-8 px-6">
+        <div className="container mx-auto flex h-16 items-center gap-8 px-6 max-w-7xl">
           {/* Logo */}
-          <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={95} height={27} className="transition-transform hover:scale-105" />
+          <Link href="/dashboard" className="hover-lift tap-scale flex-shrink-0">
+            <TaktIQLogo width={140} height={40} className="transition-transform hover:scale-105" />
           </Link>
 
           {/* Desktop Navigation Tabs */}
@@ -350,7 +350,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto pb-20 lg:pb-6 w-full">
-        <div className="container mx-auto px-4 py-6 lg:px-6 max-w-full">{children}</div>
+        <div className="container mx-auto px-4 py-6 lg:px-6 max-w-7xl">{children}</div>
       </main>
 
       {/* Bottom Tab Navigation - Mobile Only */}
