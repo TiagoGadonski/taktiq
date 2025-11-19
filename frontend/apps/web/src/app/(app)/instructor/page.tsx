@@ -21,6 +21,10 @@ import {
   Clock,
   CheckCircle,
   XCircle,
+  Globe,
+  Instagram,
+  Facebook,
+  Save,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -83,6 +87,18 @@ interface WorkoutPlan {
   goal: string;
 }
 
+interface PTProfile {
+  profileSlug?: string;
+  specialization?: string;
+  education?: string;
+  experience?: string;
+  pricingInfo?: string;
+  isPublicProfile: boolean;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  websiteUrl?: string;
+}
+
 export default function InstructorPage() {
   const { user } = useAuth();
   const router = useRouter();
@@ -105,6 +121,18 @@ export default function InstructorPage() {
   const [selectedPlanId, setSelectedPlanId] = useState<string>('');
   const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
   const [isSendingInvite, setIsSendingInvite] = useState(false);
+
+  // Profile state
+  const [profileSlug, setProfileSlug] = useState('');
+  const [specialization, setSpecialization] = useState('');
+  const [education, setEducation] = useState('');
+  const [experience, setExperience] = useState('');
+  const [pricingInfo, setPricingInfo] = useState('');
+  const [isPublicProfile, setIsPublicProfile] = useState(false);
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [facebookUrl, setFacebookUrl] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
 
   // Redirect if not personal trainer
   useEffect(() => {
@@ -176,6 +204,32 @@ export default function InstructorPage() {
       fetchWorkoutPlans();
     }
   }, [user, inviteDialogOpen]);
+
+  // Fetch PT profile
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await apiClient.get<any>('/me');
+        if (response) {
+          setProfileSlug(response.profileSlug || '');
+          setSpecialization(response.specialization || '');
+          setEducation(response.education || '');
+          setExperience(response.experience || '');
+          setPricingInfo(response.pricingInfo || '');
+          setIsPublicProfile(response.isPublicProfile || false);
+          setInstagramUrl(response.instagramUrl || '');
+          setFacebookUrl(response.facebookUrl || '');
+          setWebsiteUrl(response.websiteUrl || '');
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    if (user?.role === 'PersonalTrainer') {
+      fetchProfile();
+    }
+  }, [user]);
 
   const filteredClients = (clients || []).filter((c) =>
     c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -337,6 +391,50 @@ export default function InstructorPage() {
     }
   };
 
+  const handleSaveProfile = async () => {
+    // Validate slug format if provided
+    if (profileSlug && !/^[a-z0-9-]+$/.test(profileSlug)) {
+      toast({
+        title: 'Erro',
+        description: 'O URL deve conter apenas letras minúsculas, números e hífens',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSavingProfile(true);
+
+    try {
+      await apiClient.put('/personal/profile', {
+        ProfileSlug: profileSlug || null,
+        Specialization: specialization || null,
+        Education: education || null,
+        Experience: experience || null,
+        PricingInfo: pricingInfo || null,
+        IsPublicProfile: isPublicProfile,
+        InstagramUrl: instagramUrl || null,
+        FacebookUrl: facebookUrl || null,
+        WebsiteUrl: websiteUrl || null,
+      });
+
+      toast({
+        title: 'Perfil atualizado!',
+        description: 'Suas informações foram salvas com sucesso.',
+      });
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        'Não foi possível atualizar o perfil.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSavingProfile(false);
+    }
+  };
+
   if (user?.role !== 'PersonalTrainer') {
     return null;
   }
@@ -463,6 +561,10 @@ export default function InstructorPage() {
           <TabsTrigger value="progress" className="tap-scale">
             <TrendingUp className="mr-2 h-4 w-4" />
             Progresso
+          </TabsTrigger>
+          <TabsTrigger value="profile" className="tap-scale">
+            <Globe className="mr-2 h-4 w-4" />
+            Perfil Público
           </TabsTrigger>
         </TabsList>
 
@@ -720,6 +822,198 @@ export default function InstructorPage() {
                 Ver Progresso
               </Button>
             </Link>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="profile" className="space-y-4">
+          <Card className="glass border-primary/20">
+            <div className="p-6">
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-semibold flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-primary" />
+                    Perfil Público
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Configure seu perfil público para que alunos possam encontrar você
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="isPublic" className="text-sm">Perfil Público</Label>
+                  <input
+                    type="checkbox"
+                    id="isPublic"
+                    checked={isPublicProfile}
+                    onChange={(e) => setIsPublicProfile(e.target.checked)}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {/* Profile URL Slug */}
+                <div className="space-y-2">
+                  <Label htmlFor="profileSlug">URL do Perfil</Label>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">taktiq.app/trainer/</span>
+                    <Input
+                      id="profileSlug"
+                      value={profileSlug}
+                      onChange={(e) => setProfileSlug(e.target.value.toLowerCase())}
+                      placeholder="seu-nome"
+                      className="glass flex-1"
+                      disabled={isSavingProfile}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Apenas letras minúsculas, números e hífens. Ex: tiago-cordeiro
+                  </p>
+                </div>
+
+                {/* Specialization */}
+                <div className="space-y-2">
+                  <Label htmlFor="specialization">Especialização</Label>
+                  <Input
+                    id="specialization"
+                    value={specialization}
+                    onChange={(e) => setSpecialization(e.target.value)}
+                    placeholder="Ex: Musculação, Funcional, Crossfit..."
+                    className="glass"
+                    disabled={isSavingProfile}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Suas áreas de especialização e expertise
+                  </p>
+                </div>
+
+                {/* Education */}
+                <div className="space-y-2">
+                  <Label htmlFor="education">Formação e Certificações</Label>
+                  <Textarea
+                    id="education"
+                    value={education}
+                    onChange={(e) => setEducation(e.target.value)}
+                    placeholder="Descreva sua formação acadêmica e certificações profissionais..."
+                    className="glass min-h-[100px]"
+                    disabled={isSavingProfile}
+                  />
+                </div>
+
+                {/* Experience */}
+                <div className="space-y-2">
+                  <Label htmlFor="experience">Experiência Profissional</Label>
+                  <Textarea
+                    id="experience"
+                    value={experience}
+                    onChange={(e) => setExperience(e.target.value)}
+                    placeholder="Conte sobre sua experiência e trajetória profissional..."
+                    className="glass min-h-[100px]"
+                    disabled={isSavingProfile}
+                  />
+                </div>
+
+                {/* Pricing Info */}
+                <div className="space-y-2">
+                  <Label htmlFor="pricingInfo">Informações de Preços</Label>
+                  <Textarea
+                    id="pricingInfo"
+                    value={pricingInfo}
+                    onChange={(e) => setPricingInfo(e.target.value)}
+                    placeholder="Descreva seus planos e valores (ex: Plano mensal: R$ 150, Plano trimestral: R$ 400...)"
+                    className="glass min-h-[100px]"
+                    disabled={isSavingProfile}
+                  />
+                </div>
+
+                {/* Social Media Links */}
+                <div className="border-t border-border/50 pt-6">
+                  <h4 className="text-sm font-semibold mb-4">Redes Sociais e Contato</h4>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="instagramUrl" className="flex items-center gap-2">
+                        <Instagram className="h-4 w-4 text-pink-500" />
+                        Instagram
+                      </Label>
+                      <Input
+                        id="instagramUrl"
+                        value={instagramUrl}
+                        onChange={(e) => setInstagramUrl(e.target.value)}
+                        placeholder="https://instagram.com/seu-perfil"
+                        className="glass"
+                        disabled={isSavingProfile}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="facebookUrl" className="flex items-center gap-2">
+                        <Facebook className="h-4 w-4 text-blue-500" />
+                        Facebook
+                      </Label>
+                      <Input
+                        id="facebookUrl"
+                        value={facebookUrl}
+                        onChange={(e) => setFacebookUrl(e.target.value)}
+                        placeholder="https://facebook.com/seu-perfil"
+                        className="glass"
+                        disabled={isSavingProfile}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="websiteUrl" className="flex items-center gap-2">
+                        <Globe className="h-4 w-4 text-primary" />
+                        Site Pessoal
+                      </Label>
+                      <Input
+                        id="websiteUrl"
+                        value={websiteUrl}
+                        onChange={(e) => setWebsiteUrl(e.target.value)}
+                        placeholder="https://seusite.com"
+                        className="glass"
+                        disabled={isSavingProfile}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Save Button */}
+                <div className="border-t border-border/50 pt-6">
+                  <Button
+                    onClick={handleSaveProfile}
+                    disabled={isSavingProfile}
+                    className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+                  >
+                    {isSavingProfile ? (
+                      <>
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                        Salvando...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="mr-2 h-4 w-4" />
+                        Salvar Perfil
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {/* Preview Link */}
+                {profileSlug && isPublicProfile && (
+                  <div className="glass rounded-lg p-4 border border-primary/20">
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Seu perfil público estará disponível em:
+                    </p>
+                    <Link
+                      href={`/trainer/${profileSlug}`}
+                      className="text-primary font-medium hover:underline flex items-center gap-2"
+                    >
+                      <Globe className="h-4 w-4" />
+                      taktiq.app/trainer/{profileSlug}
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
           </Card>
         </TabsContent>
       </Tabs>
