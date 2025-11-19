@@ -197,4 +197,5 @@ app.MapUsersEndpoints();
 app.MapPublicEndpoints();
 app.MapAIEndpoints(); // AI-powered workout generation
 app.MapNotificationEndpoints();
+app.MapPostEndpoints(); // Personal Trainer blog posts
 app.Run();
