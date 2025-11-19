@@ -220,7 +220,7 @@ export default function AIWorkoutPage() {
 
   // Single workout mutation
   const generateWorkoutMutation = useMutation({
-    mutationFn: async (request: { prompt: string; fitnessLevel?: string }) => {
+    mutationFn: async (request: { prompt: string; fitnessLevel?: string; workoutLocation?: string }) => {
       return apiClient.post<AIWorkoutResponse>('/ai/generate-workout', request);
     },
     onSuccess: (data) => {
@@ -293,7 +293,7 @@ export default function AIWorkoutPage() {
       finalPrompt += `, ${locationText}`;
     }
 
-    generateWorkoutMutation.mutate({ prompt: finalPrompt, fitnessLevel });
+    generateWorkoutMutation.mutate({ prompt: finalPrompt, fitnessLevel, workoutLocation });
   };
 
   const handleGeneratePlan = () => {
@@ -726,46 +726,39 @@ export default function AIWorkoutPage() {
         </p>
       </div>
 
-      {/* Profile Completeness Banner */}
+      {/* Profile Completeness Banner - Compact */}
       {isProfileIncomplete && (
-        <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950/20">
+        <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950/20 py-2">
           <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-          <AlertTitle className="text-blue-900 dark:text-blue-100">
-            Melhore seus treinos com IA
-          </AlertTitle>
-          <AlertDescription className="text-blue-800 dark:text-blue-200">
-            Seu perfil está {profileCompleteness}% completo. Quanto mais informações você fornecer sobre lesões,
-            condições de saúde e objetivos, melhor a IA poderá personalizar seus treinos para você!{' '}
-            <Link href="/profile" className="font-medium underline underline-offset-4 hover:text-blue-600">
-              Complete seu perfil
+          <AlertDescription className="text-blue-800 dark:text-blue-200 text-sm">
+            <span className="font-medium">Perfil {profileCompleteness}% completo.</span>{' '}
+            <Link href="/profile" className="underline underline-offset-2 hover:text-blue-600">
+              Complete para treinos mais personalizados
             </Link>
           </AlertDescription>
         </Alert>
       )}
 
-      {/* Training Split Suggestion Banner */}
+      {/* Training Split Suggestion Banner - Compact */}
       {todaysSplit && (
-        <Alert className="border-primary/30 bg-primary/5 dark:bg-primary/10">
+        <Alert className="border-primary/30 bg-primary/5 dark:bg-primary/10 py-2">
           <Calendar className="h-4 w-4 text-primary" />
-          <AlertTitle className="text-foreground flex items-center gap-2">
-            📅 Sugestão de Hoje
-          </AlertTitle>
-          <AlertDescription className="text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <AlertDescription className="text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
             <span>
-              Seu treino de hoje é: <strong className="text-foreground">{todaysSplit}</strong>
+              📅 <strong className="text-foreground">{todaysSplit}</strong>
             </span>
             <div className="flex gap-2">
               <Button
                 size="sm"
                 variant="outline"
                 onClick={useTodaySuggestion}
-                className="hover-lift tap-scale"
+                className="h-7 text-xs"
               >
                 <Sparkles className="mr-1 h-3 w-3" />
-                Usar Sugestão
+                Usar
               </Button>
               <Link href="/training-split">
-                <Button size="sm" variant="ghost" className="hover-lift tap-scale">
+                <Button size="sm" variant="ghost" className="h-7 text-xs">
                   Configurar
                 </Button>
               </Link>
@@ -774,18 +767,15 @@ export default function AIWorkoutPage() {
         </Alert>
       )}
 
-      {/* No Training Split Banner */}
+      {/* No Training Split Banner - Compact */}
       {!todaysSplit && userProfile && (
-        <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950/20">
+        <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950/20 py-2">
           <Info className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-          <AlertTitle className="text-amber-900 dark:text-amber-100">
-            Configure sua divisão de treinos
-          </AlertTitle>
-          <AlertDescription className="text-amber-800 dark:text-amber-200">
-            Crie uma divisão semanal e receba sugestões automáticas de treino para cada dia!{' '}
-            <Link href="/training-split" className="font-medium underline underline-offset-4 hover:text-amber-600">
-              Configurar agora
+          <AlertDescription className="text-amber-800 dark:text-amber-200 text-sm">
+            <Link href="/training-split" className="font-medium underline underline-offset-2 hover:text-amber-600">
+              Configure sua divisão de treinos
             </Link>
+            {' '}para sugestões automáticas
           </AlertDescription>
         </Alert>
       )}

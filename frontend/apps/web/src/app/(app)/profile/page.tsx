@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/components/ui/use-toast';
 import { apiClient } from '@/lib/api';
 import { env } from '@/lib/env';
@@ -41,6 +42,7 @@ const profileSchema = z.object({
   healthConditions: z.string().optional(),
   exerciseGoal: z.string().optional(),
   preferredWorkoutLocation: z.string().optional(),
+  practicesBoxing: z.boolean().optional(),
 });
 
 const changePasswordSchema = z.object({
@@ -126,6 +128,7 @@ export default function ProfilePage() {
           healthConditions: data.healthConditions || '',
           exerciseGoal: data.exerciseGoal || '',
           preferredWorkoutLocation: data.preferredWorkoutLocation?.toString() || '0',
+          practicesBoxing: data.practicesBoxing || false,
         });
       } catch (error: any) {
         toast({
@@ -155,6 +158,7 @@ export default function ProfilePage() {
         healthConditions: data.healthConditions || null,
         exerciseGoal: data.exerciseGoal || null,
         preferredWorkoutLocation: data.preferredWorkoutLocation ? parseInt(data.preferredWorkoutLocation) : 0,
+        practicesBoxing: data.practicesBoxing || false,
       });
 
       toast({
@@ -534,6 +538,32 @@ export default function ProfilePage() {
                     />
                     <p className="text-xs text-muted-foreground">
                       Isso ajudará a IA a gerar treinos mais adequados aos equipamentos disponíveis.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Controller
+                      name="practicesBoxing"
+                      control={control}
+                      render={({ field }) => (
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="practicesBoxing"
+                            checked={field.value || false}
+                            onCheckedChange={field.onChange}
+                            disabled={!isEditing}
+                          />
+                          <Label
+                            htmlFor="practicesBoxing"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                          >
+                            🥊 Pratico boxe como treino suplementar
+                          </Label>
+                        </div>
+                      )}
+                    />
+                    <p className="text-xs text-muted-foreground ml-6">
+                      Ative esta opção se você pratica boxe e deseja incluir exercícios de boxe nos seus treinos.
                     </p>
                   </div>
                 </div>

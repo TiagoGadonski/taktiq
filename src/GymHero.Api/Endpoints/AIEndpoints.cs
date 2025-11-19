@@ -12,7 +12,8 @@ public record AIWorkoutRequest(
     string Prompt,
     string? FitnessLevel,
     int? Duration,
-    List<string>? Equipment
+    List<string>? Equipment,
+    string? WorkoutLocation  // ✅ NEW: "gym", "home", or "both" - overrides user profile preference
 );
 
 public record AIWorkoutPlanRequest(
@@ -109,7 +110,7 @@ public static class AIEndpoints
                 if (!hasGemini && !hasOpenAI)
                 {
                     logger.LogWarning("No AI API keys configured. Using enhanced mock generation.");
-                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile);
+                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation);
                 }
                 else
                 {
@@ -150,12 +151,17 @@ public static class AIEndpoints
                     if (!generated)
                     {
                         logger.LogWarning("All AI APIs failed. Using enhanced mock generation.");
-                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile);
+                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation);
                     }
                 }
 
-                // SERVER-SIDE VALIDATION: Filter out gym equipment for home workouts
-                if (userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home)
+                // ✅ SERVER-SIDE VALIDATION: Filter out gym equipment for home workouts
+                // Check request location first, then fall back to profile preference
+                var isHomeWorkoutRequest = !string.IsNullOrEmpty(request.WorkoutLocation)
+                    ? request.WorkoutLocation.ToLower() == "home"
+                    : userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+
+                if (isHomeWorkoutRequest)
                 {
                     // Comprehensive list of gym equipment keywords in Portuguese and English
                     var gymEquipment = new[] {
@@ -985,16 +991,21 @@ public static class AIEndpoints
         }
     }
 
-    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null)
+    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null, string? workoutLocation = null)
     {
         Console.WriteLine("=== MOCK GENERATION DEBUG ===");
         Console.WriteLine($"Prompt: {prompt}");
         Console.WriteLine($"Fitness Level Received: '{fitnessLevel ?? "NULL"}'");
         Console.WriteLine($"Exercise Goal: '{exerciseGoal ?? "NULL"}'");
 
-        // Check if user prefers home workouts
-        var isHomeWorkout = userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
-        Console.WriteLine($"Home Workout Preference: {isHomeWorkout}");
+        // ✅ Check workout location: prioritize request parameter, then fall back to user profile preference
+        var isHomeWorkout = !string.IsNullOrEmpty(workoutLocation)
+            ? workoutLocation.ToLower() == "home"
+            : userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+
+        Console.WriteLine($"Workout Location (Request): '{workoutLocation ?? "NULL"}'");
+        Console.WriteLine($"Workout Location (Profile): '{(userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home ? "home" : "gym")}'");
+        Console.WriteLine($"Final Home Workout Decision: {isHomeWorkout}");
 
         if (isHomeWorkout)
         {
