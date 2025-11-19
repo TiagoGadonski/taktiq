@@ -283,17 +283,15 @@ public static class AuthEndpoints
                     Goal = invitation.WorkoutPlan.Goal,
                     Duration = invitation.WorkoutPlan.Duration,
                     OwnerId = newUser.Id,
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedByPersonalTrainer = true
+                    IsActive = true
                 };
 
                 await context.WorkoutPlans.AddAsync(workoutPlanCopy, cancellationToken);
 
                 // Copy workouts if needed
                 var workouts = await context.Workouts
-                    .Include(w => w.WorkoutExercises)
-                    .Where(w => w.WorkoutPlanId == invitation.WorkoutPlanId)
+                    .Include(w => w.Exercises)
+                    .Where(w => w.PlanId == invitation.WorkoutPlanId)
                     .ToListAsync(cancellationToken);
 
                 foreach (var workout in workouts)
@@ -303,21 +301,21 @@ public static class AuthEndpoints
                         Id = Guid.NewGuid(),
                         Name = workout.Name,
                         DayOfWeek = workout.DayOfWeek,
-                        WorkoutPlanId = workoutPlanCopy.Id
+                        PlanId = workoutPlanCopy.Id
                     };
 
                     await context.Workouts.AddAsync(workoutCopy, cancellationToken);
 
                     // Copy exercises
-                    foreach (var exercise in workout.WorkoutExercises)
+                    foreach (var exercise in workout.Exercises)
                     {
                         var exerciseCopy = new WorkoutExercise
                         {
                             Id = Guid.NewGuid(),
                             WorkoutId = workoutCopy.Id,
                             ExerciseId = exercise.ExerciseId,
-                            Sets = exercise.Sets,
-                            Reps = exercise.Reps,
+                            TargetSets = exercise.TargetSets,
+                            TargetReps = exercise.TargetReps,
                             RestSeconds = exercise.RestSeconds,
                             Notes = exercise.Notes
                         };
@@ -330,7 +328,7 @@ public static class AuthEndpoints
             await context.SaveChangesAsync(cancellationToken);
 
             // Gerar token JWT para login automático
-            var token = jwtTokenGenerator.GenerateToken(newUser.Id, newUser.Name, newUser.Email, newUser.Role);
+            var token = jwtTokenGenerator.GenerateToken(newUser);
 
             return Results.Ok(new AuthResponse(
                 newUser.Id,

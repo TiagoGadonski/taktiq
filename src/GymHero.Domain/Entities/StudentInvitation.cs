@@ -19,7 +19,6 @@ public class StudentInvitation : BaseEntity
     public User? CreatedUser { get; set; }
 
     public string Status { get; set; } = "Pending"; // Pending, Activated, Expired
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public bool IsExpired => DateTime.UtcNow > ExpiresAt;
     public bool IsActivated => ActivatedAt.HasValue;
