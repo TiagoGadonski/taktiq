@@ -1,9 +1,11 @@
 using System.Security.Authentication;
 using System.Security.Claims;
+using GymHero.Domain.Entities;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Auth.Commands;
 using GymHero.Application.Features.Auth.Queries; // Adicionar este using
 using GymHero.Application.Common.Interfaces;
+using GymHero.Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -212,6 +214,136 @@ public static class AuthEndpoints
         .WithName("ResetPassword")
         .WithSummary("Reset password using a valid token")
         .Produces(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status400BadRequest);
+
+        // Endpoint para ativar conta através de convite de personal trainer
+        group.MapPost("/activate", async (
+            [FromBody] ActivateAccountRequest request,
+            IApplicationDbContext context,
+            IPasswordHasher passwordHasher,
+            IJwtTokenGenerator jwtTokenGenerator,
+            CancellationToken cancellationToken) =>
+        {
+            // Buscar convite válido
+            var invitation = await context.StudentInvitations
+                .Include(i => i.Trainer)
+                .Include(i => i.WorkoutPlan)
+                .FirstOrDefaultAsync(i =>
+                    i.ActivationToken == request.Token &&
+                    i.Status == "Pending" &&
+                    i.ExpiresAt > DateTime.UtcNow,
+                    cancellationToken);
+
+            if (invitation == null)
+            {
+                return Results.Json(
+                    new { message = "Convite inválido ou expirado." },
+                    statusCode: StatusCodes.Status400BadRequest);
+            }
+
+            // Verificar se o email já está em uso
+            var existingUser = await context.Users
+                .FirstOrDefaultAsync(u => u.Email == invitation.StudentEmail, cancellationToken);
+
+            if (existingUser != null)
+            {
+                return Results.Json(
+                    new { message = "Este email já está em uso." },
+                    statusCode: StatusCodes.Status400BadRequest);
+            }
+
+            // Criar novo usuário
+            var newUser = new User
+            {
+                Id = Guid.NewGuid(),
+                Name = request.Name,
+                Email = invitation.StudentEmail,
+                PasswordHash = passwordHasher.Hash(request.Password),
+                Role = "Aluno",
+                PersonalTrainerId = invitation.TrainerId,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                PreferredWorkoutLocation = (Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation
+            };
+
+            await context.Users.AddAsync(newUser, cancellationToken);
+
+            // Atualizar convite como ativado
+            invitation.Status = "Activated";
+            invitation.ActivatedAt = DateTime.UtcNow;
+            invitation.CreatedUserId = newUser.Id;
+
+            // Se houver plano de treino associado, copiar para o novo usuário
+            if (invitation.WorkoutPlanId.HasValue && invitation.WorkoutPlan != null)
+            {
+                var workoutPlanCopy = new WorkoutPlan
+                {
+                    Id = Guid.NewGuid(),
+                    Name = invitation.WorkoutPlan.Name,
+                    Goal = invitation.WorkoutPlan.Goal,
+                    Duration = invitation.WorkoutPlan.Duration,
+                    OwnerId = newUser.Id,
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedByPersonalTrainer = true
+                };
+
+                await context.WorkoutPlans.AddAsync(workoutPlanCopy, cancellationToken);
+
+                // Copy workouts if needed
+                var workouts = await context.Workouts
+                    .Include(w => w.WorkoutExercises)
+                    .Where(w => w.WorkoutPlanId == invitation.WorkoutPlanId)
+                    .ToListAsync(cancellationToken);
+
+                foreach (var workout in workouts)
+                {
+                    var workoutCopy = new Workout
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = workout.Name,
+                        DayOfWeek = workout.DayOfWeek,
+                        WorkoutPlanId = workoutPlanCopy.Id
+                    };
+
+                    await context.Workouts.AddAsync(workoutCopy, cancellationToken);
+
+                    // Copy exercises
+                    foreach (var exercise in workout.WorkoutExercises)
+                    {
+                        var exerciseCopy = new WorkoutExercise
+                        {
+                            Id = Guid.NewGuid(),
+                            WorkoutId = workoutCopy.Id,
+                            ExerciseId = exercise.ExerciseId,
+                            Sets = exercise.Sets,
+                            Reps = exercise.Reps,
+                            RestSeconds = exercise.RestSeconds,
+                            Notes = exercise.Notes
+                        };
+
+                        await context.WorkoutExercises.AddAsync(exerciseCopy, cancellationToken);
+                    }
+                }
+            }
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            // Gerar token JWT para login automático
+            var token = jwtTokenGenerator.GenerateToken(newUser.Id, newUser.Name, newUser.Email, newUser.Role);
+
+            return Results.Ok(new AuthResponse(
+                newUser.Id,
+                newUser.Name,
+                newUser.Email,
+                token,
+                newUser.Role,
+                newUser.ProfilePictureUrl
+            ));
+        })
+        .WithName("ActivateAccount")
+        .WithSummary("Activate account through personal trainer invitation")
+        .Produces<AuthResponse>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status400BadRequest);
     }
 }

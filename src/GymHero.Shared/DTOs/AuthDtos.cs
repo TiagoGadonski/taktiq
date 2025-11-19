@@ -35,7 +35,9 @@ public record AuthResponse(
     Guid Id,
     string Name,
     string Email,
-    string Token
+    string Token,
+    string? Role = null,
+    string? ProfilePictureUrl = null
 );
 
 public record ChangePasswordRequest
@@ -72,4 +74,24 @@ public record ResetPasswordRequest
     [Required(ErrorMessage = "A confirmação de senha é obrigatória")]
     [Compare(nameof(NewPassword), ErrorMessage = "As senhas não coincidem")]
     public string ConfirmPassword { get; set; } = "";
+}
+
+public record ActivateAccountRequest
+{
+    [Required(ErrorMessage = "O token de ativação é obrigatório")]
+    public string Token { get; set; } = "";
+
+    [Required(ErrorMessage = "O nome é obrigatório")]
+    public string Name { get; set; } = "";
+
+    [Required(ErrorMessage = "A senha é obrigatória")]
+    [MinLength(6, ErrorMessage = "A senha deve ter pelo menos 6 caracteres")]
+    public string Password { get; set; } = "";
+
+    [Required(ErrorMessage = "A confirmação de senha é obrigatória")]
+    [Compare(nameof(Password), ErrorMessage = "As senhas não coincidem")]
+    public string ConfirmPassword { get; set; } = "";
+
+    // Workout Location: 0 = Gym, 1 = Home, 2 = Both
+    public int PreferredWorkoutLocation { get; set; } = 0;
 }

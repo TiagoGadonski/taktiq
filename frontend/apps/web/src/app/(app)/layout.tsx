@@ -21,6 +21,7 @@ import {
   Sun,
   Calendar,
   Trophy,
+  MapPin,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -153,7 +154,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile" className="cursor-pointer">
+                  <Link href="/settings" className="cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
                     Configurações
                   </Link>
@@ -168,6 +169,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   <Link href="/challenges" className="cursor-pointer">
                     <Trophy className="mr-2 h-4 w-4" />
                     Desafios
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/gyms" className="cursor-pointer">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Academias Próximas
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -265,7 +272,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile" className="cursor-pointer">
+                  <Link href="/settings" className="cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
                     Configurações
                   </Link>
@@ -280,6 +287,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   <Link href="/challenges" className="cursor-pointer">
                     <Trophy className="mr-2 h-4 w-4" />
                     Desafios
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/gyms" className="cursor-pointer">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Academias Próximas
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -337,7 +350,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto pb-20 lg:pb-6 w-full">
-        <div className="container mx-auto p-3 sm:p-4 md:p-6 max-w-full">{children}</div>
+        <div className="container mx-auto px-4 py-6 lg:px-6 max-w-full">{children}</div>
       </main>
 
       {/* Bottom Tab Navigation - Mobile Only */}

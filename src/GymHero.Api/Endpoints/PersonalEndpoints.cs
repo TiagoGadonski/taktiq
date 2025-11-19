@@ -1,10 +1,13 @@
 using System.Security.Claims;
 using GymHero.Application.Common.Exceptions;
+using GymHero.Application.Common.Interfaces;
+using GymHero.Domain.Entities;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Personal.Commands;
 using GymHero.Application.Features.Personal.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymHero.Api.Endpoints;
 
@@ -149,5 +152,132 @@ public static class PersonalEndpoints
         })
         .WithName("GenerateWorkoutPlanForClient")
         .WithSummary("Generates a new workout plan for a specific client based on AI rules.");
+
+        // Student Invitation System
+        group.MapPost("/invitations", async (
+            [FromBody] CreateStudentInvitationRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            IEmailService emailService,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Check if email already exists as a user
+            var existingUser = await context.Users
+                .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
+
+            if (existingUser != null)
+            {
+                return Results.BadRequest(new { message = "Este email já possui uma conta ativa. Use a função de adicionar cliente existente." });
+            }
+
+            // Check if there's already a pending invitation for this email from this trainer
+            var existingInvitation = await context.StudentInvitations
+                .FirstOrDefaultAsync(i =>
+                    i.StudentEmail == request.Email &&
+                    i.TrainerId == trainerId &&
+                    i.Status == "Pending" &&
+                    i.ExpiresAt > DateTime.UtcNow,
+                    cancellationToken);
+
+            if (existingInvitation != null)
+            {
+                return Results.BadRequest(new { message = "Já existe um convite pendente para este email." });
+            }
+
+            // Get trainer info for email
+            var trainer = await context.Users.FindAsync(new object[] { trainerId }, cancellationToken: cancellationToken);
+            if (trainer == null)
+            {
+                return Results.NotFound(new { message = "Trainer not found" });
+            }
+
+            // Create invitation
+            var invitation = new StudentInvitation
+            {
+                TrainerId = trainerId,
+                StudentEmail = request.Email,
+                StudentName = request.Name,
+                WorkoutPlanId = request.WorkoutPlanId,
+                ActivationToken = Guid.NewGuid().ToString("N"), // 32-character hex string
+                ExpiresAt = DateTime.UtcNow.AddDays(7),
+                Status = "Pending",
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await context.StudentInvitations.AddAsync(invitation, cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
+
+            // Get workout plan name if provided
+            string workoutPlanName = "Plano Personalizado";
+            if (request.WorkoutPlanId.HasValue)
+            {
+                var workoutPlan = await context.WorkoutPlans.FindAsync(
+                    new object[] { request.WorkoutPlanId.Value },
+                    cancellationToken: cancellationToken);
+                if (workoutPlan != null)
+                {
+                    workoutPlanName = workoutPlan.Name;
+                }
+            }
+
+            // Send invitation email
+            await emailService.SendStudentInvitationEmailAsync(
+                request.Email,
+                trainer.Name,
+                invitation.ActivationToken,
+                workoutPlanName
+            );
+
+            return Results.Created($"/api/personal/invitations/{invitation.Id}", new
+            {
+                id = invitation.Id,
+                email = invitation.StudentEmail,
+                name = invitation.StudentName,
+                expiresAt = invitation.ExpiresAt,
+                status = invitation.Status
+            });
+        })
+        .WithName("CreateStudentInvitation")
+        .WithSummary("Creates an invitation for a new student and sends activation email");
+
+        // Get all invitations for this trainer
+        group.MapGet("/invitations", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            [FromQuery] string? status = null,
+            CancellationToken cancellationToken = default) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var query = context.StudentInvitations
+                .Where(i => i.TrainerId == trainerId);
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(i => i.Status == status);
+            }
+
+            var invitations = await query
+                .OrderByDescending(i => i.CreatedAt)
+                .Select(i => new
+                {
+                    id = i.Id,
+                    studentEmail = i.StudentEmail,
+                    studentName = i.StudentName,
+                    workoutPlanId = i.WorkoutPlanId,
+                    status = i.Status,
+                    createdAt = i.CreatedAt,
+                    expiresAt = i.ExpiresAt,
+                    activatedAt = i.ActivatedAt,
+                    isExpired = i.IsExpired
+                })
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(invitations);
+        })
+        .WithName("GetMyInvitations")
+        .WithSummary("Gets all student invitations created by this trainer");
     }
 }

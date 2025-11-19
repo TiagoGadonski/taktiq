@@ -26,6 +26,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<PasswordResetToken> PasswordResetTokens => Set<PasswordResetToken>();
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<UserActivityLog> UserActivityLogs => Set<UserActivityLog>();
+    public DbSet<StudentInvitation> StudentInvitations => Set<StudentInvitation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

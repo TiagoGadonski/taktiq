@@ -41,3 +41,16 @@ public record PersonalRecordResponse(
 public record AddClientNotesRequest(
     string Notes
 );
+
+/// <summary>
+/// DTO para criar um convite de aluno.
+/// </summary>
+public record CreateStudentInvitationRequest(
+    [Required(ErrorMessage = "O email é obrigatório.")]
+    [EmailAddress(ErrorMessage = "Email inválido.")]
+    string Email,
+
+    string? Name,
+
+    Guid? WorkoutPlanId
+);

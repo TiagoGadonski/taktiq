@@ -16,6 +16,11 @@ import {
   MoreVertical,
   Eye,
   ClipboardEdit,
+  Mail,
+  Send,
+  Clock,
+  CheckCircle,
+  XCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -40,6 +45,13 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { apiClient } from '@/lib/api';
 import { getAssetUrl } from '@/lib/env';
 
@@ -51,6 +63,24 @@ interface Client {
   createdAt: string;
   workoutPlans: number;
   lastWorkout?: string;
+}
+
+interface Invitation {
+  id: string;
+  studentEmail: string;
+  studentName?: string;
+  workoutPlanId?: string;
+  status: string;
+  createdAt: string;
+  expiresAt: string;
+  activatedAt?: string;
+  isExpired: boolean;
+}
+
+interface WorkoutPlan {
+  id: string;
+  name: string;
+  goal: string;
 }
 
 export default function InstructorPage() {
@@ -66,6 +96,15 @@ export default function InstructorPage() {
   const [clientNotes, setClientNotes] = useState('');
   const [clientEmail, setClientEmail] = useState('');
   const [isAddingClient, setIsAddingClient] = useState(false);
+
+  // Invitation state
+  const [invitations, setInvitations] = useState<Invitation[]>([]);
+  const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteName, setInviteName] = useState('');
+  const [selectedPlanId, setSelectedPlanId] = useState<string>('');
+  const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
+  const [isSendingInvite, setIsSendingInvite] = useState(false);
 
   // Redirect if not personal trainer
   useEffect(() => {
@@ -103,6 +142,40 @@ export default function InstructorPage() {
       fetchClients();
     }
   }, [user, toast]);
+
+  // Fetch invitations
+  useEffect(() => {
+    const fetchInvitations = async () => {
+      try {
+        const response = await apiClient.get<Invitation[]>('/personal/invitations');
+        setInvitations(Array.isArray(response) ? response : []);
+      } catch (error) {
+        console.error('Error fetching invitations:', error);
+        setInvitations([]);
+      }
+    };
+
+    if (user?.role === 'PersonalTrainer') {
+      fetchInvitations();
+    }
+  }, [user]);
+
+  // Fetch workout plans for invitation dialog
+  useEffect(() => {
+    const fetchWorkoutPlans = async () => {
+      try {
+        const response = await apiClient.get<WorkoutPlan[]>('/workout-plans');
+        setWorkoutPlans(Array.isArray(response) ? response : []);
+      } catch (error) {
+        console.error('Error fetching workout plans:', error);
+        setWorkoutPlans([]);
+      }
+    };
+
+    if (user?.role === 'PersonalTrainer' && inviteDialogOpen) {
+      fetchWorkoutPlans();
+    }
+  }, [user, inviteDialogOpen]);
 
   const filteredClients = (clients || []).filter((c) =>
     c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -201,6 +274,69 @@ export default function InstructorPage() {
     }
   };
 
+  const handleOpenInviteDialog = () => {
+    setInviteEmail('');
+    setInviteName('');
+    setSelectedPlanId('');
+    setInviteDialogOpen(true);
+  };
+
+  const handleSendInvite = async () => {
+    if (!inviteEmail.trim()) {
+      toast({
+        title: 'Erro',
+        description: 'Por favor, insira o email do aluno.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(inviteEmail)) {
+      toast({
+        title: 'Erro',
+        description: 'Por favor, insira um email válido.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSendingInvite(true);
+
+    try {
+      await apiClient.post('/personal/invitations', {
+        Email: inviteEmail.trim(),
+        Name: inviteName.trim() || null,
+        WorkoutPlanId: selectedPlanId || null,
+      });
+
+      toast({
+        title: 'Convite enviado!',
+        description: `Um email foi enviado para ${inviteEmail} com instruções para ativar a conta.`,
+      });
+
+      setInviteDialogOpen(false);
+      setInviteEmail('');
+      setInviteName('');
+      setSelectedPlanId('');
+
+      // Refresh invitations list
+      const response = await apiClient.get<Invitation[]>('/personal/invitations');
+      setInvitations(Array.isArray(response) ? response : []);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        'Não foi possível enviar o convite.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSendingInvite(false);
+    }
+  };
+
   if (user?.role !== 'PersonalTrainer') {
     return null;
   }
@@ -232,13 +368,23 @@ export default function InstructorPage() {
               Gerencie seus clientes, treinos e progresso
             </p>
           </div>
-          <Button
-            onClick={handleAddClient}
-            className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Adicionar Cliente
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={handleOpenInviteDialog}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Convidar Aluno
+            </Button>
+            <Button
+              onClick={handleAddClient}
+              variant="outline"
+              className="hover-lift tap-scale"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Adicionar Cliente
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -300,6 +446,15 @@ export default function InstructorPage() {
           <TabsTrigger value="clients" className="tap-scale">
             <Users className="mr-2 h-4 w-4" />
             Meus Clientes
+          </TabsTrigger>
+          <TabsTrigger value="invitations" className="tap-scale">
+            <Mail className="mr-2 h-4 w-4" />
+            Convites
+            {invitations.filter(i => i.status === 'Pending').length > 0 && (
+              <Badge className="ml-2 bg-primary/20 text-primary border-primary/30">
+                {invitations.filter(i => i.status === 'Pending').length}
+              </Badge>
+            )}
           </TabsTrigger>
           <TabsTrigger value="plans" className="tap-scale">
             <Dumbbell className="mr-2 h-4 w-4" />
@@ -443,6 +598,97 @@ export default function InstructorPage() {
           )}
         </TabsContent>
 
+        <TabsContent value="invitations" className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {invitations.map((invitation, index) => (
+              <Card
+                key={invitation.id}
+                className="glass border-primary/20 hover-lift tap-scale animate-scale-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 bg-primary/20 rounded-lg">
+                        <Mail className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">{invitation.studentName || 'Novo Aluno'}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {invitation.studentEmail}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Status</span>
+                      {invitation.status === 'Pending' && !invitation.isExpired && (
+                        <Badge className="bg-yellow-500/20 text-yellow-500 border-yellow-500/30">
+                          <Clock className="h-3 w-3 mr-1" />
+                          Pendente
+                        </Badge>
+                      )}
+                      {invitation.status === 'Activated' && (
+                        <Badge className="bg-green-500/20 text-green-500 border-green-500/30">
+                          <CheckCircle className="h-3 w-3 mr-1" />
+                          Ativado
+                        </Badge>
+                      )}
+                      {invitation.isExpired && (
+                        <Badge className="bg-red-500/20 text-red-500 border-red-500/30">
+                          <XCircle className="h-3 w-3 mr-1" />
+                          Expirado
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Enviado em</span>
+                      <span className="font-medium">
+                        {new Date(invitation.createdAt).toLocaleDateString('pt-BR')}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Expira em</span>
+                      <span className="font-medium">
+                        {new Date(invitation.expiresAt).toLocaleDateString('pt-BR')}
+                      </span>
+                    </div>
+                    {invitation.activatedAt && (
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Ativado em</span>
+                        <span className="font-medium text-green-500">
+                          {new Date(invitation.activatedAt).toLocaleDateString('pt-BR')}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {invitations.length === 0 && (
+            <div className="text-center py-12">
+              <Mail className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
+              <h3 className="text-lg font-semibold mb-2">
+                Nenhum convite enviado
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Convide novos alunos para começarem a treinar com você
+              </p>
+              <Button
+                onClick={handleOpenInviteDialog}
+                className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+              >
+                <Mail className="mr-2 h-4 w-4" />
+                Enviar Convite
+              </Button>
+            </div>
+          )}
+        </TabsContent>
+
         <TabsContent value="plans">
           <Card className="glass border-primary/20 p-12 text-center">
             <Dumbbell className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
@@ -571,6 +817,109 @@ export default function InstructorPage() {
                 <>
                   <Plus className="mr-2 h-4 w-4" />
                   Adicionar
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Invite Student Dialog */}
+      <Dialog open={inviteDialogOpen} onOpenChange={setInviteDialogOpen}>
+        <DialogContent className="glass">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Mail className="h-5 w-5 text-primary" />
+              Convidar Novo Aluno
+            </DialogTitle>
+            <DialogDescription>
+              Envie um convite por email para um aluno que ainda não possui conta na plataforma
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="inviteEmail">
+                Email do Aluno <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="inviteEmail"
+                type="email"
+                placeholder="aluno@exemplo.com"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isSendingInvite) {
+                    handleSendInvite();
+                  }
+                }}
+                className="glass"
+                disabled={isSendingInvite}
+              />
+              <p className="text-xs text-muted-foreground">
+                Um email será enviado com um link para ativação da conta
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="inviteName">Nome do Aluno (opcional)</Label>
+              <Input
+                id="inviteName"
+                type="text"
+                placeholder="Nome do aluno"
+                value={inviteName}
+                onChange={(e) => setInviteName(e.target.value)}
+                className="glass"
+                disabled={isSendingInvite}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="workoutPlan">Plano de Treino (opcional)</Label>
+              <Select
+                value={selectedPlanId}
+                onValueChange={setSelectedPlanId}
+                disabled={isSendingInvite}
+              >
+                <SelectTrigger className="glass">
+                  <SelectValue placeholder="Selecione um plano (opcional)" />
+                </SelectTrigger>
+                <SelectContent className="glass">
+                  <SelectItem value="">Nenhum plano</SelectItem>
+                  {workoutPlans.map((plan) => (
+                    <SelectItem key={plan.id} value={plan.id}>
+                      {plan.name} - {plan.goal}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                O plano selecionado será copiado para o aluno ao ativar a conta
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setInviteDialogOpen(false)}
+              className="hover-lift tap-scale"
+              disabled={isSendingInvite}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSendInvite}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+              disabled={isSendingInvite}
+            >
+              {isSendingInvite ? (
+                <>
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                  Enviando...
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-4 w-4" />
+                  Enviar Convite
                 </>
               )}
             </Button>
