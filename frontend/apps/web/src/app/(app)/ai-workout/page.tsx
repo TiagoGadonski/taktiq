@@ -815,25 +815,22 @@ export default function AIWorkoutPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="duration">Duração do Treino: {duration} minutos</Label>
-                <input
-                  id="duration"
-                  type="range"
-                  min="15"
-                  max="120"
-                  step="15"
-                  value={duration}
-                  onChange={(e) => setDuration(parseInt(e.target.value))}
-                  disabled={generateWorkoutMutation.isPending}
-                  className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary"
-                />
-                <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>15 min</span>
-                  <span>30 min</span>
-                  <span>45 min</span>
-                  <span>60 min</span>
-                  <span>90 min</span>
-                  <span>120 min</span>
+                <Label>Duração do Treino</Label>
+                <div className="grid grid-cols-4 gap-2">
+                  {[30, 45, 60, 90].map((mins) => (
+                    <button
+                      key={mins}
+                      onClick={() => setDuration(mins)}
+                      disabled={generateWorkoutMutation.isPending}
+                      className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                        duration === mins
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'bg-background border-input hover:bg-accent'
+                      }`}
+                    >
+                      {mins} min
+                    </button>
+                  ))}
                 </div>
               </div>
 

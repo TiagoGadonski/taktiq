@@ -229,13 +229,13 @@ export default function WorkoutPage() {
     setIsAddExerciseOpen(false);
   };
 
-  const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[]) => {
+  const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[], replaced: Record<string, any> = {}) => {
     // If no exercises, don't auto-complete
     if (!exercises || exercises.length === 0) return false;
 
     // Check if all exercises have completed their target sets
     const allExercisesCompleted = exercises.every((exercise) => {
-      const displayExercise = replacedExercises[exercise.id] || exercise;
+      const displayExercise = replaced[exercise.id] || exercise;
       const exerciseSets = sets.filter((s) => s.exerciseId === displayExercise.exerciseId);
       return exerciseSets.length >= exercise.targetSets;
     });
@@ -263,6 +263,7 @@ export default function WorkoutPage() {
     if (!currentSession) return;
 
     try {
+      setShowCompletionModal(false); // Close modal before completing
       await completeSession({ sessionId: currentSession.id, notes });
       const motivationalMessage = getRandomWorkoutMessage();
       toast({
@@ -276,6 +277,7 @@ export default function WorkoutPage() {
         title: 'Erro ao concluir treino',
         description: error.message,
       });
+      setShowCompletionModal(false); // Close modal on error too
     }
   };
 
@@ -350,7 +352,7 @@ export default function WorkoutPage() {
         // Simulate the new sets array with the just-added set
         const updatedSets = [...(currentSession.sets || []), { ...setData, id: 'temp', exerciseId } as WorkoutSet];
 
-        if (checkWorkoutCompletion(exercisesToCheck, updatedSets)) {
+        if (checkWorkoutCompletion(exercisesToCheck, updatedSets, replacedExercises)) {
           // All exercises completed! Show completion modal
           setShowCompletionModal(true);
         }

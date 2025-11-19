@@ -1,12 +1,16 @@
 using System.Security.Claims;
 using GymHero.Application.Common.Exceptions;
+using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Sessions.Commands;
 using GymHero.Application.Features.Sessions.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymHero.Api.Endpoints;
+
+public record UpdateSetRequest(int? Reps, double? Weight, int? Rpe);
 
 public static class SessionEndpoints
 {
@@ -142,5 +146,71 @@ public static class SessionEndpoints
         })
         .WithName("CancelWorkoutSession")
         .WithSummary("Cancels an active workout session and removes all progress");
+    }
+
+    public static void MapSetEndpoints(this IEndpointRouteBuilder app)
+    {
+        var group = app.MapGroup("/api/sets")
+                       .WithTags("Workout Sets")
+                       .RequireAuthorization();
+
+        group.MapPatch("/{setId:guid}", async (
+            Guid setId,
+            [FromBody] UpdateSetRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var set = await context.WorkoutSets
+                .Include(s => s.WorkoutSession)
+                .FirstOrDefaultAsync(s => s.Id == setId, cancellationToken);
+
+            if (set == null)
+                return Results.NotFound(new { message = "Set not found" });
+
+            if (set.WorkoutSession.OwnerId != ownerId)
+                return Results.Forbid();
+
+            if (request.Reps.HasValue)
+                set.Reps = request.Reps;
+            if (request.Weight.HasValue)
+                set.Load = request.Weight;
+            if (request.Rpe.HasValue)
+                set.Rpe = request.Rpe;
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(set);
+        })
+        .WithName("UpdateWorkoutSet")
+        .WithSummary("Updates an existing workout set");
+
+        group.MapDelete("/{setId:guid}", async (
+            Guid setId,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var set = await context.WorkoutSets
+                .Include(s => s.WorkoutSession)
+                .FirstOrDefaultAsync(s => s.Id == setId, cancellationToken);
+
+            if (set == null)
+                return Results.NotFound(new { message = "Set not found" });
+
+            if (set.WorkoutSession.OwnerId != ownerId)
+                return Results.Forbid();
+
+            context.WorkoutSets.Remove(set);
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.NoContent();
+        })
+        .WithName("DeleteWorkoutSet")
+        .WithSummary("Deletes a workout set");
     }
 }

@@ -184,6 +184,7 @@ app.MapAuthEndpoints(); // Nosso método de extensão para os endpoints de auten
 app.MapWorkoutPlanEndpoints();
 app.MapExerciseEndpoints();
 app.MapSessionEndpoints();
+app.MapSetEndpoints();
 app.MapProgressEndpoints();
 app.MapAdminEndpoints();
 app.MapMeEndpoints();
