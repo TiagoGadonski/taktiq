@@ -39,6 +39,17 @@ public class User : BaseEntity
     public string Role { get; set; } = "Aluno";
     public bool IsActive { get; set; } = true; // Indica se o usuário está ativo ou não
     public DateTime? LastLoginAt { get; set; } // Data/hora do último login do usuário
+
+    // --- PERSONAL TRAINER PROFILE FIELDS ---
+    public string? ProfileSlug { get; set; } // Custom URL slug (e.g., "tiago-cordeiro" for taktiq.app/trainer/tiago-cordeiro)
+    public string? Specialization { get; set; } // Área de especialização (ex: "Musculação", "Funcional", "Crossfit")
+    public string? Education { get; set; } // Formação acadêmica e certificações
+    public string? Experience { get; set; } // Experiência profissional e carreira
+    public string? PricingInfo { get; set; } // Informações sobre preços e planos
+    public bool IsPublicProfile { get; set; } = false; // Se o perfil público está ativo
+    public string? InstagramUrl { get; set; } // URL do Instagram
+    public string? FacebookUrl { get; set; } // URL do Facebook
+    public string? WebsiteUrl { get; set; } // URL do site pessoal
     // --- RELAÇÃO PARA O ALUNO ---
     // Se este utilizador for um "Aluno", aqui guardaremos o ID do seu Personal Trainer.
     // A interrogação (?) indica que pode ser nulo (um aluno pode não ter um personal).

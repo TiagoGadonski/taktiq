@@ -54,3 +54,38 @@ public record CreateStudentInvitationRequest(
 
     Guid? WorkoutPlanId
 );
+
+/// <summary>
+/// DTO para atualizar perfil público do Personal Trainer.
+/// </summary>
+public record UpdatePersonalProfileRequest
+{
+    public string? ProfileSlug { get; set; }
+    public string? Specialization { get; set; }
+    public string? Education { get; set; }
+    public string? Experience { get; set; }
+    public string? PricingInfo { get; set; }
+    public bool? IsPublicProfile { get; set; }
+    public string? InstagramUrl { get; set; }
+    public string? FacebookUrl { get; set; }
+    public string? WebsiteUrl { get; set; }
+}
+
+/// <summary>
+/// DTO para resposta do perfil público do Personal Trainer.
+/// </summary>
+public record PublicPersonalProfileResponse(
+    Guid Id,
+    string Name,
+    string? ProfilePictureUrl,
+    string? Bio,
+    string? Location,
+    string? Specialization,
+    string? Education,
+    string? Experience,
+    string? PricingInfo,
+    string? InstagramUrl,
+    string? FacebookUrl,
+    string? WebsiteUrl,
+    int StudentCount
+);

@@ -279,5 +279,97 @@ public static class PersonalEndpoints
         })
         .WithName("GetMyInvitations")
         .WithSummary("Gets all student invitations created by this trainer");
+
+        // Update Personal Trainer profile
+        group.MapPut("/profile", async (
+            [FromBody] UpdatePersonalProfileRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var trainer = await context.Users.FindAsync(new object[] { trainerId }, cancellationToken);
+            if (trainer == null)
+            {
+                return Results.NotFound(new { message = "Personal Trainer não encontrado" });
+            }
+
+            // Validate slug uniqueness if it's being changed
+            if (!string.IsNullOrWhiteSpace(request.ProfileSlug) && request.ProfileSlug != trainer.ProfileSlug)
+            {
+                var slugExists = await context.Users
+                    .AnyAsync(u => u.ProfileSlug == request.ProfileSlug && u.Id != trainerId, cancellationToken);
+
+                if (slugExists)
+                {
+                    return Results.BadRequest(new { message = "Este URL já está em uso por outro personal trainer" });
+                }
+
+                // Validate slug format (lowercase, alphanumeric and hyphens only)
+                if (!System.Text.RegularExpressions.Regex.IsMatch(request.ProfileSlug, @"^[a-z0-9-]+$"))
+                {
+                    return Results.BadRequest(new { message = "O URL deve conter apenas letras minúsculas, números e hífens" });
+                }
+
+                trainer.ProfileSlug = request.ProfileSlug;
+            }
+
+            if (request.Specialization != null) trainer.Specialization = request.Specialization;
+            if (request.Education != null) trainer.Education = request.Education;
+            if (request.Experience != null) trainer.Experience = request.Experience;
+            if (request.PricingInfo != null) trainer.PricingInfo = request.PricingInfo;
+            if (request.IsPublicProfile.HasValue) trainer.IsPublicProfile = request.IsPublicProfile.Value;
+            if (request.InstagramUrl != null) trainer.InstagramUrl = request.InstagramUrl;
+            if (request.FacebookUrl != null) trainer.FacebookUrl = request.FacebookUrl;
+            if (request.WebsiteUrl != null) trainer.WebsiteUrl = request.WebsiteUrl;
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Perfil atualizado com sucesso" });
+        })
+        .WithName("UpdatePersonalProfile")
+        .WithSummary("Updates the personal trainer's public profile");
+    }
+
+    public static void MapPublicPersonalEndpoints(this IEndpointRouteBuilder app)
+    {
+        var group = app.MapGroup("/api/trainer").WithTags("Public Personal Trainer");
+
+        // Get public profile by slug (no authentication required)
+        group.MapGet("/{slug}", async (
+            string slug,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainer = await context.Users
+                .Where(u => u.ProfileSlug == slug && u.IsPublicProfile && u.Role == "PersonalTrainer")
+                .Select(u => new PublicPersonalProfileResponse(
+                    u.Id,
+                    u.Name,
+                    u.ProfilePictureUrl,
+                    u.Bio,
+                    u.Location,
+                    u.Specialization,
+                    u.Education,
+                    u.Experience,
+                    u.PricingInfo,
+                    u.InstagramUrl,
+                    u.FacebookUrl,
+                    u.WebsiteUrl,
+                    u.Clients.Count
+                ))
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (trainer == null)
+            {
+                return Results.NotFound(new { message = "Personal Trainer não encontrado" });
+            }
+
+            return Results.Ok(trainer);
+        })
+        .WithName("GetPublicPersonalProfile")
+        .WithSummary("Gets a personal trainer's public profile by their slug")
+        .AllowAnonymous();
     }
 }
