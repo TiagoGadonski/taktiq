@@ -170,6 +170,9 @@ public static class SessionEndpoints
             if (set == null)
                 return Results.NotFound(new { message = "Set not found" });
 
+            if (set.WorkoutSession == null)
+                return Results.BadRequest(new { message = "Workout session not found" });
+
             if (set.WorkoutSession.OwnerId != ownerId)
                 return Results.Forbid();
 
@@ -201,6 +204,9 @@ public static class SessionEndpoints
 
             if (set == null)
                 return Results.NotFound(new { message = "Set not found" });
+
+            if (set.WorkoutSession == null)
+                return Results.BadRequest(new { message = "Workout session not found" });
 
             if (set.WorkoutSession.OwnerId != ownerId)
                 return Results.Forbid();
