@@ -185,7 +185,19 @@ public static class SessionEndpoints
 
             await context.SaveChangesAsync(cancellationToken);
 
-            return Results.Ok(set);
+            // Return simple DTO to avoid circular reference issues
+            return Results.Ok(new
+            {
+                id = set.Id,
+                sessionId = set.WorkoutSessionId,
+                exerciseId = set.ExerciseId,
+                setNumber = set.SetNumber,
+                reps = set.Reps,
+                weight = set.Load,
+                rpe = set.Rpe,
+                completed = set.Completed,
+                isAddedDuringSession = set.IsAddedDuringSession
+            });
         })
         .WithName("UpdateWorkoutSet")
         .WithSummary("Updates an existing workout set");
