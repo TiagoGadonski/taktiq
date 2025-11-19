@@ -237,8 +237,25 @@ public static class AdminEndpoints
                 endDate,
                 cancellationToken);
 
+            // Transform to DTO to avoid circular references and provide proper field names
+            var logDtos = logs.Select(log => new {
+                id = log.Id,
+                userId = log.UserId,
+                userName = log.User?.Name,
+                userEmail = log.User?.Email,
+                action = log.Action,
+                endpoint = log.Endpoint,
+                httpMethod = log.HttpMethod,
+                statusCode = log.StatusCode,
+                responseTimeMs = log.ResponseTimeMs,
+                ipAddress = log.IpAddress,
+                userAgent = log.UserAgent,
+                timestamp = log.Timestamp,
+                errorMessage = log.ErrorMessage
+            });
+
             return Results.Ok(new {
-                logs,
+                logs = logDtos,
                 pagination = new {
                     currentPage = page,
                     pageSize,
