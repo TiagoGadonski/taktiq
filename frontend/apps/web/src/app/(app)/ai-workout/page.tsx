@@ -726,58 +726,82 @@ export default function AIWorkoutPage() {
         </p>
       </div>
 
-      {/* Profile Completeness Banner - Compact */}
+      {/* Profile Completeness Banner - Minimalist */}
       {isProfileIncomplete && (
-        <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950/20 py-2">
-          <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-          <AlertDescription className="text-blue-800 dark:text-blue-200 text-sm">
-            <span className="font-medium">Perfil {profileCompleteness}% completo.</span>{' '}
-            <Link href="/profile" className="underline underline-offset-2 hover:text-blue-600">
-              Complete para treinos mais personalizados
-            </Link>
-          </AlertDescription>
-        </Alert>
+        <div className="glass rounded-lg p-3 border border-blue-200/50 dark:border-blue-800/50">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-muted-foreground">
+                Seu perfil está <span className="font-semibold text-foreground">{profileCompleteness}% completo</span>
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                <Link href="/profile" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                  Complete seu perfil
+                </Link>
+                {' '}para treinos ainda mais personalizados às suas necessidades
+              </p>
+            </div>
+          </div>
+        </div>
       )}
 
-      {/* Training Split Suggestion Banner - Compact */}
+      {/* Training Split Suggestion Banner - Minimalist */}
       {todaysSplit && (
-        <Alert className="border-primary/30 bg-primary/5 dark:bg-primary/10 py-2">
-          <Calendar className="h-4 w-4 text-primary" />
-          <AlertDescription className="text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
-            <span>
-              📅 <strong className="text-foreground">{todaysSplit}</strong>
-            </span>
-            <div className="flex gap-2">
+        <div className="glass rounded-lg p-3 border border-primary/20">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <Calendar className="h-4 w-4 text-primary" />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground">Sugestão de hoje</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{todaysSplit}</p>
+            </div>
+            <div className="flex gap-1.5 flex-shrink-0">
               <Button
                 size="sm"
                 variant="outline"
                 onClick={useTodaySuggestion}
-                className="h-7 text-xs"
+                className="h-8 text-xs px-3"
               >
-                <Sparkles className="mr-1 h-3 w-3" />
+                <Sparkles className="mr-1.5 h-3 w-3" />
                 Usar
               </Button>
               <Link href="/training-split">
-                <Button size="sm" variant="ghost" className="h-7 text-xs">
-                  Configurar
+                <Button size="sm" variant="ghost" className="h-8 text-xs px-3">
+                  Editar
                 </Button>
               </Link>
             </div>
-          </AlertDescription>
-        </Alert>
+          </div>
+        </div>
       )}
 
-      {/* No Training Split Banner - Compact */}
+      {/* No Training Split Banner - Minimalist */}
       {!todaysSplit && userProfile && (
-        <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950/20 py-2">
-          <Info className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-          <AlertDescription className="text-amber-800 dark:text-amber-200 text-sm">
-            <Link href="/training-split" className="font-medium underline underline-offset-2 hover:text-amber-600">
-              Configure sua divisão de treinos
-            </Link>
-            {' '}para sugestões automáticas
-          </AlertDescription>
-        </Alert>
+        <div className="glass rounded-lg p-3 border border-amber-200/50 dark:border-amber-800/50">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <div className="h-8 w-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                <Info className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-muted-foreground">
+                <Link href="/training-split" className="text-amber-600 dark:text-amber-400 hover:underline font-medium">
+                  Configure sua divisão de treinos
+                </Link>
+                {' '}e receba sugestões personalizadas diárias baseadas no seu planejamento
+              </p>
+            </div>
+          </div>
+        </div>
       )}
 
       <Tabs defaultValue="workout" className="w-full">
@@ -815,17 +839,17 @@ export default function AIWorkoutPage() {
               </div>
 
               <div className="space-y-2">
-                <Label>Duração do Treino</Label>
+                <Label className="text-sm font-medium">Duração do Treino</Label>
                 <div className="grid grid-cols-4 gap-2">
                   {[30, 45, 60, 90].map((mins) => (
                     <button
                       key={mins}
                       onClick={() => setDuration(mins)}
                       disabled={generateWorkoutMutation.isPending}
-                      className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                      className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                         duration === mins
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-background border-input hover:bg-accent'
+                          ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                          : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                       }`}
                     >
                       {mins} min
@@ -836,17 +860,17 @@ export default function AIWorkoutPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Nível de Condicionamento</Label>
+                  <Label className="text-sm font-medium">Nível de Condicionamento</Label>
                   <div className="grid grid-cols-3 gap-2">
                     {(['beginner', 'intermediate', 'advanced'] as const).map((level) => (
                       <button
                         key={level}
                         onClick={() => setFitnessLevel(level)}
                         disabled={generateWorkoutMutation.isPending}
-                        className={`px-3 py-2 text-sm rounded-md border transition-colors ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                           fitnessLevel === level
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
                         {level === 'beginner' && 'Iniciante'}
@@ -858,7 +882,7 @@ export default function AIWorkoutPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Local do Treino</Label>
+                  <Label className="text-sm font-medium">Local do Treino</Label>
                   <div className="grid grid-cols-3 gap-2">
                     {(['gym', 'home', 'both'] as const).map((location) => (
                       <button
@@ -866,15 +890,15 @@ export default function AIWorkoutPage() {
                         onClick={() => setWorkoutLocation(location)}
                         disabled={generateWorkoutMutation.isPending}
                         title={location === 'gym' ? 'Academia' : location === 'home' ? 'Casa' : 'Ambos'}
-                        className={`px-3 py-2 text-sm rounded-md border transition-colors flex items-center justify-center ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all flex items-center justify-center ${
                           workoutLocation === location
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
-                        {location === 'gym' && <Building2 className="h-5 w-5" />}
-                        {location === 'home' && <Home className="h-5 w-5" />}
-                        {location === 'both' && '🏠🏋️'}
+                        {location === 'gym' && <Building2 className="h-4 w-4" />}
+                        {location === 'home' && <Home className="h-4 w-4" />}
+                        {location === 'both' && <span className="text-xs">🏠🏋️</span>}
                       </button>
                     ))}
                   </div>
@@ -884,8 +908,7 @@ export default function AIWorkoutPage() {
               <Button
                 onClick={handleGenerateWorkout}
                 disabled={generateWorkoutMutation.isPending}
-                className="w-full"
-                size="lg"
+                className="w-full h-10"
               >
                 {generateWorkoutMutation.isPending ? (
                   <>
@@ -1063,17 +1086,17 @@ export default function AIWorkoutPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label>Nível de Condicionamento</Label>
+                  <Label className="text-sm font-medium">Nível de Condicionamento</Label>
                   <div className="grid grid-cols-3 gap-2">
                     {(['beginner', 'intermediate', 'advanced'] as const).map((level) => (
                       <button
                         key={level}
                         onClick={() => setPlanFitnessLevel(level)}
                         disabled={generatePlanMutation.isPending}
-                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                           planFitnessLevel === level
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
                         {level === 'beginner' && 'Inic.'}
@@ -1085,17 +1108,17 @@ export default function AIWorkoutPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Dias por Semana</Label>
+                  <Label className="text-sm font-medium">Dias por Semana</Label>
                   <div className="grid grid-cols-4 gap-2">
                     {[2, 3, 4, 5].map((days) => (
                       <button
                         key={days}
                         onClick={() => setDaysPerWeek(days)}
                         disabled={generatePlanMutation.isPending}
-                        className={`px-3 py-2 text-sm rounded-md border transition-colors ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                           daysPerWeek === days
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
                         {days}
@@ -1105,7 +1128,7 @@ export default function AIWorkoutPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Local do Treino</Label>
+                  <Label className="text-sm font-medium">Local do Treino</Label>
                   <div className="grid grid-cols-3 gap-2">
                     {(['gym', 'home', 'both'] as const).map((location) => (
                       <button
@@ -1113,15 +1136,15 @@ export default function AIWorkoutPage() {
                         onClick={() => setPlanWorkoutLocation(location)}
                         disabled={generatePlanMutation.isPending}
                         title={location === 'gym' ? 'Academia' : location === 'home' ? 'Casa' : 'Ambos'}
-                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors flex items-center justify-center ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all flex items-center justify-center ${
                           planWorkoutLocation === location
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
-                        {location === 'gym' && <Building2 className="h-5 w-5" />}
-                        {location === 'home' && <Home className="h-5 w-5" />}
-                        {location === 'both' && '🏠🏋️'}
+                        {location === 'gym' && <Building2 className="h-4 w-4" />}
+                        {location === 'home' && <Home className="h-4 w-4" />}
+                        {location === 'both' && <span className="text-xs">🏠🏋️</span>}
                       </button>
                     ))}
                   </div>
@@ -1130,17 +1153,17 @@ export default function AIWorkoutPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Duração por Treino</Label>
+                  <Label className="text-sm font-medium">Duração por Treino</Label>
                   <div className="grid grid-cols-4 gap-2">
                     {[30, 45, 60, 90].map((mins) => (
                       <button
                         key={mins}
                         onClick={() => setPlanDuration(mins)}
                         disabled={generatePlanMutation.isPending}
-                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                           planDuration === mins
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
                         {mins}min
@@ -1150,17 +1173,17 @@ export default function AIWorkoutPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Duração do Plano</Label>
+                  <Label className="text-sm font-medium">Duração do Plano</Label>
                   <div className="grid grid-cols-4 gap-2">
                     {[4, 6, 8, 12].map((weeks) => (
                       <button
                         key={weeks}
                         onClick={() => setWeeksCount(weeks)}
                         disabled={generatePlanMutation.isPending}
-                        className={`px-2 py-2 text-xs sm:text-sm rounded-md border transition-colors ${
+                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
                           weeksCount === weeks
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-background border-input hover:bg-accent'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
                         }`}
                       >
                         {weeks}sem
@@ -1173,8 +1196,7 @@ export default function AIWorkoutPage() {
               <Button
                 onClick={handleGeneratePlan}
                 disabled={generatePlanMutation.isPending}
-                className="w-full"
-                size="lg"
+                className="w-full h-10"
               >
                 {generatePlanMutation.isPending ? (
                   <>
