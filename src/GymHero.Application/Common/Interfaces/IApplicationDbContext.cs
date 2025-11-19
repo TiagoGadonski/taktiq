@@ -25,6 +25,7 @@ public interface IApplicationDbContext
     DbSet<Notification> Notifications { get; }
     DbSet<UserActivityLog> UserActivityLogs { get; }
     DbSet<StudentInvitation> StudentInvitations { get; }
+    DbSet<Post> Posts { get; }
 
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
