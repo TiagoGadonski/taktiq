@@ -261,7 +261,13 @@ export class SetApi {
   }
 
   async update(id: string, data: Partial<WorkoutSet>): Promise<WorkoutSet> {
-    return this.client.patch<WorkoutSet>(`/sets/${id}`, data);
+    // Transform to match backend UpdateSetRequest (Reps, Weight, Rpe)
+    const backendPayload: any = {};
+    if (data.reps !== undefined) backendPayload.reps = data.reps;
+    if (data.weight !== undefined) backendPayload.weight = data.weight;
+    if (data.rpe !== undefined) backendPayload.rpe = data.rpe;
+
+    return this.client.patch<WorkoutSet>(`/sets/${id}`, backendPayload);
   }
 
   async delete(id: string): Promise<void> {
