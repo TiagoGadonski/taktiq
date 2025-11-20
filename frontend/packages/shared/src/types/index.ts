@@ -9,6 +9,7 @@ export interface User {
   createdAt: string;
   preferences?: UserPreferences;
   preferredWorkoutLocation?: number;
+  personalTrainerId?: string;
 }
 
 export interface UserPreferences {

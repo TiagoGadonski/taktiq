@@ -198,4 +198,7 @@ app.MapPublicEndpoints();
 app.MapAIEndpoints(); // AI-powered workout generation
 app.MapNotificationEndpoints();
 app.MapPostEndpoints(); // Personal Trainer blog posts
+app.MapMediaEndpoints(); // Media upload (images and videos)
+app.MapPaymentEndpoints(); // Payment processing (Stripe)
+app.MapPlacesEndpoints(); // Google Places API (nearby gyms, geocoding)
 app.Run();

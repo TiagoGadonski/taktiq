@@ -108,3 +108,8 @@ public record RenewWorkoutPlanRequest(
 public record DuplicateWorkoutPlanRequest(
     int Duration
 );
+
+public record UpdateMarketplaceSettingsRequest(
+    bool ForSale,
+    decimal? Price
+);

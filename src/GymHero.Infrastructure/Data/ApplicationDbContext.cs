@@ -28,6 +28,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<UserActivityLog> UserActivityLogs => Set<UserActivityLog>();
     public DbSet<StudentInvitation> StudentInvitations => Set<StudentInvitation>();
     public DbSet<Post> Posts => Set<Post>();
+    public DbSet<Media> Medias => Set<Media>();
+    public DbSet<Transaction> Transactions => Set<Transaction>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -169,6 +171,76 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .WithMany()
                   .HasForeignKey(log => log.UserId)
                   .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<Media>(entity =>
+        {
+            // Index for user-specific media queries
+            entity.HasIndex(m => m.UploadedBy)
+                .HasDatabaseName("IX_Media_UploadedBy");
+
+            // Index for media type queries
+            entity.HasIndex(m => m.MediaType)
+                .HasDatabaseName("IX_Media_MediaType");
+
+            // Index for entity-specific media queries
+            entity.HasIndex(m => new { m.EntityId, m.UsageContext })
+                .HasDatabaseName("IX_Media_EntityUsage");
+
+            // Index for finding non-deleted media
+            entity.HasIndex(m => m.IsDeleted)
+                .HasDatabaseName("IX_Media_IsDeleted");
+
+            // Configure relationship with User (uploader)
+            entity.HasOne(m => m.Uploader)
+                  .WithMany()
+                  .HasForeignKey(m => m.UploadedBy)
+                  .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Transaction>(entity =>
+        {
+            // Index for buyer's transaction history
+            entity.HasIndex(t => t.BuyerId)
+                .HasDatabaseName("IX_Transactions_BuyerId");
+
+            // Index for seller's transaction history
+            entity.HasIndex(t => t.SellerId)
+                .HasDatabaseName("IX_Transactions_SellerId");
+
+            // Index for workout plan transactions
+            entity.HasIndex(t => t.WorkoutPlanId)
+                .HasDatabaseName("IX_Transactions_WorkoutPlanId");
+
+            // Index for transaction status queries
+            entity.HasIndex(t => t.Status)
+                .HasDatabaseName("IX_Transactions_Status");
+
+            // Index for Stripe payment intent lookup
+            entity.HasIndex(t => t.StripePaymentIntentId)
+                .HasDatabaseName("IX_Transactions_StripePaymentIntentId");
+
+            // Configure relationship with buyer
+            entity.HasOne(t => t.Buyer)
+                  .WithMany()
+                  .HasForeignKey(t => t.BuyerId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure relationship with seller
+            entity.HasOne(t => t.Seller)
+                  .WithMany()
+                  .HasForeignKey(t => t.SellerId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure relationship with workout plan
+            entity.HasOne(t => t.WorkoutPlan)
+                  .WithMany()
+                  .HasForeignKey(t => t.WorkoutPlanId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Precision for decimal amount
+            entity.Property(t => t.Amount)
+                  .HasPrecision(18, 2);
         });
 
         base.OnModelCreating(modelBuilder);

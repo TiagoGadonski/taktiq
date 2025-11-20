@@ -2,15 +2,34 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Dumbbell, Trophy, TrendingUp, Zap, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { Dumbbell, Trophy, TrendingUp, Zap, Check, ChevronDown, ChevronUp, FileText } from 'lucide-react';
 import { api } from '@/lib/api';
+import { apiClient } from '@/lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/use-auth';
+import { PostFeed } from '@/components/posts/post-feed';
+import { InstructorDashboard } from '@/components/dashboard/instructor-dashboard';
+
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl?: string;
+  authorId: string;
+  authorName: string;
+  authorProfilePictureUrl?: string;
+  isPublished: boolean;
+  publishedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function DashboardPage() {
   const [isCalendarExpanded, setIsCalendarExpanded] = useState(false);
+  const { user } = useAuth();
 
   const { data: progress, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', 'dashboard'],
@@ -25,6 +44,17 @@ export default function DashboardPage() {
   const { data: challenges } = useQuery({
     queryKey: ['challenges', 'active'],
     queryFn: () => api.challenges.getAll({ status: 'active' }),
+  });
+
+  // Fetch posts from the user's personal trainer
+  const { data: posts } = useQuery({
+    queryKey: ['posts', 'trainer', user?.personalTrainerId],
+    queryFn: async () => {
+      if (!user?.personalTrainerId) return [];
+      const response = await apiClient.get<Post[]>(`/posts/trainer/${user.personalTrainerId}`);
+      return Array.isArray(response) ? response : [];
+    },
+    enabled: !!user?.personalTrainerId,
   });
 
   // Generate full calendar from account creation to today
@@ -70,6 +100,12 @@ export default function DashboardPage() {
     return monthsData;
   };
 
+  // Show instructor dashboard for Personal Trainers
+  if (user?.role === 'PersonalTrainer') {
+    return <InstructorDashboard />;
+  }
+
+  // Show student dashboard for regular users
   return (
     <div className="space-y-4 sm:space-y-6">
       <div>
@@ -157,6 +193,26 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Posts from Personal Trainer */}
+      {posts && posts.length > 0 && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <FileText className="h-5 w-5 text-primary" />
+              <div>
+                <CardTitle>Dicas do seu Personal Trainer</CardTitle>
+                <CardDescription>
+                  Conteúdo exclusivo compartilhado pelo seu instrutor
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <PostFeed posts={posts} showAuthor={true} compact={true} />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Weekly Training Tracker */}
       {progress?.weeklyWorkouts && progress.weeklyWorkouts.length > 0 && (

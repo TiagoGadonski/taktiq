@@ -15,6 +15,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { challengeIcons, getChallengeIcon } from '@/components/challenge-icon-library';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/use-auth';
+import { InstructorChallenges } from '@/components/challenges/instructor-challenges';
 
 // Types
 interface Challenge {
@@ -252,6 +253,11 @@ export default function ChallengesPage() {
   const completedChallengesCount = challenges.filter((c) =>
     c.status.toLowerCase() === 'completed' || c.status.toLowerCase() === 'concluído'
   ).length;
+
+  // Show instructor challenges for Personal Trainers
+  if (currentUser?.role === 'PersonalTrainer') {
+    return <InstructorChallenges />;
+  }
 
   return (
     <div className="space-y-4 sm:space-y-6">

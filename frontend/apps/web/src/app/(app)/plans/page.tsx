@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Star, Trash2, Edit, Share2, Send, Settings, AlertTriangle, Clock, RefreshCw } from 'lucide-react';
+import { Plus, Star, Trash2, Edit, Share2, Send, Settings, AlertTriangle, Clock, RefreshCw, ShoppingCart } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +12,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { ShareSettingsDialog } from '@/components/workout/share-settings-dialog';
 import { ShareWithFriendsDialog } from '@/components/workout/share-with-friends-dialog';
 import { RenewPlanDialog } from '@/components/workout/renew-plan-dialog';
+import { MarketplaceSettingsDialog } from '@/components/workout/marketplace-settings-dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +30,7 @@ export default function PlansPage() {
   const [shareWithFriendsDialogOpen, setShareWithFriendsDialogOpen] = useState(false);
   const [renewDialogOpen, setRenewDialogOpen] = useState(false);
   const [renewPlanData, setRenewPlanData] = useState<{ id: string; name: string; isExpired: boolean } | null>(null);
+  const [marketplaceDialogOpen, setMarketplaceDialogOpen] = useState(false);
 
   const { data: plans, isLoading } = useQuery({
     queryKey: ['workout-plans'],
@@ -319,6 +321,15 @@ export default function PlansPage() {
                             <Settings className="mr-2 h-4 w-4" />
                             Configurações de Compartilhamento
                           </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedPlan(plan);
+                              setMarketplaceDialogOpen(true);
+                            }}
+                          >
+                            <ShoppingCart className="mr-2 h-4 w-4" />
+                            Configurações do Marketplace
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
@@ -364,6 +375,15 @@ export default function PlansPage() {
             planName={selectedPlan.name}
             open={shareWithFriendsDialogOpen}
             onOpenChange={setShareWithFriendsDialogOpen}
+          />
+          <MarketplaceSettingsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            currentForSale={(selectedPlan as any).forSale ?? false}
+            currentPrice={(selectedPlan as any).price ?? 0}
+            isPublic={(selectedPlan as any).isPublic ?? false}
+            open={marketplaceDialogOpen}
+            onOpenChange={setMarketplaceDialogOpen}
           />
         </>
       )}

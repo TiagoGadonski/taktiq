@@ -21,8 +21,10 @@ import {
   Mail,
   ArrowLeft,
   Sparkles,
+  FileText,
 } from 'lucide-react';
 import Link from 'next/link';
+import { PostFeed } from '@/components/posts/post-feed';
 
 interface PublicProfileData {
   id: string;
@@ -40,12 +42,27 @@ interface PublicProfileData {
   studentCount: number;
 }
 
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl?: string;
+  authorId: string;
+  authorName: string;
+  authorProfilePictureUrl?: string;
+  isPublished: boolean;
+  publishedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function TrainerPublicProfilePage() {
   const params = useParams();
   const router = useRouter();
   const slug = params?.slug as string;
 
   const [profile, setProfile] = useState<PublicProfileData | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -70,6 +87,23 @@ export default function TrainerPublicProfilePage() {
 
     fetchProfile();
   }, [slug]);
+
+  // Fetch posts for this trainer
+  useEffect(() => {
+    const fetchPosts = async () => {
+      if (!profile?.id) return;
+
+      try {
+        const response = await apiClient.get<Post[]>(`/posts/trainer/${profile.id}`);
+        setPosts(Array.isArray(response) ? response : []);
+      } catch (error: any) {
+        console.error('Error fetching posts:', error);
+        setPosts([]);
+      }
+    };
+
+    fetchPosts();
+  }, [profile?.id]);
 
   if (isLoading) {
     return (
@@ -261,6 +295,17 @@ export default function TrainerPublicProfilePage() {
             </Card>
           )}
         </div>
+
+        {/* Posts Section */}
+        {posts.length > 0 && (
+          <div className="mt-12">
+            <div className="flex items-center gap-3 mb-6">
+              <FileText className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold">Artigos e Dicas</h2>
+            </div>
+            <PostFeed posts={posts} showAuthor={false} />
+          </div>
+        )}
 
         {/* Contact CTA */}
         <Card className="glass border-primary/20 p-8 mt-8 text-center bg-gradient-to-br from-primary/10 to-background">

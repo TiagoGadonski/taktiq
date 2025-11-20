@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ImageUpload } from '@/components/media/image-upload';
 import {
   UserCog,
   Users,
@@ -25,6 +26,13 @@ import {
   Instagram,
   Facebook,
   Save,
+  FileEdit,
+  Edit,
+  Trash2,
+  BarChart3,
+  Activity,
+  ShoppingCart,
+  DollarSign,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -58,6 +66,8 @@ import {
 } from '@/components/ui/select';
 import { apiClient } from '@/lib/api';
 import { getAssetUrl } from '@/lib/env';
+import { RevenueAnalytics } from '@/components/analytics/revenue-analytics';
+import { ProgressTrends } from '@/components/analytics/progress-trends';
 
 interface Client {
   id: string;
@@ -99,6 +109,42 @@ interface PTProfile {
   websiteUrl?: string;
 }
 
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl?: string;
+  authorId: string;
+  authorName: string;
+  authorProfilePictureUrl?: string;
+  isPublished: boolean;
+  publishedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Analytics {
+  clients: {
+    total: number;
+    active: number;
+    inactive: number;
+  };
+  posts: {
+    total: number;
+    published: number;
+    drafts: number;
+  };
+  plans: {
+    total: number;
+    forSale: number;
+    public_: number;
+    totalViews: number;
+  };
+  invitations: {
+    pending: number;
+  };
+}
+
 export default function InstructorPage() {
   const { user } = useAuth();
   const router = useRouter();
@@ -133,6 +179,20 @@ export default function InstructorPage() {
   const [facebookUrl, setFacebookUrl] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [isSavingProfile, setIsSavingProfile] = useState(false);
+
+  // Posts state
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [postDialogOpen, setPostDialogOpen] = useState(false);
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [postTitle, setPostTitle] = useState('');
+  const [postContent, setPostContent] = useState('');
+  const [postImageUrl, setPostImageUrl] = useState('');
+  const [postIsPublished, setPostIsPublished] = useState(false);
+  const [isSavingPost, setIsSavingPost] = useState(false);
+  const [isDeletingPost, setIsDeletingPost] = useState<string | null>(null);
+
+  // Analytics state
+  const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
   // Redirect if not personal trainer
   useEffect(() => {
@@ -228,6 +288,39 @@ export default function InstructorPage() {
 
     if (user?.role === 'PersonalTrainer') {
       fetchProfile();
+    }
+  }, [user]);
+
+  // Fetch posts
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await apiClient.get<Post[]>('/personal/posts');
+        setPosts(Array.isArray(response) ? response : []);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setPosts([]);
+      }
+    };
+
+    if (user?.role === 'PersonalTrainer') {
+      fetchPosts();
+    }
+  }, [user]);
+
+  // Fetch analytics
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const response = await apiClient.get<Analytics>('/personal/analytics');
+        setAnalytics(response);
+      } catch (error) {
+        console.error('Error fetching analytics:', error);
+      }
+    };
+
+    if (user?.role === 'PersonalTrainer') {
+      fetchAnalytics();
     }
   }, [user]);
 
@@ -435,6 +528,127 @@ export default function InstructorPage() {
     }
   };
 
+  const handleOpenPostDialog = (post?: Post) => {
+    if (post) {
+      setEditingPost(post);
+      setPostTitle(post.title);
+      setPostContent(post.content);
+      setPostImageUrl(post.imageUrl || '');
+      setPostIsPublished(post.isPublished);
+    } else {
+      setEditingPost(null);
+      setPostTitle('');
+      setPostContent('');
+      setPostImageUrl('');
+      setPostIsPublished(false);
+    }
+    setPostDialogOpen(true);
+  };
+
+  const handleSavePost = async () => {
+    if (!postTitle.trim()) {
+      toast({
+        title: 'Erro',
+        description: 'O título é obrigatório.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!postContent.trim()) {
+      toast({
+        title: 'Erro',
+        description: 'O conteúdo é obrigatório.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSavingPost(true);
+
+    try {
+      if (editingPost) {
+        // Update existing post
+        await apiClient.put(`/personal/posts/${editingPost.id}`, {
+          Title: postTitle.trim(),
+          Content: postContent.trim(),
+          ImageUrl: postImageUrl.trim() || null,
+          IsPublished: postIsPublished,
+        });
+
+        toast({
+          title: 'Post atualizado!',
+          description: 'Seu post foi atualizado com sucesso.',
+        });
+      } else {
+        // Create new post
+        await apiClient.post('/personal/posts', {
+          Title: postTitle.trim(),
+          Content: postContent.trim(),
+          ImageUrl: postImageUrl.trim() || null,
+          IsPublished: postIsPublished,
+        });
+
+        toast({
+          title: 'Post criado!',
+          description: postIsPublished
+            ? 'Seu post foi publicado com sucesso.'
+            : 'Seu rascunho foi salvo com sucesso.',
+        });
+      }
+
+      setPostDialogOpen(false);
+      setEditingPost(null);
+      setPostTitle('');
+      setPostContent('');
+      setPostImageUrl('');
+      setPostIsPublished(false);
+
+      // Refresh posts list
+      const response = await apiClient.get<Post[]>('/personal/posts');
+      setPosts(Array.isArray(response) ? response : []);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        'Não foi possível salvar o post.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSavingPost(false);
+    }
+  };
+
+  const handleDeletePost = async (postId: string) => {
+    setIsDeletingPost(postId);
+
+    try {
+      await apiClient.delete(`/personal/posts/${postId}`);
+
+      toast({
+        title: 'Post excluído!',
+        description: 'O post foi removido com sucesso.',
+      });
+
+      // Refresh posts list
+      const response = await apiClient.get<Post[]>('/personal/posts');
+      setPosts(Array.isArray(response) ? response : []);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        'Não foi possível excluir o post.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsDeletingPost(null);
+    }
+  };
+
   if (user?.role !== 'PersonalTrainer') {
     return null;
   }
@@ -539,8 +753,12 @@ export default function InstructorPage() {
       </div>
 
       {/* Tabs */}
-      <Tabs defaultValue="clients" className="space-y-4">
+      <Tabs defaultValue="analytics" className="space-y-4">
         <TabsList className="glass">
+          <TabsTrigger value="analytics" className="tap-scale">
+            <BarChart3 className="mr-2 h-4 w-4" />
+            Métricas
+          </TabsTrigger>
           <TabsTrigger value="clients" className="tap-scale">
             <Users className="mr-2 h-4 w-4" />
             Meus Clientes
@@ -566,7 +784,196 @@ export default function InstructorPage() {
             <Globe className="mr-2 h-4 w-4" />
             Perfil Público
           </TabsTrigger>
+          <TabsTrigger value="posts" className="tap-scale">
+            <FileEdit className="mr-2 h-4 w-4" />
+            Posts
+            {posts.filter(p => !p.isPublished).length > 0 && (
+              <Badge className="ml-2 bg-yellow-500/20 text-yellow-500 border-yellow-500/30">
+                {posts.filter(p => !p.isPublished).length}
+              </Badge>
+            )}
+          </TabsTrigger>
+          <TabsTrigger value="sales" className="tap-scale">
+            <DollarSign className="mr-2 h-4 w-4" />
+            Vendas
+          </TabsTrigger>
+          <TabsTrigger value="progress" className="tap-scale">
+            <TrendingUp className="mr-2 h-4 w-4" />
+            Progresso
+          </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="analytics" className="space-y-4">
+          {analytics ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {/* Clients Metrics */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in">
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <Users className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Clientes</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Total</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.clients.total}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Ativos</span>
+                      <span className="font-semibold text-green-500">{analytics.clients.active}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Inativos</span>
+                      <span className="font-semibold text-orange-500">{analytics.clients.inactive}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Posts Metrics */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in" style={{ animationDelay: '100ms' }}>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <FileText className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Posts</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Total</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.posts.total}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Publicados</span>
+                      <span className="font-semibold text-green-500">{analytics.posts.published}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Rascunhos</span>
+                      <span className="font-semibold text-yellow-500">{analytics.posts.drafts}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Plans Metrics */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in" style={{ animationDelay: '200ms' }}>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <Dumbbell className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Planos</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Total</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.plans.total}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Públicos</span>
+                      <span className="font-semibold text-blue-500">{analytics.plans.public_}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">À venda</span>
+                      <span className="font-semibold text-green-500">{analytics.plans.forSale}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Views Metrics */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in" style={{ animationDelay: '300ms' }}>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <Eye className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Visualizações</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Planos Públicos</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.plans.totalViews}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Total de visualizações nos seus planos públicos
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Invitations Metrics */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in" style={{ animationDelay: '400ms' }}>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <Mail className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Convites</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Pendentes</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.invitations.pending}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Convites aguardando ativação
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Activity Summary */}
+              <Card className="glass border-primary/20 hover-lift animate-scale-in" style={{ animationDelay: '500ms' }}>
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 rounded-lg bg-primary/20">
+                      <Activity className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Engajamento</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Taxa de Publicação</span>
+                      <span className="font-semibold text-primary">
+                        {analytics.posts.total > 0
+                          ? Math.round((analytics.posts.published / analytics.posts.total) * 100)
+                          : 0}%
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Planos Compartilhados</span>
+                      <span className="font-semibold text-primary">
+                        {analytics.plans.total > 0
+                          ? Math.round((analytics.plans.public_ / analytics.plans.total) * 100)
+                          : 0}%
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Clientes Ativos</span>
+                      <span className="font-semibold text-primary">
+                        {analytics.clients.total > 0
+                          ? Math.round((analytics.clients.active / analytics.clients.total) * 100)
+                          : 0}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <Activity className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50 animate-pulse" />
+              <h3 className="text-lg font-semibold mb-2">Carregando métricas...</h3>
+              <p className="text-muted-foreground">
+                Aguarde enquanto carregamos suas estatísticas
+              </p>
+            </div>
+          )}
+        </TabsContent>
 
         <TabsContent value="clients" className="space-y-4">
           {/* Search */}
@@ -1016,6 +1423,142 @@ export default function InstructorPage() {
             </div>
           </Card>
         </TabsContent>
+
+        <TabsContent value="posts" className="space-y-4">
+          <div className="flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              Gerencie suas publicações e artigos para compartilhar com seus alunos
+            </p>
+            <Button
+              onClick={() => handleOpenPostDialog()}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              Novo Post
+            </Button>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, index) => (
+              <Card
+                key={post.id}
+                className="glass border-primary/20 hover-lift tap-scale animate-scale-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="font-semibold line-clamp-1">{post.title}</h3>
+                        {!post.isPublished && (
+                          <Badge className="bg-yellow-500/20 text-yellow-500 border-yellow-500/30 text-xs">
+                            Rascunho
+                          </Badge>
+                        )}
+                        {post.isPublished && (
+                          <Badge className="bg-green-500/20 text-green-500 border-green-500/30 text-xs">
+                            Publicado
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {post.content}
+                      </p>
+                    </div>
+                  </div>
+
+                  {post.imageUrl && (
+                    <div className="mb-4 rounded-lg overflow-hidden">
+                      <img
+                        src={getAssetUrl(post.imageUrl)}
+                        alt={post.title}
+                        className="w-full h-32 object-cover"
+                      />
+                    </div>
+                  )}
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Criado em</span>
+                      <span className="font-medium">
+                        {new Date(post.createdAt).toLocaleDateString('pt-BR')}
+                      </span>
+                    </div>
+                    {post.publishedAt && (
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Publicado em</span>
+                        <span className="font-medium text-green-500">
+                          {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 mt-4 pt-4 border-t border-border/50">
+                    <Button
+                      onClick={() => handleOpenPostDialog(post)}
+                      className="flex-1 bg-primary hover:bg-primary/90 hover-lift tap-scale"
+                      size="sm"
+                    >
+                      <Edit className="mr-2 h-4 w-4" />
+                      Editar
+                    </Button>
+                    <Button
+                      onClick={() => handleDeletePost(post.id)}
+                      variant="outline"
+                      className="hover-lift tap-scale border-red-500/30 text-red-500 hover:bg-red-500/10"
+                      size="sm"
+                      disabled={isDeletingPost === post.id}
+                    >
+                      {isDeletingPost === post.id ? (
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-red-500 border-t-transparent" />
+                      ) : (
+                        <Trash2 className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {posts.length === 0 && (
+            <div className="text-center py-12">
+              <FileEdit className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
+              <h3 className="text-lg font-semibold mb-2">
+                Nenhum post criado
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Comece a compartilhar conteúdo com seus alunos criando seu primeiro post
+              </p>
+              <Button
+                onClick={() => handleOpenPostDialog()}
+                className="bg-primary hover:bg-primary/90 hover-lift tap-scale"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Criar Primeiro Post
+              </Button>
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="sales" className="space-y-4">
+          <div className="mb-4">
+            <p className="text-sm text-muted-foreground">
+              Acompanhe suas vendas, receita e desempenho financeiro no marketplace
+            </p>
+          </div>
+          <RevenueAnalytics />
+        </TabsContent>
+
+        <TabsContent value="progress" className="space-y-4">
+          <div className="mb-4">
+            <p className="text-sm text-muted-foreground">
+              Acompanhe o progresso e engajamento dos seus clientes com gráficos interativos
+            </p>
+          </div>
+          <ProgressTrends />
+        </TabsContent>
       </Tabs>
 
       {/* Notes Dialog */}
@@ -1214,6 +1757,118 @@ export default function InstructorPage() {
                 <>
                   <Send className="mr-2 h-4 w-4" />
                   Enviar Convite
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Post Dialog */}
+      <Dialog open={postDialogOpen} onOpenChange={setPostDialogOpen}>
+        <DialogContent className="glass max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileEdit className="h-5 w-5 text-primary" />
+              {editingPost ? 'Editar Post' : 'Criar Novo Post'}
+            </DialogTitle>
+            <DialogDescription>
+              {editingPost
+                ? 'Atualize as informações do seu post'
+                : 'Crie um novo post para compartilhar com seus alunos'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="postTitle">
+                Título <span className="text-destructive">*</span>
+              </Label>
+              <Input
+                id="postTitle"
+                placeholder="Digite o título do post"
+                value={postTitle}
+                onChange={(e) => setPostTitle(e.target.value)}
+                className="glass"
+                disabled={isSavingPost}
+                maxLength={200}
+              />
+              <p className="text-xs text-muted-foreground">
+                {postTitle.length}/200 caracteres
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="postContent">
+                Conteúdo <span className="text-destructive">*</span>
+              </Label>
+              <Textarea
+                id="postContent"
+                placeholder="Escreva o conteúdo do seu post..."
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+                className="glass min-h-[300px]"
+                disabled={isSavingPost}
+              />
+              <p className="text-xs text-muted-foreground">
+                Suporta formatação Markdown para negrito, itálico, listas, etc.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Imagem de Capa (opcional)</Label>
+              <ImageUpload
+                onImageUploaded={setPostImageUrl}
+                currentImageUrl={postImageUrl}
+                usageContext="PostImage"
+                entityId={editingPost?.id}
+              />
+              <p className="text-xs text-muted-foreground">
+                Faça upload de uma imagem de capa para o post (máx. 10MB)
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 p-4 glass rounded-lg border border-primary/20">
+              <input
+                type="checkbox"
+                id="postIsPublished"
+                checked={postIsPublished}
+                onChange={(e) => setPostIsPublished(e.target.checked)}
+                className="h-4 w-4 rounded border-input"
+                disabled={isSavingPost}
+              />
+              <Label htmlFor="postIsPublished" className="cursor-pointer">
+                Publicar imediatamente
+              </Label>
+              <p className="text-xs text-muted-foreground ml-auto">
+                {postIsPublished
+                  ? 'Este post será visível para todos'
+                  : 'Salvar como rascunho'}
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setPostDialogOpen(false)}
+              className="hover-lift tap-scale"
+              disabled={isSavingPost}
+            >
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleSavePost}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+              disabled={isSavingPost}
+            >
+              {isSavingPost ? (
+                <>
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
+                  Salvando...
+                </>
+              ) : (
+                <>
+                  <Save className="mr-2 h-4 w-4" />
+                  {editingPost ? 'Atualizar' : postIsPublished ? 'Publicar' : 'Salvar Rascunho'}
                 </>
               )}
             </Button>

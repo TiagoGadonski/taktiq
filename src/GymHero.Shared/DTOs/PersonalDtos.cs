@@ -77,6 +77,7 @@ public record UpdatePersonalProfileRequest
 public record PublicPersonalProfileResponse(
     Guid Id,
     string Name,
+    string? ProfileSlug,
     string? ProfilePictureUrl,
     string? Bio,
     string? Location,

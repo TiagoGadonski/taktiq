@@ -110,7 +110,7 @@ public static class AIEndpoints
                 if (!hasGemini && !hasOpenAI)
                 {
                     logger.LogWarning("No AI API keys configured. Using enhanced mock generation.");
-                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation);
+                    workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation, request.Duration);
                 }
                 else
                 {
@@ -151,7 +151,7 @@ public static class AIEndpoints
                     if (!generated)
                     {
                         logger.LogWarning("All AI APIs failed. Using enhanced mock generation.");
-                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation);
+                        workout = GenerateMockWorkout(request.Prompt, request.FitnessLevel, userProfile?.ExerciseGoal, userProfile, request.WorkoutLocation, request.Duration);
                     }
                 }
 
@@ -991,7 +991,7 @@ public static class AIEndpoints
         }
     }
 
-    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null, string? workoutLocation = null)
+    private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null, string? workoutLocation = null, int? requestedDuration = null)
     {
         Console.WriteLine("=== MOCK GENERATION DEBUG ===");
         Console.WriteLine($"Prompt: {prompt}");
@@ -1288,7 +1288,16 @@ public static class AIEndpoints
                              (exerciseGoal?.Contains("perder peso", StringComparison.OrdinalIgnoreCase) ?? false) ||
                              (exerciseGoal?.Contains("definir", StringComparison.OrdinalIgnoreCase) ?? false);
 
-        if (shouldAddCardio && !parsedPrompt.MuscleGroups.Contains("cardio") && ExerciseDatabase.ContainsKey("cardio"))
+        // Check if user explicitly restricted cardio
+        var hasCardioRestriction = parsedPrompt.Restrictions.Any(r =>
+            r.Contains("cardio", StringComparison.OrdinalIgnoreCase) ||
+            r.Contains("cardiovascular", StringComparison.OrdinalIgnoreCase) ||
+            r.Contains("aeróbico", StringComparison.OrdinalIgnoreCase) ||
+            r.Contains("aerobico", StringComparison.OrdinalIgnoreCase) ||
+            r.Contains("corrida", StringComparison.OrdinalIgnoreCase) ||
+            r.Contains("esteira", StringComparison.OrdinalIgnoreCase));
+
+        if (shouldAddCardio && !parsedPrompt.MuscleGroups.Contains("cardio") && !hasCardioRestriction && ExerciseDatabase.ContainsKey("cardio"))
         {
             // Filter out simulated exercises like "Natação (Simulada)"
             var cardioExercises = ExerciseDatabase["cardio"]
@@ -1349,8 +1358,8 @@ public static class AIEndpoints
             ? GenerateWorkoutDescription(parsedPrompt.MuscleGroups, selectedExercises.Count)
             : $"Treino completo com {selectedExercises.Count} exercícios variados para desenvolvimento muscular equilibrado. Nível: {level}.";
 
-        // Duration varies significantly by level due to rest periods and exercise count
-        var duration = level switch
+        // Use requested duration if provided, otherwise calculate based on level
+        var duration = requestedDuration ?? level switch
         {
             "iniciante" or "beginner" => random.Next(30, 45),   // Shorter workouts, more rest
             "avançado" or "advanced" => random.Next(70, 90),    // Longer workouts, more volume

@@ -1,4 +1,5 @@
 ﻿using GymHero.Application.Common.Interfaces;
+using GymHero.Application.Services;
 using GymHero.Infrastructure.Authentication;
 using GymHero.Infrastructure.Data;
 using GymHero.Infrastructure.Services;
@@ -26,6 +27,12 @@ public static class DependencyInjection
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IActivityLogService, ActivityLogService>();
+        services.AddScoped<IFileStorageService, FileStorageService>();
+        services.AddScoped<IPaymentService, StripePaymentService>();
+        services.AddScoped<IPayPalPaymentService, PayPalPaymentService>();
+        services.AddScoped<IReceiptService, ReceiptService>();
+        services.AddScoped<IVideoProcessingService, VideoProcessingService>();
+        services.AddScoped<IGooglePlacesService, GooglePlacesService>();
 
         // --- Background Services ---
         services.AddHostedService<PlanExpirationCheckService>();

@@ -16,7 +16,14 @@
       "Bash(del deploy.zip)",
       "Bash(npx shadcn@latest add:*)",
       "Bash(npm install:*)",
-      "Bash(pnpm install)"
+      "Bash(pnpm install)",
+      "Bash(pnpm add:*)",
+      "Bash(ls:*)",
+      "Bash(dotnet add:*)",
+      "Bash(pnpm run build:*)",
+      "Bash(dotnet remove:*)",
+      "Bash(pnpm list:*)",
+      "Bash(dotnet ef migrations:*)"
     ],
     "deny": [],
     "ask": []

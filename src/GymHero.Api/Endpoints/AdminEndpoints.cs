@@ -1007,5 +1007,94 @@ public static class AdminEndpoints
         })
         .WithName("AssignDefaultChallenges")
         .WithSummary("Assigns all default challenges to existing users who don't have them yet");
+
+        // Get platform revenue analytics
+        group.MapGet("/platform-revenue", async (
+            IApplicationDbContext context,
+            CancellationToken cancellationToken,
+            [FromQuery] int days = 30) =>
+        {
+            try
+            {
+                // Limit days to reasonable range
+                days = Math.Min(Math.Max(days, 7), 365);
+                var startDate = DateTime.UtcNow.AddDays(-days);
+
+                var transactions = await context.Transactions
+                    .Include(t => t.Seller)
+                    .Where(t => t.Status == TransactionStatus.Completed && t.CompletedAt >= startDate)
+                    .OrderByDescending(t => t.CompletedAt)
+                    .ToListAsync(cancellationToken);
+
+                // Calculate platform revenue metrics
+                var totalPlatformRevenue = transactions.Sum(t => t.PlatformFee);
+                var totalTransactionVolume = transactions.Sum(t => t.Amount);
+                var totalSellerPayouts = transactions.Sum(t => t.SellerPayout);
+                var transactionCount = transactions.Count;
+                var averagePlatformFee = transactionCount > 0 ? totalPlatformRevenue / transactionCount : 0;
+
+                // Revenue by day
+                var dailyRevenue = transactions
+                    .GroupBy(t => t.CompletedAt!.Value.Date)
+                    .Select(g => new
+                    {
+                        date = g.Key.ToString("yyyy-MM-dd"),
+                        platformFee = g.Sum(t => t.PlatformFee),
+                        transactionVolume = g.Sum(t => t.Amount),
+                        sellerPayout = g.Sum(t => t.SellerPayout),
+                        transactionCount = g.Count()
+                    })
+                    .OrderBy(x => x.date)
+                    .ToList();
+
+                // Top sellers by platform fee contribution
+                var topSellers = transactions
+                    .GroupBy(t => new { t.SellerId, t.Seller.Name })
+                    .Select(g => new
+                    {
+                        sellerId = g.Key.SellerId,
+                        sellerName = g.Key.Name,
+                        totalPlatformFees = g.Sum(t => t.PlatformFee),
+                        totalSales = g.Sum(t => t.Amount),
+                        transactionCount = g.Count()
+                    })
+                    .OrderByDescending(s => s.totalPlatformFees)
+                    .Take(10)
+                    .ToList();
+
+                return Results.Ok(new
+                {
+                    period = new
+                    {
+                        startDate = startDate.ToString("yyyy-MM-dd"),
+                        endDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+                        days = days
+                    },
+                    summary = new
+                    {
+                        totalPlatformRevenue = totalPlatformRevenue,
+                        totalTransactionVolume = totalTransactionVolume,
+                        totalSellerPayouts = totalSellerPayouts,
+                        transactionCount = transactionCount,
+                        averagePlatformFee = averagePlatformFee,
+                        averageFeePercentage = totalTransactionVolume > 0
+                            ? (totalPlatformRevenue / totalTransactionVolume * 100)
+                            : 0
+                    },
+                    dailyRevenue = dailyRevenue,
+                    topSellers = topSellers
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(
+                    title: "Failed to fetch platform revenue",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("GetPlatformRevenue")
+        .WithSummary("Get platform revenue analytics from marketplace fees (Admin only)");
     }
 }

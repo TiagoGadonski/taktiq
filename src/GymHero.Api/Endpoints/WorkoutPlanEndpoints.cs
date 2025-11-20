@@ -476,5 +476,243 @@ public static class WorkoutPlanEndpoints
         })
         .WithName("GetPublicWorkoutPlanDetail")
         .WithSummary("Get details of a public workout plan (increments view count)");
+
+        // Marketplace endpoints
+        var marketplaceGroup = app.MapGroup("/api/marketplace")
+            .WithTags("Marketplace")
+            .AllowAnonymous();
+
+        marketplaceGroup.MapGet("/plans", async (
+            [FromQuery] int page,
+            [FromQuery] int pageSize,
+            [FromQuery] string? search,
+            [FromQuery] string? goal,
+            [FromQuery] decimal? minPrice,
+            [FromQuery] decimal? maxPrice,
+            IApplicationDbContext context) =>
+        {
+            var pageNumber = page > 0 ? page : 1;
+            var size = pageSize > 0 && pageSize <= 50 ? pageSize : 20;
+
+            var query = context.WorkoutPlans
+                .Include(p => p.Owner)
+                .Include(p => p.Workouts)
+                    .ThenInclude(w => w.Exercises)
+                .Where(p => p.ForSale && p.IsPublic);
+
+            // Apply search filter
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var searchLower = search.ToLower();
+                query = query.Where(p =>
+                    p.Name.ToLower().Contains(searchLower) ||
+                    (p.Description != null && p.Description.ToLower().Contains(searchLower)) ||
+                    (p.Goal != null && p.Goal.ToLower().Contains(searchLower))
+                );
+            }
+
+            // Apply goal filter
+            if (!string.IsNullOrWhiteSpace(goal))
+            {
+                var goalLower = goal.ToLower();
+                query = query.Where(p => p.Goal != null && p.Goal.ToLower().Contains(goalLower));
+            }
+
+            // Apply price filters
+            if (minPrice.HasValue)
+            {
+                query = query.Where(p => p.Price >= minPrice.Value);
+            }
+
+            if (maxPrice.HasValue)
+            {
+                query = query.Where(p => p.Price <= maxPrice.Value);
+            }
+
+            var totalCount = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)size);
+
+            var plans = await query
+                .OrderByDescending(p => p.ViewCount)
+                .Skip((pageNumber - 1) * size)
+                .Take(size)
+                .Select(p => new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    description = p.Description,
+                    goal = p.Goal,
+                    duration = p.Duration,
+                    price = p.Price,
+                    creatorId = p.OwnerId,
+                    creatorName = p.Owner.Name,
+                    viewCount = p.ViewCount,
+                    workoutCount = p.Workouts.Count,
+                    exerciseCount = p.Workouts.SelectMany(w => w.Exercises).Count(),
+                    publishedAt = p.PublishedAt
+                })
+                .ToListAsync();
+
+            return Results.Ok(new
+            {
+                data = plans,
+                page = pageNumber,
+                pageSize = size,
+                totalCount,
+                totalPages
+            });
+        })
+        .WithName("GetMarketplacePlans")
+        .WithSummary("Browse workout plans available for purchase");
+
+        marketplaceGroup.MapGet("/plans/{planId:guid}", async (
+            Guid planId,
+            IApplicationDbContext context) =>
+        {
+            var plan = await context.WorkoutPlans
+                .Include(p => p.Owner)
+                .Include(p => p.Workouts)
+                    .ThenInclude(w => w.Exercises)
+                        .ThenInclude(we => we.Exercise)
+                .Where(p => p.Id == planId && p.ForSale && p.IsPublic)
+                .Select(p => new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    description = p.Description,
+                    goal = p.Goal,
+                    duration = p.Duration,
+                    price = p.Price,
+                    creatorId = p.OwnerId,
+                    creatorName = p.Owner.Name,
+                    viewCount = p.ViewCount,
+                    allowCopying = p.AllowCopying,
+                    workouts = p.Workouts.OrderBy(w => w.Order).Select(w => new
+                    {
+                        id = w.Id,
+                        name = w.Name,
+                        dayOfWeek = w.DayOfWeek,
+                        order = w.Order,
+                        exercises = w.Exercises.OrderBy(e => e.Order).Select(e => new
+                        {
+                            id = e.Id,
+                            exerciseId = e.ExerciseId,
+                            exerciseName = e.Exercise != null ? e.Exercise.Name : "",
+                            order = e.Order,
+                            targetSets = e.TargetSets,
+                            targetReps = e.TargetReps,
+                            targetLoad = e.TargetLoad,
+                            targetRpe = e.TargetRpe,
+                            restSeconds = e.RestSeconds,
+                            notes = e.Notes
+                        }).ToList()
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (plan == null)
+            {
+                return Results.NotFound(new { message = "Plano não encontrado ou não disponível para compra" });
+            }
+
+            // Increment view count
+            var planEntity = await context.WorkoutPlans.FindAsync(planId);
+            if (planEntity != null)
+            {
+                planEntity.ViewCount++;
+                await context.SaveChangesAsync(CancellationToken.None);
+            }
+
+            return Results.Ok(plan);
+        })
+        .WithName("GetMarketplacePlanDetail")
+        .WithSummary("Get detailed information about a marketplace plan");
+
+        // Purchase a plan (requires authentication)
+        var purchaseGroup = app.MapGroup("/api/marketplace")
+            .WithTags("Marketplace")
+            .RequireAuthorization();
+
+        purchaseGroup.MapPost("/plans/{planId:guid}/purchase", async (
+            Guid planId,
+            ClaimsPrincipal user,
+            ISender sender,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Check if the plan requires payment
+            var plan = await context.WorkoutPlans
+                .FirstOrDefaultAsync(p => p.Id == planId && p.ForSale, cancellationToken);
+
+            if (plan == null)
+            {
+                return Results.NotFound(new { message = "Plano não encontrado" });
+            }
+
+            // If plan has a price, redirect to payment flow
+            if (plan.Price.HasValue && plan.Price.Value > 0)
+            {
+                return Results.BadRequest(new
+                {
+                    message = "Este plano requer pagamento. Use o endpoint /api/payments/create-intent.",
+                    requiresPayment = true,
+                    price = plan.Price.Value
+                });
+            }
+
+            // For free plans, clone directly
+            var command = new CloneWorkoutPlanCommand(planId, buyerId);
+
+            try
+            {
+                var result = await sender.Send(command);
+                return Results.Ok(new
+                {
+                    message = "Plano adquirido com sucesso!",
+                    planId = result.Id
+                });
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+        })
+        .WithName("PurchaseMarketplacePlan")
+        .WithSummary("Purchase a free workout plan from the marketplace");
+
+        // Update marketplace settings for a plan (PT only)
+        group.MapPatch("/{planId:guid}/marketplace", async (
+            Guid planId,
+            [FromBody] UpdateMarketplaceSettingsRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var plan = await context.WorkoutPlans
+                .FirstOrDefaultAsync(p => p.Id == planId && p.OwnerId == userId);
+
+            if (plan == null)
+            {
+                return Results.NotFound(new { message = "Plano não encontrado" });
+            }
+
+            plan.ForSale = request.ForSale;
+            plan.Price = request.Price;
+
+            // If marking for sale, must be public
+            if (request.ForSale && !plan.IsPublic)
+            {
+                return Results.BadRequest(new { message = "O plano deve ser público para ser vendido" });
+            }
+
+            await context.SaveChangesAsync(CancellationToken.None);
+
+            return Results.Ok(new { message = "Configurações de marketplace atualizadas com sucesso" });
+        })
+        .WithName("UpdateMarketplaceSettings")
+        .WithSummary("Updates marketplace settings for a workout plan");
     }
 }

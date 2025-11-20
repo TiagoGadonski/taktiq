@@ -280,6 +280,173 @@ public static class PersonalEndpoints
         .WithName("GetMyInvitations")
         .WithSummary("Gets all student invitations created by this trainer");
 
+        // Get PT Analytics/Metrics
+        group.MapGet("/analytics", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Get client stats
+            var totalClients = await context.Users
+                .CountAsync(u => u.PersonalTrainerId == trainerId, cancellationToken);
+
+            var activeClients = await context.Users
+                .Where(u => u.PersonalTrainerId == trainerId && u.IsActive)
+                .CountAsync(cancellationToken);
+
+            // Get posts stats
+            var totalPosts = await context.Posts
+                .CountAsync(p => p.AuthorId == trainerId, cancellationToken);
+
+            var publishedPosts = await context.Posts
+                .CountAsync(p => p.AuthorId == trainerId && p.IsPublished, cancellationToken);
+
+            // Get plans stats
+            var totalPlans = await context.WorkoutPlans
+                .CountAsync(p => p.OwnerId == trainerId, cancellationToken);
+
+            var plansForSale = await context.WorkoutPlans
+                .CountAsync(p => p.OwnerId == trainerId && p.ForSale, cancellationToken);
+
+            var publicPlans = await context.WorkoutPlans
+                .CountAsync(p => p.OwnerId == trainerId && p.IsPublic, cancellationToken);
+
+            var totalViews = await context.WorkoutPlans
+                .Where(p => p.OwnerId == trainerId && p.IsPublic)
+                .SumAsync(p => p.ViewCount, cancellationToken);
+
+            // Get pending invitations
+            var pendingInvitations = await context.StudentInvitations
+                .CountAsync(i => i.TrainerId == trainerId && i.Status == "Pending" && !i.IsExpired, cancellationToken);
+
+            return Results.Ok(new
+            {
+                clients = new
+                {
+                    total = totalClients,
+                    active = activeClients,
+                    inactive = totalClients - activeClients
+                },
+                posts = new
+                {
+                    total = totalPosts,
+                    published = publishedPosts,
+                    drafts = totalPosts - publishedPosts
+                },
+                plans = new
+                {
+                    total = totalPlans,
+                    forSale = plansForSale,
+                    public_ = publicPlans,
+                    totalViews = totalViews
+                },
+                invitations = new
+                {
+                    pending = pendingInvitations
+                }
+            });
+        })
+        .WithName("GetPTAnalytics")
+        .WithSummary("Gets analytics and metrics for the authenticated personal trainer");
+
+        // Get client progress trends for charts
+        group.MapGet("/analytics/progress-trends", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken,
+            [FromQuery] int days = 30) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Limit days to a reasonable range
+            days = Math.Min(Math.Max(days, 7), 365);
+            var startDate = DateTime.UtcNow.AddDays(-days);
+
+            // Get client workout sessions over time
+            var sessions = await context.WorkoutSessions
+                .Include(s => s.WorkoutPlan)
+                .Where(s => s.WorkoutPlan!.OwnerId == trainerId && s.StartedAt >= startDate)
+                .OrderBy(s => s.StartedAt)
+                .ToListAsync(cancellationToken);
+
+            // Group by date for daily trends
+            var dailyActivity = sessions
+                .GroupBy(s => s.StartedAt.Date)
+                .Select(g => new
+                {
+                    date = g.Key.ToString("yyyy-MM-dd"),
+                    totalSessions = g.Count(),
+                    completedSessions = g.Count(s => s.CompletedAt.HasValue),
+                    uniqueClients = g.Select(s => s.OwnerId).Distinct().Count()
+                })
+                .OrderBy(x => x.date)
+                .ToList();
+
+            // Get plan completion rates
+            var planEngagement = await context.WorkoutPlans
+                .Where(p => p.OwnerId == trainerId)
+                .Select(p => new
+                {
+                    planId = p.Id,
+                    planName = p.Name,
+                    totalWorkouts = p.Workouts.Count,
+                    assignedClients = context.WorkoutSessions.Where(s => s.WorkoutPlanId == p.Id).Select(s => s.OwnerId).Distinct().Count(),
+                    totalSessions = p.WorkoutSessions.Count,
+                    completedSessions = p.WorkoutSessions.Count(s => s.CompletedAt.HasValue)
+                })
+                .Where(p => p.assignedClients > 0)
+                .OrderByDescending(p => p.totalSessions)
+                .Take(10)
+                .ToListAsync(cancellationToken);
+
+            // Get client engagement levels
+            var clientIds = await context.Users
+                .Where(u => u.PersonalTrainerId == trainerId)
+                .Select(u => u.Id)
+                .ToListAsync(cancellationToken);
+
+            var clientEngagement = new List<object>();
+            foreach (var clientId in clientIds)
+            {
+                var clientSessions = sessions.Where(s => s.OwnerId == clientId).ToList();
+                if (clientSessions.Any())
+                {
+                    var client = await context.Users.FindAsync(new object[] { clientId }, cancellationToken);
+                    clientEngagement.Add(new
+                    {
+                        clientId = clientId,
+                        clientName = client?.Name ?? "Unknown",
+                        totalSessions = clientSessions.Count,
+                        completedSessions = clientSessions.Count(s => s.CompletedAt.HasValue),
+                        lastActivity = clientSessions.Max(s => s.StartedAt),
+                        completionRate = clientSessions.Count > 0
+                            ? (double)clientSessions.Count(s => s.CompletedAt.HasValue) / clientSessions.Count * 100
+                            : 0
+                    });
+                }
+            }
+
+            return Results.Ok(new
+            {
+                dailyActivity = dailyActivity,
+                planEngagement = planEngagement,
+                clientEngagement = clientEngagement.OrderByDescending(c => ((dynamic)c).lastActivity).Take(10),
+                summary = new
+                {
+                    totalSessionsInPeriod = sessions.Count,
+                    completedSessionsInPeriod = sessions.Count(s => s.CompletedAt.HasValue),
+                    activeClients = sessions.Select(s => s.OwnerId).Distinct().Count(),
+                    averageCompletionRate = sessions.Count > 0
+                        ? (double)sessions.Count(s => s.CompletedAt.HasValue) / sessions.Count * 100
+                        : 0
+                }
+            });
+        })
+        .WithName("GetProgressTrends")
+        .WithSummary("Gets client progress trends and activity data for charts");
+
         // Update Personal Trainer profile
         group.MapPut("/profile", async (
             [FromBody] UpdatePersonalProfileRequest request,
@@ -336,6 +503,68 @@ public static class PersonalEndpoints
     {
         var group = app.MapGroup("/api/trainer").WithTags("Public Personal Trainer");
 
+        // Get all public trainers (no authentication required)
+        group.MapGet("", async (
+            IApplicationDbContext context,
+            [FromQuery] string? search = null,
+            [FromQuery] string? specialization = null,
+            [FromQuery] string? location = null,
+            CancellationToken cancellationToken = default) =>
+        {
+            var query = context.Users
+                .Where(u => u.IsPublicProfile && u.Role == "PersonalTrainer");
+
+            // Apply search filter
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var searchLower = search.ToLower();
+                query = query.Where(u =>
+                    u.Name.ToLower().Contains(searchLower) ||
+                    (u.Specialization != null && u.Specialization.ToLower().Contains(searchLower)) ||
+                    (u.Bio != null && u.Bio.ToLower().Contains(searchLower))
+                );
+            }
+
+            // Apply specialization filter
+            if (!string.IsNullOrWhiteSpace(specialization))
+            {
+                var specializationLower = specialization.ToLower();
+                query = query.Where(u => u.Specialization != null && u.Specialization.ToLower().Contains(specializationLower));
+            }
+
+            // Apply location filter
+            if (!string.IsNullOrWhiteSpace(location))
+            {
+                var locationLower = location.ToLower();
+                query = query.Where(u => u.Location != null && u.Location.ToLower().Contains(locationLower));
+            }
+
+            var trainers = await query
+                .OrderBy(u => u.Name)
+                .Select(u => new PublicPersonalProfileResponse(
+                    u.Id,
+                    u.Name,
+                    u.ProfileSlug,
+                    u.ProfilePictureUrl,
+                    u.Bio,
+                    u.Location,
+                    u.Specialization,
+                    u.Education,
+                    u.Experience,
+                    u.PricingInfo,
+                    u.InstagramUrl,
+                    u.FacebookUrl,
+                    u.WebsiteUrl,
+                    u.Clients.Count
+                ))
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(trainers);
+        })
+        .WithName("GetAllPublicTrainers")
+        .WithSummary("Gets all public personal trainers with optional filters")
+        .AllowAnonymous();
+
         // Get public profile by slug (no authentication required)
         group.MapGet("/{slug}", async (
             string slug,
@@ -347,6 +576,7 @@ public static class PersonalEndpoints
                 .Select(u => new PublicPersonalProfileResponse(
                     u.Id,
                     u.Name,
+                    u.ProfileSlug,
                     u.ProfilePictureUrl,
                     u.Bio,
                     u.Location,

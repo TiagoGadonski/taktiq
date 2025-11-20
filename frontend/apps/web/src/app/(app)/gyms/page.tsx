@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MapPin, Navigation, Star, Phone, Globe, ArrowLeft, Loader2, MapPinned } from 'lucide-react';
+import { MapPin, Navigation, Star, Phone, Globe, ArrowLeft, Loader2, MapPinned, Info } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 interface Gym {
   place_id: string;
@@ -212,6 +213,15 @@ export default function GymsNearMePage() {
           Encontre as melhores academias perto de você
         </p>
       </div>
+
+      {/* Coming Soon Banner */}
+      <Alert className="glass border-yellow-500/50 bg-yellow-500/10">
+        <Info className="h-5 w-5 text-yellow-500" />
+        <AlertTitle className="text-yellow-500 font-semibold">Em Breve</AlertTitle>
+        <AlertDescription className="text-yellow-500/80">
+          Esta funcionalidade está em desenvolvimento e estará disponível em breve. Por enquanto, você pode explorar as outras funcionalidades do app!
+        </AlertDescription>
+      </Alert>
 
       {/* Search and Location */}
       <Card className="glass border-primary/20">

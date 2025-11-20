@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, Plus, Trash2, Check, RefreshCw, Pencil } from 'lucide-react';
+import { ChevronDown, Plus, Trash2, Check, RefreshCw, Pencil, Play } from 'lucide-react';
 import type { WorkoutPlanExercise, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
+import { VideoPlayer } from '@/components/media/video-player';
 
 interface ExerciseCardProps {
   exercise: WorkoutPlanExercise | WorkoutExercise;
@@ -25,6 +26,7 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onEditSet,
   const [showSetForm, setShowSetForm] = useState(false);
   const [newSetReps, setNewSetReps] = useState(exercise.targetReps);
   const [newSetWeight, setNewSetWeight] = useState(exercise.targetLoad || 0);
+  const [showVideo, setShowVideo] = useState(false);
 
   // ✅ NEW: Edit set state
   const [editingSetId, setEditingSetId] = useState<string | null>(null);
@@ -128,6 +130,18 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onEditSet,
 
             {/* Details and Replace Buttons */}
             <div className="flex gap-1 sm:gap-2 mt-2 -ml-2">
+              {exercise.exercise?.videoUrl && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowVideo(!showVideo)}
+                  className="text-xs sm:text-sm h-8 px-2 sm:px-3"
+                >
+                  <Play className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">{showVideo ? 'Ocultar' : 'Ver'} vídeo</span>
+                  <span className="sm:hidden">Vídeo</span>
+                </Button>
+              )}
               {onExerciseClick && (
                 <Button
                   variant="ghost"
@@ -157,6 +171,17 @@ export function ExerciseCard({ exercise, sets, onAddSet, onDeleteSet, onEditSet,
           </div>
         </div>
       </CardHeader>
+
+      {/* Video Player */}
+      {showVideo && exercise.exercise?.videoUrl && (
+        <CardContent className="pt-0 pb-3">
+          <VideoPlayer
+            src={exercise.exercise.videoUrl}
+            poster={exercise.exercise.imageUrl}
+            className="rounded-lg"
+          />
+        </CardContent>
+      )}
 
       {/* Completed Sets List */}
       {exerciseSets.length > 0 && (

@@ -247,6 +247,81 @@ namespace GymHero.Infrastructure.Migrations
                     b.ToTable("Friendships");
                 });
 
+            modelBuilder.Entity("GymHero.Domain.Entities.Media", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContainerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<double?>("DurationSeconds")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid?>("EntityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("MediaType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ThumbnailUrl")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UploadedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UsageContext")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("Width")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted")
+                        .HasDatabaseName("IX_Media_IsDeleted");
+
+                    b.HasIndex("MediaType")
+                        .HasDatabaseName("IX_Media_MediaType");
+
+                    b.HasIndex("UploadedBy")
+                        .HasDatabaseName("IX_Media_UploadedBy");
+
+                    b.HasIndex("EntityId", "UsageContext")
+                        .HasDatabaseName("IX_Media_EntityUsage");
+
+                    b.ToTable("Medias");
+                });
+
             modelBuilder.Entity("GymHero.Domain.Entities.Notification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -450,6 +525,92 @@ namespace GymHero.Infrastructure.Migrations
                     b.HasIndex("WorkoutPlanId");
 
                     b.ToTable("StudentInvitations");
+                });
+
+            modelBuilder.Entity("GymHero.Domain.Entities.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)");
+
+                    b.Property<Guid>("BuyerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Metadata")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PayPalCaptureId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PayPalOrderId")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("PlatformFee")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("PlatformFeePercentage")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Provider")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("SellerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("SellerPayout")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("StripeChargeId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StripePaymentIntentId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("WorkoutPlanId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuyerId")
+                        .HasDatabaseName("IX_Transactions_BuyerId");
+
+                    b.HasIndex("SellerId")
+                        .HasDatabaseName("IX_Transactions_SellerId");
+
+                    b.HasIndex("Status")
+                        .HasDatabaseName("IX_Transactions_Status");
+
+                    b.HasIndex("StripePaymentIntentId")
+                        .HasDatabaseName("IX_Transactions_StripePaymentIntentId");
+
+                    b.HasIndex("WorkoutPlanId")
+                        .HasDatabaseName("IX_Transactions_WorkoutPlanId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("GymHero.Domain.Entities.User", b =>
@@ -719,6 +880,9 @@ namespace GymHero.Infrastructure.Migrations
                     b.Property<DateTime?>("ExpirationDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool>("ForSale")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Goal")
                         .HasColumnType("text");
 
@@ -734,6 +898,9 @@ namespace GymHero.Infrastructure.Migrations
 
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime?>("PublishedAt")
                         .HasColumnType("timestamp with time zone");
@@ -904,6 +1071,17 @@ namespace GymHero.Infrastructure.Migrations
                     b.Navigation("Requester");
                 });
 
+            modelBuilder.Entity("GymHero.Domain.Entities.Media", b =>
+                {
+                    b.HasOne("GymHero.Domain.Entities.User", "Uploader")
+                        .WithMany()
+                        .HasForeignKey("UploadedBy")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Uploader");
+                });
+
             modelBuilder.Entity("GymHero.Domain.Entities.Notification", b =>
                 {
                     b.HasOne("GymHero.Domain.Entities.User", "User")
@@ -967,6 +1145,33 @@ namespace GymHero.Infrastructure.Migrations
                     b.Navigation("CreatedUser");
 
                     b.Navigation("Trainer");
+
+                    b.Navigation("WorkoutPlan");
+                });
+
+            modelBuilder.Entity("GymHero.Domain.Entities.Transaction", b =>
+                {
+                    b.HasOne("GymHero.Domain.Entities.User", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GymHero.Domain.Entities.User", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GymHero.Domain.Entities.WorkoutPlan", "WorkoutPlan")
+                        .WithMany()
+                        .HasForeignKey("WorkoutPlanId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
+
+                    b.Navigation("Seller");
 
                     b.Navigation("WorkoutPlan");
                 });

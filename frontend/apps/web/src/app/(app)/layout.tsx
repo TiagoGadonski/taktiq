@@ -22,6 +22,9 @@ import {
   Calendar,
   Trophy,
   MapPin,
+  ShoppingBag,
+  Search,
+  CreditCard,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -177,6 +180,26 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     Academias Próximas
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/trainers" className="cursor-pointer">
+                    <Search className="mr-2 h-4 w-4" />
+                    Encontrar Personal
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/marketplace" className="cursor-pointer">
+                    <ShoppingBag className="mr-2 h-4 w-4" />
+                    Marketplace
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/transactions" className="cursor-pointer">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Transações
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/about" className="cursor-pointer">
                     <Info className="mr-2 h-4 w-4" />
@@ -295,6 +318,26 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     Academias Próximas
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/trainers" className="cursor-pointer">
+                    <Search className="mr-2 h-4 w-4" />
+                    Encontrar Personal
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/marketplace" className="cursor-pointer">
+                    <ShoppingBag className="mr-2 h-4 w-4" />
+                    Marketplace
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/transactions" className="cursor-pointer">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Transações
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/about" className="cursor-pointer">
                     <Info className="mr-2 h-4 w-4" />

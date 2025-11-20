@@ -26,6 +26,10 @@ public class WorkoutPlan : BaseEntity
     public bool AllowCopying { get; set; } = true; // Allow others to copy this plan
     public int ViewCount { get; set; } = 0; // Track how many times plan was viewed
 
+    // Marketplace settings
+    public bool ForSale { get; set; } = false; // Indicates if this plan is available for purchase
+    public decimal? Price { get; set; } // Price in local currency (BRL for Brazil)
+
     // Um plano de treino tem uma coleção de treinos (workout days).
     public ICollection<Workout> Workouts { get; set; } = new List<Workout>();
     public ICollection<WorkoutSession> WorkoutSessions { get; set; } = new List<WorkoutSession>();
