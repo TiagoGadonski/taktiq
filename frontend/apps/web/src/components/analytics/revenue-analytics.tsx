@@ -186,9 +186,9 @@ export function RevenueAnalytics() {
             <h3 className="font-semibold">Planos Mais Vendidos</h3>
           </div>
 
-          {analytics.topSellingPlans.length > 0 ? (
+          {(analytics.topSellingPlans || []).length > 0 ? (
             <div className="space-y-3">
-              {analytics.topSellingPlans.map((plan, index) => (
+              {(analytics.topSellingPlans || []).map((plan, index) => (
                 <div
                   key={plan.planId}
                   className="flex items-center justify-between p-3 glass rounded-lg border border-primary/10 hover-lift"
@@ -272,9 +272,9 @@ export function RevenueAnalytics() {
           <h3 className="font-semibold">Vendas Recentes</h3>
         </div>
 
-        {analytics.recentSales.length > 0 ? (
+        {(analytics.recentSales || []).length > 0 ? (
           <div className="space-y-2">
-            {analytics.recentSales.map((sale, index) => (
+            {(analytics.recentSales || []).map((sale, index) => (
               <div
                 key={sale.transactionId}
                 className="flex items-center justify-between p-3 glass rounded-lg border border-primary/10 hover-lift animate-scale-in"

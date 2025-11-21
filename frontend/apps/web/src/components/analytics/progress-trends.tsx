@@ -184,21 +184,21 @@ export function ProgressTrends() {
             <Award className="h-5 w-5 text-orange-500" />
           </div>
           <p className="text-3xl font-bold text-orange-500">
-            {trends.planEngagement.length}
+            {(trends.planEngagement || []).length}
           </p>
           <p className="text-xs text-muted-foreground mt-1">com atividade</p>
         </Card>
       </div>
 
       {/* Daily Activity Chart */}
-      {trends.dailyActivity.length > 0 && (
+      {(trends.dailyActivity || []).length > 0 && (
         <Card className="glass border-primary/20 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Calendar className="h-5 w-5 text-primary" />
             <h3 className="font-semibold">Atividade Diária</h3>
           </div>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={trends.dailyActivity}>
+            <LineChart data={trends.dailyActivity || []}>
               <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
               <XAxis
                 dataKey="date"
@@ -246,14 +246,14 @@ export function ProgressTrends() {
       )}
 
       {/* Plan Engagement Chart */}
-      {trends.planEngagement.length > 0 && (
+      {(trends.planEngagement || []).length > 0 && (
         <Card className="glass border-primary/20 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Award className="h-5 w-5 text-primary" />
             <h3 className="font-semibold">Engajamento por Plano</h3>
           </div>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={trends.planEngagement}>
+            <BarChart data={trends.planEngagement || []}>
               <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
               <XAxis
                 dataKey="planName"
@@ -280,14 +280,14 @@ export function ProgressTrends() {
       )}
 
       {/* Client Engagement List */}
-      {trends.clientEngagement.length > 0 && (
+      {(trends.clientEngagement || []).length > 0 && (
         <Card className="glass border-primary/20 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Users className="h-5 w-5 text-primary" />
             <h3 className="font-semibold">Top 10 Clientes Mais Ativos</h3>
           </div>
           <div className="space-y-3">
-            {trends.clientEngagement.map((client, index) => (
+            {(trends.clientEngagement || []).map((client, index) => (
               <div
                 key={client.clientId}
                 className="flex items-center justify-between p-3 glass rounded-lg border border-primary/10 hover-lift animate-scale-in"
@@ -321,7 +321,7 @@ export function ProgressTrends() {
       )}
 
       {/* Empty State */}
-      {trends.dailyActivity.length === 0 && (
+      {(trends.dailyActivity || []).length === 0 && (
         <Card className="glass border-primary/20 p-12 text-center">
           <Activity className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
           <h3 className="text-lg font-semibold mb-2">Nenhuma atividade no período</h3>
