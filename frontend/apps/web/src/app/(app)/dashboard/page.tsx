@@ -250,7 +250,7 @@ export default function DashboardPage() {
             {!isCalendarExpanded ? (
               // Weekly view (last 7 days)
               <div className="grid grid-cols-7 gap-2">
-                {progress.weeklyWorkouts.map((day, index) => {
+                {(progress?.weeklyWorkouts || []).map((day, index) => {
                   const dayShort = day.dayOfWeek.substring(0, 3);
                   const dateObj = new Date(day.date);
                   const dayNum = dateObj.getDate();
@@ -429,7 +429,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {progress.recentPRs.slice(0, 5).map((pr, index) => (
+              {(progress.recentPRs || []).slice(0, 5).map((pr, index) => (
                 <div key={index} className="flex items-center justify-between border-b pb-2">
                   <div>
                     <p className="font-medium">
