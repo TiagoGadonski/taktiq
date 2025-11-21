@@ -38,7 +38,7 @@ export function InstructorDashboard() {
     queryFn: () => apiClient.get('/personal/analytics'),
   });
 
-  const { data: recentClients } = useQuery({
+  const { data: recentClients = [] } = useQuery({
     queryKey: ['recent-clients'],
     queryFn: async () => {
       const response = await apiClient.get('/personal/clients');
