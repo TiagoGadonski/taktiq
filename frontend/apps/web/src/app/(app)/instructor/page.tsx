@@ -164,7 +164,7 @@ export default function InstructorPage() {
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
   const [inviteName, setInviteName] = useState('');
-  const [selectedPlanId, setSelectedPlanId] = useState<string>('');
+  const [selectedPlanId, setSelectedPlanId] = useState<string>('none');
   const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
   const [isSendingInvite, setIsSendingInvite] = useState(false);
 
@@ -455,7 +455,7 @@ export default function InstructorPage() {
       await apiClient.post('/personal/invitations', {
         Email: inviteEmail.trim(),
         Name: inviteName.trim() || null,
-        WorkoutPlanId: selectedPlanId || null,
+        WorkoutPlanId: (selectedPlanId && selectedPlanId !== 'none') ? selectedPlanId : null,
       });
 
       toast({
@@ -466,7 +466,7 @@ export default function InstructorPage() {
       setInviteDialogOpen(false);
       setInviteEmail('');
       setInviteName('');
-      setSelectedPlanId('');
+      setSelectedPlanId('none');
 
       // Refresh invitations list
       const response = await apiClient.get<Invitation[]>('/personal/invitations');
@@ -499,7 +499,7 @@ export default function InstructorPage() {
     setIsSavingProfile(true);
 
     try {
-      await apiClient.put('/personal/profile', {
+      const profileData = {
         ProfileSlug: profileSlug || null,
         Specialization: specialization || null,
         Education: education || null,
@@ -509,18 +509,53 @@ export default function InstructorPage() {
         InstagramUrl: instagramUrl || null,
         FacebookUrl: facebookUrl || null,
         WebsiteUrl: websiteUrl || null,
-      });
+      };
+
+      console.log('Saving profile data:', profileData);
+      const saveResponse = await apiClient.put('/personal/profile', profileData);
+      console.log('Save response:', saveResponse);
+
+      // Refetch profile data to ensure it's saved
+      const response = await apiClient.get<any>('/me');
+      console.log('Refetched user data:', response);
+
+      if (response) {
+        const hasProfileData = response.profileSlug || response.specialization ||
+                               response.education || response.experience ||
+                               response.pricingInfo || response.instagramUrl ||
+                               response.facebookUrl || response.websiteUrl;
+
+        if (!hasProfileData) {
+          console.warn('WARNING: /me endpoint does not return profile fields!');
+          console.warn('Backend needs to include these fields in User response:',
+            'profileSlug, specialization, education, experience, pricingInfo, isPublicProfile, instagramUrl, facebookUrl, websiteUrl');
+        }
+
+        setProfileSlug(response.profileSlug || '');
+        setSpecialization(response.specialization || '');
+        setEducation(response.education || '');
+        setExperience(response.experience || '');
+        setPricingInfo(response.pricingInfo || '');
+        setIsPublicProfile(response.isPublicProfile || false);
+        setInstagramUrl(response.instagramUrl || '');
+        setFacebookUrl(response.facebookUrl || '');
+        setWebsiteUrl(response.websiteUrl || '');
+      }
 
       toast({
         title: 'Perfil atualizado!',
         description: 'Suas informações foram salvas com sucesso.',
       });
     } catch (error: any) {
+      console.error('Error saving profile:', error);
+      console.error('Error response:', error.response?.data);
+
       const errorMessage = error.response?.data?.message ||
+        error.response?.data?.title ||
         'Não foi possível atualizar o perfil.';
 
       toast({
-        title: 'Erro',
+        title: 'Erro ao salvar',
         description: errorMessage,
         variant: 'destructive',
       });
@@ -1731,7 +1766,7 @@ export default function InstructorPage() {
                   <SelectValue placeholder="Selecione um plano (opcional)" />
                 </SelectTrigger>
                 <SelectContent className="glass">
-                  <SelectItem value="">Nenhum plano</SelectItem>
+                  <SelectItem value="none">Nenhum plano</SelectItem>
                   {workoutPlans.map((plan) => (
                     <SelectItem key={plan.id} value={plan.id}>
                       {plan.name} - {plan.goal}
