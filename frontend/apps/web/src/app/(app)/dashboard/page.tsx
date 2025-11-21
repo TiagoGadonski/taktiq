@@ -46,15 +46,21 @@ export default function DashboardPage() {
     queryFn: () => api.challenges.getAll({ status: 'active' }),
   });
 
-  // Fetch posts from the user's personal trainer
+  // Fetch posts from the user's personal trainer OR all public posts if no PT assigned
   const { data: posts } = useQuery({
-    queryKey: ['posts', 'trainer', user?.personalTrainerId],
+    queryKey: ['posts', user?.personalTrainerId ? 'trainer' : 'all', user?.personalTrainerId],
     queryFn: async () => {
-      if (!user?.personalTrainerId) return [];
-      const response = await apiClient.get<Post[]>(`/posts/trainer/${user.personalTrainerId}`);
-      return Array.isArray(response) ? response : [];
+      if (user?.personalTrainerId) {
+        // Fetch posts from user's assigned personal trainer
+        const response = await apiClient.get<Post[]>(`/posts/trainer/${user.personalTrainerId}`);
+        return Array.isArray(response) ? response : [];
+      } else {
+        // Fetch all published posts from all trainers
+        const response = await apiClient.get<Post[]>('/posts?page=1&pageSize=10');
+        return Array.isArray(response) ? response : [];
+      }
     },
-    enabled: !!user?.personalTrainerId,
+    enabled: !!user,
   });
 
   // Generate full calendar from account creation to today
@@ -194,16 +200,22 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Posts from Personal Trainer */}
+      {/* Posts from Personal Trainer or all trainers */}
       {posts && posts.length > 0 && (
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
               <FileText className="h-5 w-5 text-primary" />
               <div>
-                <CardTitle>Dicas do seu Personal Trainer</CardTitle>
+                <CardTitle>
+                  {user?.personalTrainerId
+                    ? 'Dicas do seu Personal Trainer'
+                    : 'Dicas de Personal Trainers'}
+                </CardTitle>
                 <CardDescription>
-                  Conteúdo exclusivo compartilhado pelo seu instrutor
+                  {user?.personalTrainerId
+                    ? 'Conteúdo exclusivo compartilhado pelo seu instrutor'
+                    : 'Artigos e dicas compartilhadas por personal trainers da comunidade'}
                 </CardDescription>
               </div>
             </div>

@@ -23,7 +23,8 @@
       "Bash(pnpm run build:*)",
       "Bash(dotnet remove:*)",
       "Bash(pnpm list:*)",
-      "Bash(dotnet ef migrations:*)"
+      "Bash(dotnet ef migrations:*)",
+      "Bash(tail:*)"
     ],
     "deny": [],
     "ask": []

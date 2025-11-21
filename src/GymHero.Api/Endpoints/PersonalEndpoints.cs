@@ -384,17 +384,17 @@ public static class PersonalEndpoints
                 .OrderBy(x => x.date)
                 .ToList();
 
-            // Get plan completion rates
+            // Get plan completion rates - use explicit joins to avoid navigation property issues
             var planEngagement = await context.WorkoutPlans
                 .Where(p => p.OwnerId == trainerId)
                 .Select(p => new
                 {
                     planId = p.Id,
                     planName = p.Name,
-                    totalWorkouts = p.Workouts.Count,
+                    totalWorkouts = context.Workouts.Count(w => w.PlanId == p.Id),
                     assignedClients = context.WorkoutSessions.Where(s => s.WorkoutPlanId == p.Id).Select(s => s.OwnerId).Distinct().Count(),
-                    totalSessions = p.WorkoutSessions.Count,
-                    completedSessions = p.WorkoutSessions.Count(s => s.CompletedAt.HasValue)
+                    totalSessions = context.WorkoutSessions.Count(s => s.WorkoutPlanId == p.Id),
+                    completedSessions = context.WorkoutSessions.Count(s => s.WorkoutPlanId == p.Id && s.CompletedAt.HasValue)
                 })
                 .Where(p => p.assignedClients > 0)
                 .OrderByDescending(p => p.totalSessions)

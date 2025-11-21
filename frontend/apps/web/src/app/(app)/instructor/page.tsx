@@ -184,6 +184,7 @@ export default function InstructorPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [postDialogOpen, setPostDialogOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [viewingPost, setViewingPost] = useState<Post | null>(null);
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
   const [postImageUrl, setPostImageUrl] = useState('');
@@ -1496,6 +1497,15 @@ export default function InstructorPage() {
 
                   <div className="flex gap-2 mt-4 pt-4 border-t border-border/50">
                     <Button
+                      onClick={() => setViewingPost(post)}
+                      variant="outline"
+                      className="hover-lift tap-scale"
+                      size="sm"
+                    >
+                      <Eye className="mr-2 h-4 w-4" />
+                      Ver
+                    </Button>
+                    <Button
                       onClick={() => handleOpenPostDialog(post)}
                       className="flex-1 bg-primary hover:bg-primary/90 hover-lift tap-scale"
                       size="sm"
@@ -1871,6 +1881,47 @@ export default function InstructorPage() {
                   {editingPost ? 'Atualizar' : postIsPublished ? 'Publicar' : 'Salvar Rascunho'}
                 </>
               )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Post Dialog */}
+      <Dialog open={!!viewingPost} onOpenChange={() => setViewingPost(null)}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">{viewingPost?.title}</DialogTitle>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant={viewingPost?.isPublished ? "default" : "secondary"}>
+                {viewingPost?.isPublished ? 'Publicado' : 'Rascunho'}
+              </Badge>
+              {viewingPost?.publishedAt && (
+                <p className="text-sm text-muted-foreground">
+                  {new Date(viewingPost.publishedAt).toLocaleDateString('pt-BR')}
+                </p>
+              )}
+            </div>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            {viewingPost?.imageUrl && (
+              <div className="relative w-full h-64 rounded-lg overflow-hidden">
+                <img
+                  src={getAssetUrl(viewingPost.imageUrl)}
+                  alt={viewingPost.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div className="prose prose-sm max-w-none dark:prose-invert">
+              <p className="whitespace-pre-wrap">{viewingPost?.content}</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setViewingPost(null)}
+            >
+              Fechar
             </Button>
           </DialogFooter>
         </DialogContent>

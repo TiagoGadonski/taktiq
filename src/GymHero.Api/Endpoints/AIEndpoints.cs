@@ -1288,7 +1288,7 @@ public static class AIEndpoints
                              (exerciseGoal?.Contains("perder peso", StringComparison.OrdinalIgnoreCase) ?? false) ||
                              (exerciseGoal?.Contains("definir", StringComparison.OrdinalIgnoreCase) ?? false);
 
-        // Check if user explicitly restricted cardio
+        // Check if user explicitly restricted cardio - check both parsed restrictions AND original prompt
         var hasCardioRestriction = parsedPrompt.Restrictions.Any(r =>
             r.Contains("cardio", StringComparison.OrdinalIgnoreCase) ||
             r.Contains("cardiovascular", StringComparison.OrdinalIgnoreCase) ||
@@ -1296,6 +1296,22 @@ public static class AIEndpoints
             r.Contains("aerobico", StringComparison.OrdinalIgnoreCase) ||
             r.Contains("corrida", StringComparison.OrdinalIgnoreCase) ||
             r.Contains("esteira", StringComparison.OrdinalIgnoreCase));
+
+        // ADDITIONAL CHECK: Also check the original prompt directly for common "no cardio" patterns
+        if (!hasCardioRestriction)
+        {
+            var lowerPrompt = prompt.ToLower();
+            var noCardioPatterns = new[] {
+                "sem cardio", "sem o cardio", "no cardio", "não quero cardio",
+                "evitar cardio", "excluir cardio", "nada de cardio", "nao quero cardio",
+                "without cardio", "don't want cardio", "dont want cardio"
+            };
+            hasCardioRestriction = noCardioPatterns.Any(pattern => lowerPrompt.Contains(pattern));
+            if (hasCardioRestriction)
+            {
+                Console.WriteLine("⚠️ CARDIO RESTRICTION DETECTED FROM PROMPT DIRECTLY");
+            }
+        }
 
         if (shouldAddCardio && !parsedPrompt.MuscleGroups.Contains("cardio") && !hasCardioRestriction && ExerciseDatabase.ContainsKey("cardio"))
         {

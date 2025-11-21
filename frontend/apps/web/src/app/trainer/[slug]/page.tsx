@@ -125,9 +125,9 @@ export default function TrainerPublicProfilePage() {
           <p className="text-muted-foreground">
             O perfil que você está procurando não existe ou não está público.
           </p>
-          <Button onClick={() => router.push('/dashboard')} className="hover-lift tap-scale">
+          <Button onClick={() => router.push('/trainers')} className="hover-lift tap-scale">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar para o Início
+            Voltar para Personal Trainers
           </Button>
         </div>
       </div>
@@ -141,7 +141,7 @@ export default function TrainerPublicProfilePage() {
         <div className="container mx-auto px-4 py-12 max-w-5xl">
           <Button
             variant="ghost"
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push('/trainers')}
             className="mb-6 hover-lift tap-scale"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />

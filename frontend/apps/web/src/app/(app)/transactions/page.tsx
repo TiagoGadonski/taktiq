@@ -29,6 +29,7 @@ import {
   Download,
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/hooks/use-auth';
 
 interface Transaction {
   id: string;
@@ -42,6 +43,7 @@ interface Transaction {
 
 export default function TransactionsPage() {
   const { toast } = useToast();
+  const { user } = useAuth();
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState<'all' | 'purchases' | 'sales'>('all');
   const [refundingTransaction, setRefundingTransaction] = useState<Transaction | null>(null);
@@ -216,15 +218,18 @@ export default function TransactionsPage() {
             <ArrowUpRight className="h-4 w-4 mr-2" />
             Compras
           </Button>
-          <Button
-            variant={filter === 'sales' ? 'default' : 'outline'}
-            onClick={() => setFilter('sales')}
-            size="sm"
-            className="hover-lift tap-scale"
-          >
-            <ArrowDownLeft className="h-4 w-4 mr-2" />
-            Vendas
-          </Button>
+          {/* Only show sales filter for Personal Trainers */}
+          {user?.role === 'PersonalTrainer' && (
+            <Button
+              variant={filter === 'sales' ? 'default' : 'outline'}
+              onClick={() => setFilter('sales')}
+              size="sm"
+              className="hover-lift tap-scale"
+            >
+              <ArrowDownLeft className="h-4 w-4 mr-2" />
+              Vendas
+            </Button>
+          )}
         </div>
       </Card>
 

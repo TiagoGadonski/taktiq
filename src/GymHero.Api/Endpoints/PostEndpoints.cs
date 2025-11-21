@@ -146,5 +146,18 @@ public static class PostEndpoints
         })
         .WithName("GetTrainerPosts")
         .WithSummary("Gets all published posts from a specific trainer");
+
+        // Get all published posts from all trainers (for general feed)
+        publicGroup.MapGet("", async (
+            ISender sender,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10) =>
+        {
+            var query = new GetAllPublishedPostsQuery(page, pageSize);
+            var posts = await sender.Send(query);
+            return Results.Ok(posts);
+        })
+        .WithName("GetAllPublishedPosts")
+        .WithSummary("Gets all published posts from all trainers");
     }
 }
