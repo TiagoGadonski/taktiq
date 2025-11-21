@@ -188,9 +188,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/marketplace" className="cursor-pointer">
+                  <Link href="/discover" className="cursor-pointer">
                     <ShoppingBag className="mr-2 h-4 w-4" />
-                    Marketplace
+                    Descobrir Planos
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -326,9 +326,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/marketplace" className="cursor-pointer">
+                  <Link href="/discover" className="cursor-pointer">
                     <ShoppingBag className="mr-2 h-4 w-4" />
-                    Marketplace
+                    Descobrir Planos
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>

@@ -22,6 +22,10 @@ import {
   ArrowLeft,
   Sparkles,
   FileText,
+  Dumbbell,
+  Calendar,
+  Eye,
+  TrendingUp,
 } from 'lucide-react';
 import Link from 'next/link';
 import { PostFeed } from '@/components/posts/post-feed';
@@ -63,6 +67,7 @@ export default function TrainerPublicProfilePage() {
 
   const [profile, setProfile] = useState<PublicProfileData | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [plans, setPlans] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
@@ -103,6 +108,24 @@ export default function TrainerPublicProfilePage() {
     };
 
     fetchPosts();
+  }, [profile?.id]);
+
+  // Fetch public plans for this trainer
+  useEffect(() => {
+    const fetchPlans = async () => {
+      if (!profile?.id) return;
+
+      try {
+        // Fetch public plans from this trainer (sample/top plans)
+        const response = await apiClient.get(`/workout-plans/user/${profile.id}/public?pageSize=4`);
+        setPlans(Array.isArray(response) ? response : []);
+      } catch (error: any) {
+        console.error('Error fetching plans:', error);
+        setPlans([]);
+      }
+    };
+
+    fetchPlans();
   }, [profile?.id]);
 
   if (isLoading) {
@@ -226,6 +249,22 @@ export default function TrainerPublicProfilePage() {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8 max-w-5xl">
+        {/* Stats Section */}
+        <div className="grid gap-4 md:grid-cols-3 mb-8">
+          <Card className="glass border-primary/20 p-6 text-center hover-lift">
+            <div className="text-3xl font-bold text-primary mb-1">{profile.studentCount}</div>
+            <p className="text-sm text-muted-foreground">{profile.studentCount === 1 ? 'Aluno' : 'Alunos'}</p>
+          </Card>
+          <Card className="glass border-primary/20 p-6 text-center hover-lift">
+            <div className="text-3xl font-bold text-primary mb-1">{posts.length}</div>
+            <p className="text-sm text-muted-foreground">{posts.length === 1 ? 'Post Publicado' : 'Posts Publicados'}</p>
+          </Card>
+          <Card className="glass border-primary/20 p-6 text-center hover-lift">
+            <div className="text-3xl font-bold text-primary mb-1">{plans.length}</div>
+            <p className="text-sm text-muted-foreground">{plans.length === 1 ? 'Plano Criado' : 'Planos Criados'}</p>
+          </Card>
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
           {/* Specialization */}
           {profile.specialization && (
@@ -295,6 +334,58 @@ export default function TrainerPublicProfilePage() {
             </Card>
           )}
         </div>
+
+        {/* Sample Workout Plans Section */}
+        {plans.length > 0 && (
+          <div className="mt-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Dumbbell className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold">Planos de Treino</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {plans.slice(0, 4).map((plan: any, index: number) => (
+                <Card
+                  key={plan.id}
+                  className="glass border-primary/20 p-6 hover-lift animate-scale-in"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">{plan.name}</h3>
+                      {plan.description && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {plan.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 text-sm">
+                      {plan.goal && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          <TrendingUp className="h-3 w-3" />
+                          {plan.goal}
+                        </Badge>
+                      )}
+                      {plan.duration && (
+                        <Badge variant="outline" className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {plan.duration} semanas
+                        </Badge>
+                      )}
+                    </div>
+
+                    {plan.viewCount > 0 && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2 border-t">
+                        <Eye className="h-4 w-4" />
+                        <span>{plan.viewCount} visualizações</span>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Posts Section */}
         {posts.length > 0 && (
