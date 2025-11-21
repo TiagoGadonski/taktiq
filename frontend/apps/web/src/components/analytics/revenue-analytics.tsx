@@ -227,10 +227,10 @@ export function RevenueAnalytics() {
             <h3 className="font-semibold">Receita por Mês</h3>
           </div>
 
-          {analytics.revenueByMonth.length > 0 ? (
+          {analytics?.revenueByMonth && analytics.revenueByMonth.length > 0 ? (
             <div className="space-y-2">
-              {analytics.revenueByMonth.slice(-6).map((period, index) => {
-                const maxRevenue = Math.max(...analytics.revenueByMonth.map(p => p.revenue));
+              {(analytics.revenueByMonth || []).slice(-6).map((period, index) => {
+                const maxRevenue = Math.max(...(analytics.revenueByMonth || []).map(p => p.revenue));
                 const widthPercent = maxRevenue > 0 ? (period.revenue / maxRevenue) * 100 : 0;
 
                 return (
