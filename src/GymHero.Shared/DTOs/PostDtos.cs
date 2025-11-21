@@ -45,6 +45,7 @@ public record PostResponse(
     Guid AuthorId,
     string AuthorName,
     string? AuthorProfilePictureUrl,
+    string? AuthorProfileSlug,
     bool IsPublished,
     DateTime? PublishedAt,
     DateTime CreatedAt,
@@ -62,6 +63,7 @@ public record PostSummaryResponse(
     Guid AuthorId,
     string AuthorName,
     string? AuthorProfilePictureUrl,
+    string? AuthorProfileSlug,
     bool IsPublished,
     DateTime? PublishedAt,
     DateTime CreatedAt

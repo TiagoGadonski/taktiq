@@ -28,6 +28,7 @@ public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, PostRes
                 p.AuthorId,
                 p.Author.Name,
                 p.Author.ProfilePictureUrl,
+                p.Author.ProfileSlug,
                 p.IsPublished,
                 p.PublishedAt,
                 p.CreatedAt,

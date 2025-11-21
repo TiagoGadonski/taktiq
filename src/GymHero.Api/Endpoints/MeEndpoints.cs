@@ -38,7 +38,17 @@ public static class MeEndpoints
                 currentUser.ExerciseGoal,
                 currentUser.TrainingSplit,
                 (int)currentUser.PreferredWorkoutLocation,
-                currentUser.CreatedAt
+                currentUser.CreatedAt,
+                // Personal Trainer Profile Fields
+                currentUser.ProfileSlug,
+                currentUser.Specialization,
+                currentUser.Education,
+                currentUser.Experience,
+                currentUser.PricingInfo,
+                currentUser.IsPublicProfile,
+                currentUser.InstagramUrl,
+                currentUser.FacebookUrl,
+                currentUser.WebsiteUrl
             );
             return Results.Ok(response);
         });

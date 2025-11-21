@@ -322,9 +322,9 @@ public static class PersonalEndpoints
 
                 var totalViews = publicPlansList.Sum(p => p.ViewCount);
 
-                // Get pending invitations
+                // Get pending invitations (use direct date comparison instead of computed property)
                 var pendingInvitations = await context.StudentInvitations
-                    .CountAsync(i => i.TrainerId == trainerId && i.Status == "Pending" && !i.IsExpired, cancellationToken);
+                    .CountAsync(i => i.TrainerId == trainerId && i.Status == "Pending" && i.ExpiresAt > DateTime.UtcNow, cancellationToken);
 
                 // Get total invitations (for conversion rate)
                 var totalInvitations = await context.StudentInvitations

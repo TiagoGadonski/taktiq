@@ -45,7 +45,17 @@ public record UserProfileResponse(
     string? ExerciseGoal,
     string? TrainingSplit,
     int PreferredWorkoutLocation, // 0 = Gym, 1 = Home, 2 = Both
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    // Personal Trainer Profile Fields
+    string? ProfileSlug,
+    string? Specialization,
+    string? Education,
+    string? Experience,
+    string? PricingInfo,
+    bool IsPublicProfile,
+    string? InstagramUrl,
+    string? FacebookUrl,
+    string? WebsiteUrl
 );
 
 public record PublicProfileResponse(

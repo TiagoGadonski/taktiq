@@ -30,6 +30,7 @@ public class GetAllPublishedPostsQueryHandler : IRequestHandler<GetAllPublishedP
                 p.AuthorId,
                 p.Author.Name,
                 p.Author.ProfilePictureUrl,
+                p.Author.ProfileSlug,
                 p.IsPublished,
                 p.PublishedAt,
                 p.CreatedAt

@@ -28,6 +28,7 @@ public class GetTrainerPostsQueryHandler : IRequestHandler<GetTrainerPostsQuery,
                 p.AuthorId,
                 p.Author.Name,
                 p.Author.ProfilePictureUrl,
+                p.Author.ProfileSlug,
                 p.IsPublished,
                 p.PublishedAt,
                 p.CreatedAt
