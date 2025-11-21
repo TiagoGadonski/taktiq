@@ -117,24 +117,23 @@ jobs:
           echo "=== Final artifact tree (first 200 lines) ==="
           ls -laR "$DEPLOY_DIR" | sed -n '1,200p'
 
-      # Cria ZIP com a RAIZ sendo o conteúdo de out-azure (sem a pasta out-azure no topo)
-      - name: Create deploy zip (flatten root)
+      # Create tar.gz instead of zip to avoid Windows path issues
+      - name: Create deploy archive (tar.gz)
         shell: bash
         run: |
           set -euo pipefail
           cd frontend/apps/web/out-azure
-          # Use zip with Unix-friendly options: -r (recursive), -y (store symlinks), -q (quiet)
-          # The -FS option synchronizes file system paths to avoid backslashes
-          zip -r -y ../out-azure.zip .
+          # Use tar to preserve Unix paths properly
+          tar -czf ../out-azure.tar.gz .
           cd ..
-          echo "== ZIP listing =="
-          unzip -l out-azure.zip | sed -n '1,120p'
+          echo "== Archive listing =="
+          tar -tzf out-azure.tar.gz | head -120
 
-      - name: Upload artifact (zip)
+      - name: Upload artifact (tar.gz)
         uses: actions/upload-artifact@v4
         with:
-          name: deploy-zip
-          path: frontend/apps/web/out-azure.zip
+          name: deploy-archive
+          path: frontend/apps/web/out-azure.tar.gz
           if-no-files-found: error
 
   deploy:
@@ -145,25 +144,25 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact (zip)
+      - name: Download artifact (tar.gz)
         uses: actions/download-artifact@v4
         with:
-          name: deploy-zip
+          name: deploy-archive
           path: .
 
-      - name: Verify zip
+      - name: Verify archive
         run: |
           echo "== Files =="
           ls -la
-          echo "== ZIP listing =="
-          unzip -l out-azure.zip | sed -n '1,120p'
-          echo "== Checking for backslashes in ZIP entries =="
-          if unzip -l out-azure.zip | grep -q '\\'; then
-            echo "ERROR: Found backslashes in ZIP entries!" >&2
-            unzip -l out-azure.zip | grep '\\'
+          echo "== Archive listing =="
+          tar -tzf out-azure.tar.gz | head -120
+          echo "== Checking for backslashes in paths =="
+          if tar -tzf out-azure.tar.gz | grep -q '\\'; then
+            echo "ERROR: Found backslashes in archive paths!" >&2
+            tar -tzf out-azure.tar.gz | grep '\\'
             exit 1
           else
-            echo "OK: No backslashes found in ZIP entries"
+            echo "OK: No backslashes found in archive paths"
           fi
 
       - name: Login to Azure
@@ -173,14 +172,14 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
-      # Deploy using az CLI for better path handling
+      # Deploy using az CLI with tar.gz for proper path handling
       - name: Deploy to Azure Web App (az CLI)
         run: |
           az webapp deploy \
             --resource-group taktiqRecursos \
             --name taktiq-web-frontend \
-            --src-path out-azure.zip \
-            --type zip \
+            --src-path out-azure.tar.gz \
+            --type tar \
             --restart true \
             --clean true
 
