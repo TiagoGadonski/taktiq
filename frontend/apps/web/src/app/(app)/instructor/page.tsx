@@ -805,7 +805,7 @@ export default function InstructorPage() {
         </TabsList>
 
         <TabsContent value="analytics" className="space-y-4">
-          {analytics ? (
+          {analytics && analytics.clients && analytics.posts && analytics.plans && analytics.invitations ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* Clients Metrics */}
               <Card className="glass border-primary/20 hover-lift animate-scale-in">
@@ -819,15 +819,15 @@ export default function InstructorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Total</span>
-                      <span className="text-2xl font-bold text-primary">{analytics.clients.total}</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.clients?.total || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Ativos</span>
-                      <span className="font-semibold text-green-500">{analytics.clients.active}</span>
+                      <span className="font-semibold text-green-500">{analytics.clients?.active || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Inativos</span>
-                      <span className="font-semibold text-orange-500">{analytics.clients.inactive}</span>
+                      <span className="font-semibold text-orange-500">{analytics.clients?.inactive || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -845,15 +845,15 @@ export default function InstructorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Total</span>
-                      <span className="text-2xl font-bold text-primary">{analytics.posts.total}</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.posts?.total || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Publicados</span>
-                      <span className="font-semibold text-green-500">{analytics.posts.published}</span>
+                      <span className="font-semibold text-green-500">{analytics.posts?.published || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Rascunhos</span>
-                      <span className="font-semibold text-yellow-500">{analytics.posts.drafts}</span>
+                      <span className="font-semibold text-yellow-500">{analytics.posts?.drafts || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -871,15 +871,15 @@ export default function InstructorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Total</span>
-                      <span className="text-2xl font-bold text-primary">{analytics.plans.total}</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.plans?.total || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Públicos</span>
-                      <span className="font-semibold text-blue-500">{analytics.plans.public_}</span>
+                      <span className="font-semibold text-blue-500">{analytics.plans?.public_ || 0}</span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">À venda</span>
-                      <span className="font-semibold text-green-500">{analytics.plans.forSale}</span>
+                      <span className="font-semibold text-green-500">{analytics.plans?.forSale || 0}</span>
                     </div>
                   </div>
                 </div>
@@ -897,7 +897,7 @@ export default function InstructorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Planos Públicos</span>
-                      <span className="text-2xl font-bold text-primary">{analytics.plans.totalViews}</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.plans?.totalViews || 0}</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-2">
                       Total de visualizações nos seus planos públicos
@@ -918,7 +918,7 @@ export default function InstructorPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Pendentes</span>
-                      <span className="text-2xl font-bold text-primary">{analytics.invitations.pending}</span>
+                      <span className="text-2xl font-bold text-primary">{analytics.invitations?.pending || 0}</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-2">
                       Convites aguardando ativação
@@ -940,24 +940,24 @@ export default function InstructorPage() {
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Taxa de Publicação</span>
                       <span className="font-semibold text-primary">
-                        {analytics.posts.total > 0
-                          ? Math.round((analytics.posts.published / analytics.posts.total) * 100)
+                        {(analytics.posts?.total || 0) > 0
+                          ? Math.round(((analytics.posts?.published || 0) / (analytics.posts?.total || 1)) * 100)
                           : 0}%
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Planos Compartilhados</span>
                       <span className="font-semibold text-primary">
-                        {analytics.plans.total > 0
-                          ? Math.round((analytics.plans.public_ / analytics.plans.total) * 100)
+                        {(analytics.plans?.total || 0) > 0
+                          ? Math.round(((analytics.plans?.public_ || 0) / (analytics.plans?.total || 1)) * 100)
                           : 0}%
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-muted-foreground">Clientes Ativos</span>
                       <span className="font-semibold text-primary">
-                        {analytics.clients.total > 0
-                          ? Math.round((analytics.clients.active / analytics.clients.total) * 100)
+                        {(analytics.clients?.total || 0) > 0
+                          ? Math.round(((analytics.clients?.active || 0) / (analytics.clients?.total || 1)) * 100)
                           : 0}%
                       </span>
                     </div>

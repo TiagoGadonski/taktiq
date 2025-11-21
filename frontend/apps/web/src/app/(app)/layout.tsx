@@ -180,25 +180,30 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     Academias Próximas
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/trainers" className="cursor-pointer">
-                    <Search className="mr-2 h-4 w-4" />
-                    Encontrar Personal
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/discover" className="cursor-pointer">
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Descobrir Planos
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/transactions" className="cursor-pointer">
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    Transações
-                  </Link>
-                </DropdownMenuItem>
+                {/* Hide certain options for Personal Trainers */}
+                {user?.role !== 'PersonalTrainer' && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/trainers" className="cursor-pointer">
+                        <Search className="mr-2 h-4 w-4" />
+                        Encontrar Personal
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/discover" className="cursor-pointer">
+                        <ShoppingBag className="mr-2 h-4 w-4" />
+                        Descobrir Planos
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/transactions" className="cursor-pointer">
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Transações
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/about" className="cursor-pointer">
@@ -318,25 +323,30 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                     Academias Próximas
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/trainers" className="cursor-pointer">
-                    <Search className="mr-2 h-4 w-4" />
-                    Encontrar Personal
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/discover" className="cursor-pointer">
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Descobrir Planos
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/transactions" className="cursor-pointer">
-                    <CreditCard className="mr-2 h-4 w-4" />
-                    Transações
-                  </Link>
-                </DropdownMenuItem>
+                {/* Hide certain options for Personal Trainers */}
+                {user?.role !== 'PersonalTrainer' && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/trainers" className="cursor-pointer">
+                        <Search className="mr-2 h-4 w-4" />
+                        Encontrar Personal
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/discover" className="cursor-pointer">
+                        <ShoppingBag className="mr-2 h-4 w-4" />
+                        Descobrir Planos
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/transactions" className="cursor-pointer">
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Transações
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/about" className="cursor-pointer">
