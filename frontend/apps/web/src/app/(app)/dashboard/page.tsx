@@ -22,6 +22,7 @@ interface Post {
   authorId: string;
   authorName: string;
   authorProfilePictureUrl?: string;
+  authorProfileSlug?: string;
   isPublished: boolean;
   publishedAt?: string;
   createdAt: string;
