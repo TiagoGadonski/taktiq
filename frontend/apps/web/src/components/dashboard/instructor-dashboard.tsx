@@ -28,8 +28,8 @@ interface InstructorAnalytics {
   totalViews: number;
   totalInvitations: number;
   acceptedInvitations: number;
-  monthlyRevenue?: number;
-  totalRevenue?: number;
+  monthlyRevenue: number;
+  totalRevenue: number;
 }
 
 export function InstructorDashboard() {

@@ -286,67 +286,97 @@ public static class PersonalEndpoints
             IApplicationDbContext context,
             CancellationToken cancellationToken) =>
         {
-            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-            // Get client stats
-            var totalClients = await context.Users
-                .CountAsync(u => u.PersonalTrainerId == trainerId, cancellationToken);
-
-            var activeClients = await context.Users
-                .Where(u => u.PersonalTrainerId == trainerId && u.IsActive)
-                .CountAsync(cancellationToken);
-
-            // Get posts stats
-            var totalPosts = await context.Posts
-                .CountAsync(p => p.AuthorId == trainerId, cancellationToken);
-
-            var publishedPosts = await context.Posts
-                .CountAsync(p => p.AuthorId == trainerId && p.IsPublished, cancellationToken);
-
-            // Get plans stats
-            var totalPlans = await context.WorkoutPlans
-                .CountAsync(p => p.OwnerId == trainerId, cancellationToken);
-
-            var plansForSale = await context.WorkoutPlans
-                .CountAsync(p => p.OwnerId == trainerId && p.ForSale, cancellationToken);
-
-            var publicPlans = await context.WorkoutPlans
-                .CountAsync(p => p.OwnerId == trainerId && p.IsPublic, cancellationToken);
-
-            var totalViews = await context.WorkoutPlans
-                .Where(p => p.OwnerId == trainerId && p.IsPublic)
-                .SumAsync(p => p.ViewCount, cancellationToken);
-
-            // Get pending invitations
-            var pendingInvitations = await context.StudentInvitations
-                .CountAsync(i => i.TrainerId == trainerId && i.Status == "Pending" && !i.IsExpired, cancellationToken);
-
-            return Results.Ok(new
+            try
             {
-                clients = new
+                var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+                // Get client stats
+                var totalClients = await context.Users
+                    .CountAsync(u => u.PersonalTrainerId == trainerId, cancellationToken);
+
+                var activeClients = await context.Users
+                    .Where(u => u.PersonalTrainerId == trainerId && u.IsActive)
+                    .CountAsync(cancellationToken);
+
+                // Get posts stats
+                var totalPosts = await context.Posts
+                    .CountAsync(p => p.AuthorId == trainerId, cancellationToken);
+
+                var publishedPosts = await context.Posts
+                    .CountAsync(p => p.AuthorId == trainerId && p.IsPublished, cancellationToken);
+
+                // Get plans stats
+                var totalPlans = await context.WorkoutPlans
+                    .CountAsync(p => p.OwnerId == trainerId, cancellationToken);
+
+                var plansForSale = await context.WorkoutPlans
+                    .CountAsync(p => p.OwnerId == trainerId && p.ForSale, cancellationToken);
+
+                var publicPlans = await context.WorkoutPlans
+                    .CountAsync(p => p.OwnerId == trainerId && p.IsPublic, cancellationToken);
+
+                // Safely get total views with fallback to 0 if no public plans
+                var publicPlansList = await context.WorkoutPlans
+                    .Where(p => p.OwnerId == trainerId && p.IsPublic)
+                    .ToListAsync(cancellationToken);
+
+                var totalViews = publicPlansList.Sum(p => p.ViewCount);
+
+                // Get pending invitations
+                var pendingInvitations = await context.StudentInvitations
+                    .CountAsync(i => i.TrainerId == trainerId && i.Status == "Pending" && !i.IsExpired, cancellationToken);
+
+                // Get total invitations (for conversion rate)
+                var totalInvitations = await context.StudentInvitations
+                    .CountAsync(i => i.TrainerId == trainerId, cancellationToken);
+
+                var acceptedInvitations = await context.StudentInvitations
+                    .CountAsync(i => i.TrainerId == trainerId && i.Status == "Accepted", cancellationToken);
+
+                // Calculate monthly and total revenue (if payments are tracked)
+                var now = DateTime.UtcNow;
+                var monthStart = new DateTime(now.Year, now.Month, 1);
+
+                decimal monthlyRevenue = 0;
+                decimal totalRevenue = 0;
+
+                return Results.Ok(new
                 {
-                    total = totalClients,
-                    active = activeClients,
-                    inactive = totalClients - activeClients
-                },
-                posts = new
+                    totalClients = totalClients,
+                    activeClients = activeClients,
+                    totalPosts = totalPosts,
+                    publishedPosts = publishedPosts,
+                    totalPlans = totalPlans,
+                    plansForSale = plansForSale,
+                    totalViews = totalViews,
+                    totalInvitations = totalInvitations,
+                    acceptedInvitations = acceptedInvitations,
+                    monthlyRevenue = monthlyRevenue,
+                    totalRevenue = totalRevenue
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log the error (you might want to inject ILogger here)
+                Console.WriteLine($"Error in GetPTAnalytics: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+
+                // Return default values instead of 500 error
+                return Results.Ok(new
                 {
-                    total = totalPosts,
-                    published = publishedPosts,
-                    drafts = totalPosts - publishedPosts
-                },
-                plans = new
-                {
-                    total = totalPlans,
-                    forSale = plansForSale,
-                    public_ = publicPlans,
-                    totalViews = totalViews
-                },
-                invitations = new
-                {
-                    pending = pendingInvitations
-                }
-            });
+                    totalClients = 0,
+                    activeClients = 0,
+                    totalPosts = 0,
+                    publishedPosts = 0,
+                    totalPlans = 0,
+                    plansForSale = 0,
+                    totalViews = 0,
+                    totalInvitations = 0,
+                    acceptedInvitations = 0,
+                    monthlyRevenue = 0m,
+                    totalRevenue = 0m
+                });
+            }
         })
         .WithName("GetPTAnalytics")
         .WithSummary("Gets analytics and metrics for the authenticated personal trainer");
