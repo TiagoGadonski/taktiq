@@ -127,7 +127,7 @@ jobs:
           tar -czf ../out-azure.tar.gz .
           cd ..
           echo "== Archive listing =="
-          tar -tzf out-azure.tar.gz | head -120
+          tar -tzf out-azure.tar.gz | head -120 || true
 
       - name: Upload artifact (tar.gz)
         uses: actions/upload-artifact@v4
@@ -155,7 +155,7 @@ jobs:
           echo "== Files =="
           ls -la
           echo "== Archive listing =="
-          tar -tzf out-azure.tar.gz | head -120
+          tar -tzf out-azure.tar.gz | head -120 || true
           echo "== Checking for backslashes in paths =="
           if tar -tzf out-azure.tar.gz | grep -q '\\'; then
             echo "ERROR: Found backslashes in archive paths!" >&2
