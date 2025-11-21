@@ -9,6 +9,7 @@ import { Calendar, FileText } from 'lucide-react';
 import { getAssetUrl } from '@/lib/env';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Link from 'next/link';
 
 interface Post {
   id: string;
@@ -18,6 +19,7 @@ interface Post {
   authorId: string;
   authorName: string;
   authorProfilePictureUrl?: string;
+  authorProfileSlug?: string;
   isPublished: boolean;
   publishedAt?: string;
   createdAt: string;
@@ -86,25 +88,51 @@ export function PostFeed({ posts, showAuthor = false, compact = false }: PostFee
               {/* Author Info */}
               {showAuthor && (
                 <div className="flex items-center gap-3 mb-4">
-                  <Avatar className="h-10 w-10 ring-2 ring-primary/30">
-                    <AvatarImage src={getAssetUrl(post.authorProfilePictureUrl)} />
-                    <AvatarFallback className="bg-primary/20 text-primary font-bold">
-                      {(post.authorName || 'A').charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-semibold text-sm">{post.authorName || 'Autor'}</p>
-                    {post.publishedAt && (
-                      <p className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric',
-                        })}
-                      </p>
-                    )}
-                  </div>
+                  {post.authorProfileSlug ? (
+                    <Link href={`/trainer/${post.authorProfileSlug}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
+                      <Avatar className="h-10 w-10 ring-2 ring-primary/30 group-hover:ring-primary/50 transition-all">
+                        <AvatarImage src={getAssetUrl(post.authorProfilePictureUrl)} />
+                        <AvatarFallback className="bg-primary/20 text-primary font-bold">
+                          {(post.authorName || 'A').charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold text-sm group-hover:text-primary transition-colors">{post.authorName || 'Autor'}</p>
+                        {post.publishedAt && (
+                          <p className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
+                              day: 'numeric',
+                              month: 'long',
+                              year: 'numeric',
+                            })}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  ) : (
+                    <>
+                      <Avatar className="h-10 w-10 ring-2 ring-primary/30">
+                        <AvatarImage src={getAssetUrl(post.authorProfilePictureUrl)} />
+                        <AvatarFallback className="bg-primary/20 text-primary font-bold">
+                          {(post.authorName || 'A').charAt(0).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold text-sm">{post.authorName || 'Autor'}</p>
+                        {post.publishedAt && (
+                          <p className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
+                              day: 'numeric',
+                              month: 'long',
+                              year: 'numeric',
+                            })}
+                          </p>
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
 
