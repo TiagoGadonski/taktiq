@@ -172,14 +172,25 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
-      # Deploy using az CLI with tar.gz for proper path handling
+      # Extract tar.gz and create zip for Azure deployment
+      - name: Extract and create zip for deployment
+        run: |
+          mkdir -p deploy-temp
+          tar -xzf out-azure.tar.gz -C deploy-temp
+          cd deploy-temp
+          zip -r ../deploy.zip .
+          cd ..
+          echo "== Zip contents (first 120 lines) =="
+          unzip -l deploy.zip | head -120 || true
+
+      # Deploy using az CLI with zip
       - name: Deploy to Azure Web App (az CLI)
         run: |
           az webapp deploy \
             --resource-group taktiqRecursos \
             --name taktiq-web-frontend \
-            --src-path out-azure.tar.gz \
-            --type tar \
+            --src-path deploy.zip \
+            --type zip \
             --restart true \
             --clean true
 
