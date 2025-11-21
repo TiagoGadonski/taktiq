@@ -28,6 +28,15 @@ public static class PaymentEndpoints
             IConfiguration configuration,
             CancellationToken cancellationToken) =>
         {
+            // Check if payments are enabled
+            var paymentsEnabled = configuration.GetValue<bool>("Marketplace:PaymentsEnabled");
+            if (!paymentsEnabled)
+            {
+                return Results.BadRequest(new {
+                    message = "Payments are currently disabled. This feature is coming soon!"
+                });
+            }
+
             try
             {
                 var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);

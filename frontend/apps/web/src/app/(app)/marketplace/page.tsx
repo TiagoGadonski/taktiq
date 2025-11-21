@@ -108,14 +108,17 @@ export default function MarketplacePage() {
       return;
     }
 
-    // If the plan is paid, open Stripe checkout
+    // If the plan is paid, show coming soon message
     if (plan.price && plan.price > 0) {
-      setCheckoutPlan(plan);
-      setShowCheckout(true);
-    } else {
-      // For free plans, purchase directly
-      purchaseMutation.mutate(plan.id);
+      toast({
+        title: 'Em Breve',
+        description: 'O sistema de pagamentos estará disponível em breve. Por enquanto, apenas planos gratuitos podem ser adquiridos.',
+      });
+      return;
     }
+
+    // For free plans, purchase directly
+    purchaseMutation.mutate(plan.id);
   };
 
   const handleCheckoutSuccess = () => {
