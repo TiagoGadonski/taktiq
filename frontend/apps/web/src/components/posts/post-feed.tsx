@@ -61,8 +61,9 @@ export function PostFeed({ posts, showAuthor = false, compact = false }: PostFee
     <div className="space-y-6">
       {posts.map((post, index) => {
         const isExpanded = expandedPosts.has(post.id);
-        const contentPreview = post.content.slice(0, 200);
-        const needsReadMore = post.content.length > 200;
+        const content = post.content || '';
+        const contentPreview = content.slice(0, 200);
+        const needsReadMore = content.length > 200;
 
         return (
           <Card
@@ -88,11 +89,11 @@ export function PostFeed({ posts, showAuthor = false, compact = false }: PostFee
                   <Avatar className="h-10 w-10 ring-2 ring-primary/30">
                     <AvatarImage src={getAssetUrl(post.authorProfilePictureUrl)} />
                     <AvatarFallback className="bg-primary/20 text-primary font-bold">
-                      {post.authorName.charAt(0).toUpperCase()}
+                      {(post.authorName || 'A').charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-sm">{post.authorName}</p>
+                    <p className="font-semibold text-sm">{post.authorName || 'Autor'}</p>
                     {post.publishedAt && (
                       <p className="text-xs text-muted-foreground flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
@@ -131,7 +132,7 @@ export function PostFeed({ posts, showAuthor = false, compact = false }: PostFee
                 }`}
               >
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {isExpanded || !needsReadMore ? post.content : contentPreview}
+                  {isExpanded || !needsReadMore ? content : contentPreview}
                 </ReactMarkdown>
               </div>
 
