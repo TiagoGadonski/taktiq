@@ -24,7 +24,10 @@
       "Bash(dotnet remove:*)",
       "Bash(pnpm list:*)",
       "Bash(dotnet ef migrations:*)",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm --filter @gymhero/web run build:*)",
+      "Bash(az:*)"
     ],
     "deny": [],
     "ask": []

@@ -631,5 +631,42 @@ public static class PersonalEndpoints
         .WithName("GetPublicPersonalProfile")
         .WithSummary("Gets a personal trainer's public profile by their slug")
         .AllowAnonymous();
+
+        // Get trainer by ID (for students to see their assigned trainer)
+        group.MapGet("/id/{trainerId:guid}", async (
+            Guid trainerId,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainer = await context.Users
+                .Where(u => u.Id == trainerId && u.Role == "PersonalTrainer")
+                .Select(u => new PublicPersonalProfileResponse(
+                    u.Id,
+                    u.Name,
+                    u.ProfileSlug,
+                    u.ProfilePictureUrl,
+                    u.Bio,
+                    u.Location,
+                    u.Specialization,
+                    u.Education,
+                    u.Experience,
+                    u.PricingInfo,
+                    u.InstagramUrl,
+                    u.FacebookUrl,
+                    u.WebsiteUrl,
+                    u.Clients.Count
+                ))
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (trainer == null)
+            {
+                return Results.NotFound(new { message = "Personal Trainer não encontrado" });
+            }
+
+            return Results.Ok(trainer);
+        })
+        .WithName("GetTrainerById")
+        .WithSummary("Gets a trainer's profile by ID (for students)")
+        .AllowAnonymous();
     }
 }

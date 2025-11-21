@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { PostFeed } from '@/components/posts/post-feed';
 import { InstructorDashboard } from '@/components/dashboard/instructor-dashboard';
+import { InstructorCard } from '@/components/dashboard/instructor-card';
 
 interface Post {
   id: string;
@@ -199,6 +200,11 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Instructor Profile Card - Only show if student has a personal trainer */}
+      {user?.personalTrainerId && (
+        <InstructorCard trainerId={user.personalTrainerId} />
+      )}
 
       {/* Posts from Personal Trainer or all trainers */}
       {posts && posts.length > 0 && (
