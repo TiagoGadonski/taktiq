@@ -56,8 +56,8 @@ jobs:
           rm -rf "$DEPLOY_DIR"
           mkdir -p "$DEPLOY_DIR"
 
-          # 1) copia tudo do standalone (inclui a árvore replicada e node_modules do Next)
-          cp -a "$STANDALONE_DIR/." "$DEPLOY_DIR/"
+          # 1) copia tudo do standalone (dereference symlinks to avoid path issues)
+          cp -rL "$STANDALONE_DIR/." "$DEPLOY_DIR/"
 
           # 2) localizar o server.js dentro do standalone (ex.: ./frontend/apps/web/server.js dentro do DEPLOY_DIR)
           SERVER_PATH=$(cd "$DEPLOY_DIR" && /usr/bin/find . -maxdepth 8 -path '*/server.js' | head -n1 || true)
@@ -123,7 +123,9 @@ jobs:
         run: |
           set -euo pipefail
           cd frontend/apps/web/out-azure
-          zip -r ../out-azure.zip .
+          # Use zip with Unix-friendly options: -r (recursive), -y (store symlinks), -q (quiet)
+          # The -FS option synchronizes file system paths to avoid backslashes
+          zip -r -y ../out-azure.zip .
           cd ..
           echo "== ZIP listing =="
           unzip -l out-azure.zip | sed -n '1,120p'
@@ -155,6 +157,14 @@ jobs:
           ls -la
           echo "== ZIP listing =="
           unzip -l out-azure.zip | sed -n '1,120p'
+          echo "== Checking for backslashes in ZIP entries =="
+          if unzip -l out-azure.zip | grep -q '\\'; then
+            echo "ERROR: Found backslashes in ZIP entries!" >&2
+            unzip -l out-azure.zip | grep '\\'
+            exit 1
+          else
+            echo "OK: No backslashes found in ZIP entries"
+          fi
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -163,11 +173,19 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EA773EF948164EB4B840B38206C0EE9B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2670BF870A264746887AD5A7A625FC08 }}
 
-      - name: Deploy to Azure Web App (zip)
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'taktiq-web-frontend'
-          slot-name: 'Production'
-          package: out-azure.zip
-          startup-command: "./start.sh"
-          clean: true
+      # Deploy using az CLI for better path handling
+      - name: Deploy to Azure Web App (az CLI)
+        run: |
+          az webapp deploy \
+            --resource-group taktiqRecursos \
+            --name taktiq-web-frontend \
+            --src-path out-azure.zip \
+            --type zip \
+            --restart true \
+            --clean true
+
+          # Set startup command
+          az webapp config set \
+            --resource-group taktiqRecursos \
+            --name taktiq-web-frontend \
+            --startup-file "./start.sh"
