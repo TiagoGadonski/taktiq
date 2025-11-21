@@ -14,9 +14,10 @@ import { Loader2, CreditCard, CheckCircle2, AlertCircle } from 'lucide-react';
 import { apiClient } from '@/lib/api';
 
 // Initialize Stripe - you'll need to set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in .env
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
-);
+// Only load Stripe if the key is available
+const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+  : null;
 
 interface StripeCheckoutProps {
   planId: string;
@@ -246,6 +247,24 @@ export function StripeCheckout({
             Não foi possível iniciar o pagamento.
           </p>
           <Button variant="outline" onClick={onCancel} className="mt-4">
+            Voltar
+          </Button>
+        </div>
+      </Card>
+    );
+  }
+
+  // Check if Stripe is configured
+  if (!stripePromise) {
+    return (
+      <Card className="glass border-destructive/30 bg-destructive/5 p-8">
+        <div className="text-center">
+          <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
+          <h3 className="font-semibold mb-2">Pagamentos Não Configurados</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            O sistema de pagamentos não está configurado. Entre em contato com o suporte.
+          </p>
+          <Button variant="outline" onClick={onCancel}>
             Voltar
           </Button>
         </div>
