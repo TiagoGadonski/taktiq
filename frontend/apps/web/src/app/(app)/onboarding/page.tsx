@@ -48,7 +48,6 @@ export default function OnboardingPage() {
       toast.success("Perfil atualizado com sucesso!");
       router.push("/dashboard");
     } catch (error) {
-      console.error("Erro ao salvar informações:", error);
       toast.error("Erro ao salvar informações. Tente novamente.");
     } finally {
       setIsLoading(false);

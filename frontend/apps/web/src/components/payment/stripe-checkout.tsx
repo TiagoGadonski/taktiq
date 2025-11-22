@@ -88,13 +88,11 @@ function CheckoutForm({
             onSuccess();
           }, 2000);
         } catch (backendError: any) {
-          console.error('Backend confirmation error:', backendError);
           setErrorMessage('Pagamento confirmado, mas houve um erro ao processar o plano. Entre em contato com o suporte.');
           setIsProcessing(false);
         }
       }
     } catch (error: any) {
-      console.error('Payment error:', error);
       setErrorMessage('Erro inesperado ao processar pagamento');
       setIsProcessing(false);
     }
@@ -200,7 +198,6 @@ export function StripeCheckout({
         setPaymentIntentId(response.paymentIntentId);
         setIsLoading(false);
       } catch (error: any) {
-        console.error('Error creating payment intent:', error);
         setError(
           error?.response?.data?.message ||
             'Não foi possível iniciar o pagamento. Tente novamente.'

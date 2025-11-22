@@ -246,7 +246,6 @@ export default function InstructorPage() {
         const response = await apiClient.get<Invitation[]>('/personal/invitations');
         setInvitations(Array.isArray(response) ? response : []);
       } catch (error) {
-        console.error('Error fetching invitations:', error);
         setInvitations([]);
       }
     };
@@ -263,7 +262,6 @@ export default function InstructorPage() {
         const response = await apiClient.get<WorkoutPlan[]>('/workout-plans');
         setWorkoutPlans(Array.isArray(response) ? response : []);
       } catch (error) {
-        console.error('Error fetching workout plans:', error);
         setWorkoutPlans([]);
       }
     };
@@ -290,7 +288,6 @@ export default function InstructorPage() {
           setWebsiteUrl(response.websiteUrl || '');
         }
       } catch (error) {
-        console.error('Error fetching profile:', error);
       }
     };
 
@@ -306,7 +303,6 @@ export default function InstructorPage() {
         const response = await apiClient.get<Post[]>('/personal/posts');
         setPosts(Array.isArray(response) ? response : []);
       } catch (error) {
-        console.error('Error fetching posts:', error);
         setPosts([]);
       }
     };
@@ -323,7 +319,6 @@ export default function InstructorPage() {
         const response = await apiClient.get<Analytics>('/personal/analytics');
         setAnalytics(response);
       } catch (error) {
-        console.error('Error fetching analytics:', error);
       }
     };
 
@@ -411,8 +406,6 @@ export default function InstructorPage() {
       const response = await apiClient.get<any>('/personal/clients');
       setClients(Array.isArray(response.data) ? response.data : []);
     } catch (error: any) {
-      console.error('Error adding client:', error);
-      console.error('Error response:', error.response?.data);
 
       const errorMessage = error.response?.data?.message ||
         error.response?.data?.detail ||
@@ -518,13 +511,10 @@ export default function InstructorPage() {
         WebsiteUrl: websiteUrl || null,
       };
 
-      console.log('Saving profile data:', profileData);
       const saveResponse = await apiClient.put('/personal/profile', profileData);
-      console.log('Save response:', saveResponse);
 
       // Refetch profile data to ensure it's saved
       const response = await apiClient.get<any>('/me');
-      console.log('Refetched user data:', response);
 
       if (response) {
         const hasProfileData = response.profileSlug || response.specialization ||
@@ -533,9 +523,7 @@ export default function InstructorPage() {
                                response.facebookUrl || response.websiteUrl;
 
         if (!hasProfileData) {
-          console.warn('WARNING: /me endpoint does not return profile fields!');
-          console.warn('Backend needs to include these fields in User response:',
-            'profileSlug, specialization, education, experience, pricingInfo, isPublicProfile, instagramUrl, facebookUrl, websiteUrl');
+          // Profile data not available from backend
         }
 
         setProfileSlug(response.profileSlug || '');
@@ -554,8 +542,6 @@ export default function InstructorPage() {
         description: 'Suas informações foram salvas com sucesso.',
       });
     } catch (error: any) {
-      console.error('Error saving profile:', error);
-      console.error('Error response:', error.response?.data);
 
       const errorMessage = error.response?.data?.message ||
         error.response?.data?.title ||

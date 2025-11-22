@@ -26,6 +26,7 @@ public static class PaymentEndpoints
             IPaymentService paymentService,
             IApplicationDbContext context,
             IConfiguration configuration,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
             // Check if payments are enabled
@@ -48,16 +49,30 @@ public static class PaymentEndpoints
 
                 if (plan == null)
                 {
+                    logger.LogWarning("Payment attempt for non-existent plan: {PlanId} by user {UserId}",
+                        request.WorkoutPlanId, buyerId);
                     return Results.NotFound(new { message = "Workout plan not found" });
                 }
 
                 if (!plan.ForSale || !plan.Price.HasValue)
                 {
+                    logger.LogWarning("Payment attempt for non-sale plan: {PlanId} by user {UserId}",
+                        plan.Id, buyerId);
                     return Results.BadRequest(new { message = "This plan is not for sale" });
+                }
+
+                // SECURITY: Validate price is reasonable (between R$1 and R$10,000)
+                if (plan.Price.Value <= 0 || plan.Price.Value > 10000)
+                {
+                    logger.LogError("Invalid plan price detected: {Price} for plan {PlanId}",
+                        plan.Price.Value, plan.Id);
+                    return Results.BadRequest(new { message = "Invalid plan price" });
                 }
 
                 if (plan.OwnerId == buyerId)
                 {
+                    logger.LogWarning("User {UserId} attempted to purchase their own plan {PlanId}",
+                        buyerId, plan.Id);
                     return Results.BadRequest(new { message = "You cannot purchase your own plan" });
                 }
 
@@ -112,6 +127,9 @@ public static class PaymentEndpoints
                 context.Transactions.Add(transaction);
                 await context.SaveChangesAsync(cancellationToken);
 
+                logger.LogInformation("Payment intent created: {PaymentIntentId} for plan {PlanId} by user {UserId}. Amount: {Amount} BRL",
+                    paymentIntentId, plan.Id, buyerId, plan.Price.Value);
+
                 return Results.Ok(new CreatePaymentIntentResponse(
                     clientSecret,
                     paymentIntentId,
@@ -119,11 +137,21 @@ public static class PaymentEndpoints
                     "BRL"
                 ));
             }
-            catch (Exception ex)
+            catch (StripeException ex)
             {
+                logger.LogError(ex, "Stripe error creating payment intent for user {UserId}", user.FindFirstValue(ClaimTypes.NameIdentifier));
                 return Results.Problem(
                     title: "Failed to create payment intent",
-                    detail: ex.Message,
+                    detail: "Unable to process payment. Please try again.",
+                    statusCode: 500
+                );
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error creating payment intent for user {UserId}", user.FindFirstValue(ClaimTypes.NameIdentifier));
+                return Results.Problem(
+                    title: "Failed to create payment intent",
+                    detail: "An error occurred. Please try again.",
                     statusCode: 500
                 );
             }
@@ -138,11 +166,13 @@ public static class PaymentEndpoints
             IPaymentService paymentService,
             IApplicationDbContext context,
             ISender sender,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             try
             {
-                var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
                 // Find the transaction
                 var transaction = await context.Transactions
@@ -154,11 +184,15 @@ public static class PaymentEndpoints
 
                 if (transaction == null)
                 {
+                    logger.LogWarning("Payment confirmation attempted for non-existent transaction: {PaymentIntentId} by user {UserId}",
+                        request.PaymentIntentId, buyerId);
                     return Results.NotFound(new { message = "Transaction not found" });
                 }
 
                 if (transaction.Status == TransactionStatus.Completed)
                 {
+                    logger.LogInformation("Duplicate payment confirmation attempt for transaction: {TransactionId}",
+                        transaction.Id);
                     return Results.BadRequest(new { message = "Transaction already completed" });
                 }
 
@@ -172,6 +206,9 @@ public static class PaymentEndpoints
                     transaction.CompletedAt = DateTime.UtcNow;
                     await context.SaveChangesAsync(cancellationToken);
 
+                    logger.LogInformation("Payment confirmed successfully: Transaction {TransactionId}, Amount: {Amount} BRL, Buyer: {BuyerId}, Seller: {SellerId}",
+                        transaction.Id, transaction.Amount, buyerId, transaction.SellerId);
+
                     // Clone the workout plan to the buyer's account using the existing command
                     var cloneCommand = new CloneWorkoutPlanCommand(transaction.WorkoutPlanId, buyerId);
                     await sender.Send(cloneCommand, cancellationToken);
@@ -184,6 +221,7 @@ public static class PaymentEndpoints
                 }
                 else if (paymentStatus == "processing")
                 {
+                    logger.LogInformation("Payment still processing: {TransactionId}", transaction.Id);
                     return Results.Ok(new PaymentConfirmationResponse(
                         false,
                         null,
@@ -196,6 +234,8 @@ public static class PaymentEndpoints
                     transaction.ErrorMessage = $"Payment status: {paymentStatus}";
                     await context.SaveChangesAsync(cancellationToken);
 
+                    logger.LogWarning("Payment failed: {TransactionId}, Status: {PaymentStatus}", transaction.Id, paymentStatus);
+
                     return Results.Ok(new PaymentConfirmationResponse(
                         false,
                         null,
@@ -205,9 +245,10 @@ public static class PaymentEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error confirming payment for user {UserId}", buyerId);
                 return Results.Problem(
                     title: "Failed to confirm payment",
-                    detail: ex.Message,
+                    detail: "An error occurred processing your payment. Please contact support.",
                     statusCode: 500
                 );
             }
@@ -306,6 +347,7 @@ public static class PaymentEndpoints
             IPaymentService paymentService,
             IPayPalPaymentService paypalService,
             IApplicationDbContext context,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
             try
@@ -320,12 +362,16 @@ public static class PaymentEndpoints
 
                 if (transaction == null)
                 {
+                    logger.LogWarning("Refund attempted for non-existent transaction: {TransactionId} by user {UserId}",
+                        transactionId, userId);
                     return Results.NotFound(new { message = "Transaction not found" });
                 }
 
                 // Only the seller can issue refunds
                 if (transaction.SellerId != userId)
                 {
+                    logger.LogWarning("Unauthorized refund attempt: Transaction {TransactionId} by user {UserId} (not seller)",
+                        transactionId, userId);
                     return Results.Forbid();
                 }
 
@@ -378,6 +424,9 @@ public static class PaymentEndpoints
                 transaction.Status = TransactionStatus.Refunded;
                 await context.SaveChangesAsync(cancellationToken);
 
+                logger.LogInformation("Refund processed successfully: Transaction {TransactionId}, Amount: {Amount} BRL, Seller: {SellerId}",
+                    transaction.Id, transaction.Amount, userId);
+
                 return Results.Ok(new
                 {
                     success = true,
@@ -387,9 +436,10 @@ public static class PaymentEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error processing refund for transaction {TransactionId}", transactionId);
                 return Results.Problem(
                     title: "Failed to process refund",
-                    detail: ex.Message,
+                    detail: "Unable to process refund. Please try again or contact support.",
                     statusCode: 500
                 );
             }
@@ -401,11 +451,13 @@ public static class PaymentEndpoints
         group.MapGet("/revenue-analytics", async (
             ClaimsPrincipal user,
             IApplicationDbContext context,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             try
             {
-                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
                 // Get all sales for this user
                 var sales = await context.Transactions
@@ -484,9 +536,10 @@ public static class PaymentEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error retrieving revenue analytics for user {UserId}", userId);
                 return Results.Problem(
                     title: "Failed to get revenue analytics",
-                    detail: ex.Message,
+                    detail: "Unable to retrieve analytics. Please try again.",
                     statusCode: 500
                 );
             }
@@ -500,11 +553,13 @@ public static class PaymentEndpoints
             ClaimsPrincipal user,
             IApplicationDbContext context,
             IReceiptService receiptService,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             try
             {
-                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
                 // Verify user has access to this transaction
                 var transaction = await context.Transactions
@@ -526,13 +581,18 @@ public static class PaymentEndpoints
 
                 // Return as downloadable file
                 var fileName = $"Receipt-{transactionId}-{DateTime.UtcNow:yyyyMMdd}.pdf";
+
+                logger.LogInformation("Receipt generated for transaction {TransactionId} by user {UserId}",
+                    transactionId, userId);
+
                 return Results.File(pdfBytes, "application/pdf", fileName);
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error generating receipt for transaction {TransactionId}", transactionId);
                 return Results.Problem(
                     title: "Failed to generate receipt",
-                    detail: ex.Message,
+                    detail: "Unable to generate receipt. Please try again.",
                     statusCode: 500
                 );
             }
@@ -547,11 +607,13 @@ public static class PaymentEndpoints
             IPayPalPaymentService paypalService,
             IApplicationDbContext context,
             IConfiguration configuration,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             try
             {
-                var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
                 // Get the workout plan
                 var plan = await context.WorkoutPlans
@@ -565,11 +627,23 @@ public static class PaymentEndpoints
 
                 if (!plan.ForSale || !plan.Price.HasValue)
                 {
+                    logger.LogWarning("PayPal order creation attempted for plan not for sale: {PlanId} by user {UserId}",
+                        request.WorkoutPlanId, buyerId);
                     return Results.BadRequest(new { message = "This plan is not for sale" });
+                }
+
+                // Validate price
+                if (plan.Price.Value <= 0 || plan.Price.Value > 10000)
+                {
+                    logger.LogError("Invalid PayPal order price detected: {Price} for plan {PlanId}",
+                        plan.Price.Value, plan.Id);
+                    return Results.BadRequest(new { message = "Invalid plan price" });
                 }
 
                 if (plan.OwnerId == buyerId)
                 {
+                    logger.LogWarning("User attempted to purchase their own plan via PayPal: User {UserId}, Plan {PlanId}",
+                        buyerId, plan.Id);
                     return Results.BadRequest(new { message = "You cannot purchase your own plan" });
                 }
 
@@ -615,6 +689,9 @@ public static class PaymentEndpoints
                 context.Transactions.Add(transaction);
                 await context.SaveChangesAsync(cancellationToken);
 
+                logger.LogInformation("PayPal order created: {OrderId} for plan {PlanId} by user {UserId}. Amount: {Amount} BRL",
+                    orderId, plan.Id, buyerId, plan.Price.Value);
+
                 return Results.Ok(new
                 {
                     orderId = orderId,
@@ -626,9 +703,10 @@ public static class PaymentEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error creating PayPal order for user {UserId}", buyerId);
                 return Results.Problem(
                     title: "Failed to create PayPal order",
-                    detail: ex.Message,
+                    detail: "Unable to create payment order. Please try again.",
                     statusCode: 500
                 );
             }
@@ -643,11 +721,13 @@ public static class PaymentEndpoints
             IPayPalPaymentService paypalService,
             IApplicationDbContext context,
             ISender sender,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
             try
             {
-                var buyerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
                 // Find the transaction
                 var transaction = await context.Transactions
@@ -659,11 +739,15 @@ public static class PaymentEndpoints
 
                 if (transaction == null)
                 {
+                    logger.LogWarning("PayPal capture attempted for non-existent transaction: OrderId {OrderId} by user {UserId}",
+                        request.OrderId, buyerId);
                     return Results.NotFound(new { message = "Transaction not found" });
                 }
 
                 if (transaction.Status == TransactionStatus.Completed)
                 {
+                    logger.LogInformation("Duplicate PayPal capture attempt for transaction: {TransactionId}",
+                        transaction.Id);
                     return Results.BadRequest(new { message = "Transaction already completed" });
                 }
 
@@ -677,6 +761,9 @@ public static class PaymentEndpoints
                     transaction.CompletedAt = DateTime.UtcNow;
                     transaction.PayPalCaptureId = captureId;
                     await context.SaveChangesAsync(cancellationToken);
+
+                    logger.LogInformation("PayPal payment captured successfully: Transaction {TransactionId}, CaptureId {CaptureId}, Amount: {Amount} BRL, Buyer: {BuyerId}, Seller: {SellerId}",
+                        transaction.Id, captureId, transaction.Amount, buyerId, transaction.SellerId);
 
                     // Clone the workout plan to the buyer's account
                     var cloneCommand = new CloneWorkoutPlanCommand(transaction.WorkoutPlanId, buyerId);
@@ -694,6 +781,9 @@ public static class PaymentEndpoints
                     transaction.ErrorMessage = $"PayPal capture status: {status}";
                     await context.SaveChangesAsync(cancellationToken);
 
+                    logger.LogWarning("PayPal payment capture failed: {TransactionId}, Status: {CaptureStatus}",
+                        transaction.Id, status);
+
                     return Results.Ok(new PaymentConfirmationResponse(
                         false,
                         null,
@@ -703,9 +793,10 @@ public static class PaymentEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Error capturing PayPal order {OrderId} for user {UserId}", request.OrderId, buyerId);
                 return Results.Problem(
                     title: "Failed to capture PayPal order",
-                    detail: ex.Message,
+                    detail: "Unable to process payment. Please try again or contact support.",
                     statusCode: 500
                 );
             }

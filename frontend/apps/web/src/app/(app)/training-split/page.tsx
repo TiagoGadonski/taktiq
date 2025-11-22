@@ -98,7 +98,6 @@ export default function TrainingSplitPage() {
           setTrainingSplit(parsed);
         }
       } catch (error) {
-        console.error('Error loading training split:', error);
       } finally {
         setLoading(false);
       }

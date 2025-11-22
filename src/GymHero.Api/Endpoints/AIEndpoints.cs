@@ -248,7 +248,8 @@ public static class AIEndpoints
             [FromQuery] string? muscle,
             [FromQuery] string? equipment,
             [FromQuery] string? level,
-            IExerciseMediaService mediaService) =>
+            IExerciseMediaService mediaService,
+            ILogger<Program> logger) =>
         {
             try
             {
@@ -283,8 +284,7 @@ public static class AIEndpoints
             {
                 // SECURITY: Log errors internally, return generic message to client
                 var errorId = Guid.NewGuid();
-                Console.WriteLine($"[ERROR {errorId}] Error in search-exercises: {ex.Message}");
-                Console.WriteLine($"[ERROR {errorId}] Stack trace: {ex.StackTrace}");
+                logger.LogError(ex, "[ERROR {ErrorId}] Error in search-exercises", errorId);
 
                 return Results.Json(new {
                     message = "An error occurred while searching exercises",
@@ -871,7 +871,6 @@ public static class AIEndpoints
     // Helper method: Validate volume landmarks (total sets per muscle per week)
     private static void ValidateVolumeLandmarks(List<WorkoutDay> days, string fitnessLevel)
     {
-        Console.WriteLine("\n=== VOLUME LANDMARKS VALIDATION ===");
 
         // Map body parts to muscle groups
         var muscleSets = new Dictionary<string, int>();
@@ -912,15 +911,12 @@ public static class AIEndpoints
             };
 
             var status = sets < min ? "⚠️ TOO LOW" : sets > max ? "⚠️ TOO HIGH" : "✅ OK";
-            Console.WriteLine($"{muscle}: {sets} sets/week (guideline: {min}-{max}) {status}");
         }
     }
 
     // Helper method: Check recovery time between muscle groups
     private static void ValidateRecoveryTime(List<WorkoutDay> days)
     {
-        Console.WriteLine("\n=== RECOVERY TIME VALIDATION ===");
-
         for (int i = 0; i < days.Count - 1; i++)
         {
             var today = days[i];
@@ -930,23 +926,12 @@ public static class AIEndpoints
             var tomorrowMuscles = tomorrow.Exercises.Select(e => e.BodyPart.ToLower()).Distinct().ToList();
 
             var overlap = todayMuscles.Intersect(tomorrowMuscles).Where(m => m != "abs" && m != "cardio").ToList();
-
-            if (overlap.Any())
-            {
-                Console.WriteLine($"⚠️ Day {i + 1} ({today.Title}) → Day {i + 2} ({tomorrow.Title}): Same muscles trained consecutively: {string.Join(", ", overlap)}");
-            }
-            else
-            {
-                Console.WriteLine($"✅ Day {i + 1} → Day {i + 2}: Proper recovery (no muscle overlap)");
-            }
         }
     }
 
     // Helper method: Check movement pattern balance (push/pull ratio)
     private static void ValidateMovementPatternBalance(List<WorkoutDay> days)
     {
-        Console.WriteLine("\n=== MOVEMENT PATTERN BALANCE ===");
-
         var patternCounts = new Dictionary<string, int>();
 
         foreach (var day in days)
@@ -969,48 +954,28 @@ public static class AIEndpoints
         var hipHinge = patternCounts.GetValueOrDefault("hip_hinge");
         var kneeDominant = patternCounts.GetValueOrDefault("knee_dominant");
 
-        Console.WriteLine($"Horizontal Push: {horizontalPush} | Horizontal Pull: {horizontalPull}");
         if (horizontalPush > 0 && horizontalPull > 0)
         {
             var ratio = (double)horizontalPush / horizontalPull;
-            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
         }
 
-        Console.WriteLine($"Vertical Push: {verticalPush} | Vertical Pull: {verticalPull}");
         if (verticalPush > 0 && verticalPull > 0)
         {
             var ratio = (double)verticalPush / verticalPull;
-            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
         }
 
-        Console.WriteLine($"Hip Hinge: {hipHinge} | Knee Dominant: {kneeDominant}");
         if (hipHinge > 0 && kneeDominant > 0)
         {
             var ratio = (double)hipHinge / kneeDominant;
-            Console.WriteLine($"  Ratio: {ratio:F2} (ideal: 0.67-1.50) {(ratio >= 0.67 && ratio <= 1.50 ? "✅" : "⚠️")}");
         }
     }
 
     private static AIWorkoutResponse GenerateMockWorkout(string prompt, string? fitnessLevel = null, string? exerciseGoal = null, dynamic? userProfile = null, string? workoutLocation = null, int? requestedDuration = null)
     {
-        Console.WriteLine("=== MOCK GENERATION DEBUG ===");
-        Console.WriteLine($"Prompt: {prompt}");
-        Console.WriteLine($"Fitness Level Received: '{fitnessLevel ?? "NULL"}'");
-        Console.WriteLine($"Exercise Goal: '{exerciseGoal ?? "NULL"}'");
-
         // ✅ Check workout location: prioritize request parameter, then fall back to user profile preference
         var isHomeWorkout = !string.IsNullOrEmpty(workoutLocation)
             ? workoutLocation.ToLower() == "home"
             : userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
-
-        Console.WriteLine($"Workout Location (Request): '{workoutLocation ?? "NULL"}'");
-        Console.WriteLine($"Workout Location (Profile): '{(userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home ? "home" : "gym")}'");
-        Console.WriteLine($"Final Home Workout Decision: {isHomeWorkout}");
-
-        if (isHomeWorkout)
-        {
-            Console.WriteLine("🏠🏠🏠 MOCK GENERATION FOR HOME WORKOUT - BODYWEIGHT ONLY 🏠🏠🏠");
-        }
 
         var random = new Random();
         var parsedPrompt = ParsePrompt(prompt.ToLower());
@@ -1022,11 +987,8 @@ public static class AIEndpoints
 
         if (goalMentionsAbs && !parsedPrompt.MuscleGroups.Contains("abdômen"))
         {
-            Console.WriteLine("*** USER GOAL MENTIONS ABS - ADDING ABDÔMEN TO MUSCLE GROUPS ***");
             parsedPrompt.MuscleGroups.Add("abdômen");
         }
-
-        Console.WriteLine($"Normalized Level: '{level}'");
 
         // Determine exercise count based on fitness level
         // Beginners need fewer exercises to focus on form, advanced can handle more volume
@@ -1037,20 +999,14 @@ public static class AIEndpoints
             _ => (6, 8)                              // Intermediate: moderate volume
         };
 
-        Console.WriteLine($"Exercise Count Range: {minExercises}-{maxExercises}");
-
         // Select exercises based on parsed requirements
         var selectedExercises = new List<ExerciseInstruction>();
 
         // If specific muscle groups were requested, use those
         if (parsedPrompt.MuscleGroups.Any())
         {
-            Console.WriteLine($"Path: SPECIFIC MUSCLE GROUPS");
-            Console.WriteLine($"Muscle Groups Detected: {string.Join(", ", parsedPrompt.MuscleGroups)}");
             var totalExercises = random.Next(minExercises, maxExercises + 1);
-            Console.WriteLine($"Total Exercises to Generate: {totalExercises}");
             var exercisesPerGroup = Math.Max(2, totalExercises / parsedPrompt.MuscleGroups.Count);
-            Console.WriteLine($"Exercises Per Group: {exercisesPerGroup}");
 
             foreach (var muscleGroup in parsedPrompt.MuscleGroups)
             {
@@ -1076,7 +1032,6 @@ public static class AIEndpoints
                                               ex.Equipment == "cable" ? 2 : 3)
                                 .ThenBy(x => random.Next())
                                 .ToList();
-                            Console.WriteLine($"   👶 BEGINNER: Prioritizing machines and dumbbells over barbells");
                         }
                         else if (level == "avançado" || level == "advanced")
                         {
@@ -1087,7 +1042,6 @@ public static class AIEndpoints
                                               ex.Equipment == "cable" ? 2 : 3)
                                 .ThenBy(x => random.Next())
                                 .ToList();
-                            Console.WriteLine($"   💪 ADVANCED: Prioritizing barbells and free weights over machines");
                         }
                     }
 
@@ -1129,10 +1083,8 @@ public static class AIEndpoints
         }
         else
         {
-            Console.WriteLine($"Path: DEFAULT WORKOUT (no specific muscle groups detected)");
             // Intelligent default based on common workout splits
             var workoutType = random.Next(0, 5);
-            Console.WriteLine($"Random Workout Type: {workoutType}");
             var muscleGroupsToUse = workoutType switch
             {
                 0 => new[] { "peito", "tríceps" },           // Push
@@ -1142,11 +1094,8 @@ public static class AIEndpoints
                 _ => new[] { "peito", "costas", "ombros" }   // Upper Body
             };
 
-            Console.WriteLine($"Muscle Groups to Use: {string.Join(", ", muscleGroupsToUse)}");
             var totalExercises = random.Next(minExercises, maxExercises + 1);
-            Console.WriteLine($"Total Exercises to Generate: {totalExercises}");
             var exercisesPerGroup = Math.Max(2, totalExercises / muscleGroupsToUse.Length);
-            Console.WriteLine($"Exercises Per Group: {exercisesPerGroup}");
 
             foreach (var muscleGroup in muscleGroupsToUse)
             {
@@ -1172,7 +1121,6 @@ public static class AIEndpoints
                                               ex.Equipment == "cable" ? 2 : 3)
                                 .ThenBy(x => random.Next())
                                 .ToList();
-                            Console.WriteLine($"   👶 BEGINNER: Prioritizing machines and dumbbells over barbells");
                         }
                         else if (level == "avançado" || level == "advanced")
                         {
@@ -1183,7 +1131,6 @@ public static class AIEndpoints
                                               ex.Equipment == "cable" ? 2 : 3)
                                 .ThenBy(x => random.Next())
                                 .ToList();
-                            Console.WriteLine($"   💪 ADVANCED: Prioritizing barbells and free weights over machines");
                         }
                     }
 
@@ -1230,13 +1177,9 @@ public static class AIEndpoints
         const int MAX_EXERCISES = 7;
         if (selectedExercises.Count > MAX_EXERCISES)
         {
-            Console.WriteLine($"Trimming workout from {selectedExercises.Count} to {MAX_EXERCISES} exercises");
-
             // The exercises are already ordered with compound exercises first,
             // so we can simply take the first MAX_EXERCISES
             selectedExercises = selectedExercises.Take(MAX_EXERCISES).ToList();
-
-            Console.WriteLine($"Trimmed exercise list: {string.Join(", ", selectedExercises.Select(e => e.Name))}");
         }
 
         // If no exercises selected (all were restricted), provide varied fallback
@@ -1307,10 +1250,6 @@ public static class AIEndpoints
                 "without cardio", "don't want cardio", "dont want cardio"
             };
             hasCardioRestriction = noCardioPatterns.Any(pattern => lowerPrompt.Contains(pattern));
-            if (hasCardioRestriction)
-            {
-                Console.WriteLine("⚠️ CARDIO RESTRICTION DETECTED FROM PROMPT DIRECTLY");
-            }
         }
 
         if (shouldAddCardio && !parsedPrompt.MuscleGroups.Contains("cardio") && !hasCardioRestriction && ExerciseDatabase.ContainsKey("cardio"))
@@ -1342,7 +1281,6 @@ public static class AIEndpoints
         var practicesBoxing = userProfile?.PracticesBoxing ?? false;
         if (practicesBoxing && ExerciseDatabase.ContainsKey("boxe"))
         {
-            Console.WriteLine("🥊 User practices boxing - adding boxing exercises");
             var boxingExercises = ExerciseDatabase["boxe"]
                 .Where(ex => !IsRestricted(ex.Name, parsedPrompt.Restrictions))
                 .OrderBy(x => random.Next())
@@ -1382,10 +1320,6 @@ public static class AIEndpoints
             _ => random.Next(50, 65)                             // Intermediate duration
         };
 
-        Console.WriteLine($"FINAL EXERCISE COUNT: {selectedExercises.Count}");
-        Console.WriteLine($"Exercise Names: {string.Join(", ", selectedExercises.Select(e => e.Name))}");
-        Console.WriteLine("=== END MOCK GENERATION DEBUG ===");
-
         return new AIWorkoutResponse(
             Title: title,
             Description: description,
@@ -1413,7 +1347,6 @@ public static class AIEndpoints
             muscleGroups.Add("glúteos");
             muscleGroups.Add("pernas");
             muscleGroups.Add("panturrilha");
-            Console.WriteLine("*** DETECTED LOWER BODY FOCUS FROM PHRASE ***");
         }
         else if (isUpperBodyFocus)
         {
@@ -1423,7 +1356,6 @@ public static class AIEndpoints
             muscleGroups.Add("ombros");
             muscleGroups.Add("bíceps");
             muscleGroups.Add("tríceps");
-            Console.WriteLine("*** DETECTED UPPER BODY FOCUS FROM PHRASE ***");
         }
         else
         {
@@ -2885,19 +2817,8 @@ INSTRUÇÕES CRÍTICAS:
 
     private static AIWorkoutPlanResponse GenerateMockPlan(string prompt, int daysPerWeek, string? fitnessLevel = null, dynamic? userProfile = null)
     {
-        Console.WriteLine("=== MOCK PLAN GENERATION DEBUG ===");
-        Console.WriteLine($"Prompt: {prompt}");
-        Console.WriteLine($"Days Per Week: {daysPerWeek}");
-        Console.WriteLine($"Fitness Level: '{fitnessLevel ?? "NULL"}'");
-
         // Check if user prefers home workouts
         var isHomeWorkout = userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
-        Console.WriteLine($"Home Workout Preference: {isHomeWorkout}");
-
-        if (isHomeWorkout)
-        {
-            Console.WriteLine("🏠🏠🏠 MOCK PLAN GENERATION FOR HOME WORKOUT - BODYWEIGHT ONLY 🏠🏠🏠");
-        }
 
         var random = new Random();
         var level = fitnessLevel?.ToLower() ?? "intermediário";
@@ -2912,13 +2833,9 @@ INSTRUÇÕES CRÍTICAS:
             _ => (5, 7)                              // Intermediate: moderate volume
         };
 
-        Console.WriteLine($"Exercises Per Day Range: {minExercisesPerDay}-{maxExercisesPerDay}");
-
         // Parse user prompt to detect focus areas
         var parsedPrompt = ParsePrompt(prompt.ToLower());
         var focusMuscleGroups = parsedPrompt.MuscleGroups;
-
-        Console.WriteLine($"Focus Muscle Groups Detected: {string.Join(", ", focusMuscleGroups)}");
 
         // Define workout splits based on user focus or default to standard splits
         // Format: (DayName, Title, MuscleGroups)
@@ -2927,7 +2844,6 @@ INSTRUÇÕES CRÍTICAS:
         // If user specified specific muscle groups, create a focused plan
         if (focusMuscleGroups.Any())
         {
-            Console.WriteLine("Creating FOCUSED plan based on user request");
 
             // Check if focus is lower body
             var isLowerBodyFocus = focusMuscleGroups.Any(m => m == "pernas" || m == "glúteos" || m == "panturrilha");
@@ -3027,7 +2943,6 @@ INSTRUÇÕES CRÍTICAS:
         else
         {
             // Default balanced plan if no specific focus detected
-            Console.WriteLine("Creating DEFAULT balanced plan");
             workoutSplits = daysPerWeek switch
         {
             2 => new[] {
@@ -3069,15 +2984,11 @@ INSTRUÇÕES CRÍTICAS:
         };
         }
 
-        Console.WriteLine($"Using {workoutSplits.Length}-day split");
-
         foreach (var (dayName, dayTitle, muscleGroups) in workoutSplits)
         {
             var exercisesForDay = new List<ExerciseInstruction>();
             var totalExercisesForDay = random.Next(minExercisesPerDay, maxExercisesPerDay + 1);
             var exercisesPerGroup = Math.Max(1, totalExercisesForDay / muscleGroups.Length);
-
-            Console.WriteLine($"Day: {dayName} - {dayTitle}, Target Exercises: {totalExercisesForDay}");
 
             foreach (var muscleGroup in muscleGroups)
             {
@@ -3097,8 +3008,6 @@ INSTRUÇÕES CRÍTICAS:
                             random.Next(2, exercisesPerGroup + 2), // Main muscles get more
                         availableExercises.Count
                     );
-
-                    Console.WriteLine($"  Muscle: {muscleGroup}, Exercises: {countForThisGroup}");
 
                     // Prioritize compound exercises (at least 1, up to half of count)
                     var compoundCount = Math.Min(Math.Max(1, countForThisGroup / 2), compoundExercises.Count);
@@ -3168,7 +3077,7 @@ INSTRUÇÕES CRÍTICAS:
 
             if (fillAttempts >= maxFillAttempts)
             {
-                Console.WriteLine($"⚠️ Could not fill to minimum exercises. Got {exercisesForDay.Count}/{minExercisesPerDay}. Limited bodyweight exercises available.");
+                // Could not fill to minimum exercises - limited exercises available
             }
 
             // Add finishers: abs (most days) and cardio (2-3x per week)
@@ -3234,8 +3143,6 @@ INSTRUÇÕES CRÍTICAS:
                 }
             }
 
-            Console.WriteLine($"  Total exercises for this day: {exercisesForDay.Count}");
-
             days.Add(new WorkoutDay(
                 DayName: dayName,
                 Title: dayTitle,
@@ -3253,12 +3160,6 @@ INSTRUÇÕES CRÍTICAS:
             ? "Treino personalizado"
             : prompt.Length > 100 ? prompt.Substring(0, 100) + "..." : prompt;
 
-        Console.WriteLine($"FINAL PLAN: {days.Count} days total");
-        foreach (var day in days)
-        {
-            Console.WriteLine($"  {day.Title}: {day.Exercises.Count} exercises ({string.Join(", ", day.Exercises.Select(e => e.Name))})");
-        }
-
         // ✅ NEW: Apply exercise ordering to each day
         for (int i = 0; i < days.Count; i++)
         {
@@ -3269,8 +3170,6 @@ INSTRUÇÕES CRÍTICAS:
         ValidateVolumeLandmarks(days, level);
         ValidateRecoveryTime(days);
         ValidateMovementPatternBalance(days);
-
-        Console.WriteLine("=== END MOCK PLAN GENERATION DEBUG ===");
 
         return new AIWorkoutPlanResponse(
             Title: title,

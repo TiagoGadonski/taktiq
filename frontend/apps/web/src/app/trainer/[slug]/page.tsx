@@ -84,7 +84,6 @@ export default function TrainerPublicProfilePage() {
         setProfile(response);
         setNotFound(false);
       } catch (error: any) {
-        console.error('Error fetching profile:', error);
         if (error.response?.status === 404) {
           setNotFound(true);
         }
@@ -105,7 +104,6 @@ export default function TrainerPublicProfilePage() {
         const response = await apiClient.get<Post[]>(`/posts/trainer/${profile.id}`);
         setPosts(Array.isArray(response) ? response : []);
       } catch (error: any) {
-        console.error('Error fetching posts:', error);
         setPosts([]);
       }
     };
@@ -127,7 +125,6 @@ export default function TrainerPublicProfilePage() {
         if (error.response?.status === 404) {
           setPlans([]);
         } else {
-          console.error('Error fetching plans:', error);
           setPlans([]);
         }
       }

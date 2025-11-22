@@ -82,7 +82,6 @@ export function VideoUpload({
         description: 'O vídeo foi enviado com sucesso.',
       });
     } catch (error: any) {
-      console.error('Upload error:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao enviar vídeo',

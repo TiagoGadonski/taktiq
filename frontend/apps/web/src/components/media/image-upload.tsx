@@ -78,7 +78,6 @@ export function ImageUpload({
         description: 'A imagem foi enviada com sucesso.',
       });
     } catch (error: any) {
-      console.error('Upload error:', error);
       toast({
         variant: 'destructive',
         title: 'Erro ao enviar imagem',

@@ -92,7 +92,6 @@ export default function WorkoutPage() {
 
             // If still not found, create the exercise in the database
             if (!dbExercise) {
-              console.log(`Creating new exercise in database: ${ex.name}`);
               try {
                 // Create the exercise
                 const newExercise = await api.exercises.create({
@@ -117,7 +116,6 @@ export default function WorkoutPage() {
                   targetLoad: 0,
                 });
               } catch (error) {
-                console.error(`Failed to create exercise ${ex.name}:`, error);
                 // Skip this exercise
               }
             } else {
@@ -160,7 +158,6 @@ export default function WorkoutPage() {
             localStorage.removeItem('ai_workout_title');
           }
         } catch (error) {
-          console.error('Error loading AI workout:', error);
           localStorage.removeItem('ai_workout_exercises');
           localStorage.removeItem('ai_workout_title');
         }

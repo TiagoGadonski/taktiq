@@ -72,7 +72,6 @@ export function useNotifications(unreadOnly?: boolean) {
       const data = await response.json();
       setUnreadCount(data.count);
     } catch (err) {
-      console.error('Error fetching unread count:', err);
     }
   };
 
@@ -105,7 +104,6 @@ export function useNotifications(unreadOnly?: boolean) {
       // Update unread count
       await fetchUnreadCount();
     } catch (err) {
-      console.error('Error marking notification as read:', err);
     }
   };
 
@@ -135,7 +133,6 @@ export function useNotifications(unreadOnly?: boolean) {
 
       setUnreadCount(0);
     } catch (err) {
-      console.error('Error marking all notifications as read:', err);
     }
   };
 

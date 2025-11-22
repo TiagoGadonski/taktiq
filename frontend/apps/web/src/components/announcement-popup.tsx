@@ -55,7 +55,6 @@ export function AnnouncementPopup() {
         setOpen(true);
       }
     } catch (error) {
-      console.error('Error fetching announcements:', error);
     }
   };
 
@@ -76,7 +75,6 @@ export function AnnouncementPopup() {
     try {
       await apiClient.post(`/announcements/${announcementId}/mark-read`, {});
     } catch (error) {
-      console.error('Error marking announcement as read:', error);
     }
   };
 
@@ -105,7 +103,6 @@ export function AnnouncementPopup() {
       setAnnouncements([]);
       setCurrentIndex(0);
     } catch (error) {
-      console.error('Error marking all announcements as read:', error);
     }
   };
 

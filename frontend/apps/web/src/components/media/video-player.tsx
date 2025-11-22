@@ -105,7 +105,6 @@ export function VideoPlayer({
         await document.exitFullscreen();
       }
     } catch (error) {
-      console.error('Fullscreen error:', error);
     }
   };
 
