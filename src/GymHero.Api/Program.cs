@@ -187,6 +187,9 @@ app.UseStaticFiles();
 // Security headers middleware - adds protective HTTP headers
 app.UseMiddleware<SecurityHeadersMiddleware>();
 
+// Input validation middleware - prevents SQL injection and XSS attacks
+app.UseMiddleware<InputValidationMiddleware>();
+
 // Activity logging middleware - logs all HTTP requests
 app.UseMiddleware<ActivityLoggingMiddleware>();
 
