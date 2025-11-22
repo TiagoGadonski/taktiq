@@ -19,8 +19,12 @@ public static class AdminEndpoints
 
         // Apply database migrations
         group.MapPost("/migrate-database", async (
-            ApplicationDbContext context) =>
+            ApplicationDbContext context,
+            System.Security.Claims.ClaimsPrincipal user,
+            ILogger<Program> logger) =>
         {
+            var adminId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             try
             {
                 var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
@@ -28,14 +32,19 @@ public static class AdminEndpoints
 
                 if (!pendingList.Any())
                 {
+                    logger.LogInformation("Admin {AdminId} checked database migrations - none pending", adminId);
                     return Results.Ok(new {
                         message = "No pending migrations",
                         timestamp = DateTime.UtcNow
                     });
                 }
 
+                logger.LogWarning("Admin {AdminId} is applying database migrations: {Migrations}", adminId, string.Join(", ", pendingList));
+
                 // Apply all pending migrations
                 await context.Database.MigrateAsync();
+
+                logger.LogInformation("Admin {AdminId} successfully applied database migrations: {Migrations}", adminId, string.Join(", ", pendingList));
 
                 return Results.Ok(new {
                     message = "Database migrations applied successfully",
@@ -45,6 +54,7 @@ public static class AdminEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Admin {AdminId} failed to apply database migrations", adminId);
                 return Results.Problem(
                     title: "Migration failed",
                     detail: ex.Message,
@@ -58,8 +68,12 @@ public static class AdminEndpoints
         group.MapPost("/badge-definitions", async (
             [FromBody] BadgeDefinition request,
             IApplicationDbContext context,
+            System.Security.Claims.ClaimsPrincipal user,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var adminId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             var definition = new BadgeDefinition
             {
                 Code = request.Code,
@@ -71,6 +85,8 @@ public static class AdminEndpoints
 
             await context.BadgeDefinitions.AddAsync(definition, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogInformation("Admin {AdminId} created badge definition: {BadgeCode} - {BadgeTitle}", adminId, definition.Code, definition.Title);
 
             return Results.Created($"/api/v1/admin/badge-definitions/{definition.Id}", definition);
         });
@@ -128,35 +144,60 @@ public static class AdminEndpoints
         });
 
         // Update user (role)
-        group.MapPut("/users/{userId}", async (Guid userId, [FromBody] UpdateUserRequest request, IApplicationDbContext context, CancellationToken cancellationToken) =>
+        group.MapPut("/users/{userId}", async (Guid userId, [FromBody] UpdateUserRequest request, IApplicationDbContext context, System.Security.Claims.ClaimsPrincipal adminUser, ILogger<Program> logger, CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
-            if (user is null) return Results.NotFound("User not found.");
+            if (user is null)
+            {
+                logger.LogWarning("Admin {AdminId} attempted to update non-existent user {UserId}", adminId, userId);
+                return Results.NotFound("User not found.");
+            }
 
+            var oldRole = user.Role;
             user.Role = request.Role;
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogWarning("Admin {AdminId} changed user {UserId} ({UserEmail}) role from {OldRole} to {NewRole}", adminId, userId, user.Email, oldRole, request.Role);
+
             return Results.Ok(new { message = "User updated successfully" });
         });
 
         // Activate user
-        group.MapPost("/users/{userId}/activate", async (Guid userId, IApplicationDbContext context, CancellationToken cancellationToken) =>
+        group.MapPost("/users/{userId}/activate", async (Guid userId, IApplicationDbContext context, System.Security.Claims.ClaimsPrincipal adminUser, ILogger<Program> logger, CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
-            if (user is null) return Results.NotFound("User not found.");
+            if (user is null)
+            {
+                logger.LogWarning("Admin {AdminId} attempted to activate non-existent user {UserId}", adminId, userId);
+                return Results.NotFound("User not found.");
+            }
 
             user.IsActive = true;
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogWarning("Admin {AdminId} activated user {UserId} ({UserEmail})", adminId, userId, user.Email);
+
             return Results.Ok(new { message = "User activated successfully" });
         });
 
         // Deactivate user
-        group.MapPost("/users/{userId}/deactivate", async (Guid userId, IApplicationDbContext context, CancellationToken cancellationToken) =>
+        group.MapPost("/users/{userId}/deactivate", async (Guid userId, IApplicationDbContext context, System.Security.Claims.ClaimsPrincipal adminUser, ILogger<Program> logger, CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
-            if (user is null) return Results.NotFound("User not found.");
+            if (user is null)
+            {
+                logger.LogWarning("Admin {AdminId} attempted to deactivate non-existent user {UserId}", adminId, userId);
+                return Results.NotFound("User not found.");
+            }
 
             user.IsActive = false;
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogWarning("Admin {AdminId} deactivated user {UserId} ({UserEmail})", adminId, userId, user.Email);
+
             return Results.Ok(new { message = "User deactivated successfully" });
         });
 
@@ -165,10 +206,17 @@ public static class AdminEndpoints
             Guid userId,
             [FromBody] AdminChangePasswordRequest request,
             IApplicationDbContext context,
+            System.Security.Claims.ClaimsPrincipal adminUser,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
-            if (user is null) return Results.NotFound("User not found.");
+            if (user is null)
+            {
+                logger.LogWarning("Admin {AdminId} attempted to change password for non-existent user {UserId}", adminId, userId);
+                return Results.NotFound("User not found.");
+            }
 
             // Validate new password
             if (string.IsNullOrWhiteSpace(request.NewPassword) || request.NewPassword.Length < 6)
@@ -180,14 +228,25 @@ public static class AdminEndpoints
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
             await context.SaveChangesAsync(cancellationToken);
 
+            logger.LogWarning("Admin {AdminId} changed password for user {UserId} ({UserEmail})", adminId, userId, user.Email);
+
             return Results.Ok(new { message = "Password changed successfully" });
         });
 
         // Delete user
-        group.MapDelete("/users/{userId}", async (Guid userId, IApplicationDbContext context, CancellationToken cancellationToken) =>
+        group.MapDelete("/users/{userId}", async (Guid userId, IApplicationDbContext context, System.Security.Claims.ClaimsPrincipal adminUser, ILogger<Program> logger, CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             var user = await context.Users.FindAsync(new object[] { userId }, cancellationToken: cancellationToken);
-            if (user is null) return Results.NotFound("User not found.");
+            if (user is null)
+            {
+                logger.LogWarning("Admin {AdminId} attempted to delete non-existent user {UserId}", adminId, userId);
+                return Results.NotFound("User not found.");
+            }
+
+            var userEmail = user.Email;
+            var userName = user.Name;
+            var userRole = user.Role;
 
             // First, delete all friendships where this user is involved
             // This includes both sent and received friend requests
@@ -203,6 +262,9 @@ public static class AdminEndpoints
             // Now delete the user (cascade will handle other related entities)
             context.Users.Remove(user);
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogWarning("Admin {AdminId} DELETED user {UserId} ({UserEmail}, {UserName}, {UserRole})", adminId, userId, userEmail, userName, userRole);
+
             return Results.Ok(new { message = "User deleted successfully" });
         });
 
@@ -327,14 +389,19 @@ public static class AdminEndpoints
         group.MapPost("/users", async (
             [FromBody] CreateUserRequest request,
             IApplicationDbContext context,
+            System.Security.Claims.ClaimsPrincipal adminUser,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             // Check if email already exists
             var existingUser = await context.Users
                 .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
 
             if (existingUser != null)
             {
+                logger.LogWarning("Admin {AdminId} attempted to create user with existing email: {Email}", adminId, request.Email);
                 return Results.BadRequest(new { message = "User with this email already exists" });
             }
 
@@ -342,6 +409,7 @@ public static class AdminEndpoints
             var validRoles = new[] { "Aluno", "PersonalTrainer", "Admin" };
             if (!validRoles.Contains(request.Role))
             {
+                logger.LogWarning("Admin {AdminId} attempted to create user with invalid role: {Role}", adminId, request.Role);
                 return Results.BadRequest(new { message = "Invalid role specified" });
             }
 
@@ -358,6 +426,8 @@ public static class AdminEndpoints
 
             await context.Users.AddAsync(user, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
+
+            logger.LogWarning("Admin {AdminId} created new user {UserId} ({UserEmail}, {UserRole})", adminId, user.Id, user.Email, user.Role);
 
             return Results.Created($"/api/admin/users/{user.Id}", new
             {
@@ -1011,9 +1081,13 @@ public static class AdminEndpoints
         // Get platform revenue analytics
         group.MapGet("/platform-revenue", async (
             IApplicationDbContext context,
+            System.Security.Claims.ClaimsPrincipal adminUser,
+            ILogger<Program> logger,
             CancellationToken cancellationToken,
             [FromQuery] int days = 30) =>
         {
+            var adminId = adminUser.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
             try
             {
                 // Limit days to reasonable range
@@ -1062,6 +1136,8 @@ public static class AdminEndpoints
                     .Take(10)
                     .ToList();
 
+                logger.LogInformation("Admin {AdminId} accessed platform revenue analytics for {Days} days. Total Revenue: R${Revenue}", adminId, days, totalPlatformRevenue);
+
                 return Results.Ok(new
                 {
                     period = new
@@ -1087,6 +1163,7 @@ public static class AdminEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "Admin {AdminId} failed to access platform revenue analytics", adminId);
                 return Results.Problem(
                     title: "Failed to fetch platform revenue",
                     detail: ex.Message,
