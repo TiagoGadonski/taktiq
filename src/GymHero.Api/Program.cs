@@ -67,6 +67,24 @@ builder.Services.AddAuthentication(defaultScheme: JwtBearerDefaults.Authenticati
             ValidAudience = jwtSettings.Audience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
         };
+
+        // Configure JWT authentication for SignalR
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+
+                // If the request is for our SignalR hub
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/chat"))
+                {
+                    context.Token = accessToken;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddAuthorization(options =>
@@ -112,6 +130,9 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails(); // Serviço necessário para o handler
+
+// Add SignalR for real-time communication
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -204,4 +225,9 @@ app.MapAnnouncementEndpoints(); // Platform announcements and popups
 app.MapMediaEndpoints(); // Media upload (images and videos)
 app.MapPaymentEndpoints(); // Payment processing (Stripe)
 app.MapPlacesEndpoints(); // Google Places API (nearby gyms, geocoding)
+app.MapChatEndpoints(); // Real-time chat
+
+// Map SignalR hub
+app.MapHub<GymHero.Api.Hubs.ChatHub>("/hubs/chat");
+
 app.Run();

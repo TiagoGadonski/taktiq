@@ -33,6 +33,8 @@ public interface IApplicationDbContext
     DbSet<UserAnnouncementRead> UserAnnouncementReads { get; }
     DbSet<Media> Medias { get; }
     DbSet<Transaction> Transactions { get; }
+    DbSet<Conversation> Conversations { get; }
+    DbSet<Message> Messages { get; }
 
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

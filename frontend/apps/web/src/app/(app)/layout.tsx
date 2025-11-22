@@ -25,6 +25,7 @@ import {
   ShoppingBag,
   Search,
   CreditCard,
+  MessageCircle,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -41,8 +42,10 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { NotificationsDropdown } from '@/components/notifications-dropdown';
 import { AnnouncementPopup } from '@/components/announcement-popup';
+import { ChatDrawer } from '@/components/chat/chat-drawer';
 import { getAssetUrl } from '@/lib/env';
 import { useTheme } from 'next-themes';
+import { useChat } from '@/hooks/use-chat';
 
 // Main navigation - 5 clean, intuitive tabs
 const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
@@ -58,6 +61,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const { totalUnreadCount } = useChat();
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -123,8 +128,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          {/* Right side - Notifications + Avatar Dropdown */}
+          {/* Right side - Chat + Notifications + Avatar Dropdown */}
           <div className="flex items-center gap-3">
+            {/* Chat */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative hover-lift tap-scale"
+              onClick={() => setChatOpen(true)}
+            >
+              <MessageCircle className="h-5 w-5" />
+              {totalUnreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-destructive text-destructive-foreground text-xs flex items-center justify-center font-bold">
+                  {totalUnreadCount > 9 ? '9+' : totalUnreadCount}
+                </span>
+              )}
+            </Button>
+
             {/* Notifications */}
             <NotificationsDropdown />
 
@@ -267,8 +287,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <TaktIQLogo width={110} height={31} className="transition-transform" />
           </Link>
 
-          {/* Right side - Notifications + Avatar */}
+          {/* Right side - Chat + Notifications + Avatar */}
           <div className="flex items-center gap-2">
+            {/* Chat */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative hover-lift tap-scale h-9 w-9"
+              onClick={() => setChatOpen(true)}
+            >
+              <MessageCircle className="h-5 w-5" />
+              {totalUnreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-destructive text-destructive-foreground text-[10px] flex items-center justify-center font-bold">
+                  {totalUnreadCount > 9 ? '9+' : totalUnreadCount}
+                </span>
+              )}
+            </Button>
+
             <NotificationsDropdown />
 
             {/* Avatar Dropdown Menu */}
@@ -434,6 +469,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Announcement Popup */}
       <AnnouncementPopup />
+
+      {/* Chat Drawer */}
+      <ChatDrawer open={chatOpen} onOpenChange={setChatOpen} />
     </div>
   );
 }

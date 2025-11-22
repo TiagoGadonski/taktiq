@@ -35,6 +35,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<UserAnnouncementRead> UserAnnouncementReads => Set<UserAnnouncementRead>();
     public DbSet<Media> Medias => Set<Media>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
+    public DbSet<Conversation> Conversations => Set<Conversation>();
+    public DbSet<Message> Messages => Set<Message>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -385,6 +387,70 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .WithMany(a => a.Reads)
                   .HasForeignKey(r => r.AnnouncementId)
                   .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Conversation>(entity =>
+        {
+            // Index for finding conversations by participant
+            entity.HasIndex(c => c.Participant1Id)
+                .HasDatabaseName("IX_Conversations_Participant1Id");
+
+            entity.HasIndex(c => c.Participant2Id)
+                .HasDatabaseName("IX_Conversations_Participant2Id");
+
+            // Composite index for finding a conversation between two users
+            entity.HasIndex(c => new { c.Participant1Id, c.Participant2Id })
+                .IsUnique()
+                .HasDatabaseName("IX_Conversations_Participants");
+
+            // Index for sorting conversations by last message
+            entity.HasIndex(c => new { c.Participant1Id, c.LastMessageAt })
+                .HasDatabaseName("IX_Conversations_Participant1LastMessage");
+
+            entity.HasIndex(c => new { c.Participant2Id, c.LastMessageAt })
+                .HasDatabaseName("IX_Conversations_Participant2LastMessage");
+
+            // Configure relationships with participants
+            entity.HasOne(c => c.Participant1)
+                .WithMany()
+                .HasForeignKey(c => c.Participant1Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(c => c.Participant2)
+                .WithMany()
+                .HasForeignKey(c => c.Participant2Id)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Message>(entity =>
+        {
+            // Index for finding messages by conversation (most common query)
+            entity.HasIndex(m => m.ConversationId)
+                .HasDatabaseName("IX_Messages_ConversationId");
+
+            // Index for finding unread messages
+            entity.HasIndex(m => new { m.ConversationId, m.ReadAt })
+                .HasDatabaseName("IX_Messages_ConversationRead");
+
+            // Index for message search by sender
+            entity.HasIndex(m => m.SenderId)
+                .HasDatabaseName("IX_Messages_SenderId");
+
+            // Index for chronological ordering
+            entity.HasIndex(m => new { m.ConversationId, m.SentAt })
+                .HasDatabaseName("IX_Messages_ConversationSent");
+
+            // Configure relationship with conversation
+            entity.HasOne(m => m.Conversation)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.ConversationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure relationship with sender
+            entity.HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
 
         base.OnModelCreating(modelBuilder);
