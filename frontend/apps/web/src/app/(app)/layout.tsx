@@ -40,6 +40,7 @@ import {
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { NotificationsDropdown } from '@/components/notifications-dropdown';
+import { AnnouncementPopup } from '@/components/announcement-popup';
 import { getAssetUrl } from '@/lib/env';
 import { useTheme } from 'next-themes';
 
@@ -430,6 +431,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           })}
         </div>
       </nav>
+
+      {/* Announcement Popup */}
+      <AnnouncementPopup />
     </div>
   );
 }

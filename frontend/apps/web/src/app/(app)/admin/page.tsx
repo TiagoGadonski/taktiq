@@ -16,6 +16,7 @@ import {
   Key,
   Trophy,
   Activity,
+  Megaphone,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -308,7 +309,7 @@ export default function AdminPage() {
       </div>
 
       {/* System Actions */}
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card className="glass border-primary/20">
           <CardContent className="pt-6">
             <div className="flex flex-col gap-4">
@@ -354,6 +355,31 @@ export default function AdminPage() {
               >
                 <Activity className="mr-2 h-4 w-4" />
                 Ver Logs
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass border-orange-500/20">
+          <CardContent className="pt-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-orange-500/20 rounded-lg">
+                  <Megaphone className="h-6 w-6 text-orange-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Anúncios</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Gerenciar anúncios e notificações de plataforma
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={() => router.push('/admin/announcements')}
+                className="bg-orange-500 hover:bg-orange-500/90 hover-lift tap-scale w-full"
+              >
+                <Megaphone className="mr-2 h-4 w-4" />
+                Gerenciar Anúncios
               </Button>
             </div>
           </CardContent>

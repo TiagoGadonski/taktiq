@@ -200,6 +200,7 @@ app.MapNotificationEndpoints();
 app.MapPostEndpoints(); // Personal Trainer blog posts
 app.MapCertificationEndpoints(); // Trainer certifications
 app.MapTestimonialEndpoints(); // Testimonials and reviews
+app.MapAnnouncementEndpoints(); // Platform announcements and popups
 app.MapMediaEndpoints(); // Media upload (images and videos)
 app.MapPaymentEndpoints(); // Payment processing (Stripe)
 app.MapPlacesEndpoints(); // Google Places API (nearby gyms, geocoding)

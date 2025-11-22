@@ -31,6 +31,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<PostView> PostViews => Set<PostView>();
     public DbSet<Certification> Certifications => Set<Certification>();
     public DbSet<Testimonial> Testimonials => Set<Testimonial>();
+    public DbSet<Announcement> Announcements => Set<Announcement>();
+    public DbSet<UserAnnouncementRead> UserAnnouncementReads => Set<UserAnnouncementRead>();
     public DbSet<Media> Medias => Set<Media>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
 
@@ -340,6 +342,49 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             // Constraint: Rating must be between 1 and 5
             entity.Property(t => t.Rating)
                   .HasAnnotation("CheckConstraint", "CK_Testimonials_Rating CHECK (Rating >= 1 AND Rating <= 5)");
+        });
+
+        modelBuilder.Entity<Announcement>(entity =>
+        {
+            // Index for finding active announcements
+            entity.HasIndex(a => new { a.IsActive, a.PublishedAt })
+                .HasDatabaseName("IX_Announcements_ActivePublished");
+
+            // Index for finding announcements by type
+            entity.HasIndex(a => a.Type)
+                .HasDatabaseName("IX_Announcements_Type");
+
+            // Index for popup announcements
+            entity.HasIndex(a => new { a.ShowAsPopup, a.IsActive, a.PublishedAt })
+                .HasDatabaseName("IX_Announcements_PopupActive");
+        });
+
+        modelBuilder.Entity<UserAnnouncementRead>(entity =>
+        {
+            // Index for user-specific read queries
+            entity.HasIndex(r => r.UserId)
+                .HasDatabaseName("IX_UserAnnouncementReads_UserId");
+
+            // Index for announcement-specific read queries
+            entity.HasIndex(r => r.AnnouncementId)
+                .HasDatabaseName("IX_UserAnnouncementReads_AnnouncementId");
+
+            // Composite unique index to prevent duplicate reads
+            entity.HasIndex(r => new { r.UserId, r.AnnouncementId })
+                .IsUnique()
+                .HasDatabaseName("IX_UserAnnouncementReads_UserAnnouncement");
+
+            // Configure relationship with user
+            entity.HasOne(r => r.User)
+                  .WithMany()
+                  .HasForeignKey(r => r.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure relationship with announcement
+            entity.HasOne(r => r.Announcement)
+                  .WithMany(a => a.Reads)
+                  .HasForeignKey(r => r.AnnouncementId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         base.OnModelCreating(modelBuilder);
