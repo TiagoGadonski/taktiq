@@ -88,74 +88,79 @@ export function useChat() {
     // Set up event handlers
     hubConnection.on('ReceiveMessage', (notification: MessageNotification) => {
       // Handle incoming message
-      console.log('New message received:', notification);
+      try {
+        // Update conversation list
+        setConversations(prev => {
+          const conversationIndex = prev.findIndex(c => c.id === notification.conversationId);
+          if (conversationIndex >= 0) {
+            const updated = [...prev];
+            updated[conversationIndex] = {
+              ...updated[conversationIndex],
+              lastMessageAt: notification.sentAt,
+              lastMessagePreview: notification.content,
+              lastMessageSenderId: notification.senderId,
+              unreadCount: updated[conversationIndex].unreadCount + 1,
+            };
+            // Move to top
+            const [conversation] = updated.splice(conversationIndex, 1);
+            updated.unshift(conversation);
+            return updated;
+          }
+          return prev;
+        });
 
-      // Update conversation list
-      setConversations(prev => {
-        const conversationIndex = prev.findIndex(c => c.id === notification.conversationId);
-        if (conversationIndex >= 0) {
-          const updated = [...prev];
-          updated[conversationIndex] = {
-            ...updated[conversationIndex],
-            lastMessageAt: notification.sentAt,
-            lastMessagePreview: notification.content,
-            lastMessageSenderId: notification.senderId,
-            unreadCount: updated[conversationIndex].unreadCount + 1,
-          };
-          // Move to top
-          const [conversation] = updated.splice(conversationIndex, 1);
-          updated.unshift(conversation);
-          return updated;
-        }
-        return prev;
-      });
-
-      // Update unread count
-      setTotalUnreadCount(prev => prev + 1);
+        // Update unread count
+        setTotalUnreadCount(prev => prev + 1);
+      } catch (error) {
+        // Silently handle error - logging would be done server-side
+      }
     });
 
     hubConnection.on('UserTyping', (indicator: TypingIndicator) => {
-      setTypingUsers(prev => {
-        const newMap = new Map(prev);
-        if (indicator.isTyping) {
-          newMap.set(indicator.conversationId, indicator.userName);
-        } else {
-          newMap.delete(indicator.conversationId);
-        }
-        return newMap;
-      });
+      try {
+        setTypingUsers(prev => {
+          const newMap = new Map(prev);
+          if (indicator.isTyping) {
+            newMap.set(indicator.conversationId, indicator.userName);
+          } else {
+            newMap.delete(indicator.conversationId);
+          }
+          return newMap;
+        });
+      } catch (error) {
+        // Silently handle error
+      }
     });
 
     hubConnection.on('MessageRead', (data: { messageId: string; readByUserId: string; readAt: string }) => {
-      console.log('Message marked as read:', data);
-      // You can update the UI to show read status if needed
+      // Message read indicator received - can be used to update UI
     });
 
     // Handle connection state changes
     hubConnection.onreconnecting(() => {
-      console.log('SignalR reconnecting...');
       setIsConnected(false);
     });
 
     hubConnection.onreconnected(() => {
-      console.log('SignalR reconnected');
       setIsConnected(true);
+      retryAttempts = 0;
     });
 
-    hubConnection.onclose(() => {
-      console.log('SignalR connection closed');
+    hubConnection.onclose((error) => {
       setIsConnected(false);
+      if (error) {
+        // Connection closed with error - will attempt to reconnect
+      }
     });
 
     // Start the connection
     hubConnection
       .start()
       .then(() => {
-        console.log('SignalR connected');
         setIsConnected(true);
+        retryAttempts = 0;
       })
-      .catch(err => {
-        console.error('SignalR connection error:', err);
+      .catch(() => {
         setIsConnected(false);
       });
 
@@ -173,7 +178,9 @@ export function useChat() {
       if (connection && isConnected) {
         connection
           .invoke('SendTypingIndicator', conversationId, recipientId, isTyping)
-          .catch(err => console.error('Error sending typing indicator:', err));
+          .catch(() => {
+            // Silently handle error - non-critical feature
+          });
       }
     },
     [connection, isConnected]
@@ -185,7 +192,9 @@ export function useChat() {
       if (connection && isConnected) {
         connection
           .invoke('JoinConversation', conversationId)
-          .catch(err => console.error('Error joining conversation:', err));
+          .catch(() => {
+            // Silently handle error - will retry on next action
+          });
       }
     },
     [connection, isConnected]
@@ -197,7 +206,9 @@ export function useChat() {
       if (connection && isConnected) {
         connection
           .invoke('LeaveConversation', conversationId)
-          .catch(err => console.error('Error leaving conversation:', err));
+          .catch(() => {
+            // Silently handle error - non-critical cleanup
+          });
       }
     },
     [connection, isConnected]

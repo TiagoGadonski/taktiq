@@ -98,7 +98,11 @@ export function ChatDrawer({ open, onOpenChange, initialUserId }: ChatDrawerProp
       const total = data.reduce((sum, conv) => sum + conv.unreadCount, 0);
       setTotalUnreadCount(total);
     } catch (error: any) {
-      console.error('Error fetching conversations:', error);
+      toast({
+        title: 'Erro ao carregar conversas',
+        description: 'Não foi possível carregar suas conversas. Tente novamente.',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoadingConversations(false);
     }
@@ -193,7 +197,7 @@ export function ChatDrawer({ open, onOpenChange, initialUserId }: ChatDrawerProp
       // Update total unread count
       setTotalUnreadCount(prev => Math.max(0, prev - (selectedConversation?.unreadCount || 0)));
     } catch (error) {
-      console.error('Error marking as read:', error);
+      // Silently handle error - not critical to user experience
     }
   };
 
@@ -201,14 +205,26 @@ export function ChatDrawer({ open, onOpenChange, initialUserId }: ChatDrawerProp
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!messageInput.trim() || !selectedConversation || isSending) return;
+    const trimmedInput = messageInput.trim();
+
+    // Validation: Check if message is empty or too long
+    if (!trimmedInput || !selectedConversation || isSending) return;
+
+    if (trimmedInput.length > 5000) {
+      toast({
+        title: 'Mensagem muito longa',
+        description: 'A mensagem deve ter no máximo 5000 caracteres.',
+        variant: 'destructive',
+      });
+      return;
+    }
 
     setIsSending(true);
 
     try {
       const response = await apiClient.post<Message>('/chat/messages', {
         recipientId: selectedConversation.otherUserId,
-        content: messageInput.trim(),
+        content: trimmedInput,
         messageType: 'Text',
       });
 

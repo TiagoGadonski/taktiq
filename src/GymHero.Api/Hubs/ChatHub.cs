@@ -1,21 +1,26 @@
 using System.Security.Claims;
+using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace GymHero.Api.Hubs;
 
 /// <summary>
 /// SignalR Hub for real-time chat functionality
+/// Implements secure real-time messaging with authorization checks
 /// </summary>
 [Authorize]
 public class ChatHub : Hub
 {
     private readonly ILogger<ChatHub> _logger;
+    private readonly IApplicationDbContext _context;
 
-    public ChatHub(ILogger<ChatHub> logger)
+    public ChatHub(ILogger<ChatHub> logger, IApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     /// <summary>
@@ -26,9 +31,17 @@ public class ChatHub : Hub
         var userId = Context.User?.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
         {
-            // Add user to their personal group for targeted messages
-            await Groups.AddToGroupAsync(Context.ConnectionId, $"user_{userId}");
-            _logger.LogInformation("User {UserId} connected to chat with connection {ConnectionId}", userId, Context.ConnectionId);
+            try
+            {
+                // Add user to their personal group for targeted messages
+                await Groups.AddToGroupAsync(Context.ConnectionId, $"user_{userId}");
+                _logger.LogDebug("User {UserId} connected to chat", userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during connection setup for user {UserId}", userId);
+                throw;
+            }
         }
 
         await base.OnConnectedAsync();
@@ -42,8 +55,20 @@ public class ChatHub : Hub
         var userId = Context.User?.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!string.IsNullOrEmpty(userId))
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"user_{userId}");
-            _logger.LogInformation("User {UserId} disconnected from chat", userId);
+            try
+            {
+                await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"user_{userId}");
+                _logger.LogDebug("User {UserId} disconnected from chat", userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during disconnection cleanup for user {UserId}", userId);
+            }
+        }
+
+        if (exception != null)
+        {
+            _logger.LogWarning(exception, "User {UserId} disconnected with error", userId);
         }
 
         await base.OnDisconnectedAsync(exception);
@@ -61,17 +86,41 @@ public class ChatHub : Hub
         var userName = Context.User?.FindFirstValue(ClaimTypes.Name);
 
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(userName))
+        {
+            _logger.LogWarning("Typing indicator attempted without valid user context");
             return;
+        }
 
-        var typingIndicator = new TypingIndicator(
-            conversationId,
-            Guid.Parse(userId),
-            userName,
-            isTyping
-        );
+        try
+        {
+            var userGuid = Guid.Parse(userId);
 
-        // Send to the recipient's group
-        await Clients.Group($"user_{recipientId}").SendAsync("UserTyping", typingIndicator);
+            // Security: Verify user is a participant in the conversation
+            var isParticipant = await _context.Conversations
+                .AnyAsync(c => c.Id == conversationId &&
+                              (c.Participant1Id == userGuid || c.Participant2Id == userGuid));
+
+            if (!isParticipant)
+            {
+                _logger.LogWarning("User {UserId} attempted to send typing indicator for unauthorized conversation {ConversationId}",
+                    userId, conversationId);
+                return;
+            }
+
+            var typingIndicator = new TypingIndicator(
+                conversationId,
+                userGuid,
+                userName,
+                isTyping
+            );
+
+            // Send to the recipient's group only
+            await Clients.Group($"user_{recipientId}").SendAsync("UserTyping", typingIndicator);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending typing indicator for conversation {ConversationId}", conversationId);
+        }
     }
 
     /// <summary>
@@ -80,8 +129,36 @@ public class ChatHub : Hub
     /// <param name="conversationId">ID of the conversation to join</param>
     public async Task JoinConversation(Guid conversationId)
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, $"conversation_{conversationId}");
-        _logger.LogInformation("User joined conversation {ConversationId}", conversationId);
+        var userId = Context.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userId))
+        {
+            _logger.LogWarning("Join conversation attempted without valid user context");
+            return;
+        }
+
+        try
+        {
+            var userGuid = Guid.Parse(userId);
+
+            // Security: Verify user is a participant in the conversation before allowing join
+            var isParticipant = await _context.Conversations
+                .AnyAsync(c => c.Id == conversationId &&
+                              (c.Participant1Id == userGuid || c.Participant2Id == userGuid));
+
+            if (!isParticipant)
+            {
+                _logger.LogWarning("User {UserId} attempted to join unauthorized conversation {ConversationId}",
+                    userId, conversationId);
+                return;
+            }
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, $"conversation_{conversationId}");
+            _logger.LogDebug("User {UserId} joined conversation {ConversationId}", userId, conversationId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error joining conversation {ConversationId}", conversationId);
+        }
     }
 
     /// <summary>
@@ -90,33 +167,16 @@ public class ChatHub : Hub
     /// <param name="conversationId">ID of the conversation to leave</param>
     public async Task LeaveConversation(Guid conversationId)
     {
-        await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"conversation_{conversationId}");
-        _logger.LogInformation("User left conversation {ConversationId}", conversationId);
-    }
+        var userId = Context.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
-    /// <summary>
-    /// Notify a specific user about a new message
-    /// </summary>
-    /// <param name="recipientId">ID of the recipient user</param>
-    /// <param name="message">The message notification</param>
-    public async Task NotifyNewMessage(Guid recipientId, MessageNotification message)
-    {
-        await Clients.Group($"user_{recipientId}").SendAsync("ReceiveMessage", message);
-    }
-
-    /// <summary>
-    /// Notify a conversation that a message has been read
-    /// </summary>
-    /// <param name="conversationId">ID of the conversation</param>
-    /// <param name="messageId">ID of the message that was read</param>
-    /// <param name="readByUserId">ID of the user who read the message</param>
-    public async Task NotifyMessageRead(Guid conversationId, Guid messageId, Guid readByUserId)
-    {
-        await Clients.Group($"conversation_{conversationId}").SendAsync("MessageRead", new
+        try
         {
-            MessageId = messageId,
-            ReadByUserId = readByUserId,
-            ReadAt = DateTime.UtcNow
-        });
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"conversation_{conversationId}");
+            _logger.LogDebug("User {UserId} left conversation {ConversationId}", userId, conversationId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error leaving conversation {ConversationId}", conversationId);
+        }
     }
 }
