@@ -15,28 +15,28 @@ namespace GymHero.Infrastructure.Migrations
                 name: "IX_Users_IsPublicProfile_Role",
                 table: "Users",
                 columns: new[] { "IsPublicProfile", "Role" },
-                filter: "IsPublicProfile = true AND Role = 'PersonalTrainer'");
+                filter: "\"IsPublicProfile\" = true AND \"Role\" = 'PersonalTrainer'");
 
             // Add index for specialization filtering
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Specialization",
                 table: "Users",
                 column: "Specialization",
-                filter: "Specialization IS NOT NULL");
+                filter: "\"Specialization\" IS NOT NULL");
 
             // Add index for location filtering
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Location",
                 table: "Users",
                 column: "Location",
-                filter: "Location IS NOT NULL");
+                filter: "\"Location\" IS NOT NULL");
 
             // Add composite index for common filter combinations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_PublicProfile_Location_Specialization",
                 table: "Users",
                 columns: new[] { "IsPublicProfile", "Location", "Specialization" },
-                filter: "IsPublicProfile = true");
+                filter: "\"IsPublicProfile\" = true");
         }
 
         /// <inheritdoc />
