@@ -29,6 +29,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<StudentInvitation> StudentInvitations => Set<StudentInvitation>();
     public DbSet<Post> Posts => Set<Post>();
     public DbSet<PostView> PostViews => Set<PostView>();
+    public DbSet<Certification> Certifications => Set<Certification>();
+    public DbSet<Testimonial> Testimonials => Set<Testimonial>();
     public DbSet<Media> Medias => Set<Media>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
 
@@ -290,6 +292,54 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .WithMany()
                   .HasForeignKey(pv => pv.ViewerId)
                   .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<Certification>(entity =>
+        {
+            // Index for trainer-specific certification queries
+            entity.HasIndex(c => c.TrainerId)
+                .HasDatabaseName("IX_Certifications_TrainerId");
+
+            // Index for finding active certifications
+            entity.HasIndex(c => new { c.TrainerId, c.ExpiryDate })
+                .HasDatabaseName("IX_Certifications_TrainerExpiry");
+
+            // Configure relationship with trainer
+            entity.HasOne(c => c.Trainer)
+                  .WithMany(u => u.Certifications)
+                  .HasForeignKey(c => c.TrainerId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Testimonial>(entity =>
+        {
+            // Index for trainer-specific testimonial queries
+            entity.HasIndex(t => t.TrainerId)
+                .HasDatabaseName("IX_Testimonials_TrainerId");
+
+            // Index for finding approved testimonials
+            entity.HasIndex(t => new { t.TrainerId, t.IsApproved })
+                .HasDatabaseName("IX_Testimonials_TrainerApproved");
+
+            // Index for student's testimonials
+            entity.HasIndex(t => t.StudentId)
+                .HasDatabaseName("IX_Testimonials_StudentId");
+
+            // Configure relationship with trainer
+            entity.HasOne(t => t.Trainer)
+                  .WithMany(u => u.Testimonials)
+                  .HasForeignKey(t => t.TrainerId)
+                  .OnDelete(DeleteBehavior.Restrict); // Don't delete testimonials when trainer is deleted
+
+            // Configure relationship with student
+            entity.HasOne(t => t.Student)
+                  .WithMany()
+                  .HasForeignKey(t => t.StudentId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Constraint: Rating must be between 1 and 5
+            entity.Property(t => t.Rating)
+                  .HasAnnotation("CheckConstraint", "CK_Testimonials_Rating CHECK (Rating >= 1 AND Rating <= 5)");
         });
 
         base.OnModelCreating(modelBuilder);

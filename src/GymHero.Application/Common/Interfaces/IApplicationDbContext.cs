@@ -27,6 +27,8 @@ public interface IApplicationDbContext
     DbSet<StudentInvitation> StudentInvitations { get; }
     DbSet<Post> Posts { get; }
     DbSet<PostView> PostViews { get; }
+    DbSet<Certification> Certifications { get; }
+    DbSet<Testimonial> Testimonials { get; }
     DbSet<Media> Medias { get; }
     DbSet<Transaction> Transactions { get; }
 

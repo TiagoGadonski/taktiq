@@ -42,14 +42,25 @@ public class User : BaseEntity
 
     // --- PERSONAL TRAINER PROFILE FIELDS ---
     public string? ProfileSlug { get; set; } // Custom URL slug (e.g., "tiago-cordeiro" for taktiq.app/trainer/tiago-cordeiro)
+    public string? CoverPhotoUrl { get; set; } // Cover/banner photo for profile
     public string? Specialization { get; set; } // Área de especialização (ex: "Musculação", "Funcional", "Crossfit")
     public string? Education { get; set; } // Formação acadêmica e certificações
     public string? Experience { get; set; } // Experiência profissional e carreira
     public string? PricingInfo { get; set; } // Informações sobre preços e planos
+    public string? Philosophy { get; set; } // Workout philosophy/approach
+    public string? Methodology { get; set; } // Training methodology
+    public string? VideoIntroUrl { get; set; } // YouTube/Vimeo intro video URL
+    public int? YearsExperience { get; set; } // Years of professional experience
+    public int? ClientsCount { get; set; } // Total number of clients trained
+    public int? SuccessStoriesCount { get; set; } // Number of success transformations
     public bool IsPublicProfile { get; set; } = false; // Se o perfil público está ativo
     public string? InstagramUrl { get; set; } // URL do Instagram
     public string? FacebookUrl { get; set; } // URL do Facebook
     public string? WebsiteUrl { get; set; } // URL do site pessoal
+
+    // Navigation properties for enhanced profile
+    public ICollection<Certification> Certifications { get; set; } = new List<Certification>();
+    public ICollection<Testimonial> Testimonials { get; set; } = new List<Testimonial>();
     // --- RELAÇÃO PARA O ALUNO ---
     // Se este utilizador for um "Aluno", aqui guardaremos o ID do seu Personal Trainer.
     // A interrogação (?) indica que pode ser nulo (um aluno pode não ter um personal).
