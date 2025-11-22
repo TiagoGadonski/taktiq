@@ -33,6 +33,8 @@ import {
   Activity,
   ShoppingCart,
   DollarSign,
+  MousePointer,
+  Zap,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -121,6 +123,11 @@ interface Post {
   publishedAt?: string;
   createdAt: string;
   updatedAt: string;
+  // Analytics fields (will be populated when backend tracking is implemented)
+  viewCount?: number;
+  uniqueViewers?: number;
+  profileClicks?: number;
+  engagementRate?: number;
 }
 
 interface Analytics {
@@ -1529,6 +1536,54 @@ export default function InstructorPage() {
                       </div>
                     )}
                   </div>
+
+                  {/* Analytics Metrics - Only show for published posts */}
+                  {post.isPublished && (
+                    <div className="mb-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                      <div className="flex items-center gap-2 mb-3">
+                        <TrendingUp className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-semibold text-primary">Alcance e Engajamento</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-1">
+                            <Eye className="h-3 w-3 text-muted-foreground" />
+                            <span className="text-xs text-muted-foreground">Visualizações</span>
+                          </div>
+                          <span className="text-lg font-bold text-primary">
+                            {post.viewCount || 0}
+                          </span>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-1">
+                            <Users className="h-3 w-3 text-muted-foreground" />
+                            <span className="text-xs text-muted-foreground">Únicos</span>
+                          </div>
+                          <span className="text-lg font-bold text-primary">
+                            {post.uniqueViewers || 0}
+                          </span>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-1">
+                            <MousePointer className="h-3 w-3 text-muted-foreground" />
+                            <span className="text-xs text-muted-foreground">Cliques</span>
+                          </div>
+                          <span className="text-lg font-bold text-primary">
+                            {post.profileClicks || 0}
+                          </span>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex items-center gap-1">
+                            <Zap className="h-3 w-3 text-muted-foreground" />
+                            <span className="text-xs text-muted-foreground">Engajamento</span>
+                          </div>
+                          <span className="text-lg font-bold text-primary">
+                            {post.engagementRate ? `${post.engagementRate.toFixed(1)}%` : '0%'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex gap-2 mt-4 pt-4 border-t border-border/50">
                     <Button
