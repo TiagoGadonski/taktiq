@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { apiClient } from '@/lib/api';
 import { getAssetUrl } from '@/lib/env';
+import { useAuth } from '@/hooks/use-auth';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,7 @@ import {
   Calendar,
   Eye,
   TrendingUp,
+  Home,
 } from 'lucide-react';
 import Link from 'next/link';
 import { PostFeed } from '@/components/posts/post-feed';
@@ -64,6 +66,7 @@ export default function TrainerPublicProfilePage() {
   const params = useParams();
   const router = useRouter();
   const slug = params?.slug as string;
+  const { user, isAuthenticated } = useAuth();
 
   const [profile, setProfile] = useState<PublicProfileData | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -120,8 +123,13 @@ export default function TrainerPublicProfilePage() {
         const response = await apiClient.get(`/workout-plans/user/${profile.id}/public?pageSize=4`);
         setPlans(Array.isArray(response) ? response : []);
       } catch (error: any) {
-        console.error('Error fetching plans:', error);
-        setPlans([]);
+        // Silently handle 404 - trainer may not have public plans yet
+        if (error.response?.status === 404) {
+          setPlans([]);
+        } else {
+          console.error('Error fetching plans:', error);
+          setPlans([]);
+        }
       }
     };
 
@@ -402,7 +410,9 @@ export default function TrainerPublicProfilePage() {
         <Card className="glass border-primary/20 p-8 mt-8 text-center bg-gradient-to-br from-primary/10 to-background">
           <h3 className="text-2xl font-bold mb-3">Interessado em treinar com {profile.name.split(' ')[0]}?</h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Entre em contato através das redes sociais ou crie sua conta no TaktIQ para começar sua jornada fitness!
+            {isAuthenticated
+              ? 'Entre em contato através das redes sociais para iniciar sua jornada fitness!'
+              : 'Entre em contato através das redes sociais ou crie sua conta no TaktIQ para começar sua jornada fitness!'}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             {(profile.instagramUrl || profile.facebookUrl || profile.websiteUrl) && (
@@ -433,12 +443,22 @@ export default function TrainerPublicProfilePage() {
                 )}
               </div>
             )}
-            <Link href="/signup">
-              <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale">
-                <UserCog className="mr-2 h-4 w-4" />
-                Criar Conta
-              </Button>
-            </Link>
+            {!isAuthenticated && (
+              <Link href="/signup">
+                <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale">
+                  <UserCog className="mr-2 h-4 w-4" />
+                  Criar Conta
+                </Button>
+              </Link>
+            )}
+            {isAuthenticated && (
+              <Link href="/dashboard">
+                <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale">
+                  <Home className="mr-2 h-4 w-4" />
+                  Voltar ao Dashboard
+                </Button>
+              </Link>
+            )}
           </div>
         </Card>
       </div>
