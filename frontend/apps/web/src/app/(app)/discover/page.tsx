@@ -9,6 +9,13 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
   Sparkles,
   Search,
   Dumbbell,
@@ -23,6 +30,10 @@ import {
   Gift,
   Crown,
   ShoppingCart,
+  Star,
+  Flame,
+  ArrowUpDown,
+  BookmarkCheck,
 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/hooks/use-auth';
@@ -44,7 +55,8 @@ interface DiscoverPlan {
   isPublic: boolean;
 }
 
-type PlanTab = 'free' | 'premium' | 'friends';
+type PlanTab = 'free' | 'premium' | 'friends' | 'myplans';
+type SortOption = 'newest' | 'popular' | 'mostViewed';
 
 export default function DiscoverPlansPage() {
   const { toast } = useToast();
@@ -55,6 +67,7 @@ export default function DiscoverPlansPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [goalFilter, setGoalFilter] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>('newest');
   const [page, setPage] = useState(1);
 
   // Fetch marketplace plans
@@ -90,6 +103,16 @@ export default function DiscoverPlansPage() {
       return { data: [], totalCount: 0 };
     },
     enabled: activeTab === 'friends' && !!user,
+  });
+
+  // Fetch user's own plans (purchased or assigned)
+  const { data: myPlans, isLoading: isLoadingMyPlans } = useQuery({
+    queryKey: ['workout-plans', user?.id],
+    queryFn: async () => {
+      const response = await apiClient.get<DiscoverPlan[]>('/workout-plans');
+      return { data: Array.isArray(response) ? response : [], totalCount: Array.isArray(response) ? response.length : 0 };
+    },
+    enabled: activeTab === 'myplans' && !!user,
   });
 
   const purchaseMutation = useMutation({
@@ -141,62 +164,136 @@ export default function DiscoverPlansPage() {
     setActiveTab(tab as PlanTab);
     setPage(1);
     clearFilters();
+    setSortBy('newest'); // Reset sort when changing tabs
   };
 
-  // Filter plans based on active tab
+  // Helper function to determine if a plan is "new" (published within 7 days)
+  const isNewPlan = (plan: DiscoverPlan) => {
+    if (!plan.publishedAt) return false;
+    const publishedDate = new Date(plan.publishedAt);
+    const daysSincePublished = (Date.now() - publishedDate.getTime()) / (1000 * 60 * 60 * 24);
+    return daysSincePublished <= 7;
+  };
+
+  // Helper function to determine if a plan is "popular" (high view count)
+  const isPopularPlan = (plan: DiscoverPlan) => {
+    return plan.viewCount >= 50; // Plans with 50+ views are considered popular
+  };
+
+  // Helper function to determine if a plan is "trending" (highest view count)
+  const isTrendingPlan = (plan: DiscoverPlan, allPlans: DiscoverPlan[]) => {
+    if (allPlans.length === 0) return false;
+    const sortedByViews = [...allPlans].sort((a, b) => b.viewCount - a.viewCount);
+    const topViewCount = sortedByViews[0]?.viewCount || 0;
+    return plan.viewCount >= topViewCount * 0.8 && plan.viewCount >= 100; // Top 20% with at least 100 views
+  };
+
+  // Filter and sort plans based on active tab
   const getFilteredPlans = () => {
+    let filtered: DiscoverPlan[] = [];
+
     if (activeTab === 'friends') {
-      return friendPlans?.data || [];
+      filtered = friendPlans?.data || [];
+    } else if (activeTab === 'myplans') {
+      filtered = myPlans?.data || [];
+    } else {
+      const allPlans = marketplaceData?.data || [];
+
+      if (activeTab === 'free') {
+        filtered = allPlans.filter(plan => !plan.price || plan.price === 0);
+      } else if (activeTab === 'premium') {
+        filtered = allPlans.filter(plan => plan.price && plan.price > 0);
+      } else {
+        filtered = allPlans;
+      }
     }
 
-    const allPlans = marketplaceData?.data || [];
+    // Apply sorting
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'newest':
+          if (!a.publishedAt) return 1;
+          if (!b.publishedAt) return -1;
+          return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+        case 'popular':
+          // Sort by view count descending
+          return b.viewCount - a.viewCount;
+        case 'mostViewed':
+          return b.viewCount - a.viewCount;
+        default:
+          return 0;
+      }
+    });
 
-    if (activeTab === 'free') {
-      return allPlans.filter(plan => !plan.price || plan.price === 0);
-    }
-
-    if (activeTab === 'premium') {
-      return allPlans.filter(plan => plan.price && plan.price > 0);
-    }
-
-    return allPlans;
+    return sorted;
   };
 
   const hasActiveFilters = searchTerm || goalFilter;
   const plans = getFilteredPlans();
-  const isLoading = activeTab === 'friends' ? isLoadingFriends : isLoadingMarketplace;
+  const isLoading = activeTab === 'friends' ? isLoadingFriends :
+                    activeTab === 'myplans' ? isLoadingMyPlans :
+                    isLoadingMarketplace;
   const totalCount = activeTab === 'friends' ? friendPlans?.totalCount || 0 :
+                     activeTab === 'myplans' ? myPlans?.totalCount || 0 :
                      plans.length;
 
-  const renderPlanCard = (plan: DiscoverPlan, index: number) => (
-    <Card
-      key={plan.id}
-      className="glass border-primary/20 hover-lift tap-scale animate-scale-in"
-      style={{ animationDelay: `${index * 50}ms` }}
-    >
-      <div className="p-6 space-y-4">
-        {/* Plan Header */}
-        <div>
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="font-bold text-lg flex-1">{plan.name}</h3>
-            {plan.price && plan.price > 0 ? (
-              <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0">
-                <Crown className="h-3 w-3 mr-1" />
-                Premium
-              </Badge>
-            ) : (
-              <Badge variant="secondary" className="bg-green-500/20 text-green-500 border-green-500/30">
-                <Gift className="h-3 w-3 mr-1" />
-                Grátis
-              </Badge>
+  const renderPlanCard = (plan: DiscoverPlan, index: number) => {
+    const isNew = isNewPlan(plan);
+    const isPopular = isPopularPlan(plan);
+    const isTrending = isTrendingPlan(plan, plans);
+
+    return (
+      <Card
+        key={plan.id}
+        className="glass border-primary/20 hover-lift tap-scale animate-scale-in"
+        style={{ animationDelay: `${index * 50}ms` }}
+      >
+        <div className="p-6 space-y-4">
+          {/* Plan Header */}
+          <div>
+            <div className="flex items-start justify-between mb-2">
+              <h3 className="font-bold text-lg flex-1">{plan.name}</h3>
+              <div className="flex gap-2 flex-wrap justify-end">
+                {plan.price && plan.price > 0 ? (
+                  <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-0">
+                    <Crown className="h-3 w-3 mr-1" />
+                    Premium
+                  </Badge>
+                ) : (
+                  <Badge variant="secondary" className="bg-green-500/20 text-green-500 border-green-500/30">
+                    <Gift className="h-3 w-3 mr-1" />
+                    Grátis
+                  </Badge>
+                )}
+              </div>
+            </div>
+            {/* Status Badges */}
+            <div className="flex gap-2 mb-2 flex-wrap">
+              {isTrending && (
+                <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/30">
+                  <Flame className="h-3 w-3 mr-1" />
+                  Trending
+                </Badge>
+              )}
+              {isPopular && !isTrending && (
+                <Badge variant="outline" className="bg-blue-500/10 text-blue-500 border-blue-500/30">
+                  <Star className="h-3 w-3 mr-1" />
+                  Popular
+                </Badge>
+              )}
+              {isNew && (
+                <Badge variant="outline" className="bg-purple-500/10 text-purple-500 border-purple-500/30">
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Novo
+                </Badge>
+              )}
+            </div>
+            {plan.description && (
+              <p className="text-sm text-muted-foreground line-clamp-2">
+                {plan.description}
+              </p>
             )}
           </div>
-          {plan.description && (
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {plan.description}
-            </p>
-          )}
-        </div>
 
         {/* Plan Details */}
         <div className="space-y-2">
@@ -264,7 +361,8 @@ export default function DiscoverPlansPage() {
         </div>
       </div>
     </Card>
-  );
+    );
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -283,7 +381,7 @@ export default function DiscoverPlansPage() {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 glass border border-primary/20">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 glass border border-primary/20">
           <TabsTrigger value="free" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-500">
             <Gift className="h-4 w-4 mr-2" />
             Grátis
@@ -295,6 +393,10 @@ export default function DiscoverPlansPage() {
           <TabsTrigger value="friends" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-500">
             <Users className="h-4 w-4 mr-2" />
             Amigos
+          </TabsTrigger>
+          <TabsTrigger value="myplans" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+            <BookmarkCheck className="h-4 w-4 mr-2" />
+            Meus Planos
           </TabsTrigger>
         </TabsList>
 
@@ -312,28 +414,47 @@ export default function DiscoverPlansPage() {
               />
             </div>
 
-            {/* Filter Toggle */}
-            <div className="flex items-center justify-between">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowFilters(!showFilters)}
-                className="hover-lift tap-scale"
-              >
-                <Filter className="mr-2 h-4 w-4" />
-                {showFilters ? 'Esconder Filtros' : 'Mostrar Filtros'}
-              </Button>
-
-              {hasActiveFilters && (
+            {/* Filter Toggle and Sort */}
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <div className="flex gap-2">
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="sm"
-                  onClick={clearFilters}
-                  className="text-muted-foreground hover:text-foreground"
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="hover-lift tap-scale"
                 >
-                  <X className="mr-2 h-4 w-4" />
-                  Limpar Filtros
+                  <Filter className="mr-2 h-4 w-4" />
+                  {showFilters ? 'Esconder Filtros' : 'Mostrar Filtros'}
                 </Button>
+
+                {hasActiveFilters && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearFilters}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="mr-2 h-4 w-4" />
+                    Limpar Filtros
+                  </Button>
+                )}
+              </div>
+
+              {/* Sort Dropdown */}
+              {activeTab !== 'myplans' && (
+                <div className="flex items-center gap-2">
+                  <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                  <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
+                    <SelectTrigger className="w-[180px] glass">
+                      <SelectValue placeholder="Ordenar por" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="newest">Mais Recentes</SelectItem>
+                      <SelectItem value="popular">Mais Populares</SelectItem>
+                      <SelectItem value="mostViewed">Mais Visualizados</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               )}
             </div>
 
@@ -410,14 +531,19 @@ export default function DiscoverPlansPage() {
               {activeTab === 'free' && <Gift className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />}
               {activeTab === 'premium' && <Crown className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />}
               {activeTab === 'friends' && <Users className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />}
+              {activeTab === 'myplans' && <BookmarkCheck className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />}
               <h3 className="text-lg font-semibold mb-2">
-                {activeTab === 'friends' ? 'Nenhum plano de amigos' : 'Nenhum plano disponível'}
+                {activeTab === 'friends' ? 'Nenhum plano de amigos' :
+                 activeTab === 'myplans' ? 'Nenhum plano adquirido' :
+                 'Nenhum plano disponível'}
               </h3>
               <p className="text-muted-foreground mb-4">
                 {hasActiveFilters
                   ? 'Tente ajustar seus filtros de busca'
                   : activeTab === 'friends'
                   ? 'Seus amigos ainda não compartilharam nenhum plano público'
+                  : activeTab === 'myplans'
+                  ? 'Você ainda não adquiriu nenhum plano de treino. Explore os planos disponíveis!'
                   : `Ainda não há planos ${activeTab === 'free' ? 'gratuitos' : 'premium'} disponíveis`}
               </p>
               {hasActiveFilters && (
@@ -425,11 +551,16 @@ export default function DiscoverPlansPage() {
                   Limpar Filtros
                 </Button>
               )}
+              {activeTab === 'myplans' && !hasActiveFilters && (
+                <Button onClick={() => setActiveTab('free')} variant="outline" className="hover-lift tap-scale">
+                  Explorar Planos Gratuitos
+                </Button>
+              )}
             </Card>
           )}
 
           {/* Pagination */}
-          {!isLoading && marketplaceData && marketplaceData.totalPages > 1 && activeTab !== 'friends' && (
+          {!isLoading && marketplaceData && marketplaceData.totalPages > 1 && activeTab !== 'friends' && activeTab !== 'myplans' && (
             <div className="flex justify-center gap-2">
               <Button
                 variant="outline"

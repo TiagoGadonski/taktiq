@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Dumbbell, Trophy, TrendingUp, Zap, Check, ChevronDown, ChevronUp, FileText } from 'lucide-react';
+import { Dumbbell, Trophy, TrendingUp, Zap, Check, ChevronDown, ChevronUp, FileText, MessageCircle, Calendar, Sparkles } from 'lucide-react';
 import { api } from '@/lib/api';
 import { apiClient } from '@/lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +13,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { PostFeed } from '@/components/posts/post-feed';
 import { InstructorDashboard } from '@/components/dashboard/instructor-dashboard';
 import { InstructorCard } from '@/components/dashboard/instructor-card';
+import { getDailyQuote } from '@/components/dashboard/motivational-quotes';
 
 interface Post {
   id: string;
@@ -29,9 +30,18 @@ interface Post {
   updatedAt: string;
 }
 
+// Helper function to get time-based greeting
+function getTimeBasedGreeting() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return 'Bom dia';
+  if (hour >= 12 && hour < 18) return 'Boa tarde';
+  return 'Boa noite';
+}
+
 export default function DashboardPage() {
   const [isCalendarExpanded, setIsCalendarExpanded] = useState(false);
   const { user } = useAuth();
+  const dailyQuote = getDailyQuote();
 
   const { data: progress, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', 'dashboard'],
@@ -116,38 +126,102 @@ export default function DashboardPage() {
   // Show student dashboard for regular users
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold sm:text-3xl">Dashboard</h1>
-        <p className="text-sm text-muted-foreground sm:text-base">Bem-vindo de volta! Vamos treinar hoje?</p>
+      {/* Personalized Greeting */}
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold sm:text-4xl">
+          {getTimeBasedGreeting()}, {user?.name?.split(' ')[0] || 'Atleta'}!
+        </h1>
+        <p className="text-base text-muted-foreground sm:text-lg">
+          {currentSession
+            ? 'Você tem um treino em andamento. Continue e finalize com força!'
+            : 'Pronto para superar seus limites hoje?'
+          }
+        </p>
       </div>
 
-      {/* Start Workout CTA */}
-      <Card className="border-primary bg-gradient-to-br from-primary/5 to-primary/10">
+      {/* Motivational Quote Card */}
+      <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-background">
         <CardContent className="pt-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-2xl font-bold mb-2">
-                {currentSession ? 'Treino em Andamento' : 'Pronto para Treinar?'}
-              </h2>
-              <p className="text-muted-foreground">
-                {currentSession
-                  ? 'Continue de onde parou e complete seu treino'
-                  : 'Inicie um novo treino e mantenha sua sequência'}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                <Sparkles className="h-6 w-6 text-primary" />
+              </div>
+            </div>
+            <div className="flex-1">
+              <p className="text-lg font-medium leading-relaxed mb-2 italic">
+                &ldquo;{dailyQuote.text}&rdquo;
+              </p>
+              <p className="text-sm text-muted-foreground">
+                — {dailyQuote.author}
               </p>
             </div>
-            <Link href="/workout">
-              <Button size="lg" className="w-full sm:w-auto min-w-[200px]">
-                <Dumbbell className="mr-2 h-5 w-5" />
-                {currentSession ? 'Continuar Treino' : 'Iniciar Treino'}
-              </Button>
-            </Link>
           </div>
         </CardContent>
       </Card>
 
-      {/* Stats Cards */}
+      {/* Quick Actions */}
+      <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
+        <Card className="border-primary bg-gradient-to-br from-primary/5 to-primary/10 hover:shadow-lg transition-shadow cursor-pointer">
+          <Link href="/workout">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Dumbbell className="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1">
+                    {currentSession ? 'Continuar Treino' : 'Iniciar Treino'}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {currentSession ? 'Retome seu treino' : 'Comece agora'}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Link>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+          <Link href="/plans">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Calendar className="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1">Ver Meu Plano</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Seus treinos programados
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Link>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+          <Link href={user?.personalTrainerId ? `/instructor/${user.personalTrainerId}` : '/trainers'}>
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <MessageCircle className="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1">Falar com Personal</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {user?.personalTrainerId ? 'Entre em contato' : 'Encontrar personal'}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Link>
+        </Card>
+      </div>
+
+      {/* Stats Cards with Progress */}
       <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+        <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Treinos Totais</CardTitle>
             <Dumbbell className="h-4 w-4 text-muted-foreground" />
@@ -156,13 +230,21 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">
               {isLoadingProgress ? '...' : progress?.totalWorkouts || 0}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mb-2">
               {progress?.totalSets || 0} exercícios diferentes
             </p>
+            {progress?.totalWorkouts && progress.totalWorkouts > 0 && (
+              <div className="w-full bg-muted rounded-full h-2">
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{ width: `${Math.min((progress.totalWorkouts / 50) * 100, 100)}%` }}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Volume Total</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -171,11 +253,19 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">
               {isLoadingProgress ? '...' : `${(progress?.totalVolume || 0).toFixed(0)} kg`}
             </div>
-            <p className="text-xs text-muted-foreground">Peso total levantado</p>
+            <p className="text-xs text-muted-foreground mb-2">Peso total levantado</p>
+            {progress?.totalVolume && progress.totalVolume > 0 && (
+              <div className="w-full bg-muted rounded-full h-2">
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{ width: `${Math.min((progress.totalVolume / 10000) * 100, 100)}%` }}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Sequência Atual</CardTitle>
             <Zap className="h-4 w-4 text-muted-foreground" />
@@ -184,20 +274,36 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">
               {isLoadingProgress ? '...' : `${progress?.currentStreak || 0} dias`}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mb-2">
               Maior: {progress?.longestStreak || 0} dias
             </p>
+            {progress?.currentStreak !== undefined && progress?.longestStreak && progress.longestStreak > 0 && (
+              <div className="w-full bg-muted rounded-full h-2">
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{ width: `${Math.min((progress.currentStreak / progress.longestStreak) * 100, 100)}%` }}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Desafios Ativos</CardTitle>
             <Trophy className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{challenges?.length || 0}</div>
-            <p className="text-xs text-muted-foreground">Em andamento</p>
+            <p className="text-xs text-muted-foreground mb-2">Em andamento</p>
+            {challenges && challenges.length > 0 && (
+              <div className="w-full bg-muted rounded-full h-2">
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{ width: `${Math.min((challenges.length / 5) * 100, 100)}%` }}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>

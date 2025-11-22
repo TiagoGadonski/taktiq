@@ -27,7 +27,8 @@
       "Bash(tail:*)",
       "Bash(pnpm install:*)",
       "Bash(pnpm --filter @gymhero/web run build:*)",
-      "Bash(az:*)"
+      "Bash(az:*)",
+      "Bash(node test-system.js:*)"
     ],
     "deny": [],
     "ask": []
