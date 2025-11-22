@@ -27,18 +27,23 @@ public static class MediaEndpoints
             ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            IFormFile? file = null;
+
             try
             {
                 if (!request.HasFormContentType)
                 {
+                    logger.LogWarning("User {UserId} attempted file upload without multipart/form-data", userId);
                     return Results.BadRequest(new { message = "Request must be multipart/form-data" });
                 }
 
                 var form = await request.ReadFormAsync(cancellationToken);
-                var file = form.Files.FirstOrDefault();
+                file = form.Files.FirstOrDefault();
 
                 if (file == null || file.Length == 0)
                 {
+                    logger.LogWarning("User {UserId} attempted upload with no file", userId);
                     return Results.BadRequest(new { message = "No file uploaded" });
                 }
 
@@ -46,7 +51,33 @@ public static class MediaEndpoints
                 const long maxFileSize = 100 * 1024 * 1024;
                 if (file.Length > maxFileSize)
                 {
+                    logger.LogWarning("User {UserId} attempted upload of oversized file: {Size}MB, Name: {FileName}",
+                        userId, file.Length / 1024.0 / 1024.0, file.FileName);
                     return Results.BadRequest(new { message = "File size exceeds maximum limit of 100MB" });
+                }
+
+                // Validate file type (whitelist)
+                var contentType = file.ContentType.ToLower();
+                var allowedImageTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp" };
+                var allowedVideoTypes = new[] { "video/mp4", "video/mpeg", "video/quicktime", "video/x-msvideo", "video/webm" };
+                var allAllowedTypes = allowedImageTypes.Concat(allowedVideoTypes).ToArray();
+
+                if (!allAllowedTypes.Contains(contentType))
+                {
+                    logger.LogWarning("User {UserId} attempted upload of disallowed file type: {ContentType}, Name: {FileName}",
+                        userId, contentType, file.FileName);
+                    return Results.BadRequest(new { message = $"File type '{contentType}' is not allowed. Allowed types: images (JPEG, PNG, GIF, WebP) and videos (MP4, MPEG, QuickTime, AVI, WebM)" });
+                }
+
+                // Validate file extension matches content type
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                var validExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp", ".mp4", ".mpeg", ".mov", ".avi", ".webm" };
+
+                if (!validExtensions.Contains(fileExtension))
+                {
+                    logger.LogWarning("User {UserId} attempted upload with suspicious extension: {Extension}, Name: {FileName}",
+                        userId, fileExtension, file.FileName);
+                    return Results.BadRequest(new { message = "Invalid file extension" });
                 }
 
                 // Get optional parameters
@@ -58,8 +89,7 @@ public static class MediaEndpoints
                 var compressVideo = bool.Parse(form["compress"].ToString() ?? configuration["VideoCompression:AutoCompress"] ?? "false");
                 var qualityStr = form["quality"].ToString() ?? configuration["VideoCompression:DefaultQuality"] ?? "Medium";
 
-                // Determine media type from content type
-                var contentType = file.ContentType;
+                // Determine media type from content type (use already validated contentType)
                 var mediaType = contentType.StartsWith("image/") ? MediaType.Image : MediaType.Video;
                 var containerName = mediaType == MediaType.Image ? "images" : "videos";
 
@@ -195,7 +225,6 @@ public static class MediaEndpoints
                 }
 
                 // Create media record in database
-                var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var media = new Media
                 {
                     FileName = file.FileName,
@@ -216,6 +245,9 @@ public static class MediaEndpoints
                 context.Medias.Add(media);
                 await context.SaveChangesAsync(cancellationToken);
 
+                logger.LogInformation("Media uploaded successfully: User {UserId}, File: {FileName}, Type: {MediaType}, Size: {Size}MB, URL: {FileUrl}",
+                    userId, file.FileName, mediaType, uploadedFileSize / 1024.0 / 1024.0, fileUrl);
+
                 var response = new MediaUploadResponse(
                     media.Id,
                     media.FileName,
@@ -234,9 +266,10 @@ public static class MediaEndpoints
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "File upload failed for user {UserId}, File: {FileName}", userId, file?.FileName ?? "unknown");
                 return Results.Problem(
                     title: "File upload failed",
-                    detail: ex.Message,
+                    detail: "Unable to upload file. Please try again.",
                     statusCode: 500
                 );
             }
@@ -324,6 +357,7 @@ public static class MediaEndpoints
             ClaimsPrincipal user,
             IFileStorageService fileStorageService,
             IApplicationDbContext context,
+            ILogger<Program> logger,
             CancellationToken cancellationToken) =>
         {
             var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
@@ -334,24 +368,33 @@ public static class MediaEndpoints
 
             if (media == null)
             {
+                logger.LogWarning("User {UserId} attempted to delete non-existent or unauthorized media: {MediaId}",
+                    userId, mediaId);
                 return Results.NotFound(new { message = "Media not found" });
             }
+
+            var fileName = media.FileName;
+            var fileUrl = media.FileUrl;
 
             // Soft delete in database
             media.IsDeleted = true;
             media.DeletedAt = DateTime.UtcNow;
             await context.SaveChangesAsync(cancellationToken);
 
+            logger.LogInformation("Media deleted: User {UserId}, MediaId: {MediaId}, File: {FileName}",
+                userId, mediaId, fileName);
+
             // Delete from blob storage (fire and forget)
             _ = Task.Run(async () =>
             {
                 try
                 {
-                    await fileStorageService.DeleteFileAsync(media.FileUrl);
+                    await fileStorageService.DeleteFileAsync(fileUrl);
+                    logger.LogInformation("Blob storage file deleted: {FileUrl}", fileUrl);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // Log error but don't fail the request
+                    logger.LogError(ex, "Failed to delete blob storage file: {FileUrl}", fileUrl);
                 }
             });
 
