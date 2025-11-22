@@ -49,7 +49,12 @@ public record PostResponse(
     bool IsPublished,
     DateTime? PublishedAt,
     DateTime CreatedAt,
-    DateTime UpdatedAt
+    DateTime UpdatedAt,
+    // Analytics
+    int ViewCount,
+    int UniqueViewers,
+    int ProfileClicks,
+    double EngagementRate
 );
 
 /// <summary>

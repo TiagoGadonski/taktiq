@@ -28,6 +28,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<UserActivityLog> UserActivityLogs => Set<UserActivityLog>();
     public DbSet<StudentInvitation> StudentInvitations => Set<StudentInvitation>();
     public DbSet<Post> Posts => Set<Post>();
+    public DbSet<PostView> PostViews => Set<PostView>();
     public DbSet<Media> Medias => Set<Media>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
 
@@ -241,6 +242,54 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             // Precision for decimal amount
             entity.Property(t => t.Amount)
                   .HasPrecision(18, 2);
+        });
+
+        modelBuilder.Entity<Post>(entity =>
+        {
+            // Index for author-specific post queries
+            entity.HasIndex(p => p.AuthorId)
+                .HasDatabaseName("IX_Posts_AuthorId");
+
+            // Index for published posts queries
+            entity.HasIndex(p => new { p.IsPublished, p.PublishedAt })
+                .HasDatabaseName("IX_Posts_PublishedDate");
+
+            // Configure relationship with author
+            entity.HasOne(p => p.Author)
+                  .WithMany()
+                  .HasForeignKey(p => p.AuthorId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<PostView>(entity =>
+        {
+            // Index for post-specific view queries (most common)
+            entity.HasIndex(pv => pv.PostId)
+                .HasDatabaseName("IX_PostViews_PostId");
+
+            // Index for viewer-specific view queries
+            entity.HasIndex(pv => pv.ViewerId)
+                .HasDatabaseName("IX_PostViews_ViewerId");
+
+            // Composite index for unique viewer counting
+            entity.HasIndex(pv => new { pv.PostId, pv.ViewerId })
+                .HasDatabaseName("IX_PostViews_PostViewer");
+
+            // Index for time-based analytics queries
+            entity.HasIndex(pv => new { pv.PostId, pv.ViewedAt })
+                .HasDatabaseName("IX_PostViews_PostDate");
+
+            // Configure relationship with post
+            entity.HasOne(pv => pv.Post)
+                  .WithMany(p => p.Views)
+                  .HasForeignKey(pv => pv.PostId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure relationship with viewer (optional)
+            entity.HasOne(pv => pv.Viewer)
+                  .WithMany()
+                  .HasForeignKey(pv => pv.ViewerId)
+                  .OnDelete(DeleteBehavior.SetNull);
         });
 
         base.OnModelCreating(modelBuilder);

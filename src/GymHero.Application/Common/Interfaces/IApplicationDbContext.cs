@@ -26,6 +26,7 @@ public interface IApplicationDbContext
     DbSet<UserActivityLog> UserActivityLogs { get; }
     DbSet<StudentInvitation> StudentInvitations { get; }
     DbSet<Post> Posts { get; }
+    DbSet<PostView> PostViews { get; }
     DbSet<Media> Medias { get; }
     DbSet<Transaction> Transactions { get; }
 

@@ -159,5 +159,43 @@ public static class PostEndpoints
         })
         .WithName("GetAllPublishedPosts")
         .WithSummary("Gets all published posts from all trainers");
+
+        // Track post view (analytics)
+        publicGroup.MapPost("/{postId:guid}/track-view", async (
+            Guid postId,
+            ClaimsPrincipal? user,
+            [FromQuery] string? source,
+            ISender sender) =>
+        {
+            var viewerId = user?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var command = new TrackPostViewCommand(
+                postId,
+                viewerId != null ? Guid.Parse(viewerId) : null,
+                source
+            );
+
+            await sender.Send(command);
+            return Results.Ok(new { message = "View tracked successfully" });
+        })
+        .WithName("TrackPostView")
+        .WithSummary("Tracks a view of a post for analytics");
+
+        // Track profile click from post (analytics)
+        publicGroup.MapPost("/{postId:guid}/track-profile-click", async (
+            Guid postId,
+            ClaimsPrincipal? user,
+            ISender sender) =>
+        {
+            var viewerId = user?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var command = new TrackProfileClickCommand(
+                postId,
+                viewerId != null ? Guid.Parse(viewerId) : null
+            );
+
+            await sender.Send(command);
+            return Results.Ok(new { message = "Profile click tracked successfully" });
+        })
+        .WithName("TrackProfileClick")
+        .WithSummary("Tracks when a user clicks on the author's profile from a post");
     }
 }

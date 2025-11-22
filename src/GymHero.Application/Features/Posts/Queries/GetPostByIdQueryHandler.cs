@@ -19,26 +19,43 @@ public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, PostRes
     {
         var post = await _context.Posts
             .Include(p => p.Author)
-            .Where(p => p.Id == request.PostId)
-            .Select(p => new PostResponse(
-                p.Id,
-                p.Title,
-                p.Content,
-                p.ImageUrl,
-                p.AuthorId,
-                p.Author.Name,
-                p.Author.ProfilePictureUrl,
-                p.Author.ProfileSlug,
-                p.IsPublished,
-                p.PublishedAt,
-                p.CreatedAt,
-                p.UpdatedAt
-            ))
-            .FirstOrDefaultAsync(cancellationToken);
+            .FirstOrDefaultAsync(p => p.Id == request.PostId, cancellationToken);
 
         if (post == null)
             throw new NotFoundException("Post não encontrado");
 
-        return post;
+        // Calculate analytics
+        var uniqueViewers = await _context.PostViews
+            .Where(pv => pv.PostId == post.Id && pv.ViewerId != null)
+            .Select(pv => pv.ViewerId)
+            .Distinct()
+            .CountAsync(cancellationToken);
+
+        var profileClicks = await _context.PostViews
+            .Where(pv => pv.PostId == post.Id && pv.ClickedProfile)
+            .CountAsync(cancellationToken);
+
+        var engagementRate = post.ViewCount > 0
+            ? (double)profileClicks / post.ViewCount * 100
+            : 0.0;
+
+        return new PostResponse(
+            post.Id,
+            post.Title,
+            post.Content,
+            post.ImageUrl,
+            post.AuthorId,
+            post.Author.Name,
+            post.Author.ProfilePictureUrl,
+            post.Author.ProfileSlug,
+            post.IsPublished,
+            post.PublishedAt,
+            post.CreatedAt,
+            post.UpdatedAt,
+            post.ViewCount,
+            uniqueViewers,
+            profileClicks,
+            Math.Round(engagementRate, 2)
+        );
     }
 }

@@ -44,4 +44,14 @@ public class Post : BaseEntity
     /// Last time this post was updated
     /// </summary>
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
+    /// Total number of views (cached count for performance)
+    /// </summary>
+    public int ViewCount { get; set; } = 0;
+
+    /// <summary>
+    /// Navigation property to all views of this post
+    /// </summary>
+    public ICollection<PostView> Views { get; set; } = new List<PostView>();
 }
