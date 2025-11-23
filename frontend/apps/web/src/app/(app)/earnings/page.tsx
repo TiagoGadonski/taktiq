@@ -26,7 +26,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { DollarSign, TrendingUp, Clock, CheckCircle, XCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { DollarSign, TrendingUp, Clock, CheckCircle, XCircle, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Balance {
   availableBalance: number;
@@ -52,6 +55,7 @@ interface Withdrawal {
 export default function EarningsPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [showRequestDialog, setShowRequestDialog] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [withdrawalNotes, setWithdrawalNotes] = useState("");
@@ -62,6 +66,19 @@ export default function EarningsPage() {
     queryFn: async () => {
       const { data } = await api.get("/api/withdrawals/balance");
       return data;
+    },
+  });
+
+  // Fetch Stripe Connect status
+  const { data: stripeStatus } = useQuery({
+    queryKey: ["stripe-connect-status"],
+    queryFn: async () => {
+      try {
+        const { data } = await api.get("/api/stripe/connect/status");
+        return data;
+      } catch (error) {
+        return { connected: false, chargesEnabled: false, payoutsEnabled: false };
+      }
     },
   });
 
@@ -240,6 +257,39 @@ export default function EarningsPage() {
         </Card>
       </div>
 
+      {/* Stripe Connect Alert */}
+      {!stripeStatus?.connected && (
+        <Alert>
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Connect Your Stripe Account</AlertTitle>
+          <AlertDescription className="space-y-2">
+            <p>
+              You need to connect your Stripe account to receive payments from workout plan
+              sales and request withdrawals.
+            </p>
+            <Button onClick={() => router.push("/stripe-connect")} variant="outline" size="sm">
+              Connect Stripe Account
+            </Button>
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {stripeStatus?.connected && !stripeStatus?.payoutsEnabled && (
+        <Alert>
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Complete Your Stripe Onboarding</AlertTitle>
+          <AlertDescription className="space-y-2">
+            <p>
+              Your Stripe account is connected but not fully set up. Complete the onboarding
+              process to enable payouts.
+            </p>
+            <Button onClick={() => router.push("/stripe-connect")} variant="outline" size="sm">
+              Complete Onboarding
+            </Button>
+          </AlertDescription>
+        </Alert>
+      )}
+
       {/* Request Withdrawal Button */}
       <Card>
         <CardHeader>
@@ -251,7 +301,7 @@ export default function EarningsPage() {
         <CardContent>
           <Button
             onClick={() => setShowRequestDialog(true)}
-            disabled={!balance || balance.availableBalance <= 0}
+            disabled={!balance || balance.availableBalance <= 0 || !stripeStatus?.payoutsEnabled}
             size="lg"
           >
             Request Withdrawal
@@ -259,6 +309,11 @@ export default function EarningsPage() {
           {balance && balance.availableBalance <= 0 && (
             <p className="text-sm text-muted-foreground mt-2">
               No available balance to withdraw
+            </p>
+          )}
+          {!stripeStatus?.payoutsEnabled && balance && balance.availableBalance > 0 && (
+            <p className="text-sm text-muted-foreground mt-2">
+              Connect and verify your Stripe account to request withdrawals
             </p>
           )}
         </CardContent>

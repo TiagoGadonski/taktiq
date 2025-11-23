@@ -26,6 +26,7 @@ import {
   Search,
   CreditCard,
   MessageCircle,
+  DollarSign,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -92,9 +93,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const additionalNavItems = [];
   if (user?.role === 'Admin') {
     additionalNavItems.push({ name: 'Admin', href: '/admin', icon: Shield });
+    additionalNavItems.push({ name: 'Saques', href: '/admin/withdrawals', icon: DollarSign });
   }
   if (user?.role === 'PersonalTrainer') {
     additionalNavItems.push({ name: 'Instrutor', href: '/instructor', icon: UserCog });
+    additionalNavItems.push({ name: 'Ganhos', href: '/earnings', icon: DollarSign });
   }
 
   return (
@@ -212,7 +215,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/discover" className="cursor-pointer">
+                      <Link href="/discover-plans" className="cursor-pointer">
                         <ShoppingBag className="mr-2 h-4 w-4" />
                         Descobrir Planos
                       </Link>
@@ -370,7 +373,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/discover" className="cursor-pointer">
+                      <Link href="/discover-plans" className="cursor-pointer">
                         <ShoppingBag className="mr-2 h-4 w-4" />
                         Descobrir Planos
                       </Link>
