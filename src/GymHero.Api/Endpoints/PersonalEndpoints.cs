@@ -2,6 +2,7 @@ using System.Security.Claims;
 using GymHero.Application.Common.Exceptions;
 using GymHero.Application.Common.Interfaces;
 using GymHero.Domain.Entities;
+using GymHero.Domain.Enums;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Personal.Commands;
 using GymHero.Application.Features.Personal.Queries;
@@ -668,5 +669,43 @@ public static class PersonalEndpoints
         .WithName("GetTrainerById")
         .WithSummary("Gets a trainer's profile by ID (for students)")
         .AllowAnonymous();
+
+        // Get plans from trainers I'm following
+        app.MapGet("/api/personal/following/plans", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Get IDs of trainers I'm following (accepted friendships)
+            var followedTrainerIds = await context.Friendships
+                .Where(f => f.RequesterId == userId && f.Status == FriendshipStatus.Accepted)
+                .Select(f => f.AddresseeId)
+                .ToListAsync(cancellationToken);
+
+            // Get public plans from these trainers
+            var plans = await context.WorkoutPlans
+                .Where(p => followedTrainerIds.Contains(p.OwnerId) && p.IsPublic)
+                .Include(p => p.Owner)
+                .OrderByDescending(p => p.CreatedAt)
+                .Select(p => new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    goal = p.Goal,
+                    duration = p.Duration,
+                    forSale = p.ForSale,
+                    price = p.Price,
+                    ownerName = p.Owner.Name,
+                    ownerId = p.OwnerId
+                })
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(plans);
+        })
+        .RequireAuthorization()
+        .WithName("GetFollowingPlans")
+        .WithSummary("Get public plans from trainers I'm following");
     }
 }
