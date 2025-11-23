@@ -35,6 +35,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<UserAnnouncementRead> UserAnnouncementReads => Set<UserAnnouncementRead>();
     public DbSet<Media> Medias => Set<Media>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
+    public DbSet<WithdrawalRequest> WithdrawalRequests => Set<WithdrawalRequest>();
     public DbSet<Conversation> Conversations => Set<Conversation>();
     public DbSet<Message> Messages => Set<Message>();
 

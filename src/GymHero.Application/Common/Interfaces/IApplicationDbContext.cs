@@ -33,6 +33,7 @@ public interface IApplicationDbContext
     DbSet<UserAnnouncementRead> UserAnnouncementReads { get; }
     DbSet<Media> Medias { get; }
     DbSet<Transaction> Transactions { get; }
+    DbSet<WithdrawalRequest> WithdrawalRequests { get; }
     DbSet<Conversation> Conversations { get; }
     DbSet<Message> Messages { get; }
 

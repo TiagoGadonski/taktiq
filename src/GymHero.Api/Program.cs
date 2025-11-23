@@ -233,6 +233,7 @@ app.MapTestimonialEndpoints(); // Testimonials and reviews
 app.MapAnnouncementEndpoints(); // Platform announcements and popups
 app.MapMediaEndpoints(); // Media upload (images and videos)
 app.MapPaymentEndpoints(); // Payment processing (Stripe)
+app.MapWithdrawalEndpoints(); // Trainer withdrawal requests
 app.MapPlacesEndpoints(); // Google Places API (nearby gyms, geocoding)
 app.MapChatEndpoints(); // Real-time chat
 

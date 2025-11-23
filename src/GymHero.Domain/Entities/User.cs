@@ -57,6 +57,7 @@ public class User : BaseEntity
     public string? InstagramUrl { get; set; } // URL do Instagram
     public string? FacebookUrl { get; set; } // URL do Facebook
     public string? WebsiteUrl { get; set; } // URL do site pessoal
+    public string? StripeAccountId { get; set; } // Stripe Connect account ID for receiving payouts
 
     // Navigation properties for enhanced profile
     public ICollection<Certification> Certifications { get; set; } = new List<Certification>();
