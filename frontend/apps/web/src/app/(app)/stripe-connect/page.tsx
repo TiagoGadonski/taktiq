@@ -44,8 +44,7 @@ export default function StripeConnectPage() {
   const { data: status, isLoading } = useQuery<StripeAccountStatus>({
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
-      const data = await apiClient.get("/api/stripe/connect/status");
-      return data;
+      return await apiClient.get("/api/stripe/connect/status") as StripeAccountStatus;
     },
   });
 
