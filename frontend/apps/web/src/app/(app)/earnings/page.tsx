@@ -58,6 +58,13 @@ interface StripeStatus {
   payoutsEnabled: boolean;
 }
 
+interface WithdrawalsResponse {
+  withdrawals: Withdrawal[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
 export default function EarningsPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -87,7 +94,7 @@ export default function EarningsPage() {
   });
 
   // Fetch withdrawal history
-  const { data: historyData, isLoading: historyLoading } = useQuery({
+  const { data: historyData, isLoading: historyLoading } = useQuery<WithdrawalsResponse>({
     queryKey: ["withdrawal-history"],
     queryFn: async () => {
       return apiClient.get("/api/withdrawals/history?page=1&pageSize=20");
