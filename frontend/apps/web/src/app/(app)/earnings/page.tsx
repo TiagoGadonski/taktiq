@@ -52,6 +52,12 @@ interface Withdrawal {
   rejectionReason?: string;
 }
 
+interface StripeStatus {
+  connected: boolean;
+  chargesEnabled: boolean;
+  payoutsEnabled: boolean;
+}
+
 export default function EarningsPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -69,7 +75,7 @@ export default function EarningsPage() {
   });
 
   // Fetch Stripe Connect status
-  const { data: stripeStatus } = useQuery({
+  const { data: stripeStatus } = useQuery<StripeStatus>({
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
       try {
