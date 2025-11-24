@@ -1,0 +1,40 @@
+{
+  "name": "gymhero-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GymHero unified frontend monorepo - Web + Mobile",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=@gymhero/web",
+    "dev:mobile": "turbo run dev --filter=@gymhero/mobile",
+    
+    "build": "turbo run build",
+    "build:web": "cd apps/web && pnpm build",
+    "build:mobile": "turbo run build --filter=@gymhero/mobile",
+    
+    "test": "turbo run test",
+    "test:web": "turbo run test --filter=@gymhero/web",
+    "test:mobile": "turbo run test --filter=@gymhero/mobile",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.3",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "dependencies": {
+    "next-transpile-modules": "^10.0.1"
+  }
+}

@@ -41,12 +41,10 @@ export default function GymsNearMePage() {
   const fetchGyms = async (lat: number, lng: number) => {
     setIsLoading(true);
     try {
-      // Using a proxy service or backend endpoint to call Google Places API
-      // For now, we'll use a mock implementation
-      // In production, create a backend endpoint that calls Google Places API
-
+      // Using backend endpoint to call Google Places API
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '/api';
       const response = await fetch(
-        `/api/places?lat=${lat}&lng=${lng}&type=gym&radius=5000`
+        `${apiBaseUrl}/places?lat=${lat}&lng=${lng}&type=gym&radius=5000`
       );
 
       if (!response.ok) {

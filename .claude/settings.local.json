@@ -28,7 +28,15 @@
       "Bash(pnpm install:*)",
       "Bash(pnpm --filter @gymhero/web run build:*)",
       "Bash(az:*)",
-      "Bash(node test-system.js:*)"
+      "Bash(node test-system.js:*)",
+      "Bash(nul)",
+      "Bash(Select-String -Pattern \"error|Build FAILED|Build succeeded\" -Context 0,2)",
+      "Bash(find:*)",
+      "Bash(dotnet list:*)",
+      "Bash(pnpm audit:*)",
+      "Bash(pnpm update:*)",
+      "Bash(git checkout:*)",
+      "Bash(ConnectionStrings__DefaultConnection=\"Host=taktiq-db.postgres.database.azure.com;Port=5432;Database=postgres;Username=tasktiqadmin;Password=W3rt4juk;SslMode=Require;Trust Server Certificate=true;Timeout=30;Command Timeout=60;Pooling=true;Minimum Pool Size=0;Maximum Pool Size=100\" dotnet ef database update:*)"
     ],
     "deny": [],
     "ask": []
