@@ -193,7 +193,7 @@ export default function AdminWithdrawalsPage() {
           <CardContent>
             <div className="text-2xl font-bold">
               R${" "}
-              {withdrawalsData?.withdrawals?.length > 0
+              {withdrawalsData?.withdrawals && withdrawalsData.withdrawals.length > 0
                 ? (totalPendingAmount / withdrawalsData.withdrawals.length).toFixed(2)
                 : "0.00"}
             </div>
