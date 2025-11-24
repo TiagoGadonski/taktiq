@@ -186,6 +186,9 @@ if (!app.Environment.IsDevelopment())
 // Configurar o servidor de arquivos estáticos para servir as imagens de perfil
 app.UseStaticFiles();
 
+// IMPORTANT: CORS must come early, before other middleware that might block requests
+app.UseCors(app.Environment.IsDevelopment() ? "AllowDevelopment" : "Production");
+
 // Security headers middleware - adds protective HTTP headers
 app.UseMiddleware<SecurityHeadersMiddleware>();
 
@@ -197,9 +200,6 @@ app.UseMiddleware<ActivityLoggingMiddleware>();
 
 // Chat rate limiting middleware - prevents spam and abuse
 app.UseMiddleware<ChatRateLimitingMiddleware>();
-
-// Use appropriate CORS policy based on environment
-app.UseCors(app.Environment.IsDevelopment() ? "AllowDevelopment" : "Production");
 
 // Apply rate limiting
 // TODO: Rate limiting temporarily disabled
