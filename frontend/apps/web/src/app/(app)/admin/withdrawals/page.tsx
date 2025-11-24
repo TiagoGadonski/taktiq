@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -53,7 +53,7 @@ export default function AdminWithdrawalsPage() {
   const { data: withdrawalsData, isLoading } = useQuery({
     queryKey: ["admin-pending-withdrawals"],
     queryFn: async () => {
-      const { data } = await api.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
+      const { data } = await apiClient.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
       return data;
     },
   });
@@ -61,7 +61,7 @@ export default function AdminWithdrawalsPage() {
   // Approve withdrawal mutation
   const approveWithdrawal = useMutation({
     mutationFn: async (withdrawalId: string) => {
-      return await api.post(`/api/withdrawals/admin/${withdrawalId}/approve`);
+      return await apiClient.post(`/api/withdrawals/admin/${withdrawalId}/approve`);
     },
     onSuccess: (response) => {
       toast({
@@ -82,7 +82,7 @@ export default function AdminWithdrawalsPage() {
   // Reject withdrawal mutation
   const rejectWithdrawal = useMutation({
     mutationFn: async (data: { withdrawalId: string; reason: string }) => {
-      return await api.post(`/api/withdrawals/admin/${data.withdrawalId}/reject`, {
+      return await apiClient.post(`/api/withdrawals/admin/${data.withdrawalId}/reject`, {
         reason: data.reason,
       });
     },

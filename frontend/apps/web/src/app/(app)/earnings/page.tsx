@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -64,7 +64,7 @@ export default function EarningsPage() {
   const { data: balance, isLoading: balanceLoading } = useQuery<Balance>({
     queryKey: ["balance"],
     queryFn: async () => {
-      const { data } = await api.get("/api/withdrawals/balance");
+      const { data } = await apiClient.get("/api/withdrawals/balance");
       return data;
     },
   });
@@ -74,7 +74,7 @@ export default function EarningsPage() {
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
       try {
-        const { data } = await api.get("/api/stripe/connect/status");
+        const { data } = await apiClient.get("/api/stripe/connect/status");
         return data;
       } catch (error) {
         return { connected: false, chargesEnabled: false, payoutsEnabled: false };
@@ -86,7 +86,7 @@ export default function EarningsPage() {
   const { data: historyData, isLoading: historyLoading } = useQuery({
     queryKey: ["withdrawal-history"],
     queryFn: async () => {
-      const { data } = await api.get("/api/withdrawals/history?page=1&pageSize=20");
+      const { data } = await apiClient.get("/api/withdrawals/history?page=1&pageSize=20");
       return data;
     },
   });
@@ -94,7 +94,7 @@ export default function EarningsPage() {
   // Request withdrawal mutation
   const requestWithdrawal = useMutation({
     mutationFn: async (data: { amount: number; notes?: string }) => {
-      return await api.post("/api/withdrawals/request", data);
+      return await apiClient.post("/api/withdrawals/request", data);
     },
     onSuccess: () => {
       toast({
@@ -119,7 +119,7 @@ export default function EarningsPage() {
   // Cancel withdrawal mutation
   const cancelWithdrawal = useMutation({
     mutationFn: async (withdrawalId: string) => {
-      return await api.delete(`/api/withdrawals/${withdrawalId}`);
+      return await apiClient.delete(`/api/withdrawals/${withdrawalId}`);
     },
     onSuccess: () => {
       toast({
