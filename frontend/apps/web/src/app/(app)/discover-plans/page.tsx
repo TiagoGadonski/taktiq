@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -31,8 +31,7 @@ export default function DiscoverPlansPage() {
   const { data: allPlans, isLoading: plansLoading } = useQuery<WorkoutPlan[]>({
     queryKey: ["public-plans"],
     queryFn: async () => {
-      const { data } = await api.get("/api/public/plans");
-      return data;
+      return apiClient.get("/api/public/plans");
     },
   });
 
@@ -41,8 +40,7 @@ export default function DiscoverPlansPage() {
     queryKey: ["friend-plans"],
     queryFn: async () => {
       try {
-        const { data } = await api.get("/api/personal/following/plans");
-        return data;
+        return apiClient.get("/api/personal/following/plans");
       } catch (error) {
         return [];
       }
