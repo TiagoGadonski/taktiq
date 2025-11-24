@@ -56,6 +56,13 @@ public class InputValidationMiddleware
             if (string.IsNullOrWhiteSpace(value))
                 continue;
 
+            // Skip validation for JWT tokens (used in SignalR authentication)
+            if (param.Key.Equals("access_token", StringComparison.OrdinalIgnoreCase) ||
+                param.Key.Equals("id_token", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
             // Check for SQL injection
             if (SqlInjectionPattern.IsMatch(value))
             {

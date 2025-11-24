@@ -24,22 +24,43 @@ public class PlanExpirationCheckService : BackgroundService
     {
         _logger.LogInformation("Plan Expiration Check Service is starting.");
 
-        // Wait a bit before first execution to allow the app to fully start
-        await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
-
-        while (!stoppingToken.IsCancellationRequested)
+        try
         {
-            try
-            {
-                await CheckExpiringPlansAsync(stoppingToken);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while checking for expiring plans.");
-            }
+            // Wait a bit before first execution to allow the app to fully start
+            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
 
-            // Wait for the next check interval
-            await Task.Delay(_checkInterval, stoppingToken);
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                try
+                {
+                    await CheckExpiringPlansAsync(stoppingToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Expected when the application is shutting down
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error occurred while checking for expiring plans.");
+                }
+
+                // Wait for the next check interval
+                try
+                {
+                    await Task.Delay(_checkInterval, stoppingToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Expected when the application is shutting down
+                    break;
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Expected when the application is shutting down during initial delay
+            _logger.LogInformation("Plan Expiration Check Service was cancelled during startup.");
         }
 
         _logger.LogInformation("Plan Expiration Check Service is stopping.");

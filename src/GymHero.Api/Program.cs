@@ -144,7 +144,8 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://127.0.0.1:3000")
                   .AllowAnyMethod()
                   .AllowAnyHeader()
-                  .AllowCredentials();
+                  .AllowCredentials()
+                  .SetIsOriginAllowedToAllowWildcardSubdomains();
         });
     }
     else
@@ -156,9 +157,10 @@ builder.Services.AddCors(options =>
         options.AddPolicy("Production", policy =>
         {
             policy.WithOrigins(allowedOrigins)
-                  .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH")
-                  .WithHeaders("Content-Type", "Authorization")
-                  .AllowCredentials();
+                  .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+                  .WithHeaders("Content-Type", "Authorization", "X-Requested-With", "Accept")
+                  .AllowCredentials()
+                  .SetIsOriginAllowedToAllowWildcardSubdomains();
         });
     }
 });
