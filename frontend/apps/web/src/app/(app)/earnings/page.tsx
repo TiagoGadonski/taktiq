@@ -64,8 +64,7 @@ export default function EarningsPage() {
   const { data: balance, isLoading: balanceLoading } = useQuery<Balance>({
     queryKey: ["balance"],
     queryFn: async () => {
-      const { data } = await apiClient.get("/api/withdrawals/balance");
-      return data;
+      return apiClient.get("/api/withdrawals/balance");
     },
   });
 
@@ -74,8 +73,7 @@ export default function EarningsPage() {
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
       try {
-        const { data } = await apiClient.get("/api/stripe/connect/status");
-        return data;
+        return apiClient.get("/api/stripe/connect/status");
       } catch (error) {
         return { connected: false, chargesEnabled: false, payoutsEnabled: false };
       }
@@ -86,8 +84,7 @@ export default function EarningsPage() {
   const { data: historyData, isLoading: historyLoading } = useQuery({
     queryKey: ["withdrawal-history"],
     queryFn: async () => {
-      const { data } = await apiClient.get("/api/withdrawals/history?page=1&pageSize=20");
-      return data;
+      return apiClient.get("/api/withdrawals/history?page=1&pageSize=20");
     },
   });
 

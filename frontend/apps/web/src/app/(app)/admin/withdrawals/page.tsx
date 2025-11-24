@@ -53,8 +53,7 @@ export default function AdminWithdrawalsPage() {
   const { data: withdrawalsData, isLoading } = useQuery({
     queryKey: ["admin-pending-withdrawals"],
     queryFn: async () => {
-      const { data } = await apiClient.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
-      return data;
+      return apiClient.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
     },
   });
 
