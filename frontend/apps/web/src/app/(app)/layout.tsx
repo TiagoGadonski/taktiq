@@ -284,14 +284,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Top Bar */}
       <header className="sticky top-0 z-50 border-b glass-strong lg:hidden">
-        <div className="flex h-14 items-center justify-between px-4">
+        <div className="flex h-14 items-center justify-between px-3">
           {/* Logo */}
-          <Link href="/dashboard" className="hover-lift tap-scale">
-            <TaktIQLogo width={110} height={31} className="transition-transform" />
+          <Link href="/dashboard" className="hover-lift tap-scale flex-shrink-0">
+            <TaktIQLogo width={100} height={28} className="transition-transform" />
           </Link>
 
           {/* Right side - Chat + Notifications + Avatar */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {/* Chat */}
             <Button
               variant="ghost"
@@ -442,26 +442,26 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto pb-20 lg:pb-6 w-full">
-        <div className="container mx-auto px-4 py-6 lg:px-6 max-w-7xl">{children}</div>
+        <div className="container mx-auto px-3 py-4 sm:px-4 sm:py-6 lg:px-6 max-w-7xl">{children}</div>
       </main>
 
       {/* Bottom Tab Navigation - Mobile Only */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t glass-strong lg:hidden">
-        <div className="flex h-16 items-center justify-around px-2">
+        <div className="flex h-16 items-center justify-around px-1">
           {navigation.map((item) => {
             const isActive = isRouteActive(item.href);
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex flex-1 flex-col items-center justify-center gap-1 rounded-lg py-2 transition-all tap-scale ${
+                className={`flex flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-1.5 transition-all tap-scale ${
                   isActive
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                <item.icon className={`h-6 w-6 ${isActive ? 'scale-110' : ''} transition-transform`} />
-                <span className={`text-xs font-medium ${isActive ? 'font-semibold' : ''}`}>
+                <item.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${isActive ? 'scale-110' : ''} transition-transform`} />
+                <span className={`text-[10px] sm:text-xs font-medium ${isActive ? 'font-semibold' : ''}`}>
                   {item.name}
                 </span>
               </Link>

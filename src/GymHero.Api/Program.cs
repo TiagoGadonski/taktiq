@@ -157,9 +157,10 @@ builder.Services.AddCors(options =>
         options.AddPolicy("Production", policy =>
         {
             policy.WithOrigins(allowedOrigins)
-                  .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-                  .WithHeaders("Content-Type", "Authorization", "X-Requested-With", "Accept")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
                   .AllowCredentials()
+                  .WithExposedHeaders("*")
                   .SetIsOriginAllowedToAllowWildcardSubdomains();
         });
     }

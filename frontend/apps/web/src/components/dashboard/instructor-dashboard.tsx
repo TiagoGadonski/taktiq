@@ -11,9 +11,10 @@ import {
   Target,
   ShoppingCart,
   Plus,
-  Eye
+  Eye,
+  Dumbbell
 } from 'lucide-react';
-import { apiClient } from '@/lib/api';
+import { api, apiClient } from '@/lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -44,6 +45,11 @@ export function InstructorDashboard() {
       const response = await apiClient.get('/personal/clients');
       return Array.isArray(response) ? response.slice(0, 5) : [];
     },
+  });
+
+  const { data: currentSession } = useQuery({
+    queryKey: ['sessions', 'current'],
+    queryFn: () => api.sessions.getCurrent(),
   });
 
   return (
@@ -128,7 +134,27 @@ export function InstructorDashboard() {
       </div>
 
       {/* Main Actions */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="border-primary/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Dumbbell className="h-5 w-5 text-primary" />
+              {currentSession ? 'Continuar Treino' : 'Iniciar Treino'}
+            </CardTitle>
+            <CardDescription>
+              {currentSession ? 'Retome seu treino pessoal' : 'Comece seu treino pessoal'}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/workout">
+              <Button className="w-full">
+                <Dumbbell className="mr-2 h-4 w-4" />
+                {currentSession ? 'Continuar' : 'Iniciar'}
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
         <Card className="border-primary/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
