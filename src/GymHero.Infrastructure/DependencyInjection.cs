@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using SendGrid;
 
 namespace GymHero.Infrastructure;
 
@@ -20,6 +21,18 @@ public static class DependencyInjection
 
         // Registra as configurações para serem injetáveis via IOptions<JwtSettings>
         services.AddSingleton(Options.Create(jwtSettings));
+
+        // --- Configuração de SendGrid ---
+        var sendGridApiKey = configuration["SendGrid:ApiKey"];
+        if (!string.IsNullOrEmpty(sendGridApiKey) && sendGridApiKey != "your_sendgrid_api_key_here")
+        {
+            services.AddScoped<ISendGridClient>(sp => new SendGridClient(sendGridApiKey));
+        }
+        else
+        {
+            // Fallback: register a null implementation for development
+            services.AddScoped<ISendGridClient>(sp => new SendGridClient("SG.invalid-key-for-development"));
+        }
 
         // Registra as implementações concretas dos serviços
         services.AddSingleton<IPasswordHasher, PasswordHasher>();

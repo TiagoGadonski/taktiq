@@ -1,57 +1,116 @@
 using GymHero.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace GymHero.Infrastructure.Services;
 
 /// <summary>
-/// Email service implementation.
-/// For development: logs emails to console.
-/// For production: can be replaced with SendGrid, SMTP, or other email providers.
+/// Email service implementation using SendGrid.
 /// </summary>
 public class EmailService : IEmailService
 {
     private readonly ILogger<EmailService> _logger;
+    private readonly ISendGridClient _sendGridClient;
+    private readonly string _fromEmail;
+    private readonly string _fromName;
 
-    public EmailService(ILogger<EmailService> logger)
+    public EmailService(
+        ILogger<EmailService> logger,
+        ISendGridClient sendGridClient)
     {
         _logger = logger;
+        _sendGridClient = sendGridClient;
+        _fromEmail = "noreply@taktiq.app";
+        _fromName = "TaktIQ";
     }
 
-    public Task SendPasswordResetEmailAsync(string email, string resetToken)
+    public async Task SendPasswordResetEmailAsync(string email, string resetToken)
     {
-        // For development: log to console
-        // For production: replace with actual email sending (SendGrid, SMTP, etc.)
+        try
+        {
+            var resetUrl = $"https://taktiq.app/reset-password?token={resetToken}";
 
-        _logger.LogInformation(
-            "========================================\n" +
-            "PASSWORD RESET EMAIL\n" +
-            "To: {Email}\n" +
-            "Reset Token: {ResetToken}\n" +
-            "========================================",
-            email, resetToken);
+            var from = new EmailAddress(_fromEmail, _fromName);
+            var to = new EmailAddress(email);
+            var subject = "Redefinição de Senha - TaktIQ";
 
-        // In production, you would send an actual email here
-        // Example with SendGrid:
-        // await _sendGridClient.SendEmailAsync(from, to, subject, plainTextContent, htmlContent);
+            var plainTextContent = $"Clique no link para redefinir sua senha: {resetUrl}";
+            var htmlContent = $@"
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Redefinição de Senha</h2>
+    <p>Clique no botão abaixo para redefinir sua senha:</p>
+    <a href=""{resetUrl}"" style=""display: inline-block; background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px;"">Redefinir Senha</a>
+    <p>Ou copie e cole este link no seu navegador: {resetUrl}</p>
+    <p>Este link expira em 1 hora.</p>
+</body>
+</html>";
 
-        return Task.CompletedTask;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await _sendGridClient.SendEmailAsync(msg);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("Password reset email sent successfully to {Email}", email);
+            }
+            else
+            {
+                var body = await response.Body.ReadAsStringAsync();
+                _logger.LogError("Failed to send password reset email to {Email}. Status: {Status}, Response: {Response}",
+                    email, response.StatusCode, body);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending password reset email to {Email}", email);
+            throw;
+        }
     }
 
-    public Task SendWelcomeEmailAsync(string email, string userName)
+    public async Task SendWelcomeEmailAsync(string email, string userName)
     {
-        _logger.LogInformation(
-            "========================================\n" +
-            "WELCOME EMAIL\n" +
-            "To: {Email}\n" +
-            "User: {UserName}\n" +
-            "Welcome to GymHero!\n" +
-            "========================================",
-            email, userName);
+        try
+        {
+            var from = new EmailAddress(_fromEmail, _fromName);
+            var to = new EmailAddress(email);
+            var subject = "Bem-vindo ao TaktIQ! 🎯";
 
-        return Task.CompletedTask;
+            var plainTextContent = $"Bem-vindo ao TaktIQ, {userName}! Estamos felizes em tê-lo conosco.";
+            var htmlContent = $@"
+<!DOCTYPE html>
+<html>
+<body style=""font-family: Arial, sans-serif; line-height: 1.6; color: #333;"">
+    <h2>Bem-vindo ao TaktIQ, {userName}! 🎯</h2>
+    <p>Estamos muito felizes em tê-lo conosco!</p>
+    <p>Comece sua jornada de transformação agora mesmo.</p>
+    <a href=""https://taktiq.app"" style=""display: inline-block; background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin-top: 10px;"">Acessar TaktIQ</a>
+</body>
+</html>";
+
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await _sendGridClient.SendEmailAsync(msg);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("Welcome email sent successfully to {Email}", email);
+            }
+            else
+            {
+                var body = await response.Body.ReadAsStringAsync();
+                _logger.LogError("Failed to send welcome email to {Email}. Status: {Status}, Response: {Response}",
+                    email, response.StatusCode, body);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending welcome email to {Email}", email);
+            throw;
+        }
     }
 
-    public Task SendStudentInvitationEmailAsync(string email, string trainerName, string activationToken, string workoutPlanName)
+    public async Task SendStudentInvitationEmailAsync(string email, string trainerName, string activationToken, string workoutPlanName)
     {
         var activationUrl = $"https://taktiq.app/activate?token={activationToken}";
 
@@ -165,25 +224,36 @@ public class EmailService : IEmailService
 </body>
 </html>";
 
-        _logger.LogInformation(
-            "========================================\n" +
-            "STUDENT INVITATION EMAIL\n" +
-            "To: {Email}\n" +
-            "Trainer: {TrainerName}\n" +
-            "Workout Plan: {WorkoutPlanName}\n" +
-            "Activation URL: {ActivationUrl}\n" +
-            "========================================",
-            email, trainerName, workoutPlanName, activationUrl);
+        try
+        {
+            var from = new EmailAddress(_fromEmail, _fromName);
+            var to = new EmailAddress(email);
+            var subject = $"{trainerName} te convidou para o TaktIQ! 🎯";
 
-        // In production, send actual HTML email
-        // await _sendGridClient.SendEmailAsync(
-        //     from: "noreply@taktiq.app",
-        //     to: email,
-        //     subject: $"{trainerName} te convidou para o TaktIQ! 🎯",
-        //     plainTextContent: $"Você foi convidado por {trainerName} para o TaktIQ...",
-        //     htmlContent: htmlContent
-        // );
+            var plainTextContent = $"Você foi convidado por {trainerName} para o TaktIQ. Acesse {activationUrl} para ativar sua conta.";
 
-        return Task.CompletedTask;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await _sendGridClient.SendEmailAsync(msg);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation(
+                    "Student invitation email sent successfully. To: {Email}, Trainer: {TrainerName}, Plan: {WorkoutPlanName}",
+                    email, trainerName, workoutPlanName);
+            }
+            else
+            {
+                var body = await response.Body.ReadAsStringAsync();
+                _logger.LogError(
+                    "Failed to send student invitation email. To: {Email}, Status: {Status}, Response: {Response}",
+                    email, response.StatusCode, body);
+                throw new Exception($"Failed to send email. Status: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending student invitation email to {Email}", email);
+            throw;
+        }
     }
 }
