@@ -477,6 +477,43 @@ public static class WorkoutPlanEndpoints
         .WithName("GetPublicWorkoutPlanDetail")
         .WithSummary("Get details of a public workout plan (increments view count)");
 
+        publicGroup.MapGet("/user/{userId:guid}", async (
+            Guid userId,
+            [FromQuery] int pageSize,
+            ISender sender) =>
+        {
+            var query = new GetPublicWorkoutPlansByUserQuery(
+                userId,
+                pageSize > 0 && pageSize <= 50 ? pageSize : 20
+            );
+
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("GetPublicWorkoutPlansByUser")
+        .WithSummary("Get public workout plans created by a specific user");
+
+        // Alternative endpoint for user-specific public plans
+        var userPublicGroup = app.MapGroup("/api/workout-plans/user")
+            .WithTags("Public Workout Plans")
+            .AllowAnonymous();
+
+        userPublicGroup.MapGet("/{userId:guid}/public", async (
+            Guid userId,
+            [FromQuery] int pageSize,
+            ISender sender) =>
+        {
+            var query = new GetPublicWorkoutPlansByUserQuery(
+                userId,
+                pageSize > 0 && pageSize <= 50 ? pageSize : 20
+            );
+
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("GetPublicWorkoutPlansByUserAlternate")
+        .WithSummary("Get public workout plans created by a specific user (alternative route)");
+
         // Marketplace endpoints
         var marketplaceGroup = app.MapGroup("/api/marketplace")
             .WithTags("Marketplace")
