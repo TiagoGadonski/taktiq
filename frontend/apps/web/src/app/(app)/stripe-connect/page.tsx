@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
-import { api } from "@/lib/api";
+import { apiClient } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,7 +44,7 @@ export default function StripeConnectPage() {
   const { data: status, isLoading } = useQuery<StripeAccountStatus>({
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
-      const { data } = await api.get("/api/stripe/connect/status");
+      const data = await apiClient.get("/api/stripe/connect/status");
       return data;
     },
   });
@@ -64,7 +64,7 @@ export default function StripeConnectPage() {
   const connectAccount = useMutation({
     mutationFn: async () => {
       setConnectingToStripe(true);
-      const { data } = await api.post("/api/stripe/connect/create-account");
+      const data = await apiClient.post("/api/stripe/connect/create-account");
       return data;
     },
     onSuccess: (data) => {
@@ -84,7 +84,7 @@ export default function StripeConnectPage() {
   // Refresh onboarding URL
   const refreshUrl = useMutation({
     mutationFn: async () => {
-      const { data } = await api.get("/api/stripe/connect/refresh-url");
+      const data = await apiClient.get("/api/stripe/connect/refresh-url");
       return data;
     },
     onSuccess: (data) => {
@@ -102,7 +102,7 @@ export default function StripeConnectPage() {
   // Disconnect account mutation
   const disconnectAccount = useMutation({
     mutationFn: async () => {
-      return await api.post("/api/stripe/connect/disconnect");
+      return await apiClient.post("/api/stripe/connect/disconnect");
     },
     onSuccess: () => {
       toast({
