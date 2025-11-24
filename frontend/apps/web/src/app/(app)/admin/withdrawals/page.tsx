@@ -58,14 +58,14 @@ export default function AdminWithdrawalsPage() {
   const { data: withdrawalsData, isLoading } = useQuery<WithdrawalsResponse>({
     queryKey: ["admin-pending-withdrawals"],
     queryFn: async () => {
-      return apiClient.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
+      return apiClient.get("/withdrawals/admin/pending?page=1&pageSize=50");
     },
   });
 
   // Approve withdrawal mutation
   const approveWithdrawal = useMutation({
     mutationFn: async (withdrawalId: string) => {
-      return await apiClient.post(`/api/withdrawals/admin/${withdrawalId}/approve`);
+      return await apiClient.post(`/withdrawals/admin/${withdrawalId}/approve`);
     },
     onSuccess: (response) => {
       toast({
@@ -86,7 +86,7 @@ export default function AdminWithdrawalsPage() {
   // Reject withdrawal mutation
   const rejectWithdrawal = useMutation({
     mutationFn: async (data: { withdrawalId: string; reason: string }) => {
-      return await apiClient.post(`/api/withdrawals/admin/${data.withdrawalId}/reject`, {
+      return await apiClient.post(`/withdrawals/admin/${data.withdrawalId}/reject`, {
         reason: data.reason,
       });
     },
