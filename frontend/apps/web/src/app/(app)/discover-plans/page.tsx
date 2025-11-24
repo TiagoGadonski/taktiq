@@ -217,7 +217,7 @@ export default function DiscoverPlansPage() {
               <div className="bg-muted/50 rounded-lg p-4 mb-6">
                 <h3 className="font-semibold mb-2">Plans from Trainers You Follow</h3>
                 <p className="text-sm text-muted-foreground">
-                  These plans are from trainers you're following. Support your favorite trainers
+                  These plans are from trainers you&apos;re following. Support your favorite trainers
                   by using their workout plans!
                 </p>
               </div>

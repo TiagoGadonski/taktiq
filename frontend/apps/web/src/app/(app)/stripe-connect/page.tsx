@@ -183,7 +183,7 @@ export default function StripeConnectPage() {
                 purchase your workout plans.
               </p>
               <div className="space-y-2">
-                <h3 className="font-semibold">What you'll need:</h3>
+                <h3 className="font-semibold">What you&apos;ll need:</h3>
                 <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
                   <li>Valid government-issued ID</li>
                   <li>Bank account information</li>
@@ -356,7 +356,7 @@ export default function StripeConnectPage() {
           <div>
             <h3 className="font-semibold mb-2">Fees</h3>
             <p className="text-sm text-muted-foreground">
-              Stripe charges a standard processing fee for each transaction. You'll see the
+              Stripe charges a standard processing fee for each transaction. You&apos;ll see the
               exact fees during the onboarding process. GymHero takes a small platform fee
               to maintain and improve the service.
             </p>
