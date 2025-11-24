@@ -42,6 +42,11 @@ interface PendingWithdrawal {
   notes?: string;
 }
 
+interface WithdrawalsResponse {
+  withdrawals: PendingWithdrawal[];
+  totalCount: number;
+}
+
 export default function AdminWithdrawalsPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -50,7 +55,7 @@ export default function AdminWithdrawalsPage() {
   const [rejectionReason, setRejectionReason] = useState("");
 
   // Fetch pending withdrawals
-  const { data: withdrawalsData, isLoading } = useQuery({
+  const { data: withdrawalsData, isLoading } = useQuery<WithdrawalsResponse>({
     queryKey: ["admin-pending-withdrawals"],
     queryFn: async () => {
       return apiClient.get("/api/withdrawals/admin/pending?page=1&pageSize=50");
