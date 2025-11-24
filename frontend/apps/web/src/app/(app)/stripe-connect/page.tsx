@@ -31,6 +31,10 @@ interface StripeAccountStatus {
   pendingVerification?: string[];
 }
 
+interface StripeOnboardingResponse {
+  url: string;
+}
+
 export default function StripeConnectPage() {
   const { toast } = useToast();
   const router = useRouter();
@@ -60,11 +64,10 @@ export default function StripeConnectPage() {
   }, [isRefresh, toast, queryClient]);
 
   // Connect account mutation
-  const connectAccount = useMutation({
+  const connectAccount = useMutation<StripeOnboardingResponse>({
     mutationFn: async () => {
       setConnectingToStripe(true);
-      const data = await apiClient.post("/api/stripe/connect/create-account");
-      return data;
+      return await apiClient.post("/api/stripe/connect/create-account") as StripeOnboardingResponse;
     },
     onSuccess: (data) => {
       // Redirect to Stripe onboarding
@@ -81,10 +84,9 @@ export default function StripeConnectPage() {
   });
 
   // Refresh onboarding URL
-  const refreshUrl = useMutation({
+  const refreshUrl = useMutation<StripeOnboardingResponse>({
     mutationFn: async () => {
-      const data = await apiClient.get("/api/stripe/connect/refresh-url");
-      return data;
+      return await apiClient.get("/api/stripe/connect/refresh-url") as StripeOnboardingResponse;
     },
     onSuccess: (data) => {
       window.location.href = data.url;
