@@ -95,7 +95,12 @@ public static class MeEndpoints
         });
 
         // Endpoint para atualizar a foto de perfil
-        group.MapPost("/profile-picture", async (IFormFile file, ClaimsPrincipal user, IApplicationDbContext context, CancellationToken ct) =>
+        group.MapPost("/profile-picture", async (
+            IFormFile file,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            IBlobStorageService blobStorage,
+            CancellationToken ct) =>
         {
             var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var userToUpdate = await context.Users.FirstOrDefaultAsync(u => u.Id == userId, ct);
@@ -148,32 +153,36 @@ public static class MeEndpoints
                 return Results.BadRequest(new { message = "Arquivo não é uma imagem válida" });
             }
 
-            // Criar diretório de uploads se não existir
-            var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profiles");
-            Directory.CreateDirectory(uploadsPath);
-
-            // Gerar nome único para o arquivo
+            // Generate unique file name
             var fileName = $"{userId}_{Guid.NewGuid()}{extension}";
-            var filePath = Path.Combine(uploadsPath, fileName);
 
-            // Salvar o arquivo
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream, ct);
-            }
+            // Upload to Azure Blob Storage
+            var blobUrl = await blobStorage.UploadAsync(
+                stream,
+                fileName,
+                file.ContentType ?? "application/octet-stream",
+                "profile-pictures",
+                ct);
 
-            // Deletar a foto antiga se existir
-            if (!string.IsNullOrEmpty(userToUpdate.ProfilePictureUrl))
+            // Delete old profile picture from blob storage if exists
+            if (!string.IsNullOrEmpty(userToUpdate.ProfilePictureUrl) &&
+                userToUpdate.ProfilePictureUrl.Contains("blob.core.windows.net"))
             {
-                var oldFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", userToUpdate.ProfilePictureUrl.TrimStart('/'));
-                if (File.Exists(oldFilePath))
+                try
                 {
-                    File.Delete(oldFilePath);
+                    await blobStorage.DeleteAsync(
+                        userToUpdate.ProfilePictureUrl,
+                        "profile-pictures",
+                        ct);
+                }
+                catch
+                {
+                    // Ignore errors when deleting old blob (might not exist)
                 }
             }
 
-            // Atualizar o URL da foto no banco
-            userToUpdate.ProfilePictureUrl = $"/uploads/profiles/{fileName}";
+            // Update the photo URL in the database
+            userToUpdate.ProfilePictureUrl = blobUrl;
             await context.SaveChangesAsync(ct);
 
             return Results.Ok(new { profilePictureUrl = userToUpdate.ProfilePictureUrl });

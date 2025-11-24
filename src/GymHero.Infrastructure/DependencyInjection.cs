@@ -41,6 +41,7 @@ public static class DependencyInjection
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IActivityLogService, ActivityLogService>();
         services.AddScoped<IFileStorageService, FileStorageService>();
+        services.AddScoped<IBlobStorageService, BlobStorageService>();
         services.AddScoped<IPaymentService, StripePaymentService>();
         services.AddScoped<IPayPalPaymentService, PayPalPaymentService>();
         services.AddScoped<IReceiptService, ReceiptService>();
