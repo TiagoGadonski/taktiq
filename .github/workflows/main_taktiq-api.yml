@@ -64,20 +64,23 @@ jobs:
           echo "== Deployment package contents (first 50 lines) =="
           unzip -l deploy.zip | head -50
 
-      - name: Enable run-from-package mode
+      - name: Configure Azure for run-from-package
         run: |
-          echo "Configuring WEBSITE_RUN_FROM_PACKAGE to prevent extraction and double-startup..."
-          az webapp config appsettings set \
+          echo "Stopping API for clean configuration..."
+          az webapp stop --resource-group taktiqRecursos --name taktiq-api
+
+          echo "Removing WEBSITE_RUN_FROM_PACKAGE (reverting to standard deployment)..."
+          az webapp config appsettings delete \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --settings WEBSITE_RUN_FROM_PACKAGE=1 \
-            --output none
+            --setting-names WEBSITE_RUN_FROM_PACKAGE SCM_DO_BUILD_DURING_DEPLOYMENT \
+            --output none || true
 
-          echo "Setting explicit startup command..."
+          echo "Setting startup command to prevent Oryx script generation..."
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --startup-file "dotnet GymHero.Api.dll"
+            --startup-file "exec dotnet GymHero.Api.dll"
 
       - name: Deploy to Azure Web App (ZIP)
         run: |
