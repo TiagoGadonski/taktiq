@@ -69,19 +69,26 @@ jobs:
           echo "Stopping API to ensure clean deployment..."
           az webapp stop --resource-group taktiqRecursos --name taktiq-api
 
-      - name: Configure startup command (bypass Oryx)
+      - name: Disable Oryx build detection
         run: |
-          echo "Setting explicit startup command to prevent Oryx interference..."
+          echo "Disabling Oryx build/startup detection to prevent double-startup..."
+          az webapp config appsettings set \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false \
+            --output none
+
+          echo "Clearing startup command..."
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
             --startup-file ""
 
-          echo "Verifying configuration was applied..."
-          az webapp config show \
+          echo "Verifying configuration..."
+          az webapp config appsettings list \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --query "appCommandLine" -o tsv
+            --query "[?name=='SCM_DO_BUILD_DURING_DEPLOYMENT'].value" -o tsv
 
       - name: Deploy to Azure Web App (ZIP)
         run: |
