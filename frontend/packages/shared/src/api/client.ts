@@ -20,6 +20,7 @@ export class ApiClient {
     this.config = config;
     this.client = axios.create({
       baseURL: config.baseURL,
+      timeout: 60000, // 60 seconds timeout for AI operations
       headers: {
         'Content-Type': 'application/json',
       },
