@@ -21,6 +21,15 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+// Configure Kestrel for Azure App Service
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.AddServerHeader = false;
+    serverOptions.Limits.MaxRequestBodySize = 104857600; // 100 MB
+    serverOptions.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(2);
+    serverOptions.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(2);
+});
+
 // Adiciona os serviços das nossas camadas com os métodos de extensão que criamos
 builder.Services
     .AddApplication()
@@ -167,6 +176,21 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Configure graceful shutdown for Azure App Service
+var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+
+lifetime.ApplicationStopping.Register(() =>
+{
+    Log.Information("Application is stopping - waiting for active connections to complete...");
+    Thread.Sleep(5000); // Give 5 seconds for requests to complete
+});
+
+lifetime.ApplicationStopped.Register(() =>
+{
+    Log.Information("Application stopped gracefully");
+    Log.CloseAndFlush();
+});
 
 // 2. CONFIGURAR O PIPELINE DE MIDDLEWARE HTTP
 // ============================================
