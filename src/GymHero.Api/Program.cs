@@ -1,4 +1,4 @@
-// Deployment Version: 2025-11-25-v3 - Fixed double-startup and CORS issues
+// Deployment Version: 2025-11-25-v4 - Fixed DataProtection path and first-login timeout
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
@@ -46,14 +46,23 @@ builder.Services
 // Configure DataProtection to persist keys properly in Azure
 if (builder.Environment.IsProduction())
 {
-    var dataProtectionPath = Path.Combine(builder.Environment.ContentRootPath, "DataProtection-Keys");
-    Directory.CreateDirectory(dataProtectionPath);
+    // Use /home/site which persists across container restarts in Azure App Service
+    var dataProtectionPath = "/home/site/DataProtection-Keys";
 
-    builder.Services.AddDataProtection()
-        .PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath))
-        .SetApplicationName("GymHero");
+    try
+    {
+        Directory.CreateDirectory(dataProtectionPath);
 
-    Log.Information("DataProtection keys will be persisted to: {Path}", dataProtectionPath);
+        builder.Services.AddDataProtection()
+            .PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath))
+            .SetApplicationName("GymHero");
+
+        Log.Information("DataProtection keys will be persisted to: {Path}", dataProtectionPath);
+    }
+    catch (Exception ex)
+    {
+        Log.Warning(ex, "Failed to configure persistent DataProtection storage. Falling back to default (ephemeral) storage.");
+    }
 }
 
 // Configure Redis distributed cache
@@ -199,6 +208,29 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Warm up database connection on startup to avoid first-request timeout
+try
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<GymHero.Infrastructure.Data.ApplicationDbContext>();
+
+    Log.Information("Warming up database connection...");
+    var canConnect = await dbContext.Database.CanConnectAsync();
+
+    if (canConnect)
+    {
+        Log.Information("Database connection successful");
+    }
+    else
+    {
+        Log.Warning("Database connection warmup failed - database may be unavailable");
+    }
+}
+catch (Exception ex)
+{
+    Log.Error(ex, "Error warming up database connection");
+}
 
 // Configure graceful shutdown for Azure App Service
 var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();

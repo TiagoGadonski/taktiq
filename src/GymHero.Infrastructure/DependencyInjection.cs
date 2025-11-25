@@ -57,12 +57,19 @@ public static class DependencyInjection
         {
             options.UseNpgsql(connectionString, npgsqlOptions =>
             {
-                npgsqlOptions.CommandTimeout(60); // 60 seconds command timeout
+                // Increased timeout for cold starts in Azure
+                npgsqlOptions.CommandTimeout(120); // 120 seconds for first connection
                 npgsqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 3,
+                    maxRetryCount: 5, // More retries for Azure cold starts
                     maxRetryDelay: TimeSpan.FromSeconds(30),
                     errorCodesToAdd: null);
             });
+
+            // Enable sensitive data logging only in development
+            if (configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT") != "Production")
+            {
+                options.EnableSensitiveDataLogging();
+            }
         });
 
         // Registra o ApplicationDbContext como a implementação de IApplicationDbContext
