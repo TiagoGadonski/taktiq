@@ -64,45 +64,41 @@ jobs:
           echo "== Deployment package contents (first 50 lines) =="
           unzip -l deploy.zip | head -50
 
-      - name: Stop the API before deployment
+      - name: Enable run-from-package mode
         run: |
-          echo "Stopping API to ensure clean deployment..."
-          az webapp stop --resource-group taktiqRecursos --name taktiq-api
-
-      - name: Disable Oryx build detection
-        run: |
-          echo "Disabling Oryx build/startup detection to prevent double-startup..."
+          echo "Configuring WEBSITE_RUN_FROM_PACKAGE to prevent extraction and double-startup..."
           az webapp config appsettings set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --settings SCM_DO_BUILD_DURING_DEPLOYMENT=false \
+            --settings WEBSITE_RUN_FROM_PACKAGE=1 \
             --output none
 
-          echo "Clearing startup command..."
+          echo "Setting explicit startup command..."
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --startup-file ""
-
-          echo "Verifying configuration..."
-          az webapp config appsettings list \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --query "[?name=='SCM_DO_BUILD_DURING_DEPLOYMENT'].value" -o tsv
+            --startup-file "dotnet GymHero.Api.dll"
 
       - name: Deploy to Azure Web App (ZIP)
         run: |
-          echo "Starting deployment..."
+          echo "Uploading deployment package..."
           az webapp deploy \
             --resource-group taktiqRecursos \
             --name taktiq-api \
             --src-path deploy.zip \
             --type zip \
-            --clean true \
-            --restart true \
             --timeout 300
 
-          echo "Deployment completed"
+          echo "Deployment package uploaded"
+
+      - name: Restart API to apply changes
+        run: |
+          echo "Restarting API..."
+          az webapp restart \
+            --resource-group taktiqRecursos \
+            --name taktiq-api
+
+          echo "API restarted"
 
       - name: Wait for startup
         run: |
