@@ -82,26 +82,24 @@ jobs:
             --name taktiq-api \
             --startup-file "exec dotnet GymHero.Api.dll"
 
-      - name: Deploy to Azure Web App (ZIP)
+      - name: Deploy using config-zip (no build triggering)
         run: |
-          echo "Uploading deployment package..."
-          az webapp deploy \
+          echo "Deploying with config-zip method (simplest, no Oryx)..."
+          az webapp deployment source config-zip \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --src-path deploy.zip \
-            --type zip \
-            --timeout 300
+            --src deploy.zip
 
-          echo "Deployment package uploaded"
+          echo "Deployment completed"
 
-      - name: Restart API to apply changes
+      - name: Start API after deployment
         run: |
-          echo "Restarting API..."
-          az webapp restart \
+          echo "Starting API..."
+          az webapp start \
             --resource-group taktiqRecursos \
             --name taktiq-api
 
-          echo "API restarted"
+          echo "API started"
 
       - name: Wait for startup
         run: |
