@@ -47,7 +47,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-          path: ./api-app
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -56,64 +55,26 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DBA37EC361994F1888857F18897FE10B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3F7A8C19EE0146BF9CBF9722FD32EBFB }}
 
-      - name: Create deployment package
+      - name: Clear any custom startup commands
         run: |
-          cd api-app
-          zip -r ../deploy.zip .
-          cd ..
-          echo "== Deployment package contents (first 50 lines) =="
-          unzip -l deploy.zip | head -50
+          echo "Clearing startup command and custom settings..."
+          az webapp config set \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --startup-file ""
 
-      - name: Configure Azure for run-from-package
-        run: |
-          echo "Stopping API for clean configuration..."
-          az webapp stop --resource-group taktiqRecursos --name taktiq-api
-
-          echo "Removing WEBSITE_RUN_FROM_PACKAGE (reverting to standard deployment)..."
           az webapp config appsettings delete \
             --resource-group taktiqRecursos \
             --name taktiq-api \
             --setting-names WEBSITE_RUN_FROM_PACKAGE SCM_DO_BUILD_DURING_DEPLOYMENT \
             --output none || true
 
-          echo "Setting startup command to prevent Oryx script generation..."
-          az webapp config set \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --startup-file "exec dotnet GymHero.Api.dll"
-
-      - name: Deploy using config-zip (no build triggering)
-        run: |
-          echo "Deploying with config-zip method (simplest, no Oryx)..."
-          az webapp deployment source config-zip \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --src deploy.zip
-
-          echo "Deployment completed"
-
-      - name: Start API after deployment
-        run: |
-          echo "Starting API..."
-          az webapp start \
-            --resource-group taktiqRecursos \
-            --name taktiq-api
-
-          echo "API started"
-
-      - name: Wait for startup
-        run: |
-          echo "Waiting 90 seconds for API to start..."
-          sleep 90
-
-      - name: Check deployment status
-        run: |
-          echo "=== Checking API status ==="
-          az webapp show \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --query "state" -o tsv
-
-          echo ""
-          echo "Monitor logs at: https://taktiq-api.scm.azurewebsites.net/api/logs/docker"
-          echo "API Health URL: https://api.taktiq.app/api/health"
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'taktiq-api'
+          slot-name: 'Production'
+          package: .
+          clean: true
+          restart: true
