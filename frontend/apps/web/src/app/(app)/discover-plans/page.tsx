@@ -31,7 +31,7 @@ export default function DiscoverPlansPage() {
   const { data: allPlans, isLoading: plansLoading } = useQuery<WorkoutPlan[]>({
     queryKey: ["public-plans"],
     queryFn: async () => {
-      return apiClient.get("/api/public/plans");
+      return apiClient.get("/api/workout-plans/public");
     },
   });
 
@@ -40,7 +40,7 @@ export default function DiscoverPlansPage() {
     queryKey: ["friend-plans"],
     queryFn: async () => {
       try {
-        return apiClient.get("/api/personal/following/plans");
+        return apiClient.get("/personal/following/plans");
       } catch (error) {
         return [];
       }

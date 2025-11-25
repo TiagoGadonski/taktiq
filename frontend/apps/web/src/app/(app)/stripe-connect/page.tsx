@@ -48,7 +48,7 @@ export default function StripeConnectPage() {
   const { data: status, isLoading } = useQuery<StripeAccountStatus>({
     queryKey: ["stripe-connect-status"],
     queryFn: async () => {
-      return await apiClient.get("/api/stripe/connect/status") as StripeAccountStatus;
+      return await apiClient.get("/stripe/connect/status") as StripeAccountStatus;
     },
   });
 
@@ -67,7 +67,7 @@ export default function StripeConnectPage() {
   const connectAccount = useMutation<StripeOnboardingResponse>({
     mutationFn: async () => {
       setConnectingToStripe(true);
-      return await apiClient.post("/api/stripe/connect/create-account") as StripeOnboardingResponse;
+      return await apiClient.post("/stripe/connect/create-account") as StripeOnboardingResponse;
     },
     onSuccess: (data) => {
       // Redirect to Stripe onboarding
@@ -86,7 +86,7 @@ export default function StripeConnectPage() {
   // Refresh onboarding URL
   const refreshUrl = useMutation<StripeOnboardingResponse>({
     mutationFn: async () => {
-      return await apiClient.get("/api/stripe/connect/refresh-url") as StripeOnboardingResponse;
+      return await apiClient.get("/stripe/connect/refresh-url") as StripeOnboardingResponse;
     },
     onSuccess: (data) => {
       window.location.href = data.url;
@@ -103,7 +103,7 @@ export default function StripeConnectPage() {
   // Disconnect account mutation
   const disconnectAccount = useMutation({
     mutationFn: async () => {
-      return await apiClient.post("/api/stripe/connect/disconnect");
+      return await apiClient.post("/stripe/connect/disconnect");
     },
     onSuccess: () => {
       toast({
