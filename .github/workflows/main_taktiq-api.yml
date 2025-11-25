@@ -47,7 +47,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+          path: ./api-app
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -55,13 +56,60 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DBA37EC361994F1888857F18897FE10B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3F7A8C19EE0146BF9CBF9722FD32EBFB }}
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'taktiq-api'
-          slot-name: 'Production'
-          package: .
-          clean: true
-          restart: true
-          
+      - name: Create deployment package
+        run: |
+          cd api-app
+          zip -r ../deploy.zip .
+          cd ..
+          echo "== Deployment package contents (first 50 lines) =="
+          unzip -l deploy.zip | head -50
+
+      - name: Stop the API before deployment
+        run: |
+          echo "Stopping API to ensure clean deployment..."
+          az webapp stop --resource-group taktiqRecursos --name taktiq-api
+
+      - name: Configure startup command (bypass Oryx)
+        run: |
+          echo "Setting explicit startup command to prevent Oryx interference..."
+          az webapp config set \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --startup-file ""
+
+          echo "Verifying configuration was applied..."
+          az webapp config show \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --query "appCommandLine" -o tsv
+
+      - name: Deploy to Azure Web App (ZIP)
+        run: |
+          echo "Starting deployment..."
+          az webapp deploy \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --src-path deploy.zip \
+            --type zip \
+            --clean true \
+            --restart true \
+            --timeout 300
+
+          echo "Deployment completed"
+
+      - name: Wait for startup
+        run: |
+          echo "Waiting 90 seconds for API to start..."
+          sleep 90
+
+      - name: Check deployment status
+        run: |
+          echo "=== Checking API status ==="
+          az webapp show \
+            --resource-group taktiqRecursos \
+            --name taktiq-api \
+            --query "state" -o tsv
+
+          echo ""
+          echo "Monitor logs at: https://taktiq-api.scm.azurewebsites.net/api/logs/docker"
+          echo "API Health URL: https://api.taktiq.app/api/health"
