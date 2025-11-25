@@ -194,6 +194,16 @@ lifetime.ApplicationStopped.Register(() =>
 
 // 2. CONFIGURAR O PIPELINE DE MIDDLEWARE HTTP
 // ============================================
+
+// Configure forwarded headers for Azure App Service (behind load balancer)
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
+});
+
+// Add health check endpoint for Azure monitoring
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
+
 // Em ambiente de desenvolvimento, usamos a UI do Swagger
 if (app.Environment.IsDevelopment())
 {
@@ -201,12 +211,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Enable HTTPS redirection in production
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-    app.UseHsts();
-}
+// Skip HTTPS redirection in production (Azure handles this at load balancer level)
+// if (!app.Environment.IsDevelopment())
+// {
+//     app.UseHttpsRedirection();
+//     app.UseHsts();
+// }
 
 // Configurar o servidor de arquivos estáticos para servir as imagens de perfil
 app.UseStaticFiles();
