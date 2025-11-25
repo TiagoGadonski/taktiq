@@ -186,16 +186,27 @@ jobs:
       # Deploy using az CLI with zip
       - name: Deploy to Azure Web App (az CLI)
         run: |
+          # Deploy with async flag to avoid timeout
           az webapp deploy \
             --resource-group taktiqRecursos \
             --name taktiq-web-frontend \
             --src-path deploy.zip \
             --type zip \
-            --restart true \
-            --clean true
+            --async true \
+            --timeout 600
+
+          # Wait for deployment to settle
+          echo "Waiting for deployment to complete..."
+          sleep 30
 
           # Set startup command
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-web-frontend \
             --startup-file "./start.sh"
+
+          # Restart to apply changes
+          echo "Restarting app..."
+          az webapp restart \
+            --resource-group taktiqRecursos \
+            --name taktiq-web-frontend
