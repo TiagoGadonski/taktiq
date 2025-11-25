@@ -1,4 +1,4 @@
-// Deployment Version: 2025-11-25-v2 - Force fresh deployment with all fixes
+// Deployment Version: 2025-11-25-v3 - Fixed double-startup and CORS issues
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
@@ -6,6 +6,7 @@ using GymHero.Application;
 using GymHero.Infrastructure;
 using GymHero.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -22,6 +23,12 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+// Log startup to help diagnose deployment issues
+Log.Information("=== Application Starting ===");
+Log.Information("Environment: {Environment}", builder.Environment.EnvironmentName);
+Log.Information("ProcessId: {ProcessId}", Environment.ProcessId);
+Log.Information("MachineName: {MachineName}", Environment.MachineName);
+
 // Configure Kestrel for Azure App Service
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
@@ -36,6 +43,19 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+// Configure DataProtection to persist keys properly in Azure
+if (builder.Environment.IsProduction())
+{
+    var dataProtectionPath = Path.Combine(builder.Environment.ContentRootPath, "DataProtection-Keys");
+    Directory.CreateDirectory(dataProtectionPath);
+
+    builder.Services.AddDataProtection()
+        .PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath))
+        .SetApplicationName("GymHero");
+
+    Log.Information("DataProtection keys will be persisted to: {Path}", dataProtectionPath);
+}
+
 // Configure Redis distributed cache
 var redisConnection = builder.Configuration.GetConnectionString("Redis");
 if (!string.IsNullOrEmpty(redisConnection))
@@ -45,11 +65,13 @@ if (!string.IsNullOrEmpty(redisConnection))
         options.Configuration = redisConnection;
         options.InstanceName = "GymHero_";
     });
+    Log.Information("Using Redis cache");
 }
 else
 {
     // Fallback to in-memory cache if Redis is not configured
     builder.Services.AddDistributedMemoryCache();
+    Log.Information("Using in-memory cache (Redis not configured)");
 }
 
 builder.Services.AddHttpClient();
@@ -279,4 +301,9 @@ app.MapChatEndpoints(); // Real-time chat
 // Map SignalR hub
 app.MapHub<GymHero.Api.Hubs.ChatHub>("/hubs/chat");
 
+Log.Information("=== Application Configuration Complete ===");
+Log.Information("Starting application on port 8080...");
+
 app.Run();
+
+Log.Information("Application stopped");

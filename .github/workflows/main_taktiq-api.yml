@@ -55,19 +55,26 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DBA37EC361994F1888857F18897FE10B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3F7A8C19EE0146BF9CBF9722FD32EBFB }}
 
-      - name: Clear any custom startup commands
+      - name: Configure Azure to prevent Oryx double-startup
         run: |
-          echo "Clearing startup command and custom settings..."
+          echo "Configuring Azure to prevent Oryx build and double-startup..."
+
+          # Clear startup command to let Azure use web.config
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
             --startup-file ""
 
-          az webapp config appsettings delete \
+          # Set app settings to prevent Oryx from interfering
+          az webapp config appsettings set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --setting-names WEBSITE_RUN_FROM_PACKAGE SCM_DO_BUILD_DURING_DEPLOYMENT \
-            --output none || true
+            --settings \
+              SCM_DO_BUILD_DURING_DEPLOYMENT=false \
+              WEBSITE_DISABLE_SCM_SEPARATION=false \
+              WEBSITE_RUN_FROM_PACKAGE=0
+
+          echo "Configuration complete. Azure will use web.config for startup."
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
