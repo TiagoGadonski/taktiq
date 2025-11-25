@@ -14,6 +14,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'raw.githubusercontent.com' },
       { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'https', hostname: '*.blob.core.windows.net' },
     ],
   },
   

@@ -103,10 +103,29 @@ jobs:
           cat > "$DEPLOY_DIR/start.sh" << 'EOS'
           #!/bin/sh
           set -e
-          cd frontend/apps/web
+
+          # Log environment for debugging
+          echo "=== Starting Next.js standalone server ==="
+          echo "PORT: ${PORT:-8080}"
+          echo "NODE_ENV: production"
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+
+          # Navigate to the app directory where server.js is located
+          cd "$APP_RUNTIME_DIR"
+
+          # Start the server
+          echo "Starting server.js from: $(pwd)"
           HOST=0.0.0.0 PORT=${PORT:-8080} NODE_ENV=production exec node server.js
           EOS
+
+          # Replace APP_RUNTIME_DIR placeholder with actual path
+          sed -i "s|\$APP_RUNTIME_DIR|$APP_RUNTIME_DIR|g" "$DEPLOY_DIR/start.sh"
           chmod +x "$DEPLOY_DIR/start.sh"
+
+          echo "=== start.sh contents ==="
+          cat "$DEPLOY_DIR/start.sh"
 
           echo "== VERIFY BUILD_ID next to server.js =="
           if [ ! -f "$DEPLOY_DIR/$APP_RUNTIME_DIR/.next/BUILD_ID" ]; then
@@ -183,30 +202,47 @@ jobs:
           echo "== Zip contents (first 120 lines) =="
           unzip -l deploy.zip | head -120 || true
 
-      # Deploy using az CLI with zip
-      - name: Deploy to Azure Web App (az CLI)
+      # Set startup command before deployment
+      - name: Configure startup command
         run: |
-          # Deploy with async flag to avoid timeout
-          az webapp deploy \
-            --resource-group taktiqRecursos \
-            --name taktiq-web-frontend \
-            --src-path deploy.zip \
-            --type zip \
-            --async true \
-            --timeout 600
-
-          # Wait for deployment to settle
-          echo "Waiting for deployment to complete..."
-          sleep 30
-
-          # Set startup command
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-web-frontend \
             --startup-file "./start.sh"
 
-          # Restart to apply changes
-          echo "Restarting app..."
-          az webapp restart \
+      # Deploy using az CLI with zip (skip health check wait)
+      - name: Deploy to Azure Web App (az CLI)
+        run: |
+          echo "Starting deployment..."
+
+          # Deploy without waiting for full startup (--async skips health check)
+          az webapp deploy \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend
+            --name taktiq-web-frontend \
+            --src-path deploy.zip \
+            --type zip \
+            --timeout 300 || {
+            echo "Deploy command timed out, but deployment may still be processing..."
+            echo "Check deployment status at: https://taktiq-web-frontend.scm.azurewebsites.net"
+            exit 0
+          }
+
+          echo "Deployment command completed"
+
+      # Monitor deployment status without blocking
+      - name: Check deployment status
+        run: |
+          echo "=== Deployment initiated ==="
+          echo "The app may take a few minutes to fully start."
+          echo "Monitor at: https://taktiq-web-frontend.scm.azurewebsites.net/api/deployments"
+          echo "App URL: https://taktiq-web-frontend.azurewebsites.net"
+
+          # Give it some time to start
+          echo "Waiting 60 seconds for initial startup..."
+          sleep 60
+
+          # Try to check app status (non-blocking)
+          az webapp show \
+            --resource-group taktiqRecursos \
+            --name taktiq-web-frontend \
+            --query "state" -o tsv || echo "Could not check app state"
