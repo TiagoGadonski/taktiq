@@ -1,3 +1,4 @@
+// Deployment Version: 2025-11-25-v2 - Force fresh deployment with all fixes
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
