@@ -55,12 +55,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DBA37EC361994F1888857F18897FE10B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3F7A8C19EE0146BF9CBF9722FD32EBFB }}
 
-      - name: Stop Azure Web App
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            az webapp stop --name taktiq-api --resource-group gymhero-rg
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -68,10 +62,6 @@ jobs:
           app-name: 'taktiq-api'
           slot-name: 'Production'
           package: .
-
-      - name: Start Azure Web App
-        uses: azure/cli@v2
-        with:
-          inlineScript: |
-            az webapp start --name taktiq-api --resource-group gymhero-rg
+          clean: true
+          restart: true
           
