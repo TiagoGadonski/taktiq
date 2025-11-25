@@ -174,6 +174,7 @@ export default function InstructorPage() {
   const [selectedPlanId, setSelectedPlanId] = useState<string>('none');
   const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>([]);
   const [isSendingInvite, setIsSendingInvite] = useState(false);
+  const [isDeletingInvitation, setIsDeletingInvitation] = useState<string | null>(null);
 
   // Profile state
   const [profileSlug, setProfileSlug] = useState('');
@@ -482,6 +483,34 @@ export default function InstructorPage() {
       });
     } finally {
       setIsSendingInvite(false);
+    }
+  };
+
+  const handleCancelInvitation = async (invitationId: string) => {
+    setIsDeletingInvitation(invitationId);
+
+    try {
+      await apiClient.delete(`/personal/invitations/${invitationId}`);
+
+      toast({
+        title: 'Convite cancelado!',
+        description: 'O convite foi removido com sucesso.',
+      });
+
+      // Refresh invitations list
+      const response = await apiClient.get<Invitation[]>('/personal/invitations');
+      setInvitations(Array.isArray(response) ? response : []);
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message ||
+        'Não foi possível cancelar o convite.';
+
+      toast({
+        title: 'Erro',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsDeletingInvitation(null);
     }
   };
 
@@ -804,10 +833,6 @@ export default function InstructorPage() {
           <TabsTrigger value="plans" className="tap-scale">
             <Dumbbell className="mr-2 h-4 w-4" />
             Planos de Treino
-          </TabsTrigger>
-          <TabsTrigger value="progress" className="tap-scale">
-            <TrendingUp className="mr-2 h-4 w-4" />
-            Progresso
           </TabsTrigger>
           <TabsTrigger value="profile" className="tap-scale">
             <Globe className="mr-2 h-4 w-4" />
@@ -1202,6 +1227,31 @@ export default function InstructorPage() {
                       </div>
                     )}
                   </div>
+
+                  {/* Cancel button for pending invitations */}
+                  {invitation.status === 'Pending' && (
+                    <div className="mt-4 pt-4 border-t border-border/50">
+                      <Button
+                        onClick={() => handleCancelInvitation(invitation.id)}
+                        variant="outline"
+                        className="w-full hover-lift tap-scale border-red-500/30 text-red-500 hover:bg-red-500/10"
+                        size="sm"
+                        disabled={isDeletingInvitation === invitation.id}
+                      >
+                        {isDeletingInvitation === invitation.id ? (
+                          <>
+                            <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-red-500 border-t-transparent" />
+                            Cancelando...
+                          </>
+                        ) : (
+                          <>
+                            <XCircle className="mr-2 h-4 w-4" />
+                            Cancelar Convite
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </Card>
             ))}
@@ -1239,23 +1289,6 @@ export default function InstructorPage() {
             <Link href="/plans">
               <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale">
                 Ver Todos os Planos
-              </Button>
-            </Link>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="progress">
-          <Card className="glass border-primary/20 p-12 text-center">
-            <TrendingUp className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <h3 className="text-lg font-semibold mb-2">
-              Monitoramento de Progresso
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Acompanhe o progresso e evolução dos seus clientes
-            </p>
-            <Link href="/progress">
-              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale">
-                Ver Progresso
               </Button>
             </Link>
           </Card>
@@ -1967,16 +2000,18 @@ export default function InstructorPage() {
         <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl">{viewingPost?.title}</DialogTitle>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge variant={viewingPost?.isPublished ? "default" : "secondary"}>
-                {viewingPost?.isPublished ? 'Publicado' : 'Rascunho'}
-              </Badge>
-              {viewingPost?.publishedAt && (
-                <p className="text-sm text-muted-foreground">
-                  {new Date(viewingPost.publishedAt).toLocaleDateString('pt-BR')}
-                </p>
-              )}
-            </div>
+            <DialogDescription>
+              <div className="flex items-center gap-2 mt-2">
+                <Badge variant={viewingPost?.isPublished ? "default" : "secondary"}>
+                  {viewingPost?.isPublished ? 'Publicado' : 'Rascunho'}
+                </Badge>
+                {viewingPost?.publishedAt && (
+                  <span className="text-sm text-muted-foreground">
+                    {new Date(viewingPost.publishedAt).toLocaleDateString('pt-BR')}
+                  </span>
+                )}
+              </div>
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             {viewingPost?.imageUrl && (
