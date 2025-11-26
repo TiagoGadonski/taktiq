@@ -281,6 +281,38 @@ public static class PersonalEndpoints
         .WithName("GetMyInvitations")
         .WithSummary("Gets all student invitations created by this trainer");
 
+        // Cancel/delete an invitation
+        group.MapDelete("/invitations/{invitationId:guid}", async (
+            Guid invitationId,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var invitation = await context.StudentInvitations
+                .FirstOrDefaultAsync(i => i.Id == invitationId && i.TrainerId == trainerId, cancellationToken);
+
+            if (invitation == null)
+            {
+                return Results.NotFound(new { message = "Convite não encontrado" });
+            }
+
+            // Only allow canceling pending invitations
+            if (invitation.Status != "Pending")
+            {
+                return Results.BadRequest(new { message = "Apenas convites pendentes podem ser cancelados" });
+            }
+
+            // Remove the invitation
+            context.StudentInvitations.Remove(invitation);
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Convite cancelado com sucesso" });
+        })
+        .WithName("CancelInvitation")
+        .WithSummary("Cancels a pending student invitation");
+
         // Get PT Analytics/Metrics
         group.MapGet("/analytics", async (
             ClaimsPrincipal user,

@@ -444,15 +444,15 @@ public static class WorkoutPlanEndpoints
             .AllowAnonymous();
 
         publicGroup.MapGet("/", async (
-            [FromQuery] int page,
-            [FromQuery] int pageSize,
+            [FromQuery] int? page,
+            [FromQuery] int? pageSize,
             [FromQuery] string? search,
             [FromQuery] string? goal,
             ISender sender) =>
         {
             var query = new GetPublicWorkoutPlansQuery(
-                page > 0 ? page : 1,
-                pageSize > 0 && pageSize <= 50 ? pageSize : 20,
+                page.HasValue && page.Value > 0 ? page.Value : 1,
+                pageSize.HasValue && pageSize.Value > 0 && pageSize.Value <= 50 ? pageSize.Value : 20,
                 search,
                 goal
             );

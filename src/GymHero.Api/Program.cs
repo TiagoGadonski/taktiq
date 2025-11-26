@@ -1,4 +1,4 @@
-// Deployment Version: 2025-11-25-v4 - Fixed DataProtection path and first-login timeout
+// Deployment Version: 2025-11-26-v1 - Fixed CORS, added invitation delete endpoint, fixed public plans params
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
@@ -193,7 +193,14 @@ builder.Services.AddCors(options =>
     {
         // Production: Restrict to specific domains
         var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
-            ?? new[] { "https://yourdomain.com" };
+            ?? new[] {
+                "https://taktiq.app",
+                "https://www.taktiq.app",
+                "https://taktiq-web-frontend.azurewebsites.net",
+                "https://taktiq-web-frontend-fzetgjhvhqbpdtc4.brazilsouth-01.azurewebsites.net"
+            };
+
+        Log.Information("CORS Configuration - Allowed Origins: {Origins}", string.Join(", ", allowedOrigins));
 
         options.AddPolicy("Production", policy =>
         {
@@ -202,7 +209,7 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader()
                   .AllowCredentials()
                   .WithExposedHeaders("*")
-                  .SetIsOriginAllowedToAllowWildcardSubdomains();
+                  .SetPreflightMaxAge(TimeSpan.FromMinutes(10));
         });
     }
 });
