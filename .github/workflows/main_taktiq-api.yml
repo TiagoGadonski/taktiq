@@ -59,22 +59,22 @@ jobs:
         run: |
           echo "Configuring Azure to prevent Oryx build and double-startup..."
 
-          # Clear startup command to let Azure use web.config
+          # Set startup command to prevent Oryx from generating its own
           az webapp config set \
-            --resource-group taktiqRecursos \
+            --resource-group taktiq-rg \
             --name taktiq-api \
-            --startup-file ""
+            --startup-file "dotnet GymHero.Api.dll"
 
           # Set app settings to prevent Oryx from interfering
           az webapp config appsettings set \
-            --resource-group taktiqRecursos \
+            --resource-group taktiq-rg \
             --name taktiq-api \
             --settings \
               SCM_DO_BUILD_DURING_DEPLOYMENT=false \
-              WEBSITE_DISABLE_SCM_SEPARATION=false \
+              ENABLE_ORYX_BUILD=false \
               WEBSITE_RUN_FROM_PACKAGE=0
 
-          echo "Configuration complete. Azure will use web.config for startup."
+          echo "Configuration complete."
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
