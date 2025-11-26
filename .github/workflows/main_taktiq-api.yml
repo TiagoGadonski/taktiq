@@ -72,7 +72,7 @@ jobs:
             --settings \
               SCM_DO_BUILD_DURING_DEPLOYMENT=false \
               ENABLE_ORYX_BUILD=false \
-              WEBSITE_RUN_FROM_PACKAGE=0
+              WEBSITE_RUN_FROM_PACKAGE=1
 
           echo "Configuration complete."
 
