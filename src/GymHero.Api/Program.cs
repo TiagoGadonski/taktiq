@@ -263,9 +263,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
 });
 
-// Add health check endpoint for Azure monitoring
-app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
-
 // Em ambiente de desenvolvimento, usamos a UI do Swagger
 if (app.Environment.IsDevelopment())
 {
@@ -309,6 +306,11 @@ app.UseAuthorization();
 
 // 3. MAPEAR OS ENDPOINTS
 // ======================
+
+// Health check endpoint for Azure monitoring (no authentication required)
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+   .AllowAnonymous();
+
 app.MapAuthEndpoints(); // Nosso método de extensão para os endpoints de autenticação
 app.MapWorkoutPlanEndpoints();
 app.MapExerciseEndpoints();
