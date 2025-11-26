@@ -59,11 +59,13 @@ jobs:
         run: |
           echo "Configuring Azure to prevent Oryx build and double-startup..."
 
-          # Set startup command to prevent Oryx from generating its own
+          # IMPORTANT: Remove any existing startup command
+          # WEBSITE_RUN_FROM_PACKAGE=1 automatically detects and runs the .NET app
+          # Adding a startup command causes a double-startup and port conflict
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --startup-file "dotnet GymHero.Api.dll"
+            --startup-file ""
 
           # Set app settings to prevent Oryx from interfering
           az webapp config appsettings set \
