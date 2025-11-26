@@ -61,13 +61,13 @@ jobs:
 
           # Set startup command to prevent Oryx from generating its own
           az webapp config set \
-            --resource-group taktiq-rg \
+            --resource-group taktiqRecursos \
             --name taktiq-api \
             --startup-file "dotnet GymHero.Api.dll"
 
           # Set app settings to prevent Oryx from interfering
           az webapp config appsettings set \
-            --resource-group taktiq-rg \
+            --resource-group taktiqRecursos \
             --name taktiq-api \
             --settings \
               SCM_DO_BUILD_DURING_DEPLOYMENT=false \
