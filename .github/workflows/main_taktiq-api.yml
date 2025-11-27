@@ -55,29 +55,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DBA37EC361994F1888857F18897FE10B }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3F7A8C19EE0146BF9CBF9722FD32EBFB }}
 
-      - name: Configure Azure deployment settings
-        run: |
-          echo "Configuring Azure deployment settings..."
-
-          # CLEAR the startup command to let Azure auto-detect .NET 8
-          # This prevents the double-startup bug
-          az webapp config set \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --startup-file ""
-
-          # Run directly from package - bypasses Oryx completely
-          # This prevents the double-startup bug by skipping Oryx's startup script generation
-          az webapp config appsettings set \
-            --resource-group taktiqRecursos \
-            --name taktiq-api \
-            --settings \
-              WEBSITE_RUN_FROM_PACKAGE=1 \
-              SCM_DO_BUILD_DURING_DEPLOYMENT=false \
-              ENABLE_ORYX_BUILD=false
-
-          echo "Configuration complete."
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
