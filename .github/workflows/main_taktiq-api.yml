@@ -59,12 +59,12 @@ jobs:
         run: |
           echo "Configuring Azure deployment settings..."
 
-          # Set a simple startup command
-          # This tells Azure exactly how to start the app
+          # CLEAR the startup command to let Azure auto-detect .NET 8
+          # This prevents the double-startup bug
           az webapp config set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
-            --startup-file "dotnet GymHero.Api.dll"
+            --startup-file ""
 
           # Prevent Oryx from rebuilding (we already built in the workflow)
           az webapp config appsettings set \
