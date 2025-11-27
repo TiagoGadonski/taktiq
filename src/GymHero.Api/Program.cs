@@ -1,4 +1,4 @@
-// Deployment Version: 2025-11-26-v1 - Fixed CORS, added invitation delete endpoint, fixed public plans params
+// Deployment Version: 2025-11-27-v1 - Redeploy to ensure all endpoints are active
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
