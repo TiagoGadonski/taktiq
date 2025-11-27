@@ -66,11 +66,13 @@ jobs:
             --name taktiq-api \
             --startup-file ""
 
-          # Prevent Oryx from rebuilding (we already built in the workflow)
+          # Run directly from package - bypasses Oryx completely
+          # This prevents the double-startup bug by skipping Oryx's startup script generation
           az webapp config appsettings set \
             --resource-group taktiqRecursos \
             --name taktiq-api \
             --settings \
+              WEBSITE_RUN_FROM_PACKAGE=1 \
               SCM_DO_BUILD_DURING_DEPLOYMENT=false \
               ENABLE_ORYX_BUILD=false
 
