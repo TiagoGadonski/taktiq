@@ -1304,9 +1304,9 @@ export default function InstructorPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Marketplace</p>
-                    <h3 className="text-2xl font-bold">{analytics?.plans.forSale || 0}</h3>
+                    <h3 className="text-2xl font-bold">{analytics?.plans?.forSale || 0}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {analytics?.plans.totalViews || 0} visualizações
+                      {analytics?.plans?.totalViews || 0} visualizações
                     </p>
                   </div>
                 </div>
