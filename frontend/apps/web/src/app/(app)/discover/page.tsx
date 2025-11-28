@@ -34,9 +34,25 @@ import {
   Flame,
   ArrowUpDown,
   BookmarkCheck,
+  Edit,
+  Share2,
+  Send,
+  Settings,
+  Trash2,
 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/hooks/use-auth';
+import { ShareSettingsDialog } from '@/components/workout/share-settings-dialog';
+import { ShareWithFriendsDialog } from '@/components/workout/share-with-friends-dialog';
+import { MarketplaceSettingsDialog } from '@/components/workout/marketplace-settings-dialog';
+import { useRouter } from 'next/navigation';
+import { api } from '@/lib/api';
 
 interface DiscoverPlan {
   id: string;
@@ -62,6 +78,7 @@ export default function DiscoverPlansPage() {
   const { toast } = useToast();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<PlanTab>('free');
   const [searchTerm, setSearchTerm] = useState('');
@@ -69,6 +86,12 @@ export default function DiscoverPlansPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState<SortOption>('newest');
   const [page, setPage] = useState(1);
+
+  // Dialog states for plan management
+  const [selectedPlan, setSelectedPlan] = useState<DiscoverPlan | null>(null);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [shareWithFriendsDialogOpen, setShareWithFriendsDialogOpen] = useState(false);
+  const [marketplaceDialogOpen, setMarketplaceDialogOpen] = useState(false);
 
   // Fetch marketplace plans
   const { data: marketplaceData, isLoading: isLoadingMarketplace } = useQuery({
@@ -105,12 +128,23 @@ export default function DiscoverPlansPage() {
     enabled: activeTab === 'friends' && !!user,
   });
 
-  // Fetch user's own plans (purchased or assigned)
+  // Fetch user's own plans (created + purchased/assigned)
   const { data: myPlans, isLoading: isLoadingMyPlans } = useQuery({
     queryKey: ['workout-plans', user?.id],
     queryFn: async () => {
-      const response = await apiClient.get<DiscoverPlan[]>('/workout-plans');
-      return { data: Array.isArray(response) ? response : [], totalCount: Array.isArray(response) ? response.length : 0 };
+      const response = await apiClient.get<any[]>('/workout-plans');
+      const plans = Array.isArray(response) ? response : [];
+
+      // Separate created plans from acquired plans
+      const createdPlans = plans.filter(p => p.ownerId === user?.id || p.creatorId === user?.id);
+      const acquiredPlans = plans.filter(p => p.ownerId !== user?.id && p.creatorId !== user?.id);
+
+      return {
+        data: plans,
+        createdPlans,
+        acquiredPlans,
+        totalCount: plans.length
+      };
     },
     enabled: activeTab === 'myplans' && !!user,
   });
@@ -130,6 +164,24 @@ export default function DiscoverPlansPage() {
         variant: 'destructive',
         title: 'Erro ao adquirir plano',
         description: errorData?.message || 'Não foi possível adquirir o plano.',
+      });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (planId: string) => api.workoutPlans.delete(planId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['workout-plans'] });
+      toast({
+        title: 'Plano excluído',
+        description: 'O plano foi excluído com sucesso.',
+      });
+    },
+    onError: () => {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao excluir plano',
+        description: 'Não foi possível excluir o plano.',
       });
     },
   });
@@ -364,6 +416,173 @@ export default function DiscoverPlansPage() {
     );
   };
 
+  // Render card for "My Plans" tab (created + acquired plans)
+  const renderMyPlanCard = (plan: any, index: number) => {
+    const isOwnPlan = plan.ownerId === user?.id || plan.creatorId === user?.id;
+
+    const handleDelete = (planId: string) => {
+      if (confirm('Tem certeza que deseja excluir este plano?')) {
+        deleteMutation.mutate(planId);
+      }
+    };
+
+    return (
+      <Card
+        key={plan.id}
+        className="glass border-primary/20 hover-lift tap-scale animate-scale-in"
+        style={{ animationDelay: `${index * 50}ms` }}
+      >
+        <div className="p-6 space-y-4">
+          {/* Plan Header */}
+          <div>
+            <div className="flex items-start justify-between mb-2">
+              <h3 className="font-bold text-lg flex-1">{plan.name}</h3>
+              <div className="flex gap-2 flex-wrap justify-end">
+                {isOwnPlan && (
+                  <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                    <Edit className="h-3 w-3 mr-1" />
+                    Meu Plano
+                  </Badge>
+                )}
+                {!isOwnPlan && (
+                  <Badge variant="outline" className="bg-blue-500/10 text-blue-500 border-blue-500/30">
+                    <ShoppingCart className="h-3 w-3 mr-1" />
+                    Adquirido
+                  </Badge>
+                )}
+              </div>
+            </div>
+            {plan.description && (
+              <p className="text-sm text-muted-foreground line-clamp-2">
+                {plan.description}
+              </p>
+            )}
+          </div>
+
+          {/* Plan Details */}
+          <div className="space-y-2">
+            {plan.goal && (
+              <div className="flex items-center gap-2 text-sm">
+                <TrendingUp className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">Objetivo:</span>
+                <span className="font-medium">{plan.goal}</span>
+              </div>
+            )}
+            {plan.duration && (
+              <div className="flex items-center gap-2 text-sm">
+                <Calendar className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">Duração:</span>
+                <span className="font-medium">{plan.duration} semanas</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2 text-sm">
+              <Dumbbell className="h-4 w-4 text-primary" />
+              <span className="text-muted-foreground">Treinos:</span>
+              <span className="font-medium">{plan.workoutCount || plan.workouts?.length || 0}</span>
+            </div>
+            {plan.viewCount !== undefined && (
+              <div className="flex items-center gap-2 text-sm">
+                <Eye className="h-4 w-4 text-primary" />
+                <span className="text-muted-foreground">Visualizações:</span>
+                <span className="font-medium">{plan.viewCount}</span>
+              </div>
+            )}
+          </div>
+
+          {/* Creator Info */}
+          {!isOwnPlan && (
+            <div className="pt-4 border-t border-border/50">
+              <p className="text-sm text-muted-foreground">
+                Criado por <span className="font-medium text-foreground">{plan.creatorName || plan.ownerName}</span>
+              </p>
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="pt-4 border-t border-border/50 space-y-2">
+            {isOwnPlan ? (
+              // Actions for own plans
+              <>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => router.push(`/plans/${plan.id}/edit`)}
+                    className="flex-1"
+                  >
+                    <Edit className="h-4 w-4 mr-2" />
+                    Editar
+                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="flex-1"
+                      >
+                        <Share2 className="h-4 w-4 mr-2" />
+                        Compartilhar
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setShareWithFriendsDialogOpen(true);
+                        }}
+                      >
+                        <Send className="mr-2 h-4 w-4" />
+                        Enviar para Amigos
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setShareDialogOpen(true);
+                        }}
+                      >
+                        <Settings className="mr-2 h-4 w-4" />
+                        Configurações
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setMarketplaceDialogOpen(true);
+                        }}
+                      >
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Marketplace
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => handleDelete(plan.id)}
+                  disabled={deleteMutation.isPending}
+                  className="w-full text-destructive hover:text-destructive hover:bg-destructive/10"
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Excluir Plano
+                </Button>
+              </>
+            ) : (
+              // Actions for acquired plans
+              <Button
+                size="sm"
+                onClick={() => router.push(`/plans/${plan.id}`)}
+                className="w-full"
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                Ver Plano
+              </Button>
+            )}
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
@@ -521,7 +740,9 @@ export default function DiscoverPlansPage() {
           {/* Plans Grid */}
           {!isLoading && plans.length > 0 && (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {plans.map((plan, index) => renderPlanCard(plan, index))}
+              {plans.map((plan, index) =>
+                activeTab === 'myplans' ? renderMyPlanCard(plan, index) : renderPlanCard(plan, index)
+              )}
             </div>
           )}
 
@@ -616,6 +837,35 @@ export default function DiscoverPlansPage() {
             </div>
           </div>
         </Card>
+      )}
+
+      {/* Dialogs for plan management */}
+      {selectedPlan && (
+        <>
+          <ShareSettingsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            currentVisibility={(selectedPlan as any).visibilityLevel ?? 0}
+            currentAllowCopying={(selectedPlan as any).allowCopying ?? true}
+            open={shareDialogOpen}
+            onOpenChange={setShareDialogOpen}
+          />
+          <ShareWithFriendsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            open={shareWithFriendsDialogOpen}
+            onOpenChange={setShareWithFriendsDialogOpen}
+          />
+          <MarketplaceSettingsDialog
+            planId={selectedPlan.id}
+            planName={selectedPlan.name}
+            currentForSale={(selectedPlan as any).forSale ?? false}
+            currentPrice={(selectedPlan as any).price ?? 0}
+            isPublic={(selectedPlan as any).isPublic ?? false}
+            open={marketplaceDialogOpen}
+            onOpenChange={setMarketplaceDialogOpen}
+          />
+        </>
       )}
     </div>
   );
