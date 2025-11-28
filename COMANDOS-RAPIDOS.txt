@@ -1,0 +1,70 @@
+═══════════════════════════════════════════════════════════════
+  COMANDOS RÁPIDOS - LIMPAR ARTIFACTS DO GITHUB
+═══════════════════════════════════════════════════════════════
+
+1) ABRIR POWERSHELL COMO ADMIN
+   Windows + X → Terminal (Admin) → Sim
+
+
+2) CLONAR/ATUALIZAR REPOSITÓRIO
+
+   Cole tudo isso de uma vez:
+   ───────────────────────────────────────────────────────────
+   cd $HOME
+   if (Test-Path "taktiq") {
+       cd taktiq
+       git pull
+   } else {
+       git clone https://github.com/TiagoGadonski/taktiq.git
+       cd taktiq
+   }
+   ───────────────────────────────────────────────────────────
+
+
+3) EXECUTAR SCRIPT
+
+   ───────────────────────────────────────────────────────────
+   .\cleanup-github-artifacts.ps1
+   ───────────────────────────────────────────────────────────
+
+
+4) FAZER LOGIN NO GITHUB QUANDO PEDIR
+   - Escolher: GitHub.com
+   - Escolher: HTTPS
+   - Escolher: Yes
+   - Escolher: Login with a web browser
+   - Abrir link no navegador
+   - Fazer login e autorizar
+
+
+5) CONFIRMAR EXCLUSÃO
+   Quando perguntar "Deseja deletar TODOS os artifacts? (S/N):"
+
+   Digite: S
+   Aperte: Enter
+
+
+6) AGUARDAR
+   O script vai deletar tudo automaticamente (2-3 minutos)
+
+
+═══════════════════════════════════════════════════════════════
+  PRONTO! Aguarde 6-12 horas e o deploy vai funcionar!
+═══════════════════════════════════════════════════════════════
+
+
+═══════════════════════════════════════════════════════════════
+  SE DER ERRO "git não encontrado"
+═══════════════════════════════════════════════════════════════
+
+Instale o Git primeiro:
+───────────────────────────────────────────────────────────
+winget install --id Git.Git -e --source winget
+───────────────────────────────────────────────────────────
+
+Depois feche e abra o PowerShell novamente e repita do passo 2.
+
+
+═══════════════════════════════════════════════════════════════
+  REPOSITÓRIO: https://github.com/TiagoGadonski/taktiq
+═══════════════════════════════════════════════════════════════
