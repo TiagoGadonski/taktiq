@@ -154,6 +154,7 @@ jobs:
           name: deploy-archive
           path: frontend/apps/web/out-azure.tar.gz
           if-no-files-found: error
+          retention-days: 1
 
   deploy:
     runs-on: ubuntu-latest
