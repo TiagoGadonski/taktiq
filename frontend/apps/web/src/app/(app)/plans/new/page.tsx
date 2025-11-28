@@ -81,7 +81,7 @@ export default function NewPlanPage() {
   const [workoutLocationFilter, setWorkoutLocationFilter] = useState<number | null>(null);
 
   // Personal Trainer specific states
-  const isPersonalTrainer = user?.role === 'Personal';
+  const isPersonalTrainer = user?.role === 'PersonalTrainer';
   const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template'>('template');
   const [selectedStudentId, setSelectedStudentId] = useState<string>('');
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
