@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { GymDetailsModal } from '@/components/gyms/gym-details-modal';
 
 interface Gym {
   place_id: string;
@@ -36,6 +37,8 @@ export default function GymsNearMePage() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [searchLocation, setSearchLocation] = useState('');
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  const [selectedGym, setSelectedGym] = useState<Gym | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const fetchGyms = async (lat: number, lng: number) => {
     setIsLoading(true);
@@ -183,9 +186,9 @@ export default function GymsNearMePage() {
     return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoReference}&key=YOUR_API_KEY`;
   };
 
-  const openInMaps = (gym: Gym) => {
-    const url = `https://www.google.com/maps/search/?api=1&query=${gym.geometry.location.lat},${gym.geometry.location.lng}&query_place_id=${gym.place_id}`;
-    window.open(url, '_blank');
+  const openGymDetails = (gym: Gym) => {
+    setSelectedGym(gym);
+    setModalOpen(true);
   };
 
   return (
@@ -271,7 +274,7 @@ export default function GymsNearMePage() {
               <Card
                 key={gym.place_id}
                 className="glass hover-lift tap-scale border-primary/20 overflow-hidden cursor-pointer transition-all hover:shadow-lg"
-                onClick={() => openInMaps(gym)}
+                onClick={() => openGymDetails(gym)}
               >
                 <div className="h-40 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center relative">
                   <MapPin className="h-16 w-16 text-primary/30" />
@@ -315,13 +318,13 @@ export default function GymsNearMePage() {
                   <Button
                     onClick={(e) => {
                       e.stopPropagation();
-                      openInMaps(gym);
+                      openGymDetails(gym);
                     }}
                     className="w-full hover-lift tap-scale"
                     size="sm"
                   >
                     <MapPin className="h-4 w-4 mr-2" />
-                    Ver no Mapa
+                    Ver Detalhes
                   </Button>
                 </CardContent>
               </Card>
@@ -345,6 +348,13 @@ export default function GymsNearMePage() {
           )}
         </>
       )}
+
+      {/* Gym Details Modal */}
+      <GymDetailsModal
+        gym={selectedGym}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </div>
   );
 }
