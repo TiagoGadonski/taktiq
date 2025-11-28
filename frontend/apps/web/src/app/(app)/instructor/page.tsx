@@ -1277,21 +1277,281 @@ export default function InstructorPage() {
           )}
         </TabsContent>
 
-        <TabsContent value="plans">
-          <Card className="glass border-primary/20 p-12 text-center">
-            <Dumbbell className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <h3 className="text-lg font-semibold mb-2">
-              Gestão de Planos de Treino
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Visualize e gerencie todos os planos de treino dos seus clientes
-            </p>
-            <Link href="/plans">
-              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale">
-                Ver Todos os Planos
+        <TabsContent value="plans" className="space-y-4">
+          {/* Plans Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold">Planos de Treino</h2>
+              <p className="text-muted-foreground">
+                Gerencie seus planos: marketplace, alunos e templates
+              </p>
+            </div>
+            <Link href="/plans/new">
+              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale gap-2">
+                <Plus className="h-4 w-4" />
+                Criar Novo Plano
               </Button>
             </Link>
-          </Card>
+          </div>
+
+          {/* Plans Stats Cards */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <Card className="glass border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-full bg-green-500/10 p-3">
+                    <ShoppingCart className="h-6 w-6 text-green-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Marketplace</p>
+                    <h3 className="text-2xl font-bold">{analytics?.plans.forSale || 0}</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {analytics?.plans.totalViews || 0} visualizações
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-full bg-blue-500/10 p-3">
+                    <Users className="h-6 w-6 text-blue-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Para Alunos</p>
+                    <h3 className="text-2xl font-bold">
+                      {workoutPlans.filter((p: any) => p.assignedToUserId).length}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Planos atribuídos</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-full bg-purple-500/10 p-3">
+                    <FileText className="h-6 w-6 text-purple-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Templates</p>
+                    <h3 className="text-2xl font-bold">
+                      {workoutPlans.filter((p: any) => !p.assignedToUserId && !p.forSale).length}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">Modelos pessoais</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Categorized Plans */}
+          <Tabs defaultValue="all" className="space-y-4">
+            <TabsList>
+              <TabsTrigger value="all">Todos</TabsTrigger>
+              <TabsTrigger value="marketplace">
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Marketplace
+              </TabsTrigger>
+              <TabsTrigger value="students">
+                <Users className="h-4 w-4 mr-2" />
+                Para Alunos
+              </TabsTrigger>
+              <TabsTrigger value="templates">
+                <FileText className="h-4 w-4 mr-2" />
+                Templates
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="all" className="space-y-4">
+              {workoutPlans.length === 0 ? (
+                <Card className="glass border-primary/20 p-12 text-center">
+                  <Dumbbell className="h-16 w-16 text-muted-foreground mx-auto mb-4 opacity-50" />
+                  <h3 className="text-lg font-semibold mb-2">
+                    Nenhum plano criado ainda
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Crie seu primeiro plano de treino para começar
+                  </p>
+                  <Link href="/plans/new">
+                    <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale gap-2">
+                      <Plus className="h-4 w-4" />
+                      Criar Primeiro Plano
+                    </Button>
+                  </Link>
+                </Card>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {workoutPlans.map((plan: any) => (
+                    <Card key={plan.id} className="glass border-primary/20 hover-lift tap-scale">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-start justify-between">
+                          <h3 className="font-semibold">{plan.name}</h3>
+                          <Badge variant={plan.forSale ? "default" : plan.assignedToUserId ? "secondary" : "outline"}>
+                            {plan.forSale ? "Marketplace" : plan.assignedToUserId ? "Aluno" : "Template"}
+                          </Badge>
+                        </div>
+                        {plan.goal && (
+                          <p className="text-sm text-muted-foreground line-clamp-2">{plan.goal}</p>
+                        )}
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          {plan.forSale && plan.price && (
+                            <span className="font-semibold text-green-500">R$ {plan.price.toFixed(2)}</span>
+                          )}
+                          {plan.duration && <span>{plan.duration} sem</span>}
+                        </div>
+                        <div className="flex gap-2">
+                          <Link href={`/plans/${plan.id}/edit`} className="flex-1">
+                            <Button size="sm" variant="outline" className="w-full">
+                              <Edit className="h-4 w-4 mr-2" />
+                              Editar
+                            </Button>
+                          </Link>
+                          <Link href={`/plans/${plan.id}`} className="flex-1">
+                            <Button size="sm" className="w-full">
+                              Ver
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="marketplace">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {workoutPlans.filter((p: any) => p.forSale).length === 0 ? (
+                  <Card className="glass border-primary/20 p-8 text-center col-span-full">
+                    <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
+                    <p className="text-muted-foreground">
+                      Nenhum plano no marketplace ainda
+                    </p>
+                  </Card>
+                ) : (
+                  workoutPlans.filter((p: any) => p.forSale).map((plan: any) => (
+                    <Card key={plan.id} className="glass border-green-500/20 hover-lift">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-start justify-between">
+                          <h3 className="font-semibold">{plan.name}</h3>
+                          <Badge className="bg-green-500">R$ {plan.price?.toFixed(2) || '0.00'}</Badge>
+                        </div>
+                        <div className="text-sm space-y-1">
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <Eye className="h-4 w-4" />
+                            <span>{plan.viewCount || 0} visualizações</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <ShoppingCart className="h-4 w-4" />
+                            <span>{plan.purchaseCount || 0} vendas</span>
+                          </div>
+                        </div>
+                        <Link href={`/plans/${plan.id}/edit`}>
+                          <Button size="sm" variant="outline" className="w-full">
+                            <Edit className="h-4 w-4 mr-2" />
+                            Gerenciar
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  ))
+                )}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="students">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {workoutPlans.filter((p: any) => p.assignedToUserId).length === 0 ? (
+                  <Card className="glass border-primary/20 p-8 text-center col-span-full">
+                    <Users className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
+                    <p className="text-muted-foreground">
+                      Nenhum plano atribuído a alunos ainda
+                    </p>
+                  </Card>
+                ) : (
+                  workoutPlans.filter((p: any) => p.assignedToUserId).map((plan: any) => (
+                    <Card key={plan.id} className="glass border-blue-500/20 hover-lift">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-start justify-between">
+                          <h3 className="font-semibold">{plan.name}</h3>
+                          {plan.expirationDate && (
+                            <Badge variant="secondary">
+                              <Calendar className="h-3 w-3 mr-1" />
+                              Expira
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          Atribuído a: {plan.assignedToUserName || 'Aluno'}
+                        </p>
+                        {plan.expirationDate && (
+                          <p className="text-xs text-muted-foreground">
+                            Válido até: {new Date(plan.expirationDate).toLocaleDateString()}
+                          </p>
+                        )}
+                        <Link href={`/plans/${plan.id}/edit`}>
+                          <Button size="sm" variant="outline" className="w-full">
+                            <Edit className="h-4 w-4 mr-2" />
+                            Editar
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  ))
+                )}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="templates">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {workoutPlans.filter((p: any) => !p.assignedToUserId && !p.forSale).length === 0 ? (
+                  <Card className="glass border-primary/20 p-8 text-center col-span-full">
+                    <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
+                    <p className="text-muted-foreground">
+                      Nenhum template criado ainda
+                    </p>
+                  </Card>
+                ) : (
+                  workoutPlans.filter((p: any) => !p.assignedToUserId && !p.forSale).map((plan: any) => (
+                    <Card key={plan.id} className="glass border-purple-500/20 hover-lift">
+                      <CardContent className="p-4 space-y-3">
+                        <h3 className="font-semibold">{plan.name}</h3>
+                        {plan.goal && (
+                          <p className="text-sm text-muted-foreground line-clamp-2">{plan.goal}</p>
+                        )}
+                        <div className="flex gap-2">
+                          <Link href={`/plans/${plan.id}/edit`} className="flex-1">
+                            <Button size="sm" variant="outline" className="w-full">
+                              <Edit className="h-4 w-4 mr-2" />
+                              Editar
+                            </Button>
+                          </Link>
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            className="flex-1"
+                            onClick={() => {
+                              // TODO: Duplicate plan logic
+                              toast({
+                                title: 'Em breve',
+                                description: 'Funcionalidade de duplicar plano em desenvolvimento'
+                              });
+                            }}
+                          >
+                            Duplicar
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
         </TabsContent>
 
         <TabsContent value="profile" className="space-y-4">
