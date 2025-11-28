@@ -45,7 +45,18 @@
       "Bash(if exist srcGymHero.Apipublishdeploy.zip del srcGymHero.Apipublishdeploy.zip)",
       "Bash(test -d:*)",
       "Bash(test:*)",
-      "WebFetch(domain:taktiq-api-cua5a8aucpawb9fk.scm.brazilsouth-01.azurewebsites.net)"
+      "WebFetch(domain:taktiq-api-cua5a8aucpawb9fk.scm.brazilsouth-01.azurewebsites.net)",
+      "Bash(git remote get-url:*)",
+      "WebFetch(domain:api.taktiq.app)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git stash pop:*)",
+      "Bash(git rm:*)",
+      "WebFetch(domain:taktiqwinback-f6eacgh2ggcxefdy.scm.brazilsouth-01.azurewebsites.net)",
+      "Bash(git ls-tree:*)",
+      "Bash(a client-side exception has occurred\" errors. The page had issues with API \nresponse handling.\n\nUpdated layout navigation links to point to the working /discover page \ninstead.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

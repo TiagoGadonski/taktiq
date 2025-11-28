@@ -215,7 +215,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/discover-plans" className="cursor-pointer">
+                      <Link href="/discover" className="cursor-pointer">
                         <ShoppingBag className="mr-2 h-4 w-4" />
                         Descobrir Planos
                       </Link>
@@ -373,7 +373,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/discover-plans" className="cursor-pointer">
+                      <Link href="/discover" className="cursor-pointer">
                         <ShoppingBag className="mr-2 h-4 w-4" />
                         Descobrir Planos
                       </Link>
