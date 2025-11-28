@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2 } from 'lucide-react';
+import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2, User, ShoppingCart, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,15 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
 import { useSession } from '@/hooks/use-session';
+import { useAuth } from '@/hooks/use-auth';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 // Types
 interface Exercise {
@@ -100,6 +109,14 @@ export default function AIWorkoutPage() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { startSession, hasActiveSession, isStarting } = useSession();
+  const { user } = useAuth();
+
+  // Personal Trainer specific states
+  const isPersonalTrainer = user?.role === 'PersonalTrainer';
+  const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template'>('template');
+  const [selectedStudentId, setSelectedStudentId] = useState<string>('');
+  const [expirationWeeks, setExpirationWeeks] = useState<string>('');
+  const [planPrice, setPlanPrice] = useState<string>('');
 
   const openExerciseModal = (exercise: Exercise) => {
     setSelectedExercise(exercise);
@@ -160,6 +177,16 @@ export default function AIWorkoutPage() {
     queryFn: async () => {
       return apiClient.get('/friends');
     },
+  });
+
+  // Fetch PT's students/clients
+  const { data: students } = useQuery({
+    queryKey: ['personal-students'],
+    queryFn: async () => {
+      const response = await apiClient.get<any[]>('/personal/clients');
+      return response || [];
+    },
+    enabled: isPersonalTrainer && planType === 'student',
   });
 
   // Fetch user profile for completeness check
@@ -503,13 +530,59 @@ export default function AIWorkoutPage() {
   const handleSavePlan = async () => {
     if (!generatedPlan) return;
 
+    // Personal Trainer validations
+    if (isPersonalTrainer) {
+      if (planType === 'student' && !selectedStudentId) {
+        toast({
+          variant: 'destructive',
+          title: 'Selecione um aluno',
+          description: 'Você deve selecionar um aluno para atribuir este plano.',
+        });
+        return;
+      }
+      if (planType === 'marketplace' && (!planPrice || parseFloat(planPrice) < 0)) {
+        toast({
+          variant: 'destructive',
+          title: 'Defina o preço',
+          description: 'Planos de marketplace precisam ter um preço válido (ou 0 para grátis).',
+        });
+        return;
+      }
+    }
+
     try {
+      // Calculate expiration date
+      let expirationDate = null;
+      if (expirationWeeks && parseInt(expirationWeeks) > 0) {
+        const weeks = parseInt(expirationWeeks);
+        const expDate = new Date();
+        expDate.setDate(expDate.getDate() + (weeks * 7));
+        expirationDate = expDate.toISOString();
+      }
+
       // Step 1: Create the workout plan
-      const planData = {
+      const planData: any = {
         name: generatedPlan.title,
         goal: generatedPlan.goal,
         duration: weeksCount, // Send the weeks count as duration
       };
+
+      // Add PT-specific fields
+      if (isPersonalTrainer) {
+        if (planType === 'student') {
+          planData.assignedToUserId = selectedStudentId;
+          planData.expirationDate = expirationDate;
+        } else if (planType === 'marketplace') {
+          planData.forSale = true;
+          planData.price = parseFloat(planPrice || '0');
+          planData.isPublic = true;
+        }
+      }
+
+      // Add expiration even for non-PT if specified
+      if (expirationDate && planType !== 'student') {
+        planData.expirationDate = expirationDate;
+      }
 
       const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
@@ -608,12 +681,58 @@ export default function AIWorkoutPage() {
   const handleStartPlan = async () => {
     if (!generatedPlan) return;
 
+    // Personal Trainer validations
+    if (isPersonalTrainer) {
+      if (planType === 'student' && !selectedStudentId) {
+        toast({
+          variant: 'destructive',
+          title: 'Selecione um aluno',
+          description: 'Você deve selecionar um aluno para atribuir este plano.',
+        });
+        return;
+      }
+      if (planType === 'marketplace' && (!planPrice || parseFloat(planPrice) < 0)) {
+        toast({
+          variant: 'destructive',
+          title: 'Defina o preço',
+          description: 'Planos de marketplace precisam ter um preço válido (ou 0 para grátis).',
+        });
+        return;
+      }
+    }
+
     try {
+      // Calculate expiration date
+      let expirationDate = null;
+      if (expirationWeeks && parseInt(expirationWeeks) > 0) {
+        const weeks = parseInt(expirationWeeks);
+        const expDate = new Date();
+        expDate.setDate(expDate.getDate() + (weeks * 7));
+        expirationDate = expDate.toISOString();
+      }
+
       // Step 1: Save the plan first
-      const planData = {
+      const planData: any = {
         name: generatedPlan.title,
         goal: generatedPlan.goal,
       };
+
+      // Add PT-specific fields
+      if (isPersonalTrainer) {
+        if (planType === 'student') {
+          planData.assignedToUserId = selectedStudentId;
+          planData.expirationDate = expirationDate;
+        } else if (planType === 'marketplace') {
+          planData.forSale = true;
+          planData.price = parseFloat(planPrice || '0');
+          planData.isPublic = true;
+        }
+      }
+
+      // Add expiration even for non-PT if specified
+      if (expirationDate && planType !== 'student') {
+        planData.expirationDate = expirationDate;
+      }
 
       const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
       const planId = createdPlan.id;
@@ -1212,6 +1331,140 @@ export default function AIWorkoutPage() {
               </Button>
             </CardContent>
           </Card>
+
+          {/* Personal Trainer Configuration */}
+          {isPersonalTrainer && (
+            <Card className="border-primary/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <User className="h-5 w-5 text-primary" />
+                  Configurações de Personal Trainer
+                </CardTitle>
+                <CardDescription>Configure como este plano será utilizado</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Plan Type Selection */}
+                <div className="space-y-3">
+                  <Label>Tipo de Plano</Label>
+                  <RadioGroup value={planType} onValueChange={(value: any) => setPlanType(value)}>
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent cursor-pointer">
+                      <RadioGroupItem value="template" id="template" />
+                      <Label htmlFor="template" className="flex-1 cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <FileText className="h-4 w-4" />
+                          <div>
+                            <p className="font-medium">Template Pessoal</p>
+                            <p className="text-sm text-muted-foreground">Use como modelo para futuros planos</p>
+                          </div>
+                        </div>
+                      </Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent cursor-pointer">
+                      <RadioGroupItem value="student" id="student" />
+                      <Label htmlFor="student" className="flex-1 cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          <div>
+                            <p className="font-medium">Para Aluno Específico</p>
+                            <p className="text-sm text-muted-foreground">Atribuir a um aluno da sua lista</p>
+                          </div>
+                        </div>
+                      </Label>
+                    </div>
+
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent cursor-pointer">
+                      <RadioGroupItem value="marketplace" id="marketplace" />
+                      <Label htmlFor="marketplace" className="flex-1 cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <ShoppingCart className="h-4 w-4" />
+                          <div>
+                            <p className="font-medium">Para Marketplace</p>
+                            <p className="text-sm text-muted-foreground">Disponibilizar para venda/distribuição</p>
+                          </div>
+                        </div>
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* Student Selection */}
+                {planType === 'student' && (
+                  <div className="space-y-2 animate-in fade-in-50">
+                    <Label htmlFor="student-select">Selecionar Aluno *</Label>
+                    <Select value={selectedStudentId} onValueChange={setSelectedStudentId}>
+                      <SelectTrigger id="student-select">
+                        <SelectValue placeholder="Escolha um aluno" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {students && students.length > 0 ? (
+                          students.map((student: any) => (
+                            <SelectItem key={student.id} value={student.id}>
+                              {student.name} ({student.email})
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <SelectItem value="none" disabled>
+                            Nenhum aluno encontrado
+                          </SelectItem>
+                        )}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-sm text-muted-foreground">
+                      O plano será automaticamente atribuído ao aluno selecionado
+                    </p>
+                  </div>
+                )}
+
+                {/* Marketplace Configuration */}
+                {planType === 'marketplace' && (
+                  <div className="space-y-4 animate-in fade-in-50">
+                    <div className="space-y-2">
+                      <Label htmlFor="price">Preço (R$) *</Label>
+                      <input
+                        id="price"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        placeholder="0.00"
+                        value={planPrice}
+                        onChange={(e) => setPlanPrice(e.target.value)}
+                        className="w-full p-2 rounded-md border border-input bg-background text-sm"
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        Defina como R$ 0,00 para disponibilizar gratuitamente
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Expiration Date (for student plans or optional for others) */}
+                {(planType === 'student' || planType === 'template') && (
+                  <div className="space-y-2 animate-in fade-in-50">
+                    <Label htmlFor="expiration" className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      Data de Expiração (semanas)
+                      {planType === 'student' && <span className="text-destructive">*</span>}
+                    </Label>
+                    <input
+                      id="expiration"
+                      type="number"
+                      min="1"
+                      placeholder="Ex: 12"
+                      value={expirationWeeks}
+                      onChange={(e) => setExpirationWeeks(e.target.value)}
+                      className="w-full p-2 rounded-md border border-input bg-background text-sm"
+                    />
+                    <p className="text-sm text-muted-foreground">
+                      {planType === 'student'
+                        ? 'O aluno poderá usar este plano pelo período especificado'
+                        : 'Opcional: defina um prazo de validade para este plano'}
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Display generated plan */}
           {generatedPlan && (

@@ -333,6 +333,7 @@ app.MapCertificationEndpoints(); // Trainer certifications
 app.MapTestimonialEndpoints(); // Testimonials and reviews
 app.MapAnnouncementEndpoints(); // Platform announcements and popups
 app.MapMediaEndpoints(); // Media upload (images and videos)
+app.MapWorkoutPlanCommentEndpoints(); // Workout plan comments
 app.MapPaymentEndpoints(); // Payment processing (Stripe)
 app.MapStripeConnectEndpoints(); // Stripe Connect for trainer payouts
 app.MapWithdrawalEndpoints(); // Trainer withdrawal requests

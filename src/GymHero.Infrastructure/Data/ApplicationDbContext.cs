@@ -38,6 +38,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<WithdrawalRequest> WithdrawalRequests => Set<WithdrawalRequest>();
     public DbSet<Conversation> Conversations => Set<Conversation>();
     public DbSet<Message> Messages => Set<Message>();
+    public DbSet<WorkoutPlanComment> WorkoutPlanComments => Set<WorkoutPlanComment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

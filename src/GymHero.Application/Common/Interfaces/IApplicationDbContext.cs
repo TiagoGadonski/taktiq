@@ -36,6 +36,7 @@ public interface IApplicationDbContext
     DbSet<WithdrawalRequest> WithdrawalRequests { get; }
     DbSet<Conversation> Conversations { get; }
     DbSet<Message> Messages { get; }
+    DbSet<WorkoutPlanComment> WorkoutPlanComments { get; }
 
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

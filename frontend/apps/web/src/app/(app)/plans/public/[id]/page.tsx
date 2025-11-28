@@ -8,11 +8,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/use-auth';
+import { PlanComments } from '@/components/plans/plan-comments';
 
 export default function PublicPlanDetailPage() {
   const router = useRouter();
   const params = useParams();
   const { toast } = useToast();
+  const { user } = useAuth();
   const planId = params?.id as string;
 
   const { data: plan, isLoading } = useQuery({
@@ -202,6 +205,11 @@ export default function PublicPlanDetailPage() {
             </CardContent>
           </Card>
         )}
+      </div>
+
+      {/* Comments Section */}
+      <div className="mt-8">
+        <PlanComments planId={planId} currentUserId={user?.id} />
       </div>
     </div>
   );

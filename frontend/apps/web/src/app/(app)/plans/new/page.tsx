@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, Dumbbell, Home, Globe, User, ShoppingCart, FileText, Calendar } from 'lucide-react';
+import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, Dumbbell, Home, Globe, User, ShoppingCart, FileText, Calendar, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useQuery } from '@tanstack/react-query';
+import { CustomExerciseModal } from '@/components/exercise/custom-exercise-modal';
 
 const planSchema = z.object({
   name: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),
@@ -86,6 +87,9 @@ export default function NewPlanPage() {
   const [selectedStudentId, setSelectedStudentId] = useState<string>('');
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
   const [planPrice, setPlanPrice] = useState<string>('');
+
+  // Custom exercise modal state
+  const [isCustomExerciseModalOpen, setIsCustomExerciseModalOpen] = useState(false);
 
   // Fetch PT's students/clients
   const { data: students } = useQuery({
@@ -686,6 +690,24 @@ export default function NewPlanPage() {
               </Button>
             </div>
 
+            {/* Custom Exercise Button - Only for Personal Trainers */}
+            {isPersonalTrainer && (
+              <div className="pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsCustomExerciseModalOpen(true)}
+                  className="w-full border-dashed border-primary/50 hover:border-primary hover:bg-primary/5"
+                >
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Criar Exercício Personalizado
+                </Button>
+                <p className="text-xs text-muted-foreground text-center mt-2">
+                  Crie exercícios customizados com vídeos e imagens
+                </p>
+              </div>
+            )}
+
             <div className="space-y-2">
               <Label>Adicionar ao:</Label>
               <Select value={selectedDayId} onValueChange={setSelectedDayId}>
@@ -879,6 +901,18 @@ export default function NewPlanPage() {
           </Button>
         </div>
       </form>
+
+      {/* Custom Exercise Modal */}
+      <CustomExerciseModal
+        open={isCustomExerciseModalOpen}
+        onClose={() => setIsCustomExerciseModalOpen(false)}
+        onExerciseCreated={(exercise) => {
+          // Add the created exercise to search results
+          setSearchResults([exercise, ...searchResults]);
+          // Auto-add to current day
+          addExerciseToDay(exercise);
+        }}
+      />
     </div>
   );
 }
