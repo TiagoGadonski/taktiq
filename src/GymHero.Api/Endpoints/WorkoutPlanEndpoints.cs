@@ -22,11 +22,50 @@ public static class WorkoutPlanEndpoints
         group.MapPost("/", async (
             [FromBody] CreateWorkoutPlanRequest request,
             ClaimsPrincipal user,
-            ISender sender) =>
+            ISender sender,
+            IApplicationDbContext context) =>
         {
-            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var currentUserId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // If AssignedToUserId is provided, the student becomes the owner
+            // Otherwise, the current user (PT or regular user) is the owner
+            var ownerId = request.AssignedToUserId ?? currentUserId;
+
             var command = new CreateWorkoutPlanCommand(request.Name, request.Goal, ownerId, request.Duration);
             var result = await sender.Send(command);
+
+            // Update additional fields if provided
+            var plan = await context.WorkoutPlans.FindAsync(result.Id);
+            if (plan != null)
+            {
+                // Set expiration date if provided
+                if (request.ExpirationDate.HasValue)
+                {
+                    plan.ExpirationDate = request.ExpirationDate.Value;
+                }
+
+                // Marketplace fields
+                plan.ForSale = request.ForSale;
+                plan.Price = request.Price;
+
+                // If for sale, must be public
+                if (request.ForSale)
+                {
+                    plan.IsPublic = true;
+                    plan.VisibilityLevel = GymHero.Domain.Enums.VisibilityLevel.Public;
+                }
+                else
+                {
+                    plan.IsPublic = request.IsPublic;
+                    if (request.IsPublic)
+                    {
+                        plan.VisibilityLevel = GymHero.Domain.Enums.VisibilityLevel.Public;
+                    }
+                }
+
+                await context.SaveChangesAsync(CancellationToken.None);
+            }
+
             return Results.CreatedAtRoute("GetWorkoutPlanById", new { id = result.Id }, result);
         })
         .WithName("CreateWorkoutPlan")

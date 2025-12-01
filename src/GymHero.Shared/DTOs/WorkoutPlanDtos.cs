@@ -10,6 +10,15 @@ public class CreateWorkoutPlanRequest
     public string Name { get; set; } = "";
     public string? Goal { get; set; }
     public int? Duration { get; set; } // Duração em semanas
+
+    // PT-specific fields
+    public Guid? AssignedToUserId { get; set; } // Para atribuir a um aluno
+    public DateTime? ExpirationDate { get; set; }
+
+    // Marketplace fields
+    public bool ForSale { get; set; } = false;
+    public decimal? Price { get; set; }
+    public bool IsPublic { get; set; } = false;
 }
 
 // Dados que retornamos após a criação
