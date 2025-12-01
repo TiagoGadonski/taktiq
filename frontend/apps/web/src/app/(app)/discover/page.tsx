@@ -382,24 +382,34 @@ export default function DiscoverPlansPage() {
           </p>
         </div>
 
-        {/* Price and Purchase */}
-        <div className="flex items-center justify-between pt-4 border-t border-border/50">
-          <div>
-            {plan.price && plan.price > 0 ? (
-              <p className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-                R$ {plan.price.toFixed(2)}
-              </p>
-            ) : (
-              <p className="text-sm font-semibold text-green-500 flex items-center gap-1">
-                <Check className="h-4 w-4" />
-                Grátis
-              </p>
-            )}
+        {/* Price and Actions */}
+        <div className="pt-4 border-t border-border/50 space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              {plan.price && plan.price > 0 ? (
+                <p className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                  R$ {plan.price.toFixed(2)}
+                </p>
+              ) : (
+                <p className="text-sm font-semibold text-green-500 flex items-center gap-1">
+                  <Check className="h-4 w-4" />
+                  Grátis
+                </p>
+              )}
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => router.push(`/plans/public/${plan.id}`)}
+            >
+              <Eye className="h-4 w-4 mr-2" />
+              Ver Detalhes
+            </Button>
           </div>
           <Button
             onClick={() => handlePurchaseClick(plan)}
             disabled={!user || purchaseMutation.isPending}
-            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+            className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
           >
             {purchaseMutation.isPending ? (
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
@@ -570,7 +580,7 @@ export default function DiscoverPlansPage() {
               // Actions for acquired plans
               <Button
                 size="sm"
-                onClick={() => router.push(`/plans/${plan.id}`)}
+                onClick={() => router.push(`/plans/public/${plan.id}`)}
                 className="w-full"
               >
                 <Eye className="h-4 w-4 mr-2" />

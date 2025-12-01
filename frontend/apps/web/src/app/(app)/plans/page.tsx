@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Star, Trash2, Edit, Share2, Send, Settings, AlertTriangle, Clock, RefreshCw, ShoppingCart } from 'lucide-react';
+import { Plus, Star, Trash2, Edit, Share2, Send, Settings, AlertTriangle, Clock, RefreshCw, ShoppingCart, ChevronDown, ChevronUp, Dumbbell } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +31,19 @@ export default function PlansPage() {
   const [renewDialogOpen, setRenewDialogOpen] = useState(false);
   const [renewPlanData, setRenewPlanData] = useState<{ id: string; name: string; isExpired: boolean } | null>(null);
   const [marketplaceDialogOpen, setMarketplaceDialogOpen] = useState(false);
+  const [expandedPlans, setExpandedPlans] = useState<Set<string>>(new Set());
+
+  const togglePlanExpansion = (planId: string) => {
+    setExpandedPlans(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(planId)) {
+        newSet.delete(planId);
+      } else {
+        newSet.add(planId);
+      }
+      return newSet;
+    });
+  };
 
   const { data: plans, isLoading } = useQuery({
     queryKey: ['workout-plans'],
@@ -219,6 +232,61 @@ export default function PlansPage() {
                         <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
                         <p>Seu plano está próximo do fim. Planeje sua continuação em breve!</p>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Expandable Workouts/Exercises Section */}
+                  {plan.workouts && plan.workouts.length > 0 && (
+                    <div className="border-t border-border/50 pt-4 mt-4">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => togglePlanExpansion(plan.id)}
+                        className="w-full justify-between hover:bg-accent/50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Dumbbell className="h-4 w-4" />
+                          <span className="font-medium">Ver Exercícios</span>
+                        </div>
+                        {expandedPlans.has(plan.id) ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                      </Button>
+
+                      {expandedPlans.has(plan.id) && (
+                        <div className="mt-3 space-y-3">
+                          {plan.workouts.map((workout, workoutIndex) => (
+                            <div key={workout.id} className="bg-accent/30 rounded-lg p-3">
+                              <h4 className="font-medium text-sm mb-2 flex items-center gap-2">
+                                <span className="bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center text-xs">
+                                  {workoutIndex + 1}
+                                </span>
+                                {workout.name}
+                              </h4>
+                              {workout.exercises && workout.exercises.length > 0 ? (
+                                <div className="space-y-2 pl-8">
+                                  {workout.exercises.map((exercise, exerciseIndex) => (
+                                    <div key={exercise.id} className="text-sm flex items-start gap-2">
+                                      <span className="text-muted-foreground min-w-[20px]">{exerciseIndex + 1}.</span>
+                                      <div className="flex-1">
+                                        <p className="font-medium">{exercise.exerciseName || exercise.exercise?.name}</p>
+                                        <p className="text-xs text-muted-foreground">
+                                          {exercise.targetSets} séries × {exercise.targetReps} reps
+                                          {exercise.exercise?.muscleGroup && ` • ${exercise.exercise.muscleGroup}`}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-xs text-muted-foreground pl-8">Nenhum exercício adicionado</p>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
 
