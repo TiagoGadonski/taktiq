@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2, User, ShoppingCart, FileText } from 'lucide-react';
+import { Sparkles, Loader2, Dumbbell, Calendar, Share2, RefreshCw, Info, Play, Home, Building2, User, ShoppingCart, FileText, Save } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -118,6 +118,12 @@ export default function AIWorkoutPage() {
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
   const [planPrice, setPlanPrice] = useState<string>('');
 
+  // Single workout PT states
+  const [singleWorkoutType, setSingleWorkoutType] = useState<'personal' | 'student'>('personal');
+  const [singleWorkoutStudentId, setSingleWorkoutStudentId] = useState<string>('');
+  const [singleWorkoutExpirationWeeks, setSingleWorkoutExpirationWeeks] = useState<string>('');
+  const [savedSingleWorkoutId, setSavedSingleWorkoutId] = useState<string | null>(null);
+
   const openExerciseModal = (exercise: Exercise) => {
     setSelectedExercise(exercise);
     setIsExerciseModalOpen(true);
@@ -159,6 +165,150 @@ export default function AIWorkoutPage() {
     }
   };
 
+  const handleSaveSingleWorkout = async () => {
+    if (!generatedWorkout) return;
+
+    // Personal Trainer validations
+    if (isPersonalTrainer && singleWorkoutType === 'student') {
+      if (!singleWorkoutStudentId) {
+        toast({
+          variant: 'destructive',
+          title: 'Selecione um aluno',
+          description: 'Você deve selecionar um aluno para atribuir este treino.',
+        });
+        return;
+      }
+      if (!singleWorkoutExpirationWeeks || parseInt(singleWorkoutExpirationWeeks) <= 0) {
+        toast({
+          variant: 'destructive',
+          title: 'Defina a expiração',
+          description: 'Treinos atribuídos a alunos precisam ter uma data de expiração.',
+        });
+        return;
+      }
+    }
+
+    try {
+      // Calculate expiration date
+      let expirationDate = null;
+      if (singleWorkoutExpirationWeeks && parseInt(singleWorkoutExpirationWeeks) > 0) {
+        const weeks = parseInt(singleWorkoutExpirationWeeks);
+        const expDate = new Date();
+        expDate.setDate(expDate.getDate() + (weeks * 7));
+        expirationDate = expDate.toISOString();
+      }
+
+      // Step 1: Create the workout plan
+      const planData: any = {
+        name: generatedWorkout.title,
+        goal: generatedWorkout.description,
+        duration: 1, // Single workout = 1 week plan
+      };
+
+      // Add PT-specific fields
+      if (isPersonalTrainer && singleWorkoutType === 'student') {
+        planData.assignedToUserId = singleWorkoutStudentId;
+        planData.expirationDate = expirationDate;
+      } else if (singleWorkoutExpirationWeeks && parseInt(singleWorkoutExpirationWeeks) > 0) {
+        // Add expiration even for non-PT if specified
+        planData.expirationDate = expirationDate;
+      }
+
+      const createdPlan = await apiClient.post<{ id: string }>('/workout-plans', planData);
+      const planId = createdPlan.id;
+
+      if (!planId) {
+        throw new Error('Plan ID not returned from server');
+      }
+
+      setSavedSingleWorkoutId(planId);
+
+      // Step 2: Get all exercises from the database to check which ones already exist
+      const existingExercises = await apiClient.get<any[]>('/exercises');
+      const exerciseMap = new Map(existingExercises.map((e: any) => [e.name.toLowerCase(), e]));
+
+      // Step 3: Create a single workout (day) and add exercises to it
+      const workoutData = {
+        name: generatedWorkout.title,
+        dayOfWeek: null,
+        order: 1,
+      };
+
+      const workoutResponse = await apiClient.post<{ id: string }>(`/workout-plans/${planId}/workouts`, workoutData);
+      const workoutId = workoutResponse.id;
+
+      // Add exercises to this workout
+      for (let exIndex = 0; exIndex < generatedWorkout.exercises.length; exIndex++) {
+        const ex = generatedWorkout.exercises[exIndex];
+        let exerciseId: string;
+
+        // Check if exercise already exists in database
+        const existingExercise = exerciseMap.get(ex.name.toLowerCase());
+
+        if (existingExercise) {
+          // Check if existing exercise needs video URL update
+          const needsUpdate = (!existingExercise.videoUrl && ex.videoUrl) || (!existingExercise.imageUrl && ex.gifUrl);
+
+          if (needsUpdate) {
+            await apiClient.put(`/exercises/${existingExercise.id}`, {
+              name: existingExercise.name,
+              muscleGroup: existingExercise.muscleGroup,
+              category: existingExercise.category,
+              equipment: existingExercise.equipment,
+              notes: ex.instructions ? ex.instructions.join('. ') : existingExercise.notes,
+              videoUrl: ex.videoUrl || existingExercise.videoUrl,
+              imageUrl: ex.gifUrl || existingExercise.imageUrl,
+            });
+          }
+
+          exerciseId = existingExercise.id;
+        } else {
+          // Create new exercise
+          const newExercise = await apiClient.post<{ id: string }>('/exercises', {
+            name: ex.name,
+            muscleGroup: ex.bodyPart || 'Other',
+            category: 'strength',
+            equipment: ex.equipment || 'bodyweight',
+            notes: ex.instructions ? ex.instructions.join('. ') : null,
+            videoUrl: ex.videoUrl || null,
+            imageUrl: ex.gifUrl || null,
+          });
+          exerciseId = newExercise.id;
+          exerciseMap.set(ex.name.toLowerCase(), newExercise);
+        }
+
+        // Add exercise to the workout
+        const exerciseData = {
+          exerciseId: exerciseId,
+          order: exIndex + 1,
+          targetSets: ex.sets,
+          targetReps: typeof ex.reps === 'string' ? parseInt(ex.reps.split('-')[0]) || 12 : ex.reps,
+          targetLoad: 0,
+        };
+
+        await apiClient.post(`/workout-plans/${planId}/workouts/${workoutId}/exercises`, exerciseData);
+      }
+
+      toast({
+        title: 'Treino salvo!',
+        description: isPersonalTrainer && singleWorkoutType === 'student'
+          ? 'Treino atribuído ao aluno com sucesso.'
+          : 'Seu treino foi salvo e está disponível em Meus Planos.',
+      });
+
+      // Redirect to plans page
+      setTimeout(() => {
+        router.push('/plans');
+      }, 1000);
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao salvar treino',
+        description: error.response?.data?.message || error.message || 'Não foi possível salvar o treino',
+      });
+    }
+  };
+
   const openShareDialog = (workoutType: 'single' | 'plan') => {
     setWorkoutToShare(workoutType);
     setIsShareDialogOpen(true);
@@ -186,7 +336,7 @@ export default function AIWorkoutPage() {
       const response = await apiClient.get<any[]>('/personal/clients');
       return response || [];
     },
-    enabled: isPersonalTrainer && planType === 'student',
+    enabled: isPersonalTrainer && (planType === 'student' || singleWorkoutType === 'student'),
   });
 
   // Fetch user profile for completeness check
@@ -1024,6 +1174,89 @@ export default function AIWorkoutPage() {
                 </div>
               </div>
 
+              {/* Personal Trainer Configuration for Single Workout */}
+              {isPersonalTrainer && (
+                <Card className="border-2 border-primary/20 bg-primary/5">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      Configurações de Personal Trainer
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <RadioGroup value={singleWorkoutType} onValueChange={(value: 'personal' | 'student') => setSingleWorkoutType(value)}>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="personal" id="single-personal" />
+                        <Label htmlFor="single-personal" className="font-normal cursor-pointer">
+                          <div className="flex items-center gap-2">
+                            <FileText className="h-4 w-4 text-muted-foreground" />
+                            <span>Treino Pessoal (para mim ou template)</span>
+                          </div>
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="student" id="single-student" />
+                        <Label htmlFor="single-student" className="font-normal cursor-pointer">
+                          <div className="flex items-center gap-2">
+                            <User className="h-4 w-4 text-muted-foreground" />
+                            <span>Para Aluno Específico</span>
+                          </div>
+                        </Label>
+                      </div>
+                    </RadioGroup>
+
+                    {singleWorkoutType === 'student' && (
+                      <div className="space-y-3 pl-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="single-student-select" className="text-sm">Selecionar Aluno</Label>
+                          <Select value={singleWorkoutStudentId} onValueChange={setSingleWorkoutStudentId}>
+                            <SelectTrigger id="single-student-select">
+                              <SelectValue placeholder="Escolha um aluno" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {students?.map((student: any) => (
+                                <SelectItem key={student.id} value={student.id}>
+                                  {student.name || student.email}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="single-expiration-weeks" className="text-sm">Expiração (semanas) *</Label>
+                          <input
+                            id="single-expiration-weeks"
+                            type="number"
+                            min="1"
+                            value={singleWorkoutExpirationWeeks}
+                            onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
+                            placeholder="Ex: 4"
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {singleWorkoutType === 'personal' && (
+                      <div className="pl-6 space-y-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="single-expiration-weeks-optional" className="text-sm">Expiração (semanas) - Opcional</Label>
+                          <input
+                            id="single-expiration-weeks-optional"
+                            type="number"
+                            min="1"
+                            value={singleWorkoutExpirationWeeks}
+                            onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
+                            placeholder="Ex: 8"
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
               <Button
                 onClick={handleGenerateWorkout}
                 disabled={generateWorkoutMutation.isPending}
@@ -1059,7 +1292,7 @@ export default function AIWorkoutPage() {
                       Duração estimada: {generatedWorkout.duration} minutos
                     </p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     <Button
                       onClick={handleStartWorkout}
                       disabled={isStarting}
@@ -1071,6 +1304,14 @@ export default function AIWorkoutPage() {
                         <Play className="h-4 w-4 mr-2" />
                       )}
                       Iniciar Treino
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleSaveSingleWorkout}
+                    >
+                      <Save className="h-4 w-4 mr-2" />
+                      Salvar Treino
                     </Button>
                     <Button
                       variant="outline"
