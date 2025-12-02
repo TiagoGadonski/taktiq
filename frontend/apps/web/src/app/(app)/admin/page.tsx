@@ -17,6 +17,7 @@ import {
   Trophy,
   Activity,
   Megaphone,
+  Dumbbell,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -380,6 +381,31 @@ export default function AdminPage() {
               >
                 <Megaphone className="mr-2 h-4 w-4" />
                 Gerenciar Anúncios
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass border-purple-500/20">
+          <CardContent className="pt-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-purple-500/20 rounded-lg">
+                  <Dumbbell className="h-6 w-6 text-purple-500" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Exercícios</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Editar base de exercícios e traduções
+                  </p>
+                </div>
+              </div>
+              <Button
+                onClick={() => router.push('/admin/exercises')}
+                className="bg-purple-500 hover:bg-purple-500/90 hover-lift tap-scale w-full"
+              >
+                <Dumbbell className="mr-2 h-4 w-4" />
+                Gerenciar Exercícios
               </Button>
             </div>
           </CardContent>
