@@ -580,7 +580,7 @@ export default function DiscoverPlansPage() {
               // Actions for acquired plans
               <Button
                 size="sm"
-                onClick={() => router.push(`/plans/public/${plan.id}`)}
+                onClick={() => router.push(`/plans/${plan.id}`)}
                 className="w-full"
               >
                 <Eye className="h-4 w-4 mr-2" />

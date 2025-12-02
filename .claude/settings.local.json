@@ -11,7 +11,12 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nfix: Corrigir detecção de Personal Trainer na criação de planos\n\nProblema:\n- Personal Trainers não conseguiam ver opções específicas de criação de planos\n- Opções de marketplace, atribuir a aluno e templates não apareciam\n- PTs criavam planos como usuários normais\n\nCausa:\n- Linha 84: verificava user?.role === ''Personal''\n- Role correto é ''PersonalTrainer'' (não ''Personal'')\n- Por isso isPersonalTrainer sempre retornava false\n\nCorreção:\n- Alterado de user?.role === ''Personal''\n- Para user?.role === ''PersonalTrainer''\n- Agora PTs veem todas as opções específicas:\n  ✓ Template Pessoal\n  ✓ Para Aluno Específico (com seleção de aluno)\n  ✓ Para Marketplace (com configuração de preço)\n  ✓ Data de expiração\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(dotnet build:*)",
       "Bash(dotnet ef migrations add:*)",
-      "Bash(dotnet ef database update:*)"
+      "Bash(dotnet ef database update:*)",
+      "Bash(git commit:*)",
+      "Bash(gh:*)",
+      "Bash(winget install:*)",
+      "Bash(git diff:*)",
+      "Bash(Select-String -Pattern \"Type error|Failed to compile|Compiled successfully\")"
     ],
     "deny": [],
     "ask": []
