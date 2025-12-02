@@ -343,7 +343,10 @@ export default function WorkoutPage() {
       const selectedWorkout = currentSession.workoutPlan?.workouts?.find(
         (w: Workout) => w.id === selectedWorkoutId
       );
-      const exercisesToCheck = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+      const planExercises = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+
+      // Combine plan exercises with added exercises for complete check
+      const exercisesToCheck = [...planExercises, ...addedExercises];
 
       if (exercisesToCheck.length > 0) {
         // Simulate the new sets array with the just-added set
