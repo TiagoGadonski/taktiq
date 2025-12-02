@@ -56,9 +56,6 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8880A4138F3240E6943E06D251C296BB }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EAD3191630A04926BE438133F7C6B5A6 }}
 
-      - name: Stop Azure Web App
-        run: az webapp stop --name taktiqwinback --resource-group gymherowebfrontend_group
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -66,7 +63,6 @@ jobs:
           app-name: 'taktiqwinback'
           slot-name: 'Production'
           package: .
-
-      - name: Start Azure Web App
-        run: az webapp start --name taktiqwinback --resource-group gymherowebfrontend_group
+          clean: true
+          restart: true
           
