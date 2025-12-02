@@ -21,6 +21,7 @@ public class UpdateExerciseCommandHandler : IRequestHandler<UpdateExerciseComman
         }
 
         exercise.Name = request.Name;
+        exercise.Description = request.Description;
         exercise.MuscleGroup = request.MuscleGroup;
         exercise.Category = request.Category;
         exercise.Equipment = request.Equipment;

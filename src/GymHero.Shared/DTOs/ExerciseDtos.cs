@@ -4,6 +4,7 @@ namespace GymHero.Shared.DTOs;
 public record ExerciseResponse(
     Guid Id,
     string Name,
+    string? Description,
     string MuscleGroup,
     string? Category,
     string? Equipment,
@@ -17,6 +18,7 @@ public record ExerciseResponse(
 public class CreateExerciseRequest
 {
     public string Name { get; set; } = "";
+    public string? Description { get; set; }
     public string MuscleGroup { get; set; } = "";
     public string? Category { get; set; }
     public string? Equipment { get; set; }
@@ -30,6 +32,7 @@ public class CreateExerciseRequest
 public class UpdateExerciseRequest
 {
     public string Name { get; set; } = "";
+    public string? Description { get; set; }
     public string MuscleGroup { get; set; } = "";
     public string? Category { get; set; }
     public string? Equipment { get; set; }
@@ -44,6 +47,7 @@ public class ExerciseDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = "";
+    public string? Description { get; set; }
     public string MuscleGroup { get; set; } = "";
     public string? Category { get; set; }
     public string? Equipment { get; set; }

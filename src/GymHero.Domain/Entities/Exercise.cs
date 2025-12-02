@@ -5,6 +5,7 @@ namespace GymHero.Domain.Entities;
 public class Exercise : BaseEntity
 {
     public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
     public string MuscleGroup { get; set; } = string.Empty;
     public string? Equipment { get; set; }
     public string? Notes { get; set; }

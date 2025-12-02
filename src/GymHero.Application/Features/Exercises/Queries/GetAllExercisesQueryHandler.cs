@@ -27,10 +27,13 @@ public class GetAllExercisesQueryHandler : IRequestHandler<GetAllExercisesQuery,
             {
                 Id = e.Id,
                 Name = e.Name,
+                Description = e.Description,
                 MuscleGroup = e.MuscleGroup,
                 Category = e.Category,
                 Equipment = e.Equipment,
                 Notes = e.Notes,
+                VideoUrl = e.VideoUrl,
+                ImageUrl = e.ImageUrl,
                 WorkoutLocation = (int)e.WorkoutLocation
             })
             .ToListAsync(cancellationToken);

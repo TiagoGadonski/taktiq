@@ -16,6 +16,7 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
         var exercise = new Exercise
         {
             Name = request.Name,
+            Description = request.Description,
             MuscleGroup = request.MuscleGroup,
             Category = request.Category,
             Equipment = request.Equipment,
@@ -32,6 +33,7 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
         {
             Id = exercise.Id,
             Name = exercise.Name,
+            Description = exercise.Description,
             MuscleGroup = exercise.MuscleGroup,
             Category = exercise.Category,
             Equipment = exercise.Equipment,

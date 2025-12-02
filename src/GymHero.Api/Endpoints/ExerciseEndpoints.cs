@@ -32,7 +32,7 @@ public static class ExerciseEndpoints
         group.MapPost("/", async ([FromBody] CreateExerciseRequest request, ISender sender) =>
         {
             var workoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.WorkoutLocation;
-            var command = new CreateExerciseCommand(request.Name, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl, workoutLocation);
+            var command = new CreateExerciseCommand(request.Name, request.Description, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl, workoutLocation);
             var result = await sender.Send(command);
             return Results.Created($"/api/exercises/{result.Id}", result);
         }).RequireAuthorization(); // Allow authenticated users to create exercises
@@ -40,7 +40,7 @@ public static class ExerciseEndpoints
         // PUT /api/v1/exercises/{id}
         group.MapPut("/{id:guid}", async (Guid id, [FromBody] UpdateExerciseRequest request, ISender sender) =>
         {
-            var command = new UpdateExerciseCommand(id, request.Name, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl);
+            var command = new UpdateExerciseCommand(id, request.Name, request.Description, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl);
             try
             {
                 await sender.Send(command);
