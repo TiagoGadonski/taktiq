@@ -168,6 +168,14 @@ public static class AIEndpoints
                     }
                 }
 
+                // ✅ NEW: Auto-save new exercises to database
+                logger.LogInformation("Checking for new exercises to save to database...");
+                var savedCount = await AutoSaveNewExercises(context, workout, logger);
+                if (savedCount > 0)
+                {
+                    logger.LogInformation($"✅ Saved {savedCount} new exercise(s) to database");
+                }
+
                 // ✅ SERVER-SIDE VALIDATION: Filter out gym equipment for home workouts
                 // Check request location first, then fall back to profile preference
                 var isHomeWorkoutRequest = !string.IsNullOrEmpty(request.WorkoutLocation)
@@ -392,6 +400,19 @@ public static class AIEndpoints
                         logger.LogWarning("All AI APIs failed. Using enhanced mock plan generation.");
                         plan = GenerateMockPlan(request.Prompt, request.DaysPerWeek ?? 4, request.FitnessLevel, userProfile);
                     }
+                }
+
+                // ✅ NEW: Auto-save new exercises from all days of the plan
+                logger.LogInformation("Checking for new exercises in workout plan to save to database...");
+                var totalSavedInPlan = 0;
+                foreach (var day in plan.Days)
+                {
+                    var savedInDay = await AutoSaveNewExercisesFromDay(context, day, logger);
+                    totalSavedInPlan += savedInDay;
+                }
+                if (totalSavedInPlan > 0)
+                {
+                    logger.LogInformation($"✅ Saved {totalSavedInPlan} new exercise(s) from workout plan to database");
                 }
 
                 // Add GIF URLs to all exercises in all days
@@ -2546,6 +2567,133 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         await context.SaveChangesAsync(CancellationToken.None);
 
         return newExercise.Id;
+    }
+
+    // ✅ NEW: Auto-save new exercises from AI-generated workout
+    private static async Task<int> AutoSaveNewExercises(
+        IApplicationDbContext context,
+        AIWorkoutResponse workout,
+        ILogger<Program> logger)
+    {
+        var savedCount = 0;
+
+        if (workout?.Exercises == null || !workout.Exercises.Any())
+        {
+            return savedCount;
+        }
+
+        foreach (var exercise in workout.Exercises)
+        {
+            try
+            {
+                // Check if exercise already exists in database
+                var exists = await context.Exercises
+                    .AnyAsync(e => e.Name.ToLower() == exercise.Name.ToLower());
+
+                if (!exists)
+                {
+                    logger.LogInformation($"New exercise found: '{exercise.Name}' - saving to database...");
+
+                    // Extract muscle group from bodyPart
+                    var muscleGroup = MapBodyPartToMuscleGroup(exercise.BodyPart);
+
+                    // Save to database
+                    await SaveNewExerciseToDatabase(
+                        context,
+                        name: exercise.Name,
+                        muscleGroup: muscleGroup,
+                        equipment: exercise.Equipment,
+                        description: null, // AI doesn't provide description in response
+                        category: muscleGroup
+                    );
+
+                    savedCount++;
+                    logger.LogInformation($"✅ Saved '{exercise.Name}' to database");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, $"Failed to save exercise '{exercise.Name}' to database. Continuing...");
+                // Continue with next exercise - don't fail the entire request
+            }
+        }
+
+        return savedCount;
+    }
+
+    // ✅ NEW: Auto-save new exercises from a workout day (for workout plans)
+    private static async Task<int> AutoSaveNewExercisesFromDay(
+        IApplicationDbContext context,
+        WorkoutDay day,
+        ILogger<Program> logger)
+    {
+        var savedCount = 0;
+
+        if (day?.Exercises == null || !day.Exercises.Any())
+        {
+            return savedCount;
+        }
+
+        foreach (var exercise in day.Exercises)
+        {
+            try
+            {
+                // Check if exercise already exists in database
+                var exists = await context.Exercises
+                    .AnyAsync(e => e.Name.ToLower() == exercise.Name.ToLower());
+
+                if (!exists)
+                {
+                    logger.LogInformation($"New exercise found in '{day.DayName}': '{exercise.Name}' - saving to database...");
+
+                    // Extract muscle group from bodyPart
+                    var muscleGroup = MapBodyPartToMuscleGroup(exercise.BodyPart);
+
+                    // Save to database
+                    await SaveNewExerciseToDatabase(
+                        context,
+                        name: exercise.Name,
+                        muscleGroup: muscleGroup,
+                        equipment: exercise.Equipment,
+                        description: null, // AI doesn't provide description in response
+                        category: muscleGroup
+                    );
+
+                    savedCount++;
+                    logger.LogInformation($"✅ Saved '{exercise.Name}' to database");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, $"Failed to save exercise '{exercise.Name}' to database. Continuing...");
+                // Continue with next exercise - don't fail the entire request
+            }
+        }
+
+        return savedCount;
+    }
+
+    // ✅ NEW: Map AI bodyPart to our MuscleGroup
+    private static string MapBodyPartToMuscleGroup(string bodyPart)
+    {
+        return bodyPart?.ToLower() switch
+        {
+            "chest" => "Peito",
+            "back" => "Costas",
+            "shoulders" => "Ombros",
+            "biceps" => "Bíceps",
+            "triceps" => "Tríceps",
+            "legs" => "Pernas",
+            "quadriceps" => "Pernas",
+            "hamstrings" => "Pernas",
+            "glutes" => "Glúteos",
+            "calves" => "Panturrilha",
+            "abs" => "Abdômen",
+            "core" => "Abdômen",
+            "cardio" => "Cardio",
+            "full body" => "Corpo Todo",
+            _ => "Geral"
+        };
     }
 
     // ✅ MODIFIED: Build exercise list context for AI
