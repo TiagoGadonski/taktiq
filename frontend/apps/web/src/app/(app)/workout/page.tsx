@@ -228,15 +228,23 @@ export default function WorkoutPage() {
 
   const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[], replaced: Record<string, any> = {}) => {
     // If no exercises, don't auto-complete
-    if (!exercises || exercises.length === 0) return false;
+    if (!exercises || exercises.length === 0) {
+      console.log('checkWorkoutCompletion: No exercises found');
+      return false;
+    }
+
+    console.log('checkWorkoutCompletion: Checking', exercises.length, 'exercises');
 
     // Check if all exercises have completed their target sets
     const allExercisesCompleted = exercises.every((exercise) => {
       const displayExercise = replaced[exercise.id] || exercise;
       const exerciseSets = sets.filter((s) => s.exerciseId === displayExercise.exerciseId);
-      return exerciseSets.length >= exercise.targetSets;
+      const isCompleted = exerciseSets.length >= exercise.targetSets;
+      console.log(`Exercise ${displayExercise.exerciseName || displayExercise.exercise?.name}: ${exerciseSets.length}/${exercise.targetSets} sets - ${isCompleted ? 'COMPLETED' : 'NOT COMPLETED'}`);
+      return isCompleted;
     });
 
+    console.log('All exercises completed:', allExercisesCompleted);
     return allExercisesCompleted;
   };
 
@@ -348,12 +356,17 @@ export default function WorkoutPage() {
       // Combine plan exercises with added exercises for complete check
       const exercisesToCheck = [...planExercises, ...addedExercises];
 
+      console.log('After adding set - Plan exercises:', planExercises.length, 'Added exercises:', addedExercises.length, 'Total:', exercisesToCheck.length);
+
       if (exercisesToCheck.length > 0) {
         // Simulate the new sets array with the just-added set
         const updatedSets = [...(currentSession.sets || []), { ...setData, id: 'temp', exerciseId } as WorkoutSet];
 
+        console.log('Current sets count:', currentSession.sets?.length, 'Updated sets count:', updatedSets.length);
+
         if (checkWorkoutCompletion(exercisesToCheck, updatedSets, replacedExercises)) {
           // All exercises completed! Show completion modal
+          console.log('ALL EXERCISES COMPLETED! Opening modal...');
           setShowCompletionModal(true);
         }
       }

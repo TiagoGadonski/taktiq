@@ -2,13 +2,14 @@
 
 import { useRouter, useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { ChevronLeft, Copy, Eye, User, Calendar, Target, Dumbbell, Edit } from 'lucide-react';
+import { ChevronLeft, Copy, Eye, User, Calendar, Target, Dumbbell, Edit, TrendingUp } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/hooks/use-auth';
+import { PlanComments } from '@/components/plans/plan-comments';
 
 export default function PlanDetailPage() {
   const router = useRouter();
@@ -20,7 +21,9 @@ export default function PlanDetailPage() {
   const { data: plan, isLoading } = useQuery({
     queryKey: ['workout-plan', planId],
     queryFn: async () => {
-      return await api.workoutPlans.getById(planId);
+      const data = await api.workoutPlans.getById(planId);
+      console.log('Plan data loaded:', data);
+      return data;
     },
     enabled: !!planId,
   });
@@ -135,7 +138,7 @@ export default function PlanDetailPage() {
               <User className="h-5 w-5 text-primary" />
               <div>
                 <p className="text-sm text-muted-foreground">Criador</p>
-                <p className="font-medium">{plan.creatorName || (plan as any).ownerName}</p>
+                <p className="font-medium">{plan.creatorName || (plan as any).ownerName || user?.name || 'Não informado'}</p>
               </div>
             </div>
             {plan.goal && (
@@ -204,15 +207,18 @@ export default function PlanDetailPage() {
                     {workout.exercises && workout.exercises.length > 0 && (
                       <div className="space-y-1 pt-2 border-t border-border/50">
                         <p className="text-xs font-medium text-muted-foreground mb-2">Exercícios:</p>
-                        {workout.exercises.map((exercise, idx) => (
-                          <div key={exercise.id} className="text-sm pl-2 border-l-2 border-primary/30">
-                            <p className="font-medium">{idx + 1}. {exercise.exercise?.name}</p>
-                            <p className="text-xs text-muted-foreground">
-                              {exercise.targetSets} séries × {exercise.targetReps} reps
-                              {exercise.targetLoad && ` @ ${exercise.targetLoad}kg`}
-                            </p>
-                          </div>
-                        ))}
+                        {workout.exercises.map((exercise, idx) => {
+                          const exerciseName = exercise.exercise?.name || exercise.exerciseName || 'Exercício sem nome';
+                          return (
+                            <div key={exercise.id} className="text-sm pl-2 border-l-2 border-primary/30">
+                              <p className="font-medium">{idx + 1}. {exerciseName}</p>
+                              <p className="text-xs text-muted-foreground">
+                                {exercise.targetSets} séries × {exercise.targetReps} reps
+                                {exercise.targetLoad > 0 && ` @ ${exercise.targetLoad}kg`}
+                              </p>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -230,6 +236,11 @@ export default function PlanDetailPage() {
             </CardContent>
           </Card>
         )}
+      </div>
+
+      {/* Comments Section */}
+      <div className="space-y-4">
+        <PlanComments planId={planId} currentUserId={user?.id} />
       </div>
     </div>
   );
