@@ -44,6 +44,28 @@ export default function WorkoutPage() {
     }
   }, [currentSession, selectedWorkoutId]);
 
+  // Auto-complete workout when all exercises are done
+  useEffect(() => {
+    if (!currentSession || !selectedWorkoutId || showCompletionModal) return;
+
+    const selectedWorkout = currentSession.workoutPlan?.workouts?.find(
+      (w: Workout) => w.id === selectedWorkoutId
+    );
+    const planExercises = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
+    const exercisesToCheck = [...planExercises, ...addedExercises];
+
+    if (exercisesToCheck.length === 0) return;
+
+    const currentSets = currentSession.sets || [];
+
+    console.log('[Auto-complete check] Total exercises:', exercisesToCheck.length, 'Current sets:', currentSets.length);
+
+    if (checkWorkoutCompletion(exercisesToCheck, currentSets, replacedExercises)) {
+      console.log('[Auto-complete] ALL EXERCISES COMPLETED! Opening modal...');
+      setShowCompletionModal(true);
+    }
+  }, [currentSession?.sets?.length, selectedWorkoutId, addedExercises, replacedExercises, showCompletionModal]);
+
   const { data: activePlan } = useQuery({
     queryKey: ['workout-plans', 'active'],
     queryFn: async () => {
@@ -346,30 +368,7 @@ export default function WorkoutPage() {
         });
       }
 
-      // Check if all exercises are completed after adding this set
-      // We need to simulate the updated sets array by adding the new set
-      const selectedWorkout = currentSession.workoutPlan?.workouts?.find(
-        (w: Workout) => w.id === selectedWorkoutId
-      );
-      const planExercises = selectedWorkout?.exercises || currentSession.workoutPlan?.exercises || [];
-
-      // Combine plan exercises with added exercises for complete check
-      const exercisesToCheck = [...planExercises, ...addedExercises];
-
-      console.log('After adding set - Plan exercises:', planExercises.length, 'Added exercises:', addedExercises.length, 'Total:', exercisesToCheck.length);
-
-      if (exercisesToCheck.length > 0) {
-        // Simulate the new sets array with the just-added set
-        const updatedSets = [...(currentSession.sets || []), { ...setData, id: 'temp', exerciseId } as WorkoutSet];
-
-        console.log('Current sets count:', currentSession.sets?.length, 'Updated sets count:', updatedSets.length);
-
-        if (checkWorkoutCompletion(exercisesToCheck, updatedSets, replacedExercises)) {
-          // All exercises completed! Show completion modal
-          console.log('ALL EXERCISES COMPLETED! Opening modal...');
-          setShowCompletionModal(true);
-        }
-      }
+      // Auto-completion check is now handled by useEffect that watches currentSession.sets.length
     } catch (error: any) {
       toast({
         variant: 'destructive',
