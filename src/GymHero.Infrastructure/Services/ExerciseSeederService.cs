@@ -52,11 +52,13 @@ public class ExerciseSeederService
                 var newExercise = new Exercise
                 {
                     Name = exerciseInfo.Name,
-                    Notes = SanitizeHtml(exerciseInfo.Description), // Guardamos o HTML semi-limpo
+                    Description = SanitizeHtml(exerciseInfo.Description), // ✅ FIX: Description field (translations)
+                    Notes = string.Empty, // Notes is for user/trainer notes
                     MuscleGroup = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
                     Category = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
                     Equipment = string.Join(", ", exerciseInfo.Equipment.Select(e => e.Name)),
-                    ImageUrl = imageUrl // Guardamos o URL da imagem
+                    ImageUrl = imageUrl, // Guardamos o URL da imagem
+                    VideoUrl = null // TODO: API Wger não fornece vídeos diretamente
                 };
                 
                 await _context.Exercises.AddAsync(newExercise, cancellationToken);

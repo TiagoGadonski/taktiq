@@ -100,6 +100,19 @@ public static class AIEndpoints
                     })
                     .FirstOrDefaultAsync();
 
+                // ✅ NEW: Fetch exercises from database for AI to prioritize
+                logger.LogInformation("Fetching exercises from database...");
+                var workoutLocationParam = request.WorkoutLocation ?? (userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home ? "home" :
+                    userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Gym ? "gym" : null);
+
+                var exercisesFromDb = await GetExercisesFromDatabase(
+                    context,
+                    workoutLocationParam,
+                    null, // Will get all muscle groups
+                    userProfile?.Injuries
+                );
+                logger.LogInformation($"Found {exercisesFromDb.Count} exercises in database suitable for this workout");
+
                 var geminiApiKey = configuration["Gemini:ApiKey"];
                 var openAiApiKey = configuration["OpenAI:ApiKey"];
 
@@ -123,7 +136,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling Gemini API for workout generation...");
-                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!, userProfile);
+                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!, userProfile, exercisesFromDb, context);
                             logger.LogInformation("Successfully generated workout with Gemini");
                             generated = true;
                         }
@@ -138,7 +151,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling OpenAI API for workout generation...");
-                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!, userProfile);
+                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!, userProfile, exercisesFromDb, context);
                             logger.LogInformation("Successfully generated workout with OpenAI");
                             generated = true;
                         }
@@ -1687,7 +1700,12 @@ public static class AIEndpoints
         return $"Treino completo com {exerciseCount} exercícios para {string.Join(", ", formattedGroups)}, focado em hipertrofia muscular";
     }
 
-    private static async Task<AIWorkoutResponse> GenerateWorkoutWithAI(AIWorkoutRequest request, string apiKey, dynamic? userProfile = null)
+    private static async Task<AIWorkoutResponse> GenerateWorkoutWithAI(
+        AIWorkoutRequest request,
+        string apiKey,
+        dynamic? userProfile = null,
+        List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)>? exercisesFromDb = null,
+        IApplicationDbContext? context = null)
     {
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
@@ -1695,6 +1713,11 @@ public static class AIEndpoints
 
         // Build user profile context
         var profileContext = BuildUserProfileContext(userProfile);
+
+        // ✅ NEW: Build exercise list context
+        var exerciseListContext = exercisesFromDb != null && exercisesFromDb.Any()
+            ? BuildExerciseListContext(exercisesFromDb)
+            : "";
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado e certificado, especializado em prescrição de treinos personalizados e seguros. Crie treinos DETALHADOS, EFICAZES e CIENTIFICAMENTE EMBASADOS.
 
@@ -1786,6 +1809,8 @@ REQUISITOS DO USUÁRIO:
 {request.Prompt}
 
 {profileContext}
+
+{exerciseListContext}
 
 PARÂMETROS OBRIGATÓRIOS:
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}
@@ -2420,13 +2445,153 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         return safeAlternatives.Distinct().ToList();
     }
 
-    private static async Task<AIWorkoutResponse> GenerateWorkoutWithGemini(AIWorkoutRequest request, string apiKey, dynamic? userProfile = null)
+    // ✅ NEW: Fetch exercises from database with filters
+    private static async Task<List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)>> GetExercisesFromDatabase(
+        IApplicationDbContext context,
+        string? workoutLocation = null,
+        string? muscleGroupFilter = null,
+        string? injuries = null)
+    {
+        var query = context.Exercises.AsQueryable();
+
+        // Filter by workout location if specified
+        if (!string.IsNullOrEmpty(workoutLocation))
+        {
+            var locationEnum = workoutLocation.ToLower() switch
+            {
+                "home" => Domain.Enums.WorkoutLocation.Home,
+                "gym" => Domain.Enums.WorkoutLocation.Gym,
+                _ => Domain.Enums.WorkoutLocation.Both
+            };
+
+            query = query.Where(e =>
+                e.WorkoutLocation == locationEnum ||
+                e.WorkoutLocation == Domain.Enums.WorkoutLocation.Both);
+        }
+
+        // Filter by muscle group if specified
+        if (!string.IsNullOrEmpty(muscleGroupFilter))
+        {
+            query = query.Where(e =>
+                e.MuscleGroup.ToLower().Contains(muscleGroupFilter.ToLower()) ||
+                e.Category != null && e.Category.ToLower().Contains(muscleGroupFilter.ToLower()));
+        }
+
+        var exercises = await query
+            .Select(e => new
+            {
+                e.Name,
+                e.MuscleGroup,
+                e.Equipment,
+                e.Description,
+                e.ImageUrl,
+                e.VideoUrl
+            })
+            .ToListAsync();
+
+        // Filter out contraindicated exercises if injuries exist
+        if (!string.IsNullOrEmpty(injuries))
+        {
+            var contraindicatedExercises = GetContraindicatedExercises(injuries);
+            exercises = exercises.Where(e =>
+                !contraindicatedExercises.Any(c =>
+                    e.Name.Contains(c, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+        }
+
+        return exercises
+            .Select(e => (e.Name, e.MuscleGroup, e.Equipment, e.Description, e.ImageUrl, e.VideoUrl))
+            .ToList();
+    }
+
+    // ✅ NEW: Save new exercise to database automatically
+    private static async Task<Guid> SaveNewExerciseToDatabase(
+        IApplicationDbContext context,
+        string name,
+        string muscleGroup,
+        string? equipment = null,
+        string? description = null,
+        string? category = null)
+    {
+        // Check if exercise already exists
+        var existing = await context.Exercises
+            .FirstOrDefaultAsync(e => e.Name.ToLower() == name.ToLower());
+
+        if (existing != null)
+        {
+            return existing.Id;
+        }
+
+        // Determine workout location based on equipment
+        var workoutLocation = equipment?.ToLower() switch
+        {
+            "body only" or "peso corporal" or "bodyweight" => Domain.Enums.WorkoutLocation.Home,
+            "barbell" or "dumbbell" or "machine" or "cable" or "barra" or "halter" or "halteres" or "máquina" => Domain.Enums.WorkoutLocation.Gym,
+            _ => Domain.Enums.WorkoutLocation.Both
+        };
+
+        var newExercise = new Domain.Entities.Exercise
+        {
+            Name = name,
+            Description = description,
+            MuscleGroup = muscleGroup,
+            Equipment = equipment,
+            Category = category ?? muscleGroup,
+            WorkoutLocation = workoutLocation,
+            ImageUrl = null, // Will be populated later by seeder or manual upload
+            VideoUrl = null  // Will be populated later by seeder or manual upload
+        };
+
+        await context.Exercises.AddAsync(newExercise);
+        await context.SaveChangesAsync(CancellationToken.None);
+
+        return newExercise.Id;
+    }
+
+    // ✅ MODIFIED: Build exercise list context for AI
+    private static string BuildExerciseListContext(List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)> exercises)
+    {
+        if (!exercises.Any()) return "";
+
+        var context = new StringBuilder("\n\n📚 BANCO DE EXERCÍCIOS DISPONÍVEIS (PRIORIZE ESTES):\n");
+        context.AppendLine("Use PREFERENCIALMENTE exercícios desta lista. Apenas crie novos se absolutamente necessário.\n");
+
+        var groupedExercises = exercises
+            .GroupBy(e => e.MuscleGroup)
+            .OrderBy(g => g.Key);
+
+        foreach (var group in groupedExercises)
+        {
+            context.AppendLine($"\n🎯 {group.Key.ToUpper()}:");
+            foreach (var exercise in group.Take(15)) // Limit to 15 per group to avoid token overflow
+            {
+                var equipmentInfo = !string.IsNullOrEmpty(exercise.Equipment) ? $" ({exercise.Equipment})" : "";
+                context.AppendLine($"   • {exercise.Name}{equipmentInfo}");
+            }
+        }
+
+        context.AppendLine("\n⚠️ IMPORTANTE: Prefira sempre usar exercícios desta lista. Eles têm fotos e vídeos disponíveis para melhor experiência do usuário.");
+
+        return context.ToString();
+    }
+
+    private static async Task<AIWorkoutResponse> GenerateWorkoutWithGemini(
+        AIWorkoutRequest request,
+        string apiKey,
+        dynamic? userProfile = null,
+        List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)>? exercisesFromDb = null,
+        IApplicationDbContext? context = null)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(45);
 
         // Build user profile context
         var profileContext = BuildUserProfileContext(userProfile);
+
+        // ✅ NEW: Build exercise list context
+        var exerciseListContext = exercisesFromDb != null && exercisesFromDb.Any()
+            ? BuildExerciseListContext(exercisesFromDb)
+            : "";
 
         var systemPrompt = @"Você é um personal trainer brasileiro altamente qualificado e certificado, especializado em prescrição de treinos personalizados e seguros. Crie treinos DETALHADOS, EFICAZES e CIENTIFICAMENTE EMBASADOS.
 
@@ -2492,6 +2657,8 @@ REQUISITOS DO USUÁRIO:
 {request.Prompt}
 
 {profileContext}
+
+{exerciseListContext}
 
 PARÂMETROS OBRIGATÓRIOS:
 - NÍVEL DE CONDICIONAMENTO: {fitnessLevel}

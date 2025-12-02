@@ -16,7 +16,11 @@
       "Bash(gh:*)",
       "Bash(winget install:*)",
       "Bash(git diff:*)",
-      "Bash(Select-String -Pattern \"Type error|Failed to compile|Compiled successfully\")"
+      "Bash(Select-String -Pattern \"Type error|Failed to compile|Compiled successfully\")",
+      "Bash(wc:*)",
+      "Bash(Select-String -Path \"C:\\Users\\cwbcordeti\\source\\gymhero2\\src\\GymHero.Api\\Endpoints\\AIEndpoints.cs\" -Pattern \"ExerciseDatabase\\[\")",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object -ExpandProperty Count)"
     ],
     "deny": [],
     "ask": []
