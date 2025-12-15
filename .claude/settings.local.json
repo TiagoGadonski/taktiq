@@ -38,7 +38,16 @@
       "Bash(__NEW_LINE__ echo \"🚀 Executando Seeder Abrangente (150+ exercícios curados)...\")",
       "Bash(__NEW_LINE__ curl -i https://api.taktiq.app/api/admin/seed-comprehensive-exercises )",
       "Bash(cat:*)",
-      "Bash(node seed-comprehensive-exercises.js:*)"
+      "Bash(node seed-comprehensive-exercises.js:*)",
+      "Bash(powershell -Command \"$body = @{email=''admin@taktiq.app'';password=''W3rt4juk@''} | ConvertTo-Json; $response = Invoke-RestMethod -Uri ''https://api.taktiq.app/api/auth/login'' -Method Post -Body $body -ContentType ''application/json''; Write-Output $response.token\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File C:tmplogin.ps1)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\tmp\\login.ps1\")",
+      "Bash(timeout 20 sleep:*)",
+      "Bash(ping:*)",
+      "Bash(node enhance-exercises.js:*)",
+      "Bash(timeout 15 sleep:*)",
+      "Bash(timeout 10 sleep:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": []
