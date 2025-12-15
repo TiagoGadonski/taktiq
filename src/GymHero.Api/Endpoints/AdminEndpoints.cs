@@ -574,6 +574,42 @@ public static class AdminEndpoints
         .WithName("SeedComprehensiveExercises")
         .WithSummary("Importa 150+ exercícios curados (casa, academia, halteres, faixas elásticas, calistenia)");
 
+        group.MapPost("/enhance-exercises", async (
+            ExerciseEnhancementService enhancer,
+            ILogger<Program> logger,
+            CancellationToken ct) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting exercise enhancement process...");
+                var result = await enhancer.EnhanceAllExercisesAsync(ct);
+
+                logger.LogInformation("Exercise enhancement completed: {Enhanced} enhanced, {Skipped} skipped, {Errors} errors",
+                    result.EnhancedCount, result.SkippedCount, result.Errors.Count);
+
+                return Results.Ok(new
+                {
+                    message = "Exercícios aprimorados com sucesso",
+                    enhanced = result.EnhancedCount,
+                    skipped = result.SkippedCount,
+                    errors = result.Errors,
+                    total = result.EnhancedCount + result.SkippedCount,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to enhance exercises");
+                return Results.Problem(
+                    title: "Enhancement failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("EnhanceExercises")
+        .WithSummary("Aprimora exercícios existentes com fotos, vídeos, descrições detalhadas e traduções para português");
+
         // Seed development data (ONLY FOR DEVELOPMENT)
         group.MapPost("/seed-dev-data", async (
             DevelopmentSeederService seeder,

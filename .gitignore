@@ -69,6 +69,7 @@ Thumbs.db
 appsettings.*.json
 !appsettings.json
 !appsettings.*.json.example
+appsettings.Development.Local.json
 secrets.json
 *.pfx
 *.p12
@@ -101,3 +102,12 @@ _ReSharper*/
 *.bak
 *.swp
 nul
+
+# Docker & Local Development
+docker-compose.override.yml
+.docker/
+docker-volumes/
+
+# Local development logs and data
+local-dev-*.txt
+*.local.log
