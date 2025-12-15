@@ -541,6 +541,70 @@ public static class AdminEndpoints
 .WithName("SeedExercisesFromApi")
 .WithSummary("Busca exercícios de uma API externa e povoa a base de dados.");
 
+        group.MapPost("/seed-comprehensive-exercises", async (
+            ComprehensiveExerciseSeederService seeder,
+            ILogger<Program> logger,
+            CancellationToken ct) =>
+        {
+            try
+            {
+                var (added, skipped) = await seeder.SeedComprehensiveExercisesAsync(ct);
+
+                logger.LogInformation("Comprehensive exercise seeding completed: {Added} added, {Skipped} skipped", added, skipped);
+
+                return Results.Ok(new
+                {
+                    message = "Exercícios abrangentes importados com sucesso",
+                    exercisesAdded = added,
+                    exercisesSkipped = skipped,
+                    total = added + skipped,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to seed comprehensive exercises");
+                return Results.Problem(
+                    title: "Seed failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("SeedComprehensiveExercises")
+        .WithSummary("Importa 150+ exercícios curados (casa, academia, halteres, faixas elásticas, calistenia)");
+
+        // Seed development data (ONLY FOR DEVELOPMENT)
+        group.MapPost("/seed-dev-data", async (
+            DevelopmentSeederService seeder,
+            IWebHostEnvironment env,
+            CancellationToken ct) =>
+        {
+            // Only allow in Development environment
+            if (!env.IsDevelopment())
+            {
+                return Results.BadRequest(new { message = "This endpoint is only available in Development environment" });
+            }
+
+            try
+            {
+                await seeder.SeedAllAsync(ct);
+                return Results.Ok(new
+                {
+                    message = "Development data seeded successfully",
+                    note = "All users have password: Dev@123456",
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(new { message = ex.Message, stackTrace = ex.StackTrace });
+            }
+        })
+        .WithName("SeedDevelopmentData")
+        .WithSummary("[DEV ONLY] Seeds database with fake data for development - PTs, Students, Plans, Friendships")
+        .AllowAnonymous(); // Allow anonymous in dev for easy testing
+
         // Seed predefined system challenges
         group.MapPost("/seed-challenges", async (IApplicationDbContext context, CancellationToken cancellationToken) =>
         {

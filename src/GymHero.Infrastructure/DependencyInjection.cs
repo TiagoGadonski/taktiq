@@ -78,6 +78,12 @@ public static class DependencyInjection
             provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<ExerciseSeederService>();
+        services.AddScoped<ComprehensiveExerciseSeederService>();
+        services.AddScoped<DevelopmentSeederService>();
+
+        // Password hasher for User entity (used by DevelopmentSeederService)
+        services.AddScoped<Microsoft.AspNetCore.Identity.IPasswordHasher<GymHero.Domain.Entities.User>,
+            Microsoft.AspNetCore.Identity.PasswordHasher<GymHero.Domain.Entities.User>>();
 
         return services;
     }

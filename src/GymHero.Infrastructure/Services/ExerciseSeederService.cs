@@ -21,52 +21,110 @@ public class ExerciseSeederService
     public async Task SeedExercisesAsync(CancellationToken cancellationToken)
     {
         var client = _httpClientFactory.CreateClient();
-        string? nextUrl = "https://wger.de/api/v2/exerciseinfo/?language=pt&limit=100";
 
-        while (!string.IsNullOrEmpty(nextUrl))
+        // Buscar exercícios em português e inglês para ter mais variedade
+        var languages = new[] { "pt", "en" };
+        int totalAdded = 0;
+        int totalSkipped = 0;
+
+        foreach (var language in languages)
         {
-            var response = await client.GetAsync(nextUrl, cancellationToken);
-            if (!response.IsSuccessStatusCode) break;
+            string? nextUrl = $"https://wger.de/api/v2/exerciseinfo/?language={language}&limit=200";
 
-            var json = await response.Content.ReadAsStringAsync(cancellationToken);
-            var apiResult = JsonConvert.DeserializeObject<WgerApiResult<ExerciseInfo>>(json);
-
-            if (apiResult is null || !apiResult.Results.Any()) break;
-
-            foreach (var exerciseInfo in apiResult.Results)
+            while (!string.IsNullOrEmpty(nextUrl))
             {
-                if (await _context.Exercises.AnyAsync(e => e.Name == exerciseInfo.Name, cancellationToken)) continue;
+                var response = await client.GetAsync(nextUrl, cancellationToken);
+                if (!response.IsSuccessStatusCode) break;
 
-                // --- INÍCIO DA NOVA LÓGICA DE BUSCA DE IMAGEM ---
-                string? imageUrl = null;
-                var imageApiUrl = $"https://wger.de/api/v2/exerciseimage/?exercise_base={exerciseInfo.WgerId}&is_main=True";
-                var imageResponse = await client.GetAsync(imageApiUrl, cancellationToken);
-                if (imageResponse.IsSuccessStatusCode)
+                var json = await response.Content.ReadAsStringAsync(cancellationToken);
+                var apiResult = JsonConvert.DeserializeObject<WgerApiResult<ExerciseInfo>>(json);
+
+                if (apiResult is null || !apiResult.Results.Any()) break;
+
+                foreach (var exerciseInfo in apiResult.Results)
                 {
-                    var imageJson = await imageResponse.Content.ReadAsStringAsync(cancellationToken);
-                    var imageApiResult = JsonConvert.DeserializeObject<WgerApiResult<ImageInfo>>(imageJson);
-                    imageUrl = imageApiResult?.Results.FirstOrDefault()?.ImageUrl;
+                    if (await _context.Exercises.AnyAsync(e => e.Name == exerciseInfo.Name, cancellationToken))
+                    {
+                        totalSkipped++;
+                        continue;
+                    }
+
+                    // --- INÍCIO DA NOVA LÓGICA DE BUSCA DE IMAGEM ---
+                    string? imageUrl = null;
+                    var imageApiUrl = $"https://wger.de/api/v2/exerciseimage/?exercise_base={exerciseInfo.WgerId}&is_main=True";
+                    var imageResponse = await client.GetAsync(imageApiUrl, cancellationToken);
+                    if (imageResponse.IsSuccessStatusCode)
+                    {
+                        var imageJson = await imageResponse.Content.ReadAsStringAsync(cancellationToken);
+                        var imageApiResult = JsonConvert.DeserializeObject<WgerApiResult<ImageInfo>>(imageJson);
+                        imageUrl = imageApiResult?.Results.FirstOrDefault()?.ImageUrl;
+                    }
+                    // --- FIM DA NOVA LÓGICA ---
+
+                    // Determinar WorkoutLocation baseado no equipamento
+                    var workoutLocation = DetermineWorkoutLocation(exerciseInfo.Equipment.Select(e => e.Name).ToList());
+
+                    var newExercise = new Exercise
+                    {
+                        Name = exerciseInfo.Name,
+                        Description = SanitizeHtml(exerciseInfo.Description),
+                        Notes = string.Empty,
+                        MuscleGroup = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
+                        Category = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
+                        Equipment = string.Join(", ", exerciseInfo.Equipment.Select(e => e.Name)),
+                        ImageUrl = imageUrl,
+                        VideoUrl = null,
+                        WorkoutLocation = workoutLocation
+                    };
+
+                    await _context.Exercises.AddAsync(newExercise, cancellationToken);
+                    totalAdded++;
                 }
-                // --- FIM DA NOVA LÓGICA ---
 
-                var newExercise = new Exercise
-                {
-                    Name = exerciseInfo.Name,
-                    Description = SanitizeHtml(exerciseInfo.Description), // ✅ FIX: Description field (translations)
-                    Notes = string.Empty, // Notes is for user/trainer notes
-                    MuscleGroup = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
-                    Category = exerciseInfo.PrimaryMuscles.FirstOrDefault()?.Name ?? "Geral",
-                    Equipment = string.Join(", ", exerciseInfo.Equipment.Select(e => e.Name)),
-                    ImageUrl = imageUrl, // Guardamos o URL da imagem
-                    VideoUrl = null // TODO: API Wger não fornece vídeos diretamente
-                };
-                
-                await _context.Exercises.AddAsync(newExercise, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+                nextUrl = apiResult.NextPageUrl;
             }
-            
-            await _context.SaveChangesAsync(cancellationToken);
-            nextUrl = apiResult.NextPageUrl;
         }
+    }
+
+    private Domain.Enums.WorkoutLocation DetermineWorkoutLocation(List<string> equipmentList)
+    {
+        // Se não tem equipamento ou só tem "body weight", é Home
+        if (!equipmentList.Any() || equipmentList.All(e =>
+            e.ToLower().Contains("body weight") ||
+            e.ToLower().Contains("bodyweight") ||
+            e == "none"))
+        {
+            return Domain.Enums.WorkoutLocation.Home;
+        }
+
+        // Equipamentos que sugerem apenas academia
+        var gymOnlyEquipment = new[]
+        {
+            "barbell", "ez barbell", "barra", "cable", "machine", "smith machine",
+            "leg press", "hack squat", "lat pulldown", "cable machine", "pec deck",
+            "leg curl", "leg extension", "chest press"
+        };
+
+        if (equipmentList.Any(e => gymOnlyEquipment.Any(g => e.ToLower().Contains(g))))
+        {
+            return Domain.Enums.WorkoutLocation.Gym;
+        }
+
+        // Equipamentos que podem ser usados em casa ou academia
+        var bothEquipment = new[]
+        {
+            "dumbbell", "halter", "kettlebell", "bench", "pull-up bar", "barra fixa",
+            "mat", "resistance band", "faixa", "jump rope", "corda"
+        };
+
+        if (equipmentList.Any(e => bothEquipment.Any(b => e.ToLower().Contains(b))))
+        {
+            return Domain.Enums.WorkoutLocation.Both;
+        }
+
+        // Por padrão, assume que pode ser feito em ambos
+        return Domain.Enums.WorkoutLocation.Both;
     }
     
     private string SanitizeHtml(string html)
