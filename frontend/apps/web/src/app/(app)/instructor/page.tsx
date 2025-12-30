@@ -2072,7 +2072,7 @@ export default function InstructorPage() {
                   >
                     <div className="flex items-center gap-3">
                       <Avatar className="h-10 w-10">
-                        <AvatarImage src={student.profilePictureUrl} />
+                        <AvatarImage src={getAssetUrl(student.profilePictureUrl)} />
                         <AvatarFallback className="bg-primary/20 text-primary">
                           {student.name.charAt(0).toUpperCase()}
                         </AvatarFallback>
@@ -2093,7 +2093,7 @@ export default function InstructorPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Avatar className="h-12 w-12">
-                      <AvatarImage src={selectedStudent.profilePictureUrl} />
+                      <AvatarImage src={getAssetUrl(selectedStudent.profilePictureUrl)} />
                       <AvatarFallback className="bg-primary/20 text-primary font-bold">
                         {selectedStudent.name.charAt(0).toUpperCase()}
                       </AvatarFallback>
