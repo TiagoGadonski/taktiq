@@ -725,23 +725,23 @@ export default function InstructorPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div className="glass rounded-xl p-6 border hover-lift">
-        <div className="flex items-center justify-between">
+      <div className="glass rounded-xl p-4 md:p-6 border hover-lift">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <UserCog className="h-8 w-8 text-primary animate-glow-pulse" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              <UserCog className="h-6 md:h-8 w-6 md:w-8 text-primary animate-glow-pulse" />
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                 Painel do Instrutor
               </h1>
             </div>
-            <p className="text-muted-foreground">
+            <p className="text-sm md:text-base text-muted-foreground">
               Gerencie seus clientes, treinos e progresso
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Button
               onClick={handleOpenInviteDialog}
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale w-full sm:w-auto"
             >
               <Mail className="mr-2 h-4 w-4" />
               Convidar Aluno
@@ -749,7 +749,7 @@ export default function InstructorPage() {
             <Button
               onClick={handleAddClient}
               variant="outline"
-              className="hover-lift tap-scale"
+              className="hover-lift tap-scale w-full sm:w-auto"
             >
               <Plus className="mr-2 h-4 w-4" />
               Adicionar Cliente
@@ -759,50 +759,50 @@ export default function InstructorPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card className="glass hover-lift tap-scale p-6 border-primary/20">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        <Card className="glass hover-lift tap-scale p-4 md:p-6 border-primary/20">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-primary/20 rounded-lg">
               <Users className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Total de Clientes</p>
-              <p className="text-2xl font-bold text-primary">{clients.length}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Total de Clientes</p>
+              <p className="text-xl sm:text-2xl font-bold text-primary">{clients.length}</p>
             </div>
           </div>
         </Card>
-        <Card className="glass hover-lift tap-scale p-6 border-blue-500/20">
+        <Card className="glass hover-lift tap-scale p-4 md:p-6 border-blue-500/20">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-blue-500/20 rounded-lg">
               <Dumbbell className="h-6 w-6 text-blue-500" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Planos Ativos</p>
-              <p className="text-2xl font-bold text-blue-500">
+              <p className="text-xs sm:text-sm text-muted-foreground">Planos Ativos</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-500">
                 {clients.reduce((acc, c) => acc + c.workoutPlans, 0)}
               </p>
             </div>
           </div>
         </Card>
-        <Card className="glass hover-lift tap-scale p-6 border-green-500/20">
+        <Card className="glass hover-lift tap-scale p-4 md:p-6 border-green-500/20">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-green-500/20 rounded-lg">
               <TrendingUp className="h-6 w-6 text-green-500" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Progresso Médio</p>
-              <p className="text-2xl font-bold text-green-500">+12%</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Progresso Médio</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-500">+12%</p>
             </div>
           </div>
         </Card>
-        <Card className="glass hover-lift tap-scale p-6 border-orange-500/20">
+        <Card className="glass hover-lift tap-scale p-4 md:p-6 border-orange-500/20">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-orange-500/20 rounded-lg">
               <Calendar className="h-6 w-6 text-orange-500" />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Treinos Hoje</p>
-              <p className="text-2xl font-bold text-orange-500">
+              <p className="text-xs sm:text-sm text-muted-foreground">Treinos Hoje</p>
+              <p className="text-xl sm:text-2xl font-bold text-orange-500">
                 {clients.filter((c) => c.lastWorkout === new Date().toISOString().split('T')[0]).length}
               </p>
             </div>
@@ -812,54 +812,56 @@ export default function InstructorPage() {
 
       {/* Tabs */}
       <Tabs defaultValue="analytics" className="space-y-4">
-        <TabsList className="glass">
-          <TabsTrigger value="analytics" className="tap-scale">
-            <BarChart3 className="mr-2 h-4 w-4" />
-            Métricas
+        <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+          <TabsList className="glass inline-flex w-auto min-w-full md:w-full">
+          <TabsTrigger value="analytics" className="tap-scale whitespace-nowrap">
+            <BarChart3 className="h-4 w-4 md:mr-2" />
+            <span className="hidden md:inline">Métricas</span>
           </TabsTrigger>
-          <TabsTrigger value="clients" className="tap-scale">
-            <Users className="mr-2 h-4 w-4" />
-            Meus Clientes
+          <TabsTrigger value="clients" className="tap-scale whitespace-nowrap">
+            <Users className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Clientes</span>
           </TabsTrigger>
-          <TabsTrigger value="invitations" className="tap-scale">
-            <Mail className="mr-2 h-4 w-4" />
-            Convites
+          <TabsTrigger value="invitations" className="tap-scale whitespace-nowrap">
+            <Mail className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Convites</span>
             {invitations.filter(i => i.status === 'Pending').length > 0 && (
-              <Badge className="ml-2 bg-primary/20 text-primary border-primary/30">
+              <Badge className="ml-1 md:ml-2 bg-primary/20 text-primary border-primary/30 text-xs">
                 {invitations.filter(i => i.status === 'Pending').length}
               </Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="plans" className="tap-scale">
-            <Dumbbell className="mr-2 h-4 w-4" />
-            Planos de Treino
+          <TabsTrigger value="plans" className="tap-scale whitespace-nowrap">
+            <Dumbbell className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Planos</span>
           </TabsTrigger>
-          <TabsTrigger value="profile" className="tap-scale">
-            <Globe className="mr-2 h-4 w-4" />
-            Perfil Público
+          <TabsTrigger value="profile" className="tap-scale whitespace-nowrap">
+            <Globe className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Perfil</span>
           </TabsTrigger>
-          <TabsTrigger value="posts" className="tap-scale">
-            <FileEdit className="mr-2 h-4 w-4" />
-            Posts
+          <TabsTrigger value="posts" className="tap-scale whitespace-nowrap">
+            <FileEdit className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Posts</span>
             {posts.filter(p => !p.isPublished).length > 0 && (
-              <Badge className="ml-2 bg-yellow-500/20 text-yellow-500 border-yellow-500/30">
+              <Badge className="ml-1 md:ml-2 bg-yellow-500/20 text-yellow-500 border-yellow-500/30 text-xs">
                 {posts.filter(p => !p.isPublished).length}
               </Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="sales" className="tap-scale">
-            <DollarSign className="mr-2 h-4 w-4" />
-            Vendas
+          <TabsTrigger value="sales" className="tap-scale whitespace-nowrap">
+            <DollarSign className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Vendas</span>
           </TabsTrigger>
-          <TabsTrigger value="progress" className="tap-scale">
-            <TrendingUp className="mr-2 h-4 w-4" />
-            Progresso
+          <TabsTrigger value="progress" className="tap-scale whitespace-nowrap">
+            <TrendingUp className="h-4 w-4 md:mr-2" />
+            <span className="hidden sm:inline">Progresso</span>
           </TabsTrigger>
-        </TabsList>
+          </TabsList>
+        </div>
 
         <TabsContent value="analytics" className="space-y-4">
           {analytics && analytics.clients && analytics.posts && analytics.plans && analytics.invitations ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {/* Clients Metrics */}
               <Card className="glass border-primary/20 hover-lift animate-scale-in">
                 <div className="p-6">
@@ -1042,7 +1044,7 @@ export default function InstructorPage() {
           </div>
 
           {/* Clients Grid */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {filteredClients.map((client, index) => (
               <Card
                 key={client.id}
@@ -1162,7 +1164,7 @@ export default function InstructorPage() {
         </TabsContent>
 
         <TabsContent value="invitations" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {invitations.map((invitation, index) => (
               <Card
                 key={invitation.id}
@@ -1279,15 +1281,15 @@ export default function InstructorPage() {
 
         <TabsContent value="plans" className="space-y-4">
           {/* Plans Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold">Planos de Treino</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-xl sm:text-2xl font-bold">Planos de Treino</h2>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Gerencie seus planos: marketplace, alunos e templates
               </p>
             </div>
-            <Link href="/plans/new">
-              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale gap-2">
+            <Link href="/plans/new" className="w-full sm:w-auto">
+              <Button className="bg-primary hover:bg-primary/90 hover-lift tap-scale gap-2 w-full sm:w-auto">
                 <Plus className="h-4 w-4" />
                 Criar Novo Plano
               </Button>
@@ -1295,7 +1297,7 @@ export default function InstructorPage() {
           </div>
 
           {/* Plans Stats Cards */}
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             <Card className="glass border-primary/20">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
@@ -1384,7 +1386,7 @@ export default function InstructorPage() {
                   </Link>
                 </Card>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                   {workoutPlans.map((plan: any) => (
                     <Card key={plan.id} className="glass border-primary/20 hover-lift tap-scale">
                       <CardContent className="p-4 space-y-3">
@@ -1424,7 +1426,7 @@ export default function InstructorPage() {
             </TabsContent>
 
             <TabsContent value="marketplace">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {workoutPlans.filter((p: any) => p.forSale).length === 0 ? (
                   <Card className="glass border-primary/20 p-8 text-center col-span-full">
                     <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
@@ -1464,7 +1466,7 @@ export default function InstructorPage() {
             </TabsContent>
 
             <TabsContent value="students">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {workoutPlans.filter((p: any) => p.assignedToUserId).length === 0 ? (
                   <Card className="glass border-primary/20 p-8 text-center col-span-full">
                     <Users className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
@@ -1507,7 +1509,7 @@ export default function InstructorPage() {
             </TabsContent>
 
             <TabsContent value="templates">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {workoutPlans.filter((p: any) => !p.assignedToUserId && !p.forSale).length === 0 ? (
                   <Card className="glass border-primary/20 p-8 text-center col-span-full">
                     <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-3 opacity-50" />
@@ -1747,20 +1749,20 @@ export default function InstructorPage() {
         </TabsContent>
 
         <TabsContent value="posts" className="space-y-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <p className="text-sm text-muted-foreground">
               Gerencie suas publicações e artigos para compartilhar com seus alunos
             </p>
             <Button
               onClick={() => handleOpenPostDialog()}
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale"
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 hover-lift tap-scale w-full sm:w-auto"
             >
               <Plus className="mr-2 h-4 w-4" />
               Novo Post
             </Button>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, index) => (
               <Card
                 key={post.id}
