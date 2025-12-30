@@ -17,11 +17,24 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
 
     public async Task<Guid> Handle(AddWorkoutToPlanCommand request, CancellationToken cancellationToken)
     {
-        // Verify the plan exists and belongs to the user
+        // Verify the plan exists and the user has permission to modify it
+        // Permission is granted if:
+        // 1. User is the owner of the plan, OR
+        // 2. User is the Personal Trainer of the plan's owner
         var plan = await _context.WorkoutPlans
-            .FirstOrDefaultAsync(p => p.Id == request.PlanId && p.OwnerId == request.OwnerId, cancellationToken);
+            .Include(p => p.Owner)
+            .FirstOrDefaultAsync(p => p.Id == request.PlanId, cancellationToken);
 
         if (plan == null)
+        {
+            throw new NotFoundException($"WorkoutPlan with ID {request.PlanId} not found");
+        }
+
+        // Check if user has permission to modify this plan
+        bool hasPermission = plan.OwnerId == request.OwnerId || // User is the owner
+                           plan.Owner?.PersonalTrainerId == request.OwnerId; // User is the PT of the owner
+
+        if (!hasPermission)
         {
             throw new NotFoundException($"WorkoutPlan with ID {request.PlanId} not found");
         }

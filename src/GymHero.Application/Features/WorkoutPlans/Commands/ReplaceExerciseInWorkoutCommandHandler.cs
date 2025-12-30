@@ -19,7 +19,8 @@ public class ReplaceExerciseInWorkoutCommandHandler : IRequestHandler<ReplaceExe
         // Find the workout exercise and verify ownership
         var workoutExercise = await _context.WorkoutExercises
             .Include(we => we.Workout)
-            .ThenInclude(w => w.Plan)
+                .ThenInclude(w => w.Plan)
+                    .ThenInclude(p => p.Owner)
             .FirstOrDefaultAsync(we => we.Id == request.WorkoutExerciseId, cancellationToken);
 
         if (workoutExercise == null)
@@ -27,7 +28,14 @@ public class ReplaceExerciseInWorkoutCommandHandler : IRequestHandler<ReplaceExe
             throw new NotFoundException($"Workout exercise with ID {request.WorkoutExerciseId} not found");
         }
 
-        if (workoutExercise.Workout.Plan.OwnerId != request.OwnerId)
+        // Check if user has permission to modify this workout's plan
+        // Permission is granted if:
+        // - User is the owner of the plan, OR
+        // - User is the Personal Trainer of the plan's owner
+        bool hasPermission = workoutExercise.Workout.Plan.OwnerId == request.OwnerId || // User is the owner
+                           workoutExercise.Workout.Plan.Owner?.PersonalTrainerId == request.OwnerId; // User is the PT
+
+        if (!hasPermission)
         {
             throw new NotFoundException($"Workout exercise with ID {request.WorkoutExerciseId} not found");
         }

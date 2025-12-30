@@ -16,14 +16,25 @@ public class UpdateWorkoutPlanCommandHandler : IRequestHandler<UpdateWorkoutPlan
 
     public async Task Handle(UpdateWorkoutPlanCommand request, CancellationToken cancellationToken)
     {
-        // 1. Busca o plano de treino no banco. A condição é crucial:
-        // O ID do plano tem que bater E o OwnerId também.
+        // 1. Find the workout plan and verify user has permission
         var workoutPlan = await _context.WorkoutPlans
-            .FirstOrDefaultAsync(wp => wp.Id == request.Id && wp.OwnerId == request.OwnerId, cancellationToken);
+            .Include(wp => wp.Owner)
+            .FirstOrDefaultAsync(wp => wp.Id == request.Id, cancellationToken);
 
-        // 2. Se não encontrar, lança uma exceção.
-        // Isso previne que um usuário edite planos de outros ou planos que não existem.
+        // 2. If not found, throw exception
         if (workoutPlan is null)
+        {
+            throw new NotFoundException("Workout Plan not found.");
+        }
+
+        // 3. Verify user has permission to modify this plan
+        // Permission is granted if:
+        // - User is the owner of the plan, OR
+        // - User is the Personal Trainer of the plan's owner
+        bool hasPermission = workoutPlan.OwnerId == request.OwnerId || // User is the owner
+                           workoutPlan.Owner?.PersonalTrainerId == request.OwnerId; // User is the PT
+
+        if (!hasPermission)
         {
             throw new NotFoundException("Workout Plan not found.");
         }
