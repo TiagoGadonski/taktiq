@@ -311,6 +311,47 @@ public static class WorkoutPlanEndpoints
         .WithName("DuplicateWorkoutPlan")
         .WithSummary("Creates a new workout plan based on an existing one");
 
+        // DEBUG ENDPOINT - TEMPORARY
+        group.MapGet("/{planId:guid}/debug-permissions", async (
+            Guid planId,
+            ClaimsPrincipal user,
+            IApplicationDbContext context) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var plan = await context.WorkoutPlans
+                .Include(p => p.Owner)
+                .FirstOrDefaultAsync(p => p.Id == planId);
+
+            if (plan == null)
+            {
+                return Results.Ok(new {
+                    planExists = false,
+                    planId = planId,
+                    userId = userId,
+                    message = "Plan not found in database"
+                });
+            }
+
+            var hasPermission = plan.OwnerId == userId ||
+                              plan.Owner?.PersonalTrainerId == userId;
+
+            return Results.Ok(new {
+                planExists = true,
+                planId = plan.Id,
+                planName = plan.Name,
+                planOwnerId = plan.OwnerId,
+                ownerExists = plan.Owner != null,
+                ownerName = plan.Owner?.Name,
+                ownerPersonalTrainerId = plan.Owner?.PersonalTrainerId,
+                currentUserId = userId,
+                isOwner = plan.OwnerId == userId,
+                isPersonalTrainer = plan.Owner?.PersonalTrainerId == userId,
+                hasPermission = hasPermission
+            });
+        })
+        .WithName("DebugPlanPermissions");
+
         // Add a workout (day) to a plan
         group.MapPost("/{planId:guid}/workouts", async (
             Guid planId,
