@@ -311,6 +311,16 @@ app.UseAuthorization();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
    .AllowAnonymous();
 
+// Debug endpoint to verify deployment version (TEMPORARY - remove after debugging)
+app.MapGet("/api/debug/version", () => Results.Ok(new
+{
+    deploymentVersion = "2025-12-30-v1",
+    timestamp = DateTime.UtcNow,
+    message = "Student search endpoint should be available",
+    hasStudentSearchEndpoint = true
+}))
+   .AllowAnonymous();
+
 app.MapAuthEndpoints(); // Nosso método de extensão para os endpoints de autenticação
 app.MapWorkoutPlanEndpoints();
 app.MapExerciseEndpoints();
