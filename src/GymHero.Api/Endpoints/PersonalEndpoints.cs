@@ -21,6 +21,36 @@ public static class PersonalEndpoints
                        // Aqui aplicamos a nossa nova política de segurança!
                        .RequireAuthorization("RequirePersonalRole");
 
+        // Search available students (not assigned to any PT)
+        group.MapGet("/search-students", async (
+            [FromQuery] string? search,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            if (string.IsNullOrWhiteSpace(search) || search.Length < 2)
+            {
+                return Results.Ok(new List<object>());
+            }
+
+            var searchLower = search.ToLower();
+            var students = await context.Users
+                .Where(u => u.Role == "Aluno" && u.PersonalTrainerId == null)
+                .Where(u => u.Name.ToLower().Contains(searchLower) || u.Email.ToLower().Contains(searchLower))
+                .Select(u => new
+                {
+                    id = u.Id,
+                    name = u.Name,
+                    email = u.Email,
+                    profilePictureUrl = u.ProfilePictureUrl
+                })
+                .Take(10)
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(students);
+        })
+        .WithName("SearchAvailableStudents")
+        .WithSummary("Search for available students (not assigned to any trainer) by name or email");
+
         group.MapPost("/clients", async (
             [FromBody] AddClientRequest request,
             ClaimsPrincipal user,
