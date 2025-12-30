@@ -1,4 +1,4 @@
-// Deployment Version: 2025-11-27-v1 - Redeploy to ensure all endpoints are active
+// Deployment Version: 2025-12-30-v1 - Force redeploy with student search endpoint
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
