@@ -18,11 +18,13 @@ public class GetAllWorkoutPlansQueryHandler : IRequestHandler<GetAllWorkoutPlans
     {
         // 1. Acessamos a tabela de WorkoutPlans com seus Workouts e Exercícios
         var workoutPlans = await _context.WorkoutPlans
+            .Include(p => p.Owner)
             .Include(p => p.Workouts) // Carrega os Workouts
                 .ThenInclude(w => w.Exercises) // Carrega os exercícios de cada workout
                     .ThenInclude(we => we.Exercise) // Carrega os detalhes do exercício
-            // 2. Filtramos para pegar APENAS os planos que pertencem ao usuário logado
-            .Where(wp => wp.OwnerId == request.OwnerId)
+            // 2. Filtramos para pegar planos que pertencem ao usuário logado OU planos de seus alunos (se for PT)
+            .Where(wp => wp.OwnerId == request.OwnerId || // User's own plans
+                        wp.Owner.PersonalTrainerId == request.OwnerId) // Plans of user's students (if user is a PT)
             // 3. Ordenamos pelos mais recentes primeiro
             .OrderByDescending(wp => wp.CreatedAt)
             // 4. Projetamos os resultados para o nosso DTO de resposta com exercícios

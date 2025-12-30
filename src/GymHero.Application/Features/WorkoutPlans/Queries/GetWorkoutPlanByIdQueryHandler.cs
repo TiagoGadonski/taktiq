@@ -17,15 +17,27 @@ public class GetWorkoutPlanByIdQueryHandler : IRequestHandler<GetWorkoutPlanById
 
     public async Task<WorkoutPlanDetailResponse?> Handle(GetWorkoutPlanByIdQuery request, CancellationToken cancellationToken)
     {
+        // Fetch plan and check permission
         var plan = await _context.WorkoutPlans
             .AsNoTracking()
+            .Include(p => p.Owner)
             .Include(p => p.Workouts) // Carrega os Workouts (dias de treino)
                 .ThenInclude(w => w.Exercises) // Carrega os exercícios de cada workout
                     .ThenInclude(we => we.Exercise) // Carrega os detalhes do exercício
-            .Where(p => p.Id == request.PlanId && p.OwnerId == request.OwnerId)
+            .Where(p => p.Id == request.PlanId)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (plan == null)
+            return null;
+
+        // Check if user has permission to view this plan
+        // Permission is granted if:
+        // 1. User is the owner of the plan, OR
+        // 2. User is the Personal Trainer of the plan's owner
+        bool hasPermission = plan.OwnerId == request.OwnerId || // User is the owner
+                           plan.Owner?.PersonalTrainerId == request.OwnerId; // User is the PT
+
+        if (!hasPermission)
             return null;
 
         // Map workouts with their exercises
