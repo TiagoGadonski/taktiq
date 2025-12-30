@@ -385,13 +385,14 @@ export default function InstructorPage() {
   };
 
   // Debounce search
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      searchStudents(studentSearchTerm);
-    }, 300);
+  // Temporarily disabled due to deployment issues
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     searchStudents(studentSearchTerm);
+  //   }, 300);
 
-    return () => clearTimeout(timeoutId);
-  }, [studentSearchTerm]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [studentSearchTerm]);
 
   const handleAddClient = () => {
     setClientEmail('');
@@ -2030,135 +2031,41 @@ export default function InstructorPage() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            {/* Search Field */}
-            <div className="space-y-2">
-              <Label htmlFor="studentSearch">Buscar Aluno</Label>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="studentSearch"
-                  type="text"
-                  placeholder="Digite o nome ou email do aluno..."
-                  value={studentSearchTerm}
-                  onChange={(e) => {
-                    setStudentSearchTerm(e.target.value);
-                    setSelectedStudent(null);
-                  }}
-                  className="glass pl-10"
-                  disabled={isAddingClient}
-                />
-              </div>
-              {isSearchingStudents && (
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <div className="h-3 w-3 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                  Buscando...
-                </p>
-              )}
+            {/* Temporary: Search disabled due to backend deployment issues */}
+            <div className="glass p-4 rounded-lg border border-amber-500/30 bg-amber-500/5 mb-4">
+              <p className="text-sm text-amber-600 dark:text-amber-400">
+                <strong>Atenção:</strong> A busca por nome está temporariamente indisponível.
+                Use o email do aluno cadastrado.
+              </p>
             </div>
 
-            {/* Search Results */}
-            {availableStudents.length > 0 && !selectedStudent && (
-              <div className="space-y-2 max-h-60 overflow-y-auto">
-                <Label className="text-sm text-muted-foreground">Resultados:</Label>
-                {availableStudents.map((student) => (
-                  <div
-                    key={student.id}
-                    onClick={() => {
-                      setSelectedStudent(student);
-                      setStudentSearchTerm(`${student.name} (${student.email})`);
-                      setAvailableStudents([]);
-                    }}
-                    className="glass p-3 rounded-lg cursor-pointer hover:bg-primary/10 transition-colors border border-primary/20 hover:border-primary/40"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-10 w-10">
-                        <AvatarImage src={getAssetUrl(student.profilePictureUrl)} />
-                        <AvatarFallback className="bg-primary/20 text-primary">
-                          {student.name.charAt(0).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium">{student.name}</p>
-                        <p className="text-sm text-muted-foreground">{student.email}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Selected Student */}
-            {selectedStudent && (
-              <div className="glass p-4 rounded-lg border border-primary/30 bg-primary/5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-12 w-12">
-                      <AvatarImage src={getAssetUrl(selectedStudent.profilePictureUrl)} />
-                      <AvatarFallback className="bg-primary/20 text-primary font-bold">
-                        {selectedStudent.name.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold text-primary">{selectedStudent.name}</p>
-                      <p className="text-sm text-muted-foreground">{selectedStudent.email}</p>
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => {
-                      setSelectedStudent(null);
-                      setStudentSearchTerm('');
-                    }}
-                  >
-                    <XCircle className="h-5 w-5 text-muted-foreground" />
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {/* No results */}
-            {studentSearchTerm.length >= 2 && availableStudents.length === 0 && !isSearchingStudents && !selectedStudent && (
-              <p className="text-sm text-muted-foreground text-center py-4">
-                Nenhum aluno disponível encontrado. Verifique se o aluno está cadastrado e não possui um Personal Trainer.
-              </p>
-            )}
-
-            {/* Divider */}
-            {!selectedStudent && (
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-border" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">Ou</span>
-                </div>
-              </div>
-            )}
-
-            {/* Manual Email Input (only show if no student selected) */}
-            {!selectedStudent && (
-              <div className="space-y-2">
-                <Label htmlFor="clientEmail">Inserir Email Manualmente</Label>
-                <Input
-                  id="clientEmail"
-                  type="email"
-                  placeholder="cliente@exemplo.com"
-                  value={clientEmail}
-                  onChange={(e) => setClientEmail(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !isAddingClient) {
-                      handleSaveClient();
-                    }
-                  }}
-                  className="glass"
-                  disabled={isAddingClient}
-                />
+            {/* Manual Email Input */}
+            <div className="space-y-2">
+              <Label htmlFor="clientEmail">Email do Aluno</Label>
+              <Input
+                id="clientEmail"
+                type="email"
+                placeholder="cliente@exemplo.com"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isAddingClient) {
+                    handleSaveClient();
+                  }
+                }}
+                className="glass"
+                disabled={isAddingClient}
+                autoFocus
+              />
+              <div className="space-y-1">
                 <p className="text-xs text-muted-foreground">
-                  O aluno deve estar cadastrado no sistema com a role &quot;Aluno&quot;
+                  ✓ O aluno deve estar cadastrado com a role <strong>&quot;Aluno&quot;</strong>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  ✓ O aluno não pode ter outro Personal Trainer
                 </p>
               </div>
-            )}
+            </div>
           </div>
           <DialogFooter>
             <Button
