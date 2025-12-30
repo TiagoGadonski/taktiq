@@ -224,9 +224,18 @@ export default function InstructorPage() {
     const fetchClients = async () => {
       try {
         const response = await apiClient.get<any>('/personal/clients');
-        // Ensure we always set an array, even if response.data is undefined or null
-        setClients(Array.isArray(response.data) ? response.data : []);
+        console.log('[DEBUG] Clients API response:', response);
+
+        // The apiClient might return the data directly or wrapped in response.data
+        const clientsData = response.data !== undefined ? response.data : response;
+        console.log('[DEBUG] Clients data extracted:', clientsData);
+        console.log('[DEBUG] Is array?:', Array.isArray(clientsData));
+
+        const finalClients = Array.isArray(clientsData) ? clientsData : [];
+        setClients(finalClients);
+        console.log('[DEBUG] Set clients to state:', finalClients.length, 'clients');
       } catch (error) {
+        console.error('[DEBUG] Error fetching clients:', error);
         toast({
           title: 'Erro',
           description: 'Não foi possível carregar os clientes.',
@@ -445,7 +454,9 @@ export default function InstructorPage() {
 
       // Refresh client list
       const response = await apiClient.get<any>('/personal/clients');
-      setClients(Array.isArray(response.data) ? response.data : []);
+      const clientsData = response.data !== undefined ? response.data : response;
+      console.log('[DEBUG] Refreshed clients after add:', clientsData);
+      setClients(Array.isArray(clientsData) ? clientsData : []);
     } catch (error: any) {
 
       const errorMessage = error.response?.data?.message ||
