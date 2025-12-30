@@ -250,6 +250,9 @@ export default function InstructorPage() {
 
     if (user?.role === 'PersonalTrainer') {
       fetchClients();
+    } else if (user) {
+      // User is loaded but not a PersonalTrainer, stop loading
+      setIsLoading(false);
     }
   }, [user, toast]);
 
