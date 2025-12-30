@@ -47,7 +47,11 @@
       "Bash(node enhance-exercises.js:*)",
       "Bash(timeout 15 sleep:*)",
       "Bash(timeout 10 sleep:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(git reset:*)",
+      "Bash(git fetch:*)",
+      "Bash(nslookup:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
