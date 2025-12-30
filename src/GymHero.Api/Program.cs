@@ -1,6 +1,6 @@
-// Deployment Version: 2025-12-30-v2-final - Critical deployment with search endpoint
-// Build timestamp: 2025-12-30T14:00:00Z
-// This version MUST include the /api/personal/search-students endpoint
+// Deployment Version: 2025-12-30-v3-pt-permissions - PT can manage student plans
+// Build timestamp: 2025-12-30T17:25:00Z
+// This version allows PTs to create/edit workout plans for their students
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
