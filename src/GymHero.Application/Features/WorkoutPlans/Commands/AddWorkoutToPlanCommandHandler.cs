@@ -17,8 +17,9 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
 
     public async Task<Guid> Handle(AddWorkoutToPlanCommand request, CancellationToken cancellationToken)
     {
-        // Verify the plan exists
+        // Verify the plan exists and include the Owner to check PersonalTrainerId
         var plan = await _context.WorkoutPlans
+            .Include(p => p.Owner)
             .FirstOrDefaultAsync(p => p.Id == request.PlanId, cancellationToken);
 
         if (plan == null)
@@ -30,22 +31,8 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
         // Permission is granted if:
         // 1. User is the owner of the plan, OR
         // 2. User is the Personal Trainer of the plan's owner
-        bool hasPermission = false;
-
-        if (plan.OwnerId == request.OwnerId)
-        {
-            // User is the owner
-            hasPermission = true;
-        }
-        else
-        {
-            // Check if user is the PT of the plan's owner
-            var planOwner = await _context.Users
-                .Where(u => u.Id == plan.OwnerId && u.PersonalTrainerId == request.OwnerId)
-                .FirstOrDefaultAsync(cancellationToken);
-
-            hasPermission = planOwner != null;
-        }
+        bool hasPermission = plan.OwnerId == request.OwnerId ||
+                            (plan.Owner?.PersonalTrainerId == request.OwnerId);
 
         if (!hasPermission)
         {

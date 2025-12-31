@@ -31,6 +31,17 @@ public static class WorkoutPlanEndpoints
             // Otherwise, the current user (PT or regular user) is the owner
             var ownerId = request.AssignedToUserId ?? currentUserId;
 
+            // If a PT is assigning a plan to a student, ensure the student has the PT assigned
+            if (request.AssignedToUserId.HasValue && request.AssignedToUserId != currentUserId)
+            {
+                var student = await context.Users.FindAsync(request.AssignedToUserId.Value);
+                if (student != null && student.PersonalTrainerId == null)
+                {
+                    student.PersonalTrainerId = currentUserId;
+                    await context.SaveChangesAsync(CancellationToken.None);
+                }
+            }
+
             var command = new CreateWorkoutPlanCommand(request.Name, request.Goal, ownerId, request.Duration);
             var result = await sender.Send(command);
 
