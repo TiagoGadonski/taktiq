@@ -72,6 +72,13 @@ public record UpdatePersonalProfileRequest
 }
 
 /// <summary>
+/// DTO para resumo de aluno (para exibição no perfil público do PT).
+/// </summary>
+public record StudentSummaryDto(
+    string? ProfilePictureUrl
+);
+
+/// <summary>
 /// DTO para resposta do perfil público do Personal Trainer.
 /// </summary>
 public record PublicPersonalProfileResponse(
@@ -88,5 +95,6 @@ public record PublicPersonalProfileResponse(
     string? InstagramUrl,
     string? FacebookUrl,
     string? WebsiteUrl,
-    int StudentCount
+    int StudentCount,
+    IEnumerable<StudentSummaryDto> RecentStudents
 );

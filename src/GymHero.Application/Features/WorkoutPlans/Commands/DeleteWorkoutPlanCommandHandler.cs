@@ -8,10 +8,14 @@ namespace GymHero.Application.Features.WorkoutPlans.Commands;
 public class DeleteWorkoutPlanCommandHandler : IRequestHandler<DeleteWorkoutPlanCommand>
 {
     private readonly IApplicationDbContext _context;
+    private readonly INotificationService _notificationService;
 
-    public DeleteWorkoutPlanCommandHandler(IApplicationDbContext context)
+    public DeleteWorkoutPlanCommandHandler(
+        IApplicationDbContext context,
+        INotificationService notificationService)
     {
         _context = context;
+        _notificationService = notificationService;
     }
 
     public async Task Handle(DeleteWorkoutPlanCommand request, CancellationToken cancellationToken){
@@ -39,7 +43,18 @@ public class DeleteWorkoutPlanCommandHandler : IRequestHandler<DeleteWorkoutPlan
             throw new NotFoundException("Workout Plan not found.");
         }
 
-        // 3. Remove a referência do plano de treino das sessões relacionadas (preserva o histórico)
+        // 4. Send notification to PT if student is deleting the plan
+        if (workoutPlan.Owner?.PersonalTrainerId.HasValue == true)
+        {
+            await _notificationService.CreatePlanDeletedNotificationAsync(
+                workoutPlan.Owner.PersonalTrainerId.Value,
+                workoutPlan.OwnerId,
+                workoutPlan.Owner.Name,
+                workoutPlan.Name,
+                cancellationToken);
+        }
+
+        // 5. Remove a referência do plano de treino das sessões relacionadas (preserva o histórico)
         var relatedSessions = await _context.WorkoutSessions
             .Where(ws => ws.WorkoutPlanId == request.Id)
             .ToListAsync(cancellationToken);
@@ -49,10 +64,10 @@ public class DeleteWorkoutPlanCommandHandler : IRequestHandler<DeleteWorkoutPlan
             session.WorkoutPlanId = null;
         }
 
-        // 4. Marca a entidade para ser removida.
+        // 6. Marca a entidade para ser removida.
         _context.WorkoutPlans.Remove(workoutPlan);
 
-        // 5. Salva as mudanças, efetivando a exclusão no banco de dados.
+        // 7. Salva as mudanças, efetivando a exclusão no banco de dados.
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

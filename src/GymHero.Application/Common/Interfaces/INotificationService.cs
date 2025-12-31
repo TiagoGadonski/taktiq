@@ -42,4 +42,11 @@ public interface INotificationService
         string planName,
         int daysRemaining,
         CancellationToken cancellationToken = default);
+
+    Task CreatePlanDeletedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        string planName,
+        CancellationToken cancellationToken = default);
 }

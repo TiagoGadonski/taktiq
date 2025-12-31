@@ -52,7 +52,12 @@
       "Bash(git fetch:*)",
       "Bash(nslookup:*)",
       "Bash(git rm:*)",
-      "Bash(timeout 30 bash -c 'while true; do \n  echo \"\"=== Checking deployment status at $\\(date +%H:%M:%S\\) ===\"\"\n  STATUS=$\\(curl -s \"\"https://api.taktiq.app/health\"\" | grep -o \"\"healthy\"\" || echo \"\"unhealthy\"\"\\)\n  echo \"\"Health: $STATUS\"\"\n  \n  # Check if debug endpoint exists\n  DEBUG_STATUS=$\\(curl -s -o /dev/null -w \"\"%{http_code}\"\" \"\"https://api.taktiq.app/api/workout-plans/00000000-0000-0000-0000-000000000000/debug-permissions\"\"\\)\n  echo \"\"Debug endpoint status: $DEBUG_STATUS\"\"\n  \n  if [ \"\"$DEBUG_STATUS\"\" != \"\"404\"\" ]; then\n    echo \"\"✅ Deploy completed! Debug endpoint is active.\"\"\n    break\n  fi\n  \n  sleep 10\ndone')"
+      "Bash(timeout 30 bash -c 'while true; do \n  echo \"\"=== Checking deployment status at $\\(date +%H:%M:%S\\) ===\"\"\n  STATUS=$\\(curl -s \"\"https://api.taktiq.app/health\"\" | grep -o \"\"healthy\"\" || echo \"\"unhealthy\"\"\\)\n  echo \"\"Health: $STATUS\"\"\n  \n  # Check if debug endpoint exists\n  DEBUG_STATUS=$\\(curl -s -o /dev/null -w \"\"%{http_code}\"\" \"\"https://api.taktiq.app/api/workout-plans/00000000-0000-0000-0000-000000000000/debug-permissions\"\"\\)\n  echo \"\"Debug endpoint status: $DEBUG_STATUS\"\"\n  \n  if [ \"\"$DEBUG_STATUS\"\" != \"\"404\"\" ]; then\n    echo \"\"✅ Deploy completed! Debug endpoint is active.\"\"\n    break\n  fi\n  \n  sleep 10\ndone')",
+      "Bash(python -m json.tool:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File deploy-manual.ps1)",
+      "Bash(PT_TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MWZmMGQ4NS01YzVmLTQ1MDItOTBkNS03ZDhhYjEwZjg2NjIiLCJuYW1laWQiOiI2MWZmMGQ4NS01YzVmLTQ1MDItOTBkNS03ZDhhYjEwZjg2NjIiLCJuYW1lIjoiVGlhZ28iLCJlbWFpbCI6InRpYWdvMkB0YWt0aXEuYXBwIiwianRpIjoiNjhmOWFiOGMtNWQxMC00OTU5LWExOTItY2YzYTljZmVhN2I4Iiwicm9sZSI6IlBlcnNvbmFsVHJhaW5lciIsIm5iZiI6MTc2NzE0Njc4NCwiZXhwIjoxNzY3MTUwMzg0LCJpYXQiOjE3NjcxNDY3ODQsImlzcyI6IlRha3RJUSIsImF1ZCI6IlRha3RJUSJ9.B-9hXkuV4aZpq-FVmWG7Sfficspv-vKEEbPG15v7y-A\")",
+      "Bash(__NEW_LINE__ curl -X POST https://api.taktiq.app/api/workout-plans )",
+      "Bash(Select-String -Pattern \"Build succeeded|Build FAILED|error\")"
     ],
     "deny": [],
     "ask": []

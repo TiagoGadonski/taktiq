@@ -16,9 +16,25 @@ public static class MeEndpoints
         group.MapGet("/", async (ClaimsPrincipal user, IApplicationDbContext context, CancellationToken ct) =>
         {
             var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var currentUser = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId, ct);
+            var currentUser = await context.Users
+                .AsNoTracking()
+                .Include(u => u.PersonalTrainer)
+                .FirstOrDefaultAsync(u => u.Id == userId, ct);
             if (currentUser is null) return Results.NotFound();
-            
+
+            // Map PersonalTrainer if exists
+            PersonalTrainerSummary? personalTrainerSummary = null;
+            if (currentUser.PersonalTrainer != null)
+            {
+                personalTrainerSummary = new PersonalTrainerSummary(
+                    currentUser.PersonalTrainer.Id,
+                    currentUser.PersonalTrainer.Name,
+                    currentUser.PersonalTrainer.ProfileSlug,
+                    currentUser.PersonalTrainer.ProfilePictureUrl,
+                    currentUser.PersonalTrainer.Specialization
+                );
+            }
+
             // Mapeamos a entidade User completa para o DTO de resposta
             var response = new UserProfileResponse(
                 currentUser.Id,
@@ -55,7 +71,10 @@ public static class MeEndpoints
                 currentUser.IsPublicProfile,
                 currentUser.InstagramUrl,
                 currentUser.FacebookUrl,
-                currentUser.WebsiteUrl
+                currentUser.WebsiteUrl,
+                // Student-PT Relationship
+                currentUser.PersonalTrainerId,
+                personalTrainerSummary
             );
             return Results.Ok(response);
         });

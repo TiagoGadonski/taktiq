@@ -648,7 +648,8 @@ public static class PersonalEndpoints
                     u.InstagramUrl,
                     u.FacebookUrl,
                     u.WebsiteUrl,
-                    u.Clients.Count
+                    u.Clients.Count,
+                    Enumerable.Empty<StudentSummaryDto>() // Don't load students for list view (performance)
                 ))
                 .ToListAsync(cancellationToken);
 
@@ -664,9 +665,10 @@ public static class PersonalEndpoints
             IApplicationDbContext context,
             CancellationToken cancellationToken) =>
         {
-            var trainer = await context.Users
+            var trainerData = await context.Users
                 .Where(u => u.ProfileSlug == slug && u.IsPublicProfile && u.Role == "PersonalTrainer")
-                .Select(u => new PublicPersonalProfileResponse(
+                .Select(u => new
+                {
                     u.Id,
                     u.Name,
                     u.ProfileSlug,
@@ -680,14 +682,40 @@ public static class PersonalEndpoints
                     u.InstagramUrl,
                     u.FacebookUrl,
                     u.WebsiteUrl,
-                    u.Clients.Count
-                ))
+                    StudentCount = u.Clients.Count
+                })
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if (trainer == null)
+            if (trainerData == null)
             {
                 return Results.NotFound(new { message = "Personal Trainer não encontrado" });
             }
+
+            // Get recent students (only avatars for privacy)
+            var recentStudents = await context.Users
+                .Where(u => u.PersonalTrainerId == trainerData.Id)
+                .OrderByDescending(u => u.CreatedAt)
+                .Take(10)
+                .Select(u => new StudentSummaryDto(u.ProfilePictureUrl))
+                .ToListAsync(cancellationToken);
+
+            var trainer = new PublicPersonalProfileResponse(
+                trainerData.Id,
+                trainerData.Name,
+                trainerData.ProfileSlug,
+                trainerData.ProfilePictureUrl,
+                trainerData.Bio,
+                trainerData.Location,
+                trainerData.Specialization,
+                trainerData.Education,
+                trainerData.Experience,
+                trainerData.PricingInfo,
+                trainerData.InstagramUrl,
+                trainerData.FacebookUrl,
+                trainerData.WebsiteUrl,
+                trainerData.StudentCount,
+                recentStudents
+            );
 
             return Results.Ok(trainer);
         })
@@ -701,9 +729,10 @@ public static class PersonalEndpoints
             IApplicationDbContext context,
             CancellationToken cancellationToken) =>
         {
-            var trainer = await context.Users
+            var trainerData = await context.Users
                 .Where(u => u.Id == trainerId && u.Role == "PersonalTrainer")
-                .Select(u => new PublicPersonalProfileResponse(
+                .Select(u => new
+                {
                     u.Id,
                     u.Name,
                     u.ProfileSlug,
@@ -717,14 +746,40 @@ public static class PersonalEndpoints
                     u.InstagramUrl,
                     u.FacebookUrl,
                     u.WebsiteUrl,
-                    u.Clients.Count
-                ))
+                    StudentCount = u.Clients.Count
+                })
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if (trainer == null)
+            if (trainerData == null)
             {
                 return Results.NotFound(new { message = "Personal Trainer não encontrado" });
             }
+
+            // Get recent students (only avatars for privacy)
+            var recentStudents = await context.Users
+                .Where(u => u.PersonalTrainerId == trainerData.Id)
+                .OrderByDescending(u => u.CreatedAt)
+                .Take(10)
+                .Select(u => new StudentSummaryDto(u.ProfilePictureUrl))
+                .ToListAsync(cancellationToken);
+
+            var trainer = new PublicPersonalProfileResponse(
+                trainerData.Id,
+                trainerData.Name,
+                trainerData.ProfileSlug,
+                trainerData.ProfilePictureUrl,
+                trainerData.Bio,
+                trainerData.Location,
+                trainerData.Specialization,
+                trainerData.Education,
+                trainerData.Experience,
+                trainerData.PricingInfo,
+                trainerData.InstagramUrl,
+                trainerData.FacebookUrl,
+                trainerData.WebsiteUrl,
+                trainerData.StudentCount,
+                recentStudents
+            );
 
             return Results.Ok(trainer);
         })

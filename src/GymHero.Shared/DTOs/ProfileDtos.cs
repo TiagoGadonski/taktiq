@@ -62,7 +62,18 @@ public record UserProfileResponse(
     bool IsPublicProfile,
     string? InstagramUrl,
     string? FacebookUrl,
-    string? WebsiteUrl
+    string? WebsiteUrl,
+    // Student-PT Relationship
+    Guid? PersonalTrainerId,
+    PersonalTrainerSummary? PersonalTrainer
+);
+
+public record PersonalTrainerSummary(
+    Guid Id,
+    string Name,
+    string? ProfileSlug,
+    string? ProfilePictureUrl,
+    string? Specialization
 );
 
 public record PublicProfileResponse(

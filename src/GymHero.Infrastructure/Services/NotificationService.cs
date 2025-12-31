@@ -132,4 +132,23 @@ public class NotificationService : INotificationService
             $"/plans/{planId}",
             cancellationToken);
     }
+
+    public async Task CreatePlanDeletedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        string planName,
+        CancellationToken cancellationToken = default)
+    {
+        var data = JsonSerializer.Serialize(new { StudentId = studentId });
+
+        await CreateNotificationAsync(
+            trainerId,
+            "PlanDeleted",
+            "Plano Excluído",
+            $"{studentName} excluiu o plano \"{planName}\"",
+            data,
+            "/instructor",
+            cancellationToken);
+    }
 }

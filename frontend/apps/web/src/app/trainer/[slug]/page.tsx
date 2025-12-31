@@ -32,6 +32,10 @@ import {
 import Link from 'next/link';
 import { PostFeed } from '@/components/posts/post-feed';
 
+interface StudentSummary {
+  profilePictureUrl?: string;
+}
+
 interface PublicProfileData {
   id: string;
   name: string;
@@ -46,6 +50,7 @@ interface PublicProfileData {
   facebookUrl?: string;
   websiteUrl?: string;
   studentCount: number;
+  recentStudents: StudentSummary[];
 }
 
 interface Post {
@@ -212,6 +217,25 @@ export default function TrainerPublicProfilePage() {
                     {profile.studentCount === 1 ? 'aluno' : 'alunos'}
                   </span>
                 </div>
+
+                {/* Recent Students Avatars */}
+                {profile.recentStudents && profile.recentStudents.length > 0 && (
+                  <div className="flex -space-x-2">
+                    {profile.recentStudents.slice(0, 5).map((student, index) => (
+                      <Avatar key={index} className="h-8 w-8 border-2 border-background ring-1 ring-primary/20">
+                        <AvatarImage src={getAssetUrl(student.profilePictureUrl)} />
+                        <AvatarFallback className="bg-primary/20 text-primary text-xs">
+                          <Users className="h-3 w-3" />
+                        </AvatarFallback>
+                      </Avatar>
+                    ))}
+                    {profile.studentCount > 5 && (
+                      <div className="h-8 w-8 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-semibold text-muted-foreground ring-1 ring-primary/20">
+                        +{profile.studentCount - 5}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Social Media Links */}
                 <div className="flex gap-2">

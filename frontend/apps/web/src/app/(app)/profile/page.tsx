@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye, Home } from 'lucide-react';
+import { User, Mail, Save, Moon, MapPin, Dumbbell, Phone, Calendar, Ruler, Weight as WeightIcon, Upload, Camera, Lock, Loader2, AlertCircle, Eye, Home, UserCheck, ExternalLink } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -788,6 +788,72 @@ export default function ProfilePage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Personal Trainer Card */}
+          {profileData && (
+            <Card className="shadow-md bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <UserCheck className="h-4 w-4" />
+                  Personal Trainer
+                </CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
+                  {profileData.personalTrainer ? 'Seu personal trainer' : 'Encontre um personal'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {profileData.personalTrainer ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border">
+                      <Avatar className="h-12 w-12">
+                        <AvatarImage src={profileData.personalTrainer.profilePictureUrl || ''} />
+                        <AvatarFallback className="bg-primary/20 text-primary font-semibold">
+                          {profileData.personalTrainer.name?.charAt(0) || 'PT'}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-sm truncate">
+                          {profileData.personalTrainer.name}
+                        </p>
+                        {profileData.personalTrainer.specialization && (
+                          <p className="text-xs text-muted-foreground truncate">
+                            {profileData.personalTrainer.specialization}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    {profileData.personalTrainer.profileSlug && (
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        onClick={() => router.push(`/trainer/${profileData.personalTrainer.profileSlug}`)}
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Ver Perfil do PT
+                      </Button>
+                    )}
+                  </div>
+                ) : (
+                  <div className="space-y-3 text-center">
+                    <div className="p-4 rounded-lg bg-background/50 border border-dashed">
+                      <UserCheck className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+                      <p className="text-sm text-muted-foreground">
+                        Você ainda não tem um personal trainer
+                      </p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => router.push('/trainers')}
+                    >
+                      <Dumbbell className="mr-2 h-4 w-4" />
+                      Encontrar Personal Trainer
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Stats Card */}
           <Card className="shadow-md bg-gradient-to-br from-primary/5 to-background">
