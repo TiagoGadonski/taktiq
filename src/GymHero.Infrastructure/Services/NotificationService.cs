@@ -151,4 +151,63 @@ public class NotificationService : INotificationService
             "/instructor",
             cancellationToken);
     }
+
+    public async Task CreatePTRequestNotificationAsync(
+        Guid studentId,
+        Guid trainerId,
+        string trainerName,
+        string? message,
+        CancellationToken cancellationToken = default)
+    {
+        var data = JsonSerializer.Serialize(new { TrainerId = trainerId });
+
+        var messageText = string.IsNullOrEmpty(message)
+            ? $"{trainerName} quer ser seu Personal Trainer!"
+            : $"{trainerName} quer ser seu Personal Trainer: \"{message}\"";
+
+        await CreateNotificationAsync(
+            studentId,
+            "PTRequest",
+            "Solicitação de Personal Trainer",
+            messageText,
+            data,
+            "/pt-requests",
+            cancellationToken);
+    }
+
+    public async Task CreatePTRequestAcceptedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        CancellationToken cancellationToken = default)
+    {
+        var data = JsonSerializer.Serialize(new { StudentId = studentId });
+
+        await CreateNotificationAsync(
+            trainerId,
+            "PTRequestAccepted",
+            "Solicitação Aceita!",
+            $"{studentName} aceitou sua solicitação para ser Personal Trainer!",
+            data,
+            "/instructor",
+            cancellationToken);
+    }
+
+    public async Task CreatePTRequestRejectedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        CancellationToken cancellationToken = default)
+    {
+        var data = JsonSerializer.Serialize(new { StudentId = studentId });
+
+        await CreateNotificationAsync(
+            trainerId,
+            "PTRequestRejected",
+            "Solicitação Recusada",
+            $"{studentName} recusou sua solicitação para ser Personal Trainer.",
+            data,
+            "/instructor",
+            cancellationToken);
+    }
 }

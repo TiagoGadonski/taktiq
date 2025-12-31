@@ -70,6 +70,30 @@ public static class PersonalEndpoints
         .WithName("AddClientToPersonal")
         .WithSummary("Assigns a client to the authenticated Personal Trainer.");
 
+        // Send PT request to student
+        group.MapPost("/students/{studentId:guid}/request", async (
+            Guid studentId,
+            [FromBody] SendPTRequestRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new Application.Features.Personal.Commands.SendPTRequestCommand(
+                trainerId,
+                studentId,
+                request.Message);
+
+            try
+            {
+                var result = await sender.Send(command);
+                return Results.Created($"/api/me/pt-requests/{result}", new { id = result });
+            }
+            catch (NotFoundException ex) { return Results.NotFound(new { message = ex.Message }); }
+            catch (InvalidOperationException ex) { return Results.BadRequest(new { message = ex.Message }); }
+        })
+        .WithName("SendPTRequest")
+        .WithSummary("Send a PT request to a student");
+
         group.MapGet("/clients", async (ClaimsPrincipal user, ISender sender) =>
         {
             var personalId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);

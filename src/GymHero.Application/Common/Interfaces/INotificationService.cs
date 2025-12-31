@@ -49,4 +49,23 @@ public interface INotificationService
         string studentName,
         string planName,
         CancellationToken cancellationToken = default);
+
+    Task CreatePTRequestNotificationAsync(
+        Guid studentId,
+        Guid trainerId,
+        string trainerName,
+        string? message,
+        CancellationToken cancellationToken = default);
+
+    Task CreatePTRequestAcceptedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        CancellationToken cancellationToken = default);
+
+    Task CreatePTRequestRejectedNotificationAsync(
+        Guid trainerId,
+        Guid studentId,
+        string studentName,
+        CancellationToken cancellationToken = default);
 }

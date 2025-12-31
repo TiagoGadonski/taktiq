@@ -609,6 +609,40 @@ namespace GymHero.Infrastructure.Migrations
                     b.ToTable("PasswordResetTokens");
                 });
 
+            modelBuilder.Entity("GymHero.Domain.Entities.PersonalTrainerRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("RespondedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TrainerId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TrainerId");
+
+                    b.ToTable("PersonalTrainerRequests");
+                });
+
             modelBuilder.Entity("GymHero.Domain.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1613,6 +1647,25 @@ namespace GymHero.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GymHero.Domain.Entities.PersonalTrainerRequest", b =>
+                {
+                    b.HasOne("GymHero.Domain.Entities.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GymHero.Domain.Entities.User", "Trainer")
+                        .WithMany()
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("GymHero.Domain.Entities.Post", b =>

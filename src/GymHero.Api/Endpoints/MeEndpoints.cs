@@ -215,5 +215,35 @@ public static class MeEndpoints
             var result = await sender.Send(query);
             return Results.Ok(result);
         });
+
+        // Get PT requests for current student
+        group.MapGet("/pt-requests", async (ClaimsPrincipal user, ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new Application.Features.Personal.Queries.GetMyPTRequestsQuery(userId);
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("GetMyPTRequests")
+        .WithSummary("Gets pending PT requests for the current student");
+
+        // Respond to PT request
+        group.MapPatch("/pt-requests/{requestId:guid}", async (
+            Guid requestId,
+            RespondToPTRequestRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new Application.Features.Personal.Commands.RespondToPTRequestCommand(
+                requestId,
+                userId,
+                request.Accepted);
+
+            await sender.Send(command);
+            return Results.NoContent();
+        })
+        .WithName("RespondToPTRequest")
+        .WithSummary("Accept or reject a PT request");
     }
 }

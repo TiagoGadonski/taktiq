@@ -79,6 +79,33 @@ public record StudentSummaryDto(
 );
 
 /// <summary>
+/// DTO para enviar solicitação de Personal Trainer.
+/// </summary>
+public record SendPTRequestRequest(
+    string? Message
+);
+
+/// <summary>
+/// DTO para responder solicitação de Personal Trainer.
+/// </summary>
+public record RespondToPTRequestRequest(
+    bool Accepted
+);
+
+/// <summary>
+/// DTO para resposta de solicitação de Personal Trainer.
+/// </summary>
+public record PTRequestResponse(
+    Guid Id,
+    Guid TrainerId,
+    string TrainerName,
+    string? TrainerProfilePicture,
+    string? Message,
+    string Status,
+    DateTime CreatedAt
+);
+
+/// <summary>
 /// DTO para resposta do perfil público do Personal Trainer.
 /// </summary>
 public record PublicPersonalProfileResponse(

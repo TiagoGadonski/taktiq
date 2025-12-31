@@ -39,6 +39,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Conversation> Conversations => Set<Conversation>();
     public DbSet<Message> Messages => Set<Message>();
     public DbSet<WorkoutPlanComment> WorkoutPlanComments => Set<WorkoutPlanComment>();
+    public DbSet<PersonalTrainerRequest> PersonalTrainerRequests => Set<PersonalTrainerRequest>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
