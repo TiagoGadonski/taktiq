@@ -1273,5 +1273,48 @@ public static class AdminEndpoints
         })
         .WithName("GetPlatformRevenue")
         .WithSummary("Get platform revenue analytics from marketplace fees (Admin only)");
+
+        // TEMPORARY DEBUG ENDPOINT - Remove after fixing PT workout creation
+        group.MapGet("/debug-plan/{planId:guid}", async (
+            Guid planId,
+            IApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                var plan = await context.WorkoutPlans
+                    .Include(p => p.Owner)
+                    .FirstOrDefaultAsync(p => p.Id == planId);
+
+                if (plan == null)
+                {
+                    return Results.Ok(new {
+                        found = false,
+                        planId = planId,
+                        message = "Plan not found"
+                    });
+                }
+
+                return Results.Ok(new {
+                    found = true,
+                    planId = plan.Id,
+                    planName = plan.Name,
+                    ownerId = plan.OwnerId,
+                    ownerExists = plan.Owner != null,
+                    ownerName = plan.Owner?.Name,
+                    ownerEmail = plan.Owner?.Email,
+                    ownerRole = plan.Owner?.Role,
+                    ownerPersonalTrainerId = plan.Owner?.PersonalTrainerId,
+                    createdAt = plan.CreatedAt
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to debug plan {PlanId}", planId);
+                return Results.Problem(ex.Message);
+            }
+        })
+        .WithName("DebugPlan")
+        .WithSummary("DEBUG: Get detailed plan information (Admin only)");
     }
 }
