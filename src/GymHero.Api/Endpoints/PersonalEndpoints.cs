@@ -126,6 +126,38 @@ public static class PersonalEndpoints
         .WithName("AssignPlanToClient")
         .WithSummary("Creates and assigns a new workout plan to a specific client.");
 
+        // Bulk assign plan to multiple students
+        group.MapPost("/clients/bulk-assign-plan", async (
+            [FromBody] BulkAssignPlanRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var personalId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new Application.Features.WorkoutPlans.Commands.AssignPlanToMultipleStudentsCommand(
+                personalId,
+                request.StudentIds,
+                request.PlanName,
+                request.Goal,
+                request.TemplatePlanId,
+                request.ExpirationDate);
+
+            try
+            {
+                var result = await sender.Send(command);
+                return Results.Created($"/api/personal/clients", new { planIds = result, count = result.Count() });
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("BulkAssignPlanToStudents")
+        .WithSummary("Creates and assigns a workout plan to multiple students at once");
+
         group.MapGet("/clients/{clientId:guid}/progress", async (
             Guid clientId,
             ClaimsPrincipal user,

@@ -106,6 +106,17 @@ public record PTRequestResponse(
 );
 
 /// <summary>
+/// DTO para atribuir plano a múltiplos alunos.
+/// </summary>
+public record BulkAssignPlanRequest(
+    IEnumerable<Guid> StudentIds,
+    string PlanName,
+    string? Goal,
+    Guid? TemplatePlanId,
+    DateTime? ExpirationDate
+);
+
+/// <summary>
 /// DTO para resposta do perfil público do Personal Trainer.
 /// </summary>
 public record PublicPersonalProfileResponse(
