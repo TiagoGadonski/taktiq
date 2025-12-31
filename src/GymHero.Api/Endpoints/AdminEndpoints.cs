@@ -1316,5 +1316,43 @@ public static class AdminEndpoints
         })
         .WithName("DebugPlan")
         .WithSummary("DEBUG: Get detailed plan information (Admin only)");
+
+        // TEMPORARY FIX - Manually assign PT to student
+        group.MapPost("/assign-pt-to-student", async (
+            [FromBody] AssignPTRequest request,
+            IApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                var student = await context.Users.FindAsync(request.StudentId);
+                if (student == null)
+                {
+                    return Results.NotFound(new { message = "Student not found" });
+                }
+
+                logger.LogInformation("Admin assigning PT {PTId} to student {StudentId}",
+                    request.PersonalTrainerId, request.StudentId);
+
+                student.PersonalTrainerId = request.PersonalTrainerId;
+                await context.SaveChangesAsync(CancellationToken.None);
+
+                return Results.Ok(new {
+                    message = "PT assigned successfully",
+                    studentId = student.Id,
+                    studentName = student.Name,
+                    personalTrainerId = student.PersonalTrainerId
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to assign PT");
+                return Results.Problem(ex.Message);
+            }
+        })
+        .WithName("AssignPTToStudent")
+        .WithSummary("DEBUG: Manually assign PT to student (Admin only)");
     }
 }
+
+public record AssignPTRequest(Guid StudentId, Guid PersonalTrainerId);
