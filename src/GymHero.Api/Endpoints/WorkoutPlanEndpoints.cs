@@ -390,9 +390,42 @@ public static class WorkoutPlanEndpoints
             Guid planId,
             [FromBody] AddWorkoutToPlanRequest request,
             ClaimsPrincipal user,
-            ISender sender) =>
+            ISender sender,
+            IApplicationDbContext context,
+            ILogger<Program> logger) =>
         {
             var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // TEMPORARY FIX: Verify permission before sending command
+            // This is a workaround for Azure deployment issues
+            var plan = await context.WorkoutPlans.FindAsync(planId);
+            if (plan == null)
+            {
+                logger.LogWarning("AddWorkout - Plan {PlanId} not found", planId);
+                return Results.NotFound(new { message = $"WorkoutPlan with ID {planId} not found" });
+            }
+
+            // Check permission
+            bool hasPermission = plan.OwnerId == ownerId;
+            if (!hasPermission)
+            {
+                // Check if user is PT of plan owner
+                var ownerPTId = await context.Users
+                    .Where(u => u.Id == plan.OwnerId)
+                    .Select(u => u.PersonalTrainerId)
+                    .FirstOrDefaultAsync();
+                hasPermission = ownerPTId == ownerId;
+            }
+
+            logger.LogInformation("AddWorkout - Plan: {PlanId}, Owner: {PlanOwner}, Requester: {RequesterId}, HasPerm: {HasPerm}",
+                planId, plan.OwnerId, ownerId, hasPermission);
+
+            if (!hasPermission)
+            {
+                logger.LogWarning("AddWorkout - Permission denied for {UserId} on plan {PlanId}", ownerId, planId);
+                return Results.NotFound(new { message = $"WorkoutPlan with ID {planId} not found" });
+            }
+
             var command = new AddWorkoutToPlanCommand(
                 planId,
                 ownerId,
