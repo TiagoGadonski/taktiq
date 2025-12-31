@@ -97,8 +97,9 @@ export default function NewPlanPage() {
     }
   }, [user, isPersonalTrainer]);
 
-  const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template'>('template');
+  const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template' | 'group'>('template');
   const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+  const [selectedGroupId, setSelectedGroupId] = useState<string>('');
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
   const [planPrice, setPlanPrice] = useState<string>('');
 
@@ -113,6 +114,16 @@ export default function NewPlanPage() {
       return response || [];
     },
     enabled: isPersonalTrainer && planType === 'student',
+  });
+
+  // Fetch PT's groups
+  const { data: groups } = useQuery({
+    queryKey: ['student-groups'],
+    queryFn: async () => {
+      const response = await apiClient.get<any[]>('/personal/groups');
+      return response || [];
+    },
+    enabled: isPersonalTrainer && planType === 'group',
   });
 
   // Initialize workout location filter based on user preference
@@ -258,6 +269,14 @@ export default function NewPlanPage() {
         });
         return;
       }
+      if (planType === 'group' && !selectedGroupId) {
+        toast({
+          variant: 'destructive',
+          title: 'Selecione um grupo',
+          description: 'Você deve selecionar um grupo para atribuir este plano.',
+        });
+        return;
+      }
       if (planType === 'marketplace' && (!planPrice || parseFloat(planPrice) < 0)) {
         toast({
           variant: 'destructive',
@@ -288,6 +307,7 @@ export default function NewPlanPage() {
 
       // Add PT-specific fields
       const isMultipleStudents = isPersonalTrainer && planType === 'student' && selectedStudentIds.length > 1;
+      const isGroupPlan = isPersonalTrainer && planType === 'group';
 
       if (isPersonalTrainer) {
         if (planType === 'student') {
@@ -303,6 +323,7 @@ export default function NewPlanPage() {
           planData.price = parseFloat(planPrice || '0');
           planData.isPublic = true;
         }
+        // For groups, we'll create a template plan first, then assign to group
       }
 
       // Add expiration even for non-PT if specified
@@ -376,7 +397,7 @@ export default function NewPlanPage() {
         })
       );
 
-      // If multiple students, use the created plan as template and bulk assign
+      // If multiple students or group, use the created plan as template and assign
       if (isMultipleStudents) {
         try {
           await apiClient.post('/personal/clients/bulk-assign-plan', {
@@ -399,6 +420,30 @@ export default function NewPlanPage() {
             variant: 'destructive',
             title: 'Erro ao atribuir planos',
             description: bulkError.response?.data?.message || 'Os planos foram criados mas houve erro na atribuição.',
+          });
+        }
+      } else if (isGroupPlan) {
+        try {
+          const response = await apiClient.post<{ planIds: string[]; count: number }>(`/personal/groups/${selectedGroupId}/assign-plan`, {
+            planName: data.name,
+            goal: data.goal || null,
+            templatePlanId: planId,
+            expirationDate: expirationDate
+          });
+
+          // Delete the template plan (it was only used for cloning)
+          await apiClient.delete(`/workout-plans/${planId}`);
+
+          const planCount = response.count || 0;
+          toast({
+            title: 'Planos criados!',
+            description: `${planCount} planos foram criados e atribuídos aos membros do grupo.`,
+          });
+        } catch (groupError: any) {
+          toast({
+            variant: 'destructive',
+            title: 'Erro ao atribuir planos ao grupo',
+            description: groupError.response?.data?.message || 'Os planos foram criados mas houve erro na atribuição ao grupo.',
           });
         }
       } else {
@@ -549,6 +594,19 @@ export default function NewPlanPage() {
                       </div>
                     </Label>
                   </div>
+
+                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent cursor-pointer">
+                    <RadioGroupItem value="group" id="group" />
+                    <Label htmlFor="group" className="flex-1 cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4" />
+                        <div>
+                          <p className="font-medium">Para Grupo de Alunos</p>
+                          <p className="text-sm text-muted-foreground">Atribuir a todos os membros de um grupo</p>
+                        </div>
+                      </div>
+                    </Label>
+                  </div>
                 </RadioGroup>
               </div>
 
@@ -646,8 +704,39 @@ export default function NewPlanPage() {
                 </div>
               )}
 
+              {/* Group Selection */}
+              {planType === 'group' && (
+                <div className="space-y-2 animate-in fade-in-50">
+                  <Label htmlFor="group-select" className="flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    Selecionar Grupo *
+                  </Label>
+                  <Select value={selectedGroupId} onValueChange={setSelectedGroupId}>
+                    <SelectTrigger id="group-select">
+                      <SelectValue placeholder="Escolha um grupo" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {groups && groups.length > 0 ? (
+                        groups.map((group: any) => (
+                          <SelectItem key={group.id} value={group.id}>
+                            {group.name} ({group.memberCount} {group.memberCount === 1 ? 'aluno' : 'alunos'})
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <SelectItem value="none" disabled>
+                          Nenhum grupo encontrado
+                        </SelectItem>
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <p className="text-sm text-muted-foreground">
+                    O plano será atribuído a todos os alunos do grupo selecionado
+                  </p>
+                </div>
+              )}
+
               {/* Expiration Date (for student plans or optional for others) */}
-              {(planType === 'student' || planType === 'template') && (
+              {(planType === 'student' || planType === 'template' || planType === 'group') && (
                 <div className="space-y-2 animate-in fade-in-50">
                   <Label htmlFor="expiration" className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
