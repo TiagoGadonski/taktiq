@@ -68,7 +68,7 @@ interface WorkoutDay {
 export default function NewPlanPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const { user } = useAuth();
+  const { user, isLoading: isLoadingUser } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Exercise[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -83,6 +83,19 @@ export default function NewPlanPage() {
 
   // Personal Trainer specific states
   const isPersonalTrainer = user?.role === 'PersonalTrainer';
+
+  // Debug log to help identify role issues
+  useEffect(() => {
+    if (user) {
+      console.log('User loaded in NewPlanPage:', {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        isPersonalTrainer
+      });
+    }
+  }, [user, isPersonalTrainer]);
+
   const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template'>('template');
   const [selectedStudentId, setSelectedStudentId] = useState<string>('');
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
@@ -372,6 +385,18 @@ export default function NewPlanPage() {
 
   const muscles = ['all', 'abdominals', 'abductors', 'adductors', 'biceps', 'calves', 'chest', 'forearms', 'glutes', 'hamstrings', 'lats', 'lower back', 'middle back', 'neck', 'quadriceps', 'traps', 'triceps', 'shoulders'];
   const difficulties = ['all', 'beginner', 'intermediate', 'expert'];
+
+  // Show loading state while user is being loaded
+  if (isLoadingUser) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
