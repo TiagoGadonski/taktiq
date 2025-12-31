@@ -6,6 +6,8 @@ using GymHero.Domain.Enums;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Personal.Commands;
 using GymHero.Application.Features.Personal.Queries;
+using GymHero.Application.Features.StudentGroups.Commands;
+using GymHero.Application.Features.StudentGroups.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -880,5 +882,221 @@ public static class PersonalEndpoints
         .RequireAuthorization()
         .WithName("GetFollowingPlans")
         .WithSummary("Get public plans from trainers I'm following");
+
+        // ===== STUDENT GROUPS ENDPOINTS =====
+
+        // GET /api/personal/groups - List all groups
+        group.MapGet("/groups", async (
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GetStudentGroupsQuery(trainerId);
+            var groups = await sender.Send(query);
+            return Results.Ok(groups);
+        })
+        .WithName("GetStudentGroups")
+        .WithSummary("List all student groups for the current PT");
+
+        // GET /api/personal/groups/{groupId} - Get group details
+        group.MapGet("/groups/{groupId:guid}", async (
+            Guid groupId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GetStudentGroupDetailQuery(groupId, trainerId);
+
+            try
+            {
+                var groupDetail = await sender.Send(query);
+                return Results.Ok(groupDetail);
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("GetStudentGroupDetail")
+        .WithSummary("Get detailed information about a specific group");
+
+        // POST /api/personal/groups - Create a new group
+        group.MapPost("/groups", async (
+            CreateStudentGroupRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new CreateStudentGroupCommand(
+                trainerId,
+                request.Name,
+                request.Description,
+                request.Tags
+            );
+
+            var groupId = await sender.Send(command);
+            return Results.Created($"/api/personal/groups/{groupId}", new { id = groupId });
+        })
+        .WithName("CreateStudentGroup")
+        .WithSummary("Create a new student group");
+
+        // PUT /api/personal/groups/{groupId} - Update group
+        group.MapPut("/groups/{groupId:guid}", async (
+            Guid groupId,
+            UpdateStudentGroupRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new UpdateStudentGroupCommand(
+                groupId,
+                trainerId,
+                request.Name,
+                request.Description,
+                request.Tags
+            );
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("UpdateStudentGroup")
+        .WithSummary("Update a student group");
+
+        // DELETE /api/personal/groups/{groupId} - Delete group
+        group.MapDelete("/groups/{groupId:guid}", async (
+            Guid groupId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new DeleteStudentGroupCommand(groupId, trainerId);
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("DeleteStudentGroup")
+        .WithSummary("Delete a student group");
+
+        // POST /api/personal/groups/{groupId}/members - Add students to group
+        group.MapPost("/groups/{groupId:guid}/members", async (
+            Guid groupId,
+            AddStudentsToGroupRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new AddStudentsToGroupCommand(
+                groupId,
+                trainerId,
+                request.StudentIds
+            );
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("AddStudentsToGroup")
+        .WithSummary("Add students to a group");
+
+        // DELETE /api/personal/groups/{groupId}/members/{studentId} - Remove student from group
+        group.MapDelete("/groups/{groupId:guid}/members/{studentId:guid}", async (
+            Guid groupId,
+            Guid studentId,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new RemoveStudentFromGroupCommand(groupId, studentId, trainerId);
+
+            try
+            {
+                await sender.Send(command);
+                return Results.NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("RemoveStudentFromGroup")
+        .WithSummary("Remove a student from a group");
+
+        // POST /api/personal/groups/{groupId}/assign-plan - Assign plan to all members of a group
+        group.MapPost("/groups/{groupId:guid}/assign-plan", async (
+            Guid groupId,
+            AssignPlanToGroupRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var command = new AssignPlanToGroupCommand(
+                groupId,
+                trainerId,
+                request.PlanName,
+                request.Goal,
+                request.TemplatePlanId,
+                request.ExpirationDate
+            );
+
+            try
+            {
+                var planIds = await sender.Send(command);
+                return Results.Created($"/api/personal/groups/{groupId}", new { planIds, count = planIds.Count() });
+            }
+            catch (NotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { message = ex.Message });
+            }
+        })
+        .WithName("AssignPlanToGroup")
+        .WithSummary("Assign a workout plan to all members of a group");
     }
 }

@@ -136,3 +136,90 @@ public record PublicPersonalProfileResponse(
     int StudentCount,
     IEnumerable<StudentSummaryDto> RecentStudents
 );
+
+// ===== Student Groups DTOs =====
+
+/// <summary>
+/// DTO para criar um novo grupo de alunos.
+/// </summary>
+public record CreateStudentGroupRequest(
+    [Required(ErrorMessage = "O nome do grupo é obrigatório.")]
+    [StringLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres.")]
+    string Name,
+
+    string? Description,
+
+    string? Tags
+);
+
+/// <summary>
+/// DTO para atualizar um grupo de alunos.
+/// </summary>
+public record UpdateStudentGroupRequest(
+    [Required(ErrorMessage = "O nome do grupo é obrigatório.")]
+    [StringLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres.")]
+    string Name,
+
+    string? Description,
+
+    string? Tags
+);
+
+/// <summary>
+/// DTO para adicionar alunos a um grupo.
+/// </summary>
+public record AddStudentsToGroupRequest(
+    [Required(ErrorMessage = "IDs dos alunos são obrigatórios.")]
+    [MinLength(1, ErrorMessage = "Pelo menos um aluno deve ser selecionado.")]
+    IEnumerable<Guid> StudentIds
+);
+
+/// <summary>
+/// DTO para resumo de membro do grupo.
+/// </summary>
+public record GroupMemberSummary(
+    Guid Id,
+    string Name,
+    string Email,
+    string? ProfilePictureUrl,
+    DateTime AddedAt
+);
+
+/// <summary>
+/// DTO para resposta de grupo de alunos.
+/// </summary>
+public record StudentGroupResponse(
+    Guid Id,
+    string Name,
+    string? Description,
+    string? Tags,
+    int MemberCount,
+    DateTime CreatedAt
+);
+
+/// <summary>
+/// DTO para resposta detalhada de grupo de alunos (com membros).
+/// </summary>
+public record StudentGroupDetailResponse(
+    Guid Id,
+    string Name,
+    string? Description,
+    string? Tags,
+    int MemberCount,
+    DateTime CreatedAt,
+    IEnumerable<GroupMemberSummary> Members
+);
+
+/// <summary>
+/// DTO para atribuir plano a um grupo.
+/// </summary>
+public record AssignPlanToGroupRequest(
+    [Required(ErrorMessage = "Nome do plano é obrigatório.")]
+    string PlanName,
+
+    string? Goal,
+
+    Guid? TemplatePlanId,
+
+    DateTime? ExpirationDate
+);
