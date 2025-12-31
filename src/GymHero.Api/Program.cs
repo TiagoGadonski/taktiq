@@ -1,6 +1,6 @@
-// Deployment Version: 2025-12-30-v3-pt-permissions - PT can manage student plans
-// Build timestamp: 2025-12-30T17:25:00Z
-// This version allows PTs to create/edit workout plans for their students
+// Deployment Version: 2025-12-31-v4-groups-system - Student Groups Feature
+// Build timestamp: 2025-12-31T05:30:00Z
+// This version includes full student groups management system
 using System.Text;
 using GymHero.Api.Endpoints; // Vamos criar isso a seguir
 using GymHero.Api.Middleware;
@@ -9,6 +9,7 @@ using GymHero.Infrastructure;
 using GymHero.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -218,7 +219,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Warm up database connection on startup to avoid first-request timeout
+// Warm up database connection and apply migrations on startup
 try
 {
     using var scope = app.Services.CreateScope();
@@ -230,6 +231,21 @@ try
     if (canConnect)
     {
         Log.Information("Database connection successful");
+
+        // Apply pending migrations automatically
+        Log.Information("Checking for pending database migrations...");
+        var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+
+        if (pendingMigrations.Any())
+        {
+            Log.Information("Found {Count} pending migrations. Applying...", pendingMigrations.Count());
+            await dbContext.Database.MigrateAsync();
+            Log.Information("Database migrations applied successfully");
+        }
+        else
+        {
+            Log.Information("No pending migrations found");
+        }
     }
     else
     {
@@ -238,7 +254,8 @@ try
 }
 catch (Exception ex)
 {
-    Log.Error(ex, "Error warming up database connection");
+    Log.Error(ex, "Error during database initialization");
+    // Don't crash the app - let it start anyway for diagnostics
 }
 
 // Configure graceful shutdown for Azure App Service

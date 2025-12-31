@@ -23,17 +23,11 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Install EF Core Tools
-        run: dotnet tool install --global dotnet-ef
-
       - name: Build with dotnet
         run: dotnet build src/GymHero.Api/GymHero.Api.csproj --configuration Release
 
       - name: dotnet publish
         run: dotnet publish src/GymHero.Api/GymHero.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
-
-      - name: Create EF Core Migrations Bundle
-        run: dotnet ef migrations bundle --startup-project src/GymHero.Api --project src/GymHero.Infrastructure --self-contained -r win-x64 --force -o "${{env.DOTNET_ROOT}}/myapp/efbundle.exe"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -61,10 +55,6 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0756A42969E147EFBADB6D5CEAC4F952 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8880A4138F3240E6943E06D251C296BB }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EAD3191630A04926BE438133F7C6B5A6 }}
-
-      - name: Run EF Core Migrations
-        run: ./efbundle.exe --connection "${{ secrets.DB_CONNECTION_STRING }}"
-        continue-on-error: true
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
