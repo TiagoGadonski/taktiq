@@ -25,9 +25,8 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
         _logger.LogInformation("AddWorkoutToPlan - PlanId: {PlanId}, OwnerId: {OwnerId}",
             request.PlanId, request.OwnerId);
 
-        // Verify the plan exists and include the Owner to check PersonalTrainerId
+        // Verify the plan exists
         var plan = await _context.WorkoutPlans
-            .Include(p => p.Owner)
             .FirstOrDefaultAsync(p => p.Id == request.PlanId, cancellationToken);
 
         if (plan == null)
@@ -36,15 +35,32 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
             throw new NotFoundException($"WorkoutPlan with ID {request.PlanId} not found");
         }
 
-        _logger.LogInformation("AddWorkoutToPlan - Found plan. OwnerId: {PlanOwnerId}, OwnerPTId: {OwnerPTId}, RequesterId: {RequesterId}",
-            plan.OwnerId, plan.Owner?.PersonalTrainerId, request.OwnerId);
-
         // Check if user has permission to modify this plan
         // Permission is granted if:
         // 1. User is the owner of the plan, OR
         // 2. User is the Personal Trainer of the plan's owner
-        bool hasPermission = plan.OwnerId == request.OwnerId ||
-                            (plan.Owner?.PersonalTrainerId == request.OwnerId);
+        bool hasPermission = false;
+        Guid? ownerPersonalTrainerId = null;
+
+        if (plan.OwnerId == request.OwnerId)
+        {
+            // User is the owner
+            hasPermission = true;
+        }
+        else
+        {
+            // Check if user is the PT of the plan's owner
+            // Query separately to avoid Include issues with Azure deployment
+            ownerPersonalTrainerId = await _context.Users
+                .Where(u => u.Id == plan.OwnerId)
+                .Select(u => u.PersonalTrainerId)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            hasPermission = ownerPersonalTrainerId == request.OwnerId;
+        }
+
+        _logger.LogInformation("AddWorkoutToPlan - Found plan. OwnerId: {PlanOwnerId}, OwnerPTId: {OwnerPTId}, RequesterId: {RequesterId}, HasPermission: {HasPermission}",
+            plan.OwnerId, ownerPersonalTrainerId, request.OwnerId, hasPermission);
 
         _logger.LogInformation("AddWorkoutToPlan - Permission check: {HasPermission}", hasPermission);
 
