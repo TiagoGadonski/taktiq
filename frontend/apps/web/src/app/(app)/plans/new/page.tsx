@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, Dumbbell, Home, Globe, User, ShoppingCart, FileText, Calendar, Sparkles } from 'lucide-react';
+import { Plus, Search, Trash2, ChevronDown, ChevronUp, Save, Dumbbell, Home, Globe, User, ShoppingCart, FileText, Calendar, Sparkles, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,7 @@ import { apiClient } from '@/lib/api';
 import { useAuth } from '@/hooks/use-auth';
 import { cn } from '@/lib/utils';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Select,
   SelectContent,
@@ -97,7 +98,7 @@ export default function NewPlanPage() {
   }, [user, isPersonalTrainer]);
 
   const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template'>('template');
-  const [selectedStudentId, setSelectedStudentId] = useState<string>('');
+  const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
   const [planPrice, setPlanPrice] = useState<string>('');
 
@@ -249,11 +250,11 @@ export default function NewPlanPage() {
 
     // Personal Trainer validations
     if (isPersonalTrainer) {
-      if (planType === 'student' && !selectedStudentId) {
+      if (planType === 'student' && selectedStudentIds.length === 0) {
         toast({
           variant: 'destructive',
-          title: 'Selecione um aluno',
-          description: 'Você deve selecionar um aluno para atribuir este plano.',
+          title: 'Selecione pelo menos um aluno',
+          description: 'Você deve selecionar ao menos um aluno para atribuir este plano.',
         });
         return;
       }
@@ -286,10 +287,17 @@ export default function NewPlanPage() {
       };
 
       // Add PT-specific fields
+      const isMultipleStudents = isPersonalTrainer && planType === 'student' && selectedStudentIds.length > 1;
+
       if (isPersonalTrainer) {
         if (planType === 'student') {
-          planData.assignedToUserId = selectedStudentId;
-          planData.expirationDate = expirationDate;
+          if (!isMultipleStudents) {
+            // Single student - assign directly
+            planData.assignedToUserId = selectedStudentIds[0];
+            planData.expirationDate = expirationDate;
+          }
+          // For multiple students, we'll create a template plan first, then use bulk assign
+          // Don't assign to anyone yet - we'll use it as a template
         } else if (planType === 'marketplace') {
           planData.forSale = true;
           planData.price = parseFloat(planPrice || '0');
@@ -368,10 +376,37 @@ export default function NewPlanPage() {
         })
       );
 
-      toast({
-        title: 'Plano criado!',
-        description: 'Seu plano de treino foi criado com sucesso.',
-      });
+      // If multiple students, use the created plan as template and bulk assign
+      if (isMultipleStudents) {
+        try {
+          await apiClient.post('/personal/clients/bulk-assign-plan', {
+            studentIds: selectedStudentIds,
+            planName: data.name,
+            goal: data.goal || null,
+            templatePlanId: planId,
+            expirationDate: expirationDate
+          });
+
+          // Delete the template plan (it was only used for cloning)
+          await apiClient.delete(`/workout-plans/${planId}`);
+
+          toast({
+            title: 'Planos criados!',
+            description: `${selectedStudentIds.length} planos foram criados e atribuídos aos alunos selecionados.`,
+          });
+        } catch (bulkError: any) {
+          toast({
+            variant: 'destructive',
+            title: 'Erro ao atribuir planos',
+            description: bulkError.response?.data?.message || 'Os planos foram criados mas houve erro na atribuição.',
+          });
+        }
+      } else {
+        toast({
+          title: 'Plano criado!',
+          description: 'Seu plano de treino foi criado com sucesso.',
+        });
+      }
 
       router.push('/plans');
     } catch (error: any) {
@@ -519,28 +554,73 @@ export default function NewPlanPage() {
 
               {/* Student Selection */}
               {planType === 'student' && (
-                <div className="space-y-2 animate-in fade-in-50">
-                  <Label htmlFor="student-select">Selecionar Aluno *</Label>
-                  <Select value={selectedStudentId} onValueChange={setSelectedStudentId}>
-                    <SelectTrigger id="student-select">
-                      <SelectValue placeholder="Escolha um aluno" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {students && students.length > 0 ? (
-                        students.map((student: any) => (
-                          <SelectItem key={student.id} value={student.id}>
-                            {student.name} ({student.email})
-                          </SelectItem>
-                        ))
-                      ) : (
-                        <SelectItem value="none" disabled>
-                          Nenhum aluno encontrado
-                        </SelectItem>
-                      )}
-                    </SelectContent>
-                  </Select>
+                <div className="space-y-3 animate-in fade-in-50">
+                  <div className="flex items-center justify-between">
+                    <Label className="flex items-center gap-2">
+                      <Users className="h-4 w-4" />
+                      Selecionar Alunos *
+                    </Label>
+                    {selectedStudentIds.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-primary">
+                          {selectedStudentIds.length} {selectedStudentIds.length === 1 ? 'aluno selecionado' : 'alunos selecionados'}
+                        </span>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setSelectedStudentIds([])}
+                          className="h-6 px-2 text-xs"
+                        >
+                          Limpar
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="border rounded-lg max-h-64 overflow-y-auto">
+                    {students && students.length > 0 ? (
+                      <div className="divide-y">
+                        {students.map((student: any) => (
+                          <div
+                            key={student.id}
+                            className="flex items-center space-x-3 p-3 hover:bg-accent cursor-pointer"
+                            onClick={() => {
+                              setSelectedStudentIds(prev =>
+                                prev.includes(student.id)
+                                  ? prev.filter(id => id !== student.id)
+                                  : [...prev, student.id]
+                              );
+                            }}
+                          >
+                            <Checkbox
+                              checked={selectedStudentIds.includes(student.id)}
+                              onCheckedChange={(checked) => {
+                                setSelectedStudentIds(prev =>
+                                  checked
+                                    ? [...prev, student.id]
+                                    : prev.filter(id => id !== student.id)
+                                );
+                              }}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <p className="font-medium text-sm">{student.name}</p>
+                              <p className="text-xs text-muted-foreground truncate">{student.email}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-8 text-center text-sm text-muted-foreground">
+                        Nenhum aluno encontrado
+                      </div>
+                    )}
+                  </div>
+
                   <p className="text-sm text-muted-foreground">
-                    O plano será automaticamente atribuído ao aluno selecionado
+                    {selectedStudentIds.length > 1
+                      ? 'Um plano será criado para cada aluno selecionado'
+                      : 'Selecione um ou mais alunos para atribuir o plano'}
                   </p>
                 </div>
               )}
