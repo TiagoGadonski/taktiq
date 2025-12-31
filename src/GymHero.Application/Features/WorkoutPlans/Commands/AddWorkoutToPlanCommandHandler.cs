@@ -3,20 +3,28 @@ using GymHero.Application.Common.Interfaces;
 using GymHero.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace GymHero.Application.Features.WorkoutPlans.Commands;
 
 public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ILogger<AddWorkoutToPlanCommandHandler> _logger;
 
-    public AddWorkoutToPlanCommandHandler(IApplicationDbContext context)
+    public AddWorkoutToPlanCommandHandler(
+        IApplicationDbContext context,
+        ILogger<AddWorkoutToPlanCommandHandler> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task<Guid> Handle(AddWorkoutToPlanCommand request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("AddWorkoutToPlan - PlanId: {PlanId}, OwnerId: {OwnerId}",
+            request.PlanId, request.OwnerId);
+
         // Verify the plan exists and include the Owner to check PersonalTrainerId
         var plan = await _context.WorkoutPlans
             .Include(p => p.Owner)
@@ -24,8 +32,12 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
 
         if (plan == null)
         {
+            _logger.LogWarning("AddWorkoutToPlan - Plan not found: {PlanId}", request.PlanId);
             throw new NotFoundException($"WorkoutPlan with ID {request.PlanId} not found");
         }
+
+        _logger.LogInformation("AddWorkoutToPlan - Found plan. OwnerId: {PlanOwnerId}, OwnerPTId: {OwnerPTId}, RequesterId: {RequesterId}",
+            plan.OwnerId, plan.Owner?.PersonalTrainerId, request.OwnerId);
 
         // Check if user has permission to modify this plan
         // Permission is granted if:
@@ -34,8 +46,12 @@ public class AddWorkoutToPlanCommandHandler : IRequestHandler<AddWorkoutToPlanCo
         bool hasPermission = plan.OwnerId == request.OwnerId ||
                             (plan.Owner?.PersonalTrainerId == request.OwnerId);
 
+        _logger.LogInformation("AddWorkoutToPlan - Permission check: {HasPermission}", hasPermission);
+
         if (!hasPermission)
         {
+            _logger.LogWarning("AddWorkoutToPlan - Permission denied for user {UserId} on plan {PlanId}",
+                request.OwnerId, request.PlanId);
             throw new NotFoundException($"WorkoutPlan with ID {request.PlanId} not found");
         }
 
