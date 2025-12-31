@@ -41,6 +41,7 @@ const profileSchema = z.object({
   injuries: z.string().optional(),
   healthConditions: z.string().optional(),
   exerciseGoal: z.string().optional(),
+  excludedExercises: z.string().optional(),
   preferredWorkoutLocation: z.string().optional(),
   practicesBoxing: z.boolean().optional(),
 });
@@ -127,6 +128,7 @@ export default function ProfilePage() {
           injuries: data.injuries || '',
           healthConditions: data.healthConditions || '',
           exerciseGoal: data.exerciseGoal || '',
+          excludedExercises: data.excludedExercises || '',
           preferredWorkoutLocation: data.preferredWorkoutLocation?.toString() || '0',
           practicesBoxing: data.practicesBoxing || false,
         });
@@ -157,6 +159,7 @@ export default function ProfilePage() {
         injuries: data.injuries || null,
         healthConditions: data.healthConditions || null,
         exerciseGoal: data.exerciseGoal || null,
+        excludedExercises: data.excludedExercises || null,
         preferredWorkoutLocation: data.preferredWorkoutLocation ? parseInt(data.preferredWorkoutLocation) : 0,
         practicesBoxing: data.practicesBoxing || false,
       });
@@ -677,6 +680,24 @@ export default function ProfilePage() {
                       />
                       <p className="text-xs text-muted-foreground">
                         Informe condições de saúde relevantes para treinos mais seguros.
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="excludedExercises" className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-destructive" />
+                        Exercícios Excluídos
+                      </Label>
+                      <Textarea
+                        id="excludedExercises"
+                        {...register('excludedExercises')}
+                        disabled={!isEditing}
+                        placeholder="Ex: Supino, Agachamento, Leg Extension (separe por vírgula)"
+                        rows={2}
+                        className="resize-none"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Exercícios que você NUNCA quer em seus treinos. A AI jamais incluirá estes exercícios.
                       </p>
                     </div>
                   </div>

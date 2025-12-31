@@ -13,7 +13,10 @@ public record AIWorkoutRequest(
     string? FitnessLevel,
     int? Duration,
     List<string>? Equipment,
-    string? WorkoutLocation  // ✅ NEW: "gym", "home", or "both" - overrides user profile preference
+    string? WorkoutLocation,  // ✅ "gym", "home", or "both" - overrides user profile preference
+    bool IncludeWarmup = false,        // ✅ Include warmup exercises (5-10 min)
+    bool IncludeCooldown = false,      // ✅ Include cooldown/stretching (5-10 min)
+    bool IncludeMobility = false       // ✅ Include mobility exercises
 );
 
 public record AIWorkoutPlanRequest(
@@ -52,7 +55,8 @@ public record ExerciseInstruction(
     string? ProgressionNotes = null,
     string? RPE = null,              // Rate of Perceived Exertion guidance
     string? Tempo = null,             // Tempo prescription (e.g., "3-0-1-0")
-    string? WarmupSets = null         // Warm-up guidance for beginners
+    string? WarmupSets = null,        // Warm-up guidance for beginners
+    string? ExerciseType = null       // ✅ "warmup", "main", "mobility", "cooldown"
 );
 
 public record AIWorkoutResponse(
@@ -1791,12 +1795,37 @@ REGRAS FUNDAMENTAIS:
 10. Inclua aquecimento específico quando necessário
 11. Seja criativo mas realista com variações de exercícios
 
-ESTRUTURA DE TREINO IDEAL:
-- Aquecimento (5-10 min) quando apropriado
-- Exercícios compostos principais (1-2)
-- Exercícios complementares (2-3)
-- Exercícios de isolamento (1-2)
-- Alongamento/desaquecimento quando relevante
+ESTRUTURA DO TREINO (IMPORTANTE - Siga conforme as opções selecionadas pelo usuário):
+
+1. AQUECIMENTO (Se IncludeWarmup = true):
+   - Iniciar com 5-10 minutos de aquecimento dinâmico
+   - Exemplos: Corrida leve, polichinelos (jumping jacks), rotação de braços, balanço de pernas, burpees leves
+   - Use exerciseType: ""warmup"" para todos os exercícios de aquecimento
+   - Objetivo: preparar o corpo, elevar frequência cardíaca, aumentar temperatura muscular
+
+2. EXERCÍCIOS PRINCIPAIS:
+   - Compostos primeiro (1-2 exercícios), depois isolamento (1-2 exercícios)
+   - Use exerciseType: ""main"" para todos os exercícios principais
+   - Aqui vai a maior parte do treino
+
+3. MOBILIDADE ARTICULAR (Se IncludeMobility = true):
+   - Adicionar 5-8 exercícios de mobilidade articular
+   - Focar nas articulações que serão/foram usadas no treino (ombros, quadril, tornozelos, etc.)
+   - Exemplos: Círculos de braço, rotação de quadril, alongamento de quadríceps em pé, cat-cow, world's greatest stretch
+   - Use exerciseType: ""mobility"" para exercícios de mobilidade
+   - Objetivo: melhorar amplitude de movimento, prevenir lesões
+
+4. ALONGAMENTO FINAL (Se IncludeCooldown = true):
+   - Finalizar com 5-10 minutos de alongamento estático
+   - Alongar TODOS os músculos trabalhados no treino
+   - Exemplos: Alongamento de peitoral, isquiotibiais, quadríceps, panturrilha, lombar
+   - Use exerciseType: ""cooldown"" para alongamentos finais
+   - Objetivo: reduzir tensão muscular, melhorar flexibilidade, auxiliar recuperação
+
+⚠️ IMPORTANTE SOBRE DURAÇÃO:
+- Ajuste a duração total do treino para incluir aquecimento/mobilidade/alongamento!
+- Se o usuário pedir 60 minutos E incluir aquecimento (10 min) + alongamento (10 min), os exercícios principais devem caber em ~40 minutos
+- Exemplo: 60 min total = 10 min aquecimento + 40 min exercícios principais + 10 min alongamento
 
 Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem comentários, sem ```json):
 {
@@ -1816,7 +1845,8 @@ Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem comentári
         ""Execução: descrição completa do movimento concêntrico e excêntrico"",
         ""Respiração: quando inspirar e expirar"",
         ""Segurança/Dicas: pontos de atenção, erros comuns a evitar, ativação muscular""
-      ]
+      ],
+      ""exerciseType"": ""warmup|main|mobility|cooldown""
     }
   ]
 }";
@@ -1840,6 +1870,11 @@ PARÂMETROS OBRIGATÓRIOS:
 $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
   RESTRIÇÃO: Use APENAS os equipamentos listados acima. Não inclua exercícios que requerem outros equipamentos." :
 "")}
+
+OPÇÕES DE ESTRUTURA DO TREINO SELECIONADAS PELO USUÁRIO:
+- Incluir Aquecimento: {request.IncludeWarmup} {(request.IncludeWarmup ? "✅ (OBRIGATÓRIO - incluir aquecimento dinâmico de 5-10 min)" : "❌ (NÃO incluir)")}
+- Incluir Mobilidade Articular: {request.IncludeMobility} {(request.IncludeMobility ? "✅ (OBRIGATÓRIO - incluir 5-8 exercícios de mobilidade)" : "❌ (NÃO incluir)")}
+- Incluir Alongamento Final: {request.IncludeCooldown} {(request.IncludeCooldown ? "✅ (OBRIGATÓRIO - incluir alongamento estático de 5-10 min)" : "❌ (NÃO incluir)")}
 
 INSTRUÇÕES CRÍTICAS:
 1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
@@ -2318,6 +2353,21 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
             }
         }
 
+        // Add permanently excluded exercises
+        if (!string.IsNullOrEmpty(userProfile.ExcludedExercises))
+        {
+            context.AppendLine($"\n❌❌❌ EXERCÍCIOS PERMANENTEMENTE EXCLUÍDOS PELO USUÁRIO:");
+            var excludedList = ((string)userProfile.ExcludedExercises).Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(e => e.Trim())
+                                    .ToList();
+            foreach (var exercise in excludedList)
+            {
+                context.AppendLine($"   • {exercise}");
+            }
+            context.AppendLine("⚠️⚠️⚠️ NUNCA inclua estes exercícios, mesmo que sejam ideais para o objetivo!");
+            context.AppendLine("⚠️⚠️⚠️ Isso é uma restrição ABSOLUTA do usuário!");
+        }
+
         return context.ToString();
     }
 
@@ -2773,6 +2823,38 @@ REGRAS FUNDAMENTAIS:
 10. Inclua aquecimento específico quando necessário
 11. Seja criativo mas realista com variações de exercícios
 
+ESTRUTURA DO TREINO (IMPORTANTE - Siga conforme as opções selecionadas pelo usuário):
+
+1. AQUECIMENTO (Se IncludeWarmup = true):
+   - Iniciar com 5-10 minutos de aquecimento dinâmico
+   - Exemplos: Corrida leve, polichinelos (jumping jacks), rotação de braços, balanço de pernas, burpees leves
+   - Use exerciseType: ""warmup"" para todos os exercícios de aquecimento
+   - Objetivo: preparar o corpo, elevar frequência cardíaca, aumentar temperatura muscular
+
+2. EXERCÍCIOS PRINCIPAIS:
+   - Compostos primeiro (1-2 exercícios), depois isolamento (1-2 exercícios)
+   - Use exerciseType: ""main"" para todos os exercícios principais
+   - Aqui vai a maior parte do treino
+
+3. MOBILIDADE ARTICULAR (Se IncludeMobility = true):
+   - Adicionar 5-8 exercícios de mobilidade articular
+   - Focar nas articulações que serão/foram usadas no treino (ombros, quadril, tornozelos, etc.)
+   - Exemplos: Círculos de braço, rotação de quadril, alongamento de quadríceps em pé, cat-cow, world's greatest stretch
+   - Use exerciseType: ""mobility"" para exercícios de mobilidade
+   - Objetivo: melhorar amplitude de movimento, prevenir lesões
+
+4. ALONGAMENTO FINAL (Se IncludeCooldown = true):
+   - Finalizar com 5-10 minutos de alongamento estático
+   - Alongar TODOS os músculos trabalhados no treino
+   - Exemplos: Alongamento de peitoral, isquiotibiais, quadríceps, panturrilha, lombar
+   - Use exerciseType: ""cooldown"" para alongamentos finais
+   - Objetivo: reduzir tensão muscular, melhorar flexibilidade, auxiliar recuperação
+
+⚠️ IMPORTANTE SOBRE DURAÇÃO:
+- Ajuste a duração total do treino para incluir aquecimento/mobilidade/alongamento!
+- Se o usuário pedir 60 minutos E incluir aquecimento (10 min) + alongamento (10 min), os exercícios principais devem caber em ~40 minutos
+- Exemplo: 60 min total = 10 min aquecimento + 40 min exercícios principais + 10 min alongamento
+
 Retorne APENAS um JSON válido no seguinte formato:
 {
   ""title"": ""Título Descritivo do Treino em Português"",
@@ -2791,7 +2873,8 @@ Retorne APENAS um JSON válido no seguinte formato:
         ""Execução: descrição completa do movimento concêntrico e excêntrico"",
         ""Respiração: quando inspirar e expirar"",
         ""Segurança/Dicas: pontos de atenção, erros comuns a evitar, ativação muscular""
-      ]
+      ],
+      ""exerciseType"": ""warmup|main|mobility|cooldown""
     }
   ]
 }";
@@ -2815,6 +2898,11 @@ PARÂMETROS OBRIGATÓRIOS:
 $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
   RESTRIÇÃO: Use APENAS os equipamentos listados acima." :
 "")}
+
+OPÇÕES DE ESTRUTURA DO TREINO SELECIONADAS PELO USUÁRIO:
+- Incluir Aquecimento: {request.IncludeWarmup} {(request.IncludeWarmup ? "✅ (OBRIGATÓRIO - incluir aquecimento dinâmico de 5-10 min)" : "❌ (NÃO incluir)")}
+- Incluir Mobilidade Articular: {request.IncludeMobility} {(request.IncludeMobility ? "✅ (OBRIGATÓRIO - incluir 5-8 exercícios de mobilidade)" : "❌ (NÃO incluir)")}
+- Incluir Alongamento Final: {request.IncludeCooldown} {(request.IncludeCooldown ? "✅ (OBRIGATÓRIO - incluir alongamento estático de 5-10 min)" : "❌ (NÃO incluir)")}
 
 INSTRUÇÕES CRÍTICAS:
 1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%

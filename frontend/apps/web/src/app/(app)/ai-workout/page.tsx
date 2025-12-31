@@ -83,6 +83,9 @@ export default function AIWorkoutPage() {
   const [fitnessLevel, setFitnessLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [duration, setDuration] = useState(45); // Default 45 minutes
   const [workoutLocation, setWorkoutLocation] = useState<'gym' | 'home' | 'both'>('gym');
+  const [includeWarmup, setIncludeWarmup] = useState(false);
+  const [includeCooldown, setIncludeCooldown] = useState(false);
+  const [includeMobility, setIncludeMobility] = useState(false);
   const [generatedWorkout, setGeneratedWorkout] = useState<AIWorkoutResponse | null>(null);
   const [rejectedExercises, setRejectedExercises] = useState<Record<number, string[]>>({});
 
@@ -92,6 +95,9 @@ export default function AIWorkoutPage() {
   const [daysPerWeek, setDaysPerWeek] = useState(4);
   const [planDuration, setPlanDuration] = useState(60); // Default 60 minutes per session
   const [planWorkoutLocation, setPlanWorkoutLocation] = useState<'gym' | 'home' | 'both'>('gym');
+  const [planIncludeWarmup, setPlanIncludeWarmup] = useState(false);
+  const [planIncludeCooldown, setPlanIncludeCooldown] = useState(false);
+  const [planIncludeMobility, setPlanIncludeMobility] = useState(false);
   const [weeksCount, setWeeksCount] = useState(4); // Default 4 weeks
   const [generatedPlan, setGeneratedPlan] = useState<AIWorkoutPlanResponse | null>(null);
   const [savedPlanId, setSavedPlanId] = useState<string | null>(null);
@@ -470,7 +476,14 @@ export default function AIWorkoutPage() {
       finalPrompt += `, ${locationText}`;
     }
 
-    generateWorkoutMutation.mutate({ prompt: finalPrompt, fitnessLevel, workoutLocation });
+    generateWorkoutMutation.mutate({
+      prompt: finalPrompt,
+      fitnessLevel,
+      workoutLocation,
+      includeWarmup,
+      includeCooldown,
+      includeMobility,
+    });
   };
 
   const handleGeneratePlan = () => {
@@ -509,6 +522,9 @@ export default function AIWorkoutPage() {
       daysPerWeek,
       duration: planDuration,
       weeksCount,
+      includeWarmup: planIncludeWarmup,
+      includeCooldown: planIncludeCooldown,
+      includeMobility: planIncludeMobility,
     });
   };
 
@@ -1174,6 +1190,53 @@ export default function AIWorkoutPage() {
                 </div>
               </div>
 
+              {/* Warmup/Cooldown/Mobility Options */}
+              <Card>
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-sm">Opções do Treino</CardTitle>
+                  <CardDescription className="text-xs">
+                    Personalize a estrutura do seu treino
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="warmup"
+                      checked={includeWarmup}
+                      onCheckedChange={(checked) => setIncludeWarmup(checked as boolean)}
+                      disabled={generateWorkoutMutation.isPending}
+                    />
+                    <Label htmlFor="warmup" className="text-sm font-normal cursor-pointer">
+                      Incluir aquecimento (5-10 min)
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="mobility"
+                      checked={includeMobility}
+                      onCheckedChange={(checked) => setIncludeMobility(checked as boolean)}
+                      disabled={generateWorkoutMutation.isPending}
+                    />
+                    <Label htmlFor="mobility" className="text-sm font-normal cursor-pointer">
+                      Incluir mobilidade articular
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="cooldown"
+                      checked={includeCooldown}
+                      onCheckedChange={(checked) => setIncludeCooldown(checked as boolean)}
+                      disabled={generateWorkoutMutation.isPending}
+                    />
+                    <Label htmlFor="cooldown" className="text-sm font-normal cursor-pointer">
+                      Incluir alongamento final (5-10 min)
+                    </Label>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Personal Trainer Configuration for Single Workout */}
               {isPersonalTrainer && (
                 <Card className="border-2 border-primary/20 bg-primary/5">
@@ -1552,6 +1615,53 @@ export default function AIWorkoutPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Warmup/Cooldown/Mobility Options for Plan */}
+              <Card>
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-sm">Opções do Treino</CardTitle>
+                  <CardDescription className="text-xs">
+                    Personalize a estrutura dos treinos do plano
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="plan-warmup"
+                      checked={planIncludeWarmup}
+                      onCheckedChange={(checked) => setPlanIncludeWarmup(checked as boolean)}
+                      disabled={generatePlanMutation.isPending}
+                    />
+                    <Label htmlFor="plan-warmup" className="text-sm font-normal cursor-pointer">
+                      Incluir aquecimento (5-10 min)
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="plan-mobility"
+                      checked={planIncludeMobility}
+                      onCheckedChange={(checked) => setPlanIncludeMobility(checked as boolean)}
+                      disabled={generatePlanMutation.isPending}
+                    />
+                    <Label htmlFor="plan-mobility" className="text-sm font-normal cursor-pointer">
+                      Incluir mobilidade articular
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="plan-cooldown"
+                      checked={planIncludeCooldown}
+                      onCheckedChange={(checked) => setPlanIncludeCooldown(checked as boolean)}
+                      disabled={generatePlanMutation.isPending}
+                    />
+                    <Label htmlFor="plan-cooldown" className="text-sm font-normal cursor-pointer">
+                      Incluir alongamento final (5-10 min)
+                    </Label>
+                  </div>
+                </CardContent>
+              </Card>
 
               <Button
                 onClick={handleGeneratePlan}
