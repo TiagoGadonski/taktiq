@@ -23,9 +23,13 @@ public static class WorkoutPlanEndpoints
             [FromBody] CreateWorkoutPlanRequest request,
             ClaimsPrincipal user,
             ISender sender,
-            IApplicationDbContext context) =>
+            IApplicationDbContext context,
+            ILogger<Program> logger) =>
         {
             var currentUserId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            logger.LogInformation("CreateWorkoutPlan - CurrentUserId: {CurrentUserId}, AssignedToUserId: {AssignedToUserId}, Name: {Name}",
+                currentUserId, request.AssignedToUserId, request.Name);
 
             // If AssignedToUserId is provided, the student becomes the owner
             // Otherwise, the current user (PT or regular user) is the owner
@@ -35,10 +39,28 @@ public static class WorkoutPlanEndpoints
             if (request.AssignedToUserId.HasValue && request.AssignedToUserId != currentUserId)
             {
                 var student = await context.Users.FindAsync(request.AssignedToUserId.Value);
-                if (student != null && student.PersonalTrainerId == null)
+                if (student != null)
                 {
-                    student.PersonalTrainerId = currentUserId;
-                    await context.SaveChangesAsync(CancellationToken.None);
+                    logger.LogInformation("CreateWorkoutPlan - Student found: {StudentId}, Name: {StudentName}, CurrentPTId: {CurrentPTId}",
+                        student.Id, student.Name, student.PersonalTrainerId);
+
+                    if (student.PersonalTrainerId == null)
+                    {
+                        logger.LogInformation("CreateWorkoutPlan - Assigning PT {PTId} to student {StudentId}",
+                            currentUserId, student.Id);
+                        student.PersonalTrainerId = currentUserId;
+                        await context.SaveChangesAsync(CancellationToken.None);
+                    }
+                    else
+                    {
+                        logger.LogInformation("CreateWorkoutPlan - Student already has PT {ExistingPTId}",
+                            student.PersonalTrainerId);
+                    }
+                }
+                else
+                {
+                    logger.LogWarning("CreateWorkoutPlan - Student {StudentId} not found!",
+                        request.AssignedToUserId.Value);
                 }
             }
 
