@@ -246,6 +246,10 @@ try
         {
             Log.Information("No pending migrations found");
         }
+
+        // Seed comprehensive exercise database
+        Log.Information("Checking exercise database...");
+        await GymHero.Infrastructure.Data.Seeders.ExerciseSeeder.SeedExercisesAsync(dbContext);
     }
     else
     {
