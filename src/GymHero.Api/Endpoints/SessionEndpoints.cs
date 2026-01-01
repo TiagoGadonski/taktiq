@@ -4,6 +4,8 @@ using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using GymHero.Application.Features.Sessions.Commands;
 using GymHero.Application.Features.Sessions.Queries;
+using GymHero.Application.Features.Feedback.Commands;
+using GymHero.Application.Features.Feedback.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -230,5 +232,50 @@ public static class SessionEndpoints
         })
         .WithName("DeleteWorkoutSet")
         .WithSummary("Deletes a workout set");
+
+        // ===== FEEDBACK ENDPOINTS =====
+
+        // POST /api/sessions/{sessionId}/feedback - Enviar feedback pós-treino
+        group.MapPost("/{sessionId:guid}/feedback", async (
+            Guid sessionId,
+            [FromBody] SubmitFeedbackRequest request,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            try
+            {
+                var command = new SubmitSessionFeedbackCommand(sessionId, userId, request);
+                var feedbackId = await sender.Send(command);
+                return Results.Created($"/api/sessions/{sessionId}/feedback", new { id = feedbackId });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { message = ex.Message });
+            }
+        })
+        .WithName("SubmitSessionFeedback")
+        .WithSummary("Submit feedback after completing a workout session");
+
+        // GET /api/sessions/{sessionId}/feedback - Obter feedback da sessão
+        group.MapGet("/{sessionId:guid}/feedback", async (
+            Guid sessionId,
+            ISender sender) =>
+        {
+            var query = new GetSessionFeedbackQuery(sessionId);
+            var feedback = await sender.Send(query);
+
+            if (feedback == null)
+                return Results.NotFound(new { message = "Feedback não encontrado para esta sessão" });
+
+            return Results.Ok(feedback);
+        })
+        .WithName("GetSessionFeedback")
+        .WithSummary("Get feedback for a specific workout session");
     }
 }

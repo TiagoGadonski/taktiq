@@ -41,6 +41,7 @@ public interface IApplicationDbContext
     DbSet<StudentGroup> StudentGroups { get; }
     DbSet<StudentGroupMember> StudentGroupMembers { get; }
     DbSet<StudentAssessment> StudentAssessments { get; }
+    DbSet<WorkoutSessionFeedback> WorkoutSessionFeedbacks { get; }
 
     // Um método para salvar as mudanças de forma assíncrona.
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);

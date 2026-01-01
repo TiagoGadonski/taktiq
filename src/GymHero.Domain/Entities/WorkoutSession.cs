@@ -19,4 +19,10 @@ public class WorkoutSession : BaseEntity
 
     // Relação: Uma sessão de treino é composta por várias séries executadas
     public ICollection<WorkoutSet> Sets { get; set; } = new List<WorkoutSet>();
+
+    // Relação: Feedback do aluno sobre esta sessão de treino
+    public WorkoutSessionFeedback? Feedback { get; set; }
+
+    // Propriedade computada para verificar se a sessão está completa
+    public bool IsCompleted => CompletedAt.HasValue;
 }

@@ -57,7 +57,12 @@
       "Bash(powershell -ExecutionPolicy Bypass -File deploy-manual.ps1)",
       "Bash(PT_TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MWZmMGQ4NS01YzVmLTQ1MDItOTBkNS03ZDhhYjEwZjg2NjIiLCJuYW1laWQiOiI2MWZmMGQ4NS01YzVmLTQ1MDItOTBkNS03ZDhhYjEwZjg2NjIiLCJuYW1lIjoiVGlhZ28iLCJlbWFpbCI6InRpYWdvMkB0YWt0aXEuYXBwIiwianRpIjoiNjhmOWFiOGMtNWQxMC00OTU5LWExOTItY2YzYTljZmVhN2I4Iiwicm9sZSI6IlBlcnNvbmFsVHJhaW5lciIsIm5iZiI6MTc2NzE0Njc4NCwiZXhwIjoxNzY3MTUwMzg0LCJpYXQiOjE3NjcxNDY3ODQsImlzcyI6IlRha3RJUSIsImF1ZCI6IlRha3RJUSJ9.B-9hXkuV4aZpq-FVmWG7Sfficspv-vKEEbPG15v7y-A\")",
       "Bash(__NEW_LINE__ curl -X POST https://api.taktiq.app/api/workout-plans )",
-      "Bash(Select-String -Pattern \"Build succeeded|Build FAILED|error\")"
+      "Bash(Select-String -Pattern \"Build succeeded|Build FAILED|error\")",
+      "Bash(ls:*)",
+      "Bash(dotnet ef migrations bundle:*)",
+      "WebSearch",
+      "Bash(dotnet ef migrations:*)",
+      "Bash(git rebase:*)"
     ],
     "deny": [],
     "ask": []

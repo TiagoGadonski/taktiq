@@ -180,6 +180,37 @@ public static class PersonalEndpoints
         .WithName("GetClientProgress")
         .WithSummary("Gets the progress dashboard for a specific client.");
 
+        group.MapGet("/clients/{clientId:guid}/stats", async (
+            Guid clientId,
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate,
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GymHero.Application.Features.Feedback.Queries.GetStudentStatsQuery(
+                trainerId,
+                clientId,
+                startDate,
+                endDate);
+
+            try
+            {
+                var stats = await sender.Send(query);
+                return Results.Ok(stats);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Results.NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Results.Forbid();
+            }
+        })
+        .WithName("GetStudentStats")
+        .WithSummary("Gets comprehensive statistics and feedback for a specific student");
+
         group.MapPost("/clients/{clientId:guid}/notes", async (
             Guid clientId,
             [FromBody] AddClientNotesRequest request,
