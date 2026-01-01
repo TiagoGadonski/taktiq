@@ -79,7 +79,8 @@ public static class AIEndpoints
             ClaimsPrincipal user,
             IConfiguration configuration,
             IApplicationDbContext context,
-            ILogger<Program> logger) =>
+            ILogger<Program> logger,
+            CancellationToken cancellationToken) =>
         {
             try
             {
@@ -140,7 +141,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling Gemini API for workout generation...");
-                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!, userProfile, exercisesFromDb, context);
+                            workout = await GenerateWorkoutWithGemini(request, geminiApiKey!, userProfile, exercisesFromDb, context, cancellationToken);
                             logger.LogInformation("Successfully generated workout with Gemini");
                             generated = true;
                         }
@@ -155,7 +156,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling OpenAI API for workout generation...");
-                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!, userProfile, exercisesFromDb, context);
+                            workout = await GenerateWorkoutWithAI(request, openAiApiKey!, userProfile, exercisesFromDb, context, cancellationToken);
                             logger.LogInformation("Successfully generated workout with OpenAI");
                             generated = true;
                         }
@@ -326,7 +327,8 @@ public static class AIEndpoints
             IConfiguration configuration,
             IApplicationDbContext context,
             IExerciseMediaService mediaService,
-            ILogger<Program> logger) =>
+            ILogger<Program> logger,
+            CancellationToken cancellationToken) =>
         {
             try
             {
@@ -335,12 +337,14 @@ public static class AIEndpoints
                 var userProfile = await context.Users
                     .Where(u => u.Id == userId)
                     .Select(u => new {
+                        u.Id,  // ✅ Added for postural assessment lookup
                         u.Name,
                         u.DateOfBirth,
                         u.Gender,
                         u.Injuries,
                         u.HealthConditions,
                         u.ExerciseGoal,
+                        u.ExcludedExercises,  // ✅ Added for excluded exercises
                         u.Height,
                         u.Weight,
                         u.Location,
@@ -374,7 +378,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling Gemini API for plan generation...");
-                            plan = await GeneratePlanWithGemini(request, geminiApiKey!, userProfile);
+                            plan = await GeneratePlanWithGemini(request, geminiApiKey!, userProfile, context, cancellationToken);
                             logger.LogInformation("Successfully generated plan with Gemini");
                             generated = true;
                         }
@@ -389,7 +393,7 @@ public static class AIEndpoints
                         try
                         {
                             logger.LogInformation("Calling OpenAI API for plan generation...");
-                            plan = await GeneratePlanWithAI(request, openAiApiKey!, userProfile);
+                            plan = await GeneratePlanWithAI(request, openAiApiKey!, userProfile, context, cancellationToken);
                             logger.LogInformation("Successfully generated plan with OpenAI");
                             generated = true;
                         }
@@ -1730,14 +1734,17 @@ public static class AIEndpoints
         string apiKey,
         dynamic? userProfile = null,
         List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)>? exercisesFromDb = null,
-        IApplicationDbContext? context = null)
+        IApplicationDbContext? context = null,
+        CancellationToken cancellationToken = default)
     {
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         httpClient.Timeout = TimeSpan.FromSeconds(45); // Reasonable timeout for single workout
 
-        // Build user profile context
-        var profileContext = BuildUserProfileContext(userProfile);
+        // Build user profile context (use async version if context available)
+        var profileContext = context != null
+            ? await BuildUserProfileContextAsync(userProfile, context, cancellationToken)
+            : BuildUserProfileContext(userProfile);
 
         // ✅ NEW: Build exercise list context
         var exerciseListContext = exercisesFromDb != null && exercisesFromDb.Any()
@@ -1995,14 +2002,21 @@ INSTRUÇÕES CRÍTICAS:
         }
     }
 
-    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithAI(AIWorkoutPlanRequest request, string apiKey, dynamic? userProfile = null)
+    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithAI(
+        AIWorkoutPlanRequest request,
+        string apiKey,
+        dynamic? userProfile = null,
+        IApplicationDbContext? context = null,
+        CancellationToken cancellationToken = default)
     {
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
         httpClient.Timeout = TimeSpan.FromSeconds(60); // Longer timeout for plan generation
 
-        // Build user profile context
-        var profileContext = BuildUserProfileContext(userProfile);
+        // Build user profile context (use async version if context available)
+        var profileContext = context != null
+            ? await BuildUserProfileContextAsync(userProfile, context, cancellationToken)
+            : BuildUserProfileContext(userProfile);
 
         var daysPerWeek = request.DaysPerWeek ?? 4;
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
@@ -2366,6 +2380,138 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
             }
             context.AppendLine("⚠️⚠️⚠️ NUNCA inclua estes exercícios, mesmo que sejam ideais para o objetivo!");
             context.AppendLine("⚠️⚠️⚠️ Isso é uma restrição ABSOLUTA do usuário!");
+        }
+
+        return context.ToString();
+    }
+
+    // ✅ NEW ASYNC VERSION: Considers postural assessments when building user context
+    private static async Task<string> BuildUserProfileContextAsync(
+        dynamic? userProfile,
+        IApplicationDbContext dbContext,
+        CancellationToken cancellationToken)
+    {
+        // Start with the sync version's output
+        var baseContext = BuildUserProfileContext(userProfile);
+        var context = new StringBuilder(baseContext);
+
+        // ✅ Check for active postural assessment
+        if (userProfile?.Id != null)
+        {
+            var userId = (Guid)userProfile.Id;
+            var activeAssessment = await dbContext.StudentAssessments
+                .Where(a => a.StudentId == userId && a.IsActive)
+                .OrderByDescending(a => a.AssessmentType == "Postural" ? 1 : 0)
+                .ThenByDescending(a => a.AssessmentDate)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (activeAssessment != null && activeAssessment.AssessmentType == "Postural")
+            {
+                context.AppendLine("\n🏥 AVALIAÇÃO POSTURAL RECENTE:");
+                context.AppendLine($"Data: {activeAssessment.AssessmentDate:dd/MM/yyyy}");
+
+                var issues = new List<string>();
+                var correctiveExercises = new List<string>();
+                var contraindicatedExercises = new List<string>();
+
+                // Cabeça anteriorizada (Forward Head)
+                if (activeAssessment.ForwardHead is "Moderate" or "Severe")
+                {
+                    issues.Add($"Cabeça anteriorizada ({activeAssessment.ForwardHead})");
+                    correctiveExercises.Add("✅ INCLUIR: Chin Tucks, Face Pulls, Remada Alta, Reverse Flyes, Retração Escapular");
+                    contraindicatedExercises.Add("❌ EVITAR: Bench Press com carga excessiva, Behind-Neck Press, Encolhimento pesado");
+                }
+
+                // Ombros protusos (Rounded Shoulders)
+                if (activeAssessment.RoundedShoulders is "Moderate" or "Severe")
+                {
+                    issues.Add($"Ombros protusos ({activeAssessment.RoundedShoulders})");
+                    correctiveExercises.Add("✅ INCLUIR: Remadas (todas variações), Rotação Externa, Band Pull-Aparts, Face Pulls");
+                    contraindicatedExercises.Add("❌ EVITAR: Dips profundos, Bench Press pegada larga, Flexões cotovelos abertos");
+                }
+
+                // Inclinação pélvica anterior (Anterior Pelvic Tilt)
+                if (activeAssessment.AnteriorPelvicTilt is "Moderate" or "Severe")
+                {
+                    issues.Add($"Inclinação pélvica anterior ({activeAssessment.AnteriorPelvicTilt})");
+                    correctiveExercises.Add("✅ INCLUIR: Prancha, Dead Bug, Glute Bridges, Hip Thrust, Alongamento iliopsoas");
+                    contraindicatedExercises.Add("❌ EVITAR: Sit-ups sem controle, Leg Raises sem retroversão, Hiperextensões");
+                }
+
+                // Inclinação pélvica posterior (Posterior Pelvic Tilt)
+                if (activeAssessment.PosteriorPelvicTilt is "Moderate" or "Severe")
+                {
+                    issues.Add($"Inclinação pélvica posterior ({activeAssessment.PosteriorPelvicTilt})");
+                    correctiveExercises.Add("✅ INCLUIR: Alongamento isquiotibiais, Hip Thrusts, Ponte glúteos, Stiff");
+                }
+
+                // Joelhos valgos (Knee Valgus)
+                if (activeAssessment.KneeValgus is "Moderate" or "Severe")
+                {
+                    issues.Add($"Joelhos valgos ({activeAssessment.KneeValgus})");
+                    correctiveExercises.Add("✅ INCLUIR: Clamshells, Abdução lateral, Monster Walks, Agachamento com foco abdução");
+                    contraindicatedExercises.Add("❌ EVITAR: Agachamento profundo sem correção, Leg Press pés juntos");
+                }
+
+                // Joelhos varos (Knee Varus)
+                if (activeAssessment.KneeVarus is "Moderate" or "Severe")
+                {
+                    issues.Add($"Joelhos varos ({activeAssessment.KneeVarus})");
+                    correctiveExercises.Add("✅ INCLUIR: Fortalecimento adutores, Controle medial joelho");
+                }
+
+                // Pés planos (Flat Feet)
+                if (activeAssessment.FlatFeet is "Moderate" or "Severe")
+                {
+                    issues.Add($"Pés planos ({activeAssessment.FlatFeet})");
+                    correctiveExercises.Add("✅ INCLUIR: Toe Curls, Calf Raises, Treino descalço quando possível");
+                    contraindicatedExercises.Add("❌ EVITAR: Corrida alto impacto sem calçado adequado");
+                }
+
+                // Escoliose (Scoliosis)
+                if (activeAssessment.Scoliosis is "Moderate" or "Severe")
+                {
+                    issues.Add($"Escoliose ({activeAssessment.Scoliosis})");
+                    correctiveExercises.Add("✅ INCLUIR: Exercícios unilaterais, Prancha lateral, Core anti-rotacional");
+                    contraindicatedExercises.Add("❌ EVITAR: Cargas axiais pesadas, Levantamento terra máximo");
+                }
+
+                if (issues.Any())
+                {
+                    context.AppendLine("\n⚠️⚠️⚠️ DESVIOS POSTURAIS IDENTIFICADOS:");
+                    foreach (var issue in issues)
+                        context.AppendLine($"   • {issue}");
+                }
+
+                if (correctiveExercises.Any())
+                {
+                    context.AppendLine("\n💪 EXERCÍCIOS CORRETIVOS OBRIGATÓRIOS (INCLUIR NO TREINO):");
+                    foreach (var exercise in correctiveExercises)
+                        context.AppendLine($"   {exercise}");
+                }
+
+                if (contraindicatedExercises.Any())
+                {
+                    context.AppendLine("\n⛔ EXERCÍCIOS CONTRAINDICADOS (NUNCA INCLUIR):");
+                    foreach (var exercise in contraindicatedExercises)
+                        context.AppendLine($"   {exercise}");
+                }
+
+                if (correctiveExercises.Any() || contraindicatedExercises.Any())
+                {
+                    context.AppendLine("\n🎯 ESTRATÉGIA BASEADA NA AVALIAÇÃO POSTURAL:");
+                    context.AppendLine("   1. INCLUIR pelo menos 2-3 exercícios corretivos listados acima");
+                    context.AppendLine("   2. EVITAR completamente os exercícios contraindicados");
+                    context.AppendLine("   3. PRIORIZAR fortalecimento de músculos fracos identificados");
+                    context.AppendLine("   4. FOCAR em corrigir os desvios posturais ao longo do tempo");
+                }
+
+                if (!string.IsNullOrEmpty(activeAssessment.TrainerNotes))
+                {
+                    context.AppendLine($"\n📝 OBSERVAÇÕES DO PERSONAL TRAINER:");
+                    context.AppendLine($"   {activeAssessment.TrainerNotes}");
+                }
+            }
         }
 
         return context.ToString();
@@ -2778,13 +2924,16 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         string apiKey,
         dynamic? userProfile = null,
         List<(string Name, string MuscleGroup, string? Equipment, string? Description, string? ImageUrl, string? VideoUrl)>? exercisesFromDb = null,
-        IApplicationDbContext? context = null)
+        IApplicationDbContext? context = null,
+        CancellationToken cancellationToken = default)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(45);
 
-        // Build user profile context
-        var profileContext = BuildUserProfileContext(userProfile);
+        // Build user profile context (use async version if context available)
+        var profileContext = context != null
+            ? await BuildUserProfileContextAsync(userProfile, context, cancellationToken)
+            : BuildUserProfileContext(userProfile);
 
         // ✅ NEW: Build exercise list context
         var exerciseListContext = exercisesFromDb != null && exercisesFromDb.Any()
@@ -3005,13 +3154,20 @@ INSTRUÇÕES CRÍTICAS:
         }
     }
 
-    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithGemini(AIWorkoutPlanRequest request, string apiKey, dynamic? userProfile = null)
+    private static async Task<AIWorkoutPlanResponse> GeneratePlanWithGemini(
+        AIWorkoutPlanRequest request,
+        string apiKey,
+        dynamic? userProfile = null,
+        IApplicationDbContext? context = null,
+        CancellationToken cancellationToken = default)
     {
         using var httpClient = new HttpClient();
         httpClient.Timeout = TimeSpan.FromSeconds(60);
 
-        // Build user profile context
-        var profileContext = BuildUserProfileContext(userProfile);
+        // Build user profile context (use async version if context available)
+        var profileContext = context != null
+            ? await BuildUserProfileContextAsync(userProfile, context, cancellationToken)
+            : BuildUserProfileContext(userProfile);
 
         var daysPerWeek = request.DaysPerWeek ?? 4;
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
