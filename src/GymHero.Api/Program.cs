@@ -351,6 +351,7 @@ app.MapMeEndpoints();
 app.MapChallengeEndpoints();
 app.MapRankingEndpoints();
 app.MapPersonalEndpoints();
+app.MapAssessmentEndpoints();
 app.MapPublicPersonalEndpoints();
 app.MapFriendsEndpoints();
 app.MapUsersEndpoints();

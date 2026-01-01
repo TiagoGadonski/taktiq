@@ -42,6 +42,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<PersonalTrainerRequest> PersonalTrainerRequests => Set<PersonalTrainerRequest>();
     public DbSet<StudentGroup> StudentGroups => Set<StudentGroup>();
     public DbSet<StudentGroupMember> StudentGroupMembers => Set<StudentGroupMember>();
+    public DbSet<StudentAssessment> StudentAssessments => Set<StudentAssessment>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
