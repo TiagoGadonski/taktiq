@@ -833,7 +833,7 @@ export default function InstructorPage() {
             <div>
               <p className="text-xs sm:text-sm text-muted-foreground">Planos Ativos</p>
               <p className="text-xl sm:text-2xl font-bold text-blue-500">
-                {clients.reduce((acc, c) => acc + c.workoutPlans, 0)}
+                {clients.reduce((acc, c) => acc + (c.workoutPlans || 0), 0)}
               </p>
             </div>
           </div>
@@ -1177,13 +1177,15 @@ export default function InstructorPage() {
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">Cliente desde</span>
                       <span className="font-medium">
-                        {new Date(client.createdAt).toLocaleDateString('pt-BR')}
+                        {client.createdAt && !isNaN(Date.parse(client.createdAt))
+                          ? new Date(client.createdAt).toLocaleDateString('pt-BR')
+                          : '—'}
                       </span>
                     </div>
                   </div>
 
                   <div className="mt-4 pt-4 border-t border-border/50">
-                    <Link href={`/users/${client.id}`}>
+                    <Link href={`/instructor/clients/${client.id}`}>
                       <Button className="w-full bg-primary hover:bg-primary/90 hover-lift tap-scale">
                         <Eye className="mr-2 h-4 w-4" />
                         Ver Detalhes
