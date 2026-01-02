@@ -59,8 +59,8 @@ export default function StudentEvolutionPage() {
   const fetchAssessments = async () => {
     try {
       setIsLoading(true);
-      const response = await apiClient.get<Assessment[]>(`/assessments/student/${clientId}`);
-      const physicalAssessments = response.data.filter(a => a.assessmentType === 'Physical');
+      const data = await apiClient.get<Assessment[]>(`/assessments/student/${clientId}`);
+      const physicalAssessments = data.filter(a => a.assessmentType === 'Physical');
 
       // Sort by date (oldest first for timeline)
       physicalAssessments.sort((a, b) =>

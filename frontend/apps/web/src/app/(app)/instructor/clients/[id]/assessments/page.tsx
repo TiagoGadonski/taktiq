@@ -56,8 +56,8 @@ export default function AssessmentsListPage() {
   const fetchAssessments = async () => {
     try {
       setIsLoading(true);
-      const response = await apiClient.get<Assessment[]>(`/assessments/student/${studentId}`);
-      setAssessments(response.data);
+      const data = await apiClient.get<Assessment[]>(`/assessments/student/${studentId}`);
+      setAssessments(data);
     } catch (error) {
       console.error('Failed to fetch assessments:', error);
       toast({

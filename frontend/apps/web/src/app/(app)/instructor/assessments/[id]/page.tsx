@@ -75,8 +75,8 @@ export default function AssessmentDetailPage() {
   const fetchAssessment = async () => {
     try {
       setIsLoading(true);
-      const response = await apiClient.get<AssessmentDetail>(`/assessments/${assessmentId}`);
-      setAssessment(response.data);
+      const data = await apiClient.get<AssessmentDetail>(`/assessments/${assessmentId}`);
+      setAssessment(data);
     } catch (error) {
       console.error('Failed to fetch assessment:', error);
       toast({

@@ -126,8 +126,8 @@ export default function StudentStatsPage() {
         params.startDate = startDate.toISOString();
       }
 
-      const response = await apiClient.get<StudentStats>(`/personal/clients/${clientId}/stats`, { params });
-      setStats(response.data);
+      const data = await apiClient.get<StudentStats>(`/personal/clients/${clientId}/stats`, { params });
+      setStats(data);
     } catch (error) {
       console.error('Failed to fetch stats:', error);
     } finally {
@@ -162,6 +162,8 @@ export default function StudentStatsPage() {
     })) || [];
 
   const handleExportPDF = () => {
+    if (!stats) return;
+
     try {
       const periodLabel = period === 'week' ? 'Última Semana' : period === 'month' ? 'Último Mês' : 'Todo Período';
       const printableContent = preparePrintableStats(stats, stats.studentName, periodLabel);

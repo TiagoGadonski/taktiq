@@ -87,8 +87,7 @@ export default function EditAssessmentPage() {
   const fetchAssessment = async () => {
     try {
       setIsLoading(true);
-      const response = await apiClient.get<AssessmentDetail>(`/assessments/${assessmentId}`);
-      const data = response.data;
+      const data = await apiClient.get<AssessmentDetail>(`/assessments/${assessmentId}`);
 
       // Set assessment type
       setAssessmentType(data.assessmentType as AssessmentType);

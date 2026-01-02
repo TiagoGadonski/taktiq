@@ -403,7 +403,14 @@ export default function AIWorkoutPage() {
 
   // Single workout mutation
   const generateWorkoutMutation = useMutation({
-    mutationFn: async (request: { prompt: string; fitnessLevel?: string; workoutLocation?: string }) => {
+    mutationFn: async (request: {
+      prompt: string;
+      fitnessLevel?: string;
+      workoutLocation?: string;
+      includeWarmup?: boolean;
+      includeCooldown?: boolean;
+      includeMobility?: boolean;
+    }) => {
       return apiClient.post<AIWorkoutResponse>('/ai/generate-workout', request);
     },
     onSuccess: (data) => {
@@ -431,6 +438,9 @@ export default function AIWorkoutPage() {
       daysPerWeek?: number;
       duration?: number;
       weeksCount?: number;
+      includeWarmup?: boolean;
+      includeCooldown?: boolean;
+      includeMobility?: boolean;
     }) => {
       return apiClient.post<AIWorkoutPlanResponse>('/ai/generate-plan', request);
     },
