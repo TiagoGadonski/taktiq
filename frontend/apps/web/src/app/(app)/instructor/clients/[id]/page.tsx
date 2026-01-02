@@ -315,7 +315,7 @@ export default function ClientDetailPage() {
                 </p>
               ) : (
                 <p className="text-yellow-700 dark:text-yellow-300 italic">
-                  Clique em "Editar" para adicionar suas anotações sobre este cliente...
+                  Clique em &quot;Editar&quot; para adicionar suas anotações sobre este cliente...
                 </p>
               )}
             </div>
