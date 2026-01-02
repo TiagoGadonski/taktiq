@@ -12,8 +12,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ExerciseCard } from '@/components/workout/exercise-card';
 import { ExerciseSelectorModal } from '@/components/workout/exercise-selector-modal';
 import { WorkoutCompletionModal } from '@/components/workout/workout-completion-modal';
+import { WorkoutFeedbackModal } from '@/components/workout/workout-feedback-modal';
 import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { apiClient } from '@/lib/api';
 import { Badge } from '@/components/ui/badge';
 import type { CreateSetInput, Workout, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 import { getRandomSetMessage, getRandomWorkoutMessage, getMilestoneMessage } from '@gymhero/shared';
@@ -31,6 +33,8 @@ export default function WorkoutPage() {
   const [exerciseToReplace, setExerciseToReplace] = useState<WorkoutExercise | null>(null);
   const [isReplaceSelectorOpen, setIsReplaceSelectorOpen] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [completedSessionId, setCompletedSessionId] = useState<string | null>(null);
   const [addedExercises, setAddedExercises] = useState<WorkoutExercise[]>([]);
   const [isAddExerciseOpen, setIsAddExerciseOpen] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
@@ -290,14 +294,18 @@ export default function WorkoutPage() {
     if (!currentSession) return;
 
     try {
-      setShowCompletionModal(false); // Close modal before completing
+      setShowCompletionModal(false); // Close completion modal
       await completeSession({ sessionId: currentSession.id, notes });
+
+      // Store session ID and show feedback modal
+      setCompletedSessionId(currentSession.id);
+      setShowFeedbackModal(true);
+
       const motivationalMessage = getRandomWorkoutMessage();
       toast({
         title: motivationalMessage.title,
         description: motivationalMessage.description,
       });
-      router.push('/dashboard');
     } catch (error: any) {
       toast({
         variant: 'destructive',
@@ -306,6 +314,33 @@ export default function WorkoutPage() {
       });
       setShowCompletionModal(false); // Close modal on error too
     }
+  };
+
+  const handleSubmitFeedback = async (feedbackData: any) => {
+    if (!completedSessionId) return;
+
+    try {
+      await apiClient.post(`/sessions/${completedSessionId}/feedback`, feedbackData);
+      toast({
+        title: 'Feedback enviado!',
+        description: 'Obrigado por compartilhar sua experiência.',
+      });
+      setShowFeedbackModal(false);
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Erro ao enviar feedback',
+        description: error.message,
+      });
+      // Still redirect even if feedback fails
+      router.push('/dashboard');
+    }
+  };
+
+  const handleSkipFeedback = () => {
+    setShowFeedbackModal(false);
+    router.push('/dashboard');
   };
 
   const handleCancelSession = async () => {
@@ -1028,6 +1063,16 @@ export default function WorkoutPage() {
         onComplete={handleCompleteSession}
         autoCompleteDelay={5000}
       />
+
+      {/* Workout Feedback Modal */}
+      {completedSessionId && (
+        <WorkoutFeedbackModal
+          open={showFeedbackModal}
+          onClose={handleSkipFeedback}
+          onSubmit={handleSubmitFeedback}
+          sessionId={completedSessionId}
+        />
+      )}
 
       {/* Cancel Workout Confirmation Dialog */}
       <Dialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>

@@ -31,10 +31,12 @@ import {
   Zap,
   AlertCircle,
   Calendar,
-  MessageSquare
+  MessageSquare,
+  FileDown
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { exportToPDF, preparePrintableStats } from '@/lib/pdf-export';
 
 interface StudentStats {
   studentId: string;
@@ -159,6 +161,31 @@ export default function StudentStatsPage() {
       dayOfWeek: DAY_NAMES_PT[day.dayOfWeek] || day.dayOfWeek
     })) || [];
 
+  const handleExportPDF = () => {
+    try {
+      const periodLabel = period === 'week' ? 'Última Semana' : period === 'month' ? 'Último Mês' : 'Todo Período';
+      const printableContent = preparePrintableStats(stats, stats.studentName, periodLabel);
+
+      // Create hidden container
+      const container = document.createElement('div');
+      container.id = 'pdf-export-container';
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      container.innerHTML = printableContent;
+      document.body.appendChild(container);
+
+      // Export
+      exportToPDF('pdf-export-container', `Estatisticas_${stats.studentName}_${periodLabel}.pdf`);
+
+      // Cleanup
+      setTimeout(() => {
+        document.body.removeChild(container);
+      }, 1000);
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="container mx-auto p-6">
@@ -202,14 +229,20 @@ export default function StudentStatsPage() {
           </div>
         </div>
 
-        {/* Period Filter */}
-        <Tabs value={period} onValueChange={(v) => setPeriod(v as any)}>
-          <TabsList>
-            <TabsTrigger value="week">Última Semana</TabsTrigger>
-            <TabsTrigger value="month">Último Mês</TabsTrigger>
-            <TabsTrigger value="all">Todo Período</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        {/* Period Filter and Export */}
+        <div className="flex items-center gap-4">
+          <Button variant="outline" onClick={handleExportPDF}>
+            <FileDown className="h-4 w-4 mr-2" />
+            Exportar PDF
+          </Button>
+          <Tabs value={period} onValueChange={(v) => setPeriod(v as any)}>
+            <TabsList>
+              <TabsTrigger value="week">Última Semana</TabsTrigger>
+              <TabsTrigger value="month">Último Mês</TabsTrigger>
+              <TabsTrigger value="all">Todo Período</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
       </div>
 
       {/* Key Metrics Cards */}

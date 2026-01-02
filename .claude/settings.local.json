@@ -62,7 +62,8 @@
       "Bash(dotnet ef migrations bundle:*)",
       "WebSearch",
       "Bash(dotnet ef migrations:*)",
-      "Bash(git rebase:*)"
+      "Bash(git rebase:*)",
+      "Bash(git ls-tree:*)"
     ],
     "deny": [],
     "ask": []

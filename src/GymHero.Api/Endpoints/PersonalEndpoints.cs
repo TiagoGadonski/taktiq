@@ -8,6 +8,7 @@ using GymHero.Application.Features.Personal.Commands;
 using GymHero.Application.Features.Personal.Queries;
 using GymHero.Application.Features.StudentGroups.Commands;
 using GymHero.Application.Features.StudentGroups.Queries;
+using GymHero.Application.Features.Feedback.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -1129,5 +1130,18 @@ public static class PersonalEndpoints
         })
         .WithName("AssignPlanToGroup")
         .WithSummary("Assign a workout plan to all members of a group");
+
+        // GET /api/personal/notifications/unread - Get unread feedback count
+        group.MapGet("/notifications/unread", async (
+            ClaimsPrincipal user,
+            ISender sender) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GetUnreadFeedbackCountQuery(trainerId);
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("GetUnreadNotifications")
+        .WithSummary("Get count of unread feedback from students in the last 7 days");
     }
 }
