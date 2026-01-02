@@ -414,6 +414,11 @@ export default function AIWorkoutPage() {
       return apiClient.post<AIWorkoutResponse>('/ai/generate-workout', request);
     },
     onSuccess: (data) => {
+      console.log('🔍 DEBUG - Treino gerado pela AI:', data);
+      console.log('🔍 DEBUG - Tipos de exercícios:', data.exercises.map(e => ({
+        name: e.name,
+        exerciseType: e.exerciseType || 'undefined'
+      })));
       setGeneratedWorkout(data);
       setRejectedExercises({}); // Reset rejected exercises for new workout
       toast({
@@ -1398,10 +1403,60 @@ export default function AIWorkoutPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {generatedWorkout.exercises.map((exercise, index) => (
+                <div className="space-y-6">
+                  {/* Warmup Section */}
+                  {generatedWorkout.exercises.some(e => e.exerciseType === 'warmup') && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b">
+                        <div className="w-1 h-6 bg-orange-500 rounded"></div>
+                        <h3 className="font-bold text-lg text-orange-600 dark:text-orange-400">🔥 Aquecimento</h3>
+                      </div>
+                      <div className="space-y-4">
+                        {generatedWorkout.exercises
+                          .filter(e => e.exerciseType === 'warmup')
+                          .map((exercise, index) => (
+                            <Card
+                              key={`warmup-${index}`}
+                              className="border-l-4 border-l-orange-500 cursor-pointer hover:shadow-lg transition-shadow"
+                              onClick={() => openExerciseModal(exercise)}
+                            >
+                              <CardContent className="pt-6">
+                                <div className="flex-1 space-y-2">
+                                  <h3 className="font-semibold text-lg">
+                                    {exercise.name}
+                                  </h3>
+                                  <div className="flex flex-wrap gap-3 text-sm">
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Sets:</span> {exercise.sets}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Reps:</span> {exercise.reps}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Descanso:</span> {exercise.rest}
+                                    </span>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Main Exercises Section */}
+                  {generatedWorkout.exercises.some(e => !e.exerciseType || e.exerciseType === 'main') && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b">
+                        <div className="w-1 h-6 bg-blue-500 rounded"></div>
+                        <h3 className="font-bold text-lg text-blue-600 dark:text-blue-400">💪 Exercícios Principais</h3>
+                      </div>
+                      <div className="space-y-4">
+                        {generatedWorkout.exercises
+                          .filter(e => !e.exerciseType || e.exerciseType === 'main')
+                          .map((exercise, index) => (
                     <Card
-                      key={index}
+                      key={`main-${index}`}
                       className="border-l-4 border-l-primary cursor-pointer hover:shadow-lg transition-shadow"
                       onClick={() => openExerciseModal(exercise)}
                     >
@@ -1489,6 +1544,83 @@ export default function AIWorkoutPage() {
                       </CardContent>
                     </Card>
                   ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Mobility Section */}
+                  {generatedWorkout.exercises.some(e => e.exerciseType === 'mobility') && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b">
+                        <div className="w-1 h-6 bg-purple-500 rounded"></div>
+                        <h3 className="font-bold text-lg text-purple-600 dark:text-purple-400">🤸 Mobilidade Articular</h3>
+                      </div>
+                      <div className="space-y-4">
+                        {generatedWorkout.exercises
+                          .filter(e => e.exerciseType === 'mobility')
+                          .map((exercise, index) => (
+                            <Card
+                              key={`mobility-${index}`}
+                              className="border-l-4 border-l-purple-500 cursor-pointer hover:shadow-lg transition-shadow"
+                              onClick={() => openExerciseModal(exercise)}
+                            >
+                              <CardContent className="pt-6">
+                                <div className="flex-1 space-y-2">
+                                  <h3 className="font-semibold text-lg">
+                                    {exercise.name}
+                                  </h3>
+                                  <div className="flex flex-wrap gap-3 text-sm">
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Sets:</span> {exercise.sets}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Reps:</span> {exercise.reps}
+                                    </span>
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Descanso:</span> {exercise.rest}
+                                    </span>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cooldown Section */}
+                  {generatedWorkout.exercises.some(e => e.exerciseType === 'cooldown') && (
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 pb-2 border-b">
+                        <div className="w-1 h-6 bg-green-500 rounded"></div>
+                        <h3 className="font-bold text-lg text-green-600 dark:text-green-400">🧘 Alongamento Final</h3>
+                      </div>
+                      <div className="space-y-4">
+                        {generatedWorkout.exercises
+                          .filter(e => e.exerciseType === 'cooldown')
+                          .map((exercise, index) => (
+                            <Card
+                              key={`cooldown-${index}`}
+                              className="border-l-4 border-l-green-500 cursor-pointer hover:shadow-lg transition-shadow"
+                              onClick={() => openExerciseModal(exercise)}
+                            >
+                              <CardContent className="pt-6">
+                                <div className="flex-1 space-y-2">
+                                  <h3 className="font-semibold text-lg">
+                                    {exercise.name}
+                                  </h3>
+                                  <div className="flex flex-wrap gap-3 text-sm">
+                                    <span className="flex items-center gap-1">
+                                      <span className="font-medium">Duração:</span> {exercise.reps}
+                                    </span>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
