@@ -111,3 +111,4 @@ docker-volumes/
 # Local development logs and data
 local-dev-*.txt
 *.local.log
+efbundle
