@@ -69,6 +69,9 @@ public class User : BaseEntity
     public Guid? PersonalTrainerId { get; set; }
     public User? PersonalTrainer { get; set; }
 
+    // ✅ NEW: Trainer notes about this client (only visible to the PT)
+    public string? TrainerNotes { get; set; } // Notas privadas do PT sobre o aluno
+
     // --- RELAÇÃO PARA O PERSONAL TRAINER ---
     // Se este utilizador for um "Personal", esta coleção guardará a lista dos seus alunos.
     public ICollection<User> Clients { get; set; } = new List<User>();

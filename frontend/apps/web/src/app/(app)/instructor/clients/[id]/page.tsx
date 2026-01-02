@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
 import {
   ArrowLeft,
   FileText,
@@ -17,7 +18,9 @@ import {
   Mail,
   Calendar,
   Activity,
-  User
+  User,
+  Edit,
+  Save
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getAssetUrl } from '@/lib/env';
@@ -31,6 +34,21 @@ interface ClientDetail {
   workoutPlans: number;
   lastWorkout?: string;
   role: string;
+  trainerNotes?: string;
+}
+
+interface LatestAssessment {
+  id: string;
+  assessmentType: string;
+  assessmentDate: string;
+  forwardHead?: string;
+  roundedShoulders?: string;
+  anteriorPelvicTilt?: string;
+  kneeValgus?: string;
+  bodyFatPercentage?: number;
+  muscleMass?: number;
+  flexibilityScore?: number;
+  strengthScore?: number;
 }
 
 export default function ClientDetailPage() {
@@ -41,9 +59,14 @@ export default function ClientDetailPage() {
 
   const [client, setClient] = useState<ClientDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditingNotes, setIsEditingNotes] = useState(false);
+  const [trainerNotes, setTrainerNotes] = useState('');
+  const [isSavingNotes, setIsSavingNotes] = useState(false);
+  const [latestAssessment, setLatestAssessment] = useState<LatestAssessment | null>(null);
 
   useEffect(() => {
     fetchClientDetails();
+    fetchLatestAssessment();
   }, [clientId]);
 
   const fetchClientDetails = async () => {
@@ -55,6 +78,7 @@ export default function ClientDetailPage() {
 
       if (clientData) {
         setClient(clientData);
+        setTrainerNotes(clientData.trainerNotes || '');
       } else {
         toast({
           title: 'Cliente não encontrado',
@@ -72,6 +96,52 @@ export default function ClientDetailPage() {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleSaveNotes = async () => {
+    try {
+      setIsSavingNotes(true);
+      await apiClient.put(`/users/${clientId}`, {
+        trainerNotes,
+      });
+
+      toast({
+        title: 'Notas salvas!',
+        description: 'Suas anotações sobre o cliente foram atualizadas.',
+      });
+
+      setIsEditingNotes(false);
+
+      // Update local state
+      if (client) {
+        setClient({ ...client, trainerNotes });
+      }
+    } catch (error) {
+      console.error('Failed to save trainer notes:', error);
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível salvar as anotações.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSavingNotes(false);
+    }
+  };
+
+  const fetchLatestAssessment = async () => {
+    try {
+      const assessments = await apiClient.get<LatestAssessment[]>(`/assessments/student/${clientId}`);
+      if (assessments && assessments.length > 0) {
+        // Get the most recent assessment
+        const sorted = assessments.sort((a, b) =>
+          new Date(b.assessmentDate).getTime() - new Date(a.assessmentDate).getTime()
+        );
+        setLatestAssessment(sorted[0]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch latest assessment:', error);
+      // Don't show error toast - assessment is optional
     }
   };
 
@@ -175,6 +245,168 @@ export default function ClientDetailPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Trainer Notes - Private notes about this client */}
+      <Card className="bg-yellow-50 dark:bg-yellow-950/10 border-yellow-200 dark:border-yellow-900">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-yellow-900 dark:text-yellow-100 flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Anotações Privadas (PT)
+            </CardTitle>
+            {!isEditingNotes && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsEditingNotes(true)}
+                className="text-yellow-900 dark:text-yellow-100"
+              >
+                <Edit className="h-4 w-4 mr-2" />
+                Editar
+              </Button>
+            )}
+          </div>
+          <CardDescription className="text-yellow-800 dark:text-yellow-200">
+            Suas anotações privadas sobre este cliente (apenas você pode ver)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {isEditingNotes ? (
+            <div className="space-y-3">
+              <Textarea
+                value={trainerNotes}
+                onChange={(e) => setTrainerNotes(e.target.value)}
+                placeholder="Anote observações importantes: objetivos específicos, limitações, preferências, histórico médico relevante, progresso, ajustes necessários..."
+                className="min-h-[150px] bg-white dark:bg-gray-900"
+                maxLength={2000}
+              />
+              <div className="flex justify-between items-center">
+                <p className="text-xs text-muted-foreground">
+                  {trainerNotes.length}/2000 caracteres
+                </p>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setTrainerNotes(client?.trainerNotes || '');
+                      setIsEditingNotes(false);
+                    }}
+                    disabled={isSavingNotes}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={handleSaveNotes}
+                    disabled={isSavingNotes}
+                  >
+                    <Save className="h-4 w-4 mr-2" />
+                    {isSavingNotes ? 'Salvando...' : 'Salvar'}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-4 bg-white/50 dark:bg-gray-900/30 rounded-lg min-h-[100px]">
+              {trainerNotes ? (
+                <p className="text-yellow-900 dark:text-yellow-100 whitespace-pre-wrap">
+                  {trainerNotes}
+                </p>
+              ) : (
+                <p className="text-yellow-700 dark:text-yellow-300 italic">
+                  Clique em "Editar" para adicionar suas anotações sobre este cliente...
+                </p>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Latest Assessment Summary */}
+      {latestAssessment && (
+        <Card className="bg-blue-50 dark:bg-blue-950/10 border-blue-200 dark:border-blue-900">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-blue-900 dark:text-blue-100 flex items-center gap-2">
+                <Activity className="h-5 w-5" />
+                Última Avaliação - {latestAssessment.assessmentType === 'Postural' ? 'Postural' : latestAssessment.assessmentType === 'Physical' ? 'Física' : 'Personalizada'}
+              </CardTitle>
+              <Badge variant="secondary">
+                {new Date(latestAssessment.assessmentDate).toLocaleDateString('pt-BR')}
+              </Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {latestAssessment.assessmentType === 'Postural' && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {latestAssessment.forwardHead && latestAssessment.forwardHead !== 'None' && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium">Cabeça Anteriorizada</p>
+                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{latestAssessment.forwardHead}</p>
+                  </div>
+                )}
+                {latestAssessment.roundedShoulders && latestAssessment.roundedShoulders !== 'None' && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium">Ombros Protusos</p>
+                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{latestAssessment.roundedShoulders}</p>
+                  </div>
+                )}
+                {latestAssessment.anteriorPelvicTilt && latestAssessment.anteriorPelvicTilt !== 'None' && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium">Inclinação Pélvica Ant.</p>
+                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{latestAssessment.anteriorPelvicTilt}</p>
+                  </div>
+                )}
+                {latestAssessment.kneeValgus && latestAssessment.kneeValgus !== 'None' && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 font-medium">Joelhos Valgos</p>
+                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">{latestAssessment.kneeValgus}</p>
+                  </div>
+                )}
+              </div>
+            )}
+            {latestAssessment.assessmentType === 'Physical' && (
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {latestAssessment.bodyFatPercentage !== undefined && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg text-center">
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">{latestAssessment.bodyFatPercentage}%</p>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">Gordura</p>
+                  </div>
+                )}
+                {latestAssessment.muscleMass !== undefined && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg text-center">
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">{latestAssessment.muscleMass} kg</p>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">Músculo</p>
+                  </div>
+                )}
+                {latestAssessment.flexibilityScore !== undefined && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg text-center">
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">{latestAssessment.flexibilityScore}/10</p>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">Flexibilidade</p>
+                  </div>
+                )}
+                {latestAssessment.strengthScore !== undefined && (
+                  <div className="p-3 bg-white/50 dark:bg-gray-900/30 rounded-lg text-center">
+                    <p className="text-2xl font-bold text-blue-900 dark:text-blue-100">{latestAssessment.strengthScore}/10</p>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">Força</p>
+                  </div>
+                )}
+              </div>
+            )}
+            <div className="mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push(`/instructor/clients/${clientId}/assessments`)}
+                className="text-blue-900 dark:text-blue-100 border-blue-300 dark:border-blue-800"
+              >
+                Ver Todas as Avaliações
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Main Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
