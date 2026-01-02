@@ -37,6 +37,7 @@ interface Exercise {
   instructions: string[];
   gifUrl?: string;
   videoUrl?: string;
+  exerciseType?: string; // "warmup", "main", "mobility", "cooldown"
 }
 
 interface AIWorkoutResponse {
