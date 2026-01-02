@@ -1834,6 +1834,12 @@ ESTRUTURA DO TREINO (IMPORTANTE - Siga conforme as opções selecionadas pelo us
 - Se o usuário pedir 60 minutos E incluir aquecimento (10 min) + alongamento (10 min), os exercícios principais devem caber em ~40 minutos
 - Exemplo: 60 min total = 10 min aquecimento + 40 min exercícios principais + 10 min alongamento
 
+🔴🔴🔴 CRÍTICO - CAMPO exerciseType É OBRIGATÓRIO:
+- NUNCA omita o campo ""exerciseType"" em nenhum exercício
+- TODO exercício DEVE ter ""exerciseType"": ""warmup"" OU ""main"" OU ""mobility"" OU ""cooldown""
+- Use ""main"" se não for aquecimento, mobilidade ou alongamento
+- Verifique que TODOS os exercícios do JSON têm o campo exerciseType antes de retornar
+
 Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem comentários, sem ```json):
 {
   ""title"": ""Título Descritivo do Treino em Português"",
@@ -1853,10 +1859,20 @@ Retorne APENAS um JSON válido no seguinte formato (sem markdown, sem comentári
         ""Respiração: quando inspirar e expirar"",
         ""Segurança/Dicas: pontos de atenção, erros comuns a evitar, ativação muscular""
       ],
-      ""exerciseType"": ""warmup|main|mobility|cooldown""
+      ""exerciseType"": ""main""
     }
   ]
-}";
+}
+
+⚠️⚠️⚠️ IMPORTANTE - Campo exerciseType É OBRIGATÓRIO:
+- SEMPRE inclua o campo ""exerciseType"" em TODOS os exercícios
+- Valores possíveis: ""warmup"", ""main"", ""mobility"", ""cooldown""
+- Exemplos:
+  * Exercício de aquecimento: ""exerciseType"": ""warmup""
+  * Exercício principal: ""exerciseType"": ""main""
+  * Exercício de mobilidade: ""exerciseType"": ""mobility""
+  * Exercício de alongamento: ""exerciseType"": ""cooldown""
+- Se IncludeWarmup=false, IncludeMobility=false, IncludeCooldown=false, use ""main"" para todos";
 
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
         var duration = request.Duration ?? 60;
@@ -3004,6 +3020,12 @@ ESTRUTURA DO TREINO (IMPORTANTE - Siga conforme as opções selecionadas pelo us
 - Se o usuário pedir 60 minutos E incluir aquecimento (10 min) + alongamento (10 min), os exercícios principais devem caber em ~40 minutos
 - Exemplo: 60 min total = 10 min aquecimento + 40 min exercícios principais + 10 min alongamento
 
+🔴🔴🔴 CRÍTICO - CAMPO exerciseType É OBRIGATÓRIO:
+- NUNCA omita o campo ""exerciseType"" em nenhum exercício
+- TODO exercício DEVE ter ""exerciseType"": ""warmup"" OU ""main"" OU ""mobility"" OU ""cooldown""
+- Use ""main"" se não for aquecimento, mobilidade ou alongamento
+- Verifique que TODOS os exercícios do JSON têm o campo exerciseType antes de retornar
+
 Retorne APENAS um JSON válido no seguinte formato:
 {
   ""title"": ""Título Descritivo do Treino em Português"",
@@ -3023,10 +3045,20 @@ Retorne APENAS um JSON válido no seguinte formato:
         ""Respiração: quando inspirar e expirar"",
         ""Segurança/Dicas: pontos de atenção, erros comuns a evitar, ativação muscular""
       ],
-      ""exerciseType"": ""warmup|main|mobility|cooldown""
+      ""exerciseType"": ""main""
     }
   ]
-}";
+}
+
+⚠️⚠️⚠️ IMPORTANTE - Campo exerciseType É OBRIGATÓRIO:
+- SEMPRE inclua o campo ""exerciseType"" em TODOS os exercícios
+- Valores possíveis: ""warmup"", ""main"", ""mobility"", ""cooldown""
+- Exemplos:
+  * Exercício de aquecimento: ""exerciseType"": ""warmup""
+  * Exercício principal: ""exerciseType"": ""main""
+  * Exercício de mobilidade: ""exerciseType"": ""mobility""
+  * Exercício de alongamento: ""exerciseType"": ""cooldown""
+- Se IncludeWarmup=false, IncludeMobility=false, IncludeCooldown=false, use ""main"" para todos";
 
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
         var duration = request.Duration ?? 60;
