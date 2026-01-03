@@ -79,7 +79,10 @@
       "Bash(powershell -Command \"Compress-Archive -Path ''.\\\\publish-temp\\\\*'' -DestinationPath ''.\\\\deploy-package.zip'' -Force\")",
       "Bash(dotnet clean:*)",
       "Bash(dotnet publish:*)",
-      "Bash(powershell -Command \"Compress-Archive -Path ''.\\\\publish-fresh\\\\*'' -DestinationPath ''.\\\\deploy-v2-fresh.zip'' -Force\")"
+      "Bash(powershell -Command \"Compress-Archive -Path ''.\\\\publish-fresh\\\\*'' -DestinationPath ''.\\\\deploy-v2-fresh.zip'' -Force\")",
+      "Bash(if exist .next rmdir /s /q .next)",
+      "Bash(npx tsc:*)",
+      "Bash(cd:*)"
     ],
     "deny": [],
     "ask": []

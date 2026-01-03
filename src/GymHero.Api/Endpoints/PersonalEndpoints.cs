@@ -1143,5 +1143,95 @@ public static class PersonalEndpoints
         })
         .WithName("GetUnreadNotifications")
         .WithSummary("Get count of unread feedback from students in the last 7 days");
+
+        // GET /api/personal/dashboard/recent-activity - Get recent activity feed
+        group.MapGet("/dashboard/recent-activity", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Get recent workout completions from my students
+            var recentActivity = await context.WorkoutCompletions
+                .Where(wc => wc.Workout.WorkoutPlan.CreatedByPersonalId == trainerId)
+                .OrderByDescending(wc => wc.CompletedAt)
+                .Take(10)
+                .Select(wc => new
+                {
+                    id = wc.Id.ToString(),
+                    type = "workout_completed",
+                    clientName = wc.User.Name,
+                    message = $"completou \"{wc.Workout.Name}\"",
+                    timestamp = wc.CompletedAt,
+                    urgent = false
+                })
+                .ToListAsync(cancellationToken);
+
+            return Results.Ok(recentActivity);
+        })
+        .WithName("GetRecentActivity")
+        .WithSummary("Get recent activity feed for dashboard");
+
+        // GET /api/personal/dashboard/stats - Get dashboard statistics
+        group.MapGet("/dashboard/stats", async (
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Count total clients
+            var totalClients = await context.Users
+                .CountAsync(u => u.PersonalTrainerId == trainerId, cancellationToken);
+
+            // Count active plans (plans assigned to students)
+            var activePlans = await context.WorkoutPlans
+                .CountAsync(p => p.CreatedByPersonalId == trainerId && p.AssignedToStudentId != null, cancellationToken);
+
+            // Count pending invites (PT requests that are pending)
+            var pendingInvites = await context.PTRequests
+                .CountAsync(r => r.PersonalTrainerId == trainerId && r.Status == PTRequestStatus.Pending, cancellationToken);
+
+            var stats = new
+            {
+                totalClients,
+                activePlans,
+                pendingInvites,
+                monthlyRevenue = 0.0 // TODO: Implement when payment system is ready
+            };
+
+            return Results.Ok(stats);
+        })
+        .WithName("GetDashboardStats")
+        .WithSummary("Get statistics for PT dashboard");
+
+        // PUT /api/personal/clients/{clientId}/notes - Update client notes
+        group.MapPut("/clients/{clientId:guid}/notes", async (
+            Guid clientId,
+            [FromBody] UpdateClientNotesRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Verify the client belongs to this trainer
+            var client = await context.Users
+                .FirstOrDefaultAsync(u => u.Id == clientId && u.PersonalTrainerId == trainerId, cancellationToken);
+
+            if (client == null)
+            {
+                return Results.NotFound(new { message = "Client not found or not assigned to you" });
+            }
+
+            // Update notes
+            client.PersonalTrainerNotes = request.Notes;
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Notes updated successfully" });
+        })
+        .WithName("UpdateClientNotes")
+        .WithSummary("Update PT notes for a specific client");
     }
 }

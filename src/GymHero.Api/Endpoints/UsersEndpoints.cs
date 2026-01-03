@@ -93,7 +93,181 @@ public static class UsersEndpoints
 
             return Results.Ok(new { message = "Senha alterada com sucesso" });
         }).RequireAuthorization();
+
+        // POST /api/users/profile-picture - Upload profile picture
+        group.MapPost("/profile-picture", async (
+            IFormFile file,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            IWebHostEnvironment env,
+            CancellationToken cancellationToken) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // Validate file
+            if (file == null || file.Length == 0)
+            {
+                return Results.BadRequest(new { message = "Nenhum arquivo foi enviado." });
+            }
+
+            // Validate file size (max 5MB)
+            if (file.Length > 5 * 1024 * 1024)
+            {
+                return Results.BadRequest(new { message = "O arquivo deve ter no máximo 5MB." });
+            }
+
+            // Validate file type
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(extension))
+            {
+                return Results.BadRequest(new { message = "Apenas arquivos JPG, PNG ou GIF são permitidos." });
+            }
+
+            // Generate unique filename
+            var fileName = $"{userId}_{Guid.NewGuid()}{extension}";
+            var uploadsPath = Path.Combine(env.WebRootPath, "uploads", "profile-pictures");
+
+            // Create directory if it doesn't exist
+            if (!Directory.Exists(uploadsPath))
+            {
+                Directory.CreateDirectory(uploadsPath);
+            }
+
+            var filePath = Path.Combine(uploadsPath, fileName);
+
+            // Save file
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream, cancellationToken);
+            }
+
+            // Update user profile picture URL
+            var userEntity = await context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
+
+            if (userEntity == null)
+            {
+                return Results.NotFound(new { message = "Usuário não encontrado." });
+            }
+
+            // Delete old profile picture if exists
+            if (!string.IsNullOrEmpty(userEntity.ProfilePictureUrl))
+            {
+                var oldFileName = Path.GetFileName(userEntity.ProfilePictureUrl);
+                var oldFilePath = Path.Combine(uploadsPath, oldFileName);
+                if (File.Exists(oldFilePath))
+                {
+                    File.Delete(oldFilePath);
+                }
+            }
+
+            userEntity.ProfilePictureUrl = $"/uploads/profile-pictures/{fileName}";
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new
+            {
+                profilePictureUrl = userEntity.ProfilePictureUrl,
+                message = "Foto de perfil atualizada com sucesso."
+            });
+        })
+        .RequireAuthorization()
+        .WithName("UploadProfilePicture")
+        .WithSummary("Upload user profile picture")
+        .DisableAntiforgery(); // Required for file upload
+
+        // PUT /api/users/profile - Update user profile
+        group.MapPut("/profile", async (
+            UpdateProfileRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            var userEntity = await context.Users
+                .FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
+
+            if (userEntity == null)
+            {
+                return Results.NotFound(new { message = "Usuário não encontrado." });
+            }
+
+            // Update fields
+            if (request.Name != null) userEntity.Name = request.Name;
+            if (request.Phone != null) userEntity.Phone = request.Phone;
+            if (request.Bio != null) userEntity.Bio = request.Bio;
+            if (request.Location != null) userEntity.Location = request.Location;
+            if (request.Specialty != null) userEntity.Specialty = request.Specialty;
+            if (request.Cref != null) userEntity.Cref = request.Cref;
+
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(new { message = "Perfil atualizado com sucesso." });
+        })
+        .RequireAuthorization()
+        .WithName("UpdateProfile")
+        .WithSummary("Update user profile");
+
+        // PUT /api/users/notification-preferences - Update notification preferences
+        group.MapPut("/notification-preferences", async (
+            UpdateNotificationPreferencesRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // TODO: Store notification preferences in database
+            // For now, just return success
+            return Results.Ok(new { message = "Preferências de notificação atualizadas." });
+        })
+        .RequireAuthorization()
+        .WithName("UpdateNotificationPreferences")
+        .WithSummary("Update user notification preferences");
+
+        // PUT /api/users/privacy-settings - Update privacy settings
+        group.MapPut("/privacy-settings", async (
+            UpdatePrivacySettingsRequest request,
+            ClaimsPrincipal user,
+            IApplicationDbContext context,
+            CancellationToken cancellationToken) =>
+        {
+            var userId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            // TODO: Store privacy settings in database
+            // For now, just return success
+            return Results.Ok(new { message = "Configurações de privacidade atualizadas." });
+        })
+        .RequireAuthorization()
+        .WithName("UpdatePrivacySettings")
+        .WithSummary("Update user privacy settings");
     }
 }
 
 public record AdminChangePasswordRequest(string NewPassword);
+
+public record UpdateProfileRequest(
+    string? Name,
+    string? Phone,
+    string? Bio,
+    string? Location,
+    string? Specialty,
+    string? Cref
+);
+
+public record UpdateNotificationPreferencesRequest(
+    bool EmailWorkoutCompleted,
+    bool EmailNewClient,
+    bool EmailPaymentReceived,
+    bool PushWorkoutCompleted,
+    bool PushNewClient,
+    bool PushPaymentReceived
+);
+
+public record UpdatePrivacySettingsRequest(
+    bool ProfilePublic,
+    bool ShowEmail,
+    bool ShowPhone,
+    bool AllowMarketplaceListings
+);

@@ -43,6 +43,13 @@ public record AddClientNotesRequest(
 );
 
 /// <summary>
+/// DTO para atualizar notas sobre um cliente.
+/// </summary>
+public record UpdateClientNotesRequest(
+    string Notes
+);
+
+/// <summary>
 /// DTO para criar um convite de aluno.
 /// </summary>
 public record CreateStudentInvitationRequest(
