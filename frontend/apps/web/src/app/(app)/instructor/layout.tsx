@@ -12,7 +12,7 @@ interface InstructorStats {
 export default function InstructorLayout({
   children,
 }: {
-  children: React.Node;
+  children: React.ReactNode;
 }) {
   // Fetch instructor stats for badge counts
   const { data: stats } = useQuery({

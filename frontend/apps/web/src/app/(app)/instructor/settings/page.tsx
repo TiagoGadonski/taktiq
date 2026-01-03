@@ -44,11 +44,10 @@ export default function SettingsPage() {
   const [profileData, setProfileData] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    phone: user?.phone || '',
+    phoneNumber: user?.phoneNumber || '',
     bio: user?.bio || '',
     location: user?.location || '',
-    specialty: user?.specialty || '',
-    cref: user?.cref || '',
+    specialization: user?.specialization || '',
   });
 
   // Notification preferences
@@ -75,11 +74,10 @@ export default function SettingsPage() {
       setProfileData({
         name: user.name || '',
         email: user.email || '',
-        phone: user.phone || '',
+        phoneNumber: user.phoneNumber || '',
         bio: user.bio || '',
         location: user.location || '',
-        specialty: user.specialty || '',
-        cref: user.cref || '',
+        specialization: user.specialization || '',
       });
     }
   }, [user]);
@@ -339,14 +337,14 @@ export default function SettingsPage() {
                 </p>
               </div>
 
-              {/* Specialty */}
+              {/* Specialization */}
               <div className="grid gap-2">
-                <Label htmlFor="specialty">Especialidade</Label>
+                <Label htmlFor="specialization">Especialidade</Label>
                 <Input
-                  id="specialty"
-                  value={profileData.specialty}
+                  id="specialization"
+                  value={profileData.specialization}
                   onChange={(e) =>
-                    setProfileData({ ...profileData, specialty: e.target.value })
+                    setProfileData({ ...profileData, specialization: e.target.value })
                   }
                   placeholder="Ex: Hipertrofia, Emagrecimento, Performance"
                 />
@@ -367,19 +365,6 @@ export default function SettingsPage() {
                     className="pl-9"
                   />
                 </div>
-              </div>
-
-              {/* CREF */}
-              <div className="grid gap-2">
-                <Label htmlFor="cref">CREF (Registro Profissional)</Label>
-                <Input
-                  id="cref"
-                  value={profileData.cref}
-                  onChange={(e) =>
-                    setProfileData({ ...profileData, cref: e.target.value })
-                  }
-                  placeholder="000000-G/XX"
-                />
               </div>
 
               <Button
@@ -426,15 +411,15 @@ export default function SettingsPage() {
 
               {/* Phone */}
               <div className="grid gap-2">
-                <Label htmlFor="phone">Telefone</Label>
+                <Label htmlFor="phoneNumber">Telefone</Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="phone"
+                    id="phoneNumber"
                     type="tel"
-                    value={profileData.phone}
+                    value={profileData.phoneNumber}
                     onChange={(e) =>
-                      setProfileData({ ...profileData, phone: e.target.value })
+                      setProfileData({ ...profileData, phoneNumber: e.target.value })
                     }
                     placeholder="(00) 00000-0000"
                     className="pl-9"

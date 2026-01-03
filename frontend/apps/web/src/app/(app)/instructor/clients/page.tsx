@@ -2,10 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
@@ -15,7 +14,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Search, UserPlus, Mail } from 'lucide-react';
+import { Search, UserPlus } from 'lucide-react';
 import { ClientList } from '@/components/instructor/client-list';
 import { apiClient } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
@@ -78,29 +77,7 @@ export default function ClientsPage() {
         return [];
       }
     },
-    staleTime: 2 * 60 * 1000, // 2 minutes
-  });
-
-  // Delete client mutation
-  const deleteClientMutation = useMutation({
-    mutationFn: async (clientId: string) => {
-      await apiClient.delete(`/personal/clients/${clientId}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['clients'] });
-      toast({
-        title: 'Cliente removido',
-        description: 'O cliente foi removido com sucesso.',
-      });
-    },
-    onError: (error: any) {
-      console.error('Failed to delete client:', error);
-      toast({
-        title: 'Erro ao remover cliente',
-        description: error.response?.data?.message || 'Tente novamente mais tarde.',
-        variant: 'destructive',
-      });
-    },
+    staleTime: 2 * 60 * 1000,
   });
 
   // Filter and search clients
@@ -133,7 +110,6 @@ export default function ClientsPage() {
         filtered = filtered.filter((c) => c.status === 'invited');
         break;
       default:
-        // 'all' - no additional filtering
         break;
     }
 
@@ -190,9 +166,8 @@ export default function ClientsPage() {
   };
 
   const handleDeleteClient = (clientId: string) => {
-    if (confirm('Tem certeza que deseja remover este cliente?')) {
-      deleteClientMutation.mutate(clientId);
-    }
+    // TODO: Implement delete functionality
+    console.log('Delete client:', clientId);
   };
 
   return (
