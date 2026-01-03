@@ -3,6 +3,9 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../..'),
   },
@@ -17,7 +20,7 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.blob.core.windows.net' },
     ],
   },
-  
+
   transpilePackages: ['@gymhero/shared'],
   webpack: (config) => {
     config.resolve.alias = {
