@@ -178,7 +178,7 @@ public static class UsersEndpoints
 
         // PUT /api/users/profile - Update user profile
         group.MapPut("/profile", async (
-            UpdateProfileRequest request,
+            UpdatePTProfileRequest request,
             ClaimsPrincipal user,
             IApplicationDbContext context,
             CancellationToken cancellationToken) =>
@@ -246,7 +246,7 @@ public static class UsersEndpoints
 
 public record AdminChangePasswordRequest(string NewPassword);
 
-public record UpdateProfileRequest(
+public record UpdatePTProfileRequest(
     string? Name,
     string? PhoneNumber,
     string? Bio,
