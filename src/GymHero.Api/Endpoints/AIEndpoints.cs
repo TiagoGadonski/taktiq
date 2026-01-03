@@ -1980,17 +1980,30 @@ INSTRUÇÕES CRÍTICAS:
                 throw new Exception("Failed to parse AI response - null result");
             }
 
-            // ✅ FALLBACK: Se AI não retornou exerciseType, definir como "main"
+            // ✅ FALLBACK INTELIGENTE: Se AI não retornou exerciseType, classificar automaticamente
             if (workout.Exercises != null && workout.Exercises.Any())
             {
                 var fixedExercises = new List<ExerciseInstruction>();
-                foreach (var exercise in workout.Exercises)
+                var totalExercises = workout.Exercises.Count;
+
+                for (int i = 0; i < totalExercises; i++)
                 {
+                    var exercise = workout.Exercises[i];
+
                     if (string.IsNullOrEmpty(exercise.ExerciseType))
                     {
-                        // AI não retornou o campo - usar "main" como padrão
-                        fixedExercises.Add(exercise with { ExerciseType = "main" });
-                        Console.WriteLine($"⚠️ Exercício '{exercise.Name}' sem exerciseType - usando 'main'");
+                        // Classificar automaticamente baseado em lógica inteligente
+                        var detectedType = DetectExerciseType(
+                            exercise.Name,
+                            i,
+                            totalExercises,
+                            request.IncludeWarmup,
+                            request.IncludeMobility,
+                            request.IncludeCooldown
+                        );
+
+                        fixedExercises.Add(exercise with { ExerciseType = detectedType });
+                        Console.WriteLine($"✅ Exercício '{exercise.Name}' classificado automaticamente como '{detectedType}'");
                     }
                     else
                     {
@@ -3198,15 +3211,28 @@ INSTRUÇÕES CRÍTICAS:
                 throw new Exception("Gemini returned invalid workout structure");
             }
 
-            // ✅ FALLBACK: Se AI não retornou exerciseType, definir como "main"
+            // ✅ FALLBACK INTELIGENTE: Se AI não retornou exerciseType, classificar automaticamente
             var fixedExercises = new List<ExerciseInstruction>();
-            foreach (var exercise in workout.Exercises)
+            var totalExercises = workout.Exercises.Count;
+
+            for (int i = 0; i < totalExercises; i++)
             {
+                var exercise = workout.Exercises[i];
+
                 if (string.IsNullOrEmpty(exercise.ExerciseType))
                 {
-                    // AI não retornou o campo - usar "main" como padrão
-                    fixedExercises.Add(exercise with { ExerciseType = "main" });
-                    Console.WriteLine($"⚠️ Exercício '{exercise.Name}' sem exerciseType - usando 'main'");
+                    // Classificar automaticamente baseado em lógica inteligente
+                    var detectedType = DetectExerciseType(
+                        exercise.Name,
+                        i,
+                        totalExercises,
+                        request.IncludeWarmup,
+                        request.IncludeMobility,
+                        request.IncludeCooldown
+                    );
+
+                    fixedExercises.Add(exercise with { ExerciseType = detectedType });
+                    Console.WriteLine($"✅ Exercício '{exercise.Name}' classificado automaticamente como '{detectedType}'");
                 }
                 else
                 {
@@ -3817,5 +3843,93 @@ INSTRUÇÕES CRÍTICAS:
             Goal: goal,
             Days: days
         );
+    }
+
+    /// <summary>
+    /// Detecta automaticamente o tipo de exercício baseado em palavras-chave e contexto
+    /// </summary>
+    private static string DetectExerciseType(
+        string exerciseName,
+        int position,
+        int totalExercises,
+        bool includeWarmup,
+        bool includeMobility,
+        bool includeCooldown)
+    {
+        var nameLower = exerciseName.ToLowerInvariant();
+
+        // 🔥 WARMUP - Palavras-chave de aquecimento
+        var warmupKeywords = new[]
+        {
+            "jumping jack", "polichinelo", "burpee", "mountain climber", "high knee",
+            "butt kick", "corrida", "caminhada", "jogging", "skip", "rope jump",
+            "arm circle", "leg swing", "hip circle", "torso rotation", "rotação",
+            "balanço", "aquecimento", "warm up", "warmup", "cardio leve"
+        };
+
+        // 🤸 MOBILITY - Palavras-chave de mobilidade
+        var mobilityKeywords = new[]
+        {
+            "mobilidade", "mobility", "rotação", "rotation", "círculo", "circle",
+            "world's greatest stretch", "cat cow", "cat-cow", "thread the needle",
+            "90/90", "hip opener", "shoulder dislocate", "band pull apart",
+            "scapular", "escapular", "articular", "dinâmico", "dynamic"
+        };
+
+        // 🧘 COOLDOWN - Palavras-chave de alongamento
+        var cooldownKeywords = new[]
+        {
+            "alongamento", "stretch", "stretching", "estático", "static",
+            "relaxamento", "cooldown", "cool down", "foam roll", "liberação miofascial",
+            "child's pose", "pigeon pose", "cobra stretch", "downward dog",
+            "quadriceps stretch", "hamstring stretch", "calf stretch"
+        };
+
+        // 1️⃣ Verificar palavras-chave de COOLDOWN (prioridade se no final)
+        if (includeCooldown && cooldownKeywords.Any(k => nameLower.Contains(k)))
+        {
+            return "cooldown";
+        }
+
+        // 2️⃣ Verificar palavras-chave de WARMUP (prioridade se no início)
+        if (includeWarmup && warmupKeywords.Any(k => nameLower.Contains(k)))
+        {
+            return "warmup";
+        }
+
+        // 3️⃣ Verificar palavras-chave de MOBILITY
+        if (includeMobility && mobilityKeywords.Any(k => nameLower.Contains(k)))
+        {
+            return "mobility";
+        }
+
+        // 4️⃣ Classificação por POSIÇÃO (fallback)
+        // Se incluir warmup: primeiros 2-3 exercícios
+        if (includeWarmup && position < Math.Min(3, totalExercises / 3))
+        {
+            return "warmup";
+        }
+
+        // Se incluir cooldown: últimos 2-3 exercícios
+        if (includeCooldown && position >= totalExercises - Math.Min(3, totalExercises / 3))
+        {
+            return "cooldown";
+        }
+
+        // Se incluir mobility: exercícios do meio (se não encaixaram em warmup/cooldown)
+        if (includeMobility && position >= 2 && position < totalExercises - 2)
+        {
+            // Verificar se é um exercício de baixa intensidade (poucos sets)
+            // Exercícios de mobilidade geralmente têm 1-2 sets
+            // (Não temos acesso ao sets aqui, então usar apenas posição)
+            // Marcar alguns do meio como mobility se a opção estiver ativa
+            if (position == 2 || position == 3)
+            {
+                return "mobility";
+            }
+        }
+
+        // 5️⃣ Padrão: exercício principal
+        return "main";
     }
 }
