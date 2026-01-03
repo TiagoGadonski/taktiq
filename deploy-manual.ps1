@@ -1,24 +1,21 @@
 # Script de Deploy Manual para Azure
+Write-Host "🚀 Iniciando deploy manual para Azure..." -ForegroundColor Cyan
 
-Write-Host "Building aplicacao..." -ForegroundColor Yellow
-dotnet publish src/GymHero.Api/GymHero.Api.csproj -c Release -o ./publish
+# 1. Build
+Write-Host "`n📦 Compilando projeto..." -ForegroundColor Yellow
+dotnet build src/GymHero.Api/GymHero.Api.csproj --configuration Release
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "Erro no build!" -ForegroundColor Red
-    exit 1
-}
+# 2. Publish
+Write-Host "`n📦 Publicando..." -ForegroundColor Yellow
+$publishPath = ".\publish-temp"
+Remove-Item -Path $publishPath -Recurse -Force -ErrorAction SilentlyContinue
+dotnet publish src/GymHero.Api/GymHero.Api.csproj -c Release -o $publishPath
 
-Write-Host "Build concluido!" -ForegroundColor Green
+# 3. Criar ZIP
+Write-Host "`n📦 Criando ZIP..." -ForegroundColor Yellow
+$zipPath = ".\deploy-package.zip"
+Remove-Item -Path $zipPath -Force -ErrorAction SilentlyContinue
+Compress-Archive -Path "$publishPath\*" -DestinationPath $zipPath -Force
 
-Write-Host "Criando arquivo ZIP..." -ForegroundColor Yellow
-$zipPath = ".\deploy.zip"
-if (Test-Path $zipPath) {
-    Remove-Item $zipPath
-}
-
-Compress-Archive -Path .\publish\* -DestinationPath $zipPath
-
-Write-Host "ZIP criado com sucesso!" -ForegroundColor Green
-Write-Host "Arquivo: deploy.zip" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "Agora va para Azure Portal e faca upload do ZIP!" -ForegroundColor Yellow
+Write-Host "`n✅ Pacote criado: $zipPath" -ForegroundColor Green
+Write-Host "`nPRÓXIMO: Use Azure CLI ou Portal para fazer upload" -ForegroundColor Cyan

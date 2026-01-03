@@ -337,10 +337,12 @@ app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = Dat
 // Debug endpoint to verify deployment version (TEMPORARY - remove after debugging)
 app.MapGet("/api/debug/version", () => Results.Ok(new
 {
-    deploymentVersion = "2025-12-30-v1",
+    deploymentVersion = "2026-01-03-v2-intelligent-classification",
     timestamp = DateTime.UtcNow,
-    message = "Student search endpoint should be available",
-    hasStudentSearchEndpoint = true
+    hasDetectExerciseType = true,
+    hasIntelligentClassification = true,
+    message = "Intelligent exercise type classification deployed",
+    deployDate = "2026-01-03T01:00:00Z"
 }))
    .AllowAnonymous();
 
