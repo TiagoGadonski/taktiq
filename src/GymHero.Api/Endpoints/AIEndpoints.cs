@@ -2013,6 +2013,47 @@ INSTRUÇÕES CRÍTICAS:
                 workout = workout with { Exercises = fixedExercises };
             }
 
+            // 🔥 SUPER FALLBACK: Se AI ignorou as instruções e não gerou warmup/mobility/cooldown, ADICIONAR automaticamente
+            var hasWarmup = workout.Exercises.Any(e => e.ExerciseType == "warmup");
+            var hasMobility = workout.Exercises.Any(e => e.ExerciseType == "mobility");
+            var hasCooldown = workout.Exercises.Any(e => e.ExerciseType == "cooldown");
+
+            var finalExercises = new List<ExerciseInstruction>();
+
+            // Adicionar warmup padrão se solicitado mas não gerado
+            if (request.IncludeWarmup && !hasWarmup)
+            {
+                finalExercises.AddRange(GetDefaultWarmupExercises());
+                Console.WriteLine("⚠️ OpenAI ignorou warmup - adicionando exercícios padrão");
+            }
+
+            // Adicionar exercícios principais
+            finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "warmup" || e.ExerciseType == "main" || string.IsNullOrEmpty(e.ExerciseType)));
+
+            // Adicionar mobility padrão se solicitado mas não gerado
+            if (request.IncludeMobility && !hasMobility)
+            {
+                finalExercises.AddRange(GetDefaultMobilityExercises());
+                Console.WriteLine("⚠️ OpenAI ignorou mobility - adicionando exercícios padrão");
+            }
+            else
+            {
+                finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "mobility"));
+            }
+
+            // Adicionar cooldown padrão se solicitado mas não gerado
+            if (request.IncludeCooldown && !hasCooldown)
+            {
+                finalExercises.AddRange(GetDefaultCooldownExercises());
+                Console.WriteLine("⚠️ OpenAI ignorou cooldown - adicionando exercícios padrão");
+            }
+            else
+            {
+                finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "cooldown"));
+            }
+
+            workout = workout with { Exercises = finalExercises };
+
             // Validate workout structure
             if (string.IsNullOrWhiteSpace(workout.Title))
             {
@@ -3241,6 +3282,47 @@ INSTRUÇÕES CRÍTICAS:
             }
             workout = workout with { Exercises = fixedExercises };
 
+            // 🔥 SUPER FALLBACK: Se AI ignorou as instruções e não gerou warmup/mobility/cooldown, ADICIONAR automaticamente
+            var hasWarmup = workout.Exercises.Any(e => e.ExerciseType == "warmup");
+            var hasMobility = workout.Exercises.Any(e => e.ExerciseType == "mobility");
+            var hasCooldown = workout.Exercises.Any(e => e.ExerciseType == "cooldown");
+
+            var finalExercises = new List<ExerciseInstruction>();
+
+            // Adicionar warmup padrão se solicitado mas não gerado
+            if (request.IncludeWarmup && !hasWarmup)
+            {
+                finalExercises.AddRange(GetDefaultWarmupExercises());
+                Console.WriteLine("⚠️ Gemini ignorou warmup - adicionando exercícios padrão");
+            }
+
+            // Adicionar exercícios principais
+            finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "warmup" || e.ExerciseType == "main" || string.IsNullOrEmpty(e.ExerciseType)));
+
+            // Adicionar mobility padrão se solicitado mas não gerado
+            if (request.IncludeMobility && !hasMobility)
+            {
+                finalExercises.AddRange(GetDefaultMobilityExercises());
+                Console.WriteLine("⚠️ Gemini ignorou mobility - adicionando exercícios padrão");
+            }
+            else
+            {
+                finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "mobility"));
+            }
+
+            // Adicionar cooldown padrão se solicitado mas não gerado
+            if (request.IncludeCooldown && !hasCooldown)
+            {
+                finalExercises.AddRange(GetDefaultCooldownExercises());
+                Console.WriteLine("⚠️ Gemini ignorou cooldown - adicionando exercícios padrão");
+            }
+            else
+            {
+                finalExercises.AddRange(workout.Exercises.Where(e => e.ExerciseType == "cooldown"));
+            }
+
+            workout = workout with { Exercises = finalExercises };
+
             // Enforce maximum exercise count
             const int MAX_EXERCISES = 12;
             if (workout.Exercises.Count > MAX_EXERCISES)
@@ -3843,6 +3925,66 @@ INSTRUÇÕES CRÍTICAS:
             Goal: goal,
             Days: days
         );
+    }
+
+    /// <summary>
+    /// Retorna exercícios padrão de aquecimento quando a AI ignora a instrução
+    /// </summary>
+    private static List<ExerciseInstruction> GetDefaultWarmupExercises()
+    {
+        return new List<ExerciseInstruction>
+        {
+            new("Polichinelos (Jumping Jacks)", "cardio", "peso corporal", 1, "30 segundos", "15s",
+                new List<string> { "Fique em pé com pés juntos", "Salte abrindo pernas e elevando braços acima da cabeça", "Retorne à posição inicial", "Mantenha ritmo constante" },
+                null, null, null, null, null, null, "warmup"),
+            new("Corrida Estacionária", "cardio", "peso corporal", 1, "45 segundos", "15s",
+                new List<string> { "Corra no lugar elevando joelhos até altura do quadril", "Mantenha ritmo moderado", "Use braços para auxiliar o movimento" },
+                null, null, null, null, null, null, "warmup"),
+            new("Rotação de Braços", "ombros", "peso corporal", 1, "20 repetições", "10s",
+                new List<string> { "Estenda braços lateralmente", "Faça círculos amplos com os braços", "10 para frente, 10 para trás" },
+                null, null, null, null, null, null, "warmup")
+        };
+    }
+
+    /// <summary>
+    /// Retorna exercícios padrão de mobilidade quando a AI ignora a instrução
+    /// </summary>
+    private static List<ExerciseInstruction> GetDefaultMobilityExercises()
+    {
+        return new List<ExerciseInstruction>
+        {
+            new("Círculos de Quadril", "core", "peso corporal", 2, "10 por lado", "20s",
+                new List<string> { "Fique em pé com mãos na cintura", "Faça círculos amplos com o quadril", "10 no sentido horário, 10 anti-horário" },
+                null, null, null, null, null, null, "mobility"),
+            new("Gato-Vaca (Cat-Cow)", "core", "peso corporal", 2, "15 repetições", "20s",
+                new List<string> { "Posição de quatro apoios", "Arqueie as costas olhando para cima (vaca)", "Arredonde as costas olhando para baixo (gato)", "Movimento lento e controlado" },
+                null, null, null, null, null, null, "mobility"),
+            new("World's Greatest Stretch", "corpo todo", "peso corporal", 2, "8 por lado", "30s",
+                new List<string> { "Posição de afundo baixo", "Cotovelo toca o chão interno do pé da frente", "Rotação de tronco com braço estendido para cima", "Alterne os lados" },
+                null, null, null, null, null, null, "mobility")
+        };
+    }
+
+    /// <summary>
+    /// Retorna exercícios padrão de alongamento quando a AI ignora a instrução
+    /// </summary>
+    private static List<ExerciseInstruction> GetDefaultCooldownExercises()
+    {
+        return new List<ExerciseInstruction>
+        {
+            new("Alongamento de Peitorais", "peito", "peso corporal", 1, "30 segundos", "10s",
+                new List<string> { "Entrelace os dedos atrás das costas", "Estique os braços e eleve-os gentilmente", "Mantenha o peito aberto e ombros para trás" },
+                null, null, null, null, null, null, "cooldown"),
+            new("Alongamento de Isquiotibiais", "pernas", "peso corporal", 1, "30 segundos por perna", "10s",
+                new List<string> { "Sentado com uma perna estendida", "Incline-se para frente tentando tocar os dedos do pé", "Mantenha as costas retas", "Segure a posição sem balançar" },
+                null, null, null, null, null, null, "cooldown"),
+            new("Alongamento de Quadríceps", "pernas", "peso corporal", 1, "30 segundos por perna", "10s",
+                new List<string> { "Em pé, segure um pé atrás de você", "Puxe o calcanhar em direção ao glúteo", "Mantenha joelhos juntos", "Use parede para equilíbrio se necessário" },
+                null, null, null, null, null, null, "cooldown"),
+            new("Alongamento de Lombar (Child's Pose)", "core", "peso corporal", 1, "45 segundos", "0s",
+                new List<string> { "Ajoelhe-se e sente sobre os calcanhares", "Estenda braços à frente no chão", "Abaixe o tronco entre as coxas", "Respire profundamente e relaxe" },
+                null, null, null, null, null, null, "cooldown")
+        };
     }
 
     /// <summary>

@@ -78,7 +78,8 @@
       "Bash(if not exist \"C:\\\\Users\\\\cwbcordeti\\\\source\\\\gymhero2\\\\deploy-manual.ps1\" echo \"Arquivo não existe\")",
       "Bash(powershell -Command \"Compress-Archive -Path ''.\\\\publish-temp\\\\*'' -DestinationPath ''.\\\\deploy-package.zip'' -Force\")",
       "Bash(dotnet clean:*)",
-      "Bash(dotnet publish:*)"
+      "Bash(dotnet publish:*)",
+      "Bash(powershell -Command \"Compress-Archive -Path ''.\\\\publish-fresh\\\\*'' -DestinationPath ''.\\\\deploy-v2-fresh.zip'' -Force\")"
     ],
     "deny": [],
     "ask": []
