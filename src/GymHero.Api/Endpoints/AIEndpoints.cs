@@ -1980,6 +1980,26 @@ INSTRUÇÕES CRÍTICAS:
                 throw new Exception("Failed to parse AI response - null result");
             }
 
+            // ✅ FALLBACK: Se AI não retornou exerciseType, definir como "main"
+            if (workout.Exercises != null && workout.Exercises.Any())
+            {
+                var fixedExercises = new List<ExerciseInstruction>();
+                foreach (var exercise in workout.Exercises)
+                {
+                    if (string.IsNullOrEmpty(exercise.ExerciseType))
+                    {
+                        // AI não retornou o campo - usar "main" como padrão
+                        fixedExercises.Add(exercise with { ExerciseType = "main" });
+                        Console.WriteLine($"⚠️ Exercício '{exercise.Name}' sem exerciseType - usando 'main'");
+                    }
+                    else
+                    {
+                        fixedExercises.Add(exercise);
+                    }
+                }
+                workout = workout with { Exercises = fixedExercises };
+            }
+
             // Validate workout structure
             if (string.IsNullOrWhiteSpace(workout.Title))
             {
@@ -3177,6 +3197,23 @@ INSTRUÇÕES CRÍTICAS:
             {
                 throw new Exception("Gemini returned invalid workout structure");
             }
+
+            // ✅ FALLBACK: Se AI não retornou exerciseType, definir como "main"
+            var fixedExercises = new List<ExerciseInstruction>();
+            foreach (var exercise in workout.Exercises)
+            {
+                if (string.IsNullOrEmpty(exercise.ExerciseType))
+                {
+                    // AI não retornou o campo - usar "main" como padrão
+                    fixedExercises.Add(exercise with { ExerciseType = "main" });
+                    Console.WriteLine($"⚠️ Exercício '{exercise.Name}' sem exerciseType - usando 'main'");
+                }
+                else
+                {
+                    fixedExercises.Add(exercise);
+                }
+            }
+            workout = workout with { Exercises = fixedExercises };
 
             // Enforce maximum exercise count
             const int MAX_EXERCISES = 12;
