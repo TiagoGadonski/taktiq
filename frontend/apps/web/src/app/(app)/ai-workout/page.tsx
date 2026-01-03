@@ -418,7 +418,7 @@ export default function AIWorkoutPage() {
       console.log('🔍 DEBUG - Treino gerado pela AI:', data);
       console.log('🔍 DEBUG - Tipos de exercícios:', data.exercises.map(e => ({
         name: e.name,
-        exerciseType: e.exerciseType || 'undefined'
+        exerciseType: e.exerciseType === undefined ? '(CAMPO AUSENTE!)' : e.exerciseType
       })));
       setGeneratedWorkout(data);
       setRejectedExercises({}); // Reset rejected exercises for new workout

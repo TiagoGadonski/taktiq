@@ -1963,6 +1963,11 @@ INSTRUÇÕES CRÍTICAS:
 
         content = content.Trim();
 
+        // 🔍 DEBUG: Log da resposta RAW da AI
+        Console.WriteLine("🔍🔍🔍 DEBUG - Resposta RAW da AI:");
+        Console.WriteLine(content);
+        Console.WriteLine("🔍🔍🔍 DEBUG - FIM da resposta RAW");
+
         try
         {
             var workout = JsonSerializer.Deserialize<AIWorkoutResponse>(content, new JsonSerializerOptions
@@ -3155,6 +3160,11 @@ INSTRUÇÕES CRÍTICAS:
         }
 
         content = content.Trim();
+
+        // 🔍 DEBUG: Log da resposta RAW da AI
+        Console.WriteLine("🔍🔍🔍 DEBUG - Resposta RAW da AI:");
+        Console.WriteLine(content);
+        Console.WriteLine("🔍🔍🔍 DEBUG - FIM da resposta RAW");
 
         try
         {
