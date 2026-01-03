@@ -195,11 +195,10 @@ public static class UsersEndpoints
 
             // Update fields
             if (request.Name != null) userEntity.Name = request.Name;
-            if (request.Phone != null) userEntity.Phone = request.Phone;
+            if (request.PhoneNumber != null) userEntity.PhoneNumber = request.PhoneNumber;
             if (request.Bio != null) userEntity.Bio = request.Bio;
             if (request.Location != null) userEntity.Location = request.Location;
-            if (request.Specialty != null) userEntity.Specialty = request.Specialty;
-            if (request.Cref != null) userEntity.Cref = request.Cref;
+            if (request.Specialization != null) userEntity.Specialization = request.Specialization;
 
             await context.SaveChangesAsync(cancellationToken);
 
@@ -249,11 +248,10 @@ public record AdminChangePasswordRequest(string NewPassword);
 
 public record UpdateProfileRequest(
     string? Name,
-    string? Phone,
+    string? PhoneNumber,
     string? Bio,
     string? Location,
-    string? Specialty,
-    string? Cref
+    string? Specialization
 );
 
 public record UpdateNotificationPreferencesRequest(
