@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui/card';
-import { Button } from '@repo/ui/components/ui/button';
-import { Input } from '@repo/ui/components/ui/input';
-import { Label } from '@repo/ui/components/ui/label';
-import { useToast } from '@repo/ui/hooks/use-toast';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { toast } from '@/components/ui/use-toast';
 import { Sparkles, Loader2, Camera, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { apiClient } from '@/lib/api-client';
-import { Alert, AlertDescription } from '@repo/ui/components/ui/alert';
+import { apiClient } from '@/lib/api';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface PosturalAnalysis {
   forwardHead: string;
@@ -55,7 +55,6 @@ function DeviationItem({ label, value }: { label: string; value: string }) {
 export default function AIPosturalAssessment() {
   const params = useParams();
   const router = useRouter();
-  const { toast } = useToast();
   const clientId = params.id as string;
 
   const [frontPhoto, setFrontPhoto] = useState<File | null>(null);
