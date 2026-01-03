@@ -346,6 +346,14 @@ app.MapGet("/api/debug/version", () => Results.Ok(new
 }))
    .AllowAnonymous();
 
+// EMERGENCY ENDPOINT - Restart App Service
+app.MapPost("/api/admin/force-restart", () =>
+{
+    Environment.Exit(0); // Force app restart
+    return Results.Ok(new { message = "Restarting..." });
+})
+   .RequireAuthorization("RequireAdminRole");
+
 app.MapAuthEndpoints(); // Nosso método de extensão para os endpoints de autenticação
 app.MapWorkoutPlanEndpoints();
 app.MapExerciseEndpoints();

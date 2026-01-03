@@ -446,6 +446,80 @@ public static class AIEndpoints
         })
         .WithName("GenerateAIWorkoutPlan")
         .WithSummary("Generate a complete weekly workout plan using AI");
+
+        // 🎯 NEW: Analyze postural photos with GPT-4 Vision
+        group.MapPost("/analyze-posture", async (
+            [FromForm] IFormFile frontPhoto,
+            [FromForm] IFormFile sidePhoto,
+            [FromForm] IFormFile backPhoto,
+            ClaimsPrincipal user,
+            IConfiguration configuration,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting postural analysis with AI Vision...");
+
+                // Validate files
+                if (frontPhoto == null || sidePhoto == null || backPhoto == null)
+                {
+                    return Results.BadRequest(new { message = "Todas as 3 fotos são obrigatórias: frontal, lateral e costas" });
+                }
+
+                // Validate file sizes (max 5MB each)
+                const long maxFileSize = 5 * 1024 * 1024; // 5MB
+                if (frontPhoto.Length > maxFileSize || sidePhoto.Length > maxFileSize || backPhoto.Length > maxFileSize)
+                {
+                    return Results.BadRequest(new { message = "Cada foto deve ter no máximo 5MB" });
+                }
+
+                // Validate file types
+                var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png" };
+                if (!allowedTypes.Contains(frontPhoto.ContentType) ||
+                    !allowedTypes.Contains(sidePhoto.ContentType) ||
+                    !allowedTypes.Contains(backPhoto.ContentType))
+                {
+                    return Results.BadRequest(new { message = "Apenas arquivos JPEG e PNG são permitidos" });
+                }
+
+                var openAiKey = configuration["OpenAI:ApiKey"];
+                if (string.IsNullOrEmpty(openAiKey))
+                {
+                    logger.LogError("OpenAI API key not configured");
+                    return Results.Json(new { message = "OpenAI não configurado. Análise postural indisponível." },
+                        statusCode: StatusCodes.Status503ServiceUnavailable);
+                }
+
+                // Convert photos to base64
+                logger.LogInformation("Converting photos to base64...");
+                var frontBase64 = await ConvertToBase64(frontPhoto);
+                var sideBase64 = await ConvertToBase64(sidePhoto);
+                var backBase64 = await ConvertToBase64(backPhoto);
+
+                // Analyze with GPT-4 Vision
+                logger.LogInformation("Calling GPT-4 Vision API...");
+                var analysis = await AnalyzePostureWithVision(
+                    frontBase64,
+                    sideBase64,
+                    backBase64,
+                    openAiKey,
+                    logger
+                );
+
+                logger.LogInformation("✅ Postural analysis completed successfully");
+                return Results.Ok(analysis);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error analyzing posture");
+                return Results.Json(new { message = $"Erro na análise: {ex.Message}" },
+                    statusCode: StatusCodes.Status500InternalServerError);
+            }
+        })
+        .WithName("AnalyzePosture")
+        .WithSummary("Analyze postural photos using AI vision")
+        .RequireAuthorization("RequirePersonalRole")
+        .DisableAntiforgery();
     }
 
     // Portuguese exercise database organized by muscle group
@@ -4073,5 +4147,161 @@ INSTRUÇÕES CRÍTICAS:
 
         // 5️⃣ Padrão: exercício principal
         return "main";
+    }
+
+    /// <summary>
+    /// Converte IFormFile para base64 string
+    /// </summary>
+    private static async Task<string> ConvertToBase64(IFormFile file)
+    {
+        using var memoryStream = new MemoryStream();
+        await file.CopyToAsync(memoryStream);
+        var bytes = memoryStream.ToArray();
+        return Convert.ToBase64String(bytes);
+    }
+
+    /// <summary>
+    /// Analisa postura usando GPT-4 Vision
+    /// </summary>
+    private static async Task<GymHero.Shared.DTOs.PosturalAnalysisResponse> AnalyzePostureWithVision(
+        string frontBase64,
+        string sideBase64,
+        string backBase64,
+        string apiKey,
+        ILogger logger)
+    {
+        using var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+        httpClient.Timeout = TimeSpan.FromSeconds(60);
+
+        var systemPrompt = @"Você é um fisioterapeuta especializado em avaliação postural.
+
+Analise as 3 fotos fornecidas (frente, lateral, costas) e classifique os seguintes desvios posturais.
+
+IMPORTANTE: Retorne APENAS um JSON válido com esta estrutura EXATA (sem markdown, sem ```json, apenas o JSON puro):
+
+{
+  ""forwardHead"": ""None"",
+  ""roundedShoulders"": ""None"",
+  ""anteriorPelvicTilt"": ""None"",
+  ""posteriorPelvicTilt"": ""None"",
+  ""kneeValgus"": ""None"",
+  ""kneeVarus"": ""None"",
+  ""scoliosis"": ""None"",
+  ""flatFeet"": ""None"",
+  ""observations"": ""Descreva aqui os principais achados posturais observados nas fotos. Seja específico sobre o que você viu em cada vista (frontal, lateral, posterior)."",
+  ""recommendations"": ""Liste 3-5 exercícios corretivos específicos baseados nos desvios encontrados. Inclua o nome do exercício e seu objetivo.""
+}
+
+VALORES PERMITIDOS para cada desvio:
+- ""None"": Alinhamento normal, sem desvios significativos
+- ""Mild"": Desvio leve, observável mas não crítico
+- ""Moderate"": Desvio moderado, requer atenção e correção
+- ""Severe"": Desvio severo, necessita intervenção imediata
+
+CRITÉRIOS DE AVALIAÇÃO:
+
+1. FORWARD HEAD (Cabeça Anteriorizada) - Vista Lateral:
+   - None: Orelha alinhada com ombro
+   - Mild: Orelha 1-2cm à frente do ombro
+   - Moderate: Orelha 2-4cm à frente do ombro
+   - Severe: Orelha >4cm à frente do ombro
+
+2. ROUNDED SHOULDERS (Ombros Protusos) - Vista Lateral:
+   - None: Ombros alinhados sobre quadril
+   - Mild: Ombros levemente à frente do alinhamento
+   - Moderate: Ombros visivelmente projetados para frente
+   - Severe: Ombros muito anteriorizados com escápulas aladas
+
+3. ANTERIOR/POSTERIOR PELVIC TILT (Inclinação Pélvica) - Vista Lateral:
+   - Anterior: Lordose lombar aumentada, bumbum empinado
+   - Posterior: Lombar retificada, bumbum ""escondido""
+   - None: Curvatura lombar natural
+
+4. KNEE VALGUS (Joelhos em X) - Vista Frontal:
+   - None: Joelhos alinhados com tornozelos e quadril
+   - Mild: Joelhos levemente para dentro
+   - Moderate: Joelhos visivelmente em X
+   - Severe: Joelhos muito aproximados, tornozelos afastados
+
+5. KNEE VARUS (Joelhos em Parênteses) - Vista Frontal:
+   - None: Joelhos alinhados
+   - Mild: Pequeno arqueamento
+   - Moderate: Arqueamento visível
+   - Severe: Pernas muito arqueadas
+
+6. SCOLIOSIS (Escoliose) - Vista Posterior:
+   - None: Coluna reta, ombros e quadril nivelados
+   - Mild: Leve curvatura lateral, ombros levemente desnivelados
+   - Moderate: Curvatura visível, assimetria clara
+   - Severe: Curvatura pronunciada, rotação vertebral
+
+7. FLAT FEET (Pés Planos) - Vista Posterior/Lateral:
+   - None: Arco plantar visível
+   - Mild: Arco reduzido
+   - Moderate: Arco muito reduzido
+   - Severe: Sem arco, pé completamente plano
+
+SEJA CONSERVADOR: Em caso de dúvida entre duas classificações, escolha a menos severa.
+SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qual vista (frontal/lateral/posterior).";
+
+        var requestBody = new
+        {
+            model = "gpt-4o",
+            messages = new object[]
+            {
+                new
+                {
+                    role = "system",
+                    content = (object)systemPrompt
+                },
+                new
+                {
+                    role = "user",
+                    content = (object)new object[]
+                    {
+                        new { type = "text", text = "Analise as 3 fotos posturais abaixo e retorne o JSON com a avaliação completa:" },
+                        new { type = "image_url", image_url = new { url = $"data:image/jpeg;base64,{frontBase64}", detail = "high" } },
+                        new { type = "image_url", image_url = new { url = $"data:image/jpeg;base64,{sideBase64}", detail = "high" } },
+                        new { type = "image_url", image_url = new { url = $"data:image/jpeg;base64,{backBase64}", detail = "high" } }
+                    }
+                }
+            },
+            max_tokens = 1500,
+            temperature = 0.3,
+            response_format = new { type = "json_object" }
+        };
+
+        logger.LogInformation("Sending request to OpenAI Vision API...");
+        var response = await httpClient.PostAsJsonAsync("https://api.openai.com/v1/chat/completions", requestBody);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            logger.LogError($"OpenAI API error: {response.StatusCode} - {errorContent}");
+            throw new Exception($"OpenAI API error: {response.StatusCode}");
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<GymHero.Shared.DTOs.OpenAIVisionResponse>();
+        if (result?.Choices == null || !result.Choices.Any())
+        {
+            throw new Exception("OpenAI returned empty response");
+        }
+
+        var content = result.Choices[0].Message.Content;
+        logger.LogInformation($"Received response from OpenAI: {content.Substring(0, Math.Min(200, content.Length))}...");
+
+        // Parse JSON response
+        var analysis = JsonSerializer.Deserialize<GymHero.Shared.DTOs.PosturalAnalysisResponse>(
+            content,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
+
+        if (analysis == null)
+        {
+            throw new Exception("Failed to parse AI response");
+        }
+
+        return analysis;
     }
 }
