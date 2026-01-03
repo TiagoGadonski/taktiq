@@ -20,7 +20,8 @@ import {
   Activity,
   User,
   Edit,
-  Save
+  Save,
+  Sparkles
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getAssetUrl } from '@/lib/env';
@@ -486,6 +487,13 @@ export default function ClientDetailPage() {
           >
             <Plus className="h-4 w-4 mr-2" />
             Nova Avaliação
+          </Button>
+          <Button
+            onClick={() => router.push(`/instructor/clients/${clientId}/ai-assessment`)}
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+          >
+            <Sparkles className="h-4 w-4 mr-2" />
+            Avaliação Postural por IA
           </Button>
           <Button
             variant="outline"
