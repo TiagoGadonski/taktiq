@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -68,6 +68,7 @@ interface WorkoutDay {
 
 export default function NewPlanPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   const { user, isLoading: isLoadingUser } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
@@ -99,6 +100,15 @@ export default function NewPlanPage() {
 
   const [planType, setPlanType] = useState<'marketplace' | 'student' | 'template' | 'group'>('template');
   const [selectedStudentIds, setSelectedStudentIds] = useState<string[]>([]);
+
+  // Pre-select student from URL parameter
+  useEffect(() => {
+    const studentId = searchParams.get('studentId');
+    if (studentId && isPersonalTrainer) {
+      setSelectedStudentIds([studentId]);
+      setPlanType('student');
+    }
+  }, [searchParams, isPersonalTrainer]);
   const [selectedGroupId, setSelectedGroupId] = useState<string>('');
   const [expirationWeeks, setExpirationWeeks] = useState<string>('');
   const [planPrice, setPlanPrice] = useState<string>('');

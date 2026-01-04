@@ -497,7 +497,7 @@ export default function ClientDetailPage() {
           </Button>
           <Button
             variant="outline"
-            onClick={() => router.push('/plans/new')}
+            onClick={() => router.push(`/plans/new?studentId=${clientId}`)}
           >
             <Dumbbell className="h-4 w-4 mr-2" />
             Criar Plano de Treino
