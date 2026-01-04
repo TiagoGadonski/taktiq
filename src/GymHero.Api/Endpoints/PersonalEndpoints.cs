@@ -1153,20 +1153,21 @@ public static class PersonalEndpoints
             var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             // Get recent workout sessions from my students
-            var recentActivity = await context.WorkoutSessions
-                .Where(ws => ws.CompletedAt != null && ws.Owner.PersonalTrainerId == trainerId)
-                .OrderByDescending(ws => ws.CompletedAt)
-                .Take(10)
-                .Select(ws => new
+            var recentActivity = await (
+                from ws in context.WorkoutSessions
+                join owner in context.Users on ws.OwnerId equals owner.Id
+                where ws.CompletedAt != null && owner.PersonalTrainerId == trainerId
+                orderby ws.CompletedAt descending
+                select new
                 {
                     id = ws.Id.ToString(),
                     type = "workout_completed",
-                    clientName = ws.Owner.Name,
-                    message = $"completou treino",
+                    clientName = owner.Name,
+                    message = "completou treino",
                     timestamp = ws.CompletedAt,
                     urgent = false
-                })
-                .ToListAsync(cancellationToken);
+                }
+            ).Take(10).ToListAsync(cancellationToken);
 
             return Results.Ok(recentActivity);
         })
@@ -1205,30 +1206,5 @@ public static class PersonalEndpoints
         })
         .WithName("GetDashboardStats")
         .WithSummary("Get statistics for PT dashboard");
-
-        // GET /api/personal/groups - Get student groups
-        group.MapGet("/groups", async (
-            ClaimsPrincipal user,
-            IApplicationDbContext context,
-            CancellationToken cancellationToken) =>
-        {
-            var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-            var groups = await context.StudentGroups
-                .Where(sg => sg.CreatedBy == trainerId)
-                .Select(sg => new
-                {
-                    sg.Id,
-                    sg.Name,
-                    sg.Description,
-                    sg.CreatedAt,
-                    memberCount = sg.Members.Count
-                })
-                .ToListAsync(cancellationToken);
-
-            return Results.Ok(groups);
-        })
-        .WithName("GetStudentGroups")
-        .WithSummary("Get all student groups created by this PT");
     }
 }
