@@ -276,7 +276,7 @@ export default function SettingsPage() {
               {/* Profile Picture */}
               <div className="flex items-center gap-6">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={user?.profilePicture} alt={user?.name} />
+                  <AvatarImage src={user?.profilePictureUrl} alt={user?.name} />
                   <AvatarFallback className="text-2xl">
                     {getInitials(user?.name || 'PT')}
                   </AvatarFallback>

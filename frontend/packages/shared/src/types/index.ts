@@ -6,6 +6,11 @@ export interface User {
   role: string;
   avatar?: string;
   profilePictureUrl?: string;
+  phoneNumber?: string;
+  bio?: string;
+  location?: string;
+  specialization?: string;
+  gymName?: string;
   createdAt: string;
   preferences?: UserPreferences;
   preferredWorkoutLocation?: number;
