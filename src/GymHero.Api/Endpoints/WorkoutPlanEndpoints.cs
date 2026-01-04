@@ -115,6 +115,17 @@ public static class WorkoutPlanEndpoints
         .WithName("GetAllWorkoutPlans")
         .WithSummary("Gets all workout plans for the authenticated user");
 
+        // Alias para my-plans (mesmo comportamento que GET /)
+        group.MapGet("/my-plans", async (ClaimsPrincipal user, ISender sender) =>
+        {
+            var ownerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var query = new GetAllWorkoutPlansQuery(ownerId);
+            var result = await sender.Send(query);
+            return Results.Ok(result);
+        })
+        .WithName("GetMyWorkoutPlans")
+        .WithSummary("Gets all workout plans for the authenticated user (alias)");
+
         // Endpoint de BUSCA POR ID (agora com os usings corretos)
         group.MapGet("/{id:guid}", async (Guid id, ClaimsPrincipal user, ISender sender) =>
         {

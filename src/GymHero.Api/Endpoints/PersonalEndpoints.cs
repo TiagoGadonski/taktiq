@@ -1144,9 +1144,7 @@ public static class PersonalEndpoints
         .WithName("GetUnreadNotifications")
         .WithSummary("Get count of unread feedback from students in the last 7 days");
 
-        // TODO: Implement dashboard endpoints with correct entity properties
         // GET /api/personal/dashboard/recent-activity - Get recent activity feed
-        /*
         group.MapGet("/dashboard/recent-activity", async (
             ClaimsPrincipal user,
             IApplicationDbContext context,
@@ -1174,10 +1172,8 @@ public static class PersonalEndpoints
         })
         .WithName("GetRecentActivity")
         .WithSummary("Get recent activity feed for dashboard");
-        */
 
         // GET /api/personal/dashboard/stats - Get dashboard statistics
-        /*
         group.MapGet("/dashboard/stats", async (
             ClaimsPrincipal user,
             IApplicationDbContext context,
@@ -1209,36 +1205,30 @@ public static class PersonalEndpoints
         })
         .WithName("GetDashboardStats")
         .WithSummary("Get statistics for PT dashboard");
-        */
 
-        // PUT /api/personal/clients/{clientId}/notes - Update client notes
-        /*
-        group.MapPut("/clients/{clientId:guid}/notes", async (
-            Guid clientId,
-            [FromBody] UpdateClientNotesRequest request,
+        // GET /api/personal/groups - Get student groups
+        group.MapGet("/groups", async (
             ClaimsPrincipal user,
             IApplicationDbContext context,
             CancellationToken cancellationToken) =>
         {
             var trainerId = Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-            // Verify the client belongs to this trainer
-            var client = await context.Users
-                .FirstOrDefaultAsync(u => u.Id == clientId && u.PersonalTrainerId == trainerId, cancellationToken);
+            var groups = await context.StudentGroups
+                .Where(sg => sg.CreatedBy == trainerId)
+                .Select(sg => new
+                {
+                    sg.Id,
+                    sg.Name,
+                    sg.Description,
+                    sg.CreatedAt,
+                    memberCount = sg.Members.Count
+                })
+                .ToListAsync(cancellationToken);
 
-            if (client == null)
-            {
-                return Results.NotFound(new { message = "Client not found or not assigned to you" });
-            }
-
-            // Update notes
-            client.TrainerNotes = request.Notes;
-            await context.SaveChangesAsync(cancellationToken);
-
-            return Results.Ok(new { message = "Notes updated successfully" });
+            return Results.Ok(groups);
         })
-        .WithName("UpdateClientNotes")
-        .WithSummary("Update PT notes for a specific client");
-        */
+        .WithName("GetStudentGroups")
+        .WithSummary("Get all student groups created by this PT");
     }
 }
