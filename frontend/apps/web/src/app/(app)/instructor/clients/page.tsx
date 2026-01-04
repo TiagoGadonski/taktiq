@@ -209,7 +209,7 @@ export default function ClientsPage() {
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'all'
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Todos ({filterCounts.all})
@@ -219,8 +219,8 @@ export default function ClientsPage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'active'
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-green-600 text-white dark:bg-green-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Ativos ({filterCounts.active})
@@ -230,8 +230,8 @@ export default function ClientsPage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'inactive'
-                ? 'bg-yellow-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-yellow-600 text-white dark:bg-yellow-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Inativos ({filterCounts.inactive})
@@ -241,8 +241,8 @@ export default function ClientsPage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'no-plan'
-                ? 'bg-red-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-red-600 text-white dark:bg-red-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Sem Plano ({filterCounts.noPlan})
@@ -252,8 +252,8 @@ export default function ClientsPage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'invited'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-600 text-white dark:bg-blue-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Convidados ({filterCounts.invited})

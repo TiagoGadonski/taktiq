@@ -37,7 +37,7 @@ export default function InstructorLayout({
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Sidebar Navigation */}
       <InstructorSidebarNav
         clientCount={stats?.clientCount}

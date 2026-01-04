@@ -205,7 +205,7 @@ export default function MarketplacePage() {
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'all'
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Todos ({filterCounts.all})
@@ -215,8 +215,8 @@ export default function MarketplacePage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'for-sale'
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-green-600 text-white dark:bg-green-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Para Venda ({filterCounts.forSale})
@@ -226,8 +226,8 @@ export default function MarketplacePage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'templates'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-blue-600 text-white dark:bg-blue-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Templates ({filterCounts.templates})
@@ -237,8 +237,8 @@ export default function MarketplacePage() {
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-colors',
               activeFilter === 'student-plans'
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-purple-600 text-white dark:bg-purple-700'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
             )}
           >
             Dos Alunos ({filterCounts.studentPlans})
@@ -312,20 +312,20 @@ export default function MarketplacePage() {
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-2 text-center">
                     {plan.price && (
-                      <div className="bg-gray-50 rounded p-2">
+                      <div className="bg-muted rounded p-2">
                         <div className="text-lg font-bold text-green-600">
                           R$ {plan.price.toFixed(2)}
                         </div>
                         <div className="text-xs text-muted-foreground">Preço</div>
                       </div>
                     )}
-                    <div className="bg-gray-50 rounded p-2">
+                    <div className="bg-muted rounded p-2">
                       <div className="text-lg font-bold">
                         {plan.salesCount}
                       </div>
                       <div className="text-xs text-muted-foreground">Vendas</div>
                     </div>
-                    <div className="bg-gray-50 rounded p-2">
+                    <div className="bg-muted rounded p-2">
                       <div className="text-lg font-bold">
                         {plan.viewsCount}
                       </div>

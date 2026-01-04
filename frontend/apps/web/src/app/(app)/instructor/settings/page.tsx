@@ -244,7 +244,7 @@ export default function SettingsPage() {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full max-w-2xl grid-cols-4">
+        <TabsList className="grid w-full max-w-2xl grid-cols-2 md:grid-cols-4">
           <TabsTrigger value="profile">
             <User className="h-4 w-4 mr-2" />
             Perfil

@@ -184,7 +184,7 @@ export default function FinancialPage() {
         );
       case 'refunded':
         return (
-          <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-200">
+          <Badge variant="outline" className="bg-muted text-muted-foreground">
             Reembolsado
           </Badge>
         );
@@ -305,7 +305,7 @@ export default function FinancialPage() {
           {sales && sales.length > 0 ? (
             <div className="border rounded-lg overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-muted border-b">
                   <tr>
                     <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
                       Plano
@@ -326,7 +326,7 @@ export default function FinancialPage() {
                 </thead>
                 <tbody className="divide-y">
                   {sales.map((sale) => (
-                    <tr key={sale.id} className="hover:bg-gray-50">
+                    <tr key={sale.id} className="hover:bg-accent">
                       <td className="py-3 px-4 font-medium">{sale.planName}</td>
                       <td className="py-3 px-4">{sale.studentName}</td>
                       <td className="py-3 px-4 text-green-600 font-semibold">
@@ -363,7 +363,7 @@ export default function FinancialPage() {
           {withdrawals && withdrawals.length > 0 ? (
             <div className="border rounded-lg overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-muted border-b">
                   <tr>
                     <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
                       Valor
@@ -381,7 +381,7 @@ export default function FinancialPage() {
                 </thead>
                 <tbody className="divide-y">
                   {withdrawals.map((withdrawal) => (
-                    <tr key={withdrawal.id} className="hover:bg-gray-50">
+                    <tr key={withdrawal.id} className="hover:bg-accent">
                       <td className="py-3 px-4 font-semibold">
                         R$ {withdrawal.amount.toFixed(2)}
                       </td>
@@ -428,7 +428,7 @@ export default function FinancialPage() {
           {transactions && transactions.length > 0 ? (
             <div className="border rounded-lg overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-muted border-b">
                   <tr>
                     <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
                       Tipo
@@ -449,7 +449,7 @@ export default function FinancialPage() {
                 </thead>
                 <tbody className="divide-y">
                   {transactions.map((transaction) => (
-                    <tr key={transaction.id} className="hover:bg-gray-50">
+                    <tr key={transaction.id} className="hover:bg-accent">
                       <td className="py-3 px-4">
                         <Badge variant="outline">
                           {transaction.type === 'sale' && 'Venda'}

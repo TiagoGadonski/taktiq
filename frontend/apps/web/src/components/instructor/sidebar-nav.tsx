@@ -77,7 +77,7 @@ export function InstructorSidebarNav({ clientCount, pendingInvites }: SidebarNav
   return (
     <>
       {/* Mobile Header with Hamburger */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b px-4 py-3 flex items-center justify-between">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b px-4 py-3 flex items-center justify-between">
         <h1 className="text-lg font-semibold">Painel do Instrutor</h1>
         <Button
           variant="ghost"
@@ -102,7 +102,7 @@ export function InstructorSidebarNav({ clientCount, pendingInvites }: SidebarNav
 
       {/* Desktop Sidebar */}
       <aside className={cn(
-        "fixed top-0 left-0 bottom-0 w-64 bg-white border-r z-50 transition-transform duration-200",
+        "fixed top-0 left-0 bottom-0 w-64 bg-card border-r z-50 transition-transform duration-200",
         "hidden lg:block"
       )}>
         <div className="p-6">
@@ -123,12 +123,12 @@ export function InstructorSidebarNav({ clientCount, pendingInvites }: SidebarNav
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group',
                   active
                     ? 'bg-primary text-primary-foreground'
-                    : 'hover:bg-gray-100 text-gray-700'
+                    : 'hover:bg-accent text-foreground'
                 )}
               >
                 <Icon className={cn(
                   'h-5 w-5 flex-shrink-0',
-                  active ? 'text-primary-foreground' : 'text-gray-500 group-hover:text-gray-700'
+                  active ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'
                 )} />
                 <span className="flex-1 font-medium">{item.label}</span>
                 {item.badge !== undefined && item.badge > 0 && (
@@ -150,7 +150,7 @@ export function InstructorSidebarNav({ clientCount, pendingInvites }: SidebarNav
 
       {/* Mobile Sidebar */}
       <aside className={cn(
-        "lg:hidden fixed top-0 left-0 bottom-0 w-64 bg-white border-r z-50 transition-transform duration-200",
+        "lg:hidden fixed top-0 left-0 bottom-0 w-64 bg-card border-r z-50 transition-transform duration-200",
         isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6">
@@ -172,12 +172,12 @@ export function InstructorSidebarNav({ clientCount, pendingInvites }: SidebarNav
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group',
                   active
                     ? 'bg-primary text-primary-foreground'
-                    : 'hover:bg-gray-100 text-gray-700'
+                    : 'hover:bg-accent text-foreground'
                 )}
               >
                 <Icon className={cn(
                   'h-5 w-5 flex-shrink-0',
-                  active ? 'text-primary-foreground' : 'text-gray-500 group-hover:text-gray-700'
+                  active ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'
                 )} />
                 <span className="flex-1 font-medium">{item.label}</span>
                 {item.badge !== undefined && item.badge > 0 && (
