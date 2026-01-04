@@ -37,7 +37,6 @@ export default function NewPostPage() {
       router.push('/instructor/posts');
     },
     onError: (error: any) => {
-      console.error('Failed to create post:', error);
       toast({
         title: 'Erro ao criar post',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',

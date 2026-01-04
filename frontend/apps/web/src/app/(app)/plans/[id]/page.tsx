@@ -22,7 +22,6 @@ export default function PlanDetailPage() {
     queryKey: ['workout-plan', planId],
     queryFn: async () => {
       const data = await api.workoutPlans.getById(planId);
-      console.log('Plan data loaded:', data);
       return data;
     },
     enabled: !!planId,

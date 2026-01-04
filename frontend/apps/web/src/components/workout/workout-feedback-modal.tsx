@@ -57,8 +57,7 @@ export function WorkoutFeedbackModal({ open, onClose, onSubmit, sessionId }: Wor
       });
       onClose();
     } catch (error) {
-      console.error('Failed to submit feedback:', error);
-    } finally {
+    } finally{
       setIsSubmitting(false);
     }
   };

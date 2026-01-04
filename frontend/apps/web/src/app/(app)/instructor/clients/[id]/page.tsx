@@ -89,7 +89,6 @@ export default function ClientDetailPage() {
         router.back();
       }
     } catch (error) {
-      console.error('Failed to fetch client details:', error);
       toast({
         title: 'Erro',
         description: 'Não foi possível carregar os dados do cliente.',
@@ -119,7 +118,6 @@ export default function ClientDetailPage() {
         setClient({ ...client, trainerNotes });
       }
     } catch (error) {
-      console.error('Failed to save trainer notes:', error);
       toast({
         title: 'Erro',
         description: 'Não foi possível salvar as anotações.',
@@ -141,7 +139,6 @@ export default function ClientDetailPage() {
         setLatestAssessment(sorted[0]);
       }
     } catch (error) {
-      console.error('Failed to fetch latest assessment:', error);
       // Don't show error toast - assessment is optional
     }
   };

@@ -110,7 +110,6 @@ export default function AIPosturalAssessment() {
         description: 'Revise os resultados abaixo antes de salvar',
       });
     } catch (error: any) {
-      console.error('Error analyzing posture:', error);
       toast({
         title: 'Erro na análise',
         description: error.response?.data?.message || 'Falha ao analisar fotos. Tente novamente.',
@@ -150,7 +149,6 @@ export default function AIPosturalAssessment() {
       // Redirect to assessments list
       router.push(`/instructor/clients/${clientId}/assessments`);
     } catch (error) {
-      console.error('Error saving assessment:', error);
       toast({
         title: 'Erro ao salvar',
         description: 'Não foi possível salvar a avaliação. Tente novamente.',

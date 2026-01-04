@@ -86,15 +86,8 @@ export default function NewPlanPage() {
   // Personal Trainer specific states
   const isPersonalTrainer = user?.role === 'PersonalTrainer';
 
-  // Debug log to help identify role issues
   useEffect(() => {
     if (user) {
-      console.log('User loaded in NewPlanPage:', {
-        id: user.id,
-        name: user.name,
-        role: user.role,
-        isPersonalTrainer
-      });
     }
   }, [user, isPersonalTrainer]);
 

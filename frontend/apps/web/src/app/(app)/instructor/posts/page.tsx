@@ -49,7 +49,6 @@ export default function PostsPage() {
         const data = await apiClient.get<BlogPost[]>('/personal/posts');
         return data;
       } catch (error) {
-        console.error('Failed to fetch posts:', error);
         return [];
       }
     },
@@ -69,7 +68,6 @@ export default function PostsPage() {
       });
     },
     onError: (error: any) => {
-      console.error('Failed to delete post:', error);
       toast({
         title: 'Erro ao excluir',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',

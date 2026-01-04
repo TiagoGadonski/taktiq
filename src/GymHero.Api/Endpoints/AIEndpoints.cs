@@ -2037,11 +2037,6 @@ INSTRUÇÕES CRÍTICAS:
 
         content = content.Trim();
 
-        // 🔍 DEBUG: Log da resposta RAW da AI
-        Console.WriteLine("🔍🔍🔍 DEBUG - Resposta RAW da AI:");
-        Console.WriteLine(content);
-        Console.WriteLine("🔍🔍🔍 DEBUG - FIM da resposta RAW");
-
         try
         {
             var workout = JsonSerializer.Deserialize<AIWorkoutResponse>(content, new JsonSerializerOptions
@@ -2077,7 +2072,6 @@ INSTRUÇÕES CRÍTICAS:
                         );
 
                         fixedExercises.Add(exercise with { ExerciseType = detectedType });
-                        Console.WriteLine($"✅ Exercício '{exercise.Name}' classificado automaticamente como '{detectedType}'");
                     }
                     else
                     {
@@ -2098,7 +2092,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeWarmup && !hasWarmup)
             {
                 finalExercises.AddRange(GetDefaultWarmupExercises());
-                Console.WriteLine("⚠️ OpenAI ignorou warmup - adicionando exercícios padrão");
             }
 
             // Adicionar exercícios principais
@@ -2108,7 +2101,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeMobility && !hasMobility)
             {
                 finalExercises.AddRange(GetDefaultMobilityExercises());
-                Console.WriteLine("⚠️ OpenAI ignorou mobility - adicionando exercícios padrão");
             }
             else
             {
@@ -2119,7 +2111,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeCooldown && !hasCooldown)
             {
                 finalExercises.AddRange(GetDefaultCooldownExercises());
-                Console.WriteLine("⚠️ OpenAI ignorou cooldown - adicionando exercícios padrão");
             }
             else
             {
@@ -3309,11 +3300,6 @@ INSTRUÇÕES CRÍTICAS:
 
         content = content.Trim();
 
-        // 🔍 DEBUG: Log da resposta RAW da AI
-        Console.WriteLine("🔍🔍🔍 DEBUG - Resposta RAW da AI:");
-        Console.WriteLine(content);
-        Console.WriteLine("🔍🔍🔍 DEBUG - FIM da resposta RAW");
-
         try
         {
             var workout = JsonSerializer.Deserialize<AIWorkoutResponse>(content, new JsonSerializerOptions
@@ -3347,7 +3333,6 @@ INSTRUÇÕES CRÍTICAS:
                     );
 
                     fixedExercises.Add(exercise with { ExerciseType = detectedType });
-                    Console.WriteLine($"✅ Exercício '{exercise.Name}' classificado automaticamente como '{detectedType}'");
                 }
                 else
                 {
@@ -3367,7 +3352,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeWarmup && !hasWarmup)
             {
                 finalExercises.AddRange(GetDefaultWarmupExercises());
-                Console.WriteLine("⚠️ Gemini ignorou warmup - adicionando exercícios padrão");
             }
 
             // Adicionar exercícios principais
@@ -3377,7 +3361,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeMobility && !hasMobility)
             {
                 finalExercises.AddRange(GetDefaultMobilityExercises());
-                Console.WriteLine("⚠️ Gemini ignorou mobility - adicionando exercícios padrão");
             }
             else
             {
@@ -3388,7 +3371,6 @@ INSTRUÇÕES CRÍTICAS:
             if (request.IncludeCooldown && !hasCooldown)
             {
                 finalExercises.AddRange(GetDefaultCooldownExercises());
-                Console.WriteLine("⚠️ Gemini ignorou cooldown - adicionando exercícios padrão");
             }
             else
             {

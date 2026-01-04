@@ -334,18 +334,6 @@ app.UseAuthorization();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
    .AllowAnonymous();
 
-// Debug endpoint to verify deployment version (TEMPORARY - remove after debugging)
-app.MapGet("/api/debug/version", () => Results.Ok(new
-{
-    deploymentVersion = "2026-01-03-v2-intelligent-classification",
-    timestamp = DateTime.UtcNow,
-    hasDetectExerciseType = true,
-    hasIntelligentClassification = true,
-    message = "Intelligent exercise type classification deployed",
-    deployDate = "2026-01-03T01:00:00Z"
-}))
-   .AllowAnonymous();
-
 // EMERGENCY ENDPOINT - Restart App Service
 app.MapPost("/api/admin/force-restart", () =>
 {

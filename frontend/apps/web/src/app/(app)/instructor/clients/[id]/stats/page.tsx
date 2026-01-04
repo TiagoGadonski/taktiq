@@ -129,7 +129,6 @@ export default function StudentStatsPage() {
       const data = await apiClient.get<StudentStats>(`/personal/clients/${clientId}/stats`, { params });
       setStats(data);
     } catch (error) {
-      console.error('Failed to fetch stats:', error);
     } finally {
       setIsLoading(false);
     }
@@ -184,7 +183,6 @@ export default function StudentStatsPage() {
         document.body.removeChild(container);
       }, 1000);
     } catch (error) {
-      console.error('Error exporting PDF:', error);
     }
   };
 

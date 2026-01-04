@@ -96,7 +96,6 @@ export default function SettingsPage() {
       });
     },
     onError: (error: any) => {
-      console.error('Failed to save profile:', error);
       toast({
         title: 'Erro ao salvar',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',
@@ -117,7 +116,6 @@ export default function SettingsPage() {
       });
     },
     onError: (error: any) => {
-      console.error('Failed to save notifications:', error);
       toast({
         title: 'Erro ao salvar',
         description: 'Tente novamente mais tarde.',
@@ -138,7 +136,6 @@ export default function SettingsPage() {
       });
     },
     onError: (error: any) => {
-      console.error('Failed to save privacy:', error);
       toast({
         title: 'Erro ao salvar',
         description: 'Tente novamente mais tarde.',
@@ -212,7 +209,6 @@ export default function SettingsPage() {
       refreshUser?.();
       queryClient.invalidateQueries({ queryKey: ['user'] });
     } catch (error: any) {
-      console.error('Failed to upload photo:', error);
       toast({
         title: 'Erro ao fazer upload',
         description: 'Não foi possível atualizar a foto de perfil.',

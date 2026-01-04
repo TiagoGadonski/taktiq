@@ -78,7 +78,6 @@ export default function AssessmentDetailPage() {
       const data = await apiClient.get<AssessmentDetail>(`/assessments/${assessmentId}`);
       setAssessment(data);
     } catch (error) {
-      console.error('Failed to fetch assessment:', error);
       toast({
         title: 'Erro',
         description: 'Não foi possível carregar a avaliação.',

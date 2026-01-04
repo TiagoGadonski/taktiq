@@ -73,7 +73,6 @@ export default function FinancialPage() {
           totalWithdrawals: 12,
         } as FinancialStats;
       } catch (error) {
-        console.error('Failed to fetch financial stats:', error);
         return {
           monthlyRevenue: 0,
           availableBalance: 0,
@@ -94,7 +93,6 @@ export default function FinancialPage() {
         // TODO: Replace with real API when available
         return [] as Sale[];
       } catch (error) {
-        console.error('Failed to fetch sales:', error);
         return [];
       }
     },
@@ -109,7 +107,6 @@ export default function FinancialPage() {
         // TODO: Replace with real API when available
         return [] as Withdrawal[];
       } catch (error) {
-        console.error('Failed to fetch withdrawals:', error);
         return [];
       }
     },
@@ -124,7 +121,6 @@ export default function FinancialPage() {
         // TODO: Replace with real API when available
         return [] as Transaction[];
       } catch (error) {
-        console.error('Failed to fetch transactions:', error);
         return [];
       }
     },
@@ -143,7 +139,6 @@ export default function FinancialPage() {
           chargesEnabled: false,
         };
       } catch (error) {
-        console.error('Failed to fetch Stripe status:', error);
         return {
           connected: false,
           detailsSubmitted: false,

@@ -26,7 +26,6 @@ export default function InstructorLayout({
           pendingInvites: 0 // Placeholder
         } as InstructorStats;
       } catch (error) {
-        console.error('Failed to fetch instructor stats:', error);
         return {
           clientCount: 0,
           pendingInvites: 0

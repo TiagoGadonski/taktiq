@@ -73,7 +73,6 @@ export default function ClientsPage() {
           activePlans: client.activePlans,
         })) as Client[];
       } catch (error) {
-        console.error('Failed to fetch clients:', error);
         return [];
       }
     },
@@ -154,7 +153,6 @@ export default function ClientsPage() {
       setIsInviteDialogOpen(false);
       queryClient.invalidateQueries({ queryKey: ['clients'] });
     } catch (error: any) {
-      console.error('Failed to send invite:', error);
       toast({
         title: 'Erro ao enviar convite',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',
@@ -167,7 +165,6 @@ export default function ClientsPage() {
 
   const handleDeleteClient = (clientId: string) => {
     // TODO: Implement delete functionality
-    console.log('Delete client:', clientId);
   };
 
   return (

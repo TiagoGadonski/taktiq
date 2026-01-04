@@ -510,10 +510,6 @@ public static class PersonalEndpoints
             }
             catch (Exception ex)
             {
-                // Log the error (you might want to inject ILogger here)
-                Console.WriteLine($"Error in GetPTAnalytics: {ex.Message}");
-                Console.WriteLine($"Stack trace: {ex.StackTrace}");
-
                 // Return default values instead of 500 error
                 return Results.Ok(new
                 {

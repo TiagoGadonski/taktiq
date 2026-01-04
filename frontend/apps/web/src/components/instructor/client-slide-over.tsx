@@ -57,7 +57,6 @@ export function ClientSlideOver({ client, open, onOpenChange }: ClientSlideOverP
       });
     },
     onError: (error: any) => {
-      console.error('Failed to save notes:', error);
       toast({
         title: 'Erro ao salvar',
         description: 'Não foi possível salvar as anotações.',

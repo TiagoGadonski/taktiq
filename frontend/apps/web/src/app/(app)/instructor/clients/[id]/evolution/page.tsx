@@ -75,7 +75,6 @@ export default function StudentEvolutionPage() {
         setStudentName(firstAssessment.studentName || '');
       }
     } catch (error) {
-      console.error('Failed to fetch assessments:', error);
       toast({
         title: 'Erro',
         description: 'Não foi possível carregar as avaliações.',

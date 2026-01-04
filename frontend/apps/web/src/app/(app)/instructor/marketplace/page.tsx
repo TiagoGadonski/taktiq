@@ -64,7 +64,6 @@ export default function MarketplacePage() {
           createdAt: plan.createdAt,
         })) as WorkoutPlan[];
       } catch (error) {
-        console.error('Failed to fetch plans:', error);
         return [];
       }
     },

@@ -64,7 +64,6 @@ export default function InstructorDashboard() {
         const data = await apiClient.get<DashboardStats>('/personal/dashboard/stats');
         return data;
       } catch (error) {
-        console.error('Failed to fetch dashboard stats:', error);
         return {
           totalClients: 0,
           activePlans: 0,
@@ -84,7 +83,6 @@ export default function InstructorDashboard() {
         const data = await apiClient.get<ActivityItem[]>('/personal/dashboard/recent-activity');
         return data;
       } catch (error) {
-        console.error('Failed to fetch recent activity:', error);
         return [] as ActivityItem[];
       }
     },
@@ -115,7 +113,6 @@ export default function InstructorDashboard() {
       setInviteEmail('');
       setIsInviteDialogOpen(false);
     } catch (error: any) {
-      console.error('Failed to send invite:', error);
       toast({
         title: 'Erro ao enviar convite',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',

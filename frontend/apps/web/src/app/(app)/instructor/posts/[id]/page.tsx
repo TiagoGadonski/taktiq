@@ -48,7 +48,6 @@ export default function EditPostPage() {
         }
         return post;
       } catch (error) {
-        console.error('Failed to fetch post:', error);
         throw error;
       }
     },
@@ -80,7 +79,6 @@ export default function EditPostPage() {
       router.push('/instructor/posts');
     },
     onError: (error: any) => {
-      console.error('Failed to update post:', error);
       toast({
         title: 'Erro ao atualizar post',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',
@@ -103,7 +101,6 @@ export default function EditPostPage() {
       router.push('/instructor/posts');
     },
     onError: (error: any) => {
-      console.error('Failed to delete post:', error);
       toast({
         title: 'Erro ao excluir',
         description: error.response?.data?.message || 'Tente novamente mais tarde.',

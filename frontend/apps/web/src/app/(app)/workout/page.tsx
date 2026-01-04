@@ -62,10 +62,7 @@ export default function WorkoutPage() {
 
     const currentSets = currentSession.sets || [];
 
-    console.log('[Auto-complete check] Total exercises:', exercisesToCheck.length, 'Current sets:', currentSets.length);
-
     if (checkWorkoutCompletion(exercisesToCheck, currentSets, replacedExercises)) {
-      console.log('[Auto-complete] ALL EXERCISES COMPLETED! Opening modal...');
       setShowCompletionModal(true);
     }
   }, [currentSession?.sets?.length, selectedWorkoutId, addedExercises, replacedExercises, showCompletionModal]);
@@ -255,22 +252,17 @@ export default function WorkoutPage() {
   const checkWorkoutCompletion = (exercises: WorkoutExercise[], sets: WorkoutSet[], replaced: Record<string, any> = {}) => {
     // If no exercises, don't auto-complete
     if (!exercises || exercises.length === 0) {
-      console.log('checkWorkoutCompletion: No exercises found');
       return false;
     }
-
-    console.log('checkWorkoutCompletion: Checking', exercises.length, 'exercises');
 
     // Check if all exercises have completed their target sets
     const allExercisesCompleted = exercises.every((exercise) => {
       const displayExercise = replaced[exercise.id] || exercise;
       const exerciseSets = sets.filter((s) => s.exerciseId === displayExercise.exerciseId);
       const isCompleted = exerciseSets.length >= exercise.targetSets;
-      console.log(`Exercise ${displayExercise.exerciseName || displayExercise.exercise?.name}: ${exerciseSets.length}/${exercise.targetSets} sets - ${isCompleted ? 'COMPLETED' : 'NOT COMPLETED'}`);
       return isCompleted;
     });
 
-    console.log('All exercises completed:', allExercisesCompleted);
     return allExercisesCompleted;
   };
 
