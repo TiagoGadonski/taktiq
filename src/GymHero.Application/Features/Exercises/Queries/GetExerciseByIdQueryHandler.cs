@@ -22,13 +22,31 @@ public class GetExerciseByIdQueryHandler : IRequestHandler<GetExerciseByIdQuery,
         }
 
         return new ExerciseDto
-{
-    Id = exercise.Id,
-    Name = exercise.Name,
-    MuscleGroup = exercise.MuscleGroup,
-    Category = exercise.Category,
-    Equipment = exercise.Equipment,
-    Notes = exercise.Notes
-};
+        {
+            Id = exercise.Id,
+            Name = exercise.Name,
+            Description = exercise.Description,
+            MuscleGroup = exercise.MuscleGroup,
+            Category = exercise.Category,
+            Equipment = exercise.Equipment,
+            SecondaryMuscles = exercise.SecondaryMuscles ?? new List<GymHero.Shared.Enums.MuscleGroup>(),
+            Difficulty = exercise.Difficulty,
+            Instructions = exercise.Instructions ?? new List<string>(),
+            Tips = exercise.Tips ?? new List<string>(),
+            CommonMistakes = exercise.CommonMistakes ?? new List<string>(),
+            Notes = exercise.Notes,
+            VideoUrl = exercise.VideoUrl,
+            ImageUrl = exercise.ImageUrl,
+            ThumbnailUrl = exercise.ThumbnailUrl,
+            WorkoutLocation = exercise.WorkoutLocation,
+            SpaceRequired = exercise.SpaceRequired ?? string.Empty,
+            Progressions = exercise.Progressions ?? new List<string>(),
+            Regressions = exercise.Regressions ?? new List<string>(),
+            NoEquipmentAlternative = exercise.NoEquipmentAlternative ?? string.Empty,
+            IsPublic = exercise.IsPublic,
+            CreatedByUserId = exercise.CreatedByUserId,
+            CreatedAt = exercise.CreatedAt,
+            UpdatedAt = exercise.UpdatedAt
+        };
     }
 }
