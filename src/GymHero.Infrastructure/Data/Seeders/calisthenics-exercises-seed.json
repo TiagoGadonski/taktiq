@@ -1,0 +1,1122 @@
+[
+  {
+    "name": "Flexão Tradicional",
+    "description": "Exercício fundamental de empurrar que trabalha peito, ombros e tríceps. Posição de prancha com mãos na largura dos ombros.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos no chão na largura dos ombros",
+      "Mantenha o corpo em linha reta dos pés à cabeça",
+      "Desça o corpo flexionando os cotovelos até o peito quase tocar o chão",
+      "Empurre o corpo de volta à posição inicial",
+      "Mantenha o core contraído durante todo o movimento"
+    ],
+    "progressions": ["Flexão com palmas", "Flexão arqueira", "Flexão em L"],
+    "regressions": ["Flexão de joelhos", "Flexão inclinada na parede", "Flexão inclinada no banco"],
+    "tips": [
+      "Mantenha os cotovelos a 45 graus do corpo",
+      "Respire descendo e expire subindo",
+      "Não deixe o quadril cair"
+    ],
+    "commonMistakes": [
+      "Quadril caído ou muito elevado",
+      "Cotovelos muito abertos",
+      "Amplitude de movimento incompleta"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Diamante",
+    "description": "Variação da flexão com as mãos próximas formando um diamante, enfatizando os tríceps e a parte interna do peito.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos próximas formando um diamante com os dedos indicadores e polegares",
+      "Mantenha o corpo reto em posição de prancha",
+      "Desça controladamente até o peito quase tocar as mãos",
+      "Empurre de volta mantendo os cotovelos próximos ao corpo",
+      "Mantenha o core ativado"
+    ],
+    "progressions": ["Flexão diamante com pés elevados", "Flexão diamante com palmas", "Flexão diamante em L"],
+    "regressions": ["Flexão diamante de joelhos", "Flexão com mãos próximas", "Flexão tradicional"],
+    "tips": [
+      "Mantenha os cotovelos apontando para trás",
+      "Foque na contração dos tríceps",
+      "Não force se sentir desconforto nos pulsos"
+    ],
+    "commonMistakes": [
+      "Cotovelos muito abertos",
+      "Não descer completamente",
+      "Perder a forma da prancha"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Declinada",
+    "description": "Flexão com os pés elevados em uma superfície, aumentando a dificuldade e ênfase nos ombros e parte superior do peito.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Coloque os pés em uma superfície elevada (cadeira, sofá ou cama)",
+      "Posicione as mãos no chão na largura dos ombros",
+      "Mantenha o corpo em linha reta",
+      "Desça até o peito quase tocar o chão",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Flexão declinada com uma perna", "Flexão em parada de mão", "Flexão declinada com palmas"],
+    "regressions": ["Flexão tradicional", "Flexão com pés ligeiramente elevados", "Flexão inclinada"],
+    "tips": [
+      "Quanto mais alta a elevação, maior a dificuldade",
+      "Mantenha o pescoço neutro",
+      "Controle a descida"
+    ],
+    "commonMistakes": [
+      "Elevar muito o quadril",
+      "Descer apenas parcialmente",
+      "Perder a estabilidade do core"
+    ],
+    "noEquipmentAlternative": "Use qualquer superfície elevada disponível (escadas, cadeiras)",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Palmas",
+    "description": "Flexão explosiva onde você bate palmas no ar, desenvolvendo potência e força explosiva.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Inicie em posição de flexão tradicional",
+      "Desça rapidamente com controle",
+      "Empurre explosivamente o corpo para cima",
+      "Bata palmas rapidamente enquanto está no ar",
+      "Aterrisse suavemente com os cotovelos ligeiramente flexionados"
+    ],
+    "progressions": ["Flexão com palmas duplas", "Flexão super-homem", "Flexão 360 graus"],
+    "regressions": ["Flexão explosiva sem palmas", "Flexão tradicional rápida", "Flexão de joelhos explosiva"],
+    "tips": [
+      "Comece com flexões explosivas antes de adicionar palmas",
+      "Aterrisse com controle para proteger os pulsos",
+      "Mantenha o core bem contraído"
+    ],
+    "commonMistakes": [
+      "Não empurrar com força suficiente",
+      "Aterrissar com cotovelos travados",
+      "Não manter o core estável"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Arqueira",
+    "description": "Flexão unilateral onde um braço fica estendido lateralmente enquanto o outro faz o movimento principal.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione as mãos mais afastadas que a largura dos ombros",
+      "Desça o corpo inclinando para um lado",
+      "O braço do lado que você desce flexiona, o outro permanece estendido",
+      "Empurre de volta e repita alternando os lados",
+      "Mantenha o tronco estável"
+    ],
+    "progressions": ["Flexão de um braço", "Flexão arqueira com pés elevados", "Flexão arqueira explosiva"],
+    "regressions": ["Flexão tradicional", "Flexão com mãos afastadas", "Flexão arqueira de joelhos"],
+    "tips": [
+      "O braço estendido deve estar quase reto",
+      "Mantenha o peso distribuído entre os dois braços",
+      "Progrida gradualmente para a flexão de um braço"
+    ],
+    "commonMistakes": [
+      "Não estender completamente o braço lateral",
+      "Rotação excessiva do tronco",
+      "Não manter os quadris alinhados"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Hindu",
+    "description": "Movimento fluido que combina flexão com alongamento, trabalhando todo o corpo em um padrão de onda.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Back", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie em posição de cachorro olhando para baixo",
+      "Mergulhe o corpo para frente e para baixo em movimento de onda",
+      "Passe próximo ao chão subindo como uma cobra",
+      "Finalize com o peito elevado e braços estendidos",
+      "Retorne à posição inicial empurrando o quadril para trás"
+    ],
+    "progressions": ["Flexão hindu explosiva", "Flexão hindu com uma perna", "Combinação hindu com handstand"],
+    "regressions": ["Flexão hindu parcial", "Cachorro olhando para baixo estático", "Flexão tradicional"],
+    "tips": [
+      "Movimento deve ser fluido e contínuo",
+      "Respire coordenando com o movimento",
+      "Alongue bem na fase final"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido e sem controle",
+      "Não completar o alongamento final",
+      "Quadril muito baixo durante o movimento"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Inclinada",
+    "description": "Flexão com as mãos elevadas em uma superfície, reduzindo a dificuldade e sendo ótima para iniciantes.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos em uma superfície elevada (mesa, cadeira ou parede)",
+      "Afaste as mãos na largura dos ombros",
+      "Mantenha o corpo em linha reta dos pés à cabeça",
+      "Desça flexionando os cotovelos",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Flexão tradicional", "Flexão em superfície mais baixa", "Flexão de joelhos"],
+    "regressions": ["Flexão na parede", "Flexão em superfície mais alta", "Prancha estática"],
+    "tips": [
+      "Quanto mais baixa a superfície, maior a dificuldade",
+      "Mantenha o core contraído",
+      "Progrida gradualmente para superfícies mais baixas"
+    ],
+    "commonMistakes": [
+      "Não manter o corpo reto",
+      "Cotovelos muito abertos",
+      "Movimento muito rápido sem controle"
+    ],
+    "noEquipmentAlternative": "Use qualquer superfície elevada disponível (mesa, cadeira, escadas)",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Espartana",
+    "description": "Flexão com as mãos desalinhadas, uma mais à frente e outra mais atrás, trabalhando estabilidade e força assimétrica.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione uma mão mais à frente e outra mais atrás",
+      "Mantenha o corpo em linha reta",
+      "Desça controladamente",
+      "Empurre de volta à posição inicial",
+      "Alterne as posições das mãos a cada repetição"
+    ],
+    "progressions": ["Flexão arqueira", "Flexão de um braço", "Flexão espartana com palmas"],
+    "regressions": ["Flexão tradicional", "Flexão com mãos ligeiramente desalinhadas", "Flexão de joelhos"],
+    "tips": [
+      "Mantenha o core bem ativado para estabilidade",
+      "Alterne as mãos para trabalhar ambos os lados",
+      "Comece com pequeno desalinhamento"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do tronco",
+      "Não alternar as mãos",
+      "Desalinhamento muito grande logo no início"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Pike",
+    "description": "Flexão em formato de V invertido, enfatizando os ombros e preparando para flexões em parada de mão.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core", "Chest"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie em posição de prancha e eleve o quadril formando um V invertido",
+      "Mantenha as pernas o mais retas possível",
+      "Desça a cabeça em direção ao chão flexionando os cotovelos",
+      "Empurre de volta à posição inicial",
+      "Mantenha o core contraído"
+    ],
+    "progressions": ["Flexão pike com pés elevados", "Flexão em parada de mão com apoio", "Handstand push-up"],
+    "regressions": ["Prancha com elevação de quadril", "Flexão pike parcial", "Cachorro olhando para baixo"],
+    "tips": [
+      "Quanto mais alto o quadril, maior o foco nos ombros",
+      "Olhe entre as mãos durante o movimento",
+      "Mantenha o peso distribuído nos braços"
+    ],
+    "commonMistakes": [
+      "Quadril muito baixo",
+      "Flexionar demais as pernas",
+      "Não descer completamente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão de Um Braço",
+    "description": "Flexão avançada executada com apenas um braço, exigindo força e estabilidade extremas.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione um braço atrás das costas",
+      "Afaste as pernas para maior estabilidade",
+      "Desça controladamente com um braço",
+      "Empurre de volta à posição inicial",
+      "Mantenha o corpo o mais reto possível"
+    ],
+    "progressions": ["Flexão de um braço com pernas juntas", "Flexão de um braço explosiva", "Flexão de um braço em L"],
+    "regressions": ["Flexão arqueira", "Flexão de um braço assistida", "Flexão de um braço parcial"],
+    "tips": [
+      "Afaste as pernas para começar",
+      "Mantenha o core muito contraído",
+      "Leva tempo para dominar, seja paciente"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do corpo",
+      "Pernas muito juntas no início",
+      "Não descer completamente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Elevação de Perna",
+    "description": "Flexão onde você eleva uma perna durante o movimento, aumentando a ativação do core e glúteos.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Core", "Glutes"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Inicie em posição de flexão tradicional",
+      "Eleve uma perna mantendo-a reta",
+      "Desça fazendo a flexão com uma perna elevada",
+      "Empurre de volta mantendo a perna no ar",
+      "Alterne as pernas a cada série"
+    ],
+    "progressions": ["Flexão com elevação alternada de pernas", "Flexão de um braço e uma perna", "Flexão com perna elevada e palmas"],
+    "regressions": ["Flexão tradicional", "Prancha com elevação de perna", "Flexão com pequena elevação de perna"],
+    "tips": [
+      "Mantenha o quadril nivelado",
+      "Contraia o glúteo da perna elevada",
+      "Não deixe o quadril girar"
+    ],
+    "commonMistakes": [
+      "Rotação do quadril",
+      "Perna elevada flexionada",
+      "Perder a estabilidade do core"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão em T",
+    "description": "Flexão seguida de rotação do tronco com elevação de um braço, trabalhando estabilidade e core.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Core", "Shoulders", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Execute uma flexão tradicional",
+      "Ao subir, gire o tronco e eleve um braço para o teto",
+      "Forme uma linha reta com os braços (formato T)",
+      "Retorne à posição de flexão",
+      "Alterne o lado a cada repetição"
+    ],
+    "progressions": ["Flexão em T com pés elevados", "Flexão em T com halteres", "Flexão em T explosiva"],
+    "regressions": ["Prancha lateral", "Flexão tradicional sem rotação", "Flexão em T de joelhos"],
+    "tips": [
+      "Mantenha o equilíbrio durante a rotação",
+      "Olhe para a mão elevada",
+      "Core bem contraído durante todo movimento"
+    ],
+    "commonMistakes": [
+      "Rotação incompleta",
+      "Perder o equilíbrio",
+      "Quadril caindo durante a rotação"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Pseudo Planche",
+    "description": "Flexão com as mãos posicionadas mais atrás, inclinando o corpo para frente, preparação para planche.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos mais atrás, próximas à altura da cintura",
+      "Incline o corpo para frente",
+      "Mantenha os braços próximos ao corpo",
+      "Desça controladamente",
+      "Empurre de volta mantendo a inclinação frontal"
+    ],
+    "progressions": ["Planche lean", "Flexão em planche", "Flexão pseudo planche com uma perna"],
+    "regressions": ["Flexão tradicional", "Prancha em protração", "Flexão com mãos levemente atrás"],
+    "tips": [
+      "Mantenha os ombros protraídos",
+      "Incline-se o máximo que conseguir manter a forma",
+      "Exercício excelente para força de ombros"
+    ],
+    "commonMistakes": [
+      "Não inclinar suficientemente para frente",
+      "Cotovelos muito abertos",
+      "Perder a posição durante o movimento"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Toque no Ombro",
+    "description": "Flexão onde você toca o ombro oposto após cada repetição, trabalhando estabilidade e equilíbrio.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Core", "Shoulders", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute uma flexão tradicional",
+      "Ao chegar no topo, toque o ombro oposto com uma mão",
+      "Volte a mão ao chão",
+      "Toque o outro ombro com a outra mão",
+      "Execute outra flexão e repita"
+    ],
+    "progressions": ["Flexão com toque no ombro e pés elevados", "Flexão com toque alternado rápido", "Flexão com toque e elevação de perna"],
+    "regressions": ["Prancha com toque no ombro", "Flexão tradicional", "Flexão de joelhos com toque"],
+    "tips": [
+      "Minimize o movimento do quadril",
+      "Mantenha o core bem ativado",
+      "Distribua o peso antes de tirar a mão"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do quadril",
+      "Movimento muito rápido e sem controle",
+      "Perder a posição da prancha"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Typewriter",
+    "description": "Flexão onde você se move lateralmente de um lado para o outro na posição baixa, como uma máquina de escrever.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione as mãos mais afastadas que a largura dos ombros",
+      "Desça em posição de flexão",
+      "Na posição baixa, mova o corpo lateralmente para um lado",
+      "Deslize para o outro lado mantendo-se baixo",
+      "Empurre de volta ao topo e repita"
+    ],
+    "progressions": ["Flexão typewriter com pés elevados", "Flexão typewriter explosiva", "Flexão de um braço"],
+    "regressions": ["Flexão arqueira", "Flexão com mãos afastadas", "Flexão typewriter parcial"],
+    "tips": [
+      "Mantenha-se o mais baixo possível durante o movimento lateral",
+      "Core bem contraído para estabilidade",
+      "Movimento deve ser controlado e fluido"
+    ],
+    "commonMistakes": [
+      "Subir demais durante o movimento lateral",
+      "Perder a forma da prancha",
+      "Movimento muito rápido"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Expansiva",
+    "description": "Flexão onde as mãos se movem para fora durante a descida e voltam na subida, trabalhando amplitude e controle.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie com as mãos na largura dos ombros",
+      "Ao descer, deslize as mãos para fora",
+      "Na posição baixa, as mãos devem estar bem afastadas",
+      "Ao subir, deslize as mãos de volta à posição inicial",
+      "Mantenha o movimento fluido e controlado"
+    ],
+    "progressions": ["Flexão expansiva com palmas", "Flexão expansiva com pés elevados", "Flexão expansiva explosiva"],
+    "regressions": ["Flexão com mãos afastadas estática", "Flexão tradicional", "Flexão expansiva parcial"],
+    "tips": [
+      "Use uma superfície lisa para facilitar o deslize",
+      "Mantenha o core contraído",
+      "Controle o movimento em ambas as direções"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido e sem controle",
+      "Não retornar completamente à posição inicial",
+      "Perder a posição do core"
+    ],
+    "noEquipmentAlternative": "Use toalhas pequenas sob as mãos para facilitar o deslize",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão do Homem-Aranha",
+    "description": "Flexão onde você traz o joelho em direção ao cotovelo durante a descida, trabalhando oblíquos e flexores do quadril.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Core", "Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Inicie em posição de flexão tradicional",
+      "Ao descer, traga um joelho em direção ao cotovelo do mesmo lado",
+      "Mantenha o joelho elevado durante a subida",
+      "Retorne a perna à posição inicial",
+      "Alterne as pernas a cada repetição"
+    ],
+    "progressions": ["Mountain climbers com flexão", "Flexão homem-aranha com palmas", "Flexão com joelho ao cotovelo oposto"],
+    "regressions": ["Flexão tradicional", "Mountain climbers lentos", "Flexão de joelhos com elevação"],
+    "tips": [
+      "Sincronize o movimento da perna com a flexão",
+      "Mantenha o quadril nivelado",
+      "Contraia os oblíquos durante o movimento"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do quadril",
+      "Não trazer o joelho alto o suficiente",
+      "Perder a sincronia entre perna e flexão"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão em Círculo",
+    "description": "Flexão onde o corpo faz um movimento circular durante a execução, trabalhando todos os ângulos.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie em posição de flexão",
+      "Desça movendo o corpo em círculo para um lado",
+      "Continue o movimento circular enquanto sobe",
+      "Complete o círculo retornando ao centro",
+      "Alterne a direção do círculo a cada repetição"
+    ],
+    "progressions": ["Flexão em círculo com uma perna", "Flexão em círculo explosiva", "Flexão em círculo com pés elevados"],
+    "regressions": ["Flexão hindu", "Flexão tradicional", "Prancha com movimento circular do quadril"],
+    "tips": [
+      "Movimento deve ser suave e controlado",
+      "Mantenha o core ativado durante todo o círculo",
+      "Comece com círculos menores"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido e sem controle",
+      "Círculo muito grande logo no início",
+      "Perder a ativação do core"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Rotação de Quadril",
+    "description": "Flexão onde você rotaciona o quadril alternadamente durante o movimento, trabalhando oblíquos e mobilidade.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Core", "Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute uma flexão tradicional",
+      "Ao subir, rotacione o quadril para um lado",
+      "Retorne ao centro e execute outra flexão",
+      "Rotacione para o outro lado",
+      "Continue alternando"
+    ],
+    "progressions": ["Flexão com rotação completa", "Flexão em T", "Flexão com rotação e elevação de perna"],
+    "regressions": ["Prancha com rotação de quadril", "Flexão tradicional", "Flexão de joelhos com rotação"],
+    "tips": [
+      "Contraia os oblíquos durante a rotação",
+      "Mantenha os braços estáveis",
+      "Movimento controlado e deliberado"
+    ],
+    "commonMistakes": [
+      "Rotação muito rápida",
+      "Não manter a estabilidade dos braços",
+      "Amplitude de rotação insuficiente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Divebomber",
+    "description": "Variação da flexão hindu com movimento reverso, criando um padrão de onda completo para frente e para trás.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Back", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie em posição de cachorro olhando para baixo",
+      "Mergulhe o corpo para frente como na flexão hindu",
+      "Ao invés de empurrar para trás, reverta o movimento",
+      "Volte pelo mesmo caminho à posição inicial",
+      "Mantenha o movimento fluido"
+    ],
+    "progressions": ["Divebomber com uma perna", "Divebomber explosivo", "Divebomber com pés elevados"],
+    "regressions": ["Flexão hindu", "Cachorro olhando para baixo dinâmico", "Flexão tradicional"],
+    "tips": [
+      "Movimento deve ser contínuo e fluido",
+      "Alongue bem na posição inicial e final",
+      "Sincronize a respiração com o movimento"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido",
+      "Não reverter completamente o caminho",
+      "Perder a fluidez"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão em Pé de Jacaré",
+    "description": "Flexão com os cotovelos colados ao corpo e mãos próximas, imitando a posição de um jacaré.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos próximas sob o peito",
+      "Mantenha os cotovelos totalmente colados ao corpo",
+      "Desça controladamente mantendo a posição",
+      "Empurre de volta sem afastar os cotovelos",
+      "Core bem contraído"
+    ],
+    "progressions": ["Flexão diamante", "Flexão jacaré com uma perna", "Flexão jacaré com pés elevados"],
+    "regressions": ["Flexão diamante de joelhos", "Flexão tradicional", "Prancha com cotovelos próximos"],
+    "tips": [
+      "Cotovelos devem raspar nas costelas",
+      "Foco total nos tríceps",
+      "Desça o mais baixo que conseguir manter a forma"
+    ],
+    "commonMistakes": [
+      "Cotovelos se afastando do corpo",
+      "Não descer completamente",
+      "Perder a posição do core"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão em L",
+    "description": "Flexão mantendo os quadris elevados em 90 graus com pernas estendidas, focando intensamente nos ombros.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core", "Back"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se em L com as mãos no chão e pernas estendidas horizontalmente",
+      "Mantenha o corpo em forma de L perfeito",
+      "Desça a cabeça em direção ao chão",
+      "Empurre de volta mantendo a posição em L",
+      "Requer força significativa de ombros e core"
+    ],
+    "progressions": ["Handstand push-up", "Flexão em L com uma perna", "L-sit press"],
+    "regressions": ["Flexão pike com pés elevados", "L-sit hold", "Flexão pike"],
+    "tips": [
+      "Desenvolva primeiro a capacidade de manter o L-sit",
+      "Mantenha as pernas completamente retas",
+      "Core extremamente contraído"
+    ],
+    "commonMistakes": [
+      "Pernas caindo da posição horizontal",
+      "Flexionar as pernas",
+      "Não descer suficientemente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Explosiva com Elevação",
+    "description": "Flexão explosiva onde você empurra com força suficiente para elevar todo o corpo do chão.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Inicie em posição de flexão",
+      "Desça rapidamente com controle",
+      "Empurre explosivamente para elevar mãos e pés do chão",
+      "Aterrisse suavemente com controle",
+      "Prepare-se para a próxima repetição"
+    ],
+    "progressions": ["Flexão super-homem", "Burpee com flexão explosiva", "Flexão explosiva com giro"],
+    "regressions": ["Flexão com palmas", "Flexão explosiva apenas com mãos", "Flexão tradicional rápida"],
+    "tips": [
+      "Aterrisse com cotovelos ligeiramente flexionados",
+      "Use toda a força explosiva disponível",
+      "Comece dominando flexões com palmas"
+    ],
+    "commonMistakes": [
+      "Não empurrar com força suficiente",
+      "Aterrissar muito duro",
+      "Perder a forma no ar"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Apoio Fechado",
+    "description": "Flexão com as mãos muito próximas mas não em diamante, enfatizando tríceps e peito interno.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as mãos mais próximas que a largura dos ombros",
+      "Mantenha os cotovelos próximos ao corpo",
+      "Desça controladamente",
+      "Empurre de volta focando nos tríceps",
+      "Mantenha o corpo em linha reta"
+    ],
+    "progressions": ["Flexão diamante", "Flexão de apoio fechado com pés elevados", "Flexão diamante com palmas"],
+    "regressions": ["Flexão tradicional", "Flexão de apoio fechado de joelhos", "Flexão tradicional"],
+    "tips": [
+      "Cotovelos apontando para trás",
+      "Foco na contração dos tríceps",
+      "Mantenha o core estável"
+    ],
+    "commonMistakes": [
+      "Cotovelos se abrindo",
+      "Não descer completamente",
+      "Perder a linha reta do corpo"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Lateral Alternada",
+    "description": "Flexão onde você desce alternadamente para cada lado, trabalhando cada braço de forma diferenciada.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione as mãos ligeiramente mais afastadas que os ombros",
+      "Desça inclinando o peso para um lado",
+      "Empurre de volta ao centro",
+      "Na próxima repetição, incline para o outro lado",
+      "Continue alternando"
+    ],
+    "progressions": ["Flexão arqueira", "Flexão lateral com pés elevados", "Flexão de um braço"],
+    "regressions": ["Flexão tradicional", "Flexão com leve inclinação", "Flexão de joelhos alternada"],
+    "tips": [
+      "Mantenha o core estável durante a inclinação",
+      "Distribua o peso gradualmente",
+      "Alterne consistentemente os lados"
+    ],
+    "commonMistakes": [
+      "Inclinação muito brusca",
+      "Rotação excessiva do tronco",
+      "Não alternar uniformemente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão de Joelhos",
+    "description": "Variação regressiva da flexão tradicional com os joelhos apoiados, ideal para iniciantes.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Apoie os joelhos no chão",
+      "Posicione as mãos na largura dos ombros",
+      "Mantenha o corpo reto dos joelhos aos ombros",
+      "Desça flexionando os cotovelos",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Flexão tradicional", "Flexão inclinada", "Flexão negativa"],
+    "regressions": ["Flexão na parede", "Prancha de joelhos", "Flexão em superfície muito elevada"],
+    "tips": [
+      "Mantenha o core contraído mesmo de joelhos",
+      "Não deixe o quadril cair",
+      "Progrida para flexão tradicional gradualmente"
+    ],
+    "commonMistakes": [
+      "Quadril muito elevado ou caído",
+      "Amplitude de movimento incompleta",
+      "Não manter tensão no core"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Pés na Parede",
+    "description": "Flexão invertida com os pés apoiados na parede, progredindo para handstand push-up.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core", "Back"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se de costas para uma parede",
+      "Suba os pés pela parede enquanto caminha com as mãos para trás",
+      "Fique em posição quase vertical",
+      "Desça a cabeça em direção ao chão",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Handstand push-up livre", "Flexão vertical completa", "Flexão em parada de mão"],
+    "regressions": ["Flexão pike com pés elevados", "Caminhada na parede", "Flexão pike"],
+    "tips": [
+      "Comece com os pés mais baixos na parede",
+      "Mantenha o core bem contraído",
+      "Use uma almofada sob a cabeça inicialmente"
+    ],
+    "commonMistakes": [
+      "Não descer suficientemente",
+      "Arqueamento excessivo das costas",
+      "Pés muito longe da parede"
+    ],
+    "noEquipmentAlternative": "Este exercício já requer uma parede",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão em Zigue-Zague",
+    "description": "Flexão onde você se move em zigue-zague durante a descida e subida, trabalhando diferentes ângulos.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Inicie em posição de flexão",
+      "Desça movendo o corpo em diagonal para um lado",
+      "Na subida, mova-se em diagonal para o outro lado",
+      "Continue o padrão de zigue-zague",
+      "Mantenha o movimento controlado"
+    ],
+    "progressions": ["Flexão em zigue-zague com palmas", "Flexão em zigue-zague com pés elevados", "Flexão circular"],
+    "regressions": ["Flexão lateral alternada", "Flexão tradicional", "Prancha com movimento lateral"],
+    "tips": [
+      "Movimento deve ser suave e controlado",
+      "Core bem ativado para estabilidade",
+      "Explore diferentes ângulos"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido",
+      "Amplitude muito grande logo no início",
+      "Perder a forma durante o movimento"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Slide Lateral",
+    "description": "Flexão onde você desliza lateralmente entre repetições, trabalhando mobilidade e controle.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Execute uma flexão",
+      "No topo, deslize o corpo lateralmente",
+      "Execute outra flexão na nova posição",
+      "Deslize de volta ou para o outro lado",
+      "Continue o padrão"
+    ],
+    "progressions": ["Flexão com slide e palmas", "Flexão com slide e elevação de perna", "Flexão com múltiplos slides"],
+    "regressions": ["Flexão tradicional", "Prancha com slide lateral", "Flexão com pequeno slide"],
+    "tips": [
+      "Mantenha a prancha durante o slide",
+      "Core bem contraído",
+      "Movimento lateral controlado"
+    ],
+    "commonMistakes": [
+      "Perder a posição da prancha durante o slide",
+      "Movimento lateral muito rápido",
+      "Não manter a ativação do core"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Superman",
+    "description": "Flexão explosiva onde você estende completamente braços e pernas no ar, como se estivesse voando.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Inicie em posição de flexão",
+      "Desça rapidamente com controle",
+      "Empurre explosivamente elevando todo o corpo",
+      "Estenda braços e pernas como se estivesse voando",
+      "Aterrisse controladamente"
+    ],
+    "progressions": ["Flexão superman com giro", "Flexão superman com palmas", "Múltiplas flexões superman"],
+    "regressions": ["Flexão explosiva com elevação", "Flexão com palmas", "Flexão explosiva"],
+    "tips": [
+      "Requer muita força explosiva",
+      "Pratique em superfície macia inicialmente",
+      "Aterrisse com segurança"
+    ],
+    "commonMistakes": [
+      "Não empurrar com força suficiente",
+      "Aterrissar muito duro",
+      "Não estender completamente no ar"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Agachamento Livre",
+    "description": "Exercício fundamental de pernas usando apenas o peso corporal, trabalhando toda a musculatura inferior.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com os pés na largura dos ombros",
+      "Mantenha o peito erguido e o core contraído",
+      "Desça flexionando joelhos e quadris como se fosse sentar",
+      "Desça até as coxas ficarem paralelas ao chão",
+      "Empurre pelos calcanhares para subir"
+    ],
+    "progressions": ["Jump squat", "Pistol squat", "Agachamento búlgaro"],
+    "regressions": ["Agachamento na parede", "Agachamento assistido", "Mini agachamento"],
+    "tips": [
+      "Joelhos alinhados com os pés",
+      "Peso nos calcanhares",
+      "Mantenha as costas retas"
+    ],
+    "commonMistakes": [
+      "Joelhos ultrapassando muito os pés",
+      "Costas arredondadas",
+      "Não descer suficientemente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Pistol Squat",
+    "description": "Agachamento unilateral avançado executado com uma perna, exigindo força, equilíbrio e mobilidade excepcionais.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core", "Hamstrings"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé apoiado em uma perna",
+      "Estenda a outra perna à frente",
+      "Desça controladamente mantendo a perna estendida elevada",
+      "Desça o máximo possível mantendo o equilíbrio",
+      "Empurre pela perna de apoio para subir"
+    ],
+    "progressions": ["Pistol squat com salto", "Pistol squat em superfície elevada", "Pistol squat com peso"],
+    "regressions": ["Agachamento búlgaro", "Pistol squat assistido", "Agachamento shrimp"],
+    "tips": [
+      "Use apoio inicialmente para desenvolver força",
+      "Mantenha a perna estendida ativa",
+      "Desenvolva mobilidade de tornozelo"
+    ],
+    "commonMistakes": [
+      "Não descer completamente",
+      "Perder o equilíbrio",
+      "Joelho da perna de apoio caindo para dentro"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Jump Squat",
+    "description": "Agachamento explosivo com salto, desenvolvendo potência e força nas pernas.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Calves", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com os pés na largura dos ombros",
+      "Desça em posição de agachamento",
+      "Salte explosivamente o mais alto possível",
+      "Aterrisse suavemente voltando à posição de agachamento",
+      "Imediatamente execute o próximo salto"
+    ],
+    "progressions": ["Jump squat com uma perna", "Box jump", "Tuck jump"],
+    "regressions": ["Agachamento livre", "Meio agachamento com salto", "Elevação de calcanhares"],
+    "tips": [
+      "Aterrisse suavemente com os joelhos flexionados",
+      "Use os braços para impulsionar o salto",
+      "Mantenha o core contraído"
+    ],
+    "commonMistakes": [
+      "Aterrissar com joelhos travados",
+      "Não descer completamente entre saltos",
+      "Aterrissar muito duro"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  },
+  {
+    "name": "Agachamento Búlgaro",
+    "description": "Agachamento unilateral com perna traseira elevada, excelente para desenvolver força e equilíbrio.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Home",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione um pé atrás em uma superfície elevada",
+      "O outro pé fica à frente no chão",
+      "Desça flexionando o joelho frontal",
+      "Mantenha o tronco ereto",
+      "Empurre pela perna frontal para subir"
+    ],
+    "progressions": ["Pistol squat", "Agachamento búlgaro com salto", "Agachamento búlgaro com peso"],
+    "regressions": ["Agachamento com apoio", "Agachamento assistido", "Mini agachamento búlgaro"],
+    "tips": [
+      "Mantenha a maior parte do peso na perna frontal",
+      "Joelho frontal não deve ultrapassar muito o pé",
+      "Peito erguido durante todo o movimento"
+    ],
+    "commonMistakes": [
+      "Peso muito na perna traseira",
+      "Inclinar o tronco excessivamente para frente",
+      "Joelho frontal caindo para dentro"
+    ],
+    "noEquipmentAlternative": "Use qualquer superfície elevada (cadeira, sofá, degrau)",
+    "isPublic": true
+  },
+  {
+    "name": "Agachamento Sumo",
+    "description": "Agachamento com pés bem afastados e dedos apontados para fora, enfatizando glúteos e adutores.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Quadriceps", "Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com os pés bem afastados",
+      "Aponte os dedos para fora em 45 graus",
+      "Desça empurrando os joelhos para fora",
+      "Mantenha o tronco ereto",
+      "Empurre pelos calcanhares para subir"
+    ],
+    "progressions": ["Agachamento sumo com salto", "Agachamento sumo em uma perna", "Agachamento sumo com pausa"],
+    "regressions": ["Agachamento sumo parcial", "Agachamento tradicional", "Agachamento assistido sumo"],
+    "tips": [
+      "Joelhos devem seguir a direção dos pés",
+      "Aperte os glúteos no topo",
+      "Mantenha o peito erguido"
+    ],
+    "commonMistakes": [
+      "Joelhos caindo para dentro",
+      "Não abrir suficientemente os pés",
+      "Inclinar o tronco para frente"
+    ],
+    "noEquipmentAlternative": "Este exercício já não requer equipamento",
+    "isPublic": true
+  }
+]

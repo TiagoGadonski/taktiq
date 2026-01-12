@@ -42,4 +42,7 @@ public class StudentAssessment : BaseEntity
     // ===== RECOMENDAÇÕES AUTOMÁTICAS =====
     // Gerado pela AI ou pelo sistema baseado nos desvios identificados
     public string? Recommendations { get; set; }
+
+    // ===== RELAÇÃO COM PROTOCOLOS EXECUTADOS =====
+    public ICollection<AssessmentResult> ProtocolResults { get; set; } = new List<AssessmentResult>();
 }

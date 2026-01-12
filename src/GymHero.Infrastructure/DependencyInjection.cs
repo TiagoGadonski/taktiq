@@ -48,6 +48,15 @@ public static class DependencyInjection
         services.AddScoped<IVideoProcessingService, VideoProcessingService>();
         services.AddScoped<IGooglePlacesService, GooglePlacesService>();
 
+        // --- WhatsApp Service (Twilio) ---
+        services.AddHttpClient<IWhatsAppService, TwilioWhatsAppService>();
+
+        // --- PDF Generation Service (QuestPDF) ---
+        services.AddScoped<IPdfGenerationService, QuestPdfService>();
+
+        // --- Periodization Service ---
+        services.AddScoped<IPeriodizationService, PeriodizationService>();
+
         // --- Background Services ---
         services.AddHostedService<PlanExpirationCheckService>();
 
@@ -77,9 +86,10 @@ public static class DependencyInjection
         services.AddScoped<IApplicationDbContext>(provider => 
             provider.GetRequiredService<ApplicationDbContext>());
 
-        services.AddScoped<ExerciseSeederService>();
-        services.AddScoped<ComprehensiveExerciseSeederService>();
-        services.AddScoped<DevelopmentSeederService>();
+        // Temporarily disabled - will be replaced in TAREFA 2.3
+        // services.AddScoped<ExerciseSeederService>();
+        // services.AddScoped<ComprehensiveExerciseSeederService>();
+        // services.AddScoped<DevelopmentSeederService>();
         services.AddScoped<ExerciseEnhancementService>();
 
         // Password hasher for User entity (used by DevelopmentSeederService)

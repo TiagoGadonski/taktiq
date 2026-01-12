@@ -1,0 +1,2079 @@
+[
+  {
+    "name": "Supino Reto com Barra",
+    "description": "Exercício composto fundamental para desenvolvimento do peitoral, ombros e tríceps. Executado deitado em banco plano.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite-se no banco plano com os pés firmes no chão",
+      "Segure a barra com pegada ligeiramente mais larga que os ombros",
+      "Desça a barra controladamente até tocar o peito médio",
+      "Empurre a barra para cima até extensão completa dos braços",
+      "Mantenha as escápulas retraídas durante todo o movimento"
+    ],
+    "tips": [
+      "Mantenha os cotovelos em ângulo de aproximadamente 45° em relação ao corpo",
+      "Não deixe a barra pular do peito",
+      "Mantenha o core contraído para estabilidade",
+      "Respire fundo antes de descer e expire ao subir"
+    ],
+    "commonMistakes": [
+      "Arco excessivo nas costas",
+      "Pegada muito aberta ou muito fechada",
+      "Pés fora do chão",
+      "Subir a barra em linha reta em vez de ligeira diagonal"
+    ],
+    "notes": "Exercício base para força e hipertrofia de peitoral. Requer spotter para cargas elevadas.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Inclinado com Halteres",
+    "description": "Trabalha predominantemente a porção clavicular (superior) do peitoral com maior amplitude de movimento.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Ajuste o banco entre 30-45° de inclinação",
+      "Sente-se com halteres apoiados nas coxas",
+      "Deite-se levando os halteres aos ombros com impulso das pernas",
+      "Empurre os halteres para cima e ligeiramente para dentro",
+      "Desça controladamente até sentir alongamento no peitoral"
+    ],
+    "tips": [
+      "Ângulo de 30-35° é ideal para peitoral superior",
+      "Não deixe os halteres se chocarem no topo",
+      "Mantenha punhos neutros ou ligeiramente pronados",
+      "Movimente os halteres em trajetória ligeiramente arqueada"
+    ],
+    "commonMistakes": [
+      "Banco muito inclinado (acima de 45°) - transfere trabalho para ombros",
+      "Movimentos muito rápidos sem controle",
+      "Perder tensão no peitoral no topo do movimento",
+      "Afastar muito os cotovelos lateralmente"
+    ],
+    "notes": "Excelente para desenvolvimento do peitoral superior. Permite maior amplitude que a barra.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão de Braço Tradicional",
+    "description": "Exercício clássico de peso corporal para peito, ombros e tríceps. Mantenha o core contraído e corpo em linha reta.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Posicione-se em prancha alta com mãos na largura dos ombros",
+      "Mantenha corpo em linha reta da cabeça aos calcanhares",
+      "Desça o corpo dobrando os cotovelos até peito quase tocar o chão",
+      "Empurre o chão para voltar à posição inicial",
+      "Mantenha core e glúteos contraídos durante todo movimento"
+    ],
+    "tips": [
+      "Não deixe o quadril cair ou subir demais",
+      "Mantenha pescoço neutro olhando ligeiramente à frente",
+      "Cotovelos devem formar ângulo de 45° com o corpo",
+      "Para iniciantes, comece com joelhos apoiados"
+    ],
+    "commonMistakes": [
+      "Quadril muito alto ou muito baixo",
+      "Amplitude incompleta do movimento",
+      "Cotovelos muito abertos (90°)",
+      "Cabeça projetada para frente"
+    ],
+    "notes": "Exercício funcional excelente para iniciantes. Pode ser progressivamente dificultado com elevação dos pés.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo com Halteres",
+    "description": "Exercício de isolamento para peitoral com ênfase em alongamento e contração máxima.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite-se em banco plano com halteres acima do peito",
+      "Mantenha cotovelos levemente flexionados (como abraçar uma árvore)",
+      "Abra os braços lateralmente descendo os halteres em arco",
+      "Desça até sentir alongamento intenso no peitoral",
+      "Contraia o peitoral para retornar os halteres ao topo"
+    ],
+    "tips": [
+      "Use carga de 40-60% do supino reto",
+      "Mantenha mesma flexão de cotovelos durante todo movimento",
+      "Foco em sentir alongamento e contração do peitoral",
+      "Não desça além do nível dos ombros para evitar lesões"
+    ],
+    "commonMistakes": [
+      "Usar carga excessiva comprometendo a técnica",
+      "Transformar em supino dobrando muito os cotovelos",
+      "Descer rápido demais perdendo controle",
+      "Não contrair peitoral no topo do movimento"
+    ],
+    "notes": "Ideal para hipertrofia e pump do peitoral. Atenção à articulação do ombro.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Crossover no Cross Over",
+    "description": "Exercício de isolamento com cabo que permite contração máxima e tensão constante no peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé entre as polias com cabos nas posições altas",
+      "Segure as alças e dê um passo à frente para tensionar",
+      "Com cotovelos levemente flexionados, traga as mãos para baixo e para dentro",
+      "Cruze as mãos na frente do corpo contraindo o peitoral",
+      "Retorne controladamente mantendo tensão nos cabos"
+    ],
+    "tips": [
+      "Incline ligeiramente o tronco para frente",
+      "Foque na contração do peitoral, não na força dos braços",
+      "Varie a altura das polias para atingir diferentes porções",
+      "Segure a contração por 1-2 segundos no pico"
+    ],
+    "commonMistakes": [
+      "Usar impulso ou balanço do corpo",
+      "Estender muito os cotovelos",
+      "Não cruzar as mãos suficientemente",
+      "Perder tensão na fase excêntrica"
+    ],
+    "notes": "Excelente para finalização de treino de peito. Permite foco total na contração muscular.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Pullover com Halter",
+    "description": "Exercício que trabalha peitoral e dorsais simultaneamente, além de expandir a caixa torácica.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite-se perpendicular ao banco com apenas as escápulas apoiadas",
+      "Segure um halter com ambas as mãos acima do peito",
+      "Mantenha quadril baixo e core contraído",
+      "Desça o halter em arco atrás da cabeça mantendo cotovelos levemente flexionados",
+      "Puxe de volta pela mesma trajetória usando peito e dorsais"
+    ],
+    "tips": [
+      "Inspire profundamente ao descer para expandir caixa torácica",
+      "Mantenha quadril relativamente baixo para maior ênfase no peito",
+      "Não dobre muito os cotovelos",
+      "Controle bem o peso na fase excêntrica"
+    ],
+    "commonMistakes": [
+      "Deixar quadril subir muito",
+      "Usar carga excessiva",
+      "Transformar em tríceps francês dobrando demais os cotovelos",
+      "Amplitude muito curta"
+    ],
+    "notes": "Clássico para expansão da caixa torácica em jovens. Trabalha serrátil anterior também.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Barra Fixa Pronada",
+    "description": "Rei dos exercícios de costas. Pull-up com palmas voltadas para frente trabalhando dorsais, trapézio e bíceps.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Segure a barra com pegada pronada (palmas para frente) ligeiramente mais larga que os ombros",
+      "Pendure-se com braços completamente estendidos",
+      "Contraia as escápulas e puxe o corpo para cima",
+      "Suba até o queixo ultrapassar a barra",
+      "Desça controladamente até extensão completa dos braços"
+    ],
+    "tips": [
+      "Inicie o movimento puxando as escápulas para baixo e para trás",
+      "Evite balanço ou impulso com as pernas",
+      "Mantenha core contraído durante todo movimento",
+      "Para iniciantes, use elásticos de assistência"
+    ],
+    "commonMistakes": [
+      "Não fazer amplitude completa",
+      "Usar impulso excessivo",
+      "Não retrair escápulas antes de puxar",
+      "Subir apenas até os olhos em vez do queixo"
+    ],
+    "notes": "Exercício fundamental para desenvolvimento de costas. Progressão: negative pull-ups → assisted → full pull-ups → weighted.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Curvada com Barra",
+    "description": "Exercício composto para espessura das costas, trabalhando dorsais, trapézio médio e romboides.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com pés na largura dos ombros",
+      "Incline o tronco para frente mantendo costas retas (45-60°)",
+      "Segure a barra com pegada pronada na largura dos ombros",
+      "Puxe a barra em direção ao abdômen inferior",
+      "Aperte as escápulas no topo e retorne controladamente"
+    ],
+    "tips": [
+      "Mantenha joelhos levemente flexionados",
+      "Core sempre contraído para proteger lombar",
+      "Puxe com os cotovelos, não com as mãos",
+      "Foque em retrair escápulas e não apenas dobrar braços"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Ficar muito vertical reduzindo ativação",
+      "Usar impulso excessivo",
+      "Não retrair completamente as escápulas"
+    ],
+    "notes": "Um dos melhores para massa muscular nas costas. Importante dominar a técnica antes de aumentar carga.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra (Deadlift)",
+    "description": "O rei dos exercícios compostos. Trabalha praticamente todo o corpo com ênfase em posterior chain.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "LowerBack", "Forearms"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Fique com pés na largura dos quadris, barra sobre o meio do pé",
+      "Agache e segure a barra com pegada na largura dos ombros",
+      "Mantenha costas retas, peito para cima, escápulas sobre a barra",
+      "Empurre o chão com os pés e estenda quadris e joelhos simultaneamente",
+      "Finalize em pé com escápulas retraídas, então desça controladamente"
+    ],
+    "tips": [
+      "Mantenha a barra próxima ao corpo durante todo movimento",
+      "Inicie o movimento empurrando o chão, não puxando com as costas",
+      "Respire fundo e segure o ar durante a rep (Valsalva)",
+      "Use cinto de musculação para cargas pesadas"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar ou torácica",
+      "Iniciar o movimento puxando com os braços",
+      "Barra longe do corpo",
+      "Hiperextender lombar no topo"
+    ],
+    "notes": "Exercício mais importante para força geral. Requer técnica perfeita. Contraindicado para hérnias discais não tratadas.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada Frontal",
+    "description": "Variação de pull-up na máquina, excelente para desenvolvimento de dorsais com carga controlada.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se na máquina e ajuste o apoio de coxas",
+      "Segure a barra larga com pegada pronada",
+      "Incline ligeiramente o tronco para trás (10-15°)",
+      "Puxe a barra em direção ao peitoral superior",
+      "Retorne controladamente até extensão completa dos braços"
+    ],
+    "tips": [
+      "Inicie puxando escápulas para baixo",
+      "Imagine puxar com os cotovelos, não com as mãos",
+      "Mantenha peito para fora durante todo movimento",
+      "Evite balançar o tronco excessivamente"
+    ],
+    "commonMistakes": [
+      "Puxar atrás da nuca (maior risco de lesão)",
+      "Usar impulso excessivo do tronco",
+      "Não fazer amplitude completa",
+      "Soltar a barra muito rápido na fase excêntrica"
+    ],
+    "notes": "Excelente alternativa para quem ainda não consegue fazer pull-ups. Permite progressão de carga.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Unilateral com Halter",
+    "description": "Remada com foco unilateral permitindo maior amplitude e correção de assimetrias.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "LowerBack"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Apoie um joelho e mão do mesmo lado em banco",
+      "Mantenha costas paralelas ao chão",
+      "Segure halter com braço estendido do lado oposto",
+      "Puxe o halter até o quadril em movimento de remo",
+      "Desça controladamente até extensão completa"
+    ],
+    "tips": [
+      "Mantenha quadril nivelado, sem rotação",
+      "Puxe o cotovelo para cima e para trás",
+      "Foque em retrair a escápula no topo",
+      "Não rotacione o tronco durante o movimento"
+    ],
+    "commonMistakes": [
+      "Rotar o tronco excessivamente",
+      "Usar impulso em vez de controle",
+      "Não retrair completamente a escápula",
+      "Arredondar as costas"
+    ],
+    "notes": "Permite maior amplitude que remada bilateral. Ótimo para iniciantes e correção de assimetrias.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento Militar com Barra",
+    "description": "Exercício fundamental para força e massa nos ombros, especialmente deltóide anterior e médio.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com pés na largura dos ombros",
+      "Segure a barra na altura dos ombros com pegada ligeiramente mais larga",
+      "Contraia core e glúteos para estabilidade",
+      "Empurre a barra verticalmente acima da cabeça",
+      "Desça controladamente até a barra tocar os ombros"
+    ],
+    "tips": [
+      "Não hiperextenda lombar ao empurrar",
+      "Mantenha antebraços verticais durante todo movimento",
+      "Passe a cabeça ligeiramente para trás quando a barra passar",
+      "Finalize com barra diretamente sobre o meio do pé"
+    ],
+    "commonMistakes": [
+      "Arquear excessivamente as costas",
+      "Empurrar a barra para frente em vez de vertical",
+      "Não fazer amplitude completa",
+      "Usar impulso das pernas (push press não intencional)"
+    ],
+    "notes": "Base para força de ombros. Variante sentado reduz stress na lombar mas diminui carga total.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento com Halteres",
+    "description": "Press com halteres permitindo maior amplitude e recrutamento de estabilizadores.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Sente-se em banco com encosto vertical",
+      "Posicione halteres na altura dos ombros com palmas para frente",
+      "Empurre os halteres para cima até quase se tocarem",
+      "Desça controladamente até cotovelos em 90° ou ligeiramente abaixo",
+      "Mantenha core contraído e costas apoiadas"
+    ],
+    "tips": [
+      "Não bata os halteres no topo",
+      "Trajetória ligeiramente arqueada é natural",
+      "Mantenha punhos neutros ou ligeiramente pronados",
+      "Expire ao empurrar, inspire ao descer"
+    ],
+    "commonMistakes": [
+      "Arquear excessivamente as costas",
+      "Descer além de 90° causando stress no ombro",
+      "Usar impulso excessivo",
+      "Perder tensão no topo do movimento"
+    ],
+    "notes": "Permite maior amplitude que barra. Excelente para desenvolvimento equilibrado dos ombros.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral com Halteres",
+    "description": "Exercício de isolamento para deltóide lateral, criando largura nos ombros.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com halter em cada mão ao lado do corpo",
+      "Mantenha cotovelos levemente flexionados (leve curvatura)",
+      "Eleve os braços lateralmente até altura dos ombros",
+      "Pause brevemente no topo",
+      "Desça controladamente pela mesma trajetória"
+    ],
+    "tips": [
+      "Imagine despejar água de um copo no topo (leve rotação interna)",
+      "Não use impulso ou balanço",
+      "Mantenha tronco estável",
+      "Foque na contração do deltóide lateral"
+    ],
+    "commonMistakes": [
+      "Elevar acima da linha dos ombros (transfere para trapézio)",
+      "Usar carga muito pesada com impulso",
+      "Estender completamente os cotovelos",
+      "Inclinar o tronco para ajudar"
+    ],
+    "notes": "Fundamental para largura de ombros. Use carga moderada com execução perfeita.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Agachamento Livre (Squat)",
+    "description": "O rei dos exercícios de pernas. Trabalha quadríceps, glúteos, isquiotibiais e core.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Posicione barra nos trapézios superiores (high bar) ou médios (low bar)",
+      "Pés largura dos ombros, pontas ligeiramente para fora",
+      "Inspire fundo, contraia core e desça flexionando quadris e joelhos",
+      "Desça até coxas paralelas ao chão ou abaixo (full squat)",
+      "Empurre o chão para subir mantendo costas retas"
+    ],
+    "tips": [
+      "Joelhos devem seguir direção dos pés",
+      "Mantenha peito para cima e olhar ligeiramente acima do horizonte",
+      "Distribua peso entre meio do pé e calcanhar",
+      "Use cinto de musculação para cargas pesadas"
+    ],
+    "commonMistakes": [
+      "Joelhos colapsando para dentro (valgo)",
+      "Calcanhar saindo do chão",
+      "Arredondar lombar no fundo (butt wink excessivo)",
+      "Não atingir profundidade adequada"
+    ],
+    "notes": "Exercício mais importante para pernas. Requer boa mobilidade de tornozelos e quadris. Contraindicado para lesões de joelho não tratadas.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Leg Press 45°",
+    "description": "Exercício de quadríceps e glúteos em máquina, permitindo alta carga com menor stress na lombar.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se na máquina com costas e quadril bem apoiados",
+      "Posicione pés na plataforma na largura dos ombros",
+      "Solte as travas e desça controladamente",
+      "Desça até joelhos em aproximadamente 90°",
+      "Empurre a plataforma estendendo pernas sem travar joelhos"
+    ],
+    "tips": [
+      "Mantenha lombar sempre apoiada no encosto",
+      "Não trave os joelhos completamente no topo",
+      "Posição dos pés altera ênfase: alta = glúteos, baixa = quadríceps",
+      "Respire fundo antes de descer"
+    ],
+    "commonMistakes": [
+      "Lombar descolando do encosto no fundo",
+      "Travar joelhos no topo",
+      "Descer demais causando rotação pélvica",
+      "Amplitude muito curta"
+    ],
+    "notes": "Excelente alternativa ao agachamento para quem tem limitações de mobilidade ou lombar sensível.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Afundo com Halteres",
+    "description": "Exercício unilateral para pernas que desenvolve força, equilíbrio e corrige assimetrias.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com halter em cada mão ao lado do corpo",
+      "Dê um passo à frente com uma perna",
+      "Desça flexionando ambos joelhos até perna traseira quase tocar o chão",
+      "Joelho da frente não deve ultrapassar muito a ponta do pé",
+      "Empurre com perna da frente para voltar à posição inicial"
+    ],
+    "tips": [
+      "Mantenha tronco vertical durante todo movimento",
+      "Passo nem muito curto nem muito longo",
+      "Distribua peso entre ambas as pernas",
+      "Variante alternada ou estática (Bulgarian split squat)"
+    ],
+    "commonMistakes": [
+      "Tronco inclinado demais para frente",
+      "Joelho da frente colapsando para dentro",
+      "Passo muito curto reduzindo amplitude",
+      "Perder equilíbrio lateralmente"
+    ],
+    "notes": "Excelente para funcionalidade e correção de assimetrias entre pernas. Melhora equilíbrio.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Stiff com Halteres",
+    "description": "Exercício para posterior de coxa (isquiotibiais) e glúteos com ênfase em alongamento.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com halteres na frente das coxas",
+      "Mantenha joelhos levemente flexionados (15-20°)",
+      "Incline tronco para frente projetando quadril para trás",
+      "Desça halteres pela frente das pernas sentindo alongamento nos isquios",
+      "Retorne à posição inicial contraindo glúteos e isquiotibiais"
+    ],
+    "tips": [
+      "Mantenha costas retas durante todo movimento",
+      "Foco em projetar quadril para trás, não apenas curvar tronco",
+      "Desça até sentir bom alongamento, não force além",
+      "Aperte glúteos no topo"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Dobrar muito os joelhos (transforma em agachamento)",
+      "Não projetar quadril suficientemente para trás",
+      "Forçar amplitude além da flexibilidade"
+    ],
+    "notes": "Fundamental para posterior de coxa. Melhora também flexibilidade dos isquiotibiais.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Direta com Barra",
+    "description": "Exercício clássico para bíceps, permitindo carga significativa para desenvolvimento de massa.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com barra nas mãos, pegada supinada na largura dos ombros",
+      "Mantenha cotovelos fixos ao lado do corpo",
+      "Flexione os cotovelos levantando a barra até os ombros",
+      "Contraia o bíceps no topo por 1 segundo",
+      "Desça controladamente até extensão completa"
+    ],
+    "tips": [
+      "Não balance o tronco para ajudar",
+      "Mantenha cotovelos sempre fixos",
+      "Controle bem a fase excêntrica (3-4 segundos)",
+      "Use pegada na largura dos ombros ou levemente mais estreita"
+    ],
+    "commonMistakes": [
+      "Usar impulso do tronco (swing)",
+      "Movimentar cotovelos para frente ou trás",
+      "Não fazer extensão completa",
+      "Amplitude muito curta"
+    ],
+    "notes": "Base para desenvolvimento de bíceps. Barra reta pode causar desconforto nos punhos em alguns indivíduos.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Martelo com Halteres",
+    "description": "Trabalha bíceps com ênfase no braquial e braquiorradial, além dos antebraços.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com halter em cada mão, palmas voltadas uma para outra",
+      "Mantenha cotovelos fixos ao lado do corpo",
+      "Flexione ambos os braços simultaneamente",
+      "Suba até os halteres atingirem os ombros",
+      "Desça controladamente mantendo pegada neutra"
+    ],
+    "tips": [
+      "Pegada neutra reduz stress nos punhos",
+      "Pode ser executado alternadamente",
+      "Boa opção para quem tem desconforto com pegada supinada",
+      "Desenvolve espessura do braço"
+    ],
+    "commonMistakes": [
+      "Rotar os punhos durante o movimento",
+      "Usar impulso excessivo",
+      "Não estender completamente os braços",
+      "Movimentar os cotovelos"
+    ],
+    "notes": "Excelente para desenvolvimento do braquial, que empurra o bíceps para cima aumentando o pico.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Testa com Barra",
+    "description": "Exercício de isolamento para desenvolvimento de massa nos tríceps, especialmente cabeça longa.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite-se em banco plano com barra acima do peito",
+      "Segure a barra com pegada fechada (largura dos ombros)",
+      "Mantenha cotovelos fixos apontando para cima",
+      "Desça a barra em direção à testa flexionando apenas cotovelos",
+      "Estenda os cotovelos retornando à posição inicial"
+    ],
+    "tips": [
+      "Mantenha cotovelos sempre apontando para cima, não abra lateralmente",
+      "Desça a barra em direção à testa ou topo da cabeça",
+      "Use barra W/EZ para reduzir stress nos punhos",
+      "Controle bem a fase excêntrica"
+    ],
+    "commonMistakes": [
+      "Movimentar os cotovelos durante execução",
+      "Abrir cotovelos lateralmente",
+      "Usar carga excessiva",
+      "Não fazer extensão completa no topo"
+    ],
+    "notes": "Um dos melhores para massa de tríceps. Cuidado com carga excessiva para não causar dor nos cotovelos.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Mergulho nas Paralelas",
+    "description": "Exercício composto com peso corporal para tríceps, peitoral inferior e ombros.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "ParallelBars",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Apoie-se nas barras paralelas com braços estendidos",
+      "Incline levemente o tronco para frente",
+      "Desça flexionando os cotovelos até 90° ou ligeiramente abaixo",
+      "Empurre para cima até extensão completa dos braços",
+      "Mantenha core contraído durante todo movimento"
+    ],
+    "tips": [
+      "Mais vertical = mais tríceps, mais inclinado = mais peitoral",
+      "Não desça demais para proteger os ombros",
+      "Aperte os tríceps no topo",
+      "Use cinto de peso para progressão"
+    ],
+    "commonMistakes": [
+      "Descer demais causando stress no ombro",
+      "Não fazer extensão completa no topo",
+      "Usar impulso excessivo",
+      "Ombros projetados para frente"
+    ],
+    "notes": "Excelente para força e massa de tríceps. Progressão: negative → assisted → full → weighted.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Prancha Frontal",
+    "description": "Exercício isométrico fundamental para desenvolvimento e estabilização do core.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": ["Shoulders", "Glutes"],
+    "equipment": "Bodyweight",
+    "category": "Isometric",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Apoie antebraços e pontas dos pés no chão",
+      "Mantenha corpo em linha reta da cabeça aos calcanhares",
+      "Contraia abdômen, glúteos e quadríceps",
+      "Mantenha posição respirando normalmente",
+      "Evite deixar quadril cair ou subir demais"
+    ],
+    "tips": [
+      "Olhe para o chão mantendo pescoço neutro",
+      "Imagine empurrar o chão com antebraços",
+      "Contraia glúteos para evitar hiperextensão lombar",
+      "Comece com 3x 30-60 segundos"
+    ],
+    "commonMistakes": [
+      "Quadril muito baixo (hiperextensão lombar)",
+      "Quadril muito alto (forma de V invertido)",
+      "Segurar a respiração",
+      "Pescoço hiperextendido"
+    ],
+    "notes": "Base para estabilidade de core. Progressão: joelhos → completa → com movimentos de membros → com peso.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Abdominal Crunch",
+    "description": "Exercício clássico de isolamento para reto abdominal com movimento de flexão espinhal.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Deite de costas com joelhos flexionados e pés no chão",
+      "Coloque mãos atrás da cabeça ou cruzadas no peito",
+      "Flexione a coluna levantando escápulas do chão",
+      "Contraia abdômen no topo por 1 segundo",
+      "Desça controladamente até escápulas tocarem o chão"
+    ],
+    "tips": [
+      "Movimento é de flexão da coluna, não de sentar",
+      "Não puxe a cabeça com as mãos",
+      "Mantenha lombar no chão durante todo movimento",
+      "Expire ao subir, inspire ao descer"
+    ],
+    "commonMistakes": [
+      "Puxar pescoço com as mãos",
+      "Usar impulso excessivo",
+      "Tentar fazer sit-up completo",
+      "Amplitude muito pequena"
+    ],
+    "notes": "Fundamental para iniciantes. Progressão: básico → com peso → em decline.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Alongamento de Isquiotibiais Sentado",
+    "description": "Alongamento estático para posterior de coxa melhorando flexibilidade e reduzindo tensão.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["LowerBack"],
+    "equipment": "None",
+    "category": "Stretching",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se no chão com pernas estendidas à frente",
+      "Mantenha coluna reta e incline tronco para frente",
+      "Alcance os pés ou tornozelos com as mãos",
+      "Sinta o alongamento nos isquiotibiais",
+      "Mantenha a posição respirando profundamente"
+    ],
+    "tips": [
+      "Mantenha joelhos ligeiramente flexionados se necessário",
+      "Não force além do conforto",
+      "Respire profundamente para relaxar",
+      "Progressão gradual ao longo de semanas"
+    ],
+    "commonMistakes": [
+      "Arredondar excessivamente as costas",
+      "Puxar com força causando dor",
+      "Prender a respiração",
+      "Não manter tempo suficiente"
+    ],
+    "notes": "Mantenha por 30-60 segundos. Importante para saúde lombar e prevenção de lesões.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Alongamento de Peitoral na Parede",
+    "description": "Alongamento para abertura do peitoral e melhora de postura, especialmente para quem passa muito tempo sentado.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "None",
+    "category": "Stretching",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique ao lado de uma parede ou batente de porta",
+      "Coloque antebraço na parede com cotovelo em 90°",
+      "Gire o corpo para longe do braço",
+      "Sinta alongamento no peitoral e ombro anterior",
+      "Mantenha posição respirando profundamente"
+    ],
+    "tips": [
+      "Varie a altura do braço (baixo, médio, alto)",
+      "Não force causando dor no ombro",
+      "Mantenha abdômen contraído",
+      "Alterne entre os lados"
+    ],
+    "commonMistakes": [
+      "Braço muito alto causando impacto no ombro",
+      "Rotação excessiva forçando",
+      "Ombro protaído para frente",
+      "Tempo insuficiente"
+    ],
+    "notes": "Mantenha por 30-45 segundos cada lado. Essencial para corrigir ombros anterializados.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Gato-Vaca (Cat-Cow)",
+    "description": "Exercício de mobilidade para coluna vertebral melhorando flexibilidade e consciência corporal.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": ["LowerBack"],
+    "equipment": "None",
+    "category": "Mobility",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique de quatro apoios (mãos e joelhos)",
+      "Inspire e arqueie a coluna olhando para cima (vaca)",
+      "Expire e arredonde a coluna olhando para o umbigo (gato)",
+      "Alterne entre as posições fluidamente",
+      "Mantenha movimentos lentos e controlados"
+    ],
+    "tips": [
+      "Movimente toda a coluna, não apenas lombar",
+      "Sincronize movimento com respiração",
+      "Faça 10-15 repetições",
+      "Ótimo para aquecimento ou recuperação"
+    ],
+    "commonMistakes": [
+      "Movimento muito rápido",
+      "Apenas lombar se movendo",
+      "Não sincronizar com respiração",
+      "Cotovelos travados"
+    ],
+    "notes": "10-15 repetições controladas. Excelente para mobilidade de coluna e aquecimento.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Corrida na Esteira",
+    "description": "Exercício cardiovascular clássico para resistência, queima calórica e saúde cardiovascular.",
+    "muscleGroup": "Cardio",
+    "secondaryMuscles": ["Quadriceps", "Hamstrings", "Calves"],
+    "equipment": "Treadmill",
+    "category": "Cardio",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Ajuste velocidade e inclinação conforme objetivo",
+      "Mantenha postura ereta com core engajado",
+      "Movimente braços naturalmente",
+      "Aterrisse no meio do pé, não no calcanhar",
+      "Mantenha cadência e respiração constantes"
+    ],
+    "tips": [
+      "Comece com 5-10 minutos se iniciante",
+      "Aumente inclinação para simular terreno externo",
+      "Varie entre treino contínuo e intervalado",
+      "Use calçado adequado para corrida"
+    ],
+    "commonMistakes": [
+      "Agarrar nas barras laterais",
+      "Passadas muito longas",
+      "Aterrissar no calcanhar com perna estendida",
+      "Não progressão gradual"
+    ],
+    "notes": "Ideal para condicionamento cardiovascular. Progressão: caminhada → corrida leve → corrida → intervalos.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Burpees",
+    "description": "Exercício de corpo inteiro combinando força e cardio para condicionamento máximo.",
+    "muscleGroup": "FullBody",
+    "secondaryMuscles": ["Chest", "Core", "Quadriceps"],
+    "equipment": "Bodyweight",
+    "category": "HIIT",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Comece em pé",
+      "Agache e apoie mãos no chão",
+      "Jogue pernas para trás assumindo posição de flexão",
+      "Faça uma flexão de braço (opcional para iniciantes)",
+      "Pule pernas de volta para agachamento e salte verticalmente"
+    ],
+    "tips": [
+      "Mantenha core contraído durante todo movimento",
+      "Aterrisse suavemente ao voltar do salto",
+      "Mantenha ritmo constante sem pausas",
+      "Modifique intensidade conforme condicionamento"
+    ],
+    "commonMistakes": [
+      "Perder postura na flexão",
+      "Saltar muito alto desperdiçando energia",
+      "Não fazer amplitude completa",
+      "Ritmo inconsistente"
+    ],
+    "notes": "Excelente para HIIT e condicionamento. Queima calórica muito alta.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada Triângulo (Pegada Fechada)",
+    "description": "Variação de puxada com pegada fechada neutra, ênfase em dorsais inferiores e espessura das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Sente-se na máquina com acessório triangular",
+      "Segure o triângulo com palmas voltadas uma para outra",
+      "Incline ligeiramente para trás",
+      "Puxe o triângulo até parte inferior do peitoral",
+      "Aperte escápulas e retorne controladamente"
+    ],
+    "tips": [
+      "Foque em puxar com os cotovelos",
+      "Mantenha peito para fora",
+      "Excelente para espessura do meio das costas",
+      "Permite boa carga"
+    ],
+    "commonMistakes": [
+      "Usar muito impulso do tronco",
+      "Não fazer amplitude completa",
+      "Não retrair escápulas completamente",
+      "Soltar muito rápido"
+    ],
+    "notes": "Ótima variação para quem tem desconforto com pegada larga. Trabalha bem dorsais médios.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Baixa (Pulley)",
+    "description": "Exercício sentado com cabo para desenvolvimento de espessura das costas e romboides.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "LowerBack"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se na máquina com pés apoiados na plataforma",
+      "Segure a alça mantendo costas retas",
+      "Puxe a alça em direção ao abdômen",
+      "Aperte as escápulas no topo",
+      "Estenda braços controladamente sem arredondar costas"
+    ],
+    "tips": [
+      "Mantenha tronco quase vertical com leve inclinação",
+      "Não balance o tronco",
+      "Foque em apertar escápulas juntas",
+      "Varie o acessório (triângulo, barra, alças)"
+    ],
+    "commonMistakes": [
+      "Balance excessivo do tronco",
+      "Arredondar costas na extensão",
+      "Usar apenas braços sem retrair escápulas",
+      "Amplitude muito curta"
+    ],
+    "notes": "Fundamental para desenvolvimento de costas. Seguro e efetivo para todas faixas etárias.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Barra Fixa Supinada (Chin-Up)",
+    "description": "Pull-up com palmas voltadas para o rosto, maior ativação de bíceps.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": "PullUpBar",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Segure barra com pegada supinada na largura dos ombros",
+      "Pendure-se com braços estendidos",
+      "Puxe corpo até queixo acima da barra",
+      "Desça controladamente até extensão completa",
+      "Mantenha core contraído"
+    ],
+    "tips": [
+      "Geralmente mais fácil que pull-up pronado",
+      "Ótimo para desenvolver bíceps também",
+      "Inicie com negativas se necessário",
+      "Adicione peso quando conseguir 10+ reps"
+    ],
+    "commonMistakes": [
+      "Não fazer amplitude completa",
+      "Usar kipping (balanço)",
+      "Não descer completamente",
+      "Perder retração escapular"
+    ],
+    "notes": "Excelente para massa de dorsais e bíceps. Mais amigável aos iniciantes que pull-up.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra Sumô",
+    "description": "Variação de deadlift com stance larga, maior ênfase em adutores e glúteos.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Quadriceps", "Adductors", "Back"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Posicione pés bem mais largos que os ombros, pontas para fora",
+      "Agache e segure barra entre as pernas, pegada na largura dos ombros",
+      "Mantenha costas retas e peito para cima",
+      "Estenda quadris e joelhos simultaneamente",
+      "Finalize com glúteos contraídos e escápulas retraídas"
+    ],
+    "tips": [
+      "Melhor para pessoas com pernas longas ou tronco curto",
+      "Menor stress na lombar que deadlift convencional",
+      "Maior ativação de glúteos e adutores",
+      "Joelhos devem seguir direção dos pés"
+    ],
+    "commonMistakes": [
+      "Stance não suficientemente larga",
+      "Pontas dos pés não apontadas para fora",
+      "Arredondar lombar",
+      "Não empurrar joelhos para fora"
+    ],
+    "notes": "Excelente para glúteos e adutores. Opção para quem tem limitações no deadlift convencional.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra Romeno (RDL)",
+    "description": "Variação de deadlift focada em isquiotibiais e glúteos com joelhos menos flexionados.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Inicie em pé com barra nas mãos",
+      "Mantenha joelhos levemente flexionados durante todo movimento",
+      "Incline para frente projetando quadril para trás",
+      "Desça barra pela frente das pernas até meio da canela",
+      "Retorne à posição inicial contraindo glúteos e isquios"
+    ],
+    "tips": [
+      "Mantenha costas retas e barra próxima ao corpo",
+      "Foco em sentir alongamento nos isquiotibiais",
+      "Não dobrar mais os joelhos durante movimento",
+      "Excelente para hipertrofia de posterior de coxa"
+    ],
+    "commonMistakes": [
+      "Dobrar muito os joelhos (vira deadlift)",
+      "Arredondar as costas",
+      "Barra longe do corpo",
+      "Não empurrar quadril suficientemente para trás"
+    ],
+    "notes": "Superior ao stiff para hipertrofia de isquiotibiais. Permite boa carga com segurança.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Mesa Extensora (Leg Extension)",
+    "description": "Isolamento para quadríceps, especialmente vasto medial, em máquina.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se na máquina com costas apoiadas",
+      "Ajuste almofada para ficar sobre os tornozelos",
+      "Segure as alças laterais",
+      "Estenda as pernas até quase completa extensão",
+      "Desça controladamente sem deixar peso bater"
+    ],
+    "tips": [
+      "Não trave joelhos no topo",
+      "Controle bem a fase excêntrica",
+      "Pode adicionar pausa no topo para contração",
+      "Varie posição dos pés para ênfase diferente"
+    ],
+    "commonMistakes": [
+      "Usar peso excessivo com impulso",
+      "Não fazer amplitude completa",
+      "Levantar glúteos do assento",
+      "Hiperextensão dos joelhos"
+    ],
+    "notes": "Excelente para finalização ou pré-exaustão. Atenção em casos de problemas de joelhos.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Mesa Flexora (Leg Curl Deitado)",
+    "description": "Isolamento para isquiotibiais em máquina, importante para equilíbrio muscular.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Deite-se de bruços na máquina",
+      "Posicione almofada logo acima dos calcanhares",
+      "Flexione joelhos trazendo calcanhares em direção aos glúteos",
+      "Contraia isquiotibiais no topo",
+      "Estenda controladamente sem deixar peso bater"
+    ],
+    "tips": [
+      "Mantenha quadris no banco durante todo movimento",
+      "Não arqueie excessivamente a lombar",
+      "Segure contração no topo por 1 segundo",
+      "Controle bem a descida em 3-4 segundos"
+    ],
+    "commonMistakes": [
+      "Levantar quadris do banco",
+      "Hiperextender lombar",
+      "Amplitude incompleta",
+      "Usar impulso"
+    ],
+    "notes": "Importante para equilíbrio com quadríceps. Previne lesões de isquiotibiais.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Agachamento Búlgaro (Split Squat)",
+    "description": "Variação unilateral avançada de agachamento com perna traseira elevada.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Posicione pé traseiro em banco atrás de você",
+      "Pé frontal à frente com halteres nas mãos",
+      "Desça flexionando joelho frontal",
+      "Desça até coxa frontal paralela ao chão",
+      "Empurre com perna frontal para subir"
+    ],
+    "tips": [
+      "Maior demanda de equilíbrio que afundo regular",
+      "Excelente para hipertrofia e correção de assimetrias",
+      "Distância do banco afeta ênfase muscular",
+      "Mantenha tronco vertical"
+    ],
+    "commonMistakes": [
+      "Banco muito perto ou muito longe",
+      "Inclinar tronco excessivamente",
+      "Joelho frontal colapsando para dentro",
+      "Perder equilíbrio lateralmente"
+    ],
+    "notes": "Considerado superior ao afundo regular para hipertrofia. Requer boa propriocepção.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Pélvica (Hip Thrust)",
+    "description": "Exercício específico para glúteos com alta ativação muscular.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Sente-se no chão com costas apoiadas em banco",
+      "Posicione barra sobre o quadril (use almofada)",
+      "Apoie pés no chão largura dos quadris",
+      "Empurre quadril para cima até corpo em linha reta",
+      "Aperte glúteos intensamente no topo e desça controladamente"
+    ],
+    "tips": [
+      "Maior ativação de glúteos que agachamento",
+      "Mantenha queixo retraído olhando para frente",
+      "Empurre através dos calcanhares",
+      "Segure contração no topo por 2 segundos"
+    ],
+    "commonMistakes": [
+      "Hiperextender lombar no topo",
+      "Não fazer extensão completa de quadril",
+      "Pés muito longe ou muito perto",
+      "Não apertar glúteos no topo"
+    ],
+    "notes": "Melhor exercício para ativação isolada de glúteos. Importante para atletas e estética.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Panturrilha em Pé na Máquina",
+    "description": "Exercício para gastrocnêmio (parte principal da panturrilha) em pé.",
+    "muscleGroup": "Calves",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Posicione-se na máquina com ombros sob as almofadas",
+      "Coloque pontas dos pés na plataforma, calcanhares no ar",
+      "Estenda tornozelos elevando o corpo nas pontas dos pés",
+      "Suba o máximo possível contraindo panturrilhas",
+      "Desça controladamente até alongamento completo"
+    ],
+    "tips": [
+      "Amplitude completa é essencial",
+      "Pause 1 segundo no topo contraindo",
+      "Desça bem lentamente (3-4 segundos)",
+      "Altas repetições (15-20) funcionam bem"
+    ],
+    "commonMistakes": [
+      "Amplitude muito curta",
+      "Usar impulso",
+      "Dobrar joelhos (transfere para sóleo)",
+      "Não pausar no topo"
+    ],
+    "notes": "Panturrilhas respondem bem a volume alto. Treine 3-4x por semana para melhores resultados.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Panturrilha Sentado na Máquina",
+    "description": "Isolamento para sóleo (músculo profundo da panturrilha) com joelhos flexionados.",
+    "muscleGroup": "Calves",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se na máquina com almofadas sobre os joelhos",
+      "Pontas dos pés na plataforma, calcanhares livres",
+      "Estenda tornozelos elevando calcanhares",
+      "Contraia no topo por 1 segundo",
+      "Desça até alongamento completo"
+    ],
+    "tips": [
+      "Trabalha sóleo que é visível lateralmente",
+      "Use carga menor que panturrilha em pé",
+      "Amplitude completa é crucial",
+      "Combine com panturrilha em pé para desenvolvimento completo"
+    ],
+    "commonMistakes": [
+      "Amplitude incompleta",
+      "Usar peso excessivo",
+      "Não pausar no topo",
+      "Movimentos muito rápidos"
+    ],
+    "notes": "Importante para desenvolvimento completo das panturrilhas. Sóleo é 60% da massa da panturrilha.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Frontal com Halteres",
+    "description": "Isolamento para deltóide anterior (frente do ombro).",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com halter em cada mão à frente das coxas",
+      "Mantenha cotovelos levemente flexionados",
+      "Eleve um ou ambos braços à frente até altura dos ombros",
+      "Pause brevemente no topo",
+      "Desça controladamente"
+    ],
+    "tips": [
+      "Não eleve acima da linha dos ombros",
+      "Evite balanço do tronco",
+      "Palmas podem estar voltadas para baixo ou uma para outra",
+      "Deltóide anterior já trabalha muito em supino"
+    ],
+    "commonMistakes": [
+      "Elevar muito alto",
+      "Usar impulso do corpo",
+      "Carga excessiva",
+      "Travar os cotovelos"
+    ],
+    "notes": "Use com moderação pois anterior já trabalha em exercícios de empurrar. Foque mais em lateral e posterior.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral com Cabo",
+    "description": "Isolamento para deltóide lateral usando cabo, tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique lateral à polia baixa",
+      "Segure alça com mão oposta cruzando na frente do corpo",
+      "Eleve braço lateralmente até altura do ombro",
+      "Mantenha cotovelo levemente flexionado",
+      "Desça controladamente mantendo tensão"
+    ],
+    "tips": [
+      "Tensão constante é vantagem sobre halteres",
+      "Não se incline para o lado",
+      "Foque na contração do deltóide lateral",
+      "Pode fazer ambos lados simultaneamente com duas polias"
+    ],
+    "commonMistakes": [
+      "Inclinar corpo para ajudar",
+      "Elevar muito alto",
+      "Usar muito peso",
+      "Perder tensão no cabo"
+    ],
+    "notes": "Excelente variação para hipertrofia. Tensão constante promove pump intenso.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo Inverso com Halteres",
+    "description": "Isolamento para deltóide posterior (traseiro), crucial para ombros equilibrados.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Incline tronco para frente até quase paralelo ao chão",
+      "Halteres pendurados sob os ombros com cotovelos levemente flexionados",
+      "Abra braços lateralmente em arco",
+      "Eleve até braços paralelos ao chão",
+      "Aperte escápulas e desça controladamente"
+    ],
+    "tips": [
+      "Mantenha tronco estável e costas retas",
+      "Foco em apertar escápulas juntas",
+      "Use carga moderada (30-40% do crucifixo normal)",
+      "Essencial para saúde dos ombros"
+    ],
+    "commonMistakes": [
+      "Usar impulso balançando tronco",
+      "Não inclinar suficientemente",
+      "Dobrar muito os cotovelos",
+      "Não retrair escápulas"
+    ],
+    "notes": "Exercício mais importante para saúde e estética dos ombros. Frequentemente negligenciado.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Alta com Barra",
+    "description": "Exercício para trapézio superior e deltóides laterais.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Neck"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com barra nas mãos, pegada na largura dos ombros",
+      "Puxe a barra verticalmente próxima ao corpo",
+      "Cotovelos sobem lateralmente acima das mãos",
+      "Suba até barra na altura do queixo",
+      "Desça controladamente"
+    ],
+    "tips": [
+      "Pegada muito fechada pode causar desconforto nos ombros",
+      "Mantenha barra próxima ao corpo",
+      "Cotovelos devem subir mais alto que as mãos",
+      "Não use peso excessivo"
+    ],
+    "commonMistakes": [
+      "Pegada muito fechada causando impacto",
+      "Usar impulso excessivo",
+      "Não elevar cotovelos suficientemente",
+      "Barra longe do corpo"
+    ],
+    "notes": "Controverso devido a potencial impacto no ombro. Use pegada mais larga se houver desconforto.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Encolhimento com Barra (Shrug)",
+    "description": "Isolamento para trapézio superior, desenvolvendo massa no pescoço/ombro.",
+    "muscleGroup": "Neck",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com barra nas mãos, braços estendidos",
+      "Pegada ligeiramente mais larga que os ombros",
+      "Encolha os ombros elevando-os em direção às orelhas",
+      "Aperte trapézio no topo por 1 segundo",
+      "Desça controladamente até alongamento completo"
+    ],
+    "tips": [
+      "Movimento é apenas vertical, não circular",
+      "Não dobrar os cotovelos",
+      "Mantenha pescoço neutro",
+      "Pode usar straps para carga pesada"
+    ],
+    "commonMistakes": [
+      "Fazer movimento circular dos ombros",
+      "Dobrar os braços",
+      "Amplitude muito curta",
+      "Inclinar cabeça para frente"
+    ],
+    "notes": "Simples mas efetivo para trapézio. Importante para estética e força de pegada.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Face Pull com Corda",
+    "description": "Exercício para deltóide posterior e rotadores externos, crucial para saúde dos ombros.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Ajuste polia na altura dos olhos ou ligeiramente acima",
+      "Segure corda com palmas voltadas uma para outra",
+      "Puxe corda em direção ao rosto separando as mãos",
+      "Finalize com mãos ao lado das orelhas e cotovelos altos",
+      "Retorne controladamente"
+    ],
+    "tips": [
+      "Um dos melhores para saúde dos ombros",
+      "Foque em rotação externa (separar mãos)",
+      "Mantenha cotovelos altos",
+      "Faça altas repetições (15-20)"
+    ],
+    "commonMistakes": [
+      "Não separar as mãos suficientemente",
+      "Cotovelos muito baixos",
+      "Usar peso excessivo",
+      "Não retrair escápulas"
+    ],
+    "notes": "Exercício essencial para todo mundo. Previne lesões e melhora postura. Faça regularmente.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Scott com Barra W",
+    "description": "Isolamento para bíceps em banco Scott, elimina impulso e foca no pico de contração.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": [],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Sente-se no banco Scott com axilas no topo",
+      "Segure barra W com pegada supinada",
+      "Braços estendidos apoiados no banco inclinado",
+      "Flexione cotovelos trazendo barra até ombros",
+      "Desça controladamente sem travar cotovelos"
+    ],
+    "tips": [
+      "Não levante ombros do apoio",
+      "Controle bem a fase excêntrica",
+      "Barra W é mais confortável que barra reta",
+      "Excelente para pico do bíceps"
+    ],
+    "commonMistakes": [
+      "Levantar glúteos ou ombros para ajudar",
+      "Não fazer extensão completa (mas não trave)",
+      "Usar carga excessiva",
+      "Cotovelos saindo do banco"
+    ],
+    "notes": "Favorito para isolamento puro de bíceps. Ajusta posição para diferentes ênfases.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Concentrada com Halter",
+    "description": "Isolamento máximo para bíceps com foco em conexão mente-músculo.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Sente-se com pernas abertas",
+      "Apoie cotovelo na parte interna da coxa",
+      "Segure halter com braço estendido",
+      "Flexione cotovelo trazendo halter até ombro",
+      "Contraia bíceps intensamente e desça controladamente"
+    ],
+    "tips": [
+      "Excelente para pump e conexão mente-músculo",
+      "Foque em sentir cada fibra do bíceps",
+      "Não balance o tronco",
+      "Use carga moderada com execução perfeita"
+    ],
+    "commonMistakes": [
+      "Usar impulso do tronco",
+      "Não fazer amplitude completa",
+      "Carga muito pesada comprometendo forma",
+      "Não segurar contração no topo"
+    ],
+    "notes": "Arnold Schwarzenegger dizia ser seu favorito para bíceps. Ideal para finalização.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Alternada com Halteres",
+    "description": "Rosca clássica alternando braços, permite foco individual em cada bíceps.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique em pé com halter em cada mão, palmas para frente",
+      "Mantenha cotovelos fixos ao lado do corpo",
+      "Flexione um braço por vez até o ombro",
+      "Alterne braços em movimento controlado",
+      "Torção leve do punho ao subir (supinação)"
+    ],
+    "tips": [
+      "Pode girar punho de neutro para supinado ao subir",
+      "Não balance o corpo",
+      "Mantenha tensão em ambos os braços",
+      "Pause no topo contraindo"
+    ],
+    "commonMistakes": [
+      "Usar swing do corpo",
+      "Cotovelos se movendo para frente",
+      "Não fazer supinação completa",
+      "Perder controle na descida"
+    ],
+    "notes": "Versátil e efetivo. Permite maior carga que unilateral pura. Ótimo para volume.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca Inversa com Barra",
+    "description": "Trabalha bíceps, braquial e principalmente braquiorradial (antebraço superior).",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé com barra, pegada pronada na largura dos ombros",
+      "Cotovelos fixos ao lado do corpo",
+      "Flexione cotovelos levantando barra",
+      "Suba até barra próxima aos ombros",
+      "Desça controladamente"
+    ],
+    "tips": [
+      "Use 50-70% da carga da rosca supinada",
+      "Excelente para antebraços e força de pegada",
+      "Previne desequilíbrio muscular",
+      "Barra W pode ser mais confortável"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada",
+      "Balance do tronco",
+      "Não manter pegada pronada",
+      "Cotovelos se movendo"
+    ],
+    "notes": "Importante para desenvolvimento equilibrado de braços. Fortalece também pegada.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Rosca 21 com Barra",
+    "description": "Método de treinamento intenso fazendo 21 reps divididas em 3 amplitudes parciais.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "instructions": [
+      "7 reps da posição inicial até meio (metade inferior)",
+      "7 reps do meio até o topo (metade superior)",
+      "7 reps com amplitude completa",
+      "Tudo isso é 1 série de 21 reps totais",
+      "Descanso mínimo entre as fases"
+    ],
+    "tips": [
+      "Use 60-70% da carga normal",
+      "Excelente para pump extremo",
+      "Queima intensa garantida",
+      "Ótimo finalizador de treino de bíceps"
+    ],
+    "commonMistakes": [
+      "Usar peso muito pesado",
+      "Pausar muito entre fases",
+      "Perder forma por fadiga",
+      "Não fazer amplitude correta em cada fase"
+    ],
+    "notes": "Técnica avançada popularizada por Arnold. Resulta em pump extremo e crescimento.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Francês com Halteres",
+    "description": "Isolamento para cabeça longa do tríceps com halteres, permite maior amplitude.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite-se em banco com halteres acima do peito",
+      "Palmas voltadas uma para outra",
+      "Desça halteres flexionando apenas cotovelos",
+      "Desça até halteres ao lado das orelhas",
+      "Estenda cotovelos retornando à posição inicial"
+    ],
+    "tips": [
+      "Mantenha cotovelos apontando para cima",
+      "Permite maior amplitude que barra",
+      "Trabalha cada braço independentemente",
+      "Corrige assimetrias"
+    ],
+    "commonMistakes": [
+      "Cotovelos se abrindo lateralmente",
+      "Movimentar ombros",
+      "Carga excessiva",
+      "Não fazer extensão completa"
+    ],
+    "notes": "Excelente alternativa ao tríceps testa com barra. Maior amplitude beneficia hipertrofia.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Pulley com Corda",
+    "description": "Isolamento para tríceps com cabo e corda, permite separação das mãos para contração máxima.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique de frente para polia alta com corda",
+      "Segure corda com palmas voltadas uma para outra",
+      "Cotovelos fixos ao lado do corpo",
+      "Estenda cotovelos empurrando corda para baixo",
+      "Separe as mãos no final para contração máxima"
+    ],
+    "tips": [
+      "Mantenha cotovelos completamente fixos",
+      "Separe mãos ao final do movimento",
+      "Incline ligeiramente o tronco para frente",
+      "Não use impulso"
+    ],
+    "commonMistakes": [
+      "Movimentar cotovelos",
+      "Não separar as mãos no final",
+      "Usar balanço do corpo",
+      "Não fazer extensão completa"
+    ],
+    "notes": "Um dos melhores para pump e contração de tríceps. Tensão constante promove hipertrofia.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Pulley com Barra",
+    "description": "Isolamento clássico para tríceps usando barra reta ou W na polia.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Fique de frente para polia alta com barra",
+      "Segure barra com pegada pronada",
+      "Cotovelos fixos ao lado do corpo",
+      "Estenda cotovelos empurrando barra para baixo",
+      "Retorne controladamente sem deixar cotovelos subirem"
+    ],
+    "tips": [
+      "Pegada pronada enfatiza cabeça lateral",
+      "Pegada supinada enfatiza cabeça medial",
+      "Mantenha postura ereta",
+      "Contraia tríceps no final por 1 segundo"
+    ],
+    "commonMistakes": [
+      "Inclinar corpo para frente demais",
+      "Cotovelos se movendo para frente e trás",
+      "Não fazer extensão completa",
+      "Usar peso excessivo"
+    ],
+    "notes": "Exercício básico e efetivo. Permite bom volume sem stress articular excessivo.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Coice (Kickback)",
+    "description": "Isolamento unilateral para tríceps com ênfase em contração máxima.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Apoie um joelho e mão em banco",
+      "Segure halter com braço do lado oposto",
+      "Mantenha cotovelo flexionado e elevado",
+      "Estenda cotovelo levando halter para trás",
+      "Contraia tríceps com braço paralelo ao chão"
+    ],
+    "tips": [
+      "Mantenha cotovelo alto e fixo",
+      "Braço superior deve ficar paralelo ao chão",
+      "Use carga moderada focando em contração",
+      "Excelente conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Baixar o cotovelo durante movimento",
+      "Usar impulso",
+      "Carga muito pesada comprometendo forma",
+      "Não fazer extensão completa"
+    ],
+    "notes": "Excelente para isolamento e definição. Use como finalizador com altas reps.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Overhead com Halter",
+    "description": "Isolamento para cabeça longa do tríceps com halter acima da cabeça.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique em pé ou sentado com halter acima da cabeça",
+      "Segure halter com ambas as mãos sob a anilha superior",
+      "Desça halter atrás da cabeça flexionando cotovelos",
+      "Mantenha cotovelos apontando para cima",
+      "Estenda cotovelos retornando halter acima da cabeça"
+    ],
+    "tips": [
+      "Melhor exercício para cabeça longa do tríceps",
+      "Mantenha cotovelos o mais próximo possível",
+      "Core contraído se executar em pé",
+      "Pode usar dois halteres em vez de um"
+    ],
+    "commonMistakes": [
+      "Cotovelos se abrindo lateralmente",
+      "Arquear lombar excessivamente",
+      "Amplitude muito curta",
+      "Perder controle do peso"
+    ],
+    "notes": "Fundamental para desenvolvimento completo de tríceps. Ênfase única na cabeça longa.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Tríceps Banco (Bench Dips)",
+    "description": "Exercício com peso corporal para tríceps usando dois bancos.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Chest"],
+    "equipment": "Bench",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Apoie mãos em banco atrás de você",
+      "Pés apoiados no chão ou em outro banco à frente",
+      "Desça flexionando cotovelos até 90 graus",
+      "Empurre para cima até extensão completa",
+      "Mantenha cotovelos próximos ao corpo"
+    ],
+    "tips": [
+      "Não desça demais para proteger ombros",
+      "Pés elevados aumenta dificuldade",
+      "Adicione peso no colo para progressão",
+      "Mantenha cotovelos apontando para trás"
+    ],
+    "commonMistakes": [
+      "Descer demais causando stress nos ombros",
+      "Cotovelos muito abertos",
+      "Ombros projetados para frente",
+      "Usar pernas para ajudar"
+    ],
+    "notes": "Ótimo exercício caseiro para tríceps. Fácil de progredir adicionando peso.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Abdominal Bicicleta",
+    "description": "Exercício dinâmico para reto abdominal e oblíquos com rotação de tronco.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite de costas com mãos atrás da cabeça",
+      "Eleve pernas com joelhos flexionados",
+      "Leve cotovelo direito ao joelho esquerdo enquanto estende perna direita",
+      "Alterne lados em movimento de pedalar",
+      "Mantenha lombar no chão"
+    ],
+    "tips": [
+      "Movimento controlado, não rápido",
+      "Foque em rotação de tronco, não só dobrar pescoço",
+      "Estenda bem a perna que vai para trás",
+      "Excelente para oblíquos"
+    ],
+    "commonMistakes": [
+      "Puxar pescoço com as mãos",
+      "Movimentos muito rápidos sem controle",
+      "Não estender completamente a perna",
+      "Lombar saindo do chão"
+    ],
+    "notes": "Um dos melhores para ativação de oblíquos. Alta queima calórica também.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Prancha Lateral",
+    "description": "Isométrico para oblíquos e estabilização lateral do core.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": ["Abductors"],
+    "equipment": "Bodyweight",
+    "category": "Isometric",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Deite de lado apoiando antebraço no chão",
+      "Empilhe os pés um sobre o outro",
+      "Eleve quadril formando linha reta do ombro ao tornozelo",
+      "Mantenha posição com core contraído",
+      "Respire normalmente"
+    ],
+    "tips": [
+      "Não deixe quadril cair",
+      "Cotovelo deve estar diretamente sob o ombro",
+      "Para iniciantes, apoie joelho inferior",
+      "Comece com 20-30 segundos por lado"
+    ],
+    "commonMistakes": [
+      "Quadril caído",
+      "Rotação do tronco",
+      "Cotovelo mal posicionado",
+      "Segurar respiração"
+    ],
+    "notes": "Essencial para estabilidade lateral e prevenção de lesões. Importante para atletas.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação de Pernas Suspensas",
+    "description": "Exercício avançado para abdômen inferior pendurado em barra.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Pendure-se em barra com pegada pronada",
+      "Mantenha pernas estendidas ou joelhos flexionados",
+      "Eleve pernas até paralelas ao chão ou mais alto",
+      "Contraia abdômen no topo",
+      "Desça controladamente"
+    ],
+    "tips": [
+      "Evite balanço usando impulso",
+      "Joelhos flexionados facilita (knee raises)",
+      "Toque pés na barra para versão extrema (toes to bar)",
+      "Excelente para abdômen inferior"
+    ],
+    "commonMistakes": [
+      "Usar balanço excessivo",
+      "Não controlar a descida",
+      "Amplitude muito curta",
+      "Arquear costas demais"
+    ],
+    "notes": "Exercício avançado. Progressão: knee raises → pernas retas paralelas → toes to bar.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Abdominal Remador (Russian Twist)",
+    "description": "Exercício rotacional para oblíquos e reto abdominal.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "MedicineBall",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Sente-se no chão com joelhos flexionados",
+      "Incline tronco para trás cerca de 45 graus",
+      "Segure medicine ball ou peso",
+      "Gire tronco levando peso de um lado ao outro",
+      "Toque peso no chão em cada lado"
+    ],
+    "tips": [
+      "Mantenha pés elevados para maior intensidade",
+      "Movimento controlado de rotação",
+      "Core sempre contraído",
+      "Use peso moderado focando em qualidade"
+    ],
+    "commonMistakes": [
+      "Movimentos muito rápidos",
+      "Não girar suficientemente o tronco",
+      "Perder posição inclinada",
+      "Peso excessivo comprometendo forma"
+    ],
+    "notes": "Excelente para oblíquos e rotação de tronco. Importante para atletas de todos os esportes.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Hollow Body Hold",
+    "description": "Isométrico avançado de ginástica para core completo.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Isometric",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Deite de costas com braços estendidos acima da cabeça",
+      "Eleve ombros e pernas do chão",
+      "Pressione lombar contra o chão",
+      "Mantenha corpo em forma de banana",
+      "Segure a posição respirando"
+    ],
+    "tips": [
+      "Lombar DEVE estar no chão",
+      "Quanto mais baixas as pernas, mais difícil",
+      "Base para muitos movimentos de ginástica",
+      "Comece com 10-20 segundos"
+    ],
+    "commonMistakes": [
+      "Lombar arqueada saindo do chão",
+      "Pernas muito altas (facilita demais)",
+      "Não manter tensão constante",
+      "Segurar respiração"
+    ],
+    "notes": "Exercício fundamental de calistenia. Desenvolve força de core excepcional.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Abdominal Canivete (V-Ups)",
+    "description": "Exercício dinâmico avançado trabalhando reto abdominal completo.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "instructions": [
+      "Deite de costas com braços estendidos acima da cabeça",
+      "Simultaneamente eleve pernas e tronco",
+      "Toque as mãos nos pés formando V",
+      "Desça controladamente à posição inicial",
+      "Mantenha movimento fluido"
+    ],
+    "tips": [
+      "Requer boa força de core",
+      "Mantenha pernas e braços estendidos",
+      "Controle a descida",
+      "Para iniciantes, flexione joelhos"
+    ],
+    "commonMistakes": [
+      "Usar impulso excessivo",
+      "Não descer completamente",
+      "Dobrar muito as pernas",
+      "Movimentos descontrolados"
+    ],
+    "notes": "Exercício avançado para core completo. Alta queima calórica também.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Mountain Climbers",
+    "description": "Exercício dinâmico de core e cardio imitando escalada.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": ["Shoulders", "Quadriceps"],
+    "equipment": "Bodyweight",
+    "category": "HIIT",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Inicie em posição de prancha alta",
+      "Traga joelho direito em direção ao peito",
+      "Retorne e alterne com joelho esquerdo",
+      "Mantenha quadril baixo e core contraído",
+      "Movimento rápido e alternado"
+    ],
+    "tips": [
+      "Quanto mais rápido, maior trabalho cardiovascular",
+      "Mantenha quadril estável",
+      "Ombros sobre as mãos",
+      "Excelente para HIIT"
+    ],
+    "commonMistakes": [
+      "Quadril muito alto",
+      "Perder alinhamento de prancha",
+      "Não trazer joelho suficientemente à frente",
+      "Ombros atrás das mãos"
+    ],
+    "notes": "Versátil para core e condicionamento. Pode variar velocidade conforme objetivo.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Dead Bug",
+    "description": "Exercício de estabilização anti-extensão para core profundo.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Stability",
+    "difficulty": "Beginner",
+    "instructions": [
+      "Deite de costas com braços estendidos para cima",
+      "Joelhos flexionados em 90 graus",
+      "Estenda braço e perna oposta simultaneamente",
+      "Mantenha lombar pressionada no chão",
+      "Retorne e alterne lados"
+    ],
+    "tips": [
+      "Movimento lento e controlado",
+      "Lombar SEMPRE no chão",
+      "Expire ao estender membros",
+      "Excelente para consciência corporal"
+    ],
+    "commonMistakes": [
+      "Lombar saindo do chão",
+      "Movimentos muito rápidos",
+      "Não estender completamente",
+      "Segurar respiração"
+    ],
+    "notes": "Fundamental para estabilização lombar. Ótimo para reabilitação e prevenção.",
+    "workoutLocation": "Both",
+    "isPublic": true
+  },
+  {
+    "name": "Pallof Press",
+    "description": "Exercício anti-rotação com cabo para core e oblíquos.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Stability",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Fique lateral à polia na altura do peito",
+      "Segure alça com ambas as mãos no centro do peito",
+      "Empurre alça para frente estendendo braços",
+      "Resista à rotação mantendo tronco estável",
+      "Retorne ao peito e repita"
+    ],
+    "tips": [
+      "Foco em NÃO rotar o tronco",
+      "Core intensamente contraído",
+      "Postura ereta e estável",
+      "Excelente para força anti-rotacional"
+    ],
+    "commonMistakes": [
+      "Permitir rotação do tronco",
+      "Peso muito pesado",
+      "Não estender braços completamente",
+      "Perder postura ereta"
+    ],
+    "notes": "Um dos melhores para core funcional. Essencial para atletas e prevenção de lesões.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  },
+  {
+    "name": "Abdominal na Roldana Alta",
+    "description": "Isolamento para reto abdominal usando cabo para resistência constante.",
+    "muscleGroup": "Core",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "instructions": [
+      "Ajoelhe-se de frente para polia alta",
+      "Segure corda atrás da cabeça ou ao lado",
+      "Flexione coluna trazendo cotovelos em direção aos joelhos",
+      "Contraia abdômen intensamente no final",
+      "Retorne controladamente mantendo tensão"
+    ],
+    "tips": [
+      "Movimento é de flexão da coluna",
+      "Quadris devem permanecer fixos",
+      "Foque em contrair abdômen, não puxar com braços",
+      "Permite progressão de carga"
+    ],
+    "commonMistakes": [
+      "Usar braços em vez de abdômen",
+      "Movimentar quadris",
+      "Não fazer flexão espinhal completa",
+      "Peso excessivo"
+    ],
+    "notes": "Excelente para sobrecarga progressiva em abdômen. Tensão constante promove hipertrofia.",
+    "workoutLocation": "Gym",
+    "isPublic": true
+  }
+]

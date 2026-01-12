@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { ExerciseBadgeCompact } from '@/components/exercise/exercise-badge';
 
 interface Exercise {
   id: string;
@@ -14,6 +15,7 @@ interface Exercise {
   muscleGroup: string;
   equipment?: string;
   category?: string;
+  workoutLocation?: number; // 0 = Gym, 1 = Home, 2 = Both
   imageUrl?: string;
 }
 
@@ -38,6 +40,14 @@ const EQUIPMENT_TYPES = [
   { value: 'bands', label: 'Elásticos' },
 ];
 
+// Workout location types
+const LOCATION_TYPES = [
+  { value: 'all', label: 'Todos os locais' },
+  { value: '0', label: '🏋️ Academia' },
+  { value: '1', label: '🏠 Casa' },
+  { value: '2', label: '🔄 Ambos' },
+];
+
 export function ExerciseSelectorModal({
   open,
   onClose,
@@ -47,8 +57,9 @@ export function ExerciseSelectorModal({
 }: ExerciseSelectorModalProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [equipmentFilter, setEquipmentFilter] = useState('all');
+  const [locationFilter, setLocationFilter] = useState('all');
 
-  // Filter exercises based on search, muscle group, and equipment
+  // Filter exercises based on search, muscle group, equipment, and location
   const filteredExercises = useMemo(() => {
     let filtered = exercises;
 
@@ -57,6 +68,17 @@ export function ExerciseSelectorModal({
       filtered = filtered.filter(
         (ex) => ex.muscleGroup.toLowerCase() === currentExercise.muscleGroup.toLowerCase()
       );
+    }
+
+    // Filter by workout location
+    if (locationFilter !== 'all') {
+      const locationValue = parseInt(locationFilter);
+      filtered = filtered.filter((ex) => {
+        // If exercise has no location specified, include it
+        if (ex.workoutLocation === undefined) return true;
+        // Include if matches location or if exercise is marked as "Both" (2)
+        return ex.workoutLocation === locationValue || ex.workoutLocation === 2;
+      });
     }
 
     // Filter by equipment type
@@ -80,7 +102,7 @@ export function ExerciseSelectorModal({
     }
 
     return filtered;
-  }, [exercises, currentExercise, equipmentFilter, searchTerm]);
+  }, [exercises, currentExercise, equipmentFilter, locationFilter, searchTerm]);
 
   const handleSelectExercise = (exercise: Exercise) => {
     onSelectExercise(exercise);
@@ -88,12 +110,14 @@ export function ExerciseSelectorModal({
     // Reset filters
     setSearchTerm('');
     setEquipmentFilter('all');
+    setLocationFilter('all');
   };
 
   const handleClose = () => {
     onClose();
     setSearchTerm('');
     setEquipmentFilter('all');
+    setLocationFilter('all');
   };
 
   return (
@@ -131,21 +155,41 @@ export function ExerciseSelectorModal({
             )}
           </div>
 
-          {/* Equipment Filter */}
-          <div>
-            <label className="text-sm font-medium mb-2 block">Filtrar por equipamento:</label>
-            <Select value={equipmentFilter} onValueChange={setEquipmentFilter}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {EQUIPMENT_TYPES.map((type) => (
-                  <SelectItem key={type.value} value={type.value}>
-                    {type.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          {/* Filters Row */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* Location Filter */}
+            <div>
+              <label className="text-sm font-medium mb-2 block">Local:</label>
+              <Select value={locationFilter} onValueChange={setLocationFilter}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {LOCATION_TYPES.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Equipment Filter */}
+            <div>
+              <label className="text-sm font-medium mb-2 block">Equipamento:</label>
+              <Select value={equipmentFilter} onValueChange={setEquipmentFilter}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {EQUIPMENT_TYPES.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
 
@@ -166,16 +210,17 @@ export function ExerciseSelectorModal({
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="font-medium">{exercise.name}</h4>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-medium">{exercise.name}</h4>
+                      <ExerciseBadgeCompact
+                        workoutLocation={exercise.workoutLocation}
+                        equipment={exercise.equipment}
+                      />
+                    </div>
                     <div className="flex gap-2 mt-1 flex-wrap">
                       <Badge variant="secondary" className="text-xs">
                         {exercise.muscleGroup}
                       </Badge>
-                      {exercise.equipment && (
-                        <Badge variant="outline" className="text-xs">
-                          {exercise.equipment}
-                        </Badge>
-                      )}
                     </div>
                   </div>
                   {exercise.imageUrl && (

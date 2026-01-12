@@ -1,6 +1,7 @@
 using GymHero.Application.Common.Exceptions;
 using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
+using GymHero.Shared.Enums;
 using GymHero.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -32,16 +33,16 @@ public class GenerateWorkoutPlanForClientCommandHandler : IRequestHandler<Genera
         var allExercises = await _context.Exercises.AsNoTracking().ToListAsync(cancellationToken);
 
         // Regra 1: Selecionar exercícios compostos primeiro
-        var peitoExercises = allExercises.Where(e => e.MuscleGroup == "Peito").Take(2);
-        var costasExercises = allExercises.Where(e => e.MuscleGroup == "Costas").Take(2);
-        var pernasExercises = allExercises.Where(e => e.MuscleGroup == "Pernas").Take(2);
-        var ombrosExercises = allExercises.Where(e => e.MuscleGroup == "Ombros").Take(1);
-        var bicepsExercises = allExercises.Where(e => e.MuscleGroup == "Bíceps").Take(1);
-        var tricepsExercises = allExercises.Where(e => e.MuscleGroup == "Tríceps").Take(1);
+        var peitoExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Chest).Take(2);
+        var costasExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Back).Take(2);
+        var pernasExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Quadriceps).Take(2);
+        var ombrosExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Shoulders).Take(1);
+        var bicepsExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Biceps).Take(1);
+        var tricepsExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Triceps).Take(1);
 
         // Selecionar exercícios de finalização (abs sempre, cardio ocasionalmente)
-        var absExercises = allExercises.Where(e => e.MuscleGroup == "Abdômen" || e.MuscleGroup == "Abdomen").Take(2);
-        var cardioExercises = allExercises.Where(e => e.MuscleGroup == "Cardio").Take(1);
+        var absExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Core).Take(2);
+        var cardioExercises = allExercises.Where(e => e.MuscleGroup == MuscleGroup.Cardio).Take(1);
 
         var selectedExercises = peitoExercises.Concat(costasExercises)
                                               .Concat(pernasExercises)

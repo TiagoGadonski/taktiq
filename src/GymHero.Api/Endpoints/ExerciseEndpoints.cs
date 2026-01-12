@@ -13,10 +13,23 @@ public static class ExerciseEndpoints
     {
         var group = app.MapGroup("/api/exercises").WithTags("Exercises");
 
-        // GET /api/v1/exercises
-        group.MapGet("/", async (int? workoutLocation, ISender sender) =>
+        // GET /api/v1/exercises?workoutLocation=1&equipment=0&muscleGroup=2&difficulty=1&category=0&search=flexao
+        group.MapGet("/", async (
+            [FromQuery] int? workoutLocation,
+            [FromQuery] int? equipment,
+            [FromQuery] int? muscleGroup,
+            [FromQuery] int? difficulty,
+            [FromQuery] int? category,
+            [FromQuery] string? search,
+            ISender sender) =>
         {
-            var result = await sender.Send(new GetAllExercisesQuery(workoutLocation));
+            var result = await sender.Send(new GetAllExercisesQuery(
+                workoutLocation,
+                equipment,
+                muscleGroup,
+                difficulty,
+                category,
+                search));
             return Results.Ok(result);
         });
 
@@ -31,8 +44,27 @@ public static class ExerciseEndpoints
         // POST /api/v1/exercises
         group.MapPost("/", async ([FromBody] CreateExerciseRequest request, ISender sender) =>
         {
-            var workoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.WorkoutLocation;
-            var command = new CreateExerciseCommand(request.Name, request.Description, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl, workoutLocation);
+            var command = new CreateExerciseCommand(
+                request.Name,
+                request.Description,
+                request.MuscleGroup,
+                request.SecondaryMuscles,
+                request.Equipment,
+                request.Category,
+                request.Difficulty,
+                request.Instructions,
+                request.Tips,
+                request.CommonMistakes,
+                request.Notes,
+                request.VideoUrl,
+                request.ImageUrl,
+                request.ThumbnailUrl,
+                request.WorkoutLocation,
+                request.SpaceRequired,
+                request.Progressions,
+                request.Regressions,
+                request.NoEquipmentAlternative,
+                request.IsPublic);
             var result = await sender.Send(command);
             return Results.Created($"/api/exercises/{result.Id}", result);
         }).RequireAuthorization(); // Allow authenticated users to create exercises
@@ -40,7 +72,28 @@ public static class ExerciseEndpoints
         // PUT /api/v1/exercises/{id}
         group.MapPut("/{id:guid}", async (Guid id, [FromBody] UpdateExerciseRequest request, ISender sender) =>
         {
-            var command = new UpdateExerciseCommand(id, request.Name, request.Description, request.MuscleGroup, request.Category, request.Equipment, request.Notes, request.VideoUrl, request.ImageUrl);
+            var command = new UpdateExerciseCommand(
+                id,
+                request.Name,
+                request.Description,
+                request.MuscleGroup,
+                request.SecondaryMuscles,
+                request.Equipment,
+                request.Category,
+                request.Difficulty,
+                request.Instructions,
+                request.Tips,
+                request.CommonMistakes,
+                request.Notes,
+                request.VideoUrl,
+                request.ImageUrl,
+                request.ThumbnailUrl,
+                request.WorkoutLocation,
+                request.SpaceRequired,
+                request.Progressions,
+                request.Regressions,
+                request.NoEquipmentAlternative,
+                request.IsPublic);
             try
             {
                 await sender.Send(command);

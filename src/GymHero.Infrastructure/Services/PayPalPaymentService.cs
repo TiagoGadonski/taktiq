@@ -27,10 +27,19 @@ public class PayPalPaymentService : IPayPalPaymentService
             throw new InvalidOperationException("PayPal configuration is missing. Please set PayPal:ClientId and PayPal:ClientSecret");
         }
 
+        // Warn if using placeholder values
+        if (clientId.Contains("your_paypal") || clientId.Contains("placeholder") ||
+            clientSecret.Contains("your_paypal") || clientSecret.Contains("placeholder"))
+        {
+            _logger.LogWarning("PayPal is configured with placeholder credentials. Payment processing will not work.");
+        }
+
         // Create PayPal environment
         PayPalEnvironment environment = mode?.ToLower() == "live"
             ? new LiveEnvironment(clientId, clientSecret)
             : new SandboxEnvironment(clientId, clientSecret);
+
+        _logger.LogInformation("PayPal service initialized in {Mode} mode", mode?.ToLower() == "live" ? "LIVE" : "SANDBOX");
 
         _client = new PayPalHttpClient(environment);
     }
@@ -133,7 +142,7 @@ public class PayPalPaymentService : IPayPalPaymentService
         }
     }
 
-    public async Task<bool> RefundCaptureAsync(string captureId, decimal? amount = null)
+    public async Task<bool> RefundCaptureAsync(string captureId, decimal? amount = null, string currency = "BRL")
     {
         try
         {
@@ -145,7 +154,7 @@ public class PayPalPaymentService : IPayPalPaymentService
                 {
                     Amount = new PayPalCheckoutSdk.Payments.Money
                     {
-                        CurrencyCode = "BRL", // Note: Should be parameterized if supporting multiple currencies
+                        CurrencyCode = currency.ToUpper(),
                         Value = amount.Value.ToString("F2")
                     }
                 });

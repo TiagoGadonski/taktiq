@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs; // Garanta que este using está correto
+using GymHero.Shared.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -106,7 +107,7 @@ public static class MeEndpoints
             // Update workout location preference if provided
             if (request.PreferredWorkoutLocation.HasValue)
             {
-                userToUpdate.PreferredWorkoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation.Value;
+                userToUpdate.PreferredWorkoutLocation = (WorkoutLocation)request.PreferredWorkoutLocation.Value;
             }
 
             await context.SaveChangesAsync(ct);

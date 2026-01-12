@@ -1,5 +1,5 @@
 using GymHero.Shared.DTOs;
-using GymHero.Domain.Enums;
+using GymHero.Shared.Enums;
 using MediatR;
 
 namespace GymHero.Application.Features.Auth.Commands;

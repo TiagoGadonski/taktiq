@@ -1,4 +1,5 @@
 using GymHero.Domain.Enums;
+using GymHero.Shared.Enums;
 
 namespace GymHero.Domain.Entities;
 

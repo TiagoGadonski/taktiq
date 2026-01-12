@@ -23,6 +23,10 @@ public class EmailService : IEmailService
         _sendGridClient = sendGridClient;
         _fromEmail = "noreply@taktiq.app";
         _fromName = "TaktIQ";
+
+        // The actual API key validation is done in DependencyInjection.cs
+        // This service will still work, but emails won't be sent with invalid/placeholder keys
+        _logger.LogInformation("EmailService initialized. Emails will be sent from {FromEmail}", _fromEmail);
     }
 
     public async Task SendPasswordResetEmailAsync(string email, string resetToken)

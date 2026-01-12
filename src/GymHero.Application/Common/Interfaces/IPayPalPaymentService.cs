@@ -37,6 +37,7 @@ public interface IPayPalPaymentService
     /// </summary>
     /// <param name="captureId">The PayPal capture ID</param>
     /// <param name="amount">Optional partial refund amount (null for full refund)</param>
+    /// <param name="currency">Currency code (e.g., "BRL", "USD") - defaults to "BRL"</param>
     /// <returns>True if the refund was successful</returns>
-    Task<bool> RefundCaptureAsync(string captureId, decimal? amount = null);
+    Task<bool> RefundCaptureAsync(string captureId, decimal? amount = null, string currency = "BRL");
 }

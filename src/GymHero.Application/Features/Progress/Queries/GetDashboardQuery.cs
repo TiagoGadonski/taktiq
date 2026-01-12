@@ -21,10 +21,3 @@ public record DashboardResponse(
     List<PersonalRecordResponse> RecentPRs,
     DateTime AccountCreatedAt
 );
-
-public record WeeklyWorkoutDto(
-    DateTime Date,
-    string DayOfWeek,
-    bool Completed,
-    int SetsCompleted
-);

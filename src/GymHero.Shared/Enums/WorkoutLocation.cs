@@ -1,4 +1,4 @@
-namespace GymHero.Domain.Enums;
+namespace GymHero.Shared.Enums;
 
 public enum WorkoutLocation
 {

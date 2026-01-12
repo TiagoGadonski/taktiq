@@ -18,7 +18,7 @@ import {
   DollarSign,
   AlertCircle
 } from 'lucide-react';
-import { apiClient } from '@/lib/api';
+import { apiClient, api } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 import {
   Dialog,
@@ -56,14 +56,21 @@ export default function InstructorDashboard() {
   const [inviteEmail, setInviteEmail] = useState('');
   const [isSendingInvite, setIsSendingInvite] = useState(false);
 
-  // Fetch dashboard stats
+  // Fetch dashboard stats from analytics API
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['dashboard-stats'],
     queryFn: async () => {
       try {
-        const data = await apiClient.get<DashboardStats>('/personal/dashboard/stats');
-        return data;
+        const data = await api.analytics.getDashboard();
+        // Map analytics response to DashboardStats structure
+        return {
+          totalClients: data.totalClients || 0,
+          activePlans: data.activePlans || 0,
+          pendingInvites: data.pendingInvites || 0,
+          monthlyRevenue: data.monthlyRevenue || 0,
+        } as DashboardStats;
       } catch (error) {
+        // Fallback to zeros if API fails
         return {
           totalClients: 0,
           activePlans: 0,

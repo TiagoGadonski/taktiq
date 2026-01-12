@@ -86,8 +86,11 @@ export class ExerciseApi {
   constructor(private client: ApiClient) {}
 
   async getAll(params?: {
-    category?: string;
-    muscleGroup?: string;
+    workoutLocation?: number; // 0 = Gym, 1 = Home, 2 = Both
+    equipment?: number;
+    muscleGroup?: number;
+    difficulty?: number;
+    category?: number;
     search?: string;
   }): Promise<Exercise[]> {
     return this.client.get<Exercise[]>('/exercises', { params });
@@ -327,6 +330,146 @@ export class BadgeApi {
   }
 }
 
+export class AnalyticsApi {
+  constructor(private client: ApiClient) {}
+
+  async getDashboard(): Promise<any> {
+    return this.client.get<any>('/analytics/dashboard');
+  }
+
+  async getClientStats(clientId: string): Promise<any> {
+    return this.client.get<any>(`/analytics/client-stats/${clientId}`);
+  }
+
+  async getExercisePopularity(): Promise<any> {
+    return this.client.get<any>('/analytics/exercise-popularity');
+  }
+
+  async getWorkoutTrends(): Promise<any> {
+    return this.client.get<any>('/analytics/workout-trends');
+  }
+}
+
+export class AssessmentProtocolApi {
+  constructor(private client: ApiClient) {}
+
+  async getAll(): Promise<any[]> {
+    return this.client.get<any[]>('/assessment-protocols');
+  }
+
+  async getById(id: string): Promise<any> {
+    return this.client.get<any>(`/assessment-protocols/${id}`);
+  }
+
+  async apply(protocolId: string, data: any): Promise<any> {
+    return this.client.post<any>(`/assessment-protocols/${protocolId}/apply`, data);
+  }
+
+  async getResults(clientId: string): Promise<any[]> {
+    return this.client.get<any[]>(`/assessment-protocols/results/${clientId}`);
+  }
+}
+
+export class ProgressPhotoApi {
+  constructor(private client: ApiClient) {}
+
+  async upload(formData: FormData): Promise<any> {
+    return this.client.post<any>('/progress-photos/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  }
+
+  async getByClient(clientId: string): Promise<any[]> {
+    return this.client.get<any[]>(`/progress-photos/${clientId}`);
+  }
+
+  async compare(clientId: string, date1: string, date2: string): Promise<any> {
+    return this.client.get<any>(`/progress-photos/compare/${clientId}`, {
+      params: { date1, date2 },
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    return this.client.delete<void>(`/progress-photos/${id}`);
+  }
+}
+
+export class PdfApi {
+  constructor(private client: ApiClient) {}
+
+  async downloadClientProgress(clientId: string): Promise<Blob> {
+    const response = await this.client.getAxiosInstance().get(
+      `/pdf/client-progress/${clientId}`,
+      { responseType: 'blob' }
+    );
+    return response.data;
+  }
+
+  async downloadWorkoutPlan(planId: string): Promise<Blob> {
+    const response = await this.client.getAxiosInstance().get(
+      `/pdf/workout-plan/${planId}`,
+      { responseType: 'blob' }
+    );
+    return response.data;
+  }
+
+  async downloadAssessment(assessmentId: string): Promise<Blob> {
+    const response = await this.client.getAxiosInstance().get(
+      `/pdf/assessment/${assessmentId}`,
+      { responseType: 'blob' }
+    );
+    return response.data;
+  }
+
+  async downloadMonthlySummary(clientId: string): Promise<Blob> {
+    const response = await this.client.getAxiosInstance().get(
+      `/pdf/monthly-summary/${clientId}`,
+      { responseType: 'blob' }
+    );
+    return response.data;
+  }
+}
+
+export class PeriodizationApi {
+  constructor(private client: ApiClient) {}
+
+  async getModels(): Promise<any[]> {
+    return this.client.get<any[]>('/periodization/models');
+  }
+
+  async generate(config: any): Promise<any> {
+    return this.client.post<any>('/periodization/generate', config);
+  }
+
+  async getTemplates(): Promise<any[]> {
+    return this.client.get<any[]>('/periodization/templates');
+  }
+
+  async apply(planId: string, periodizationId: string): Promise<any> {
+    return this.client.post<any>(`/periodization/apply/${planId}`, { periodizationId });
+  }
+}
+
+export class WhatsAppApi {
+  constructor(private client: ApiClient) {}
+
+  async sendMessage(data: { phone: string; message: string }): Promise<any> {
+    return this.client.post<any>('/whatsapp/send-message', data);
+  }
+
+  async sendWorkoutPlan(planId: string, data: { phone: string }): Promise<any> {
+    return this.client.post<any>(`/whatsapp/send-workout-plan/${planId}`, data);
+  }
+
+  async sendReminder(clientId: string, data: { phone: string; message?: string }): Promise<any> {
+    return this.client.post<any>(`/whatsapp/send-reminder/${clientId}`, data);
+  }
+
+  async sendProgress(clientId: string, data: { phone: string }): Promise<any> {
+    return this.client.post<any>(`/whatsapp/send-progress/${clientId}`, data);
+  }
+}
+
 export const createApiEndpoints = (client: ApiClient) => ({
   auth: new AuthApi(client),
   exercises: new ExerciseApi(client),
@@ -337,4 +480,10 @@ export const createApiEndpoints = (client: ApiClient) => ({
   progress: new ProgressApi(client),
   challenges: new ChallengeApi(client),
   badges: new BadgeApi(client),
+  analytics: new AnalyticsApi(client),
+  assessmentProtocols: new AssessmentProtocolApi(client),
+  progressPhotos: new ProgressPhotoApi(client),
+  pdf: new PdfApi(client),
+  periodization: new PeriodizationApi(client),
+  whatsapp: new WhatsAppApi(client),
 });

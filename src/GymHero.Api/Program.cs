@@ -249,7 +249,12 @@ try
 
         // Seed comprehensive exercise database
         Log.Information("Checking exercise database...");
-        await GymHero.Infrastructure.Data.Seeders.ExerciseSeeder.SeedExercisesAsync(dbContext);
+        var seederLogger = scope.ServiceProvider.GetRequiredService<ILogger<GymHero.Infrastructure.Data.ApplicationDbContext>>();
+        await GymHero.Infrastructure.Data.Seeders.ExerciseSeeder.SeedExercisesAsync(dbContext, seederLogger);
+
+        // Seed assessment protocols
+        Log.Information("Checking assessment protocols database...");
+        await GymHero.Infrastructure.Data.Seeders.AssessmentProtocolSeeder.SeedProtocolsAsync(dbContext, seederLogger);
     }
     else
     {
@@ -354,6 +359,12 @@ app.MapChallengeEndpoints();
 app.MapRankingEndpoints();
 app.MapPersonalEndpoints();
 app.MapAssessmentEndpoints();
+app.MapAssessmentProtocolEndpoints(); // Physical assessment protocols
+app.MapProgressPhotoEndpoints(); // Before/after progress photos
+app.MapAnalyticsEndpoints(); // Comprehensive trainer analytics
+app.MapWhatsAppEndpoints(); // WhatsApp messaging via Twilio
+app.MapPdfEndpoints(); // PDF report generation
+app.MapPeriodizationEndpoints(); // Automatic periodization
 app.MapPublicPersonalEndpoints();
 app.MapFriendsEndpoints();
 app.MapUsersEndpoints();

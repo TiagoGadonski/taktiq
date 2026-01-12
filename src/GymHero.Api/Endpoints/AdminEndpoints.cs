@@ -5,6 +5,7 @@ using GymHero.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 using GymHero.Infrastructure.Services;
 using GymHero.Infrastructure.Data;
+using GymHero.Infrastructure.Data.Seeders;
 using DomainChallengeTargetType = GymHero.Domain.Enums.ChallengeTargetType;
 
 namespace GymHero.Api.Endpoints;
@@ -533,6 +534,8 @@ public static class AdminEndpoints
         .WithName("CreateCustomAdmin")
         .WithSummary("[DEV ONLY] Creates a custom admin user - DISABLED IN PRODUCTION");
 
+        // TODO: Temporarily disabled - will be replaced in TAREFA 2.3
+        /*
         group.MapPost("/seed-exercises", async (ExerciseSeederService seeder, CancellationToken ct) =>
 {
     await seeder.SeedExercisesAsync(ct);
@@ -573,6 +576,7 @@ public static class AdminEndpoints
         })
         .WithName("SeedComprehensiveExercises")
         .WithSummary("Importa 150+ exercícios curados (casa, academia, halteres, faixas elásticas, calistenia)");
+        */
 
         group.MapPost("/enhance-exercises", async (
             ExerciseEnhancementService enhancer,
@@ -610,6 +614,8 @@ public static class AdminEndpoints
         .WithName("EnhanceExercises")
         .WithSummary("Aprimora exercícios existentes com fotos, vídeos, descrições detalhadas e traduções para português");
 
+        // TODO: Temporarily disabled - will be replaced in TAREFA 2.3
+        /*
         // Seed development data (ONLY FOR DEVELOPMENT)
         group.MapPost("/seed-dev-data", async (
             DevelopmentSeederService seeder,
@@ -640,6 +646,7 @@ public static class AdminEndpoints
         .WithName("SeedDevelopmentData")
         .WithSummary("[DEV ONLY] Seeds database with fake data for development - PTs, Students, Plans, Friendships")
         .AllowAnonymous(); // Allow anonymous in dev for easy testing
+        */
 
         // Seed predefined system challenges
         group.MapPost("/seed-challenges", async (IApplicationDbContext context, CancellationToken cancellationToken) =>
@@ -1273,5 +1280,110 @@ public static class AdminEndpoints
         })
         .WithName("GetPlatformRevenue")
         .WithSummary("Get platform revenue analytics from marketplace fees (Admin only)");
+
+        // ========================================
+        // SEEDER ENDPOINTS
+        // ========================================
+
+        group.MapPost("/seed-all-exercises", async (
+            ApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting exercise seeding from JSON files...");
+
+                await ExerciseSeeder.SeedExercisesAsync(context, logger);
+
+                var totalExercises = await context.Exercises.CountAsync();
+
+                return Results.Ok(new
+                {
+                    message = "Exercícios importados com sucesso!",
+                    totalExercises,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to seed exercises");
+                return Results.Problem(
+                    title: "Seed failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("SeedAllExercises")
+        .WithSummary("Importa todos os exercícios (academia + calistenia) dos arquivos JSON");
+
+        group.MapPost("/seed-assessment-protocols", async (
+            ApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting assessment protocol seeding from JSON file...");
+
+                await AssessmentProtocolSeeder.SeedProtocolsAsync(context, logger);
+
+                var totalProtocols = await context.AssessmentProtocols.CountAsync();
+
+                return Results.Ok(new
+                {
+                    message = "Protocolos de avaliação importados com sucesso!",
+                    totalProtocols,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to seed assessment protocols");
+                return Results.Problem(
+                    title: "Seed failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("SeedAssessmentProtocols")
+        .WithSummary("Importa todos os protocolos de avaliação do arquivo JSON");
+
+        group.MapPost("/seed-all-data", async (
+            ApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting full database seeding (exercises + protocols)...");
+
+                // Seed exercises
+                await ExerciseSeeder.SeedExercisesAsync(context, logger);
+                var totalExercises = await context.Exercises.CountAsync();
+
+                // Seed protocols
+                await AssessmentProtocolSeeder.SeedProtocolsAsync(context, logger);
+                var totalProtocols = await context.AssessmentProtocols.CountAsync();
+
+                return Results.Ok(new
+                {
+                    message = "Todos os dados importados com sucesso!",
+                    totalExercises,
+                    totalProtocols,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to seed database");
+                return Results.Problem(
+                    title: "Seed failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("SeedAllData")
+        .WithSummary("Importa TODOS os dados: exercícios (academia + calistenia) + protocolos de avaliação");
     }
 }

@@ -1,6 +1,6 @@
 using GymHero.Application.Common.Interfaces;
-using GymHero.Shared.DTOs;
 using GymHero.Domain.Entities;
+using GymHero.Shared.DTOs;
 using MediatR;
 
 namespace GymHero.Application.Features.Exercises.Commands;
@@ -8,7 +8,6 @@ namespace GymHero.Application.Features.Exercises.Commands;
 public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseCommand, ExerciseDto>
 {
     private readonly IApplicationDbContext _context;
-
     public CreateExerciseCommandHandler(IApplicationDbContext context) => _context = context;
 
     public async Task<ExerciseDto> Handle(CreateExerciseCommand request, CancellationToken cancellationToken)
@@ -18,15 +17,27 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
             Name = request.Name,
             Description = request.Description,
             MuscleGroup = request.MuscleGroup,
-            Category = request.Category,
+            SecondaryMuscles = request.SecondaryMuscles,
             Equipment = request.Equipment,
+            Category = request.Category,
+            Difficulty = request.Difficulty,
+            Instructions = request.Instructions,
+            Tips = request.Tips,
+            CommonMistakes = request.CommonMistakes,
             Notes = request.Notes,
             VideoUrl = request.VideoUrl,
             ImageUrl = request.ImageUrl,
-            WorkoutLocation = request.WorkoutLocation
+            ThumbnailUrl = request.ThumbnailUrl,
+            WorkoutLocation = request.WorkoutLocation,
+            SpaceRequired = request.SpaceRequired,
+            Progressions = request.Progressions,
+            Regressions = request.Regressions,
+            NoEquipmentAlternative = request.NoEquipmentAlternative,
+            IsPublic = request.IsPublic,
+            CreatedAt = DateTime.UtcNow
         };
 
-        await _context.Exercises.AddAsync(exercise, cancellationToken);
+        _context.Exercises.Add(exercise);
         await _context.SaveChangesAsync(cancellationToken);
 
         return new ExerciseDto
@@ -35,12 +46,26 @@ public class CreateExerciseCommandHandler : IRequestHandler<CreateExerciseComman
             Name = exercise.Name,
             Description = exercise.Description,
             MuscleGroup = exercise.MuscleGroup,
-            Category = exercise.Category,
+            SecondaryMuscles = exercise.SecondaryMuscles,
             Equipment = exercise.Equipment,
+            Category = exercise.Category,
+            Difficulty = exercise.Difficulty,
+            Instructions = exercise.Instructions,
+            Tips = exercise.Tips,
+            CommonMistakes = exercise.CommonMistakes,
             Notes = exercise.Notes,
             VideoUrl = exercise.VideoUrl,
             ImageUrl = exercise.ImageUrl,
-            WorkoutLocation = (int)exercise.WorkoutLocation
+            ThumbnailUrl = exercise.ThumbnailUrl,
+            WorkoutLocation = exercise.WorkoutLocation,
+            SpaceRequired = exercise.SpaceRequired,
+            Progressions = exercise.Progressions,
+            Regressions = exercise.Regressions,
+            NoEquipmentAlternative = exercise.NoEquipmentAlternative,
+            IsPublic = exercise.IsPublic,
+            CreatedByUserId = exercise.CreatedByUserId,
+            CreatedAt = exercise.CreatedAt,
+            UpdatedAt = exercise.UpdatedAt
         };
     }
 }

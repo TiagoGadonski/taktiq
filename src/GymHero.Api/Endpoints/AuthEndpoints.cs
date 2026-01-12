@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using GymHero.Domain.Entities;
 using GymHero.Shared.DTOs;
+using GymHero.Shared.Enums;
 using GymHero.Application.Features.Auth.Commands;
 using GymHero.Application.Features.Auth.Queries;
 using GymHero.Application.Common.Interfaces;
@@ -36,7 +37,7 @@ public static class AuthEndpoints
         {
             try
             {
-                var workoutLocation = (GymHero.Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation;
+                var workoutLocation = (WorkoutLocation)request.PreferredWorkoutLocation;
                 var command = new RegisterCommand(request.Name, request.Email, request.Password, workoutLocation);
                 var result = await sender.Send(command);
 
@@ -312,7 +313,7 @@ public static class AuthEndpoints
                 PersonalTrainerId = invitation.TrainerId,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
-                PreferredWorkoutLocation = (Domain.Enums.WorkoutLocation)request.PreferredWorkoutLocation
+                PreferredWorkoutLocation = (WorkoutLocation)request.PreferredWorkoutLocation
             };
 
             await context.Users.AddAsync(newUser, cancellationToken);

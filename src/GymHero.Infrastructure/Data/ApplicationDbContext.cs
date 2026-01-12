@@ -44,6 +44,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<StudentGroupMember> StudentGroupMembers => Set<StudentGroupMember>();
     public DbSet<StudentAssessment> StudentAssessments => Set<StudentAssessment>();
     public DbSet<WorkoutSessionFeedback> WorkoutSessionFeedbacks => Set<WorkoutSessionFeedback>();
+    public DbSet<AssessmentProtocol> AssessmentProtocols => Set<AssessmentProtocol>();
+    public DbSet<AssessmentResult> AssessmentResults => Set<AssessmentResult>();
+    public DbSet<ProgressPhoto> ProgressPhotos => Set<ProgressPhoto>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -458,6 +461,68 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                 .WithMany()
                 .HasForeignKey(m => m.SenderId)
                 .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Exercise>(entity =>
+        {
+            // Configure JSON columns for lists
+            entity.Property(e => e.SecondaryMuscles)
+                .HasConversion(
+                    v => System.Text.Json.JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions)null),
+                    v => System.Text.Json.JsonSerializer.Deserialize<List<GymHero.Shared.Enums.MuscleGroup>>(v, (System.Text.Json.JsonSerializerOptions)null))
+                .HasColumnType("jsonb");
+
+            entity.Property(e => e.Instructions)
+                .HasConversion(
+                    v => System.Text.Json.JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions)null),
+                    v => System.Text.Json.JsonSerializer.Deserialize<List<string>>(v, (System.Text.Json.JsonSerializerOptions)null))
+                .HasColumnType("jsonb");
+
+            entity.Property(e => e.Tips)
+                .HasConversion(
+                    v => System.Text.Json.JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions)null),
+                    v => System.Text.Json.JsonSerializer.Deserialize<List<string>>(v, (System.Text.Json.JsonSerializerOptions)null))
+                .HasColumnType("jsonb");
+
+            entity.Property(e => e.CommonMistakes)
+                .HasConversion(
+                    v => System.Text.Json.JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions)null),
+                    v => System.Text.Json.JsonSerializer.Deserialize<List<string>>(v, (System.Text.Json.JsonSerializerOptions)null))
+                .HasColumnType("jsonb");
+
+            // Index for finding exercises by muscle group
+            entity.HasIndex(e => e.MuscleGroup)
+                .HasDatabaseName("IX_Exercises_MuscleGroup");
+
+            // Index for finding exercises by equipment
+            entity.HasIndex(e => e.Equipment)
+                .HasDatabaseName("IX_Exercises_Equipment");
+
+            // Index for finding exercises by category
+            entity.HasIndex(e => e.Category)
+                .HasDatabaseName("IX_Exercises_Category");
+
+            // Index for finding exercises by difficulty
+            entity.HasIndex(e => e.Difficulty)
+                .HasDatabaseName("IX_Exercises_Difficulty");
+
+            // Index for finding public vs private exercises
+            entity.HasIndex(e => e.IsPublic)
+                .HasDatabaseName("IX_Exercises_IsPublic");
+
+            // Index for finding exercises by creator (for PT custom exercises)
+            entity.HasIndex(e => e.CreatedByUserId)
+                .HasDatabaseName("IX_Exercises_CreatedByUserId");
+
+            // Composite index for workout location and public status
+            entity.HasIndex(e => new { e.WorkoutLocation, e.IsPublic })
+                .HasDatabaseName("IX_Exercises_LocationPublic");
+
+            // Configure relationship with creator (PT)
+            entity.HasOne(e => e.CreatedByUser)
+                .WithMany()
+                .HasForeignKey(e => e.CreatedByUserId)
+                .OnDelete(DeleteBehavior.SetNull);
         });
 
         base.OnModelCreating(modelBuilder);

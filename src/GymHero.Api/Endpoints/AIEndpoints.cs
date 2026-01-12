@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using GymHero.Api.Services;
 using GymHero.Application.Common.Interfaces;
+using GymHero.Shared.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -107,8 +108,8 @@ public static class AIEndpoints
 
                 // ✅ NEW: Fetch exercises from database for AI to prioritize
                 logger.LogInformation("Fetching exercises from database...");
-                var workoutLocationParam = request.WorkoutLocation ?? (userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home ? "home" :
-                    userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Gym ? "gym" : null);
+                var workoutLocationParam = request.WorkoutLocation ?? (userProfile?.PreferredWorkoutLocation == WorkoutLocation.Home ? "home" :
+                    userProfile?.PreferredWorkoutLocation == WorkoutLocation.Gym ? "gym" : null);
 
                 var exercisesFromDb = await GetExercisesFromDatabase(
                     context,
@@ -185,7 +186,7 @@ public static class AIEndpoints
                 // Check request location first, then fall back to profile preference
                 var isHomeWorkoutRequest = !string.IsNullOrEmpty(request.WorkoutLocation)
                     ? request.WorkoutLocation.ToLower() == "home"
-                    : userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+                    : userProfile?.PreferredWorkoutLocation == WorkoutLocation.Home;
 
                 if (isHomeWorkoutRequest)
                 {
@@ -1091,7 +1092,7 @@ public static class AIEndpoints
         // ✅ Check workout location: prioritize request parameter, then fall back to user profile preference
         var isHomeWorkout = !string.IsNullOrEmpty(workoutLocation)
             ? workoutLocation.ToLower() == "home"
-            : userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+            : userProfile?.PreferredWorkoutLocation == WorkoutLocation.Home;
 
         var random = new Random();
         var parsedPrompt = ParsePrompt(prompt.ToLower());
@@ -2836,30 +2837,29 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         {
             var locationEnum = workoutLocation.ToLower() switch
             {
-                "home" => Domain.Enums.WorkoutLocation.Home,
-                "gym" => Domain.Enums.WorkoutLocation.Gym,
-                _ => Domain.Enums.WorkoutLocation.Both
+                "home" => WorkoutLocation.Home,
+                "gym" => WorkoutLocation.Gym,
+                _ => WorkoutLocation.Both
             };
 
             query = query.Where(e =>
                 e.WorkoutLocation == locationEnum ||
-                e.WorkoutLocation == Domain.Enums.WorkoutLocation.Both);
+                e.WorkoutLocation == WorkoutLocation.Both);
         }
 
         // Filter by muscle group if specified
         if (!string.IsNullOrEmpty(muscleGroupFilter))
         {
-            query = query.Where(e =>
-                e.MuscleGroup.ToLower().Contains(muscleGroupFilter.ToLower()) ||
-                e.Category != null && e.Category.ToLower().Contains(muscleGroupFilter.ToLower()));
+            var muscleGroupEnum = ParseMuscleGroup(muscleGroupFilter);
+            query = query.Where(e => e.MuscleGroup == muscleGroupEnum);
         }
 
         var exercises = await query
             .Select(e => new
             {
                 e.Name,
-                e.MuscleGroup,
-                e.Equipment,
+                MuscleGroup = e.MuscleGroup.ToString(),
+                Equipment = e.Equipment.ToString(),
                 e.Description,
                 e.ImageUrl,
                 e.VideoUrl
@@ -2899,21 +2899,28 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
             return existing.Id;
         }
 
+        // Parse string values to enums
+        var muscleGroupEnum = ParseMuscleGroup(muscleGroup);
+        var equipmentEnum = ParseEquipment(equipment);
+        var categoryEnum = ParseCategory(category ?? muscleGroup);
+
         // Determine workout location based on equipment
-        var workoutLocation = equipment?.ToLower() switch
+        var workoutLocation = equipmentEnum switch
         {
-            "body only" or "peso corporal" or "bodyweight" => Domain.Enums.WorkoutLocation.Home,
-            "barbell" or "dumbbell" or "machine" or "cable" or "barra" or "halter" or "halteres" or "máquina" => Domain.Enums.WorkoutLocation.Gym,
-            _ => Domain.Enums.WorkoutLocation.Both
+            Equipment.None => WorkoutLocation.Home,
+            Equipment.Barbell or Equipment.CableMachine or Equipment.Machine or Equipment.SmithMachine => WorkoutLocation.Gym,
+            Equipment.Dumbbell or Equipment.Kettlebell or Equipment.ResistanceBand or Equipment.Bench => WorkoutLocation.Both,
+            _ => WorkoutLocation.Both
         };
 
         var newExercise = new Domain.Entities.Exercise
         {
             Name = name,
             Description = description,
-            MuscleGroup = muscleGroup,
-            Equipment = equipment,
-            Category = category ?? muscleGroup,
+            MuscleGroup = muscleGroupEnum,
+            Equipment = equipmentEnum,
+            Category = categoryEnum,
+            Difficulty = DifficultyLevel.Intermediate, // Default to intermediate for AI-generated exercises
             WorkoutLocation = workoutLocation,
             ImageUrl = null, // Will be populated later by seeder or manual upload
             VideoUrl = null  // Will be populated later by seeder or manual upload
@@ -3620,7 +3627,7 @@ INSTRUÇÕES CRÍTICAS:
     private static AIWorkoutPlanResponse GenerateMockPlan(string prompt, int daysPerWeek, string? fitnessLevel = null, dynamic? userProfile = null)
     {
         // Check if user prefers home workouts
-        var isHomeWorkout = userProfile?.PreferredWorkoutLocation == GymHero.Domain.Enums.WorkoutLocation.Home;
+        var isHomeWorkout = userProfile?.PreferredWorkoutLocation == WorkoutLocation.Home;
 
         var random = new Random();
         var level = fitnessLevel?.ToLower() ?? "intermediário";
@@ -4285,5 +4292,98 @@ SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qu
         }
 
         return analysis;
+    }
+
+    // ✅ Helper methods to map strings to enums
+    private static MuscleGroup ParseMuscleGroup(string? muscleGroup)
+    {
+        if (string.IsNullOrWhiteSpace(muscleGroup)) return MuscleGroup.FullBody;
+
+        return muscleGroup.ToLower().Trim() switch
+        {
+            "chest" or "peito" or "peitoral" => MuscleGroup.Chest,
+            "back" or "costas" or "dorsais" => MuscleGroup.Back,
+            "shoulders" or "ombros" or "deltoides" => MuscleGroup.Shoulders,
+            "biceps" or "bíceps" => MuscleGroup.Biceps,
+            "triceps" or "tríceps" => MuscleGroup.Triceps,
+            "forearms" or "antebraços" => MuscleGroup.Forearms,
+            "core" or "abdomen" or "abdômen" or "abs" => MuscleGroup.Core,
+            "quadriceps" or "quadríceps" or "coxa frontal" => MuscleGroup.Quadriceps,
+            "hamstrings" or "isquiotibiais" or "posterior de coxa" => MuscleGroup.Hamstrings,
+            "glutes" or "glúteos" or "gluteos" => MuscleGroup.Glutes,
+            "calves" or "panturrilhas" => MuscleGroup.Calves,
+            "adductors" or "adutores" => MuscleGroup.Adductors,
+            "abductors" or "abdutores" => MuscleGroup.Abductors,
+            "full body" or "corpo inteiro" or "full-body" => MuscleGroup.FullBody,
+            "neck" or "pescoço" => MuscleGroup.Neck,
+            "lower back" or "lombar" or "lower-back" => MuscleGroup.LowerBack,
+            "cardio" or "cardiovascular" => MuscleGroup.Cardio,
+            _ => MuscleGroup.FullBody
+        };
+    }
+
+    private static Equipment ParseEquipment(string? equipment)
+    {
+        if (string.IsNullOrWhiteSpace(equipment)) return Equipment.None;
+
+        return equipment.ToLower().Trim() switch
+        {
+            "none" or "nenhum" or "body only" or "bodyweight" or "peso corporal" => Equipment.None,
+            "barbell" or "barra" or "barra livre" => Equipment.Barbell,
+            "dumbbell" or "dumbbells" or "halter" or "halteres" => Equipment.Dumbbell,
+            "kettlebell" or "kettlebells" => Equipment.Kettlebell,
+            "cable" or "cable machine" or "cabo" or "polia" => Equipment.CableMachine,
+            "machine" or "máquina" or "maquina" => Equipment.Machine,
+            "resistance band" or "resistance bands" or "faixa elástica" or "faixa" => Equipment.ResistanceBand,
+            "pull-up bar" or "barra fixa" => Equipment.PullUpBar,
+            "bench" or "banco" => Equipment.Bench,
+            "medicine ball" or "bola medicinal" => Equipment.MedicineBall,
+            "stability ball" or "swiss ball" or "bola suíça" => Equipment.SwissBall,
+            "foam roller" => Equipment.FoamRoller,
+            "jump rope" or "corda" or "corda de pular" => Equipment.JumpRope,
+            "box" or "caixa" => Equipment.Box,
+            "trx" or "suspension trainer" => Equipment.TRX,
+            "battle rope" or "battle ropes" or "corda naval" => Equipment.BattleRopes,
+            "sled" or "trenó" => Equipment.SledProwler,
+            "rowing machine" or "remo" => Equipment.RowingMachine,
+            "treadmill" or "esteira" => Equipment.Treadmill,
+            "bike" or "bicicleta" or "bike ergométrica" => Equipment.Bike,
+            "elliptical" or "elíptico" => Equipment.Elliptical,
+            "assault bike" => Equipment.AssaultBike,
+            _ => Equipment.None
+        };
+    }
+
+    private static ExerciseCategory ParseCategory(string? category)
+    {
+        if (string.IsNullOrWhiteSpace(category)) return ExerciseCategory.Strength;
+
+        return category.ToLower().Trim() switch
+        {
+            "strength" or "força" or "forca" => ExerciseCategory.Strength,
+            "hypertrophy" or "hipertrofia" => ExerciseCategory.Hypertrophy,
+            "power" or "potência" or "potencia" => ExerciseCategory.Power,
+            "endurance" or "resistência" or "resistencia" => ExerciseCategory.Endurance,
+            "cardio" or "cardiovascular" => ExerciseCategory.Cardio,
+            "hiit" => ExerciseCategory.HIIT,
+            "functional" or "funcional" => ExerciseCategory.Functional,
+            "olympic" or "olímpico" or "olimpico" or "olympic lifting" => ExerciseCategory.OlympicLifting,
+            "powerlifting" => ExerciseCategory.Powerlifting,
+            "calisthenics" or "calistenia" => ExerciseCategory.Calisthenics,
+            "plyometric" or "plyometrics" or "pliométrico" or "pliometrico" or "pliometria" => ExerciseCategory.Plyometrics,
+            "isolation" or "isolamento" => ExerciseCategory.Isolation,
+            "compound" or "composto" => ExerciseCategory.Compound,
+            "stretching" or "alongamento" => ExerciseCategory.Stretching,
+            "warmup" or "warm-up" or "aquecimento" => ExerciseCategory.WarmUp,
+            "cooldown" or "cool-down" or "desaquecimento" => ExerciseCategory.CoolDown,
+            "mobility" or "mobilidade" => ExerciseCategory.Mobility,
+            "flexibility" or "flexibilidade" => ExerciseCategory.Flexibility,
+            "balance" or "equilíbrio" or "equilibrio" => ExerciseCategory.Balance,
+            "stability" or "estabilidade" or "estabilização" => ExerciseCategory.Stability,
+            "rehabilitation" or "reabilitação" or "reabilitacao" => ExerciseCategory.Rehabilitation,
+            "posture" or "posture correction" or "postura" or "correção postural" => ExerciseCategory.PostureCorrection,
+            "isometric" or "isométrico" => ExerciseCategory.Isometric,
+            _ => ExerciseCategory.Strength
+        };
     }
 }
