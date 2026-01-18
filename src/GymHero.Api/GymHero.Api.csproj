@@ -32,4 +32,16 @@
 		<PackageReference Include="System.Threading.RateLimiting" Version="9.0.10" />
 	</ItemGroup>
 
+	<!-- Include seeder JSON files from Infrastructure project -->
+	<ItemGroup>
+		<Content Include="..\GymHero.Infrastructure\Data\Seeders\*.json" Link="Data\Seeders\%(Filename)%(Extension)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Include="..\GymHero.Infrastructure\Data\Seeders\exercises\*.json" Link="Data\Seeders\exercises\%(Filename)%(Extension)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
 </Project>
