@@ -51,6 +51,7 @@ public static class DiagnosticsEndpoints
         {
             status = "healthy",
             message = "API is responding",
+            version = "2.0.0-exercises",
             timestamp = DateTime.UtcNow,
             environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
         }))
