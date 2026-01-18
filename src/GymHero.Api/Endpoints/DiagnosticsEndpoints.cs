@@ -55,5 +55,41 @@ public static class DiagnosticsEndpoints
             environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
         }))
         .AllowAnonymous();
+
+        // Check seeder files
+        group.MapGet("/seeder-files", () =>
+        {
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            var exercisesPath = Path.Combine(baseDir, "Data", "Seeders", "exercises");
+            var seedersPath = Path.Combine(baseDir, "Data", "Seeders");
+
+            var exerciseFiles = new List<string>();
+            var seederFiles = new List<string>();
+
+            if (Directory.Exists(exercisesPath))
+            {
+                exerciseFiles = Directory.GetFiles(exercisesPath, "*.json").Select(Path.GetFileName).ToList()!;
+            }
+
+            if (Directory.Exists(seedersPath))
+            {
+                seederFiles = Directory.GetFiles(seedersPath, "*.json").Select(Path.GetFileName).ToList()!;
+            }
+
+            return Results.Ok(new
+            {
+                baseDirectory = baseDir,
+                exercisesFolderPath = exercisesPath,
+                exercisesFolderExists = Directory.Exists(exercisesPath),
+                exerciseFilesCount = exerciseFiles.Count,
+                exerciseFiles = exerciseFiles.Take(10).ToList(),
+                seedersFolderPath = seedersPath,
+                seedersFolderExists = Directory.Exists(seedersPath),
+                seederFilesCount = seederFiles.Count,
+                seederFiles = seederFiles,
+                timestamp = DateTime.UtcNow
+            });
+        })
+        .AllowAnonymous();
     }
 }
