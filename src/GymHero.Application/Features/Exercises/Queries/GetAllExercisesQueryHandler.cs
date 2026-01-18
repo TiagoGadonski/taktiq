@@ -2,17 +2,29 @@ using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace GymHero.Application.Features.Exercises.Queries;
 
 public class GetAllExercisesQueryHandler : IRequestHandler<GetAllExercisesQuery, IEnumerable<ExerciseDto>>
 {
     private readonly IApplicationDbContext _context;
-    public GetAllExercisesQueryHandler(IApplicationDbContext context) => _context = context;
+    private readonly ILogger<GetAllExercisesQueryHandler> _logger;
+
+    public GetAllExercisesQueryHandler(IApplicationDbContext context, ILogger<GetAllExercisesQueryHandler> logger)
+    {
+        _context = context;
+        _logger = logger;
+    }
 
     public async Task<IEnumerable<ExerciseDto>> Handle(GetAllExercisesQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.Exercises.AsNoTracking();
+        try
+        {
+            _logger.LogInformation("GetAllExercisesQuery - Starting query with filters: WorkoutLocation={WorkoutLocation}, Equipment={Equipment}, MuscleGroup={MuscleGroup}, Difficulty={Difficulty}, Category={Category}, Search={Search}",
+                request.WorkoutLocation, request.Equipment, request.MuscleGroup, request.Difficulty, request.Category, request.Search);
+
+            var query = _context.Exercises.AsNoTracking();
 
         // Filter by workout location if specified
         if (request.WorkoutLocation.HasValue)
@@ -58,34 +70,43 @@ public class GetAllExercisesQueryHandler : IRequestHandler<GetAllExercisesQuery,
                                     (e.Description != null && e.Description.ToLower().Contains(searchTerm)));
         }
 
-        return await query
-            .Select(e => new ExerciseDto
-            {
-                Id = e.Id,
-                Name = e.Name,
-                Description = e.Description,
-                MuscleGroup = e.MuscleGroup,
-                Category = e.Category,
-                Equipment = e.Equipment,
-                SecondaryMuscles = e.SecondaryMuscles ?? new List<GymHero.Shared.Enums.MuscleGroup>(),
-                Difficulty = e.Difficulty,
-                Instructions = e.Instructions ?? new List<string>(),
-                Tips = e.Tips ?? new List<string>(),
-                CommonMistakes = e.CommonMistakes ?? new List<string>(),
-                Notes = e.Notes,
-                VideoUrl = e.VideoUrl,
-                ImageUrl = e.ImageUrl,
-                ThumbnailUrl = e.ThumbnailUrl,
-                WorkoutLocation = e.WorkoutLocation,
-                SpaceRequired = e.SpaceRequired ?? string.Empty,
-                Progressions = e.Progressions ?? new List<string>(),
-                Regressions = e.Regressions ?? new List<string>(),
-                NoEquipmentAlternative = e.NoEquipmentAlternative ?? string.Empty,
-                IsPublic = e.IsPublic,
-                CreatedByUserId = e.CreatedByUserId,
-                CreatedAt = e.CreatedAt,
-                UpdatedAt = e.UpdatedAt
-            })
-            .ToListAsync(cancellationToken);
+            var result = await query
+                .Select(e => new ExerciseDto
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Description = e.Description,
+                    MuscleGroup = e.MuscleGroup,
+                    Category = e.Category,
+                    Equipment = e.Equipment,
+                    SecondaryMuscles = e.SecondaryMuscles ?? new List<GymHero.Shared.Enums.MuscleGroup>(),
+                    Difficulty = e.Difficulty,
+                    Instructions = e.Instructions ?? new List<string>(),
+                    Tips = e.Tips ?? new List<string>(),
+                    CommonMistakes = e.CommonMistakes ?? new List<string>(),
+                    Notes = e.Notes,
+                    VideoUrl = e.VideoUrl,
+                    ImageUrl = e.ImageUrl,
+                    ThumbnailUrl = e.ThumbnailUrl,
+                    WorkoutLocation = e.WorkoutLocation,
+                    SpaceRequired = e.SpaceRequired ?? string.Empty,
+                    Progressions = e.Progressions ?? new List<string>(),
+                    Regressions = e.Regressions ?? new List<string>(),
+                    NoEquipmentAlternative = e.NoEquipmentAlternative ?? string.Empty,
+                    IsPublic = e.IsPublic,
+                    CreatedByUserId = e.CreatedByUserId,
+                    CreatedAt = e.CreatedAt,
+                    UpdatedAt = e.UpdatedAt
+                })
+                .ToListAsync(cancellationToken);
+
+            _logger.LogInformation("GetAllExercisesQuery - Successfully retrieved {Count} exercises", result.Count());
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "GetAllExercisesQuery - Error retrieving exercises: {Message}", ex.Message);
+            throw;
+        }
     }
 }

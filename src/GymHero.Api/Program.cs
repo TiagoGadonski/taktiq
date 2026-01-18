@@ -311,6 +311,9 @@ app.UseStaticFiles();
 // IMPORTANT: CORS must come early, before other middleware that might block requests
 app.UseCors(app.Environment.IsDevelopment() ? "AllowDevelopment" : "Production");
 
+// Additional CORS headers middleware - ensures headers are present even in error responses
+app.UseMiddleware<CorsHeadersMiddleware>();
+
 // Security headers middleware - adds protective HTTP headers
 app.UseMiddleware<SecurityHeadersMiddleware>();
 
@@ -338,6 +341,9 @@ app.UseAuthorization();
 // Health check endpoint for Azure monitoring (no authentication required)
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
    .AllowAnonymous();
+
+// Diagnostics endpoints for troubleshooting
+app.MapDiagnosticsEndpoints();
 
 // EMERGENCY ENDPOINT - Restart App Service
 app.MapPost("/api/admin/force-restart", () =>
