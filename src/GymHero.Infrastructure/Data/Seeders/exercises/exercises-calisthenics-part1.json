@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Standard Push-Up",
+    "description": "Maos na largura dos ombros, corpo reto da cabeca aos calcanhares. Desça ate o peito quase tocar o chao e empurre.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standard-push-up.png"
+  },
+  {
+    "name": "Wide Push-Up",
+    "description": "Push-up com maos mais afastadas que largura dos ombros. Maior enfase no peito.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wide-push-up.png"
+  },
+  {
+    "name": "Close Grip Push-Up",
+    "description": "Push-up com maos proximas, formando um diamante ou triangulo. Maior enfase em triceps.",
+    "musclesWorked": ["Triceps", "Chest", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/close-grip-push-up.png"
+  },
+  {
+    "name": "Diamond Push-Up",
+    "description": "Push-up com polegares e indicadores formando um diamante. Trabalho intenso de triceps.",
+    "musclesWorked": ["Triceps", "Chest", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/diamond-push-up.png"
+  },
+  {
+    "name": "Incline Push-Up",
+    "description": "Push-up com maos elevadas em superficie como banco ou parede. Mais facil que push-up normal.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/incline-push-up.png"
+  },
+  {
+    "name": "Decline Push-Up",
+    "description": "Push-up com pes elevados. Aumenta enfase na parte superior do peito e ombros.",
+    "musclesWorked": ["Chest", "Shoulders", "Triceps"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/decline-push-up.png"
+  },
+  {
+    "name": "Pike Push-Up",
+    "description": "Push-up em V invertido com quadril elevado. Enfatiza ombros, progressao para handstand push-up.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pike-push-up.png"
+  },
+  {
+    "name": "Elevated Pike Push-Up",
+    "description": "Pike push-up com pes elevados em superficie. Aumenta carga nos ombros.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/elevated-pike-push-up.png"
+  },
+  {
+    "name": "Handstand Push-Up Wall",
+    "description": "Em parada de mao contra parede, flexione os cotovelos descendo a cabeca e empurre de volta.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/handstand-push-up-wall.png"
+  },
+  {
+    "name": "Archer Push-Up",
+    "description": "Push-up onde um braco se estende lateralmente enquanto o outro faz a flexao. Progressao para one arm.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/archer-push-up.png"
+  },
+  {
+    "name": "One Arm Push-Up",
+    "description": "Push-up executado com apenas uma mao. Requer forca e estabilidade extremas.",
+    "musclesWorked": ["Chest", "Triceps", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/one-arm-push-up.png"
+  },
+  {
+    "name": "Pseudo Planche Push-Up",
+    "description": "Push-up com maos posicionadas mais para tras, proximo ao quadril. Progressao para planche.",
+    "musclesWorked": ["Chest", "Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pseudo-planche-push-up.png"
+  },
+  {
+    "name": "Typewriter Push-Up",
+    "description": "No topo do push-up, mova o corpo lateralmente de uma mao para outra mantendo posicao baixa.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/typewriter-push-up.png"
+  },
+  {
+    "name": "Clapping Push-Up",
+    "description": "Push-up explosivo onde voce bate palma no ar antes de aterrissar.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/clapping-push-up.png"
+  },
+  {
+    "name": "Plyometric Push-Up",
+    "description": "Push-up explosivo onde as maos saem do chao. Base para variacoes mais avancadas.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plyometric-push-up.png"
+  },
+  {
+    "name": "Staggered Push-Up",
+    "description": "Push-up com uma mao mais a frente que a outra. Alterne os lados.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/staggered-push-up.png"
+  },
+  {
+    "name": "Sphinx Push-Up",
+    "description": "Comece em prancha de antebracos, empurre para posicao de push-up alto e retorne.",
+    "musclesWorked": ["Triceps", "Chest", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sphinx-push-up.png"
+  },
+  {
+    "name": "Hindu Push-Up",
+    "description": "Movimento fluido de pike para cobra em arco. Trabalha flexibilidade e forca.",
+    "musclesWorked": ["Chest", "Shoulders", "Triceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hindu-push-up.png"
+  },
+  {
+    "name": "Dive Bomber Push-Up",
+    "description": "Similar ao hindu push-up, mas retorne pelo mesmo caminho em arco reverso.",
+    "musclesWorked": ["Chest", "Shoulders", "Triceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/dive-bomber-push-up.png"
+  },
+  {
+    "name": "Spiderman Push-Up",
+    "description": "Push-up trazendo o joelho ao cotovelo do mesmo lado na descida. Alterne os lados.",
+    "musclesWorked": ["Chest", "Triceps", "Obliques", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/spiderman-push-up.png"
+  },
+  {
+    "name": "Knee Push-Up",
+    "description": "Push-up com joelhos apoiados no chao. Progressao para push-up completo.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/knee-push-up.png"
+  },
+  {
+    "name": "Wall Push-Up",
+    "description": "Push-up em pe contra a parede. Mais facil, otimo para iniciantes.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-push-up.png"
+  },
+  {
+    "name": "Negative Push-Up",
+    "description": "Desça lentamente em 3-5 segundos ate o chao. Use joelhos para voltar ao topo.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/negative-push-up.png"
+  },
+  {
+    "name": "Tempo Push-Up",
+    "description": "Push-up com tempo controlado: 3 segundos descendo, pausa, 3 segundos subindo.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tempo-push-up.png"
+  },
+  {
+    "name": "Pause Push-Up",
+    "description": "Push-up com pausa de 2-3 segundos no fundo do movimento antes de empurrar.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pause-push-up.png"
+  },
+  {
+    "name": "One and Half Push-Up",
+    "description": "Desça completo, suba metade, desça de novo e suba completo. Conta como uma rep.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/one-half-push-up.png"
+  },
+  {
+    "name": "Push-Up to Side Plank",
+    "description": "Execute push-up e no topo rotacione para prancha lateral. Alterne os lados.",
+    "musclesWorked": ["Chest", "Triceps", "Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/push-up-side-plank.png"
+  },
+  {
+    "name": "Push-Up with Shoulder Tap",
+    "description": "No topo do push-up, toque o ombro oposto com cada mao alternadamente.",
+    "musclesWorked": ["Chest", "Triceps", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/push-up-shoulder-tap.png"
+  },
+  {
+    "name": "Tricep Push-Up",
+    "description": "Push-up com cotovelos colados ao corpo ao longo de toda a amplitude. Foco em triceps.",
+    "musclesWorked": ["Triceps", "Chest", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tricep-push-up.png"
+  },
+  {
+    "name": "Push-Up Plus",
+    "description": "Push-up com protracao escapular extra no topo, arredondando as costas superiores.",
+    "musclesWorked": ["Chest", "Serratus Anterior", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/push-up-plus.png"
+  }
+]

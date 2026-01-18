@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Corpse Pose",
+    "description": "Deitado de costas com bracos ao lado do corpo, relaxe completamente.",
+    "musclesWorked": ["Full Body"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/corpse-pose.png"
+  },
+  {
+    "name": "Legs Up the Wall",
+    "description": "Deitado com gluteos na parede e pernas estendidas para cima.",
+    "musclesWorked": ["Hamstrings", "Lower Back"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/legs-up-wall.png"
+  },
+  {
+    "name": "Scorpion Stretch",
+    "description": "Deitado de brucos, leve um pe em arco em direcao ao ombro oposto.",
+    "musclesWorked": ["Hip Flexors", "Lower Back", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/scorpion-stretch.png"
+  },
+  {
+    "name": "Prone Scorpion",
+    "description": "De brucos com bracos abertos, rotacione perna por cima tentando tocar mao oposta.",
+    "musclesWorked": ["Hip Flexors", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/prone-scorpion.png"
+  },
+  {
+    "name": "Shoulder Dislocates",
+    "description": "Com bastao ou toalha, passe bracos retos por cima da cabeca e por tras.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Stick"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/shoulder-dislocates.png"
+  },
+  {
+    "name": "Band Shoulder Stretch",
+    "description": "Use band para assistir em rotacao externa e interna dos ombros.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/band-shoulder-stretch.png"
+  },
+  {
+    "name": "Sleeper Stretch",
+    "description": "Deitado de lado, pressione antebraco em direcao ao chao para rotacao interna.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/sleeper-stretch.png"
+  },
+  {
+    "name": "Cross Body Shoulder Stretch",
+    "description": "Puxe braco horizontalmente pelo peito com o outro braco.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/cross-body-shoulder-stretch.png"
+  },
+  {
+    "name": "Behind Back Reach",
+    "description": "Tente tocar maos atras das costas - uma por cima, outra por baixo.",
+    "musclesWorked": ["Shoulders", "Chest"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/behind-back-reach.png"
+  },
+  {
+    "name": "Towel Behind Back Stretch",
+    "description": "Use toalha para conectar maos atras das costas quando nao conseguir toca-las.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Towel"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/towel-behind-back-stretch.png"
+  },
+  {
+    "name": "Thoracic Extension Foam Roller",
+    "description": "Deite com foam roller sob a coluna toracica e arqueie para tras.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/thoracic-extension-foam-roller.png"
+  },
+  {
+    "name": "Thoracic Rotation",
+    "description": "Deitado de lado, rotacione tronco superior abrindo braco para o outro lado.",
+    "musclesWorked": ["Upper Back", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/thoracic-rotation.png"
+  },
+  {
+    "name": "Open Book Stretch",
+    "description": "Deitado de lado com joelhos dobrados, abra braco superior rotacionando torax.",
+    "musclesWorked": ["Upper Back", "Chest"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/open-book-stretch.png"
+  },
+  {
+    "name": "Foam Roller Lat Stretch",
+    "description": "Deitado de lado com braco estendido sobre foam roller, role para alongar latissimo.",
+    "musclesWorked": ["Lats"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-lat-stretch.png"
+  },
+  {
+    "name": "Foam Roller Upper Back",
+    "description": "Deite com foam roller sob costas e role de cima para baixo.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-upper-back.png"
+  },
+  {
+    "name": "Foam Roller Quad",
+    "description": "Apoie frontal das coxas no foam roller e role de cima para baixo.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-quad.png"
+  },
+  {
+    "name": "Foam Roller Hamstring",
+    "description": "Sente com posteriores sobre foam roller e role de isquio ate atras do joelho.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-hamstring.png"
+  },
+  {
+    "name": "Foam Roller IT Band",
+    "description": "Deitado de lado com lateral da coxa no foam roller, role do quadril ao joelho.",
+    "musclesWorked": ["IT Band"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-it-band.png"
+  },
+  {
+    "name": "Foam Roller Calf",
+    "description": "Sente com panturrilha sobre foam roller e role do tornozelo ate abaixo do joelho.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-calf.png"
+  },
+  {
+    "name": "Foam Roller Glute",
+    "description": "Sente sobre foam roller e role os gluteos cruzando uma perna sobre a outra.",
+    "musclesWorked": ["Glutes"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/foam-roller-glute.png"
+  },
+  {
+    "name": "Lacrosse Ball Glute Release",
+    "description": "Sente sobre bola de lacrosse e aplique pressao em pontos tensos dos gluteos.",
+    "musclesWorked": ["Glutes", "Piriformis"],
+    "equipment": ["Lacrosse Ball"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lacrosse-ball-glute-release.png"
+  },
+  {
+    "name": "Lacrosse Ball Pec Release",
+    "description": "Contra parede, aplique pressao com bola no peitoral buscando pontos tensos.",
+    "musclesWorked": ["Chest"],
+    "equipment": ["Lacrosse Ball", "Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lacrosse-ball-pec-release.png"
+  },
+  {
+    "name": "Lacrosse Ball Upper Back",
+    "description": "Contra parede, use bola para liberar pontos tensos nas costas superiores.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Lacrosse Ball", "Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lacrosse-ball-upper-back.png"
+  },
+  {
+    "name": "Lacrosse Ball Foot Release",
+    "description": "Em pe, role bola de lacrosse sob a sola do pe aplicando pressao.",
+    "musclesWorked": ["Foot"],
+    "equipment": ["Lacrosse Ball"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lacrosse-ball-foot-release.png"
+  },
+  {
+    "name": "PNF Hamstring Stretch",
+    "description": "Alongamento assistido com contracoes isometricas para maior amplitude.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Partner"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/pnf-hamstring-stretch.png"
+  },
+  {
+    "name": "PNF Hip Flexor Stretch",
+    "description": "Alongamento de flexores do quadril com tecnica de contracao-relaxamento.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Partner"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/pnf-hip-flexor-stretch.png"
+  },
+  {
+    "name": "PNF Chest Stretch",
+    "description": "Alongamento de peitoral assistido com contracao seguida de relaxamento.",
+    "musclesWorked": ["Chest"],
+    "equipment": ["Partner"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/pnf-chest-stretch.png"
+  },
+  {
+    "name": "Active Isolated Hamstring",
+    "description": "Alongamento ativo puxando perna com corda por 2 segundos, repetindo multiplas vezes.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Rope"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/active-isolated-hamstring.png"
+  },
+  {
+    "name": "Standing Toe Touch",
+    "description": "Em pe, flexione tronco tentando tocar os pes com as maos.",
+    "musclesWorked": ["Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-toe-touch.png"
+  },
+  {
+    "name": "Lying Figure 4 with Strap",
+    "description": "Figure 4 stretch usando cinta para puxar a perna mais proximo ao peito.",
+    "musclesWorked": ["Glutes", "Piriformis"],
+    "equipment": ["Strap"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lying-figure-4-strap.png"
+  }
+]

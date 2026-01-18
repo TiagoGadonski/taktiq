@@ -1,0 +1,1131 @@
+[
+  {
+    "name": "Handstand Push-up (Parede)",
+    "description": "Desenvolvimento invertido usando peso corporal contra a parede.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Entre em handstand contra a parede (barriga ou costas para parede)",
+      "Mãos na largura dos ombros ou ligeiramente mais largas",
+      "Desça a cabeça em direção ao chão",
+      "Toque levemente ou pare antes",
+      "Empurre de volta até extensão",
+      "Mantenha core contraído"
+    ],
+    "progressions": [
+      "Handstand push-up deficit",
+      "Freestanding HSPU",
+      "HSPU strict sem kipping"
+    ],
+    "regressions": [
+      "Pike push-up",
+      "Pike push-up com pés elevados",
+      "HSPU negativo"
+    ],
+    "tips": [
+      "Requer força significativa de ombro",
+      "Pratique handstand hold primeiro",
+      "Comece com negativos",
+      "Costas para parede é mais fácil"
+    ],
+    "commonMistakes": [
+      "Cair da parede",
+      "Amplitude incompleta",
+      "Perder alinhamento",
+      "Não ter força base suficiente"
+    ],
+    "notes": "Meta avançada de calistenia para força de ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=handstand+push+up+wall",
+    "isPublic": true
+  },
+  {
+    "name": "Pike Push-up",
+    "description": "Flexão com quadril elevado para enfatizar ombros - progressão para HSPU.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Chest"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição de flexão com quadril elevado formando V invertido",
+      "Mãos na largura dos ombros",
+      "Cabeça olhando para os pés",
+      "Desça a cabeça em direção ao chão",
+      "Empurre de volta estendendo os braços"
+    ],
+    "progressions": [
+      "Pike push-up com pés elevados",
+      "Pike push-up deficit",
+      "Wall handstand push-up"
+    ],
+    "regressions": [
+      "Pike menos acentuado",
+      "Flexão declinada",
+      "Pike negativo"
+    ],
+    "tips": [
+      "Primeira progressão para HSPU",
+      "Quanto mais vertical, mais difícil",
+      "Mantenha pernas o mais retas possível",
+      "Cotovelos apontam para trás"
+    ],
+    "commonMistakes": [
+      "Quadril não elevado suficiente",
+      "Cotovelos abrindo para os lados",
+      "Amplitude incompleta",
+      "Não olhar para os pés"
+    ],
+    "notes": "Fundamental na progressão para handstand push-up.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pike+push+up",
+    "isPublic": true
+  },
+  {
+    "name": "Pike Push-up com Pés Elevados",
+    "description": "Pike push-up com pés em superfície elevada para maior dificuldade.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Chest"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pés em superfície elevada (banco, caixa)",
+      "Mãos no chão, quadril bem elevado",
+      "Quanto mais alto os pés, mais vertical fica",
+      "Desça a cabeça em direção ao chão",
+      "Empurre de volta"
+    ],
+    "progressions": [
+      "Aumentar altura dos pés",
+      "Pike contra parede",
+      "Wall HSPU"
+    ],
+    "regressions": [
+      "Pike push-up no chão",
+      "Reduzir altura dos pés",
+      "Pike negativo"
+    ],
+    "tips": [
+      "Progressão entre pike e HSPU",
+      "Ajuste altura para sua força",
+      "Superfície estável é essencial",
+      "Mantenha core contraído"
+    ],
+    "commonMistakes": [
+      "Superfície instável",
+      "Pés escorregando",
+      "Amplitude incompleta",
+      "Perder posição do quadril"
+    ],
+    "notes": "Ponte entre pike push-up e handstand push-up.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pike+push+up+feet+elevated",
+    "isPublic": true
+  },
+  {
+    "name": "Wall Walk",
+    "description": "Caminhada na parede subindo até handstand e descendo.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Comece em posição de flexão com pés na parede",
+      "Caminhe com as mãos para trás enquanto sobe os pés",
+      "Continue até estar em handstand (ou próximo)",
+      "Desça caminhando as mãos para frente",
+      "Retorne à posição inicial"
+    ],
+    "progressions": [
+      "Subir completamente até handstand",
+      "Wall walk com pausa no topo",
+      "Múltiplos wall walks consecutivos"
+    ],
+    "regressions": [
+      "Subir apenas parcialmente",
+      "Fazer mais lento",
+      "Praticar apenas hold na parede"
+    ],
+    "tips": [
+      "Excelente para construir confiança em handstand",
+      "Trabalha ombros e core intensamente",
+      "Movimento controlado",
+      "Não tenha medo de cair (para frente)"
+    ],
+    "commonMistakes": [
+      "Subir rápido demais",
+      "Perder controle",
+      "Não chegar alto o suficiente",
+      "Pular etapas"
+    ],
+    "notes": "Preparação excelente para handstand e HSPU.",
+    "videoUrl": "https://www.youtube.com/results?search_query=wall+walk+exercise",
+    "isPublic": true
+  },
+  {
+    "name": "Shoulder Tap em Prancha",
+    "description": "Toque no ombro em posição de prancha para estabilidade e ombros.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Stability",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição de prancha alta",
+      "Corpo em linha reta",
+      "Levante uma mão e toque o ombro oposto",
+      "Retorne a mão ao chão",
+      "Alterne os lados",
+      "Minimize rotação do quadril"
+    ],
+    "progressions": [
+      "Fazer mais rápido",
+      "Adicionar peso nas costas",
+      "Fazer em posição de pike"
+    ],
+    "regressions": [
+      "Pés mais afastados",
+      "Fazer com joelhos apoiados",
+      "Fazer mais lento"
+    ],
+    "tips": [
+      "Anti-rotação é o desafio principal",
+      "Mantenha quadril estável",
+      "Pés afastados ajuda no início",
+      "Core muito ativo"
+    ],
+    "commonMistakes": [
+      "Rotacionar demais o quadril",
+      "Elevar o quadril",
+      "Movimentos muito rápidos",
+      "Pés muito juntos no início"
+    ],
+    "notes": "Exercício de estabilização para ombros e core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=shoulder+tap+plank",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento com Kettlebell",
+    "description": "Press de ombro usando kettlebell para desafio de estabilização.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Kettlebell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Limpe o kettlebell até posição de rack",
+      "KB descansando no antebraço",
+      "Core contraído, glúteos apertados",
+      "Empurre o KB verticalmente",
+      "Bíceps próximo à orelha no topo",
+      "Desça controladamente ao rack"
+    ],
+    "progressions": [
+      "KB mais pesado",
+      "Double KB press",
+      "Fazer em pé sobre uma perna"
+    ],
+    "regressions": [
+      "KB mais leve",
+      "Fazer sentado",
+      "Usar halter primeiro"
+    ],
+    "tips": [
+      "Centro de massa diferente do halter",
+      "Exige mais estabilização de punho",
+      "Mantenha punho neutro",
+      "Excelente para força funcional"
+    ],
+    "commonMistakes": [
+      "Punho torto",
+      "KB batendo no antebraço",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "O formato do KB desafia estabilização de forma única.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kettlebell+press+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Bottoms Up Press",
+    "description": "Press com kettlebell invertido para máxima estabilização.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Forearms", "Core"],
+    "equipment": "Kettlebell",
+    "category": "Functional",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure o KB pela alça com fundo para cima",
+      "Mantenha o KB equilibrado",
+      "Pressione verticalmente mantendo equilíbrio",
+      "Estenda completamente",
+      "Desça mantendo o KB invertido"
+    ],
+    "progressions": [
+      "KB mais pesado",
+      "Fazer andando",
+      "Bottoms up em lunges"
+    ],
+    "regressions": [
+      "KB mais leve",
+      "Fazer sentado",
+      "Press normal primeiro"
+    ],
+    "tips": [
+      "Exige grip e estabilização extremos",
+      "Use KB leve para aprender",
+      "Foco total é necessário",
+      "Excelente para ativação neuromuscular"
+    ],
+    "commonMistakes": [
+      "KB muito pesado",
+      "Perder equilíbrio do KB",
+      "Tensionar demais",
+      "Movimentos bruscos"
+    ],
+    "notes": "Exercício avançado para estabilização e controle motor.",
+    "videoUrl": "https://www.youtube.com/results?search_query=bottoms+up+kettlebell+press",
+    "isPublic": true
+  },
+  {
+    "name": "Z Press",
+    "description": "Desenvolvimento sentado no chão com pernas estendidas para isolamento.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Sente no chão com pernas estendidas",
+      "Barra em rack baixo ou clean para posição",
+      "Costas retas, sem apoio",
+      "Pressione a barra verticalmente",
+      "Sem usar impulso do corpo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Z press com pausa",
+      "Z press com tempo lento"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer com halteres",
+      "Press sentado tradicional"
+    ],
+    "tips": [
+      "Elimina qualquer impulso de pernas",
+      "Exige boa mobilidade de quadril",
+      "Excelente para ponto fraco de overhead",
+      "Core trabalha intensamente"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Inclinar para trás",
+      "Carga muito pesada",
+      "Falta de mobilidade"
+    ],
+    "notes": "Exercício humilhante que expõe fraquezas no overhead.",
+    "videoUrl": "https://www.youtube.com/results?search_query=z+press+exercise",
+    "isPublic": true
+  },
+  {
+    "name": "Bradford Press",
+    "description": "Press alternando entre frente e atrás da cabeça sem extensão completa.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Barra na posição frontal (rack position)",
+      "Pressione a barra passando sobre a cabeça",
+      "Desça atrás da cabeça até nível do pescoço",
+      "Pressione de volta sobre a cabeça",
+      "Desça à frente",
+      "Continue alternando frente-trás"
+    ],
+    "progressions": [
+      "Aumentar carga gradualmente",
+      "Adicionar pausa em cada posição",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer só frontal",
+      "Usar halteres"
+    ],
+    "tips": [
+      "Tensão constante no deltoide",
+      "Não estende completamente - mantém tensão",
+      "Requer boa mobilidade de ombro",
+      "Use carga moderada"
+    ],
+    "commonMistakes": [
+      "Extensão completa (perde tensão)",
+      "Carga muito pesada",
+      "Falta de mobilidade para ir atrás",
+      "Movimentos bruscos"
+    ],
+    "notes": "Mantém tensão constante nos deltoides durante todo exercício.",
+    "videoUrl": "https://www.youtube.com/results?search_query=bradford+press",
+    "isPublic": true
+  },
+  {
+    "name": "Javelin Press",
+    "description": "Press unilateral com barra segura em uma ponta, estilo lança.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Segure a barra olímpica pela extremidade com uma mão",
+      "Outra extremidade no chão atrás de você",
+      "Posicione na altura do ombro",
+      "Pressione a barra para frente e para cima",
+      "Estenda completamente o braço",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar peso na barra",
+      "Fazer em pé sobre uma perna",
+      "Adicionar rotação"
+    ],
+    "regressions": [
+      "Barra sem peso",
+      "Fazer ajoelhado",
+      "Landmine press"
+    ],
+    "tips": [
+      "Trabalha estabilização única",
+      "Movimento em arco natural",
+      "Core muito ativo",
+      "Desafia grip também"
+    ],
+    "commonMistakes": [
+      "Barra muito pesada",
+      "Perder equilíbrio",
+      "Amplitude incompleta",
+      "Não estabilizar core"
+    ],
+    "notes": "Exercício funcional e desafiador para ombro e estabilização.",
+    "videoUrl": "https://www.youtube.com/results?search_query=javelin+press",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento Alternado",
+    "description": "Desenvolvimento com halteres alternando os braços.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sentado ou em pé com halteres nos ombros",
+      "Pressione um halter enquanto o outro fica no ombro",
+      "Desça e imediatamente pressione o outro",
+      "Continue alternando",
+      "Mantenha core estável"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé",
+      "Adicionar pausa no topo"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer bilateral",
+      "Fazer sentado com apoio"
+    ],
+    "tips": [
+      "Maior tempo sob tensão total",
+      "Core trabalha mais que bilateral",
+      "Mantenha postura estável",
+      "Não balance o corpo"
+    ],
+    "commonMistakes": [
+      "Balançar de um lado para outro",
+      "Perder postura",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Aumenta o desafio de estabilização e tempo sob tensão.",
+    "videoUrl": "https://www.youtube.com/results?search_query=alternating+shoulder+press",
+    "isPublic": true
+  },
+  {
+    "name": "See-Saw Press",
+    "description": "Press alternado onde um braço sobe enquanto outro desce simultaneamente.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sentado ou em pé com halteres nos ombros",
+      "Pressione um halter para cima",
+      "Enquanto esse desce, pressione o outro",
+      "Os halteres passam um pelo outro no meio",
+      "Movimento contínuo tipo gangorra"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé",
+      "Aumentar velocidade"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Alternado tradicional",
+      "Fazer mais lento"
+    ],
+    "tips": [
+      "Movimento contínuo e fluido",
+      "Tensão constante nos ombros",
+      "Mantenha postura estável",
+      "Ritmo consistente"
+    ],
+    "commonMistakes": [
+      "Perder o ritmo",
+      "Balançar o corpo",
+      "Amplitude incompleta",
+      "Pausar no meio"
+    ],
+    "notes": "Variação dinâmica que mantém tensão constante.",
+    "videoUrl": "https://www.youtube.com/results?search_query=see+saw+press+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Upright Row com Halteres",
+    "description": "Remada alta com halteres para trapézio e deltoides.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back", "Biceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé com halteres à frente das coxas",
+      "Puxe os halteres para cima levando cotovelos ao alto",
+      "Cotovelos sempre mais altos que mãos",
+      "Suba até altura do queixo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer alternado",
+      "No cabo"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Elevação lateral"
+    ],
+    "tips": [
+      "Halteres permitem caminho mais natural",
+      "Menos estresse que barra",
+      "Cotovelos altos sempre",
+      "Cuidado com ombros sensíveis"
+    ],
+    "commonMistakes": [
+      "Subir muito alto",
+      "Mãos mais altas que cotovelos",
+      "Usar impulso",
+      "Ignorar dor no ombro"
+    ],
+    "notes": "Variação mais amigável para ombros que a barra.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dumbbell+upright+row",
+    "isPublic": true
+  },
+  {
+    "name": "Cable Upright Row",
+    "description": "Remada alta no cabo para tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back", "Biceps"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa com barra reta ou EZ",
+      "Segure com pegada estreita ou média",
+      "Puxe para cima levando cotovelos ao alto",
+      "Cotovelos sempre acima das mãos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer com corda",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Tensão constante do cabo",
+      "Pode usar diferentes pegadas",
+      "Movimento controlado",
+      "Cuidado com ombros"
+    ],
+    "commonMistakes": [
+      "Subir demais",
+      "Usar impulso",
+      "Mãos mais altas que cotovelos",
+      "Pegada muito estreita"
+    ],
+    "notes": "Cabo oferece tensão constante durante todo movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+upright+row",
+    "isPublic": true
+  },
+  {
+    "name": "Prone Incline Y-T-W Raises",
+    "description": "Sequência de elevações para trabalho completo do deltoide e estabilizadores.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços em banco inclinado",
+      "Halteres leves pendendo",
+      "Y: Eleve braços em Y (polegares para cima)",
+      "T: Eleve braços lateralmente em T",
+      "W: Eleve com cotovelos flexionados em W",
+      "Faça todas as posições em sequência"
+    ],
+    "progressions": [
+      "Aumentar peso levemente",
+      "Adicionar pausa em cada posição",
+      "Fazer com banda"
+    ],
+    "regressions": [
+      "Sem peso",
+      "Uma posição de cada vez",
+      "Fazer no chão"
+    ],
+    "tips": [
+      "Fundamental para saúde do ombro",
+      "Use peso muito leve",
+      "Excelente aquecimento",
+      "Fortalece estabilizadores"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Movimentos muito rápidos",
+      "Não fazer todas as posições",
+      "Levantar o peito do banco"
+    ],
+    "notes": "Circuito essencial para prevenção e reabilitação.",
+    "videoUrl": "https://www.youtube.com/results?search_query=y+t+w+raises+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Cuban Press",
+    "description": "Exercício combinado de rotação externa e press para manguito rotador.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Rehabilitation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Eleve halteres lateralmente até cotovelos na altura dos ombros",
+      "Cotovelos a 90°, antebraços apontando para baixo",
+      "Rotacione externamente até antebraços apontarem para cima",
+      "Pressione os halteres acima da cabeça",
+      "Reverta todo o movimento para descer"
+    ],
+    "progressions": [
+      "Aumentar peso gradualmente",
+      "Fazer mais lento",
+      "Adicionar pausa em cada posição"
+    ],
+    "regressions": [
+      "Fazer cada fase separadamente",
+      "Usar peso muito leve",
+      "Eliminar o press"
+    ],
+    "tips": [
+      "Excelente para manguito rotador",
+      "Movimento combinado eficiente",
+      "Use peso muito leve",
+      "Foco na rotação externa"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Pular a rotação",
+      "Movimentos bruscos",
+      "Amplitude incompleta"
+    ],
+    "notes": "Combina fortalecimento e mobilidade do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cuban+press",
+    "isPublic": true
+  },
+  {
+    "name": "Scarecrow (Espantalho)",
+    "description": "Rotação externa com cotovelos elevados para manguito rotador.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Cotovelos elevados lateralmente na altura dos ombros",
+      "Cotovelos a 90°, antebraços apontando para baixo",
+      "Halteres leves nas mãos",
+      "Rotacione externamente até antebraços apontarem para cima",
+      "Retorne controladamente",
+      "Mantenha cotovelos na mesma altura"
+    ],
+    "progressions": [
+      "Aumentar peso levemente",
+      "Adicionar pausa no topo",
+      "Fazer no cabo"
+    ],
+    "regressions": [
+      "Sem peso",
+      "Rotação deitado",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Trabalha rotadores externos em posição funcional",
+      "Cotovelos permanecem fixos",
+      "Use peso muito leve",
+      "Movimento lento e controlado"
+    ],
+    "commonMistakes": [
+      "Cotovelos caindo",
+      "Peso muito pesado",
+      "Movimentos rápidos",
+      "Amplitude excessiva"
+    ],
+    "notes": "Fortalece rotadores externos na posição de risco.",
+    "videoUrl": "https://www.youtube.com/results?search_query=scarecrow+exercise+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Cable Face Pull with External Rotation",
+    "description": "Face pull com rotação externa adicional para trabalho completo do deltoide posterior.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com corda",
+      "Puxe em direção ao rosto",
+      "Separe as mãos",
+      "No final, rotacione externamente (polegares para trás)",
+      "Pose de double biceps no final",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa mais longa na rotação",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Face pull normal",
+      "Reduzir carga",
+      "Banda elástica"
+    ],
+    "tips": [
+      "Rotação adicional aumenta o trabalho",
+      "Excelente para postura",
+      "Cotovelos altos",
+      "Contraia escápulas"
+    ],
+    "commonMistakes": [
+      "Pular a rotação externa",
+      "Cotovelos baixos",
+      "Usar muito peso",
+      "Movimentos apressados"
+    ],
+    "notes": "Versão aprimorada do face pull para saúde do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=face+pull+external+rotation",
+    "isPublic": true
+  },
+  {
+    "name": "W Shoulder Press",
+    "description": "Press partindo da posição W para trabalho completo do deltoide.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sentado com halteres na posição W",
+      "Cotovelos a 90°, rotacionados externamente",
+      "Pressione os halteres para cima em Y",
+      "Desça voltando à posição W",
+      "Mantenha rotação externa durante todo movimento"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa em W",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer só a posição W",
+      "Press tradicional"
+    ],
+    "tips": [
+      "Trabalha rotadores externos durante press",
+      "Maior amplitude que press tradicional",
+      "Mantenha rotação externa",
+      "Excelente para saúde do ombro"
+    ],
+    "commonMistakes": [
+      "Perder rotação externa",
+      "Carga muito pesada",
+      "Amplitude incompleta",
+      "Movimentos bruscos"
+    ],
+    "notes": "Combina desenvolvimento com trabalho de rotação externa.",
+    "videoUrl": "https://www.youtube.com/results?search_query=w+press+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Prone Reverse Fly",
+    "description": "Elevação posterior deitado de bruços em banco para isolamento.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços em banco reto",
+      "Halteres pendendo",
+      "Eleve lateralmente com cotovelos levemente flexionados",
+      "Contraia escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer em banco inclinado"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Peck deck invertido",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Elimina completamente trapaça",
+      "Isolamento puro do deltoide posterior",
+      "Use cargas leves",
+      "Foco na contração"
+    ],
+    "commonMistakes": [
+      "Levantar o peito",
+      "Usar impulso",
+      "Carga muito pesada",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Versão mais estrita da elevação posterior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=prone+reverse+fly",
+    "isPublic": true
+  },
+  {
+    "name": "Lateral Raise 21s",
+    "description": "Elevação lateral com técnica 21s para máximo estímulo.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "7 reps: Elevação parcial baixa (até meio)",
+      "7 reps: Elevação parcial alta (do meio até cima)",
+      "7 reps: Elevação completa (amplitude total)",
+      "Sem descanso entre as fases",
+      "Total: 21 reps"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer 28s (7-7-7-7)",
+      "Adicionar drop set"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer 14s (7-7)",
+      "Descanso entre fases"
+    ],
+    "tips": [
+      "Técnica de intensificação",
+      "Usa carga menor que elevação normal",
+      "Queima intensa no deltoide",
+      "Excelente para finalização"
+    ],
+    "commonMistakes": [
+      "Carga muito pesada",
+      "Descansar entre fases",
+      "Amplitude incorreta em cada fase",
+      "Perder forma quando cansa"
+    ],
+    "notes": "Técnica avançada para máximo bombeamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lateral+raise+21s",
+    "isPublic": true
+  },
+  {
+    "name": "Cross Body Cable Lateral Raise",
+    "description": "Elevação lateral no cabo cruzando o corpo para maior amplitude.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa, fique ao lado da máquina",
+      "Segure a manopla com mão oposta (cabo cruza corpo)",
+      "Manopla começa cruzada na frente do corpo",
+      "Eleve lateralmente até altura do ombro",
+      "Desça controladamente cruzando novamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa no topo",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Elevação lateral normal",
+      "Usar halter"
+    ],
+    "tips": [
+      "Maior amplitude que elevação normal",
+      "Tensão constante do cabo",
+      "Excelente para alongamento sob carga",
+      "Controle na volta"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Elevar muito alto",
+      "Amplitude incompleta",
+      "Perder postura"
+    ],
+    "notes": "Versão com maior amplitude e tensão constante.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cross+body+cable+lateral+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Leaning Cable Lateral Raise",
+    "description": "Elevação lateral no cabo inclinando para longe da máquina.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa, segure manopla com mão mais distante",
+      "Segure no poste com a mão livre",
+      "Incline o corpo para longe da máquina",
+      "Eleve lateralmente",
+      "O ângulo aumenta a resistência no pico"
+    ],
+    "progressions": [
+      "Aumentar inclinação",
+      "Aumentar carga",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Menos inclinação",
+      "Reduzir carga",
+      "Elevação normal"
+    ],
+    "tips": [
+      "Inclinação muda perfil de resistência",
+      "Mais desafiador no topo do movimento",
+      "Segure firme no poste",
+      "Excelente variação"
+    ],
+    "commonMistakes": [
+      "Não inclinar suficiente",
+      "Perder equilíbrio",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "A inclinação aumenta resistência no pico da contração.",
+    "videoUrl": "https://www.youtube.com/results?search_query=leaning+cable+lateral+raise",
+    "isPublic": true
+  },
+  {
+    "name": "High Pull",
+    "description": "Puxada explosiva da barra do chão até altura do peito.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back", "Biceps", "Glutes", "Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Power",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Barra no chão, posição de terra ou hang",
+      "Pegada um pouco mais larga que ombros",
+      "Explosivamente estenda quadril e joelhos",
+      "Puxe a barra para cima com cotovelos altos",
+      "Barra sobe até altura do peito",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Do chão (mais difícil)",
+      "Progredir para power clean"
+    ],
+    "regressions": [
+      "Hang high pull",
+      "Reduzir carga",
+      "Upright row"
+    ],
+    "tips": [
+      "Movimento explosivo de todo corpo",
+      "Cotovelos sempre altos",
+      "Preparação para levantamentos olímpicos",
+      "Excelente para potência"
+    ],
+    "commonMistakes": [
+      "Não usar extensão de quadril",
+      "Cotovelos baixos",
+      "Puxar só com braços",
+      "Perder postura"
+    ],
+    "notes": "Exercício de potência que prepara para clean.",
+    "videoUrl": "https://www.youtube.com/results?search_query=high+pull+barbell",
+    "isPublic": true
+  },
+  {
+    "name": "Kneeling Landmine Press",
+    "description": "Press no landmine ajoelhado para maior isolamento do ombro.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajoelhe em um joelho na frente do landmine",
+      "Segure a barra com uma ou duas mãos",
+      "Posicione na altura do ombro",
+      "Pressione para cima e para frente",
+      "Estenda completamente",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Fazer em half kneeling"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer em pé",
+      "Bilateral"
+    ],
+    "tips": [
+      "Ajoelhar elimina impulso de pernas",
+      "Ângulo favorável para ombros",
+      "Core trabalha mais",
+      "Excelente isolamento"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Perder postura do tronco",
+      "Amplitude incompleta",
+      "Joelho desconfortável"
+    ],
+    "notes": "Variação mais isolada do landmine press.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kneeling+landmine+press",
+    "isPublic": true
+  },
+  {
+    "name": "Band Pull Apart Overhead",
+    "description": "Pull apart com banda acima da cabeça para trabalho diferente.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a banda acima da cabeça",
+      "Braços estendidos",
+      "Puxe a banda para os lados e para baixo",
+      "Desça até posição de W ou além",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Banda mais resistente",
+      "Fazer mais lento",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Banda mais leve",
+      "Menor amplitude",
+      "Pull apart normal"
+    ],
+    "tips": [
+      "Trabalha ombro em posição de overhead",
+      "Excelente para mobilidade",
+      "Pode fazer em alta frequência",
+      "Bom aquecimento para press"
+    ],
+    "commonMistakes": [
+      "Banda muito resistente",
+      "Arquear a lombar",
+      "Movimentos bruscos",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Variação do pull apart para posição overhead.",
+    "videoUrl": "https://www.youtube.com/results?search_query=overhead+band+pull+apart",
+    "isPublic": true
+  }
+]

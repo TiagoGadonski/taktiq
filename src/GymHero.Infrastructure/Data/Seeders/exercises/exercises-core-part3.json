@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Ab Machine Crunch",
+    "description": "Na maquina de abdomen com apoio no peito e alcancas. Flexione o tronco contra a resistencia contraindo o abdomen.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Ab Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/ab-machine-crunch.png"
+  },
+  {
+    "name": "Torso Rotation Machine",
+    "description": "Sentado na maquina de rotacao com peito fixo. Rotacione o quadril contra a resistencia trabalhando os obliquos.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Torso Rotation Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/torso-rotation-machine.png"
+  },
+  {
+    "name": "Decline Sit-Up",
+    "description": "No banco declinado com pes presos, execute sit-ups. A inclinacao aumenta a resistencia e intensidade.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Decline Bench"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/decline-sit-up.png"
+  },
+  {
+    "name": "Weighted Decline Sit-Up",
+    "description": "Decline sit-up segurando disco ou halter contra o peito para adicionar resistencia ao movimento.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Decline Bench", "Weight Plate"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/weighted-decline-sit-up.png"
+  },
+  {
+    "name": "Decline Russian Twist",
+    "description": "No banco declinado, execute russian twists. A posicao declinada aumenta a dificuldade do movimento.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Decline Bench", "Medicine Ball"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/decline-russian-twist.png"
+  },
+  {
+    "name": "Dragon Flag",
+    "description": "Deitado segurando suporte atras da cabeca, eleve o corpo em linha reta ate os ombros e desça controladamente.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bench"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/dragon-flag.png"
+  },
+  {
+    "name": "L-Sit",
+    "description": "Suspenso em paralelas ou no chao, mantenha as pernas estendidas a frente do corpo em angulo de 90 graus com o tronco.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Core"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/l-sit.png"
+  },
+  {
+    "name": "Toes to Bar",
+    "description": "Pendurado na barra, eleve as pernas retas ate tocar os pes na barra. Requer controle e forca abdominal.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/toes-to-bar.png"
+  },
+  {
+    "name": "Knees to Elbows",
+    "description": "Pendurado na barra, eleve os joelhos ate tocar nos cotovelos. Movimento de amplitude total para o core.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/knees-to-elbows.png"
+  },
+  {
+    "name": "Hanging Oblique Knee Raise",
+    "description": "Pendurado na barra, eleve os joelhos em direcao ao ombro, alternando os lados para trabalhar os obliquos.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hanging-oblique-knee-raise.png"
+  },
+  {
+    "name": "Suitcase Carry",
+    "description": "Caminhe segurando peso em apenas uma mao, mantendo o tronco ereto. Anti-flexao lateral do core.",
+    "musclesWorked": ["Core", "Obliques", "Forearms"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/suitcase-carry.png"
+  },
+  {
+    "name": "Farmers Walk",
+    "description": "Caminhe segurando pesos pesados em ambas as maos. Trabalha core, grip e estabilidade geral.",
+    "musclesWorked": ["Core", "Forearms", "Traps"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/farmers-walk.png"
+  },
+  {
+    "name": "Overhead Carry",
+    "description": "Caminhe com peso mantido acima da cabeca com braco estendido. Desafia estabilidade do core e ombros.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/overhead-carry.png"
+  },
+  {
+    "name": "Rack Walk",
+    "description": "Caminhe segurando kettlebells em posicao de rack (na frente do peito). Desafia estabilidade do core.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/rack-walk.png"
+  },
+  {
+    "name": "Turkish Get-Up",
+    "description": "Deitado segurando kettlebell com braco estendido, levante-se ate ficar em pe mantendo o peso sempre acima. Retorne ao chao.",
+    "musclesWorked": ["Core", "Shoulders", "Glutes", "Full Body"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/core/turkish-get-up.png"
+  },
+  {
+    "name": "Half Turkish Get-Up",
+    "description": "Versao parcial do turkish get-up, indo apenas ate a posicao sentada ou de joelhos. Boa progressao para iniciantes.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/half-turkish-get-up.png"
+  },
+  {
+    "name": "Plank Pull Through",
+    "description": "Em prancha com kettlebell ao lado, passe o peso por baixo do corpo de um lado para o outro sem rotacionar o quadril.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank-pull-through.png"
+  },
+  {
+    "name": "Renegade Row",
+    "description": "Em prancha alta segurando halteres, alterne remando cada halter ate o quadril mantendo o corpo estavel.",
+    "musclesWorked": ["Core", "Back", "Biceps"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/renegade-row.png"
+  },
+  {
+    "name": "Plank with Row",
+    "description": "Em prancha com uma mao no halter, reme mantendo o quadril estavel. Variacao unilateral do renegade row.",
+    "musclesWorked": ["Core", "Back"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank-with-row.png"
+  },
+  {
+    "name": "Bear Crawl",
+    "description": "Em quatro apoios com joelhos elevados do chao, caminhe movendo mao e pe opostos simultaneamente.",
+    "musclesWorked": ["Core", "Shoulders", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/bear-crawl.png"
+  },
+  {
+    "name": "Crab Walk",
+    "description": "Sentado com maos e pes no chao, eleve o quadril e caminhe para frente e para tras nessa posicao.",
+    "musclesWorked": ["Core", "Triceps", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/core/crab-walk.png"
+  },
+  {
+    "name": "Inchworm",
+    "description": "Em pe, flexione e toque o chao, caminhe com as maos para frente ate prancha, depois caminhe com os pes ate as maos.",
+    "musclesWorked": ["Core", "Shoulders", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/core/inchworm.png"
+  },
+  {
+    "name": "Flutter Kicks",
+    "description": "Deitado com maos sob os gluteos, eleve as pernas e alterne subindo e descendo em movimentos curtos e rapidos.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/flutter-kicks.png"
+  },
+  {
+    "name": "Scissor Kicks",
+    "description": "Deitado com pernas elevadas, cruze uma perna sobre a outra alternadamente em movimento de tesoura.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/scissor-kicks.png"
+  },
+  {
+    "name": "Sprinter Sit-Up",
+    "description": "Deitado, sente-se explosivamente trazendo um joelho ao peito e braco oposto para frente, como um corredor.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/sprinter-sit-up.png"
+  },
+  {
+    "name": "X Sit-Up",
+    "description": "Deitado em forma de X com bracos e pernas abertos. Sente-se tocando a mao no pe oposto, alternando os lados.",
+    "musclesWorked": ["Abs", "Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/x-sit-up.png"
+  },
+  {
+    "name": "Toe Touch",
+    "description": "Deitado com pernas elevadas a 90 graus, estenda os bracos e toque os pes elevando os ombros do chao.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/toe-touch.png"
+  },
+  {
+    "name": "Ab Vacuum",
+    "description": "Em pe ou em quatro apoios, expire completamente e puxe o umbigo em direcao a coluna. Mantenha por 10-30 segundos.",
+    "musclesWorked": ["Transverse Abdominis"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/ab-vacuum.png"
+  },
+  {
+    "name": "Stir the Pot",
+    "description": "Em prancha de antebracos na bola suica, faca movimentos circulares com os cotovelos como se mexesse uma panela.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/stir-the-pot.png"
+  },
+  {
+    "name": "GHD Sit-Up",
+    "description": "No GHD com quadril no apoio e pes presos, execute sit-ups com amplitude completa. Movimento intenso para abdomen e flexores do quadril.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["GHD Machine"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/ghd-sit-up.png"
+  }
+]

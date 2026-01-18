@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Plank",
+    "description": "Apoiado em antebracos com corpo reto da cabeca aos calcanhares. Mantenha core contraido.",
+    "musclesWorked": ["Core", "Abs", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plank.png"
+  },
+  {
+    "name": "High Plank",
+    "description": "Prancha com bracos estendidos, posicao de push-up. Mantenha linha reta.",
+    "musclesWorked": ["Core", "Abs", "Shoulders", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/high-plank.png"
+  },
+  {
+    "name": "Side Plank",
+    "description": "Apoiado em um antebraco de lado com corpo reto. Eleve o quadril do chao.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/side-plank.png"
+  },
+  {
+    "name": "Side Plank Hip Dip",
+    "description": "Em side plank, desça e eleve o quadril repetidamente. Trabalha obliquos dinamicamente.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/side-plank-hip-dip.png"
+  },
+  {
+    "name": "Plank Shoulder Tap",
+    "description": "Em prancha alta, toque ombro oposto com cada mao alternadamente sem rotacionar quadril.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plank-shoulder-tap.png"
+  },
+  {
+    "name": "Plank Hip Dip",
+    "description": "Em prancha de antebracos, rotacione quadril de lado a lado tocando no chao.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plank-hip-dip.png"
+  },
+  {
+    "name": "Plank Walkout",
+    "description": "De prancha de antebracos para prancha alta e vice-versa, um braco de cada vez.",
+    "musclesWorked": ["Core", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plank-walkout.png"
+  },
+  {
+    "name": "Plank Jack",
+    "description": "Em prancha, salte abrindo e fechando as pernas como jumping jack.",
+    "musclesWorked": ["Core", "Abs", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/plank-jack.png"
+  },
+  {
+    "name": "Body Saw Plank",
+    "description": "Em prancha de antebracos, balance corpo para frente e para tras mantendo forma.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/body-saw-plank.png"
+  },
+  {
+    "name": "Copenhagen Plank",
+    "description": "Side plank com perna superior apoiada em banco. Trabalha adutores intensamente.",
+    "musclesWorked": ["Obliques", "Adductors", "Core"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/copenhagen-plank.png"
+  },
+  {
+    "name": "Reverse Plank",
+    "description": "Prancha de costas com maos atras apoiadas e corpo reto olhando para cima.",
+    "musclesWorked": ["Core", "Glutes", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/reverse-plank.png"
+  },
+  {
+    "name": "Hollow Body Hold",
+    "description": "Deitado com lombar no chao, bracos acima cabeca e pernas estendidas levemente elevadas.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hollow-body-hold.png"
+  },
+  {
+    "name": "Hollow Body Rock",
+    "description": "Na posicao hollow body, balance suavemente para frente e tras mantendo forma.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hollow-body-rock.png"
+  },
+  {
+    "name": "Arch Body Hold",
+    "description": "Deitado de brucos, eleve bracos e pernas do chao mantendo posicao de arco.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/arch-body-hold.png"
+  },
+  {
+    "name": "Crunch",
+    "description": "Deitado com joelhos dobrados, eleve ombros do chao contraindo abdomen.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/crunch.png"
+  },
+  {
+    "name": "Bicycle Crunch",
+    "description": "Alterne levando cotovelo ao joelho oposto em movimento de pedalada.",
+    "musclesWorked": ["Abs", "Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bicycle-crunch.png"
+  },
+  {
+    "name": "Reverse Crunch",
+    "description": "Deitado com pernas elevadas, traga joelhos em direcao ao peito elevando quadril.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/reverse-crunch.png"
+  },
+  {
+    "name": "V-Up",
+    "description": "Deitado, eleve simultaneamente tronco e pernas formando V, tocando pes com maos.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/v-up.png"
+  },
+  {
+    "name": "Sit-Up",
+    "description": "Deitado com joelhos dobrados, sente-se completamente e retorne controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sit-up.png"
+  },
+  {
+    "name": "Leg Raise",
+    "description": "Deitado de costas, eleve as pernas retas ate 90 graus e desça controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/leg-raise.png"
+  },
+  {
+    "name": "Flutter Kick",
+    "description": "Deitado com pernas elevadas, alterne subindo e descendo em movimentos curtos rapidos.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/flutter-kick.png"
+  },
+  {
+    "name": "Scissor Kick",
+    "description": "Deitado com pernas elevadas, cruze uma sobre a outra alternadamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/scissor-kick.png"
+  },
+  {
+    "name": "Lying Windshield Wiper",
+    "description": "Deitado com pernas elevadas a 90 graus, rotacione de lado a lado.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lying-windshield-wiper.png"
+  },
+  {
+    "name": "Russian Twist",
+    "description": "Sentado com tronco inclinado, rotacione de lado a lado tocando chao com maos.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/russian-twist.png"
+  },
+  {
+    "name": "Dead Bug",
+    "description": "Deitado com bracos e pernas elevados, alterne estendendo braco e perna opostos.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/dead-bug.png"
+  },
+  {
+    "name": "Bird Dog",
+    "description": "Em quatro apoios, estenda simultaneamente braco e perna opostos mantendo estabilidade.",
+    "musclesWorked": ["Core", "Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bird-dog.png"
+  },
+  {
+    "name": "Mountain Climber",
+    "description": "Em prancha alta, alterne trazendo joelhos ao peito rapidamente.",
+    "musclesWorked": ["Core", "Hip Flexors", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/mountain-climber.png"
+  },
+  {
+    "name": "Cross-Body Mountain Climber",
+    "description": "Mountain climber trazendo joelho ao cotovelo oposto com rotacao.",
+    "musclesWorked": ["Core", "Obliques", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/cross-body-mountain-climber.png"
+  },
+  {
+    "name": "Superman",
+    "description": "Deitado de brucos, eleve simultaneamente bracos e pernas do chao.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/superman.png"
+  },
+  {
+    "name": "Ab Wheel Bodyweight",
+    "description": "Ajoelhado, role para frente estendendo corpo e retorne contraindo abdomen.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Ab Wheel"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ab-wheel.png"
+  }
+]

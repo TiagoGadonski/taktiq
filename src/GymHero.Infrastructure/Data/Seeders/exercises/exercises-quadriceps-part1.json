@@ -1,0 +1,926 @@
+[
+  {
+    "name": "Agachamento Livre com Barra",
+    "description": "Exercício fundamental para desenvolvimento de quadríceps com barra nas costas.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra no trapézio superior (high bar) ou médio (low bar)",
+      "Pés na largura dos ombros ou ligeiramente mais afastados",
+      "Desça flexionando quadris e joelhos simultaneamente",
+      "Mantenha o peito erguido e a lombar neutra",
+      "Desça até as coxas ficarem paralelas ao chão ou abaixo",
+      "Empurre o chão para subir de volta à posição inicial"
+    ],
+    "progressions": ["Agachamento com Pausa", "Agachamento com Mais Carga"],
+    "regressions": ["Agachamento Goblet", "Agachamento com Peso Corporal"],
+    "tips": [
+      "Os joelhos devem acompanhar a direção dos dedos dos pés",
+      "Mantenha o peso distribuído em todo o pé",
+      "Respire fundo antes de descer, expire ao subir"
+    ],
+    "commonMistakes": [
+      "Joelhos cedendo para dentro (valgo)",
+      "Curvar a lombar (butt wink excessivo)",
+      "Subir o quadril antes do tronco"
+    ],
+    "notes": "Rei dos exercícios para membros inferiores.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Frontal",
+    "description": "Agachamento com barra na frente dos ombros para maior ênfase no quadríceps.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra na frente dos ombros, cotovelos elevados",
+      "Use pegada de levantamento olímpico ou braços cruzados",
+      "Mantenha o tronco mais vertical que no back squat",
+      "Desça mantendo os cotovelos altos",
+      "Joelhos podem avançar mais à frente que no back squat",
+      "Empurre para subir mantendo a posição do tronco"
+    ],
+    "progressions": ["Agachamento Frontal com Pausa"],
+    "regressions": ["Agachamento Goblet"],
+    "tips": [
+      "Requer boa mobilidade de pulsos e ombros",
+      "O tronco vertical enfatiza mais o quadríceps",
+      "Comece com cargas leves para dominar a técnica"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos caírem",
+      "Inclinar demais o tronco para frente",
+      "Perder a barra pela frente"
+    ],
+    "notes": "Excelente para quadríceps e força de core.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Goblet",
+    "description": "Agachamento segurando peso na frente do peito, ideal para iniciantes.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure um halter ou kettlebell contra o peito",
+      "Pés na largura dos ombros, dedos levemente para fora",
+      "Desça empurrando os joelhos para fora",
+      "Mantenha o peito erguido durante todo o movimento",
+      "Desça até os cotovelos tocarem o interior das coxas",
+      "Empurre para subir de volta"
+    ],
+    "progressions": ["Agachamento Frontal", "Agachamento com Barra"],
+    "regressions": ["Agachamento com Peso Corporal"],
+    "tips": [
+      "O peso na frente ajuda a manter o tronco ereto",
+      "Excelente para aprender a mecânica do agachamento",
+      "Pode usar halter, kettlebell ou anilha"
+    ],
+    "commonMistakes": [
+      "Deixar o peso se afastar do corpo",
+      "Inclinar demais para frente",
+      "Não descer suficientemente"
+    ],
+    "notes": "Melhor exercício para iniciantes aprenderem o padrão de agachamento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento na Máquina Smith",
+    "description": "Agachamento guiado na máquina Smith para segurança e isolamento.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se sob a barra da Smith",
+      "Pés ligeiramente à frente do corpo",
+      "Destrave a barra e posicione nos ombros",
+      "Desça controladamente até as coxas paralelas",
+      "Empurre para subir de volta",
+      "Trave a barra ao finalizar"
+    ],
+    "progressions": ["Agachamento Livre com Barra"],
+    "regressions": ["Agachamento na Smith com Menos Carga"],
+    "tips": [
+      "A máquina guia o movimento verticalmente",
+      "Permite focar nos músculos sem preocupação com equilíbrio",
+      "Pés mais à frente enfatiza mais o quadríceps"
+    ],
+    "commonMistakes": [
+      "Pés muito próximos da barra",
+      "Não ajustar os pés para frente",
+      "Descida muito rápida"
+    ],
+    "notes": "Boa opção para treinar até a falha com segurança.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Hack",
+    "description": "Agachamento na máquina hack para isolamento do quadríceps.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na máquina com as costas no encosto",
+      "Pés na plataforma na largura dos ombros",
+      "Destrave a máquina e desça flexionando os joelhos",
+      "Desça até as coxas ficarem paralelas ou abaixo",
+      "Empurre a plataforma para estender as pernas",
+      "Não trave completamente os joelhos no topo"
+    ],
+    "progressions": ["Agachamento Hack com Mais Carga"],
+    "regressions": ["Agachamento Hack com Menos Carga"],
+    "tips": [
+      "O encosto elimina demanda de estabilização lombar",
+      "Pés mais baixos na plataforma = mais quadríceps",
+      "Excelente para isolar o quadríceps"
+    ],
+    "commonMistakes": [
+      "Travar os joelhos no topo",
+      "Tirar as costas do encosto",
+      "Usar amplitude muito curta"
+    ],
+    "notes": "Uma das melhores máquinas para desenvolvimento de quadríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press 45 Graus",
+    "description": "Prensa de pernas inclinada para desenvolvimento de quadríceps com alta carga.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se na máquina com as costas bem apoiadas",
+      "Pés na plataforma na largura dos ombros",
+      "Destrave a plataforma e desça controladamente",
+      "Flexione os joelhos até cerca de 90 graus",
+      "Empurre a plataforma de volta sem travar os joelhos",
+      "Mantenha a lombar em contato com o assento"
+    ],
+    "progressions": ["Leg Press com Mais Carga", "Leg Press Unilateral"],
+    "regressions": ["Leg Press com Menos Carga"],
+    "tips": [
+      "Posição dos pés altera o foco muscular",
+      "Pés baixos = mais quadríceps, altos = mais posterior",
+      "Nunca trave os joelhos completamente"
+    ],
+    "commonMistakes": [
+      "Travar os joelhos (risco de hiperextensão)",
+      "Tirar a lombar do assento",
+      "Descer demais levantando o quadril"
+    ],
+    "notes": "Permite usar cargas muito pesadas com segurança.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Horizontal",
+    "description": "Prensa de pernas horizontal para quadríceps.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se na máquina com as costas apoiadas",
+      "Pés na plataforma na largura dos ombros",
+      "Empurre a plataforma para destravar",
+      "Flexione os joelhos trazendo a plataforma",
+      "Empurre de volta até quase a extensão total",
+      "Mantenha os joelhos ligeiramente flexionados no topo"
+    ],
+    "progressions": ["Leg Press 45 Graus"],
+    "regressions": ["Leg Press com Menos Carga"],
+    "tips": [
+      "Similar ao 45 graus mas em ângulo diferente",
+      "Pode ser mais confortável para algumas pessoas",
+      "Mesmos princípios de posicionamento de pés"
+    ],
+    "commonMistakes": [
+      "Travar os joelhos",
+      "Tirar as costas do encosto",
+      "Amplitude incompleta"
+    ],
+    "notes": "Alternativa ao leg press 45 graus.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Unilateral",
+    "description": "Prensa de pernas com uma perna para trabalho unilateral.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se no leg press normalmente",
+      "Coloque apenas um pé na plataforma",
+      "A outra perna fica fora da plataforma",
+      "Execute o movimento com uma perna só",
+      "Mantenha a técnica igual à versão bilateral",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Leg Press Unilateral com Mais Carga"],
+    "regressions": ["Leg Press Bilateral"],
+    "tips": [
+      "Permite identificar desequilíbrios",
+      "Use cerca de 40-50% da carga bilateral",
+      "Excelente para corrigir assimetrias"
+    ],
+    "commonMistakes": [
+      "Usar carga excessiva",
+      "Girar o quadril",
+      "Não completar a amplitude"
+    ],
+    "notes": "Fundamental para desenvolvimento simétrico das pernas.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Extensora de Pernas",
+    "description": "Exercício de isolamento para quadríceps na máquina extensora.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se na máquina com as costas apoiadas",
+      "Ajuste o pad para ficar no tornozelo",
+      "Segure nas alças laterais",
+      "Estenda as pernas até a extensão quase completa",
+      "Contraia o quadríceps no topo",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Extensora com Mais Carga", "Extensora Unilateral"],
+    "regressions": ["Extensora com Menos Carga"],
+    "tips": [
+      "Excelente para isolamento do quadríceps",
+      "Não hiperextenda os joelhos",
+      "Foque na contração no topo"
+    ],
+    "commonMistakes": [
+      "Usar impulso para levantar",
+      "Hiperextender os joelhos",
+      "Descer muito rápido"
+    ],
+    "notes": "Melhor exercício de isolamento para quadríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Extensora Unilateral",
+    "description": "Extensão de pernas com uma perna para trabalho focado.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a máquina como na versão bilateral",
+      "Posicione apenas uma perna sob o pad",
+      "A outra perna fica fora do movimento",
+      "Estenda a perna até quase a extensão total",
+      "Contraia fortemente no topo",
+      "Complete e troque de perna"
+    ],
+    "progressions": ["Extensora Unilateral com Mais Carga"],
+    "regressions": ["Extensora Bilateral"],
+    "tips": [
+      "Permite foco total em uma perna",
+      "Ideal para corrigir desequilíbrios",
+      "Use a mesma carga em ambas as pernas"
+    ],
+    "commonMistakes": [
+      "Usar cargas diferentes entre as pernas",
+      "Girar o quadril",
+      "Amplitude incompleta"
+    ],
+    "notes": "Excelente para identificar e corrigir assimetrias.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo com Barra",
+    "description": "Afundo clássico com barra nas costas para quadríceps e glúteos.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra nos ombros como no agachamento",
+      "Dê um passo à frente com uma perna",
+      "Desça até o joelho traseiro quase tocar o chão",
+      "O joelho da frente fica sobre o tornozelo",
+      "Empurre com a perna da frente para voltar",
+      "Alterne as pernas ou faça todas de um lado"
+    ],
+    "progressions": ["Afundo Caminhando com Barra"],
+    "regressions": ["Afundo com Halteres", "Afundo com Peso Corporal"],
+    "tips": [
+      "Passo mais longo = mais glúteo, mais curto = mais quadríceps",
+      "Mantenha o tronco ereto durante todo o movimento",
+      "Joelho da frente não deve passar muito dos dedos"
+    ],
+    "commonMistakes": [
+      "Joelho cedendo para dentro",
+      "Inclinar demais o tronco",
+      "Passo muito curto ou longo"
+    ],
+    "notes": "Exercício versátil para desenvolvimento unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo com Halteres",
+    "description": "Afundo com halteres para maior liberdade de movimento.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Segure um halter em cada mão ao lado do corpo",
+      "Dê um passo à frente com uma perna",
+      "Desça até o joelho traseiro quase tocar o chão",
+      "Mantenha o tronco ereto",
+      "Empurre para retornar à posição inicial",
+      "Alterne as pernas a cada repetição"
+    ],
+    "progressions": ["Afundo com Barra"],
+    "regressions": ["Afundo com Peso Corporal"],
+    "tips": [
+      "Os halteres ao lado permitem equilíbrio natural",
+      "Mais fácil de equilibrar que barra nas costas",
+      "Ideal para iniciantes em afundos com carga"
+    ],
+    "commonMistakes": [
+      "Balançar os halteres",
+      "Inclinar o tronco para frente",
+      "Joelho ultrapassando muito os dedos"
+    ],
+    "notes": "Versão mais acessível do afundo com carga.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo Caminhando",
+    "description": "Afundo em movimento contínuo para trabalho dinâmico.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Segure halteres ao lado do corpo ou barra nos ombros",
+      "Dê um passo à frente e desça em afundo",
+      "Ao subir, traga a perna de trás à frente",
+      "Continue caminhando em afundos",
+      "Mantenha a fluidez do movimento",
+      "Complete a distância ou número de passos"
+    ],
+    "progressions": ["Afundo Caminhando com Mais Carga"],
+    "regressions": ["Afundo Estacionário"],
+    "tips": [
+      "Requer espaço para caminhar",
+      "Mais desafiador para equilíbrio",
+      "Excelente para trabalho metabólico"
+    ],
+    "commonMistakes": [
+      "Passos muito rápidos",
+      "Perder a postura do tronco",
+      "Não completar cada afundo"
+    ],
+    "notes": "Variação dinâmica que aumenta a demanda cardiovascular.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo Reverso",
+    "description": "Afundo com passo para trás, mais seguro para os joelhos.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com halteres ao lado do corpo",
+      "Dê um passo para trás com uma perna",
+      "Desça até o joelho traseiro quase tocar o chão",
+      "O peso fica principalmente na perna da frente",
+      "Empurre com a perna da frente para retornar",
+      "Alterne as pernas"
+    ],
+    "progressions": ["Afundo Reverso com Déficit"],
+    "regressions": ["Afundo Reverso com Peso Corporal"],
+    "tips": [
+      "Mais seguro para joelhos que afundo à frente",
+      "O passo para trás controla melhor o movimento",
+      "Excelente para iniciantes"
+    ],
+    "commonMistakes": [
+      "Passo muito curto para trás",
+      "Inclinar o tronco para frente",
+      "Joelho da frente cedendo"
+    ],
+    "notes": "Variação mais segura e controlada do afundo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo Búlgaro",
+    "description": "Afundo com pé traseiro elevado para maior amplitude e intensidade.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione o peito do pé traseiro em um banco",
+      "Segure halteres ao lado do corpo",
+      "A perna da frente faz todo o trabalho",
+      "Desça até o joelho traseiro quase tocar o chão",
+      "Mantenha o tronco ereto",
+      "Empurre para subir e repita"
+    ],
+    "progressions": ["Afundo Búlgaro com Barra"],
+    "regressions": ["Afundo Reverso"],
+    "tips": [
+      "Uma das melhores variações de afundo",
+      "Maior amplitude que afundo tradicional",
+      "Trabalha intensamente equilíbrio e estabilidade"
+    ],
+    "commonMistakes": [
+      "Banco muito alto ou muito longe",
+      "Joelho passando muito dos dedos",
+      "Perder o equilíbrio"
+    ],
+    "notes": "Exercício extremamente eficaz para desenvolvimento unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Afundo Lateral",
+    "description": "Afundo para o lado trabalhando quadríceps e adutores.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Adductors", "Glutes"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Fique em pé com os pés juntos",
+      "Dê um passo largo para o lado",
+      "Flexione o joelho da perna que se moveu",
+      "A outra perna fica estendida",
+      "Empurre para voltar à posição inicial",
+      "Pode alternar lados ou fazer todos de um lado"
+    ],
+    "progressions": ["Afundo Lateral com Mais Carga"],
+    "regressions": ["Afundo Lateral com Peso Corporal"],
+    "tips": [
+      "Trabalha no plano frontal, diferente do afundo tradicional",
+      "Excelente para adutores além do quadríceps",
+      "Mantenha o tronco ereto"
+    ],
+    "commonMistakes": [
+      "Joelho cedendo para dentro",
+      "Não manter a perna estendida reta",
+      "Inclinar demais o tronco"
+    ],
+    "notes": "Variação que trabalha em plano de movimento diferente.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Step-Up com Halteres",
+    "description": "Subir em plataforma para trabalho unilateral funcional.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em frente a um banco ou step",
+      "Segure halteres ao lado do corpo",
+      "Coloque um pé completamente na plataforma",
+      "Empurre com essa perna para subir",
+      "Desça de forma controlada com a mesma perna",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Step-Up com Barra", "Step-Up Alto"],
+    "regressions": ["Step-Up com Peso Corporal"],
+    "tips": [
+      "A altura do step determina a intensidade",
+      "Não use impulso da perna de baixo",
+      "Muito funcional para atividades diárias"
+    ],
+    "commonMistakes": [
+      "Usar impulso da perna de baixo",
+      "Não colocar o pé todo na plataforma",
+      "Descer sem controle"
+    ],
+    "notes": "Exercício funcional excelente para fortalecimento unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Step-Up Alto",
+    "description": "Step-up com plataforma mais alta para maior desafio.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Use uma plataforma mais alta (altura do joelho ou mais)",
+      "Segure halteres ou use barra",
+      "Coloque um pé completamente na plataforma",
+      "Empurre com força para subir",
+      "Controle a descida",
+      "A altura aumenta a demanda de força e amplitude"
+    ],
+    "progressions": ["Step-Up Alto com Mais Carga"],
+    "regressions": ["Step-Up com Plataforma Mais Baixa"],
+    "tips": [
+      "Plataforma mais alta = mais trabalho de glúteo",
+      "Requer boa mobilidade de quadril",
+      "Excelente para força funcional"
+    ],
+    "commonMistakes": [
+      "Usar plataforma alta demais perdendo a forma",
+      "Impulsar com a perna de baixo",
+      "Não controlar a descida"
+    ],
+    "notes": "Variação avançada para maior recrutamento muscular.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Step-Up Lateral",
+    "description": "Subir lateralmente na plataforma para trabalho no plano frontal.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Adductors", "Abductors"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se ao lado do step",
+      "Segure halteres ao lado do corpo",
+      "Coloque o pé mais próximo na plataforma",
+      "Empurre para subir lateralmente",
+      "Desça de forma controlada",
+      "Complete as repetições e troque de lado"
+    ],
+    "progressions": ["Step-Up Lateral com Mais Carga"],
+    "regressions": ["Step-Up Lateral com Peso Corporal"],
+    "tips": [
+      "Trabalha abdutores e adutores além do quadríceps",
+      "Movimento no plano frontal",
+      "Excelente para estabilidade lateral"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Não subir totalmente",
+      "Perder o equilíbrio"
+    ],
+    "notes": "Variação que trabalha estabilizadores laterais.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Sissy Squat",
+    "description": "Agachamento com inclinação do tronco para trás isolando o quadríceps.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé, podendo segurar em algo para equilíbrio",
+      "Fique na ponta dos pés",
+      "Incline o tronco para trás enquanto flexiona os joelhos",
+      "Os joelhos avançam muito à frente",
+      "Desça até sentir forte alongamento no quadríceps",
+      "Empurre para voltar mantendo o tronco inclinado"
+    ],
+    "progressions": ["Sissy Squat com Peso"],
+    "regressions": ["Sissy Squat Assistido"],
+    "tips": [
+      "Exercício de isolamento puro para quadríceps",
+      "Requer boa força de joelhos e quadríceps",
+      "Contraindicado para quem tem problemas de joelho"
+    ],
+    "commonMistakes": [
+      "Não inclinar o suficiente para trás",
+      "Perder o equilíbrio",
+      "Fazer com problema de joelho"
+    ],
+    "notes": "Exercício avançado de isolamento - cuidado com os joelhos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Sissy Squat na Máquina",
+    "description": "Sissy squat com suporte da máquina para segurança.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na máquina de sissy squat",
+      "Os calcanhares ficam apoiados no pad traseiro",
+      "Segure nas alças se disponíveis",
+      "Incline o tronco para trás flexionando os joelhos",
+      "Desça até sentir alongamento no quadríceps",
+      "Empurre para retornar"
+    ],
+    "progressions": ["Sissy Squat com Peso Adicional"],
+    "regressions": ["Sissy Squat com Menos Amplitude"],
+    "tips": [
+      "A máquina fornece estabilidade e segurança",
+      "Permite focar no trabalho muscular",
+      "Excelente isolamento de quadríceps"
+    ],
+    "commonMistakes": [
+      "Ajuste incorreto da máquina",
+      "Não usar amplitude completa",
+      "Usar carga excessiva"
+    ],
+    "notes": "Versão mais segura do sissy squat.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Pendulum",
+    "description": "Agachamento na máquina pendulum para ângulo diferente.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na máquina pendulum",
+      "Costas apoiadas no encosto",
+      "Pés na plataforma na largura dos ombros",
+      "Destrave a máquina e desça flexionando joelhos e quadris",
+      "Desça até as coxas ficarem paralelas",
+      "Empurre para retornar à posição inicial"
+    ],
+    "progressions": ["Pendulum com Mais Carga"],
+    "regressions": ["Pendulum com Menos Carga"],
+    "tips": [
+      "O movimento em arco é único desta máquina",
+      "Menos estresse na lombar que agachamento livre",
+      "Excelente para quadríceps e glúteos"
+    ],
+    "commonMistakes": [
+      "Tirar as costas do encosto",
+      "Amplitude incompleta",
+      "Usar impulso"
+    ],
+    "notes": "Máquina que combina benefícios do agachamento e leg press.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Belt Squat",
+    "description": "Agachamento com carga pendurada no quadril, sem carga axial.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Prenda o cinto de belt squat no quadril",
+      "Conecte a carga ao cinto",
+      "Fique em pé nas plataformas da máquina",
+      "Execute o agachamento normalmente",
+      "Desça até a profundidade desejada",
+      "Empurre para subir"
+    ],
+    "progressions": ["Belt Squat com Mais Carga"],
+    "regressions": ["Belt Squat com Menos Carga"],
+    "tips": [
+      "Sem compressão axial na coluna",
+      "Ideal para quem tem problemas de lombar",
+      "Permite alto volume sem fadiga de coluna"
+    ],
+    "commonMistakes": [
+      "Cinto mal posicionado",
+      "Inclinar demais o tronco",
+      "Não usar amplitude completa"
+    ],
+    "notes": "Excelente para treinar pernas poupando a coluna.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento com Pausa",
+    "description": "Agachamento com pausa no fundo para maior dificuldade.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o agachamento normalmente",
+      "Na posição mais baixa, pause por 2-3 segundos",
+      "Mantenha a tensão e posição durante a pausa",
+      "Não relaxe no fundo",
+      "Exploda para subir após a pausa",
+      "A pausa elimina o reflexo de estiramento"
+    ],
+    "progressions": ["Pausa de 5 Segundos"],
+    "regressions": ["Agachamento Normal"],
+    "tips": [
+      "A pausa elimina o bounce natural",
+      "Desenvolve força a partir de parado",
+      "Use carga menor que no agachamento normal"
+    ],
+    "commonMistakes": [
+      "Relaxar na pausa",
+      "Pausa muito curta",
+      "Perder a tensão no core"
+    ],
+    "notes": "Técnica avançada para desenvolver força na posição baixa.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento 1 e 1/2",
+    "description": "Agachamento com repetição parcial adicional para tempo sob tensão.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o agachamento descendo até o fundo",
+      "Suba até a metade do caminho",
+      "Desça novamente até o fundo",
+      "Agora suba completamente",
+      "Isso conta como 1 repetição",
+      "Continue o padrão"
+    ],
+    "progressions": ["Agachamento 1 e 1/2 com Mais Carga"],
+    "regressions": ["Agachamento Normal"],
+    "tips": [
+      "Aumenta drasticamente o tempo sob tensão",
+      "Use cerca de 60-70% da carga normal",
+      "Excelente para hipertrofia"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada",
+      "Não completar o meio movimento",
+      "Perder a contagem"
+    ],
+    "notes": "Técnica eficaz para aumentar o estímulo sem aumentar carga.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Box",
+    "description": "Agachamento sentando brevemente em um box para consistência de profundidade.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione um box atrás de você",
+      "A altura do box determina a profundidade",
+      "Execute o agachamento até sentar no box",
+      "Pause brevemente no box (não relaxe)",
+      "Empurre para subir mantendo a tensão",
+      "O box garante profundidade consistente"
+    ],
+    "progressions": ["Box Squat com Pausa Maior", "Box Mais Baixo"],
+    "regressions": ["Box Mais Alto"],
+    "tips": [
+      "Popular no treinamento de powerlifting",
+      "Desenvolve força a partir de parado",
+      "Ajuda a aprender a profundidade correta"
+    ],
+    "commonMistakes": [
+      "Relaxar completamente no box",
+      "Quicar no box",
+      "Box muito alto ou muito baixo"
+    ],
+    "notes": "Técnica de powerlifting para desenvolvimento de força.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Tempo",
+    "description": "Agachamento com cadência controlada para tempo sob tensão.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o agachamento com tempo prescrito",
+      "Por exemplo: 3 segundos descendo",
+      "1 segundo pausando no fundo",
+      "2 segundos subindo",
+      "Use cerca de 60-70% da carga normal",
+      "Conte mentalmente durante o movimento"
+    ],
+    "progressions": ["Tempo Mais Lento"],
+    "regressions": ["Agachamento Normal"],
+    "tips": [
+      "O tempo controlado aumenta o estímulo",
+      "Excelente para hipertrofia",
+      "Melhora a conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Não seguir o tempo prescrito",
+      "Usar carga muito pesada",
+      "Acelerar quando fatigado"
+    ],
+    "notes": "Técnica eficaz para maximizar o tempo sob tensão.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Zercher",
+    "description": "Agachamento com barra apoiada nos cotovelos para posição única.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Core", "Biceps", "Back"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra na dobra dos cotovelos",
+      "Braços flexionados, mãos podem se tocar",
+      "A barra fica na frente do corpo",
+      "Execute o agachamento mantendo a barra estável",
+      "Mantenha o tronco o mais ereto possível",
+      "Empurre para subir"
+    ],
+    "progressions": ["Zercher com Mais Carga"],
+    "regressions": ["Zercher com Menos Carga"],
+    "tips": [
+      "Use pad ou toalha nos cotovelos para conforto",
+      "Trabalha intensamente o core",
+      "Posição única com benefícios específicos"
+    ],
+    "commonMistakes": [
+      "Não proteger os cotovelos",
+      "Inclinar demais para frente",
+      "Perder a barra"
+    ],
+    "notes": "Variação única que trabalha core e quadríceps intensamente.",
+    "videoUrl": ""
+  }
+]

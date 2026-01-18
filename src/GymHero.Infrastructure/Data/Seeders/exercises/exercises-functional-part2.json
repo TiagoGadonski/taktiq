@@ -1,0 +1,272 @@
+[
+  {
+    "name": "TRX Face Pull",
+    "description": "Inclinado para tras, puxe as maos em direcao ao rosto com cotovelos altos, abrindo no final.",
+    "musclesWorked": ["Shoulders", "Back", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-face-pull.png"
+  },
+  {
+    "name": "TRX Plank",
+    "description": "Prancha com pes nas alcas do TRX. A instabilidade aumenta significativamente o trabalho de core.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-plank.png"
+  },
+  {
+    "name": "TRX Mountain Climber",
+    "description": "Mountain climber com pes nas alcas do TRX. Adiciona instabilidade ao movimento.",
+    "musclesWorked": ["Core", "Hip Flexors", "Shoulders"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-mountain-climber.png"
+  },
+  {
+    "name": "TRX Atomic Push-Up",
+    "description": "Push-up com pes no TRX, seguido de knee tuck no topo do movimento. Combo desafiador.",
+    "musclesWorked": ["Chest", "Core", "Shoulders", "Hip Flexors"],
+    "equipment": ["TRX"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-atomic-push-up.png"
+  },
+  {
+    "name": "TRX Single Leg Squat",
+    "description": "Pistol squat assistido segurando as alcas do TRX para equilibrio e suporte.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-single-leg-squat.png"
+  },
+  {
+    "name": "TRX Side Plank",
+    "description": "Prancha lateral com pes nas alcas do TRX. Instabilidade extrema para obliquos.",
+    "musclesWorked": ["Obliques", "Core", "Shoulders"],
+    "equipment": ["TRX"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-side-plank.png"
+  },
+  {
+    "name": "Medicine Ball Slam",
+    "description": "Levante a medicine ball acima da cabeca e arremesse com forca no chao. Potencia total do corpo.",
+    "musclesWorked": ["Core", "Shoulders", "Back"],
+    "equipment": ["Slam Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-slam.png"
+  },
+  {
+    "name": "Medicine Ball Chest Pass",
+    "description": "Arremesse a medicine ball a partir do peito para um parceiro ou parede. Potencia de peito.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-chest-pass.png"
+  },
+  {
+    "name": "Medicine Ball Overhead Throw",
+    "description": "Arremesse a medicine ball acima da cabeca para tras ou para frente. Potencia de corpo inteiro.",
+    "musclesWorked": ["Core", "Shoulders", "Back"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-overhead-throw.png"
+  },
+  {
+    "name": "Medicine Ball Rotational Throw",
+    "description": "Rotacione o tronco e arremesse a bola lateralmente. Treina potencia rotacional.",
+    "musclesWorked": ["Core", "Obliques", "Shoulders"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-rotational-throw.png"
+  },
+  {
+    "name": "Medicine Ball Squat Throw",
+    "description": "Agache segurando a medicine ball e arremesse acima da cabeca ao subir explosivamente.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-squat-throw.png"
+  },
+  {
+    "name": "Medicine Ball V-Up",
+    "description": "V-up segurando medicine ball, passando a bola das maos para os pes e vice-versa.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-v-up.png"
+  },
+  {
+    "name": "Medicine Ball Russian Twist",
+    "description": "Russian twist segurando medicine ball. Adiciona resistencia ao movimento rotacional.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-russian-twist.png"
+  },
+  {
+    "name": "Medicine Ball Push-Up",
+    "description": "Push-up com uma ou ambas as maos na medicine ball. Instabilidade trabalha estabilizadores.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-push-up.png"
+  },
+  {
+    "name": "Medicine Ball Rainbow Slam",
+    "description": "Leve a bola em arco de um lado ao outro batendo no chao. Trabalha obliquos com potencia.",
+    "musclesWorked": ["Obliques", "Core", "Shoulders"],
+    "equipment": ["Slam Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/medicine-ball-rainbow-slam.png"
+  },
+  {
+    "name": "Wall Ball Shot",
+    "description": "Agache com bola no peito, levante e arremesse num alvo alto na parede. Pegue e repita.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Wall Ball"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/wall-ball-shot.png"
+  },
+  {
+    "name": "Sandbag Clean",
+    "description": "Levante o sandbag do chao para os ombros em movimento explosivo. Similar ao clean com barra.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-clean.png"
+  },
+  {
+    "name": "Sandbag Carry",
+    "description": "Carregue o sandbag de varias formas: abraco frontal, ombro, costas. Treino funcional completo.",
+    "musclesWorked": ["Core", "Back", "Shoulders", "Quadriceps"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-carry.png"
+  },
+  {
+    "name": "Sandbag Shoulder to Shoulder",
+    "description": "Passe o sandbag de um ombro para o outro por cima ou por baixo. Trabalho de core e ombros.",
+    "musclesWorked": ["Shoulders", "Core", "Biceps"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-shoulder-to-shoulder.png"
+  },
+  {
+    "name": "Sandbag Squat",
+    "description": "Agachamento segurando sandbag abraco frontal ou nos ombros. Desafia estabilidade diferente de barra.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-squat.png"
+  },
+  {
+    "name": "Sandbag Lunge",
+    "description": "Afundo segurando sandbag nos ombros ou abraco. A carga instavel trabalha mais estabilizadores.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-lunge.png"
+  },
+  {
+    "name": "Sandbag Drag",
+    "description": "Arraste o sandbag pelo chao para frente ou para tras. Treino de resistencia e forca de tracao.",
+    "musclesWorked": ["Back", "Core", "Quadriceps"],
+    "equipment": ["Sandbag"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sandbag-drag.png"
+  },
+  {
+    "name": "Landmine Press",
+    "description": "Segure a ponta da barra landmine e pressione para frente/cima. Angulo unico para ombros.",
+    "musclesWorked": ["Shoulders", "Chest", "Triceps", "Core"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-press.png"
+  },
+  {
+    "name": "Landmine Single Arm Row",
+    "description": "Remada unilateral com a ponta da barra landmine. Angulo diferente das remadas tradicionais.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-single-arm-row.png"
+  },
+  {
+    "name": "Landmine Squat",
+    "description": "Agachamento segurando a ponta da barra landmine no peito. A resistencia angular desafia diferente.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-squat.png"
+  },
+  {
+    "name": "Landmine Rotation",
+    "description": "Rotacione o tronco movendo a barra landmine de lado a lado com bracos estendidos.",
+    "musclesWorked": ["Obliques", "Core", "Shoulders"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-rotation.png"
+  },
+  {
+    "name": "Landmine Deadlift",
+    "description": "Levantamento terra segurando a ponta da barra landmine. Otima progressao para deadlift tradicional.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Back"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-deadlift.png"
+  },
+  {
+    "name": "Landmine Thruster",
+    "description": "Agachamento seguido de press com a landmine em movimento fluido. Corpo inteiro.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-thruster.png"
+  },
+  {
+    "name": "Landmine Reverse Lunge",
+    "description": "Afundo reverso segurando a landmine no ombro. Trabalha pernas com estabilidade de core.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-reverse-lunge.png"
+  },
+  {
+    "name": "Landmine Anti-Rotation",
+    "description": "Segure a landmine com bracos estendidos e resista a rotacao enquanto move lateralmente.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/landmine-anti-rotation.png"
+  }
+]

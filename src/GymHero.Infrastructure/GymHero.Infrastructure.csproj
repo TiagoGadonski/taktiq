@@ -35,9 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Data\Seeders\*.json">
+    <Content Include="Data\Seeders\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Data\Seeders\exercises\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

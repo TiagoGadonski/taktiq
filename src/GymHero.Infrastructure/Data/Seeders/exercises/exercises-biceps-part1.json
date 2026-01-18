@@ -1,0 +1,959 @@
+[
+  {
+    "name": "Rosca Direta com Barra",
+    "description": "Exercício clássico para desenvolvimento geral dos bíceps usando barra reta.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com os pés na largura dos ombros",
+      "Segure a barra com pegada supinada (palmas para cima) na largura dos ombros",
+      "Mantenha os cotovelos fixos junto ao corpo",
+      "Flexione os cotovelos levantando a barra em direção aos ombros",
+      "Contraia os bíceps no topo do movimento",
+      "Desça a barra de forma controlada até a extensão completa"
+    ],
+    "progressions": ["Rosca Direta com Barra com Pausa", "Rosca 21"],
+    "regressions": ["Rosca Direta com Halteres", "Rosca no Cabo"],
+    "tips": [
+      "Evite balançar o corpo para gerar impulso",
+      "Mantenha os pulsos retos durante todo o movimento",
+      "Controle a fase excêntrica (descida) por 2-3 segundos"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo para levantar a carga",
+      "Mover os cotovelos para frente durante a subida",
+      "Não completar a amplitude total do movimento"
+    ],
+    "notes": "Exercício fundamental que deve fazer parte de qualquer programa de braços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Direta com Barra EZ",
+    "description": "Variação da rosca direta que reduz o estresse nos pulsos com a barra curvada.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a barra EZ na parte angulada interna para pegada supinada",
+      "Fique em pé com postura ereta e core ativado",
+      "Mantenha os cotovelos próximos ao corpo",
+      "Flexione os cotovelos elevando a barra até a altura dos ombros",
+      "Segure brevemente a contração no topo",
+      "Retorne à posição inicial de forma controlada"
+    ],
+    "progressions": ["Rosca 21 com Barra EZ", "Rosca Scott com Barra EZ"],
+    "regressions": ["Rosca Direta com Halteres Leves"],
+    "tips": [
+      "A barra EZ permite uma pegada mais natural e confortável",
+      "Ideal para quem sente desconforto nos pulsos com barra reta",
+      "Mantenha a escápula retraída durante todo o exercício"
+    ],
+    "commonMistakes": [
+      "Inclinar o tronco para trás para completar a repetição",
+      "Deixar os cotovelos subirem durante o movimento",
+      "Usar carga excessiva comprometendo a técnica"
+    ],
+    "notes": "Excelente opção para quem tem problemas de pulso ou prefere uma pegada mais ergonômica.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Direta com Halteres",
+    "description": "Rosca bilateral com halteres permitindo amplitude natural de movimento.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando um halter em cada mão ao lado do corpo",
+      "Palmas voltadas para frente (pegada supinada)",
+      "Mantenha o core ativado e postura ereta",
+      "Flexione ambos os cotovelos simultaneamente",
+      "Leve os halteres até a altura dos ombros",
+      "Desça de forma controlada até a extensão completa"
+    ],
+    "progressions": ["Rosca Alternada com Halteres", "Rosca Inclinada"],
+    "regressions": ["Rosca Direta Sentado"],
+    "tips": [
+      "Mantenha os pulsos firmes sem deixá-los dobrar",
+      "Os halteres permitem corrigir desequilíbrios entre os braços",
+      "Expire durante a subida e inspire na descida"
+    ],
+    "commonMistakes": [
+      "Balançar os halteres usando momentum",
+      "Flexionar os pulsos no topo do movimento",
+      "Não controlar a fase negativa"
+    ],
+    "notes": "Permite identificar e corrigir assimetrias de força entre os braços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Alternada com Halteres",
+    "description": "Variação unilateral alternada que permite maior foco em cada braço.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com um halter em cada mão, braços estendidos",
+      "Comece com as palmas voltadas para o corpo (posição neutra)",
+      "Flexione um cotovelo enquanto gira o antebraço (supinação)",
+      "Leve o halter até o ombro com a palma voltada para cima",
+      "Desça controladamente e repita com o outro braço",
+      "Alterne os braços a cada repetição"
+    ],
+    "progressions": ["Rosca Alternada com Pausa", "Rosca Zottman"],
+    "regressions": ["Rosca Direta Bilateral"],
+    "tips": [
+      "A supinação durante o movimento aumenta a ativação do bíceps",
+      "Mantenha o braço em descanso levemente tenso",
+      "O movimento alternado permite usar cargas um pouco mais pesadas"
+    ],
+    "commonMistakes": [
+      "Inclinar o corpo para o lado oposto ao braço trabalhando",
+      "Não completar a supinação do antebraço",
+      "Acelerar demais o movimento"
+    ],
+    "notes": "A rotação do antebraço trabalha também a função de supinação do bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Martelo",
+    "description": "Rosca com pegada neutra que enfatiza o braquial e braquiorradial.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando os halteres com pegada neutra (palmas voltadas uma para outra)",
+      "Mantenha os cotovelos junto ao corpo durante todo o movimento",
+      "Flexione os cotovelos levantando os halteres",
+      "Mantenha a pegada neutra durante toda a execução",
+      "Suba até aproximadamente a altura dos ombros",
+      "Desça de forma controlada até a extensão completa"
+    ],
+    "progressions": ["Rosca Martelo Cross Body", "Rosca Martelo com Corda"],
+    "regressions": ["Rosca Martelo Sentado"],
+    "tips": [
+      "Excelente para desenvolver a parte lateral do braço",
+      "A pegada neutra é mais confortável para os pulsos",
+      "Trabalha intensamente o braquiorradial (antebraço)"
+    ],
+    "commonMistakes": [
+      "Girar os pulsos durante o movimento",
+      "Levar os cotovelos muito à frente",
+      "Usar impulso excessivo do corpo"
+    ],
+    "notes": "Fundamental para o desenvolvimento completo dos braços e força de pegada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Martelo Alternada",
+    "description": "Versão alternada da rosca martelo para maior controle e concentração.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Em pé, segure os halteres com pegada neutra ao lado do corpo",
+      "Flexione um cotovelo levantando o halter mantendo a palma voltada para dentro",
+      "Suba até sentir a contração máxima do bíceps",
+      "Desça de forma controlada",
+      "Repita com o outro braço",
+      "Continue alternando até completar as repetições"
+    ],
+    "progressions": ["Rosca Martelo Cross Body", "Rosca Martelo com Pausa"],
+    "regressions": ["Rosca Martelo Bilateral"],
+    "tips": [
+      "Permite maior concentração em cada braço",
+      "Ideal para corrigir desequilíbrios musculares",
+      "Mantenha o core sempre ativado"
+    ],
+    "commonMistakes": [
+      "Balançar o tronco para completar a repetição",
+      "Não manter a pegada neutra constante",
+      "Usar cargas que comprometam a técnica"
+    ],
+    "notes": "O movimento alternado permite melhor controle da técnica.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Martelo Cross Body",
+    "description": "Rosca martelo cruzando o corpo para maior ativação do braquial.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com um halter em cada mão, pegada neutra",
+      "Flexione um cotovelo levando o halter em direção ao ombro oposto",
+      "O movimento cruza a linha média do corpo",
+      "Mantenha o cotovelo próximo ao corpo durante o movimento",
+      "Contraia no topo e desça controladamente",
+      "Alterne os braços a cada repetição"
+    ],
+    "progressions": ["Rosca Martelo Cross Body com Pausa"],
+    "regressions": ["Rosca Martelo Tradicional"],
+    "tips": [
+      "O movimento cruzado aumenta a ativação do braquial",
+      "Excelente para desenvolver o pico do bíceps",
+      "Mantenha o ombro estável durante o movimento"
+    ],
+    "commonMistakes": [
+      "Girar o tronco junto com o movimento",
+      "Levantar o ombro durante a flexão",
+      "Cruzar demais além do ombro oposto"
+    ],
+    "notes": "Variação eficaz para enfatizar o braquial e adicionar variedade ao treino.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Concentrada",
+    "description": "Exercício unilateral sentado com apoio do cotovelo na coxa para isolamento máximo.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em um banco com as pernas afastadas",
+      "Apoie a parte de trás do cotovelo na parte interna da coxa",
+      "Segure o halter com a palma voltada para cima",
+      "Flexione o cotovelo levantando o halter em direção ao ombro",
+      "Concentre-se em contrair fortemente o bíceps no topo",
+      "Desça de forma lenta e controlada"
+    ],
+    "progressions": ["Rosca Concentrada com Pausa Isométrica"],
+    "regressions": ["Rosca Direta com Halteres"],
+    "tips": [
+      "O apoio na coxa elimina qualquer possibilidade de usar impulso",
+      "Foque na conexão mente-músculo durante cada repetição",
+      "Use cargas moderadas para manter a técnica perfeita"
+    ],
+    "commonMistakes": [
+      "Mover o cotovelo do apoio durante a execução",
+      "Usar o ombro para ajudar no movimento",
+      "Não completar a extensão total na descida"
+    ],
+    "notes": "Um dos melhores exercícios para isolar o bíceps e desenvolver o pico.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Scott com Barra",
+    "description": "Rosca com apoio no banco Scott para isolamento total dos bíceps.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a altura do banco Scott para que as axilas fiquem confortáveis no topo",
+      "Apoie a parte de trás dos braços completamente no pad",
+      "Segure a barra com pegada supinada na largura dos ombros",
+      "Flexione os cotovelos levantando a barra até cerca de 120 graus",
+      "Não deixe a barra tocar nos ombros no topo",
+      "Desça controladamente sem estender completamente os cotovelos"
+    ],
+    "progressions": ["Rosca Scott com Barra EZ Drop Set"],
+    "regressions": ["Rosca Scott com Halteres"],
+    "tips": [
+      "Evite hiperextensão dos cotovelos na parte inferior",
+      "O banco Scott elimina completamente o uso de impulso",
+      "Ideal para trabalhar a porção longa do bíceps"
+    ],
+    "commonMistakes": [
+      "Estender completamente os cotovelos (risco de lesão)",
+      "Levantar os cotovelos do pad durante o movimento",
+      "Usar carga excessiva comprometendo a amplitude"
+    ],
+    "notes": "Exercício nomeado em homenagem a Larry Scott, primeiro Mr. Olympia.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Scott com Barra EZ",
+    "description": "Variação do banco Scott com barra EZ para maior conforto de pulso.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se no banco Scott com os braços apoiados no pad",
+      "Segure a barra EZ na parte angulada interna",
+      "Mantenha os ombros para baixo e peito contra o pad",
+      "Flexione os cotovelos de forma controlada",
+      "Suba até sentir a contração máxima (não complete totalmente)",
+      "Desça lentamente mantendo tensão constante"
+    ],
+    "progressions": ["Rosca Scott com Pausa Isométrica"],
+    "regressions": ["Rosca Scott na Máquina"],
+    "tips": [
+      "A barra EZ reduz o estresse nos pulsos e cotovelos",
+      "Mantenha uma leve flexão nos cotovelos na parte inferior",
+      "Excelente para finalizar o treino de bíceps"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos saírem do pad",
+      "Usar movimento explosivo na subida",
+      "Hiperextender os cotovelos na descida"
+    ],
+    "notes": "Combinação perfeita de isolamento e conforto articular.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Scott com Halteres",
+    "description": "Rosca Scott unilateral ou bilateral com halteres para trabalho independente dos braços.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se no banco Scott com um halter em cada mão",
+      "Apoie a parte de trás dos braços firmemente no pad",
+      "Palmas voltadas para cima (supinadas)",
+      "Flexione os cotovelos elevando os halteres",
+      "Mantenha a tensão constante durante todo o movimento",
+      "Desça de forma controlada sem estender totalmente"
+    ],
+    "progressions": ["Rosca Scott Unilateral com Pausa"],
+    "regressions": ["Rosca Concentrada"],
+    "tips": [
+      "Halteres permitem trabalhar cada braço de forma independente",
+      "Pode ser feito unilateralmente para maior concentração",
+      "Excelente para identificar desequilíbrios"
+    ],
+    "commonMistakes": [
+      "Deixar um braço compensar o mais fraco",
+      "Tirar os braços do apoio do pad",
+      "Não manter tensão constante nos bíceps"
+    ],
+    "notes": "Permite ajuste individual da amplitude para cada braço.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Spider",
+    "description": "Rosca inclinada com o peito apoiado no banco, eliminando qualquer impulso.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Incline um banco a aproximadamente 45 graus",
+      "Deite com o peito apoiado no banco, braços pendurados",
+      "Segure os halteres com pegada supinada",
+      "Flexione os cotovelos trazendo os halteres em direção aos ombros",
+      "Mantenha os braços perpendiculares ao chão",
+      "Desça de forma controlada até a extensão completa"
+    ],
+    "progressions": ["Rosca Spider com Barra EZ"],
+    "regressions": ["Rosca Inclinada"],
+    "tips": [
+      "A gravidade trabalha contra você durante todo o movimento",
+      "Excelente para desenvolver a porção curta do bíceps",
+      "Mantenha a testa apoiada no banco para estabilidade"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos oscilarem durante o movimento",
+      "Não manter o peito firmemente apoiado no banco",
+      "Usar carga excessiva que comprometa a técnica"
+    ],
+    "notes": "Exercício avançado que proporciona tensão máxima na posição contraída.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Spider com Barra EZ",
+    "description": "Variação da rosca spider usando barra EZ para maior carga.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Configure o banco inclinado a 45 graus",
+      "Deite com o peito no banco, segurando a barra EZ",
+      "Deixe os braços pendurados verticalmente",
+      "Flexione os cotovelos trazendo a barra até os ombros",
+      "Contraia fortemente os bíceps no topo",
+      "Desça de maneira controlada"
+    ],
+    "progressions": ["Rosca Spider com Drop Set"],
+    "regressions": ["Rosca Spider com Halteres Leves"],
+    "tips": [
+      "A barra permite usar cargas maiores que halteres",
+      "Mantenha os cotovelos fixos apontando para baixo",
+      "Excelente como exercício de finalização"
+    ],
+    "commonMistakes": [
+      "Mover os cotovelos para frente durante a subida",
+      "Deixar o corpo escorregar no banco",
+      "Não completar a amplitude do movimento"
+    ],
+    "notes": "Proporciona uma sensação de queimação intensa nos bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Inclinada com Halteres",
+    "description": "Rosca deitado em banco inclinado para alongar completamente o bíceps.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste um banco a 45-60 graus de inclinação",
+      "Sente-se com as costas apoiadas no banco",
+      "Deixe os braços pendurados ao lado do corpo segurando os halteres",
+      "Flexione os cotovelos sem movê-los para frente",
+      "Leve os halteres até a altura dos ombros",
+      "Desça de forma lenta e controlada"
+    ],
+    "progressions": ["Rosca Inclinada com Supinação"],
+    "regressions": ["Rosca Direta com Halteres"],
+    "tips": [
+      "A inclinação proporciona maior alongamento do bíceps",
+      "Excelente para trabalhar a porção longa do bíceps",
+      "Não deixe os cotovelos avançarem durante o movimento"
+    ],
+    "commonMistakes": [
+      "Levantar os cotovelos para facilitar o movimento",
+      "Usar impulso do corpo para completar a repetição",
+      "Não aproveitar o alongamento completo na parte inferior"
+    ],
+    "notes": "Um dos melhores exercícios para a porção longa do bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Inclinada Alternada",
+    "description": "Versão alternada da rosca inclinada para maior concentração unilateral.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em banco inclinado a 45-60 graus",
+      "Segure um halter em cada mão com os braços pendurados",
+      "Flexione um cotovelo enquanto supina o antebraço",
+      "Mantenha o cotovelo fixo durante todo o movimento",
+      "Desça controladamente e repita com o outro braço",
+      "Alterne até completar todas as repetições"
+    ],
+    "progressions": ["Rosca Inclinada com Pausa"],
+    "regressions": ["Rosca Inclinada Bilateral"],
+    "tips": [
+      "A alternância permite maior foco em cada braço",
+      "Mantenha tensão no braço em descanso",
+      "Ideal para trabalhar a conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Acelerar o movimento para terminar mais rápido",
+      "Mover os cotovelos durante a execução",
+      "Não completar o alongamento na posição inferior"
+    ],
+    "notes": "Permite usar cargas ligeiramente maiores que a versão bilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca no Cabo Reto",
+    "description": "Rosca usando a polia baixa com barra reta para tensão constante.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a barra reta na polia baixa",
+      "Fique em pé de frente para a máquina",
+      "Segure a barra com pegada supinada na largura dos ombros",
+      "Mantenha os cotovelos fixos junto ao corpo",
+      "Flexione os cotovelos levantando a barra até os ombros",
+      "Desça de forma controlada mantendo a tensão"
+    ],
+    "progressions": ["Rosca no Cabo com Drop Set", "Rosca 21 no Cabo"],
+    "regressions": ["Rosca no Cabo com Barra EZ"],
+    "tips": [
+      "O cabo mantém tensão constante durante todo o movimento",
+      "Excelente para finalizações com altas repetições",
+      "Fique ligeiramente inclinado para frente para maior ativação"
+    ],
+    "commonMistakes": [
+      "Ficar muito próximo da máquina",
+      "Deixar os cotovelos se moverem durante a execução",
+      "Usar impulso para completar as repetições"
+    ],
+    "notes": "A tensão constante do cabo é excelente para hipertrofia.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca no Cabo com Corda",
+    "description": "Rosca martelo usando corda no cabo para maior liberdade de movimento.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia baixa",
+      "Segure as extremidades da corda com pegada neutra",
+      "Mantenha os cotovelos junto ao corpo",
+      "Flexione os cotovelos puxando a corda até os ombros",
+      "No topo, separe as extremidades da corda para maior contração",
+      "Retorne de forma controlada à posição inicial"
+    ],
+    "progressions": ["Rosca Martelo no Cabo Unilateral"],
+    "regressions": ["Rosca Martelo com Halteres"],
+    "tips": [
+      "A pegada neutra enfatiza o braquial e braquiorradial",
+      "Separar a corda no topo aumenta a contração",
+      "Excelente para desenvolver a parte externa do braço"
+    ],
+    "commonMistakes": [
+      "Não separar a corda no topo do movimento",
+      "Deixar os cotovelos se afastarem do corpo",
+      "Usar carga excessiva limitando a amplitude"
+    ],
+    "notes": "A corda permite uma pegada mais natural e maior amplitude no pico.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca no Cabo com Barra EZ",
+    "description": "Rosca no cabo baixo utilizando barra EZ para conforto de pulso.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a barra EZ na polia baixa",
+      "Fique de frente para a máquina, um passo de distância",
+      "Segure a barra na parte angulada com pegada supinada",
+      "Flexione os cotovelos mantendo-os fixos junto ao corpo",
+      "Leve a barra até a altura dos ombros",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Rosca no Cabo com Pausa"],
+    "regressions": ["Rosca Direta com Barra EZ"],
+    "tips": [
+      "Combina os benefícios do cabo com o conforto da barra EZ",
+      "A tensão constante é excelente para hipertrofia",
+      "Ideal para quem tem desconforto de pulso"
+    ],
+    "commonMistakes": [
+      "Ficar muito perto ou muito longe da máquina",
+      "Usar o tronco para gerar impulso",
+      "Não aproveitar a tensão constante do cabo"
+    ],
+    "notes": "Excelente variação que combina ergonomia com tensão constante.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca 21",
+    "description": "Técnica intensificadora dividindo o movimento em três fases de 7 repetições.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a barra com pegada supinada",
+      "Execute 7 repetições parciais da posição inicial até 90 graus",
+      "Em seguida, execute 7 repetições de 90 graus até a contração total",
+      "Finalize com 7 repetições completas (amplitude total)",
+      "Mantenha os cotovelos fixos durante todas as fases",
+      "Use uma carga mais leve que o normal"
+    ],
+    "progressions": ["Rosca 28 (7+7+7+7)"],
+    "regressions": ["Rosca 21 com Barra EZ Leve"],
+    "tips": [
+      "A técnica aumenta drasticamente o tempo sob tensão",
+      "Use cerca de 50-60% da carga normal",
+      "Excelente para finalizar o treino de bíceps"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada e não completar as 21 reps",
+      "Não respeitar os ângulos de cada fase",
+      "Perder a técnica nas repetições finais"
+    ],
+    "notes": "Técnica clássica de intensificação popularizada por Arnold Schwarzenegger.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca 21 com Barra EZ",
+    "description": "Variação da rosca 21 com barra EZ para menor estresse nos pulsos.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a barra EZ com pegada supinada",
+      "7 repetições parciais baixas (extensão até 90 graus)",
+      "7 repetições parciais altas (90 graus até contração)",
+      "7 repetições completas para finalizar",
+      "Mantenha a forma durante todas as 21 repetições",
+      "Descanse e repita se programado"
+    ],
+    "progressions": ["Rosca 21 com Drop Set"],
+    "regressions": ["Rosca 21 com Halteres Leves"],
+    "tips": [
+      "A barra EZ reduz o estresse nos pulsos durante as 21 reps",
+      "Foque em manter a técnica mesmo quando fatigado",
+      "Excelente para pump máximo"
+    ],
+    "commonMistakes": [
+      "Abandonar a técnica quando a fadiga chega",
+      "Não completar a amplitude em cada fase",
+      "Usar carga excessiva"
+    ],
+    "notes": "Versão mais confortável da técnica 21 para sessões intensas.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Zottman",
+    "description": "Rosca que combina movimento supinado na subida e pronado na descida.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando halteres com pegada supinada",
+      "Flexione os cotovelos realizando uma rosca normal",
+      "No topo do movimento, gire os pulsos para pegada pronada",
+      "Desça os halteres com as palmas voltadas para baixo",
+      "Na parte inferior, gire novamente para supinada",
+      "Repita o ciclo"
+    ],
+    "progressions": ["Rosca Zottman com Pausa"],
+    "regressions": ["Rosca Alternada com Halteres"],
+    "tips": [
+      "A rotação trabalha tanto bíceps quanto antebraços",
+      "Use cargas moderadas para manter a técnica",
+      "A fase excêntrica pronada desenvolve os extensores do pulso"
+    ],
+    "commonMistakes": [
+      "Não completar a rotação no topo",
+      "Descer muito rápido com a pegada pronada",
+      "Usar carga excessiva que impeça a rotação completa"
+    ],
+    "notes": "Exercício completo que trabalha bíceps e antebraços simultaneamente.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Drag Curl",
+    "description": "Rosca arrastando a barra junto ao corpo para maior ativação da cabeça longa.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a barra com pegada supinada na largura dos ombros",
+      "Em vez de curvar à frente, arraste a barra subindo junto ao corpo",
+      "Os cotovelos vão para trás durante o movimento",
+      "A barra deve deslizar pelo abdômen e peito",
+      "Suba até a barra alcançar a parte inferior do peito",
+      "Desça de forma controlada arrastando a barra"
+    ],
+    "progressions": ["Drag Curl com Pausa Isométrica"],
+    "regressions": ["Rosca Direta com Barra"],
+    "tips": [
+      "Foca intensamente na cabeça longa do bíceps",
+      "Os ombros se movem para trás naturalmente",
+      "Use carga mais leve que na rosca tradicional"
+    ],
+    "commonMistakes": [
+      "Realizar o movimento como rosca tradicional",
+      "Não deixar os cotovelos irem para trás",
+      "Usar carga excessiva perdendo a técnica"
+    ],
+    "notes": "Exercício excelente para desenvolver o pico do bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Drag Curl com Halteres",
+    "description": "Versão com halteres do drag curl para trabalho independente dos braços.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure os halteres ao lado do corpo com pegada supinada",
+      "Arraste os halteres subindo junto às laterais do corpo",
+      "Os cotovelos se movem para trás durante a subida",
+      "Os halteres passam próximos ao quadril e costelas",
+      "Suba até a altura do peito mantendo próximo ao corpo",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Drag Curl Alternado com Pausa"],
+    "regressions": ["Drag Curl com Barra"],
+    "tips": [
+      "Halteres permitem trabalho independente de cada braço",
+      "Mantenha os halteres sempre próximos ao corpo",
+      "Excelente para sentir a contração da cabeça longa"
+    ],
+    "commonMistakes": [
+      "Afastar os halteres do corpo",
+      "Não permitir que os cotovelos vão para trás",
+      "Realizar como rosca tradicional"
+    ],
+    "notes": "Permite identificar e corrigir desequilíbrios entre os braços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca no Cross Over Alto",
+    "description": "Rosca com os cabos altos posicionados como se estivesse fazendo pose de bíceps.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione as polias na altura mais alta",
+      "Fique no centro do crossover com os braços abertos",
+      "Segure as manoplas com pegada supinada",
+      "Flexione os cotovelos trazendo as mãos em direção às orelhas",
+      "Mantenha os cotovelos elevados e fixos na altura dos ombros",
+      "Estenda os braços de forma controlada"
+    ],
+    "progressions": ["Rosca no Cross Over com Pausa"],
+    "regressions": ["Rosca no Cabo Baixo"],
+    "tips": [
+      "Simula a pose de bíceps duplo frontal",
+      "Excelente para desenvolver o pico do bíceps",
+      "Mantenha os ombros para baixo e estáveis"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos caírem durante o movimento",
+      "Usar carga excessiva perdendo a posição",
+      "Mover os ombros para ajudar no movimento"
+    ],
+    "notes": "Exercício favorito de fisiculturistas para definição do bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca no Cross Over Unilateral",
+    "description": "Versão unilateral da rosca no cabo alto para máxima concentração.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione uma polia na altura alta",
+      "Fique de lado para a máquina, segurando a manopla",
+      "Mantenha o cotovelo elevado na altura do ombro",
+      "Flexione o cotovelo trazendo a mão em direção à orelha",
+      "Contraia fortemente o bíceps no pico do movimento",
+      "Estenda de forma controlada e repita"
+    ],
+    "progressions": ["Rosca no Cross Over com Isometria"],
+    "regressions": ["Rosca no Cross Over Bilateral"],
+    "tips": [
+      "Permite foco total em um braço de cada vez",
+      "Ideal para corrigir assimetrias",
+      "Mantenha o core ativado para estabilidade"
+    ],
+    "commonMistakes": [
+      "Deixar o cotovelo cair durante a execução",
+      "Girar o tronco para ajudar no movimento",
+      "Não manter a tensão constante"
+    ],
+    "notes": "Excelente para trabalhar a conexão mente-músculo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca na Máquina Scott",
+    "description": "Rosca Scott na máquina para movimento guiado e seguro.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a altura do assento para que as axilas fiquem confortáveis no pad",
+      "Apoie a parte de trás dos braços no suporte",
+      "Segure as alças com pegada supinada",
+      "Flexione os cotovelos realizando o movimento de rosca",
+      "Contraia os bíceps no topo do movimento",
+      "Retorne de forma controlada sem estender completamente"
+    ],
+    "progressions": ["Rosca Scott com Barra Livre"],
+    "regressions": ["Rosca na Máquina com Carga Leve"],
+    "tips": [
+      "A máquina guia o movimento eliminando compensações",
+      "Ideal para iniciantes aprenderem o padrão de movimento",
+      "Permite treinar até a falha com segurança"
+    ],
+    "commonMistakes": [
+      "Ajustar incorretamente a altura do assento",
+      "Hiperextender os cotovelos na fase negativa",
+      "Usar impulso para completar as repetições"
+    ],
+    "notes": "Ótima opção para iniciantes ou para treinar até a falha.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Direta Sentado",
+    "description": "Rosca direta executada sentado para eliminar uso do corpo.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em um banco com encosto a 90 graus",
+      "Segure um halter em cada mão ao lado do corpo",
+      "Mantenha as costas apoiadas no encosto",
+      "Flexione os cotovelos realizando a rosca bilateral",
+      "Mantenha os cotovelos fixos durante o movimento",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Rosca Alternada Sentado"],
+    "regressions": ["Rosca Sentado com Elástico"],
+    "tips": [
+      "A posição sentada elimina completamente o impulso",
+      "Permite maior isolamento dos bíceps",
+      "Ideal para quem tem tendência a usar o corpo"
+    ],
+    "commonMistakes": [
+      "Tirar as costas do encosto para gerar impulso",
+      "Não manter os cotovelos fixos",
+      "Usar carga excessiva"
+    ],
+    "notes": "Variação que força o uso estrito dos bíceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca Alternada Sentado",
+    "description": "Rosca alternada executada sentado para máximo isolamento.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em banco com encosto reto",
+      "Segure os halteres ao lado do corpo",
+      "Mantenha as costas firmemente apoiadas",
+      "Flexione um cotovelo enquanto supina o antebraço",
+      "Desça controladamente e repita com o outro braço",
+      "Alterne até completar as repetições"
+    ],
+    "progressions": ["Rosca Inclinada Alternada"],
+    "regressions": ["Rosca Bilateral Sentada"],
+    "tips": [
+      "A posição sentada garante isolamento total",
+      "Foque na supinação durante a subida",
+      "Mantenha tensão no braço em descanso"
+    ],
+    "commonMistakes": [
+      "Inclinar o tronco para ajudar o movimento",
+      "Acelerar as repetições",
+      "Não completar a supinação"
+    ],
+    "notes": "Excelente para desenvolver a técnica correta de rosca.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca com Banda Elástica",
+    "description": "Rosca utilizando banda elástica para resistência progressiva.",
+    "muscleGroup": "Biceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Pise no centro da banda com os pés na largura dos ombros",
+      "Segure as extremidades da banda com pegada supinada",
+      "Mantenha os cotovelos fixos junto ao corpo",
+      "Flexione os cotovelos puxando a banda até os ombros",
+      "Contraia os bíceps no topo",
+      "Retorne de forma controlada à posição inicial"
+    ],
+    "progressions": ["Rosca com Banda mais Resistente"],
+    "regressions": ["Rosca com Banda Leve"],
+    "tips": [
+      "A resistência aumenta conforme a banda estica",
+      "Excelente para treinos em casa ou viagens",
+      "Mantenha a tensão constante durante todo o movimento"
+    ],
+    "commonMistakes": [
+      "Deixar a banda voltar rapidamente (perder controle)",
+      "Não manter os cotovelos fixos",
+      "Usar impulso do corpo"
+    ],
+    "notes": "Ótima opção portátil para manter os treinos em dia.",
+    "videoUrl": ""
+  }
+]

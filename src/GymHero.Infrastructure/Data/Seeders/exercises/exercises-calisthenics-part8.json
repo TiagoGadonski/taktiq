@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Wall Handstand",
+    "description": "Parada de mao contra parede para treinar posicao e equilibrio.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-handstand.png"
+  },
+  {
+    "name": "Chest to Wall Handstand",
+    "description": "Handstand de frente para parede, peito proximo. Melhor posicao para treinar.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chest-wall-handstand.png"
+  },
+  {
+    "name": "Handstand Walk Wall",
+    "description": "Suba e desca a parede caminhando com as maos em handstand.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/handstand-walk-wall.png"
+  },
+  {
+    "name": "Handstand Shoulder Touch",
+    "description": "Em handstand contra parede, toque ombros alternadamente.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/handstand-shoulder-touch.png"
+  },
+  {
+    "name": "Freestanding Handstand",
+    "description": "Parada de mao sem apoio de parede. Requer excelente equilibrio e controle.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/freestanding-handstand.png"
+  },
+  {
+    "name": "Handstand Walk",
+    "description": "Caminhe sobre as maos em parada de mao livre. Skill avancado.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/handstand-walk.png"
+  },
+  {
+    "name": "Crow Pose",
+    "description": "Posicao de yoga com joelhos apoiados nos triceps, equilibrio nas maos.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/crow-pose.png"
+  },
+  {
+    "name": "Headstand",
+    "description": "Equilibrio invertido apoiado na cabeca e antebracos. Base para progressoes.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/headstand.png"
+  },
+  {
+    "name": "Forearm Stand",
+    "description": "Equilibrio invertido nos antebracos. Progressao para handstand.",
+    "musclesWorked": ["Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/forearm-stand.png"
+  },
+  {
+    "name": "Kick Up to Handstand",
+    "description": "Pratique chutar para parada de mao a partir de posicao em pe.",
+    "musclesWorked": ["Shoulders", "Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/kick-up-handstand.png"
+  },
+  {
+    "name": "Press to Handstand",
+    "description": "Suba para handstand com controle a partir de pike ou straddle sem impulso.",
+    "musclesWorked": ["Shoulders", "Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/press-to-handstand.png"
+  },
+  {
+    "name": "Single Leg Balance",
+    "description": "Fique em pe numa perna so pelo maior tempo possivel. Base de equilibrio.",
+    "musclesWorked": ["Core", "Calves", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-balance.png"
+  },
+  {
+    "name": "Single Leg Balance Eyes Closed",
+    "description": "Equilibrio em uma perna com olhos fechados. Desafia propriocepcao.",
+    "musclesWorked": ["Core", "Calves", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-balance-eyes-closed.png"
+  },
+  {
+    "name": "Tree Pose",
+    "description": "Posicao de yoga em uma perna com pe oposto no interno da coxa.",
+    "musclesWorked": ["Core", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tree-pose.png"
+  },
+  {
+    "name": "Warrior 3",
+    "description": "Posicao de yoga: equilibrio em uma perna com corpo e outra perna horizontais.",
+    "musclesWorked": ["Core", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/warrior-3.png"
+  },
+  {
+    "name": "Side Kick Hold",
+    "description": "Em pe, eleve perna lateralmente e mantenha posicao. Treina abdutores e equilibrio.",
+    "musclesWorked": ["Abductors", "Core", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/side-kick-hold.png"
+  },
+  {
+    "name": "Front Kick Hold",
+    "description": "Em pe, eleve perna a frente reta e mantenha. Treina flexores do quadril.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/front-kick-hold.png"
+  },
+  {
+    "name": "Back Kick Hold",
+    "description": "Em pe, eleve perna reta para tras e mantenha. Treina gluteos e equilibrio.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/back-kick-hold.png"
+  },
+  {
+    "name": "Bosu Ball Squat",
+    "description": "Agachamento sobre bola bosu para desafiar equilibrio e estabilidade.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bosu Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bosu-ball-squat.png"
+  },
+  {
+    "name": "Bosu Ball Push-Up",
+    "description": "Push-up com maos no bosu ball para instabilidade adicional.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Bosu Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bosu-ball-push-up.png"
+  },
+  {
+    "name": "Stability Ball Plank",
+    "description": "Prancha com antebracos na bola suica. Instabilidade aumenta trabalho de core.",
+    "musclesWorked": ["Core", "Abs", "Shoulders"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-plank.png"
+  },
+  {
+    "name": "Stability Ball Push-Up",
+    "description": "Push-up com maos ou pes na bola suica para instabilidade.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-push-up.png"
+  },
+  {
+    "name": "Stability Ball Squat Wall",
+    "description": "Agachamento com bola suica entre costas e parede.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Stability Ball", "Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-squat-wall.png"
+  },
+  {
+    "name": "Stability Ball Crunch",
+    "description": "Crunch com lombar apoiada na bola suica. Maior amplitude.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-crunch.png"
+  },
+  {
+    "name": "Stability Ball Jackknife",
+    "description": "Em prancha com pes na bola, puxe joelhos em direcao ao peito.",
+    "musclesWorked": ["Abs", "Core", "Hip Flexors"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-jackknife.png"
+  },
+  {
+    "name": "Stability Ball Pike",
+    "description": "Em prancha com pes na bola, eleve quadril formando V invertido.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-pike.png"
+  },
+  {
+    "name": "Stability Ball Hamstring Curl",
+    "description": "Deitado com calcanhares na bola, eleve quadril e puxe bola com os pes.",
+    "musclesWorked": ["Hamstrings", "Glutes"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-hamstring-curl.png"
+  },
+  {
+    "name": "Stability Ball Back Extension",
+    "description": "Deitado de brucos na bola, execute extensoes de lombar.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stability-ball-back-extension.png"
+  },
+  {
+    "name": "Slider Mountain Climber",
+    "description": "Mountain climber com pes em sliders deslizando no chao.",
+    "musclesWorked": ["Core", "Hip Flexors"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-mountain-climber.png"
+  },
+  {
+    "name": "Slider Body Saw",
+    "description": "Em prancha com pes em sliders, deslize para frente e tras.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-body-saw.png"
+  }
+]

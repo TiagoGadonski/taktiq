@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Kneeling Hip Flexor Stretch",
+    "description": "Ajoelhado com um pe a frente em 90 graus, empurre quadril para frente.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/kneeling-hip-flexor-stretch.png"
+  },
+  {
+    "name": "Standing Hip Flexor Stretch",
+    "description": "Em afundo com joelho traseiro reto, empurre quadril para frente.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-hip-flexor-stretch.png"
+  },
+  {
+    "name": "Lunge Hip Flexor Stretch",
+    "description": "Em afundo profundo, abaixe quadril enquanto mantem tronco ereto.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lunge-hip-flexor-stretch.png"
+  },
+  {
+    "name": "Elevated Hip Flexor Stretch",
+    "description": "Afundo com pe traseiro elevado em banco para maior intensidade.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps"],
+    "equipment": ["Bench"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/elevated-hip-flexor-stretch.png"
+  },
+  {
+    "name": "Hip Flexor Stretch with Side Bend",
+    "description": "Em afundo, adicione inclinacao lateral para o lado da perna da frente.",
+    "musclesWorked": ["Hip Flexors", "Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/hip-flexor-stretch-side-bend.png"
+  },
+  {
+    "name": "Pigeon Pose",
+    "description": "Uma perna dobrada a frente, outra estendida atras. Alongamento profundo de gluteos.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/pigeon-pose.png"
+  },
+  {
+    "name": "Sleeping Pigeon",
+    "description": "Pigeon pose inclinando tronco para frente sobre a perna dobrada.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/sleeping-pigeon.png"
+  },
+  {
+    "name": "King Pigeon",
+    "description": "Pigeon pose segurando o pe traseiro com as maos atras das costas.",
+    "musclesWorked": ["Glutes", "Hip Flexors", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/king-pigeon.png"
+  },
+  {
+    "name": "Supine Pigeon",
+    "description": "Deitado de costas com tornozelo sobre joelho oposto, puxe coxa em direcao ao peito.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/supine-pigeon.png"
+  },
+  {
+    "name": "Figure 4 Stretch",
+    "description": "Versao supina do pigeon, tambem conhecida como stretch numero 4.",
+    "musclesWorked": ["Glutes", "Piriformis"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/figure-4-stretch.png"
+  },
+  {
+    "name": "Seated Figure 4",
+    "description": "Sentado em cadeira, cruze tornozelo sobre joelho e incline tronco para frente.",
+    "musclesWorked": ["Glutes", "Piriformis"],
+    "equipment": ["Chair"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-figure-4.png"
+  },
+  {
+    "name": "Glute Stretch Lying",
+    "description": "Deitado de costas, puxe joelho em direcao ao ombro oposto.",
+    "musclesWorked": ["Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/glute-stretch-lying.png"
+  },
+  {
+    "name": "Seated Glute Stretch",
+    "description": "Sentado, cruze uma perna sobre a outra e rotacione tronco para o lado.",
+    "musclesWorked": ["Glutes", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-glute-stretch.png"
+  },
+  {
+    "name": "Piriformis Stretch",
+    "description": "Deitado, cruze tornozelo sobre joelho e puxe ambas as pernas ao peito.",
+    "musclesWorked": ["Piriformis", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/piriformis-stretch.png"
+  },
+  {
+    "name": "Seated Piriformis Stretch",
+    "description": "Sentado no chao com uma perna cruzada, incline tronco sobre a perna.",
+    "musclesWorked": ["Piriformis", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-piriformis-stretch.png"
+  },
+  {
+    "name": "90/90 Stretch",
+    "description": "Sentado com pernas em angulos de 90 graus, incline tronco sobre a perna da frente.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/90-90-stretch.png"
+  },
+  {
+    "name": "90/90 Hip Switch",
+    "description": "De posicao 90/90, rotacione quadril para trocar de lado sem usar as maos.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/90-90-hip-switch.png"
+  },
+  {
+    "name": "World's Greatest Stretch",
+    "description": "Afundo com rotacao de tronco e braco estendido ao ceu.",
+    "musclesWorked": ["Hip Flexors", "Core", "Shoulders", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/worlds-greatest-stretch.png"
+  },
+  {
+    "name": "Deep Squat Hold",
+    "description": "Mantenha posicao de agachamento profundo com cotovelos empurrando joelhos para fora.",
+    "musclesWorked": ["Hip Flexors", "Adductors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/deep-squat-hold.png"
+  },
+  {
+    "name": "Asian Squat",
+    "description": "Agachamento profundo com pes apoiados no chao, posicao de descanso.",
+    "musclesWorked": ["Hip Flexors", "Calves", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/asian-squat.png"
+  },
+  {
+    "name": "Happy Baby Pose",
+    "description": "Deitado de costas, segure os pes com joelhos abertos e puxe em direcao ao chao.",
+    "musclesWorked": ["Hip Flexors", "Adductors", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/happy-baby-pose.png"
+  },
+  {
+    "name": "Reclined Bound Angle",
+    "description": "Deitado de costas com solas dos pes juntas, deixe joelhos cairem para os lados.",
+    "musclesWorked": ["Hip Flexors", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/reclined-bound-angle.png"
+  },
+  {
+    "name": "Lying Hip Internal Rotation",
+    "description": "Deitado de costas com joelhos dobrados, deixe joelhos cairem para dentro.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lying-hip-internal-rotation.png"
+  },
+  {
+    "name": "Lying Hip External Rotation",
+    "description": "Deitado de costas com joelhos dobrados, deixe um joelho cair para fora.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lying-hip-external-rotation.png"
+  },
+  {
+    "name": "Hip Circles",
+    "description": "Em pe, faca circulos amplos com o quadril mantendo tronco estavel.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/hip-circles.png"
+  },
+  {
+    "name": "Standing Hip Rotation",
+    "description": "Em pe em uma perna, rotacione a outra perna em circulos amplos.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-hip-rotation.png"
+  },
+  {
+    "name": "Quadruped Hip Circles",
+    "description": "Em quatro apoios, faca circulos com um joelho elevado.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/quadruped-hip-circles.png"
+  },
+  {
+    "name": "Fire Hydrant Circles",
+    "description": "Em quatro apoios com perna elevada lateralmente, faca circulos.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/fire-hydrant-circles.png"
+  },
+  {
+    "name": "Leg Swings Front Back",
+    "description": "Apoiado em parede, balance perna para frente e para tras em amplitude crescente.",
+    "musclesWorked": ["Hip Flexors", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/leg-swings-front-back.png"
+  },
+  {
+    "name": "Leg Swings Side to Side",
+    "description": "De frente para parede, balance perna de lado a lado cruzando na frente.",
+    "musclesWorked": ["Adductors", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/leg-swings-side-side.png"
+  }
+]

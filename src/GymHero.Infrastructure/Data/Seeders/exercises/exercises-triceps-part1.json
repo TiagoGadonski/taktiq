@@ -1,0 +1,959 @@
+[
+  {
+    "name": "Tríceps Pulley com Barra Reta",
+    "description": "Exercício clássico de tríceps no cabo com barra reta para extensão dos cotovelos.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a barra reta na polia alta",
+      "Fique de frente para a máquina, pés na largura dos ombros",
+      "Segure a barra com pegada pronada (palmas para baixo)",
+      "Cotovelos junto ao corpo e fixos",
+      "Estenda os cotovelos empurrando a barra para baixo",
+      "Retorne de forma controlada sem deixar os cotovelos subirem"
+    ],
+    "progressions": ["Tríceps Pulley com Corda", "Tríceps Drop Set"],
+    "regressions": ["Tríceps Pulley com Carga Leve"],
+    "tips": [
+      "Mantenha os cotovelos fixos durante todo o movimento",
+      "Incline levemente o tronco para frente para maior ativação",
+      "Expire durante a extensão"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se moverem",
+      "Usar impulso do corpo",
+      "Não completar a extensão total"
+    ],
+    "notes": "Exercício fundamental para desenvolvimento do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Pulley com Barra V",
+    "description": "Extensão de tríceps no cabo usando barra V para pegada mais confortável.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a barra V na polia alta",
+      "Segure a barra nas extremidades anguladas",
+      "Cotovelos junto ao corpo",
+      "Estenda os cotovelos empurrando a barra para baixo",
+      "Contraia fortemente os tríceps na extensão",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Tríceps Pulley Drop Set"],
+    "regressions": ["Tríceps Pulley com Barra Reta"],
+    "tips": [
+      "A barra V oferece pegada mais natural",
+      "Reduz o estresse nos pulsos",
+      "Ideal para quem tem desconforto com barra reta"
+    ],
+    "commonMistakes": [
+      "Movimentar os cotovelos durante a execução",
+      "Inclinar demais o tronco",
+      "Usar carga excessiva"
+    ],
+    "notes": "Alternativa ergonômica à barra reta.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Pulley com Corda",
+    "description": "Extensão de tríceps com corda permitindo maior contração no final.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia alta",
+      "Segure as extremidades da corda com pegada neutra",
+      "Mantenha os cotovelos fixos junto ao corpo",
+      "Estenda os cotovelos puxando a corda para baixo",
+      "No final, separe as extremidades para maior contração",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Tríceps Corda Overhead"],
+    "regressions": ["Tríceps Pulley com Barra"],
+    "tips": [
+      "Separe a corda no final para contrair a cabeça lateral",
+      "A pegada neutra é mais confortável",
+      "Excelente para sentir a contração"
+    ],
+    "commonMistakes": [
+      "Não separar a corda no final do movimento",
+      "Deixar os cotovelos se abrirem",
+      "Usar impulso do corpo"
+    ],
+    "notes": "A separação da corda aumenta a ativação da cabeça lateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Pulley Inverso",
+    "description": "Extensão de tríceps com pegada supinada para enfatizar a cabeça medial.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a barra reta na polia alta",
+      "Segure a barra com pegada supinada (palmas para cima)",
+      "Cotovelos junto ao corpo",
+      "Estenda os cotovelos empurrando a barra para baixo",
+      "Mantenha a pegada supinada durante todo o movimento",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Tríceps Inverso com Pausa"],
+    "regressions": ["Tríceps Pulley Normal"],
+    "tips": [
+      "A pegada supinada enfatiza a cabeça medial",
+      "Use carga mais leve que na pegada normal",
+      "Excelente para desenvolvimento completo"
+    ],
+    "commonMistakes": [
+      "Usar a mesma carga da pegada pronada",
+      "Não manter os cotovelos fixos",
+      "Girar os pulsos durante o movimento"
+    ],
+    "notes": "Variação que trabalha a cabeça medial frequentemente negligenciada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Pulley Unilateral",
+    "description": "Extensão de tríceps unilateral no cabo para trabalho focado.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Core"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte uma manopla na polia alta",
+      "Fique de frente para a máquina",
+      "Segure a manopla com uma mão",
+      "Mantenha o cotovelo fixo junto ao corpo",
+      "Estenda o cotovelo completamente",
+      "Retorne de forma controlada e repita"
+    ],
+    "progressions": ["Tríceps Unilateral com Pausa"],
+    "regressions": ["Tríceps Bilateral"],
+    "tips": [
+      "Permite foco total em um braço",
+      "Ideal para corrigir desequilíbrios",
+      "Use a mão livre para estabilizar"
+    ],
+    "commonMistakes": [
+      "Girar o tronco para ajudar",
+      "Mover o cotovelo durante o movimento",
+      "Não manter tensão constante"
+    ],
+    "notes": "Excelente para identificar e corrigir assimetrias.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Francês com Barra",
+    "description": "Extensão de tríceps deitado com barra, também conhecido como skull crusher.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite em um banco plano segurando a barra",
+      "Braços estendidos verticalmente acima do peito",
+      "Flexione os cotovelos levando a barra em direção à testa",
+      "Mantenha os cotovelos apontando para cima",
+      "Estenda os cotovelos retornando à posição inicial",
+      "Mantenha os braços superiores fixos"
+    ],
+    "progressions": ["Tríceps Francês com Barra EZ"],
+    "regressions": ["Tríceps Francês com Halteres"],
+    "tips": [
+      "Não deixe os cotovelos se abrirem",
+      "Mantenha controle total durante todo o movimento",
+      "Use carga que permita técnica perfeita"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem para os lados",
+      "Mover os braços superiores",
+      "Descer a barra muito rapidamente"
+    ],
+    "notes": "Exercício eficaz para a cabeça longa do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Francês com Barra EZ",
+    "description": "Skull crusher com barra EZ para maior conforto de pulso.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite em banco plano segurando a barra EZ",
+      "Braços estendidos acima do peito",
+      "Flexione os cotovelos descendo a barra para a testa",
+      "Mantenha os cotovelos fixos apontando para o teto",
+      "Estenda os cotovelos de forma controlada",
+      "Repita mantendo a técnica"
+    ],
+    "progressions": ["Tríceps Francês com Drop Set"],
+    "regressions": ["Tríceps Francês com Halteres Leves"],
+    "tips": [
+      "A barra EZ reduz o estresse nos pulsos",
+      "Ideal para sessões de alto volume",
+      "Mantenha sempre o controle"
+    ],
+    "commonMistakes": [
+      "Usar carga excessiva",
+      "Deixar os cotovelos se moverem",
+      "Perder o controle na descida"
+    ],
+    "notes": "Versão mais ergonômica do skull crusher tradicional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Francês com Halteres",
+    "description": "Extensão de tríceps deitado com halteres para trabalho independente dos braços.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite em banco plano com um halter em cada mão",
+      "Braços estendidos verticalmente, palmas voltadas uma para outra",
+      "Flexione os cotovelos levando os halteres aos lados da cabeça",
+      "Mantenha os cotovelos apontando para cima",
+      "Estenda os cotovelos retornando à posição inicial",
+      "Execute de forma simultânea ou alternada"
+    ],
+    "progressions": ["Tríceps Francês Alternado"],
+    "regressions": ["Tríceps Francês com Halter Único"],
+    "tips": [
+      "Halteres permitem trabalho independente de cada braço",
+      "A pegada neutra é confortável para os pulsos",
+      "Ideal para identificar desequilíbrios"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos caírem para os lados",
+      "Não sincronizar os braços",
+      "Usar impulso"
+    ],
+    "notes": "Permite correção de assimetrias entre os braços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Testa com Halter",
+    "description": "Extensão de tríceps deitado com um único halter segurado com ambas as mãos.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite em banco plano segurando um halter com ambas as mãos",
+      "Segure na parte interna da anilha, braços estendidos",
+      "Flexione os cotovelos levando o halter em direção à testa",
+      "Mantenha os cotovelos apontando para o teto",
+      "Estenda os cotovelos de volta à posição inicial",
+      "Controle o movimento durante toda a execução"
+    ],
+    "progressions": ["Tríceps Testa com Halteres Duplos"],
+    "regressions": ["Tríceps Testa com Halter Leve"],
+    "tips": [
+      "Mais estável que usar dois halteres",
+      "Ideal para iniciantes no exercício",
+      "Foco na contração do tríceps"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Mover os braços superiores",
+      "Usar carga excessiva"
+    ],
+    "notes": "Variação estável do skull crusher para iniciantes.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Francês Inclinado",
+    "description": "Extensão de tríceps em banco inclinado para maior alongamento.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste o banco a aproximadamente 30-45 graus de inclinação",
+      "Deite segurando a barra EZ com braços estendidos",
+      "Os braços devem ficar ligeiramente inclinados para trás",
+      "Flexione os cotovelos levando a barra atrás da cabeça",
+      "Estenda os cotovelos de forma controlada",
+      "Mantenha os cotovelos fixos durante todo o movimento"
+    ],
+    "progressions": ["Tríceps Francês Inclinado com Halteres"],
+    "regressions": ["Tríceps Francês Plano"],
+    "tips": [
+      "A inclinação aumenta o alongamento do tríceps",
+      "Trabalha mais a cabeça longa",
+      "Use carga moderada"
+    ],
+    "commonMistakes": [
+      "Usar inclinação excessiva",
+      "Deixar os cotovelos caírem",
+      "Não aproveitar o alongamento"
+    ],
+    "notes": "Excelente para desenvolvimento da cabeça longa.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Francês Declinado",
+    "description": "Extensão de tríceps em banco declinado para diferente ângulo de trabalho.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste o banco em declínio de aproximadamente 15-30 graus",
+      "Deite com a cabeça mais baixa que o quadril",
+      "Segure a barra EZ com braços estendidos",
+      "Flexione os cotovelos descendo a barra",
+      "Estenda os cotovelos retornando à posição inicial",
+      "Mantenha controle total do movimento"
+    ],
+    "progressions": ["Tríceps Declinado com Cargas Maiores"],
+    "regressions": ["Tríceps Francês Plano"],
+    "tips": [
+      "O declínio muda o vetor de resistência",
+      "Pode permitir usar cargas maiores",
+      "Menos estresse nas articulações"
+    ],
+    "commonMistakes": [
+      "Usar declínio muito acentuado",
+      "Perder o controle da barra",
+      "Não fixar os pés adequadamente"
+    ],
+    "notes": "Variação que pode ser mais confortável para alguns praticantes.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Overhead com Cabo",
+    "description": "Extensão de tríceps acima da cabeça usando cabo para tensão constante.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Core"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia baixa",
+      "Fique de costas para a máquina",
+      "Segure a corda atrás da cabeça, cotovelos apontando para cima",
+      "Estenda os cotovelos levando a corda acima da cabeça",
+      "No topo, separe a corda para contração máxima",
+      "Flexione os cotovelos de forma controlada"
+    ],
+    "progressions": ["Tríceps Overhead com Carga Maior"],
+    "regressions": ["Tríceps Overhead com Barra"],
+    "tips": [
+      "Enfatiza a cabeça longa do tríceps",
+      "Mantenha o core ativado para estabilidade",
+      "O cabo mantém tensão constante"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos caírem para frente",
+      "Usar impulso do corpo",
+      "Não completar a extensão"
+    ],
+    "notes": "Excelente para desenvolver a cabeça longa.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Overhead com Halter",
+    "description": "Extensão de tríceps acima da cabeça com halter para alongamento máximo.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure um halter com ambas as mãos atrás da cabeça",
+      "Cotovelos apontados para o teto, próximos das orelhas",
+      "Estenda os cotovelos levantando o halter acima da cabeça",
+      "Mantenha os cotovelos fixos durante todo o movimento",
+      "Flexione os cotovelos retornando à posição inicial",
+      "Sinta o alongamento na parte inferior"
+    ],
+    "progressions": ["Tríceps Overhead Unilateral"],
+    "regressions": ["Tríceps Overhead com Halter Leve"],
+    "tips": [
+      "O alongamento desenvolve a cabeça longa",
+      "Mantenha os cotovelos próximos das orelhas",
+      "Pode ser feito sentado para mais estabilidade"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Arquear excessivamente as costas",
+      "Usar carga que comprometa a técnica"
+    ],
+    "notes": "Um dos melhores exercícios para a cabeça longa do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Overhead Unilateral",
+    "description": "Extensão de tríceps unilateral acima da cabeça para trabalho focado.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure um halter com uma mão atrás da cabeça",
+      "Cotovelo apontado para o teto",
+      "Use a outra mão para estabilizar o cotovelo",
+      "Estenda o cotovelo levantando o halter",
+      "Contraia o tríceps no topo",
+      "Flexione o cotovelo de forma controlada"
+    ],
+    "progressions": ["Tríceps Overhead Unilateral com Pausa"],
+    "regressions": ["Tríceps Overhead Bilateral"],
+    "tips": [
+      "Permite foco total em um braço",
+      "Ideal para corrigir desequilíbrios",
+      "Estabilize o cotovelo com a mão livre"
+    ],
+    "commonMistakes": [
+      "Deixar o cotovelo se mover",
+      "Usar impulso do corpo",
+      "Inclinar o tronco para o lado"
+    ],
+    "notes": "Excelente para desenvolvimento simétrico.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Overhead Sentado",
+    "description": "Extensão de tríceps sentado para maior estabilidade e isolamento.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em um banco com encosto reto",
+      "Segure o halter com ambas as mãos atrás da cabeça",
+      "Apoie as costas no encosto",
+      "Estenda os cotovelos levantando o halter",
+      "Mantenha os cotovelos próximos às orelhas",
+      "Flexione os cotovelos de forma controlada"
+    ],
+    "progressions": ["Tríceps Overhead em Pé"],
+    "regressions": ["Tríceps Overhead Sentado com Carga Leve"],
+    "tips": [
+      "O encosto elimina uso de impulso",
+      "Maior estabilidade que em pé",
+      "Ideal para iniciantes"
+    ],
+    "commonMistakes": [
+      "Tirar as costas do encosto",
+      "Deixar os cotovelos se abrirem",
+      "Usar carga excessiva"
+    ],
+    "notes": "Versão mais estável do tríceps overhead.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Coice (Kickback)",
+    "description": "Extensão de tríceps inclinado para trás, excelente para contração máxima.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Apoie uma mão e joelho no banco",
+      "Segure o halter com a outra mão",
+      "Traga o cotovelo à altura do tronco, paralelo ao chão",
+      "Estenda o cotovelo para trás completamente",
+      "Contraia o tríceps no final do movimento",
+      "Flexione o cotovelo de forma controlada"
+    ],
+    "progressions": ["Tríceps Coice com Pausa"],
+    "regressions": ["Tríceps Coice com Halter Leve"],
+    "tips": [
+      "Mantenha o braço superior paralelo ao chão",
+      "A contração é máxima na extensão completa",
+      "Use cargas moderadas para manter a forma"
+    ],
+    "commonMistakes": [
+      "Deixar o cotovelo cair",
+      "Não completar a extensão",
+      "Usar impulso do corpo"
+    ],
+    "notes": "Excelente para finalizar o treino de tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Coice no Cabo",
+    "description": "Kickback executado no cabo para tensão constante.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte uma manopla na polia baixa",
+      "Fique de frente para a máquina, inclinado para frente",
+      "Traga o cotovelo à altura do tronco",
+      "Estenda o cotovelo para trás completamente",
+      "Segure a contração no final",
+      "Flexione de forma controlada"
+    ],
+    "progressions": ["Tríceps Coice Bilateral no Cabo"],
+    "regressions": ["Tríceps Coice com Halteres"],
+    "tips": [
+      "O cabo mantém tensão constante",
+      "Excelente para sentir a contração",
+      "Mantenha o tronco estável"
+    ],
+    "commonMistakes": [
+      "Deixar o cabo puxar o braço",
+      "Não manter o cotovelo elevado",
+      "Usar carga excessiva"
+    ],
+    "notes": "A tensão constante do cabo maximiza a ativação.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Coice Bilateral",
+    "description": "Kickback simultâneo com ambos os braços para eficiência.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Core"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé e incline o tronco para frente",
+      "Segure um halter em cada mão",
+      "Traga os cotovelos à altura do tronco",
+      "Estenda ambos os cotovelos simultaneamente",
+      "Contraia os tríceps na extensão completa",
+      "Flexione os cotovelos de forma controlada"
+    ],
+    "progressions": ["Tríceps Coice Bilateral com Pausa"],
+    "regressions": ["Tríceps Coice Unilateral"],
+    "tips": [
+      "Requer boa estabilidade de core",
+      "Mantenha as costas retas",
+      "Mais eficiente em tempo que unilateral"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Deixar os cotovelos caírem",
+      "Não sincronizar os braços"
+    ],
+    "notes": "Variação eficiente que trabalha ambos os braços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Mergulho em Barras Paralelas",
+    "description": "Exercício composto para tríceps usando o peso corporal nas paralelas.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "DipBars",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure as barras paralelas e eleve o corpo",
+      "Braços estendidos, corpo reto",
+      "Flexione os cotovelos descendo o corpo",
+      "Mantenha os cotovelos próximos ao corpo para focar no tríceps",
+      "Desça até os cotovelos formarem 90 graus ou menos",
+      "Empurre para cima até a extensão completa"
+    ],
+    "progressions": ["Mergulho com Peso Adicional"],
+    "regressions": ["Mergulho Assistido", "Mergulho no Banco"],
+    "tips": [
+      "Tronco mais vertical enfatiza o tríceps",
+      "Tronco inclinado trabalha mais o peitoral",
+      "Controle a descida para evitar lesões"
+    ],
+    "commonMistakes": [
+      "Descer demais causando estresse no ombro",
+      "Deixar os cotovelos se abrirem",
+      "Usar impulso para subir"
+    ],
+    "notes": "Um dos melhores exercícios para tríceps com peso corporal.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Mergulho com Peso Adicional",
+    "description": "Mergulho nas paralelas com carga adicional para maior intensidade.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "DipBars",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Prenda um cinto de mergulho com peso ou segure halter entre os pés",
+      "Execute o mergulho com técnica perfeita",
+      "Mantenha o tronco mais vertical para focar no tríceps",
+      "Desça de forma controlada",
+      "Empurre para cima com força",
+      "Complete todas as repetições com boa forma"
+    ],
+    "progressions": ["Mergulho com Mais Peso"],
+    "regressions": ["Mergulho sem Peso"],
+    "tips": [
+      "Adicione peso gradualmente",
+      "Mantenha técnica perfeita",
+      "Não comprometa amplitude pelo peso"
+    ],
+    "commonMistakes": [
+      "Adicionar peso demais cedo",
+      "Perder a técnica com o peso",
+      "Descer menos que o normal"
+    ],
+    "notes": "Progressão natural do mergulho para atletas avançados.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Mergulho no Banco",
+    "description": "Mergulho com as mãos apoiadas no banco e pés no chão.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Bench",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se na borda do banco, mãos ao lado do quadril",
+      "Deslize o quadril para fora do banco",
+      "Pés apoiados no chão, pernas flexionadas",
+      "Flexione os cotovelos descendo o corpo",
+      "Desça até os cotovelos formarem aproximadamente 90 graus",
+      "Empurre para cima estendendo os cotovelos"
+    ],
+    "progressions": ["Mergulho no Banco com Pernas Estendidas", "Mergulho nas Paralelas"],
+    "regressions": ["Mergulho com Pés Mais Próximos"],
+    "tips": [
+      "Mantenha os cotovelos apontando para trás",
+      "Pés mais longe aumenta a dificuldade",
+      "Não descanse no fundo do movimento"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem para os lados",
+      "Descer muito pouco",
+      "Usar os pés para empurrar"
+    ],
+    "notes": "Excelente variação para iniciantes.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Mergulho no Banco com Pés Elevados",
+    "description": "Mergulho no banco com pés apoiados em superfície elevada para maior dificuldade.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Bench",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione dois bancos paralelos",
+      "Mãos em um banco, calcanhares no outro",
+      "Corpo em linha reta com pernas estendidas",
+      "Flexione os cotovelos descendo o corpo",
+      "Desça até 90 graus nos cotovelos",
+      "Empurre para cima estendendo completamente"
+    ],
+    "progressions": ["Mergulho no Banco com Peso no Colo"],
+    "regressions": ["Mergulho no Banco com Pés no Chão"],
+    "tips": [
+      "A elevação dos pés aumenta a carga nos tríceps",
+      "Mantenha o core ativado",
+      "Não deixe o quadril cair"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Não descer o suficiente",
+      "Perder o alinhamento do corpo"
+    ],
+    "notes": "Progressão intermediária do mergulho no banco.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Supino Fechado",
+    "description": "Supino com pegada estreita para enfatizar o tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco de supino",
+      "Segure a barra com pegada na largura dos ombros ou mais estreita",
+      "Tire a barra do suporte e posicione sobre o peito",
+      "Desça a barra de forma controlada até tocar o peito",
+      "Mantenha os cotovelos mais próximos ao corpo",
+      "Empurre a barra de volta até a extensão completa"
+    ],
+    "progressions": ["Supino Fechado com Carga Maior"],
+    "regressions": ["Supino Fechado com Halteres"],
+    "tips": [
+      "Pegada mais estreita enfatiza o tríceps",
+      "Não use pegada muito estreita (estresse nos pulsos)",
+      "Cotovelos próximos ao corpo durante toda a execução"
+    ],
+    "commonMistakes": [
+      "Usar pegada estreita demais",
+      "Deixar os cotovelos se abrirem",
+      "Quicar a barra no peito"
+    ],
+    "notes": "Excelente exercício composto para tríceps e força de empurrar.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Supino Fechado com Halteres",
+    "description": "Supino fechado com halteres para maior amplitude e trabalho independente.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco segurando halteres",
+      "Mantenha os halteres próximos, quase se tocando",
+      "Palmas voltadas uma para outra (pegada neutra)",
+      "Desça os halteres mantendo próximos ao corpo",
+      "Empurre os halteres para cima até a extensão",
+      "Mantenha os cotovelos próximos durante toda a execução"
+    ],
+    "progressions": ["Supino Fechado com Barra"],
+    "regressions": ["Supino Fechado com Halteres Leves"],
+    "tips": [
+      "A pegada neutra é confortável para os pulsos",
+      "Trabalha cada braço de forma independente",
+      "Permite maior amplitude que a barra"
+    ],
+    "commonMistakes": [
+      "Separar demais os halteres",
+      "Deixar os cotovelos se abrirem",
+      "Não manter a pegada neutra"
+    ],
+    "notes": "Variação versátil que pode ser feita em casa.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Supino Fechado na Máquina Smith",
+    "description": "Supino fechado guiado na máquina Smith para segurança.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione o banco sob a barra da Smith",
+      "Segure a barra com pegada na largura dos ombros",
+      "Gire os ganchos para liberar a barra",
+      "Desça a barra de forma controlada até o peito",
+      "Empurre para cima até a extensão completa",
+      "Trave os ganchos ao finalizar"
+    ],
+    "progressions": ["Supino Fechado com Barra Livre"],
+    "regressions": ["Supino Fechado na Máquina com Carga Leve"],
+    "tips": [
+      "A máquina guia o movimento",
+      "Ideal para treinar sem parceiro",
+      "Permite treinar até a falha com segurança"
+    ],
+    "commonMistakes": [
+      "Posicionar incorretamente o banco",
+      "Não destravar a barra corretamente",
+      "Usar pegada muito estreita"
+    ],
+    "notes": "Opção segura para treinar supino fechado solo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexão Diamante",
+    "description": "Flexão com mãos formando um diamante para máxima ativação do tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Assuma posição de flexão",
+      "Junte as mãos sob o peito formando um diamante com polegares e indicadores",
+      "Corpo reto da cabeça aos pés",
+      "Flexione os cotovelos descendo o peito em direção às mãos",
+      "Mantenha os cotovelos próximos ao corpo",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Flexão Diamante com Pés Elevados"],
+    "regressions": ["Flexão Diamante nos Joelhos"],
+    "tips": [
+      "A pegada estreita maximiza a ativação do tríceps",
+      "Mantenha o core ativado",
+      "Os cotovelos devem ir para trás, não para os lados"
+    ],
+    "commonMistakes": [
+      "Deixar o quadril cair",
+      "Cotovelos indo para os lados",
+      "Não completar a amplitude"
+    ],
+    "notes": "Uma das melhores flexões para desenvolvimento do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexão Fechada",
+    "description": "Flexão com mãos próximas para maior ênfase no tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Assuma posição de flexão",
+      "Posicione as mãos mais próximas que a largura dos ombros",
+      "Corpo reto da cabeça aos calcanhares",
+      "Flexione os cotovelos descendo o corpo",
+      "Mantenha os cotovelos próximos ao corpo",
+      "Empurre de volta à posição inicial"
+    ],
+    "progressions": ["Flexão Diamante"],
+    "regressions": ["Flexão Fechada nos Joelhos"],
+    "tips": [
+      "Mais fácil que a diamante, mas ainda enfatiza tríceps",
+      "Boa progressão para a diamante",
+      "Mantenha o core sempre ativado"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Não manter o corpo reto",
+      "Amplitude incompleta"
+    ],
+    "notes": "Progressão natural da flexão tradicional para a diamante.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexão Sphinx",
+    "description": "Flexão partindo da posição de prancha nos antebraços para tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Comece na posição de prancha nos antebraços",
+      "Cotovelos sob os ombros, corpo reto",
+      "Empurre com os tríceps elevando o corpo para posição de flexão",
+      "Estenda completamente os cotovelos",
+      "Retorne controladamente à posição de prancha nos antebraços",
+      "Repita o movimento"
+    ],
+    "progressions": ["Flexão Sphinx com Pausa"],
+    "regressions": ["Flexão Sphinx nos Joelhos"],
+    "tips": [
+      "Movimento começa nos antebraços, não nas mãos",
+      "Exige grande força de tríceps",
+      "Mantenha o core ativado durante todo o movimento"
+    ],
+    "commonMistakes": [
+      "Deixar o quadril subir ou cair",
+      "Usar impulso do quadril",
+      "Não completar a extensão"
+    ],
+    "notes": "Exercício avançado que exige força significativa de tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps na Máquina",
+    "description": "Extensão de tríceps na máquina específica para movimento guiado.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a altura do assento da máquina",
+      "Sente-se com as costas apoiadas no encosto",
+      "Segure as alças ou apoie os braços nos pads",
+      "Estenda os cotovelos empurrando contra a resistência",
+      "Contraia os tríceps na extensão completa",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Tríceps na Máquina com Carga Maior"],
+    "regressions": ["Tríceps na Máquina com Carga Leve"],
+    "tips": [
+      "A máquina guia o movimento corretamente",
+      "Ideal para iniciantes aprenderem o padrão",
+      "Permite treinar até a falha com segurança"
+    ],
+    "commonMistakes": [
+      "Ajustar incorretamente o equipamento",
+      "Usar impulso para mover a carga",
+      "Não completar a amplitude"
+    ],
+    "notes": "Ótima opção para iniciantes ou para isolar o tríceps.",
+    "videoUrl": ""
+  }
+]

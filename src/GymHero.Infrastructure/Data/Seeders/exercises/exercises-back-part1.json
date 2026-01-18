@@ -1,0 +1,1229 @@
+[
+  {
+    "name": "Puxada Frontal Pegada Aberta",
+    "description": "Exercício fundamental para desenvolvimento da largura das costas, puxando a barra até o peito.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina e ajuste a almofada das coxas",
+      "Segure a barra com pegada pronada mais larga que os ombros",
+      "Incline levemente o tronco para trás",
+      "Puxe a barra em direção ao peito superior",
+      "Contraia as escápulas e latíssimo",
+      "Retorne controladamente estendendo os braços"
+    ],
+    "progressions": [
+      "Aumentar carga progressivamente",
+      "Puxada com pausa na contração",
+      "Progredir para pull-ups"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada assistida na máquina",
+      "Usar pegada mais fechada"
+    ],
+    "tips": [
+      "Inicie o movimento retraindo as escápulas",
+      "Pense em puxar com os cotovelos, não com as mãos",
+      "Não incline demais o tronco para trás",
+      "Mantenha peito empinado"
+    ],
+    "commonMistakes": [
+      "Puxar atrás do pescoço - desnecessário e arriscado",
+      "Usar muito impulso do corpo",
+      "Não estender completamente os braços",
+      "Deixar os ombros subir nas orelhas"
+    ],
+    "notes": "Exercício essencial para desenvolvimento da largura das costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=puxada+frontal+lat+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada Frontal Pegada Fechada",
+    "description": "Variação da puxada com pegada mais estreita enfatizando a espessura das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina com almofada ajustada",
+      "Segure a barra ou triângulo com pegada fechada",
+      "Mantenha tronco ereto ou levemente inclinado",
+      "Puxe em direção ao peito contraindo as costas",
+      "Foque em apertar as escápulas juntas",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Progredir para chin-ups"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada assistida",
+      "Usar barra reta primeiro"
+    ],
+    "tips": [
+      "Maior ênfase nos músculos do meio das costas",
+      "Mantenha peito alto",
+      "Puxe os cotovelos para baixo e para trás",
+      "Excelente para espessura"
+    ],
+    "commonMistakes": [
+      "Inclinar demais para trás",
+      "Usar impulso",
+      "Não contrair escápulas",
+      "Amplitude incompleta"
+    ],
+    "notes": "Trabalha mais a porção central das costas e romboides.",
+    "videoUrl": "https://www.youtube.com/results?search_query=puxada+pegada+fechada+close+grip",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada com Pegada Neutra",
+    "description": "Puxada com palmas das mãos se olhando para trabalho equilibrado das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Use acessório com pegada neutra (triângulo ou paralelo)",
+      "Sente e ajuste almofada das coxas",
+      "Palmas das mãos se olhando",
+      "Puxe o acessório até o peito",
+      "Contraia escápulas no ponto de contração",
+      "Estenda os braços controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Progredir para neutral grip pull-ups",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada assistida",
+      "Pegada mais larga"
+    ],
+    "tips": [
+      "Pegada mais natural e confortável para muitos",
+      "Bom equilíbrio entre bíceps e costas",
+      "Menos estresse nos ombros",
+      "Excelente para volume de treino"
+    ],
+    "commonMistakes": [
+      "Usar muito bíceps",
+      "Não estender completamente",
+      "Inclinar demais o corpo",
+      "Perder retração escapular"
+    ],
+    "notes": "Pegada neutra é geralmente mais confortável para os ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=puxada+pegada+neutra",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada Supinada",
+    "description": "Puxada com palmas viradas para você, enfatizando bíceps e latíssimo inferior.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra com pegada supinada (palmas para você)",
+      "Mãos na largura dos ombros ou mais estreitas",
+      "Sente com almofada ajustada",
+      "Puxe a barra até o peito",
+      "Foque na contração do latíssimo e bíceps",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Progredir para chin-ups",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar máquina assistida",
+      "Pegada pronada primeiro"
+    ],
+    "tips": [
+      "Maior envolvimento dos bíceps",
+      "Trabalha bem o latíssimo inferior",
+      "Mantenha cotovelos próximos ao corpo",
+      "Boa opção para chin-up prep"
+    ],
+    "commonMistakes": [
+      "Deixar bíceps dominar o movimento",
+      "Cotovelos abrindo para fora",
+      "Inclinar muito para trás",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Preparação excelente para chin-ups.",
+    "videoUrl": "https://www.youtube.com/results?search_query=puxada+supinada+underhand",
+    "isPublic": true
+  },
+  {
+    "name": "Puxada Unilateral no Cabo",
+    "description": "Puxada executada um braço de cada vez para foco e correção de assimetrias.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione a polia alta com manopla única",
+      "Sente ou ajoelhe para estabilidade",
+      "Segure a manopla com uma mão",
+      "Puxe o cotovelo para baixo e para trás",
+      "Contraia o latíssimo no ponto baixo",
+      "Retorne controladamente e complete as reps",
+      "Repita do outro lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé para mais instabilidade",
+      "Single arm pull-up progressions"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer sentado com apoio",
+      "Puxada bilateral primeiro"
+    ],
+    "tips": [
+      "Excelente para conexão mente-músculo",
+      "Corrige desequilíbrios entre os lados",
+      "Permite maior amplitude",
+      "Foque em cada repetição"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do tronco",
+      "Usar impulso",
+      "Diferença de reps entre lados",
+      "Não estabilizar o core"
+    ],
+    "notes": "Ótimo para identificar e corrigir diferenças de força.",
+    "videoUrl": "https://www.youtube.com/results?search_query=puxada+unilateral+single+arm+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Pull-up (Barra Fixa Pronada)",
+    "description": "Exercício clássico de peso corporal para desenvolvimento completo das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra com pegada pronada mais larga que ombros",
+      "Braços completamente estendidos (dead hang)",
+      "Inicie o movimento retraindo as escápulas",
+      "Puxe o corpo para cima até o queixo passar da barra",
+      "Desça controladamente até extensão completa"
+    ],
+    "progressions": [
+      "Pull-up com peso adicional",
+      "Archer pull-up",
+      "Muscle-up progressions"
+    ],
+    "regressions": [
+      "Negative pull-ups (só a descida)",
+      "Assisted pull-ups com elástico",
+      "Puxada na máquina"
+    ],
+    "tips": [
+      "Inicie de dead hang completo",
+      "Pense em puxar os cotovelos para baixo",
+      "Peito em direção à barra",
+      "Controle a descida"
+    ],
+    "commonMistakes": [
+      "Kipping (usar impulso)",
+      "Amplitude incompleta",
+      "Não estender completamente embaixo",
+      "Subir só até olhos na barra"
+    ],
+    "notes": "Um dos melhores exercícios de costas que existem.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pull+up+barra+fixa+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Chin-up (Barra Fixa Supinada)",
+    "description": "Barra fixa com pegada supinada para maior envolvimento dos bíceps.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra com pegada supinada (palmas para você)",
+      "Mãos na largura dos ombros",
+      "Inicie de dead hang completo",
+      "Puxe o corpo até queixo passar da barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Chin-up com peso",
+      "Chin-up com pausa no topo",
+      "One-arm chin-up progressions"
+    ],
+    "regressions": [
+      "Negative chin-ups",
+      "Chin-up com elástico",
+      "Puxada supinada na máquina"
+    ],
+    "tips": [
+      "Geralmente mais fácil que pull-up para iniciantes",
+      "Maior ativação de bíceps",
+      "Mantenha cotovelos à frente",
+      "Excelente para volume"
+    ],
+    "commonMistakes": [
+      "Usar só bíceps, esquecendo costas",
+      "Amplitude incompleta",
+      "Kipping excessivo",
+      "Não controlar a descida"
+    ],
+    "notes": "Mais acessível para iniciantes devido maior uso de bíceps.",
+    "videoUrl": "https://www.youtube.com/results?search_query=chin+up+execução+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Pull-up Pegada Neutra",
+    "description": "Pull-up com palmas se olhando para posição mais natural dos ombros.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Use barras paralelas ou acessório de pegada neutra",
+      "Pendure com palmas se olhando",
+      "Dead hang completo",
+      "Puxe o corpo para cima",
+      "Queixo deve passar da barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Adicionar peso",
+      "Aumentar volume",
+      "Progredir para pull-up pronado"
+    ],
+    "regressions": [
+      "Negativas",
+      "Assistido com elástico",
+      "Puxada neutra na máquina"
+    ],
+    "tips": [
+      "Posição mais natural para os ombros",
+      "Menos estresse articular",
+      "Bom equilíbrio costas/bíceps",
+      "Excelente para volume alto"
+    ],
+    "commonMistakes": [
+      "Amplitude incompleta",
+      "Usar impulso",
+      "Não estender embaixo",
+      "Descida descontrolada"
+    ],
+    "notes": "Muitos consideram a pegada mais confortável.",
+    "videoUrl": "https://www.youtube.com/results?search_query=neutral+grip+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Pull-up Commando",
+    "description": "Pull-up com mãos uma atrás da outra, alternando lados.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se de lado sob a barra",
+      "Segure a barra com mãos uma atrás da outra",
+      "Pendure em dead hang",
+      "Puxe o corpo para cima passando a cabeça de um lado da barra",
+      "Desça e na próxima rep passe do outro lado",
+      "Alterne lados a cada repetição"
+    ],
+    "progressions": [
+      "Adicionar peso",
+      "Fazer todas reps de um lado, depois trocar",
+      "Progredir para typewriter pull-ups"
+    ],
+    "regressions": [
+      "Pull-up tradicional",
+      "Commando negativo",
+      "Assistido com elástico"
+    ],
+    "tips": [
+      "Trabalha as costas de forma diferente",
+      "Adiciona componente de core",
+      "Alterne os lados igualmente",
+      "Mantenha corpo junto à barra"
+    ],
+    "commonMistakes": [
+      "Não alternar lados igualmente",
+      "Afastar muito da barra",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Variação interessante que trabalha o core de forma diferente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=commando+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Wide Grip Pull-up",
+    "description": "Pull-up com pegada extra larga para máximo trabalho do latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra com pegada muito mais larga que ombros",
+      "Pendure em dead hang",
+      "Puxe o corpo em linha reta para cima",
+      "Leve o peito em direção à barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Wide grip com peso",
+      "Wide grip archer",
+      "Muscle-up"
+    ],
+    "regressions": [
+      "Pull-up tradicional",
+      "Wide grip negativo",
+      "Puxada larga na máquina"
+    ],
+    "tips": [
+      "Foca mais no latíssimo",
+      "Menor amplitude de movimento",
+      "Mais difícil que pull-up padrão",
+      "Ombros devem estar saudáveis"
+    ],
+    "commonMistakes": [
+      "Pegada muito larga causando dor",
+      "Amplitude insuficiente",
+      "Usar impulso",
+      "Não controlar a descida"
+    ],
+    "notes": "Enfatiza a largura das costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=wide+grip+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Close Grip Pull-up",
+    "description": "Pull-up com pegada fechada para trabalho dos músculos centrais das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra com mãos juntas ou próximas",
+      "Pendure em dead hang",
+      "Puxe o corpo para cima",
+      "Tente levar o peito à barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Close grip com peso",
+      "Close grip com pausa",
+      "Progredir para muscle-up"
+    ],
+    "regressions": [
+      "Pull-up pegada normal",
+      "Close grip negativo",
+      "Puxada fechada na máquina"
+    ],
+    "tips": [
+      "Maior envolvimento de bíceps e romboides",
+      "Maior amplitude que wide grip",
+      "Excelente para espessura das costas",
+      "Menos estresse nos ombros"
+    ],
+    "commonMistakes": [
+      "Apenas flexionar bíceps",
+      "Não retrair escápulas",
+      "Amplitude incompleta",
+      "Usar impulso"
+    ],
+    "notes": "Trabalha mais a espessura do que a largura.",
+    "videoUrl": "https://www.youtube.com/results?search_query=close+grip+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Archer Pull-up",
+    "description": "Pull-up avançado onde você puxa para um lado enquanto o outro braço se estende.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra com pegada larga",
+      "Pendure em dead hang",
+      "Puxe o corpo em direção a uma mão",
+      "O outro braço fica quase estendido",
+      "Desça e repita para o mesmo lado ou alterne"
+    ],
+    "progressions": [
+      "Typewriter pull-up",
+      "Assisted one-arm pull-up",
+      "One-arm pull-up"
+    ],
+    "regressions": [
+      "Pull-up tradicional com peso",
+      "Archer negativo",
+      "Archer na puxada"
+    ],
+    "tips": [
+      "Progressão para pull-up de um braço",
+      "O braço estendido ainda ajuda",
+      "Mantenha controle total",
+      "Trabalhe ambos os lados igualmente"
+    ],
+    "commonMistakes": [
+      "Braço auxiliar muito flexionado",
+      "Usar impulso",
+      "Não trabalhar lados igualmente",
+      "Perder controle"
+    ],
+    "notes": "Passo importante na progressão para pull-up de um braço.",
+    "videoUrl": "https://www.youtube.com/results?search_query=archer+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Typewriter Pull-up",
+    "description": "Pull-up onde você se move lateralmente na posição alta.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Faça um pull-up até posição alta",
+      "Mantenha-se no topo",
+      "Deslize lateralmente para um braço",
+      "Deslize para o outro lado",
+      "Continue alternando ou desça e repita"
+    ],
+    "progressions": [
+      "Múltiplas passagens antes de descer",
+      "Adicionar peso",
+      "One-arm pull-up negativo"
+    ],
+    "regressions": [
+      "Archer pull-up",
+      "Pull-up com peso",
+      "Typewriter na puxada"
+    ],
+    "tips": [
+      "Requer excelente força base",
+      "Mantém tensão constante",
+      "Trabalha resistência e força",
+      "Excelente para o latíssimo"
+    ],
+    "commonMistakes": [
+      "Descer durante a passagem lateral",
+      "Perder controle",
+      "Amplitude lateral insuficiente",
+      "Não ter força base suficiente"
+    ],
+    "notes": "Exercício avançado que combina força e controle.",
+    "videoUrl": "https://www.youtube.com/results?search_query=typewriter+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Negative Pull-up",
+    "description": "Foco na fase excêntrica do pull-up para construção de força.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Use uma caixa ou pule para posição alta",
+      "Queixo acima da barra",
+      "Desça o mais lento possível",
+      "Controle a descida por 3-5 segundos ou mais",
+      "Chegue ao dead hang completo",
+      "Repita subindo com auxílio"
+    ],
+    "progressions": [
+      "Aumentar tempo da descida",
+      "Pull-up assistido com menos ajuda",
+      "Pull-up completo"
+    ],
+    "regressions": [
+      "Descida mais rápida",
+      "Usar mais auxílio para subir",
+      "Puxada na máquina"
+    ],
+    "tips": [
+      "Excelente para construir força para pull-up",
+      "A fase excêntrica é mais forte",
+      "Progrida aumentando o tempo de descida",
+      "Essencial na progressão"
+    ],
+    "commonMistakes": [
+      "Descer muito rápido",
+      "Não chegar ao dead hang",
+      "Não controlar a descida",
+      "Pular etapas na progressão"
+    ],
+    "notes": "Método fundamental para aprender pull-ups.",
+    "videoUrl": "https://www.youtube.com/results?search_query=negative+pull+up+progressão",
+    "isPublic": true
+  },
+  {
+    "name": "Scapular Pull-up",
+    "description": "Pull-up parcial focando apenas no movimento das escápulas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra em dead hang",
+      "Braços permanecem estendidos",
+      "Retraia as escápulas puxando ombros para baixo",
+      "O corpo sobe ligeiramente",
+      "Retorne à posição de ombros elevados",
+      "Repita focando nas escápulas"
+    ],
+    "progressions": [
+      "Aumentar repetições",
+      "Adicionar pausa na retração",
+      "Progredir para pull-up completo"
+    ],
+    "regressions": [
+      "Fazer com pés apoiados",
+      "Retração escapular deitado",
+      "Usar elástico"
+    ],
+    "tips": [
+      "Fundamental para aprender pull-up correto",
+      "Ensina a iniciar o movimento corretamente",
+      "Fortalece músculos estabilizadores",
+      "Pode ser feito como aquecimento"
+    ],
+    "commonMistakes": [
+      "Flexionar os cotovelos",
+      "Não retrair completamente",
+      "Movimentos muito rápidos",
+      "Usar impulso"
+    ],
+    "notes": "Ensina o padrão de ativação correto para pull-ups.",
+    "videoUrl": "https://www.youtube.com/results?search_query=scapular+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Australian Pull-up (Inverted Row)",
+    "description": "Remada invertida com corpo inclinado, excelente para progressão de pull-up.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione barra na altura da cintura ou use mesa/cadeiras",
+      "Deite de costas sob a barra",
+      "Segure a barra com braços estendidos",
+      "Corpo reto da cabeça aos pés",
+      "Puxe o peito em direção à barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Baixar a barra (corpo mais horizontal)",
+      "Elevar os pés",
+      "Pull-up negativo"
+    ],
+    "regressions": [
+      "Barra mais alta (corpo mais vertical)",
+      "Joelhos flexionados",
+      "Amplitude parcial"
+    ],
+    "tips": [
+      "Excelente preparação para pull-up",
+      "Quanto mais horizontal, mais difícil",
+      "Mantenha corpo reto",
+      "Pode ser feito em qualquer lugar"
+    ],
+    "commonMistakes": [
+      "Quadril caindo",
+      "Não tocar peito na barra",
+      "Amplitude incompleta",
+      "Pescoço projetando"
+    ],
+    "notes": "Um dos melhores exercícios para progredir ao pull-up.",
+    "videoUrl": "https://www.youtube.com/results?search_query=australian+pull+up+inverted+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Curvada com Barra",
+    "description": "Exercício fundamental para espessura das costas com barra livre.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core", "Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé, pés na largura dos ombros, segure a barra",
+      "Flexione os joelhos levemente",
+      "Incline o tronco para frente (45-60° com o chão)",
+      "Barra pendendo com braços estendidos",
+      "Puxe a barra em direção ao umbigo",
+      "Aperte as escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Remada Pendlay (do chão)",
+      "Remada com pausa",
+      "Aumentar carga"
+    ],
+    "regressions": [
+      "Remada com halteres",
+      "Remada na máquina",
+      "Reduzir inclinação"
+    ],
+    "tips": [
+      "Mantenha lombar neutra - não arredonde",
+      "Puxe com os cotovelos, não com as mãos",
+      "Core contraído para proteger a coluna",
+      "Pense em cotovelos indo para trás"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar muito impulso do corpo",
+      "Subir demais o tronco ao puxar",
+      "Amplitude incompleta"
+    ],
+    "notes": "Um dos exercícios mais efetivos para costas grossas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+curvada+barra+bent+over+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Pendlay",
+    "description": "Remada explosiva onde a barra retorna ao chão a cada repetição.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Barbell",
+    "category": "Power",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Barra no chão, pés sob ela",
+      "Flexione e pegue a barra com pegada pronada",
+      "Tronco paralelo ao chão",
+      "Puxe explosivamente a barra até o abdômen",
+      "Apoie a barra de volta no chão",
+      "Resete a posição e repita"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa no topo",
+      "Combinar com levantamento terra"
+    ],
+    "regressions": [
+      "Remada curvada tradicional",
+      "Remada com menos inclinação",
+      "Reduzir carga"
+    ],
+    "tips": [
+      "Cada rep começa do zero - sem impulso",
+      "Tronco deve ficar paralelo ao chão",
+      "Movimento explosivo na subida",
+      "Excelente para potência"
+    ],
+    "commonMistakes": [
+      "Não retornar ao chão",
+      "Tronco muito inclinado",
+      "Perder posição durante a série",
+      "Falta de explosão"
+    ],
+    "notes": "Nomeada em homenagem ao treinador Glenn Pendlay.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+pendlay",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Yates",
+    "description": "Remada com tronco mais ereto e pegada supinada, estilo Dorian Yates.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Segure a barra com pegada supinada",
+      "Incline o tronco menos que na remada tradicional (cerca de 70°)",
+      "Joelhos levemente flexionados",
+      "Puxe a barra em direção ao abdômen baixo",
+      "Contraia escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Combinar com remada tradicional"
+    ],
+    "regressions": [
+      "Remada curvada tradicional",
+      "Remada com halteres",
+      "Reduzir carga"
+    ],
+    "tips": [
+      "Maior envolvimento de bíceps pela pegada supinada",
+      "Permite cargas mais pesadas pela posição",
+      "Popular entre fisiculturistas",
+      "Menos estresse na lombar"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Puxar muito alto (direção ao peito)",
+      "Perder a retração escapular",
+      "Tronco muito inclinado"
+    ],
+    "notes": "Popularizada pelo Mr. Olympia Dorian Yates.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+yates+underhand",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Unilateral com Halter (Cavalinho)",
+    "description": "Remada com um halter apoiando no banco, excelente para isolar cada lado.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Apoie joelho e mão de um lado no banco",
+      "Outra perna no chão para estabilidade",
+      "Segure o halter com o braço livre",
+      "Costas retas, paralelas ao chão",
+      "Puxe o halter em direção ao quadril",
+      "Aperte as costas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Remada com pausa",
+      "Remada Meadows"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Remada na máquina"
+    ],
+    "tips": [
+      "Excelente para isolar cada lado",
+      "Mantenha costas retas",
+      "Puxe o cotovelo para trás e para cima",
+      "Não rotacione o tronco"
+    ],
+    "commonMistakes": [
+      "Rotacionar o tronco ao puxar",
+      "Arredondar as costas",
+      "Usar impulso",
+      "Puxar muito para o lado"
+    ],
+    "notes": "Um dos exercícios mais populares para costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+halter+unilateral+cavalinho",
+    "isPublic": true
+  },
+  {
+    "name": "Remada com Halteres Bilateral",
+    "description": "Remada com dois halteres simultaneamente, similar à remada curvada com barra.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé segurando dois halteres",
+      "Flexione joelhos e incline o tronco",
+      "Halteres pendendo com braços estendidos",
+      "Puxe ambos halteres em direção ao quadril",
+      "Contraia escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer alternado",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Remada unilateral no banco",
+      "Reduzir carga",
+      "Menor inclinação"
+    ],
+    "tips": [
+      "Mais liberdade que a barra",
+      "Permite maior amplitude",
+      "Cada braço trabalha independentemente",
+      "Mantenha core contraído"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Subir o tronco ao puxar"
+    ],
+    "notes": "Alternativa à barra que permite maior liberdade de movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+halteres+bilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Remada no Banco Inclinado",
+    "description": "Remada com peito apoiado em banco inclinado para eliminar impulso.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste banco em 30-45° de inclinação",
+      "Deite de bruços no banco com peito no topo",
+      "Segure halteres com braços pendendo",
+      "Puxe os halteres em direção ao quadril",
+      "Aperte escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer com barra"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Remada na máquina"
+    ],
+    "tips": [
+      "Elimina trapaça e impulso",
+      "Excelente para isolar costas",
+      "Proteção para lombar",
+      "Ótimo para conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Levantar peito do banco",
+      "Amplitude incompleta",
+      "Descer muito rápido",
+      "Puxar para o lado errado"
+    ],
+    "notes": "Também conhecida como Seal Row ou Chest Supported Row.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+banco+inclinado+chest+supported+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Baixa no Cabo (Seated Row)",
+    "description": "Remada sentado no cabo para trabalho das costas com tensão constante.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente no banco com pés nos apoios",
+      "Segure o acessório (triângulo, barra, corda)",
+      "Joelhos levemente flexionados",
+      "Tronco ereto, peito empinado",
+      "Puxe o cabo em direção ao abdômen",
+      "Aperte escápulas e retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Diferentes pegadas e acessórios",
+      "Remada unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar acessório mais fácil",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Não balance para trás ao puxar",
+      "Inicie o movimento com escápulas",
+      "Mantenha peito alto",
+      "Tensão constante do cabo"
+    ],
+    "commonMistakes": [
+      "Balançar o corpo",
+      "Curvar a lombar",
+      "Amplitude incompleta",
+      "Puxar só com braços"
+    ],
+    "notes": "Exercício fundamental em qualquer programa de costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+baixa+seated+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Alta no Cabo (Face Level)",
+    "description": "Remada no cabo com puxada na altura do rosto.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione a polia na altura do peito",
+      "Segure com pegada de sua preferência",
+      "Fique em pé ou sentado de frente para máquina",
+      "Puxe o cabo em direção ao rosto/peito alto",
+      "Contraia escápulas e retorne"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Combinar com face pull"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Remada baixa primeiro",
+      "Usar elástico"
+    ],
+    "tips": [
+      "Trabalha porção superior das costas",
+      "Bom para trapézio e romboides",
+      "Mantenha cotovelos altos",
+      "Ótimo complemento à remada baixa"
+    ],
+    "commonMistakes": [
+      "Puxar muito baixo",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Ombros subindo"
+    ],
+    "notes": "Enfatiza a porção superior das costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+alta+cabo+face+level",
+    "isPublic": true
+  },
+  {
+    "name": "Remada T",
+    "description": "Remada com barra em suporte T-bar ou landmine para grande amplitude.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Encaixe uma ponta da barra no landmine ou canto",
+      "Coloque peso na outra ponta",
+      "Fique sobre a barra em posição curvada",
+      "Segure a barra com acessório V ou mãos",
+      "Puxe a barra em direção ao peito",
+      "Contraia escápulas e desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer com pegada diferente"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "T-bar na máquina",
+      "Remada curvada"
+    ],
+    "tips": [
+      "Grande amplitude de movimento",
+      "Menos estresse na lombar que remada livre",
+      "Excelente para espessura",
+      "Posição estável"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Subir o tronco ao puxar"
+    ],
+    "notes": "Exercício clássico para costas grossas e densas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+t+bar+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada T na Máquina",
+    "description": "Remada T em máquina específica para movimento guiado e seguro.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se na máquina T-bar com peito no apoio",
+      "Segure as manoplas",
+      "Puxe em direção ao peito",
+      "Contraia escápulas no topo",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer T-bar livre",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Remada na máquina sentado",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Máquina guia o movimento",
+      "Bom para iniciantes",
+      "Proteção para lombar",
+      "Foco na contração"
+    ],
+    "commonMistakes": [
+      "Levantar o peito do apoio",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Não contrair escápulas"
+    ],
+    "notes": "Alternativa segura ao T-bar livre.",
+    "videoUrl": "https://www.youtube.com/results?search_query=t+bar+row+machine",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Meadows",
+    "description": "Remada unilateral no landmine popularizada por John Meadows.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione-se perpendicular ao landmine",
+      "Pé mais próximo à frente, outra perna atrás",
+      "Segure a barra com a mão mais afastada",
+      "Apoie o outro braço no joelho da frente",
+      "Puxe a barra em arco em direção ao quadril",
+      "Contraia e desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Combinar com remada tradicional"
+    ],
+    "regressions": [
+      "Remada unilateral com halter",
+      "Reduzir carga",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Ângulo único trabalha costas diferentemente",
+      "Excelente para latíssimo inferior",
+      "Permite grande amplitude",
+      "Criada pelo lendário John Meadows"
+    ],
+    "commonMistakes": [
+      "Posição incorreta do corpo",
+      "Rotação excessiva do tronco",
+      "Usar impulso",
+      "Não fazer dos dois lados"
+    ],
+    "notes": "Criada pelo fisiculturista e treinador John Meadows (Mountain Dog).",
+    "videoUrl": "https://www.youtube.com/results?search_query=meadows+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Gorilla",
+    "description": "Remada alternada com halteres em posição de deadlift, mantendo tensão constante.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core", "Glutes"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé com dois halteres no chão entre os pés",
+      "Flexione quadril e joelhos (posição de deadlift)",
+      "Segure os halteres mantendo costas retas",
+      "Puxe um halter enquanto o outro fica no chão",
+      "Desça e imediatamente puxe o outro",
+      "Alterne de forma contínua"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Aumentar velocidade (mantendo forma)",
+      "Fazer sem alternar"
+    ],
+    "regressions": [
+      "Remada unilateral no banco",
+      "Reduzir carga",
+      "Fazer mais lento"
+    ],
+    "tips": [
+      "Trabalha costas e isquiotibiais isometricamente",
+      "Mantém tensão constante no core",
+      "Excelente para condicionamento",
+      "Desenvolve grip strength"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Perder a posição durante as reps",
+      "Usar impulso",
+      "Não alternar fluidamente"
+    ],
+    "notes": "Exercício composto excelente para treinos metabólicos.",
+    "videoUrl": "https://www.youtube.com/results?search_query=gorilla+row",
+    "isPublic": true
+  }
+]

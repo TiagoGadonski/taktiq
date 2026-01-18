@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Cable Woodchop",
+    "description": "De lado para o cabo alto, puxe a alcanca diagonalmente para baixo do lado oposto rotacionando o tronco. Mantenha bracos esticados.",
+    "musclesWorked": ["Obliques", "Abs", "Core"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/cable-woodchop.png"
+  },
+  {
+    "name": "Low to High Cable Woodchop",
+    "description": "De lado para o cabo baixo, puxe diagonalmente para cima do lado oposto. Movimento de baixo para cima rotacionando o tronco.",
+    "musclesWorked": ["Obliques", "Abs", "Core"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/low-high-woodchop.png"
+  },
+  {
+    "name": "Medicine Ball Slam",
+    "description": "Em pe segurando medicine ball acima da cabeca, arremesse com forca no chao flexionando o tronco. Pegue a bola e repita.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Slam Ball"],
+    "difficulty": "Intermediate",
+    "category": "Power",
+    "imageUrl": "exercises/core/medicine-ball-slam.png"
+  },
+  {
+    "name": "Medicine Ball Side Slam",
+    "description": "Em pe segurando medicine ball no lado, arremesse no chao do lado oposto rotacionando o tronco explosivamente.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Slam Ball"],
+    "difficulty": "Intermediate",
+    "category": "Power",
+    "imageUrl": "exercises/core/medicine-ball-side-slam.png"
+  },
+  {
+    "name": "Medicine Ball Throw",
+    "description": "De pe ou sentado, arremesse a medicine ball para um parceiro ou parede contraindo o core explosivamente.",
+    "musclesWorked": ["Abs", "Core", "Chest"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Power",
+    "imageUrl": "exercises/core/medicine-ball-throw.png"
+  },
+  {
+    "name": "Medicine Ball Rotational Throw",
+    "description": "De lado para a parede, rotacione o tronco e arremesse a medicine ball na parede. Trabalha potencia rotacional.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Power",
+    "imageUrl": "exercises/core/medicine-ball-rotational-throw.png"
+  },
+  {
+    "name": "Cable Crunch",
+    "description": "Ajoelhado de costas para o cabo alto com corda atras da cabeca. Flexione o tronco para baixo contraindo o abdomen.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/cable-crunch.png"
+  },
+  {
+    "name": "Standing Cable Crunch",
+    "description": "Em pe de costas para o cabo alto, flexione o tronco para baixo contraindo o abdomen. Variacao em pe do cable crunch.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/standing-cable-crunch.png"
+  },
+  {
+    "name": "Cable Oblique Crunch",
+    "description": "Ajoelhado de lado para o cabo, flexione lateralmente em direcao ao quadril contraindo os obliquos.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/cable-oblique-crunch.png"
+  },
+  {
+    "name": "Ab Wheel Rollout",
+    "description": "Ajoelhado segurando a roda abdominal, role para frente estendendo o corpo e retorne contraindo o abdomen.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Ab Wheel"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/ab-wheel-rollout.png"
+  },
+  {
+    "name": "Standing Ab Wheel Rollout",
+    "description": "Em pe, role a roda abdominal para frente ate o corpo ficar quase paralelo ao chao e retorne. Versao avancada.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Ab Wheel"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/standing-ab-wheel-rollout.png"
+  },
+  {
+    "name": "Barbell Rollout",
+    "description": "Ajoelhado segurando barra com discos pequenos, role para frente e retorne. Similar ao ab wheel com mais estabilidade.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/barbell-rollout.png"
+  },
+  {
+    "name": "Stability Ball Rollout",
+    "description": "Ajoelhado com antebracos na bola suica, role para frente estendendo os bracos e retorne mantendo o core contraido.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/stability-ball-rollout.png"
+  },
+  {
+    "name": "Stability Ball Crunch",
+    "description": "Deitado com lombar apoiada na bola suica, execute crunches. A instabilidade aumenta a ativacao do core.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/stability-ball-crunch.png"
+  },
+  {
+    "name": "Stability Ball Pike",
+    "description": "Em posicao de prancha com pes na bola suica, eleve o quadril formando um V invertido e retorne.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/stability-ball-pike.png"
+  },
+  {
+    "name": "Stability Ball Knee Tuck",
+    "description": "Em prancha com pes na bola suica, puxe os joelhos em direcao ao peito rolando a bola e retorne.",
+    "musclesWorked": ["Abs", "Core", "Hip Flexors"],
+    "equipment": ["Stability Ball"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/stability-ball-knee-tuck.png"
+  },
+  {
+    "name": "TRX Knee Tuck",
+    "description": "Em prancha com pes nas alcas do TRX, puxe os joelhos em direcao ao peito e retorne mantendo o core estavel.",
+    "musclesWorked": ["Abs", "Core", "Hip Flexors"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/trx-knee-tuck.png"
+  },
+  {
+    "name": "TRX Pike",
+    "description": "Em prancha com pes no TRX, eleve o quadril formando um V invertido com pernas retas e retorne.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["TRX"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/trx-pike.png"
+  },
+  {
+    "name": "TRX Body Saw",
+    "description": "Em prancha de antebracos com pes no TRX, balance o corpo para frente e para tras mantendo a linha reta.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/trx-body-saw.png"
+  },
+  {
+    "name": "Pallof Press",
+    "description": "De lado para o cabo na altura do peito, segure a alcanca e empurre para frente resistindo a rotacao. Anti-rotacao do core.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/pallof-press.png"
+  },
+  {
+    "name": "Pallof Press with Rotation",
+    "description": "Execute o Pallof press e adicione uma rotacao controlada do tronco antes de retornar ao centro.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/pallof-press-rotation.png"
+  },
+  {
+    "name": "Band Pallof Press",
+    "description": "Versao com banda elastica do Pallof press. Ancora a banda e execute o movimento de anti-rotacao.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/band-pallof-press.png"
+  },
+  {
+    "name": "Landmine Rotation",
+    "description": "Em pe segurando a ponta da barra landmine com bracos estendidos, rotacione o tronco de lado a lado.",
+    "musclesWorked": ["Obliques", "Core", "Shoulders"],
+    "equipment": ["Barbell", "Landmine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/landmine-rotation.png"
+  },
+  {
+    "name": "Hanging Windshield Wiper",
+    "description": "Pendurado na barra com pernas elevadas, rotacione as pernas de lado a lado como um limpador de para-brisa.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hanging-windshield-wiper.png"
+  },
+  {
+    "name": "Lying Windshield Wiper",
+    "description": "Deitado com bracos abertos e pernas elevadas a 90 graus. Rotacione as pernas de lado a lado mantendo ombros no chao.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/lying-windshield-wiper.png"
+  },
+  {
+    "name": "Side Crunch",
+    "description": "Deitado de lado com joelhos levemente dobrados, eleve o ombro superior em direcao ao quadril contraindo o obliquo.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/side-crunch.png"
+  },
+  {
+    "name": "Heel Touch",
+    "description": "Deitado com joelhos dobrados e pes no chao, alterne tocando cada calcanhar com a mao do mesmo lado. Movimento lateral do tronco.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/heel-touch.png"
+  },
+  {
+    "name": "Side Bend with Dumbbell",
+    "description": "Em pe segurando halter em uma mao, flexione lateralmente para o lado do peso e retorne. Trabalha obliquo oposto.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/side-bend-dumbbell.png"
+  },
+  {
+    "name": "Cable Side Bend",
+    "description": "De lado para o cabo baixo, segure a alcanca e flexione lateralmente para o lado oposto contra a resistencia.",
+    "musclesWorked": ["Obliques"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/cable-side-bend.png"
+  },
+  {
+    "name": "Saxon Side Bend",
+    "description": "Em pe segurando peso acima da cabeca com bracos estendidos. Flexione lateralmente de lado a lado mantendo bracos retos.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/saxon-side-bend.png"
+  }
+]

@@ -1,0 +1,1323 @@
+[
+  {
+    "name": "Flexão de Braço Tradicional",
+    "description": "Exercício clássico de peso corporal para desenvolvimento do peitoral, ombros e tríceps.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em prancha alta com mãos na largura dos ombros",
+      "Corpo em linha reta da cabeça aos calcanhares",
+      "Core e glúteos contraídos",
+      "Flexione os cotovelos descendo o peito em direção ao chão",
+      "Desça até o peito quase tocar o solo",
+      "Empurre o chão para retornar à posição inicial"
+    ],
+    "progressions": [
+      "Flexão com pés elevados",
+      "Flexão diamante",
+      "Flexão com palmada"
+    ],
+    "regressions": [
+      "Flexão com joelhos apoiados",
+      "Flexão inclinada (mãos em superfície elevada)",
+      "Flexão na parede"
+    ],
+    "tips": [
+      "Mantenha cotovelos em ângulo de 45° com o corpo",
+      "Não deixe o quadril cair ou subir",
+      "Olhar ligeiramente à frente, não para baixo",
+      "Respire: inspire na descida, expire na subida"
+    ],
+    "commonMistakes": [
+      "Quadril muito alto ou muito baixo",
+      "Cotovelos muito abertos (90°)",
+      "Amplitude incompleta",
+      "Pescoço projetado para frente"
+    ],
+    "notes": "Exercício fundamental que pode ser feito em qualquer lugar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+tradicional+execução+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Joelhos Apoiados",
+    "description": "Versão facilitada da flexão para iniciantes desenvolverem força básica.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se de quatro apoios",
+      "Mãos na largura dos ombros",
+      "Joelhos apoiados no chão, pés cruzados elevados",
+      "Corpo em linha reta dos joelhos à cabeça",
+      "Desça o peito em direção ao chão",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Flexão tradicional completa",
+      "Flexão com um joelho elevado",
+      "Flexão negativa"
+    ],
+    "regressions": [
+      "Flexão inclinada na parede",
+      "Flexão no banco",
+      "Isométrico na posição baixa"
+    ],
+    "tips": [
+      "Não é vergonha começar assim",
+      "Mantenha core contraído",
+      "Progrida gradualmente para flexão completa",
+      "Use esta versão para volume extra após fadiga"
+    ],
+    "commonMistakes": [
+      "Quadril muito alto",
+      "Não descer o suficiente",
+      "Deixar o core relaxado",
+      "Pés no chão ao invés de elevados"
+    ],
+    "notes": "Primeiro passo na progressão para flexão completa.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+joelhos+iniciantes",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Inclinada (Mãos Elevadas)",
+    "description": "Flexão com mãos em superfície elevada para reduzir a carga e facilitar o movimento.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Encontre uma superfície elevada estável (banco, caixa, parede)",
+      "Posicione as mãos na largura dos ombros na superfície",
+      "Corpo em linha reta em posição de prancha inclinada",
+      "Desça o peito em direção à superfície",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Reduzir altura da superfície progressivamente",
+      "Flexão no chão",
+      "Flexão tradicional"
+    ],
+    "regressions": [
+      "Aumentar altura da superfície",
+      "Flexão na parede",
+      "Flexão com joelhos"
+    ],
+    "tips": [
+      "Quanto mais alta a superfície, mais fácil o exercício",
+      "Progrida reduzindo a altura gradualmente",
+      "Mantenha core contraído",
+      "Pode usar qualquer superfície estável"
+    ],
+    "commonMistakes": [
+      "Superfície instável",
+      "Quadril caído",
+      "Amplitude incompleta",
+      "Cotovelos muito abertos"
+    ],
+    "notes": "Excelente para progressão gradual até flexão no chão.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+inclinada+iniciantes",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Declinada (Pés Elevados)",
+    "description": "Flexão com pés elevados para maior ênfase no peitoral superior e aumento de dificuldade.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione os pés em superfície elevada (banco, caixa, cadeira)",
+      "Mãos no chão na largura dos ombros",
+      "Corpo em linha reta com inclinação",
+      "Desça o peito em direção ao chão",
+      "Empurre para retornar",
+      "Quanto mais alto os pés, mais difícil"
+    ],
+    "progressions": [
+      "Aumentar altura dos pés",
+      "Flexão pike (pés na parede)",
+      "Flexão em handstand"
+    ],
+    "regressions": [
+      "Reduzir altura dos pés",
+      "Flexão tradicional",
+      "Flexão inclinada"
+    ],
+    "tips": [
+      "Enfatiza o peitoral superior",
+      "Quanto mais alto, mais trabalha ombros",
+      "Mantenha core bem contraído",
+      "Superfície dos pés deve ser estável"
+    ],
+    "commonMistakes": [
+      "Quadril caído",
+      "Olhar para os pés (pescoço hiperestendido)",
+      "Superfície instável",
+      "Amplitude incompleta"
+    ],
+    "notes": "Progressão natural após dominar flexão tradicional.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+pés+elevados+declinada",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Diamante",
+    "description": "Flexão com mãos juntas formando um diamante para ênfase em tríceps e peitoral interno.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em prancha alta",
+      "Junte as mãos formando um diamante com indicadores e polegares",
+      "Mãos posicionadas sob o peito",
+      "Corpo em linha reta",
+      "Desça o peito em direção às mãos",
+      "Cotovelos junto ao corpo",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Flexão diamante com pés elevados",
+      "Flexão diamante explosiva",
+      "Flexão archer"
+    ],
+    "regressions": [
+      "Flexão diamante com joelhos",
+      "Flexão diamante inclinada",
+      "Flexão tradicional"
+    ],
+    "tips": [
+      "Cotovelos devem ficar junto ao corpo",
+      "Maior ênfase no tríceps que flexão tradicional",
+      "Excelente para porção interna do peito",
+      "Se doer os punhos, afaste as mãos um pouco"
+    ],
+    "commonMistakes": [
+      "Cotovelos abrindo para os lados",
+      "Mãos muito à frente ou atrás",
+      "Amplitude incompleta",
+      "Quadril desalinhado"
+    ],
+    "notes": "Uma das melhores variações para desenvolver tríceps.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+diamante+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Wide (Pegada Larga)",
+    "description": "Flexão com mãos mais afastadas para maior ênfase no peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em prancha alta",
+      "Mãos bem mais afastadas que a largura dos ombros",
+      "Dedos apontando para frente ou ligeiramente para fora",
+      "Corpo em linha reta",
+      "Desça o peito em direção ao chão",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Flexão wide com pés elevados",
+      "Flexão archer",
+      "Flexão wide explosiva"
+    ],
+    "regressions": [
+      "Flexão wide com joelhos",
+      "Flexão wide inclinada",
+      "Flexão tradicional"
+    ],
+    "tips": [
+      "Maior ênfase no peitoral que a versão tradicional",
+      "Menor amplitude de movimento",
+      "Cuide com estresse excessivo nos ombros",
+      "Mantenha cotovelos em direção aos dedos"
+    ],
+    "commonMistakes": [
+      "Mãos muito afastadas causando dor no ombro",
+      "Cotovelos muito para trás",
+      "Perder alinhamento do corpo",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Varia o estímulo no peitoral comparado à pegada tradicional.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+pegada+larga",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Archer",
+    "description": "Flexão unilateral avançada que trabalha um braço de cada vez de forma mais intensa.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se em prancha com mãos bem afastadas",
+      "Vire os dedos para fora",
+      "Desça o corpo em direção a uma mão",
+      "O braço oposto fica estendido para o lado",
+      "Empurre para retornar ao centro",
+      "Alterne os lados a cada repetição"
+    ],
+    "progressions": [
+      "Flexão archer com pés elevados",
+      "Flexão de um braço assistida",
+      "Flexão de um braço"
+    ],
+    "regressions": [
+      "Flexão archer inclinada",
+      "Flexão wide",
+      "Flexão staggered"
+    ],
+    "tips": [
+      "Preparação para flexão de um braço",
+      "Mantenha o braço estendido reto",
+      "Controle total durante todo movimento",
+      "Core muito contraído"
+    ],
+    "commonMistakes": [
+      "Dobrar o braço que deveria estar estendido",
+      "Rodar o quadril",
+      "Amplitude incompleta",
+      "Perder alinhamento do corpo"
+    ],
+    "notes": "Excelente progressão rumo à flexão de um braço.",
+    "videoUrl": "https://www.youtube.com/results?search_query=archer+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Pike",
+    "description": "Flexão com quadril elevado formando um V invertido para ênfase nos ombros.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se em prancha alta",
+      "Eleve o quadril formando um V invertido",
+      "Mãos na largura dos ombros",
+      "Cabeça entre os braços",
+      "Flexione os cotovelos levando a cabeça ao chão",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Pike com pés elevados",
+      "Flexão pike negativa (pés na parede)",
+      "Handstand push-up"
+    ],
+    "regressions": [
+      "Pike com menor elevação do quadril",
+      "Pike inclinado",
+      "Flexão declinada"
+    ],
+    "tips": [
+      "Transição para handstand push-up",
+      "Mantenha pernas o mais retas possível",
+      "Cotovelos apontando para trás",
+      "Olhe para os pés"
+    ],
+    "commonMistakes": [
+      "Quadril não elevado o suficiente",
+      "Cotovelos abrindo para os lados",
+      "Não olhar para os pés",
+      "Amplitude incompleta"
+    ],
+    "notes": "Primeiro passo para dominar o handstand push-up.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pike+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Hindu",
+    "description": "Flexão dinâmica que combina movimento de pike com flexão tradicional em fluido contínuo.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core", "Back"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Comece na posição de cachorro olhando para baixo (V invertido)",
+      "Mergulhe o corpo para frente passando rente ao chão",
+      "Continue o movimento arqueando as costas (cachorro olhando para cima)",
+      "Retorne à posição inicial em movimento reverso ou direto",
+      "O movimento deve ser fluido e contínuo"
+    ],
+    "progressions": [
+      "Aumentar amplitude do mergulho",
+      "Adicionar pausa no arco",
+      "Dive bomber push-up"
+    ],
+    "regressions": [
+      "Fazer com joelhos apoiados",
+      "Reduzir amplitude",
+      "Fazer cada fase separadamente"
+    ],
+    "tips": [
+      "Movimento fluido como uma onda",
+      "Trabalha flexibilidade além de força",
+      "Respire naturalmente durante o movimento",
+      "Excelente para mobilidade de coluna"
+    ],
+    "commonMistakes": [
+      "Movimentos robóticos em vez de fluidos",
+      "Não arquear adequadamente as costas",
+      "Pular fases do movimento",
+      "Não manter tensão muscular"
+    ],
+    "notes": "Exercício tradicional das artes marciais indianas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=hindu+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Palmada",
+    "description": "Flexão explosiva onde você solta as mãos do chão e bate palmas no ar.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Plyometrics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em prancha para flexão tradicional",
+      "Desça normalmente o peito em direção ao chão",
+      "Empurre explosivamente para cima",
+      "Solte as mãos do chão e bata palmas",
+      "Aterrisse com os cotovelos levemente flexionados",
+      "Imediatamente desça para próxima repetição"
+    ],
+    "progressions": [
+      "Flexão com palmas no peito",
+      "Flexão com palmas atrás das costas",
+      "Flexão superman"
+    ],
+    "regressions": [
+      "Flexão explosiva sem palmas",
+      "Flexão explosiva inclinada",
+      "Flexão tradicional rápida"
+    ],
+    "tips": [
+      "Aqueça bem punhos e ombros antes",
+      "Foque na potência máxima",
+      "Aterrisse com controle",
+      "Qualidade sobre quantidade"
+    ],
+    "commonMistakes": [
+      "Aterrissar com cotovelos travados",
+      "Não gerar potência suficiente",
+      "Perder postura ao aterrissar",
+      "Fazer sem aquecimento adequado"
+    ],
+    "notes": "Exercício pliométrico excelente para potência de empurro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+palmada+explosiva",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Explosiva",
+    "description": "Flexão com fase concêntrica explosiva sem necessariamente tirar as mãos do chão.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Plyometrics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para flexão tradicional",
+      "Desça controladamente",
+      "Empurre o chão com máxima potência",
+      "As mãos podem sair levemente do chão",
+      "Aterrisse suavemente",
+      "Repita o movimento"
+    ],
+    "progressions": [
+      "Flexão com palmada",
+      "Flexão explosiva declinada",
+      "Box jump push-up"
+    ],
+    "regressions": [
+      "Flexão explosiva inclinada",
+      "Flexão tradicional rápida",
+      "Flexão com joelhos explosiva"
+    ],
+    "tips": [
+      "Foque na potência, não no volume",
+      "Mantenha postura perfeita",
+      "Descanse adequadamente entre séries",
+      "Ideal para treinos de potência"
+    ],
+    "commonMistakes": [
+      "Perder forma na busca por velocidade",
+      "Não descer completamente",
+      "Fazer muitas repetições perdendo potência",
+      "Negligenciar aquecimento"
+    ],
+    "notes": "Desenvolve potência de empurro para esportes.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+explosiva+potência",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Spiderman",
+    "description": "Flexão onde você traz o joelho ao cotovelo durante a descida, como o Homem-Aranha.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core", "Glutes"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se para flexão tradicional",
+      "Ao descer, traga um joelho em direção ao cotovelo do mesmo lado",
+      "Mantenha o quadril estável sem rotar",
+      "Empurre para cima retornando a perna à posição inicial",
+      "Alterne os lados a cada repetição"
+    ],
+    "progressions": [
+      "Spiderman com pés elevados",
+      "Spiderman mais lento (3 segundos)",
+      "Spiderman com pausa"
+    ],
+    "regressions": [
+      "Trazer joelho apenas no topo",
+      "Flexão com joelho ao peito parado",
+      "Flexão tradicional"
+    ],
+    "tips": [
+      "Trabalha core e oblíquos intensamente",
+      "Mantenha quadril baixo e estável",
+      "Movimento coordenado de braço e perna",
+      "Excelente para estabilização"
+    ],
+    "commonMistakes": [
+      "Rotar o quadril excessivamente",
+      "Elevar o quadril ao trazer o joelho",
+      "Descoordenação entre membros",
+      "Amplitude incompleta"
+    ],
+    "notes": "Adiciona componente de core e mobilidade à flexão.",
+    "videoUrl": "https://www.youtube.com/results?search_query=spiderman+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão com Rotação (T Push-up)",
+    "description": "Flexão seguida de rotação do corpo abrindo o braço para o teto.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Core", "Triceps"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Execute uma flexão tradicional",
+      "No topo do movimento, rote o corpo para um lado",
+      "Eleve o braço de cima em direção ao teto",
+      "O corpo forma um T",
+      "Retorne à posição de flexão",
+      "Execute outra flexão e rote para o outro lado"
+    ],
+    "progressions": [
+      "T push-up com halteres",
+      "T push-up com pausa na rotação",
+      "T push-up declinado"
+    ],
+    "regressions": [
+      "T push-up com joelhos",
+      "Fazer rotação sem flexão primeiro",
+      "Rotação menor"
+    ],
+    "tips": [
+      "Trabalha rotação torácica e estabilidade",
+      "Mantenha quadril alto durante rotação",
+      "Empilhe os pés ou abra para mais estabilidade",
+      "Olhe para a mão que sobe"
+    ],
+    "commonMistakes": [
+      "Não rotar completamente",
+      "Deixar quadril cair",
+      "Perder controle na rotação",
+      "Não estabilizar no topo"
+    ],
+    "notes": "Excelente para mobilidade torácica e core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=t+push+up+flexão+rotação",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Staggered",
+    "description": "Flexão com uma mão mais à frente que a outra para trabalho assimétrico.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para flexão tradicional",
+      "Avance uma mão alguns centímetros à frente",
+      "A outra mão fica na posição normal ou ligeiramente atrás",
+      "Execute a flexão mantendo essa posição",
+      "Complete as repetições de um lado",
+      "Troque a posição das mãos e repita"
+    ],
+    "progressions": [
+      "Aumentar distância entre as mãos",
+      "Staggered com pés elevados",
+      "Transição para archer"
+    ],
+    "regressions": [
+      "Diminuir distância",
+      "Staggered com joelhos",
+      "Staggered inclinada"
+    ],
+    "tips": [
+      "Trabalha os lados de forma diferente",
+      "Preparação para flexão archer",
+      "Foque em estabilidade",
+      "Faça igual número de reps de cada lado"
+    ],
+    "commonMistakes": [
+      "Diferença excessiva que compromete forma",
+      "Não fazer dos dois lados igualmente",
+      "Perder alinhamento do corpo",
+      "Rotar o tronco"
+    ],
+    "notes": "Ponte entre flexão tradicional e variações unilaterais.",
+    "videoUrl": "https://www.youtube.com/results?search_query=staggered+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Typewriter",
+    "description": "Flexão onde você se move lateralmente na posição baixa como uma máquina de escrever.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se em flexão com pegada bem larga",
+      "Desça o corpo em direção a uma mão",
+      "Mantenha-se na posição baixa",
+      "Deslize lateralmente para a outra mão",
+      "Suba e repita para o outro lado",
+      "Ou: suba, desça, deslize, suba (alternando)"
+    ],
+    "progressions": [
+      "Typewriter mais lento",
+      "Typewriter com pés elevados",
+      "Múltiplas passagens antes de subir"
+    ],
+    "regressions": [
+      "Fazer com joelhos",
+      "Typewriter inclinada",
+      "Flexão archer primeiro"
+    ],
+    "tips": [
+      "Mantém tensão constante no peito",
+      "Excelente para resistência e força",
+      "Controle o movimento lateral",
+      "Core muito ativo"
+    ],
+    "commonMistakes": [
+      "Subir durante o movimento lateral",
+      "Perder forma na transição",
+      "Amplitude insuficiente",
+      "Movimentos descontrolados"
+    ],
+    "notes": "Exercício avançado que combina força e controle.",
+    "videoUrl": "https://www.youtube.com/results?search_query=typewriter+push+up+flexão",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão Pseudo Planche",
+    "description": "Flexão com mãos posicionadas perto do quadril simulando posição de planche.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para flexão com mãos na altura do quadril",
+      "Dedos apontando para os lados ou para trás",
+      "Incline o corpo para frente de modo que ombros passem das mãos",
+      "Mantenha corpo em linha reta",
+      "Flexione os cotovelos descendo o corpo",
+      "Empurre para retornar"
+    ],
+    "progressions": [
+      "Mãos ainda mais para trás",
+      "Pseudo planche lean hold",
+      "Tuck planche"
+    ],
+    "regressions": [
+      "Mãos mais para frente",
+      "Pseudo planche com joelhos",
+      "Pseudo planche inclinada"
+    ],
+    "tips": [
+      "Primeiro passo para planche",
+      "Protraia as escápulas (ombros para frente)",
+      "Cotovelos junto ao corpo",
+      "Trabalha muito os ombros frontais"
+    ],
+    "commonMistakes": [
+      "Não inclinar o corpo suficiente",
+      "Cotovelos abrindo",
+      "Quadril elevando",
+      "Retrair escápulas ao invés de protrair"
+    ],
+    "notes": "Exercício fundamental para progressão de planche.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pseudo+planche+push+up",
+    "isPublic": true
+  },
+  {
+    "name": "Flexão de Um Braço",
+    "description": "Flexão avançada executada com apenas um braço, demonstrando força extrema.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para flexão com pés afastados para estabilidade",
+      "Coloque uma mão atrás das costas ou na coxa",
+      "A mão de apoio fica centralizada sob o corpo",
+      "Desça o corpo controladamente",
+      "Empurre explosivamente para retornar",
+      "Mantenha quadril o mais reto possível"
+    ],
+    "progressions": [
+      "Flexão de um braço com pés juntos",
+      "Flexão de um braço em superfície elevada com pés",
+      "Flexão de um braço com peso"
+    ],
+    "regressions": [
+      "Flexão archer",
+      "Flexão de um braço inclinada",
+      "Flexão de um braço com dedos apoiados"
+    ],
+    "tips": [
+      "Pés bem afastados ajudam no equilíbrio",
+      "É normal alguma rotação do quadril no início",
+      "Progrida da archer push-up",
+      "Força de core é essencial"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do quadril",
+      "Não descer completamente",
+      "Falta de progressão adequada",
+      "Mão muito para o lado"
+    ],
+    "notes": "Uma das flexões mais difíceis que existem.",
+    "videoUrl": "https://www.youtube.com/results?search_query=flexão+um+braço+one+arm+push+up",
+    "isPublic": true
+  },
+  {
+    "name": "Dips no Banco",
+    "description": "Mergulho com apoio das mãos no banco para trabalho de tríceps e peitoral inferior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Bench",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na borda do banco com mãos ao lado do quadril",
+      "Deslize o glúteo para frente do banco",
+      "Pernas estendidas ou joelhos flexionados",
+      "Flexione os cotovelos descendo o corpo",
+      "Desça até cotovelos em 90° aproximadamente",
+      "Empurre para retornar à posição inicial"
+    ],
+    "progressions": [
+      "Pernas estendidas",
+      "Pés elevados em outro banco",
+      "Adicionar peso no colo"
+    ],
+    "regressions": [
+      "Joelhos mais flexionados",
+      "Menor amplitude",
+      "Mãos mais afastadas"
+    ],
+    "tips": [
+      "Mantenha as costas próximas ao banco",
+      "Não desça demais - estresse no ombro",
+      "Cotovelos apontando para trás, não lados",
+      "Pode progredir para paralelas"
+    ],
+    "commonMistakes": [
+      "Descer muito fundo - perigoso para ombros",
+      "Afastar demais do banco",
+      "Cotovelos abrindo para os lados",
+      "Usar impulso das pernas"
+    ],
+    "notes": "Ótimo exercício inicial antes de progredir para paralelas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dips+banco+tríceps",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Reto com Barra EZ",
+    "description": "Supino utilizando barra EZ para pegada mais natural e confortável nos punhos.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "EZBar",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto",
+      "Segure a barra EZ nas curvas internas ou externas",
+      "Retire do suporte e posicione sobre o peito",
+      "Desça controladamente até tocar o peito",
+      "Empurre para cima até extensão",
+      "Mantenha escápulas retraídas"
+    ],
+    "progressions": [
+      "Supino EZ com pausa",
+      "Supino EZ com tempo lento",
+      "Progredir para barra reta"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer no Smith",
+      "Supino com halteres"
+    ],
+    "tips": [
+      "Mais confortável para quem tem dor nos punhos",
+      "Pegada interna trabalha mais tríceps",
+      "Pegada externa mais similar ao supino tradicional",
+      "Bom para variação"
+    ],
+    "commonMistakes": [
+      "Pegada incorreta na barra",
+      "Mesmos erros do supino tradicional",
+      "Não aproveitar o conforto da pegada",
+      "Arco excessivo na lombar"
+    ],
+    "notes": "Alternativa para quem tem desconforto com barra reta.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+barra+ez+w",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Guillotine (Pescoço)",
+    "description": "Supino com barra descendo até o pescoço para máximo alongamento do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto com pegada larga",
+      "Retire a barra e posicione sobre os ombros/pescoço",
+      "Cotovelos bem abertos (90° em relação ao corpo)",
+      "Desça a barra em direção ao pescoço/clavícula",
+      "Apenas toque levemente - não descanse a barra",
+      "Empurre para cima até extensão"
+    ],
+    "progressions": [
+      "Aumentar carga gradualmente",
+      "Adicionar pausa no alongamento",
+      "Combinar com pré-exaustão"
+    ],
+    "regressions": [
+      "Usar cargas muito leves para aprender",
+      "Fazer no Smith para mais segurança",
+      "Voltar ao supino tradicional"
+    ],
+    "tips": [
+      "SEMPRE use spotter - exercício perigoso",
+      "Cargas mais leves que supino tradicional",
+      "Máximo alongamento do peitoral",
+      "Popular entre fisiculturistas clássicos"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada - MUITO perigoso",
+      "Não ter spotter",
+      "Descansar a barra no pescoço",
+      "Perder controle na descida"
+    ],
+    "notes": "Exercício avançado popularizado por Vince Gironda. Requer extrema cautela.",
+    "videoUrl": "https://www.youtube.com/results?search_query=guillotine+press+supino+pescoço",
+    "isPublic": true
+  },
+  {
+    "name": "Crush Press (Squeeze Press)",
+    "description": "Supino com halteres pressionados um contra o outro durante todo o movimento.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco segurando dois halteres",
+      "Junte os halteres sobre o peito com pegada neutra",
+      "Pressione um halter contra o outro com força",
+      "Mantenha essa pressão durante todo exercício",
+      "Desça os halteres juntos até o peito",
+      "Empurre para cima mantendo a pressão"
+    ],
+    "progressions": [
+      "Aumentar tempo sob tensão",
+      "Fazer em banco inclinado",
+      "Adicionar pausa isométrica"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer Svend press primeiro",
+      "Fazer crush sem amplitude"
+    ],
+    "tips": [
+      "A pressão constante é a chave",
+      "Foco na contração do peitoral",
+      "Excelente para conexão mente-músculo",
+      "Use cargas moderadas"
+    ],
+    "commonMistakes": [
+      "Parar de pressionar durante o movimento",
+      "Usar carga muito pesada",
+      "Separar os halteres",
+      "Movimentos muito rápidos"
+    ],
+    "notes": "Excelente para ativação e finalização do treino de peito.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crush+press+squeeze+press",
+    "isPublic": true
+  },
+  {
+    "name": "Close Grip Dumbbell Press",
+    "description": "Supino com halteres e pegada neutra fechada para ênfase no tríceps e peitoral interno.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco segurando halteres com pegada neutra",
+      "Posicione os halteres próximos, quase se tocando",
+      "Mantenha cotovelos junto ao corpo",
+      "Desça os halteres até o peito",
+      "Empurre para cima mantendo proximidade",
+      "Foque na contração do tríceps e peito interno"
+    ],
+    "progressions": [
+      "Crush press (pressionar juntos)",
+      "Close grip inclinado",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Afastar ligeiramente os halteres",
+      "Reduzir carga",
+      "Fazer no chão (floor press)"
+    ],
+    "tips": [
+      "Trabalha bem tríceps além do peito",
+      "Cotovelos junto ao corpo",
+      "Pode evoluir para crush press",
+      "Pegada neutra é mais confortável"
+    ],
+    "commonMistakes": [
+      "Abrir os cotovelos",
+      "Separar demais os halteres",
+      "Amplitude incompleta",
+      "Perder foco no tríceps"
+    ],
+    "notes": "Combina benefícios do supino fechado com conforto dos halteres.",
+    "videoUrl": "https://www.youtube.com/results?search_query=close+grip+dumbbell+press",
+    "isPublic": true
+  },
+  {
+    "name": "Single Arm Cable Fly",
+    "description": "Crucifixo unilateral no cabo para foco e correção de assimetrias.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione a polia na altura do peito",
+      "Fique de lado para o cabo e segure a manopla",
+      "Dê um passo à frente para tensionar",
+      "Braço aberto ao lado com cotovelo levemente flexionado",
+      "Traga o braço em arco para frente do corpo",
+      "Cruze levemente a linha média",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer sem apoio (mais instável)",
+      "Adicionar pausa na contração"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer bilateral",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Excelente para foco e conexão mente-músculo",
+      "Permite cruzar a linha média do corpo",
+      "Corrige assimetrias entre os lados",
+      "Controle total em todas as fases"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Flexionar demais o cotovelo",
+      "Não cruzar a linha média",
+      "Perder postura estável"
+    ],
+    "notes": "Permite contração máxima cruzando a linha média.",
+    "videoUrl": "https://www.youtube.com/results?search_query=single+arm+cable+fly+unilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Single Arm Dumbbell Press",
+    "description": "Supino unilateral com halter para trabalho de estabilização e força assimétrica.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco segurando um halter com uma mão",
+      "A outra mão pode ficar no peito ou ao lado",
+      "Posicione o halter ao lado do peito",
+      "Empurre para cima estabilizando o corpo",
+      "Não deixe o corpo rotar",
+      "Retorne controladamente",
+      "Complete as repetições e troque de lado"
+    ],
+    "progressions": [
+      "Adicionar carga",
+      "Fazer em banco inclinado",
+      "Fazer alternado sem descanso"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Segurar no banco com mão livre",
+      "Fazer bilateral primeiro"
+    ],
+    "tips": [
+      "Core trabalha intensamente para estabilizar",
+      "Não deixe o corpo rotar ou cair para o lado",
+      "Excelente para corrigir diferenças de força",
+      "Mantenha os pés firmes no chão"
+    ],
+    "commonMistakes": [
+      "Deixar o corpo rotar",
+      "Assimetria nas repetições",
+      "Perder estabilidade",
+      "Usar impulso"
+    ],
+    "notes": "Trabalha estabilização além do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=single+arm+dumbbell+press+unilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Alternating Dumbbell Press",
+    "description": "Supino alternando braços para trabalho assimétrico e maior tempo sob tensão.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco segurando dois halteres sobre o peito",
+      "Mantenha um halter estendido no alto",
+      "Desça o outro halter até o peito",
+      "Empurre de volta ao topo",
+      "Agora desça o outro lado",
+      "Continue alternando"
+    ],
+    "progressions": [
+      "Aumentar pausa com braço estendido",
+      "Fazer em banco inclinado",
+      "Adicionar rotação"
+    ],
+    "regressions": [
+      "Fazer bilateral tradicional",
+      "Reduzir carga",
+      "Fazer cada lado separadamente"
+    ],
+    "tips": [
+      "O braço estendido mantém trabalho isométrico",
+      "Aumenta tempo sob tensão total",
+      "Excelente para resistência muscular",
+      "Mantenha controle do halter parado"
+    ],
+    "commonMistakes": [
+      "Deixar o halter estendido cair",
+      "Descoordenar o movimento",
+      "Usar impulso",
+      "Perder postura no banco"
+    ],
+    "notes": "Variação que aumenta o desafio de estabilização.",
+    "videoUrl": "https://www.youtube.com/results?search_query=alternating+dumbbell+press",
+    "isPublic": true
+  },
+  {
+    "name": "Incline Dumbbell Fly to Press",
+    "description": "Combinação de crucifixo e supino inclinado em um movimento fluido.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite em banco inclinado 30-45°",
+      "Comece com halteres no topo em posição de supino",
+      "Desça em arco de crucifixo até alongar o peito",
+      "No ponto baixo, flexione os cotovelos",
+      "Empurre para cima como um supino",
+      "Abra novamente para o próximo crucifixo"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer mais lento",
+      "Adicionar pausa em cada posição"
+    ],
+    "regressions": [
+      "Fazer crucifixo e supino separados",
+      "Reduzir carga",
+      "Fazer em banco reto"
+    ],
+    "tips": [
+      "Combina isolamento e movimento composto",
+      "Maximiza estímulo do peitoral superior",
+      "Transição suave entre os movimentos",
+      "Excelente para hipertrofia"
+    ],
+    "commonMistakes": [
+      "Transição abrupta entre movimentos",
+      "Perder forma no crucifixo",
+      "Amplitude insuficiente",
+      "Usar carga excessiva"
+    ],
+    "notes": "Técnica híbrida para máximo estímulo muscular.",
+    "videoUrl": "https://www.youtube.com/results?search_query=incline+dumbbell+fly+to+press",
+    "isPublic": true
+  },
+  {
+    "name": "Around the World (Arco com Halteres)",
+    "description": "Movimento circular completo com halteres para alongamento e contração total do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto com halteres leves sobre o peito",
+      "Braços estendidos com leve flexão nos cotovelos",
+      "Abra os braços para os lados (crucifixo)",
+      "Continue o arco passando os braços por cima da cabeça",
+      "Junte os halteres atrás/acima da cabeça",
+      "Continue o círculo voltando pela lateral"
+    ],
+    "progressions": [
+      "Aumentar velocidade controlada",
+      "Fazer em banco inclinado",
+      "Aumentar carga gradualmente"
+    ],
+    "regressions": [
+      "Usar halteres mais leves",
+      "Fazer meio arco apenas",
+      "Reduzir amplitude"
+    ],
+    "tips": [
+      "Use cargas leves - foco no movimento",
+      "Mantenha cotovelos levemente flexionados",
+      "Sinta o alongamento em toda amplitude",
+      "Excelente para aquecimento ou finalização"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada",
+      "Travar os cotovelos",
+      "Movimentos bruscos",
+      "Amplitude incompleta"
+    ],
+    "notes": "Exercício de mobilidade e alongamento ativo do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=around+the+world+dumbbell+chest",
+    "isPublic": true
+  },
+  {
+    "name": "Standing Cable Press",
+    "description": "Supino em pé no cabo para trabalho funcional de empurro.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
+    "equipment": "CableMachine",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na altura do peito",
+      "Fique de costas para a máquina, segurando as manoplas",
+      "Dê um passo à frente em posição de afundo",
+      "Mãos ao lado do peito",
+      "Empurre para frente estendendo os braços",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Fazer unilateral",
+      "Aumentar carga",
+      "Adicionar rotação do tronco"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Pés paralelos para mais estabilidade",
+      "Fazer sentado"
+    ],
+    "tips": [
+      "Trabalha estabilização do core",
+      "Mais funcional que supino deitado",
+      "Boa transferência para movimentos do dia a dia",
+      "Mantenha postura ereta"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Perder postura ereta",
+      "Não estabilizar o core",
+      "Amplitude incompleta"
+    ],
+    "notes": "Excelente para trabalho funcional de empurro em pé.",
+    "videoUrl": "https://www.youtube.com/results?search_query=standing+cable+chest+press",
+    "isPublic": true
+  },
+  {
+    "name": "Low to High Cable Fly",
+    "description": "Crucifixo no cabo de baixo para cima enfatizando peitoral superior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na posição mais baixa",
+      "Segure as manoplas e dê um passo à frente",
+      "Braços ao lado do corpo com cotovelos levemente flexionados",
+      "Traga os cabos para cima e para frente em arco",
+      "Cruze as mãos à altura dos olhos ou acima",
+      "Retorne controladamente à posição inicial"
+    ],
+    "progressions": [
+      "Pausa na contração",
+      "Aumentar carga",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Crossover regular"
+    ],
+    "tips": [
+      "Foca na porção clavicular do peitoral",
+      "Mantenha cotovelos fixos",
+      "Cruze na altura dos olhos ou acima",
+      "Tensão constante no cabo"
+    ],
+    "commonMistakes": [
+      "Flexionar cotovelos durante movimento",
+      "Usar impulso do corpo",
+      "Não cruzar alto o suficiente",
+      "Perder postura"
+    ],
+    "notes": "Excelente para definir a linha do peitoral superior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=low+to+high+cable+fly+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "High to Low Cable Fly",
+    "description": "Crucifixo no cabo de cima para baixo enfatizando peitoral inferior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na posição mais alta",
+      "Segure as manoplas e dê um passo à frente",
+      "Incline levemente o tronco",
+      "Braços abertos com cotovelos levemente flexionados",
+      "Traga os cabos para baixo e para frente",
+      "Cruze as mãos na frente do abdômen",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar pausa na contração",
+      "Fazer unilateral",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Sem cruzar as mãos"
+    ],
+    "tips": [
+      "Foco no peitoral inferior e esternal",
+      "Mantenha cotovelos fixos",
+      "Cruze as mãos para contração máxima",
+      "Incline o tronco levemente"
+    ],
+    "commonMistakes": [
+      "Flexionar cotovelos",
+      "Usar impulso",
+      "Postura muito ereta",
+      "Não cruzar as mãos"
+    ],
+    "notes": "Trabalha a porção inferior do peitoral efetivamente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=high+to+low+cable+fly",
+    "isPublic": true
+  }
+]

@@ -1,0 +1,959 @@
+[
+  {
+    "name": "Rosca de Punho com Barra",
+    "description": "Flexão de punho com barra para desenvolvimento dos flexores do antebraço.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em um banco com os antebraços apoiados nas coxas",
+      "Segure a barra com pegada supinada (palmas para cima)",
+      "Deixe os punhos passarem dos joelhos",
+      "Flexione os punhos levantando a barra",
+      "Contraia os flexores no topo do movimento",
+      "Desça de forma controlada estendendo os punhos"
+    ],
+    "progressions": ["Rosca de Punho com Barra Mais Pesada"],
+    "regressions": ["Rosca de Punho com Halteres"],
+    "tips": [
+      "Mantenha os antebraços fixos nas coxas",
+      "Apenas os punhos devem se mover",
+      "Use amplitude completa para melhor resultado"
+    ],
+    "commonMistakes": [
+      "Mover os antebraços durante o exercício",
+      "Usar carga excessiva limitando amplitude",
+      "Não controlar a fase excêntrica"
+    ],
+    "notes": "Exercício fundamental para desenvolvimento dos flexores.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca de Punho com Halteres",
+    "description": "Flexão de punho unilateral com halteres para trabalho independente.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se com o antebraço apoiado na coxa",
+      "Segure o halter com palma para cima",
+      "Deixe o punho passar do joelho",
+      "Flexione o punho levantando o halter",
+      "Contraia no topo e desça controladamente",
+      "Complete as repetições e troque de braço"
+    ],
+    "progressions": ["Rosca de Punho com Barra"],
+    "regressions": ["Rosca de Punho com Halter Leve"],
+    "tips": [
+      "Trabalha cada antebraço independentemente",
+      "Ideal para corrigir desequilíbrios",
+      "Mantenha o antebraço fixo"
+    ],
+    "commonMistakes": [
+      "Mover o antebraço durante a execução",
+      "Não usar amplitude completa",
+      "Acelerar o movimento"
+    ],
+    "notes": "Permite identificar e corrigir assimetrias entre os antebraços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca de Punho Inversa com Barra",
+    "description": "Extensão de punho com barra para desenvolvimento dos extensores.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se com os antebraços apoiados nas coxas",
+      "Segure a barra com pegada pronada (palmas para baixo)",
+      "Deixe os punhos passarem dos joelhos",
+      "Estenda os punhos levantando a barra",
+      "Contraia os extensores no topo",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Rosca Inversa com Mais Carga"],
+    "regressions": ["Rosca Inversa com Halteres"],
+    "tips": [
+      "Use carga menor que na rosca normal",
+      "Os extensores são mais fracos que flexores",
+      "Importante para equilíbrio muscular"
+    ],
+    "commonMistakes": [
+      "Usar a mesma carga da rosca normal",
+      "Mover os antebraços",
+      "Amplitude limitada"
+    ],
+    "notes": "Fundamental para prevenção de lesões e equilíbrio.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca de Punho Inversa com Halteres",
+    "description": "Extensão de punho com halteres para trabalho unilateral dos extensores.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se com o antebraço apoiado na coxa",
+      "Segure o halter com palma para baixo",
+      "Deixe o punho passar do joelho",
+      "Estenda o punho levantando o halter",
+      "Contraia no topo e desça controladamente",
+      "Complete e troque de braço"
+    ],
+    "progressions": ["Rosca Inversa com Barra"],
+    "regressions": ["Rosca Inversa com Halter Mais Leve"],
+    "tips": [
+      "Trabalha cada braço independentemente",
+      "Use cargas moderadas",
+      "Foco na contração dos extensores"
+    ],
+    "commonMistakes": [
+      "Usar carga excessiva",
+      "Mover o antebraço",
+      "Não controlar o movimento"
+    ],
+    "notes": "Importante para saúde articular e prevenção de lesões.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rosca de Punho Atrás das Costas",
+    "description": "Flexão de punho com barra atrás do corpo para ângulo diferente.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando a barra atrás do corpo",
+      "Pegada supinada, braços estendidos",
+      "Deixe a barra rolar até a ponta dos dedos",
+      "Flexione os dedos e punhos enrolando a barra",
+      "Suba até a flexão máxima do punho",
+      "Desenrole controladamente"
+    ],
+    "progressions": ["Com Carga Maior"],
+    "regressions": ["Rosca de Punho Sentado"],
+    "tips": [
+      "Trabalha flexores em ângulo único",
+      "Permite usar cargas maiores que sentado",
+      "O rolar dos dedos adiciona trabalho extra"
+    ],
+    "commonMistakes": [
+      "Deixar a barra cair dos dedos",
+      "Não usar amplitude completa",
+      "Usar impulso do corpo"
+    ],
+    "notes": "Variação clássica popularizada por culturistas antigos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Farmer's Walk",
+    "description": "Caminhada com cargas pesadas para força de pegada e antebraços.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Core", "Shoulders", "Back"],
+    "equipment": "Dumbbell",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Segure halteres pesados em cada mão",
+      "Fique em pé com postura ereta",
+      "Caminhe de forma controlada mantendo a pegada",
+      "Mantenha os ombros para trás e core ativado",
+      "Continue até a distância ou tempo determinado",
+      "Desça os pesos de forma controlada"
+    ],
+    "progressions": ["Farmer's Walk com Mais Peso"],
+    "regressions": ["Farmer's Walk com Menos Peso"],
+    "tips": [
+      "Excelente para força funcional de pegada",
+      "Trabalha todo o corpo além dos antebraços",
+      "Mantenha passos curtos e controlados"
+    ],
+    "commonMistakes": [
+      "Passos muito largos",
+      "Inclinar o tronco",
+      "Deixar os ombros caírem"
+    ],
+    "notes": "Exercício funcional completo com grande demanda de pegada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Dead Hang",
+    "description": "Suspensão passiva na barra para resistência de pegada.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Back", "Shoulders"],
+    "equipment": "PullUpBar",
+    "category": "Isometric",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure a barra com pegada pronada na largura dos ombros",
+      "Deixe o corpo pendurar com braços estendidos",
+      "Mantenha os ombros engajados (não relaxados totalmente)",
+      "Segure a posição pelo tempo máximo possível",
+      "Desça de forma controlada quando não conseguir mais",
+      "Descanse e repita"
+    ],
+    "progressions": ["Dead Hang com Uma Mão", "Dead Hang com Peso"],
+    "regressions": ["Dead Hang com Apoio Parcial"],
+    "tips": [
+      "Excelente para resistência de pegada",
+      "Também alonga a coluna",
+      "Progrida gradualmente no tempo"
+    ],
+    "commonMistakes": [
+      "Relaxar completamente os ombros",
+      "Balançar o corpo",
+      "Pular para sair ao invés de descer"
+    ],
+    "notes": "Exercício simples mas eficaz para resistência de pegada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Plate Pinch",
+    "description": "Segurar anilhas juntas pelos lados para força de pinça.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Plate",
+    "category": "Isometric",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Junte duas anilhas lisas com os lados lisos para fora",
+      "Segure as anilhas apenas com os dedos (pinça)",
+      "Levante as anilhas do chão",
+      "Mantenha a posição pelo tempo máximo",
+      "Use os dedos polegar de um lado e os outros do outro",
+      "Desça controladamente quando não conseguir mais"
+    ],
+    "progressions": ["Plate Pinch com Mais Peso"],
+    "regressions": ["Plate Pinch com Anilhas Menores"],
+    "tips": [
+      "Desenvolve força de pinça específica",
+      "Use anilhas com superfície lisa",
+      "Progrida adicionando peso gradualmente"
+    ],
+    "commonMistakes": [
+      "Usar anilhas com furos grandes demais",
+      "Não segurar apenas com pinça",
+      "Deixar cair ao invés de descer"
+    ],
+    "notes": "Exercício específico para força de pinça dos dedos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Wrist Roller",
+    "description": "Enrolar e desenrolar peso em bastão para força de punho.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure o bastão com peso pendurado à frente do corpo",
+      "Braços estendidos na altura dos ombros",
+      "Gire os punhos para enrolar a corda no bastão",
+      "Continue até o peso chegar ao topo",
+      "Inverta o movimento desenrolando a corda",
+      "Mantenha os braços estendidos durante todo o exercício"
+    ],
+    "progressions": ["Wrist Roller com Mais Peso"],
+    "regressions": ["Wrist Roller com Menos Peso"],
+    "tips": [
+      "Trabalha flexores e extensores dependendo da direção",
+      "Enrolar para cima = flexores, para baixo = extensores",
+      "Mantenha os braços na horizontal"
+    ],
+    "commonMistakes": [
+      "Deixar os braços caírem",
+      "Usar impulso do corpo",
+      "Girar muito rápido"
+    ],
+    "notes": "Exercício clássico e muito eficaz para antebraços.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Towel Pull-Up Hold",
+    "description": "Suspensão em toalha para força de pegada extrema.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Back", "Biceps"],
+    "equipment": "Towel",
+    "category": "Isometric",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Passe duas toalhas sobre a barra de pull-up",
+      "Segure uma toalha em cada mão",
+      "Suspenda o corpo segurando apenas as toalhas",
+      "Mantenha a posição pelo tempo máximo",
+      "A textura da toalha aumenta a demanda de pegada",
+      "Desça controladamente"
+    ],
+    "progressions": ["Towel Pull-Up Completo"],
+    "regressions": ["Dead Hang Normal"],
+    "tips": [
+      "Extremamente desafiador para a pegada",
+      "Use toalhas resistentes",
+      "Comece com suspensões curtas"
+    ],
+    "commonMistakes": [
+      "Usar toalhas finas que podem rasgar",
+      "Não verificar a segurança do setup",
+      "Tentar tempo muito longo inicialmente"
+    ],
+    "notes": "Exercício avançado para força de pegada funcional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hand Gripper",
+    "description": "Exercício com hand gripper para força de aperto.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure o hand gripper com uma mão",
+      "Posicione corretamente na palma",
+      "Feche o gripper completamente juntando as alças",
+      "Mantenha brevemente fechado",
+      "Retorne de forma controlada",
+      "Repita e troque de mão"
+    ],
+    "progressions": ["Gripper com Maior Resistência"],
+    "regressions": ["Gripper com Menor Resistência"],
+    "tips": [
+      "Existem grippers de várias resistências",
+      "Progrida gradualmente para mais pesados",
+      "Fechar completamente é o objetivo"
+    ],
+    "commonMistakes": [
+      "Usar gripper muito difícil sem fechar",
+      "Não usar amplitude completa",
+      "Acelerar demais as repetições"
+    ],
+    "notes": "Ferramenta portátil excelente para treino de pegada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Finger Curls",
+    "description": "Flexão dos dedos com barra para força de dedos.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se com os antebraços apoiados nas coxas",
+      "Segure a barra com pegada supinada",
+      "Deixe a barra rolar até a ponta dos dedos",
+      "Flexione os dedos enrolando a barra de volta",
+      "Continue até a barra estar segura na palma",
+      "Desenrole controladamente"
+    ],
+    "progressions": ["Finger Curls com Mais Peso"],
+    "regressions": ["Finger Curls com Menos Peso"],
+    "tips": [
+      "Trabalha especificamente os flexores dos dedos",
+      "Use barra olímpica para melhor controle",
+      "Movimento deve ser nos dedos, não no punho"
+    ],
+    "commonMistakes": [
+      "Deixar a barra cair",
+      "Misturar com rosca de punho",
+      "Usar carga excessiva"
+    ],
+    "notes": "Exercício focado na força dos dedos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Pronação e Supinação com Halter",
+    "description": "Rotação do antebraço com halter para pronadores e supinadores.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se com o antebraço apoiado na coxa",
+      "Segure um halter na vertical (uma extremidade para cima)",
+      "Gire o antebraço para um lado (pronação)",
+      "Gire para o outro lado (supinação)",
+      "Mantenha o cotovelo fixo durante a rotação",
+      "Continue alternando os lados"
+    ],
+    "progressions": ["Com Halter Mais Pesado"],
+    "regressions": ["Com Halter Mais Leve"],
+    "tips": [
+      "Trabalha os rotadores do antebraço",
+      "Use halter com peso em uma extremidade",
+      "Importante para saúde do cotovelo"
+    ],
+    "commonMistakes": [
+      "Mover o cotovelo",
+      "Usar carga excessiva",
+      "Não fazer amplitude completa"
+    ],
+    "notes": "Exercício importante para equilíbrio dos rotadores.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hammer Rotation",
+    "description": "Rotação com halter em posição de martelo para rotadores.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando um halter com pegada neutra",
+      "Cotovelo flexionado a 90 graus, junto ao corpo",
+      "Gire o antebraço para fora (supinação)",
+      "Gire para dentro (pronação)",
+      "Mantenha o cotovelo fixo junto ao corpo",
+      "Alterne as rotações"
+    ],
+    "progressions": ["Com Mais Resistência"],
+    "regressions": ["Com Menos Peso"],
+    "tips": [
+      "Similar à pronação/supinação mas em pé",
+      "Trabalha rotadores em ângulo diferente",
+      "Mantenha o cotovelo estável"
+    ],
+    "commonMistakes": [
+      "Mover o cotovelo",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Variação da rotação de antebraço em posição funcional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Radial Deviation",
+    "description": "Desvio radial do punho com halter para força lateral.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando um halter com pegada neutra",
+      "Braço ao lado do corpo, polegar para cima",
+      "Sem flexionar o cotovelo, levante o polegar em direção ao ombro",
+      "O movimento é lateral, não de flexão",
+      "Desça de forma controlada",
+      "Apenas o punho se move"
+    ],
+    "progressions": ["Com Halter Mais Pesado"],
+    "regressions": ["Com Halter Mais Leve"],
+    "tips": [
+      "Trabalha o lado do polegar do antebraço",
+      "Importante para estabilidade do punho",
+      "Use cargas moderadas"
+    ],
+    "commonMistakes": [
+      "Flexionar o cotovelo",
+      "Usar carga excessiva",
+      "Confundir com rosca de punho"
+    ],
+    "notes": "Exercício específico para força lateral do punho.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Ulnar Deviation",
+    "description": "Desvio ulnar do punho com halter para força lateral oposta.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando um halter com pegada neutra",
+      "Braço ao lado do corpo, polegar para cima",
+      "Sem flexionar o cotovelo, baixe o mindinho em direção ao chão",
+      "O movimento é lateral, oposto ao radial",
+      "Retorne à posição neutra",
+      "Apenas o punho se move"
+    ],
+    "progressions": ["Com Halter Mais Pesado"],
+    "regressions": ["Com Halter Mais Leve"],
+    "tips": [
+      "Trabalha o lado do mindinho do antebraço",
+      "Complementa o desvio radial",
+      "Importante para equilíbrio"
+    ],
+    "commonMistakes": [
+      "Mover o cotovelo",
+      "Usar impulso",
+      "Confundir os movimentos"
+    ],
+    "notes": "Completa o trabalho de estabilização lateral do punho.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Fat Grip Training",
+    "description": "Treino com barras engrossadas para maior demanda de pegada.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Biceps", "Back"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Coloque fat grips na barra ou use barra grossa",
+      "Execute exercícios normais (rosca, remada, etc.)",
+      "A barra mais grossa aumenta a demanda de pegada",
+      "Mantenha a técnica normal do exercício",
+      "A pegada será o fator limitante",
+      "Use cargas menores que o normal"
+    ],
+    "progressions": ["Fat Grip com Cargas Maiores"],
+    "regressions": ["Barra Normal"],
+    "tips": [
+      "Fat grips aumentam diâmetro da barra",
+      "Excelente para força funcional de pegada",
+      "Reduza a carga em 20-30%"
+    ],
+    "commonMistakes": [
+      "Usar mesma carga que barra normal",
+      "Comprometer a técnica do exercício principal",
+      "Usar em todo treino"
+    ],
+    "notes": "Método eficaz para desenvolver força de pegada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rope Climb Grip",
+    "description": "Pegada em corda grossa para força de pegada funcional.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Back", "Biceps", "Core"],
+    "equipment": "Rope",
+    "category": "Functional",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Segure a corda com ambas as mãos",
+      "Suba a corda usando força de braços e pegada",
+      "Alterne as mãos puxando e segurando",
+      "Mantenha o core ativado",
+      "Desça de forma controlada",
+      "A corda grossa desafia a pegada"
+    ],
+    "progressions": ["Subida Sem Usar Pernas"],
+    "regressions": ["Subida Usando Pernas"],
+    "tips": [
+      "Exercício funcional completo",
+      "A corda grossa aumenta demanda de pegada",
+      "Use técnica de pernas para auxiliar"
+    ],
+    "commonMistakes": [
+      "Descer muito rápido (queima as mãos)",
+      "Não usar técnica de pernas quando necessário",
+      "Subir sem controle"
+    ],
+    "notes": "Exercício funcional que desenvolve pegada e força de puxar.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Extensão de Dedos com Elástico",
+    "description": "Abertura dos dedos contra resistência de elástico.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Coloque um elástico ao redor de todos os dedos",
+      "Mantenha os dedos juntos inicialmente",
+      "Abra os dedos contra a resistência do elástico",
+      "Estenda até os dedos ficarem bem afastados",
+      "Retorne de forma controlada",
+      "Repita o movimento"
+    ],
+    "progressions": ["Elástico com Maior Resistência"],
+    "regressions": ["Elástico com Menor Resistência"],
+    "tips": [
+      "Trabalha os extensores dos dedos",
+      "Importante para equilíbrio muscular",
+      "Ajuda na prevenção de lesões"
+    ],
+    "commonMistakes": [
+      "Usar elástico muito forte",
+      "Não fazer amplitude completa",
+      "Movimento muito rápido"
+    ],
+    "notes": "Essencial para equilibrar o trabalho de flexores.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hub Lift",
+    "description": "Levantar anilha pela parte central (hub) para pegada de pinça.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Plate",
+    "category": "Isometric",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Coloque uma anilha olímpica no chão",
+      "Agarre apenas pela parte central elevada (hub)",
+      "Use os dedos para fazer pinça no hub",
+      "Levante a anilha do chão",
+      "Mantenha a posição por alguns segundos",
+      "Desça controladamente"
+    ],
+    "progressions": ["Hub Lift com Anilha Maior"],
+    "regressions": ["Hub Lift com Anilha Menor"],
+    "tips": [
+      "Extremamente desafiador para força de pinça",
+      "Use anilhas olímpicas com hub elevado",
+      "Progrida gradualmente"
+    ],
+    "commonMistakes": [
+      "Tentar anilhas muito pesadas inicialmente",
+      "Não aquecer adequadamente",
+      "Deixar cair ao invés de baixar"
+    ],
+    "notes": "Teste clássico de força de pinça.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Sledgehammer Lever",
+    "description": "Alavanca com marreta para força de punho em múltiplos planos.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure uma marreta ou bastão pesado pela extremidade",
+      "Braço estendido à frente, paralelo ao chão",
+      "Deixe a marreta pender para um lado",
+      "Use força do punho para trazer à posição vertical",
+      "Controle a descida para o outro lado",
+      "Alterne os lados"
+    ],
+    "progressions": ["Segurar Mais Longe do Centro"],
+    "regressions": ["Segurar Mais Perto do Centro"],
+    "tips": [
+      "A alavanca aumenta a resistência",
+      "Trabalha força em múltiplos planos",
+      "Quanto mais longe segurar, mais difícil"
+    ],
+    "commonMistakes": [
+      "Começar muito longe do centro",
+      "Perder controle do movimento",
+      "Mover o braço ao invés do punho"
+    ],
+    "notes": "Exercício clássico para força de punho em alavanca.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Bottoms Up Kettlebell Hold",
+    "description": "Segurar kettlebell invertido para força de pegada e estabilidade.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Isometric",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure um kettlebell pela alça",
+      "Inverta-o de modo que o peso fique para cima",
+      "Estabilize o kettlebell nesta posição invertida",
+      "Mantenha a posição pelo tempo máximo",
+      "Exige forte pegada e controle",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Kettlebell Mais Pesado"],
+    "regressions": ["Kettlebell Mais Leve"],
+    "tips": [
+      "Extremamente desafiador para pegada",
+      "Trabalha estabilizadores do punho",
+      "Comece com kettlebells leves"
+    ],
+    "commonMistakes": [
+      "Kettlebell muito pesado",
+      "Não estabilizar antes de manter",
+      "Deixar cair ao perder controle"
+    ],
+    "notes": "Desenvolve força de pegada e estabilidade de punho.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Fingertip Push-Up Hold",
+    "description": "Prancha ou flexão nas pontas dos dedos para força digital.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Isometric",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Assuma posição de prancha alta",
+      "Apoie-se nas pontas dos dedos ao invés das palmas",
+      "Mantenha os dedos arqueados, não esticados",
+      "Segure a posição pelo tempo máximo",
+      "Mantenha o corpo reto como prancha normal",
+      "Desça quando a forma deteriorar"
+    ],
+    "progressions": ["Fingertip Push-Ups Completos"],
+    "regressions": ["Fingertip Hold nos Joelhos"],
+    "tips": [
+      "Desenvolve força excepcional dos dedos",
+      "Mantenha os dedos ligeiramente dobrados",
+      "Comece com apoio nos joelhos"
+    ],
+    "commonMistakes": [
+      "Dedos completamente esticados",
+      "Muito peso nos dedos inicialmente",
+      "Ignorar dor nos dedos"
+    ],
+    "notes": "Exercício avançado para força dos dedos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Rice Bucket Training",
+    "description": "Exercícios com as mãos em balde de arroz para força e mobilidade.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "None",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Encha um balde com arroz cru",
+      "Mergulhe as mãos no arroz",
+      "Execute movimentos variados: abrir/fechar, girar, pressionar",
+      "O arroz fornece resistência em todas as direções",
+      "Trabalhe por tempo (1-2 minutos por sessão)",
+      "Pode ser feito como aquecimento ou reabilitação"
+    ],
+    "progressions": ["Mais Tempo ou Movimentos Mais Intensos"],
+    "regressions": ["Menos Tempo"],
+    "tips": [
+      "Popular entre arremessadores de beisebol",
+      "Trabalha músculos pequenos da mão",
+      "Excelente para reabilitação"
+    ],
+    "commonMistakes": [
+      "Movimentos muito rápidos",
+      "Tempo excessivo causando fadiga",
+      "Usar arroz muito compactado"
+    ],
+    "notes": "Método tradicional para saúde da mão e antebraço.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Newspaper Crumple",
+    "description": "Amassar jornal com uma mão para força de aperto.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure uma folha de jornal pela ponta",
+      "Use apenas uma mão",
+      "Amasse o jornal até formar uma bola compacta",
+      "Use apenas os dedos, sem ajuda da outra mão",
+      "Complete e repita com a outra mão",
+      "Use folhas maiores para mais desafio"
+    ],
+    "progressions": ["Papel Mais Grosso ou Maior"],
+    "regressions": ["Papel Menor ou Mais Fino"],
+    "tips": [
+      "Exercício simples mas eficaz",
+      "Pode ser feito em qualquer lugar",
+      "Trabalha força de aperto"
+    ],
+    "commonMistakes": [
+      "Usar a outra mão para ajudar",
+      "Não amassar completamente",
+      "Movimento muito rápido"
+    ],
+    "notes": "Exercício caseiro clássico para força de mão.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Captains of Crush Training",
+    "description": "Treino progressivo com grippers Captains of Crush.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Escolha o gripper apropriado para seu nível",
+      "Posicione corretamente na palma",
+      "Feche o gripper completamente",
+      "O objetivo é tocar as alças",
+      "Mantenha brevemente fechado",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Próximo Nível de Gripper"],
+    "regressions": ["Gripper Mais Leve"],
+    "tips": [
+      "Grippers CoC vão de 60 a 365+ lbs",
+      "Certificação por fechar níveis específicos",
+      "Treino específico para força de aperto"
+    ],
+    "commonMistakes": [
+      "Pular níveis de progressão",
+      "Posicionamento incorreto",
+      "Fechar parcialmente apenas"
+    ],
+    "notes": "Sistema de treino com grippers de resistência certificada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Wrist Curl na Máquina",
+    "description": "Rosca de punho em máquina específica para isolamento.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a máquina para sua altura",
+      "Apoie os antebraços no pad",
+      "Segure a barra com pegada supinada",
+      "Flexione os punhos levantando a carga",
+      "Contraia os flexores no topo",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Mais Carga"],
+    "regressions": ["Menos Carga"],
+    "tips": [
+      "A máquina isola perfeitamente o movimento",
+      "Ideal para iniciantes",
+      "Permite treinar até a falha com segurança"
+    ],
+    "commonMistakes": [
+      "Ajuste incorreto da máquina",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Versão segura e isolada da rosca de punho.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Cable Wrist Curl",
+    "description": "Rosca de punho no cabo para tensão constante.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte barra reta na polia baixa",
+      "Ajoelhe de frente para a máquina",
+      "Apoie os antebraços em um banco",
+      "Segure a barra com pegada supinada",
+      "Flexione os punhos contra a resistência do cabo",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Mais Carga"],
+    "regressions": ["Menos Carga"],
+    "tips": [
+      "O cabo mantém tensão constante",
+      "Diferente de barra livre, tensão não varia",
+      "Excelente para hipertrofia"
+    ],
+    "commonMistakes": [
+      "Posicionamento incorreto",
+      "Mover os antebraços",
+      "Usar impulso"
+    ],
+    "notes": "Combina isolamento com tensão constante do cabo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Isometric Wrist Hold",
+    "description": "Manutenção isométrica da posição de flexão de punho.",
+    "muscleGroup": "Forearms",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isometric",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Apoie o antebraço na coxa ou banco",
+      "Segure o halter com punho flexionado",
+      "Mantenha a posição de flexão máxima",
+      "Segure por 20-30 segundos",
+      "Descanse e repita",
+      "Pode fazer em diferentes ângulos"
+    ],
+    "progressions": ["Mais Tempo ou Mais Peso"],
+    "regressions": ["Menos Tempo ou Peso"],
+    "tips": [
+      "Desenvolve resistência isométrica",
+      "Pode ser feito em qualquer ângulo",
+      "Complementa o treino dinâmico"
+    ],
+    "commonMistakes": [
+      "Prender a respiração",
+      "Posição inadequada do antebraço",
+      "Tempo muito curto"
+    ],
+    "notes": "Complemento eficaz ao treino dinâmico de antebraço.",
+    "videoUrl": ""
+  }
+]

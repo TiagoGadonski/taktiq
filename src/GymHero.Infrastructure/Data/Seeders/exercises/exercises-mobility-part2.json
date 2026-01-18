@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Cuban Press",
+    "description": "Elevacao lateral seguida de rotacao externa e press. Mobilidade e forca de ombro.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/cuban-press.png"
+  },
+  {
+    "name": "Prone YTW",
+    "description": "De brucos, execute posicoes Y, T e W com bracos para mobilidade de escapula.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/prone-ytw.png"
+  },
+  {
+    "name": "Scapular Push-Up",
+    "description": "Em prancha, protraia e retraia escapulas sem dobrar cotovelos.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/scapular-push-up.png"
+  },
+  {
+    "name": "Serratus Wall Slide",
+    "description": "Com antebracos na parede, deslize para cima protraindo escapulas.",
+    "musclesWorked": ["Serratus Anterior", "Shoulders"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/serratus-wall-slide.png"
+  },
+  {
+    "name": "Prone Arm Lift",
+    "description": "De brucos com bracos em diferentes posicoes, eleve do chao contra gravidade.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/prone-arm-lift.png"
+  },
+  {
+    "name": "Wrist Flexion Extension",
+    "description": "Em quatro apoios, balance para frente e para tras alongando flexores e extensores.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/wrist-flexion-extension.png"
+  },
+  {
+    "name": "Wrist Rocks",
+    "description": "Em quatro apoios com maos viradas para tras, balance suavemente.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/wrist-rocks.png"
+  },
+  {
+    "name": "Finger Spread",
+    "description": "Abra e feche os dedos maximamente repetidas vezes para mobilidade das maos.",
+    "musclesWorked": ["Hands"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/finger-spread.png"
+  },
+  {
+    "name": "Prayer Stretch Dynamic",
+    "description": "Palmas juntas, mova para cima e para baixo mantendo contato.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/prayer-stretch-dynamic.png"
+  },
+  {
+    "name": "Elbow Circles",
+    "description": "Faca circulos com os cotovelos explorando toda amplitude articular.",
+    "musclesWorked": ["Arms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/elbow-circles.png"
+  },
+  {
+    "name": "Spiderman Lunge with Rotation",
+    "description": "Em afundo, rotacione tronco abrindo braco para o ceu.",
+    "musclesWorked": ["Hip Flexors", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/spiderman-lunge-rotation.png"
+  },
+  {
+    "name": "Inchworm",
+    "description": "De pe, toque o chao, caminhe com maos para prancha, depois caminhe pes ate maos.",
+    "musclesWorked": ["Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/inchworm.png"
+  },
+  {
+    "name": "Toy Soldier",
+    "description": "Caminhando, chute perna reta para cima tentando tocar mao oposta.",
+    "musclesWorked": ["Hamstrings", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/toy-soldier.png"
+  },
+  {
+    "name": "Walking Knee Hug",
+    "description": "Caminhando, puxe joelho ao peito a cada passo.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/walking-knee-hug.png"
+  },
+  {
+    "name": "Walking Quad Pull",
+    "description": "Caminhando, puxe o pe atras em direcao aos gluteos a cada passo.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/walking-quad-pull.png"
+  },
+  {
+    "name": "Walking Lunge with Twist",
+    "description": "Execute lunges adicionando rotacao de tronco sobre a perna da frente.",
+    "musclesWorked": ["Quadriceps", "Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/walking-lunge-twist.png"
+  },
+  {
+    "name": "Lateral Lunge with Reach",
+    "description": "Afundo lateral com alcance de braco oposto ao pe para maior alongamento.",
+    "musclesWorked": ["Adductors", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/lateral-lunge-reach.png"
+  },
+  {
+    "name": "Shin Box",
+    "description": "Sentado com pernas em 90/90, transicione de lado a lado rotacionando quadris.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/shin-box.png"
+  },
+  {
+    "name": "Fire Hydrant to Leg Extension",
+    "description": "Fire hydrant seguido de extensao completa da perna para tras.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/fire-hydrant-leg-extension.png"
+  },
+  {
+    "name": "Scorpion",
+    "description": "De brucos, rotacione levando pe em arco em direcao ao ombro oposto.",
+    "musclesWorked": ["Hip Flexors", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/scorpion.png"
+  },
+  {
+    "name": "Iron Cross",
+    "description": "De costas com bracos abertos, balance pernas de lado a lado mantendo ombros no chao.",
+    "musclesWorked": ["Lower Back", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/iron-cross-mobility.png"
+  },
+  {
+    "name": "Bear Sit",
+    "description": "Sentado com pes no chao, rotacione quadris de lado a lado tocando joelhos no chao.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/bear-sit.png"
+  },
+  {
+    "name": "Pigeon Flow",
+    "description": "Flua entre pigeon pose de cada lado de forma dinamica.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/pigeon-flow.png"
+  },
+  {
+    "name": "Frog Rock",
+    "description": "Em frog stretch, balance para frente e para tras explorando amplitude.",
+    "musclesWorked": ["Adductors", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/frog-rock.png"
+  },
+  {
+    "name": "Bretzel",
+    "description": "Alongamento complexo combinando rotacao toracica, quad e hip flexor stretch.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/bretzel.png"
+  },
+  {
+    "name": "Seated Spinal Twist",
+    "description": "Sentado, rotacione tronco maximamente mantendo quadris fixos.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/seated-spinal-twist.png"
+  },
+  {
+    "name": "Supine Figure 4 to Twist",
+    "description": "De figure 4, deixe joelhos cairem para o lado oposto adicionando rotacao.",
+    "musclesWorked": ["Glutes", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/supine-figure-4-twist.png"
+  },
+  {
+    "name": "Dead Bug with Rotation",
+    "description": "Dead bug adicionando rotacao de tronco enquanto estende braco e perna.",
+    "musclesWorked": ["Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/dead-bug-rotation.png"
+  },
+  {
+    "name": "Bird Dog with Hip Circle",
+    "description": "Bird dog adicionando circulo de quadril com a perna elevada.",
+    "musclesWorked": ["Core", "Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/bird-dog-hip-circle.png"
+  },
+  {
+    "name": "Squat to Stand",
+    "description": "De forward fold, sente em agachamento, depois levante e repita.",
+    "musclesWorked": ["Hamstrings", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/squat-to-stand.png"
+  }
+]

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Slider Lunge",
+    "description": "Afundo com pe traseiro em slider deslizando para tras.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-lunge.png"
+  },
+  {
+    "name": "Slider Lateral Lunge",
+    "description": "Afundo lateral com pe deslizando lateralmente no slider.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-lateral-lunge.png"
+  },
+  {
+    "name": "Slider Push-Up",
+    "description": "Push-up com maos em sliders, podendo deslizar para variacoes.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-push-up.png"
+  },
+  {
+    "name": "Slider Fly",
+    "description": "Em prancha com maos em sliders, abra e feche os bracos lateralmente.",
+    "musclesWorked": ["Chest", "Core"],
+    "equipment": ["Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/slider-fly.png"
+  },
+  {
+    "name": "Chair Dip",
+    "description": "Dip em cadeira com maos apoiadas no assento e pes no chao.",
+    "musclesWorked": ["Triceps", "Shoulders", "Chest"],
+    "equipment": ["Chair"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chair-dip.png"
+  },
+  {
+    "name": "Chair Step-Up",
+    "description": "Step-up usando cadeira como degrau. Ajuste altura conforme nivel.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Chair"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chair-step-up.png"
+  },
+  {
+    "name": "Chair Pistol Squat",
+    "description": "Pistol squat sentando e levantando de cadeira. Progressao para pistol completo.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Chair"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chair-pistol-squat.png"
+  },
+  {
+    "name": "Door Frame Row",
+    "description": "Segure batente de porta e incline-se para tras, puxe o corpo em remada.",
+    "musclesWorked": ["Back", "Biceps"],
+    "equipment": ["Door Frame"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/door-frame-row.png"
+  },
+  {
+    "name": "Towel Row",
+    "description": "Use toalha sobre porta fechada para executar remadas em casa.",
+    "musclesWorked": ["Back", "Biceps"],
+    "equipment": ["Towel", "Door"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/towel-row.png"
+  },
+  {
+    "name": "Backpack Squat",
+    "description": "Agachamento com mochila carregada nas costas para adicionar peso.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Backpack"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/backpack-squat.png"
+  },
+  {
+    "name": "Backpack Push-Up",
+    "description": "Push-up vestindo mochila carregada para adicionar resistencia.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Backpack"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/backpack-push-up.png"
+  },
+  {
+    "name": "Backpack Lunge",
+    "description": "Afundos vestindo mochila carregada para adicionar peso.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Backpack"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/backpack-lunge.png"
+  },
+  {
+    "name": "Water Jug Curl",
+    "description": "Rosca biceps usando galao de agua como peso improvisado.",
+    "musclesWorked": ["Biceps"],
+    "equipment": ["Water Jug"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/water-jug-curl.png"
+  },
+  {
+    "name": "Water Jug Goblet Squat",
+    "description": "Goblet squat segurando galao de agua no peito.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Water Jug"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/water-jug-goblet-squat.png"
+  },
+  {
+    "name": "Water Jug Press",
+    "description": "Press overhead usando galao de agua como peso.",
+    "musclesWorked": ["Shoulders", "Triceps"],
+    "equipment": ["Water Jug"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/water-jug-press.png"
+  },
+  {
+    "name": "Sofa Dip",
+    "description": "Dips com maos apoiadas no sofa e pes no chao.",
+    "musclesWorked": ["Triceps", "Shoulders"],
+    "equipment": ["Sofa"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sofa-dip.png"
+  },
+  {
+    "name": "Sofa Incline Push-Up",
+    "description": "Push-up com maos elevadas no sofa. Mais facil que push-up normal.",
+    "musclesWorked": ["Chest", "Triceps"],
+    "equipment": ["Sofa"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sofa-incline-push-up.png"
+  },
+  {
+    "name": "Stairs Run",
+    "description": "Suba escadas correndo para cardio intenso e trabalho de pernas.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Stairs"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stairs-run.png"
+  },
+  {
+    "name": "Stairs Step-Up",
+    "description": "Use degrau de escada para step-ups. Ajuste altura com mais degraus.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Stairs"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stairs-step-up.png"
+  },
+  {
+    "name": "Stairs Calf Raise",
+    "description": "Elevacao de panturrilha em degrau de escada.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Stairs"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/stairs-calf-raise.png"
+  },
+  {
+    "name": "Wall Squat Hold",
+    "description": "Sentado contra parede com coxas paralelas ao chao. Isometria de quadriceps.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-squat-hold.png"
+  },
+  {
+    "name": "Wall Angels",
+    "description": "De costas para parede, mova bracos para cima e para baixo mantendo contato.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-angels.png"
+  },
+  {
+    "name": "Wall Slide",
+    "description": "De costas para parede, deslize para baixo ate agachamento e suba.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-slide.png"
+  },
+  {
+    "name": "Isometric Push-Up Hold",
+    "description": "Mantenha posicao baixa do push-up por tempo. Forca isometrica.",
+    "musclesWorked": ["Chest", "Triceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/isometric-push-up-hold.png"
+  },
+  {
+    "name": "Isometric Pull-Up Hold",
+    "description": "Mantenha posicao alta do pull-up com queixo acima da barra.",
+    "musclesWorked": ["Back", "Biceps"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/isometric-pull-up-hold.png"
+  },
+  {
+    "name": "Floor Y Raise",
+    "description": "Deitado de brucos, eleve bracos em forma de Y. Trabalha ombros posteriores.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/floor-y-raise.png"
+  },
+  {
+    "name": "Floor T Raise",
+    "description": "Deitado de brucos, eleve bracos lateralmente em forma de T.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/floor-t-raise.png"
+  },
+  {
+    "name": "Floor W Raise",
+    "description": "Deitado de brucos, eleve bracos em forma de W com cotovelos dobrados.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/floor-w-raise.png"
+  },
+  {
+    "name": "Floor I Raise",
+    "description": "Deitado de brucos, eleve bracos estendidos acima da cabeca.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/floor-i-raise.png"
+  },
+  {
+    "name": "Floor Swimmers",
+    "description": "Deitado de brucos, alterne elevando braco e perna opostos em movimento de nado.",
+    "musclesWorked": ["Lower Back", "Glutes", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/floor-swimmers.png"
+  }
+]

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Neck Side Stretch",
+    "description": "Incline a cabeca para o lado levando orelha em direcao ao ombro. Segure e troque de lado.",
+    "musclesWorked": ["Neck", "Traps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/neck-side-stretch.png"
+  },
+  {
+    "name": "Neck Flexion Stretch",
+    "description": "Leve o queixo em direcao ao peito alongando a parte posterior do pescoco.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/neck-flexion-stretch.png"
+  },
+  {
+    "name": "Neck Extension Stretch",
+    "description": "Incline a cabeca para tras olhando para o teto. Alongamento frontal do pescoco.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/neck-extension-stretch.png"
+  },
+  {
+    "name": "Neck Rotation Stretch",
+    "description": "Rotacione a cabeca olhando sobre o ombro. Segure e troque de lado.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/neck-rotation-stretch.png"
+  },
+  {
+    "name": "Upper Trap Stretch",
+    "description": "Incline a cabeca para o lado e puxe suavemente com a mao para maior alongamento.",
+    "musclesWorked": ["Traps", "Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/upper-trap-stretch.png"
+  },
+  {
+    "name": "Levator Scapulae Stretch",
+    "description": "Rotacione cabeca 45 graus e olhe para baixo em direcao ao pe. Puxe suavemente.",
+    "musclesWorked": ["Neck", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/levator-scapulae-stretch.png"
+  },
+  {
+    "name": "Shoulder Stretch Across Body",
+    "description": "Puxe um braco horizontalmente pelo peito com o outro braco.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/shoulder-stretch-across-body.png"
+  },
+  {
+    "name": "Tricep Stretch Overhead",
+    "description": "Leve mao atras da cabeca pelo ombro e puxe cotovelo com outra mao.",
+    "musclesWorked": ["Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/tricep-stretch-overhead.png"
+  },
+  {
+    "name": "Doorway Chest Stretch",
+    "description": "Com braco no batente da porta a 90 graus, gire corpo para alongar peitoral.",
+    "musclesWorked": ["Chest", "Shoulders"],
+    "equipment": ["Door Frame"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/doorway-chest-stretch.png"
+  },
+  {
+    "name": "Wall Chest Stretch",
+    "description": "Braco estendido contra parede na altura do ombro, rotacione corpo para fora.",
+    "musclesWorked": ["Chest", "Shoulders"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wall-chest-stretch.png"
+  },
+  {
+    "name": "Corner Chest Stretch",
+    "description": "Em canto de parede com bracos em cada lado, incline corpo para frente.",
+    "musclesWorked": ["Chest", "Shoulders"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/corner-chest-stretch.png"
+  },
+  {
+    "name": "Behind Back Clasp Stretch",
+    "description": "Entrelace maos atras das costas e eleve bracos enquanto inclina tronco para frente.",
+    "musclesWorked": ["Chest", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/behind-back-clasp-stretch.png"
+  },
+  {
+    "name": "Bicep Wall Stretch",
+    "description": "Coloque palma da mao na parede atras de voce com braco estendido e gire corpo.",
+    "musclesWorked": ["Biceps", "Chest"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/bicep-wall-stretch.png"
+  },
+  {
+    "name": "Wrist Flexor Stretch",
+    "description": "Estenda braco com palma para cima e puxe dedos para baixo com outra mao.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wrist-flexor-stretch.png"
+  },
+  {
+    "name": "Wrist Extensor Stretch",
+    "description": "Estenda braco com palma para baixo e puxe dedos para baixo com outra mao.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wrist-extensor-stretch.png"
+  },
+  {
+    "name": "Prayer Stretch Wrists",
+    "description": "Palmas juntas em posicao de oracao, abaixe maos mantendo contato para alongar flexores.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/prayer-stretch-wrists.png"
+  },
+  {
+    "name": "Reverse Prayer Stretch",
+    "description": "Dorsos das maos juntos com dedos apontando para baixo. Eleve para alongar extensores.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/reverse-prayer-stretch.png"
+  },
+  {
+    "name": "Lat Stretch Standing",
+    "description": "Segure em barra ou suporte acima e incline corpo para lado alongando lateral.",
+    "musclesWorked": ["Lats", "Obliques"],
+    "equipment": ["Bar"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lat-stretch-standing.png"
+  },
+  {
+    "name": "Lat Stretch Kneeling",
+    "description": "Ajoelhado com bracos estendidos em banco ou cadeira baixa, empurre peito para chao.",
+    "musclesWorked": ["Lats", "Shoulders"],
+    "equipment": ["Bench"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lat-stretch-kneeling.png"
+  },
+  {
+    "name": "Child's Pose",
+    "description": "Ajoelhado sentado nos calcanhares, estenda bracos a frente relaxando costas.",
+    "musclesWorked": ["Lats", "Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/childs-pose.png"
+  },
+  {
+    "name": "Extended Child's Pose",
+    "description": "Child's pose com bracos mais estendidos e dedos tentando alcancar longe.",
+    "musclesWorked": ["Lats", "Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/extended-childs-pose.png"
+  },
+  {
+    "name": "Thread the Needle",
+    "description": "Em quatro apoios, passe braco por baixo do corpo rotacionando tronco.",
+    "musclesWorked": ["Upper Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/thread-the-needle.png"
+  },
+  {
+    "name": "Cat Stretch",
+    "description": "Em quatro apoios, arredonde a coluna elevando o meio das costas.",
+    "musclesWorked": ["Upper Back", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/cat-stretch.png"
+  },
+  {
+    "name": "Cow Stretch",
+    "description": "Em quatro apoios, curve a coluna deixando a barriga cair e olhando para cima.",
+    "musclesWorked": ["Abs", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/cow-stretch.png"
+  },
+  {
+    "name": "Supine Twist",
+    "description": "Deitado de costas, cruze uma perna sobre o corpo girando quadril para o lado.",
+    "musclesWorked": ["Lower Back", "Glutes", "Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/supine-twist.png"
+  },
+  {
+    "name": "Knee to Chest Stretch",
+    "description": "Deitado de costas, puxe um joelho em direcao ao peito alongando lombar e gluteos.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/knee-to-chest-stretch.png"
+  },
+  {
+    "name": "Double Knee to Chest",
+    "description": "Deitado, puxe ambos os joelhos ao peito simultaneamente.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/double-knee-to-chest.png"
+  },
+  {
+    "name": "Cobra Stretch",
+    "description": "Deitado de brucos, empurre tronco para cima mantendo quadril no chao.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/cobra-stretch.png"
+  },
+  {
+    "name": "Sphinx Stretch",
+    "description": "Deitado de brucos apoiado nos antebracos, peito elevado. Menos intenso que cobra.",
+    "musclesWorked": ["Abs", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/sphinx-stretch.png"
+  },
+  {
+    "name": "Seal Stretch",
+    "description": "Cobra mais profunda com bracos totalmente estendidos e quadril proximo ao chao.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seal-stretch.png"
+  }
+]

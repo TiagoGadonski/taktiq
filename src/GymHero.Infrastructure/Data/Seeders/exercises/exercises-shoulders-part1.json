@@ -1,0 +1,1138 @@
+[
+  {
+    "name": "Desenvolvimento Militar com Barra",
+    "description": "Exercício composto fundamental para desenvolvimento dos ombros, executado em pé com barra.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé, segure a barra na altura dos ombros com pegada pronada",
+      "Pegada ligeiramente mais larga que ombros",
+      "Core contraído, glúteos apertados",
+      "Empurre a barra verticalmente até extensão completa",
+      "Passe a cabeça por baixo da barra no topo",
+      "Desça controladamente até os ombros"
+    ],
+    "progressions": [
+      "Aumentar carga progressivamente",
+      "Push press (com auxílio das pernas)",
+      "Strict press com pausa"
+    ],
+    "regressions": [
+      "Desenvolvimento sentado",
+      "Desenvolvimento com halteres",
+      "Desenvolvimento na máquina"
+    ],
+    "tips": [
+      "Mantenha core contraído para proteger a lombar",
+      "Cabeça passa por baixo da barra no topo",
+      "Não arque demais a lombar",
+      "Aperte glúteos para estabilidade"
+    ],
+    "commonMistakes": [
+      "Arquear excessivamente a lombar",
+      "Não passar a cabeça por baixo da barra",
+      "Usar impulso das pernas (no strict press)",
+      "Amplitude incompleta"
+    ],
+    "notes": "Um dos exercícios mais efetivos para força de ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=desenvolvimento+militar+barra+overhead+press",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento com Halteres Sentado",
+    "description": "Desenvolvimento de ombros sentado com halteres para trabalho bilateral.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente em banco com encosto a 90° ou sem encosto",
+      "Segure halteres na altura dos ombros",
+      "Palmas para frente, cotovelos abaixo dos punhos",
+      "Empurre os halteres para cima",
+      "Aproxime levemente no topo sem bater",
+      "Desça até posição inicial controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Desenvolvimento alternado",
+      "Desenvolvimento Arnold"
+    ],
+    "regressions": [
+      "Halteres mais leves",
+      "Desenvolvimento na máquina",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Banco a 90° dá mais suporte",
+      "Sem encosto trabalha mais estabilizadores",
+      "Não bata os halteres no topo",
+      "Mantenha core contraído"
+    ],
+    "commonMistakes": [
+      "Arquear a lombar",
+      "Bater halteres no topo",
+      "Cotovelos muito abertos ou fechados",
+      "Usar impulso"
+    ],
+    "notes": "Exercício versátil e seguro para desenvolvimento de ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=desenvolvimento+halteres+sentado",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento Arnold",
+    "description": "Desenvolvimento com rotação dos halteres, popularizado por Arnold Schwarzenegger.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente com halteres à frente dos ombros, palmas para você",
+      "Inicie o movimento abrindo os cotovelos",
+      "Rotacione os halteres enquanto empurra para cima",
+      "No topo, palmas viradas para frente",
+      "Desça revertendo a rotação",
+      "Termine com palmas para você novamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé",
+      "Adicionar pausa no topo"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Desenvolvimento tradicional",
+      "Fazer mais lento"
+    ],
+    "tips": [
+      "Maior tempo sob tensão que desenvolvimento tradicional",
+      "Rotação trabalha todas as cabeças do deltoide",
+      "Movimento fluido e controlado",
+      "Use carga menor que no tradicional"
+    ],
+    "commonMistakes": [
+      "Rotação incompleta",
+      "Carga muito pesada",
+      "Movimento muito rápido",
+      "Perder controle da rotação"
+    ],
+    "notes": "Criado por Arnold para trabalhar mais fibras do deltoide.",
+    "videoUrl": "https://www.youtube.com/results?search_query=arnold+press+desenvolvimento",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento na Máquina",
+    "description": "Desenvolvimento de ombros em máquina guiada para movimento seguro.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o banco para posição adequada",
+      "Sente com costas apoiadas",
+      "Segure as manoplas na altura dos ombros",
+      "Empurre para cima até extensão",
+      "Não trave completamente os cotovelos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Progredir para pesos livres"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Usar assistência se disponível"
+    ],
+    "tips": [
+      "Movimento guiado é mais seguro",
+      "Excelente para iniciantes",
+      "Bom para treinar até a falha",
+      "Ajuste bem o banco antes"
+    ],
+    "commonMistakes": [
+      "Posição incorreta no banco",
+      "Travar cotovelos",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Ótima opção para aprender o padrão de movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=shoulder+press+machine",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento no Smith",
+    "description": "Desenvolvimento de ombros no Smith Machine para movimento guiado.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione banco sob a barra do Smith",
+      "Sente com a barra à frente ou ligeiramente atrás",
+      "Destrave a barra na altura dos ombros",
+      "Empurre para cima até extensão",
+      "Desça controladamente",
+      "Trave ao finalizar"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Progredir para barra livre",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar máquina de ombro",
+      "Halteres leves"
+    ],
+    "tips": [
+      "Barra guiada elimina necessidade de estabilização",
+      "Bom para treinar pesado com segurança",
+      "Ajuste bem a posição do banco",
+      "Use travas de segurança"
+    ],
+    "commonMistakes": [
+      "Banco mal posicionado",
+      "Não usar travas",
+      "Arquear a lombar",
+      "Amplitude incompleta"
+    ],
+    "notes": "Permite focar na força sem preocupação com estabilização.",
+    "videoUrl": "https://www.youtube.com/results?search_query=smith+machine+shoulder+press",
+    "isPublic": true
+  },
+  {
+    "name": "Push Press",
+    "description": "Desenvolvimento com auxílio das pernas para mover mais carga.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Quadriceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé com barra na posição de rack frontal",
+      "Flexione levemente joelhos e quadril (dip)",
+      "Explosivamente estenda as pernas",
+      "Use o momentum para ajudar a empurrar a barra",
+      "Finalize com braços estendidos",
+      "Desça controladamente aos ombros"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Push jerk (receber com flexão)",
+      "Split jerk"
+    ],
+    "regressions": [
+      "Strict press",
+      "Push press com halteres",
+      "Reduzir carga"
+    ],
+    "tips": [
+      "Permite cargas maiores que strict press",
+      "O dip deve ser rápido e controlado",
+      "Explosão vem das pernas",
+      "Excelente para potência"
+    ],
+    "commonMistakes": [
+      "Dip muito profundo",
+      "Perder posição do tronco",
+      "Não usar explosão adequada",
+      "Descer de forma descontrolada"
+    ],
+    "notes": "Movimento funcional que desenvolve potência de todo o corpo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=push+press+barbell",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral com Halteres",
+    "description": "Exercício de isolamento para o deltoide lateral, criando largura nos ombros.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé ou sentado, halteres ao lado do corpo",
+      "Cotovelos levemente flexionados",
+      "Eleve os braços lateralmente até altura dos ombros",
+      "Mantenha a leve flexão dos cotovelos constante",
+      "Pause brevemente no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga gradualmente",
+      "Elevação lateral inclinada",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Halteres mais leves",
+      "Elevação lateral no cabo",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Cotovelos sempre levemente flexionados",
+      "Não balance o corpo",
+      "Controle a descida",
+      "Pense em derramar água de um copo"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Elevar muito alto (trapézio assume)",
+      "Cotovelos muito flexionados",
+      "Descer muito rápido"
+    ],
+    "notes": "Principal exercício para desenvolver largura dos ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=elevação+lateral+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral no Cabo",
+    "description": "Elevação lateral usando cabo para tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa, fique ao lado da máquina",
+      "Segure a manopla com a mão oposta (cabo cruza o corpo)",
+      "Braço levemente flexionado",
+      "Eleve lateralmente até altura do ombro",
+      "Desça controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer bilateral simultaneamente",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Elevação com halter",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Tensão constante durante todo movimento",
+      "Excelente conexão mente-músculo",
+      "Cabo atrás ou na frente do corpo",
+      "Ângulo diferente dos halteres"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Elevar demais",
+      "Amplitude incompleta",
+      "Perder postura"
+    ],
+    "notes": "A tensão do cabo é constante, diferente dos halteres.",
+    "videoUrl": "https://www.youtube.com/results?search_query=elevação+lateral+cabo+cable+lateral+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral na Máquina",
+    "description": "Elevação lateral em máquina específica para isolamento do deltoide lateral.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina e ajuste a altura",
+      "Braços contra os apoios",
+      "Eleve os braços até altura dos ombros",
+      "Contraia no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Elevação com halter leve"
+    ],
+    "tips": [
+      "Máquina guia o movimento",
+      "Boa para treinar até a falha",
+      "Elimina trapaça",
+      "Foco na contração"
+    ],
+    "commonMistakes": [
+      "Posição incorreta no banco",
+      "Usar impulso",
+      "Elevar demais",
+      "Amplitude incompleta"
+    ],
+    "notes": "Isolamento perfeito do deltoide lateral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lateral+raise+machine",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Lateral Inclinada",
+    "description": "Elevação lateral deitado em banco inclinado para maior alongamento.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de lado em banco inclinado (45-60°)",
+      "Segure halter com o braço de cima",
+      "Braço pendendo em direção ao chão",
+      "Eleve lateralmente até altura do ombro ou acima",
+      "Desça controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Maior inclinação",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor inclinação",
+      "Elevação tradicional"
+    ],
+    "tips": [
+      "Maior amplitude que elevação em pé",
+      "Trabalha o deltoide de ângulo diferente",
+      "Elimina impulso",
+      "Excelente variação"
+    ],
+    "commonMistakes": [
+      "Carga muito pesada",
+      "Amplitude insuficiente",
+      "Usar impulso do corpo",
+      "Não controlar a descida"
+    ],
+    "notes": "Variação que trabalha o deltoide em alongamento maior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=incline+lateral+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Frontal com Halteres",
+    "description": "Exercício de isolamento para o deltoide anterior.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Chest"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé, halteres à frente das coxas",
+      "Palmas para trás ou para dentro (neutra)",
+      "Eleve um ou ambos os braços à frente",
+      "Suba até altura dos ombros ou ligeiramente acima",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer alternado",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Elevação frontal no cabo",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Deltoide anterior já trabalha muito em supino",
+      "Não é prioridade para a maioria",
+      "Mantenha cotovelos levemente flexionados",
+      "Não balance o corpo"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Elevar muito alto",
+      "Cotovelos muito flexionados",
+      "Arquear a lombar"
+    ],
+    "notes": "Geralmente menos necessário pois supino já trabalha deltoide anterior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=elevação+frontal+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Frontal com Barra",
+    "description": "Elevação frontal bilateral usando barra reta.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Chest"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé, segure a barra à frente das coxas",
+      "Pegada na largura dos ombros ou mais estreita",
+      "Braços levemente flexionados",
+      "Eleve a barra até altura dos ombros",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Elevação frontal com anilha",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Bilateral força simetria",
+      "Não eleve muito acima dos ombros",
+      "Mantenha core contraído",
+      "Pode usar barra EZ"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Arquear lombar",
+      "Elevar muito alto",
+      "Cotovelos travados"
+    ],
+    "notes": "Trabalho bilateral do deltoide anterior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=elevação+frontal+barra",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Frontal no Cabo",
+    "description": "Elevação frontal usando cabo para tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Chest"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa, de costas para a máquina",
+      "Segure a manopla ou barra",
+      "Eleve à frente até altura dos ombros",
+      "Mantenha braços levemente flexionados",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Tensão constante do cabo",
+      "Pode fazer com várias pegadas",
+      "Não use impulso",
+      "Controle a descida"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Amplitude excessiva",
+      "Perder postura",
+      "Movimento descontrolado"
+    ],
+    "notes": "Alternativa com tensão constante aos halteres.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+front+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Frontal com Anilha",
+    "description": "Elevação frontal segurando uma anilha com ambas as mãos.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Chest", "Core"],
+    "equipment": "Plate",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé, segure uma anilha com ambas as mãos",
+      "Braços estendidos à frente das coxas",
+      "Eleve a anilha até altura dos ombros ou acima da cabeça",
+      "Mantenha braços estendidos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Anilha mais pesada",
+      "Elevar acima da cabeça",
+      "Adicionar rotação"
+    ],
+    "regressions": [
+      "Anilha mais leve",
+      "Elevar só até ombros",
+      "Usar halteres"
+    ],
+    "tips": [
+      "Trabalha deltoide frontal e core",
+      "Pode fazer steering wheel (rotação)",
+      "Mantenha core contraído",
+      "Movimento controlado"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Arquear lombar ao subir",
+      "Anilha muito pesada",
+      "Movimentos bruscos"
+    ],
+    "notes": "Variação funcional que também trabalha o core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=plate+front+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Posterior com Halteres (Crucifixo Inverso)",
+    "description": "Exercício para deltoide posterior, executado inclinado.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Incline o tronco para frente (quase paralelo ao chão)",
+      "Halteres pendendo com cotovelos levemente flexionados",
+      "Eleve os braços lateralmente",
+      "Mantenha flexão constante nos cotovelos",
+      "Suba até altura dos ombros",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em banco inclinado (chest supported)",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Peck deck invertido",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Deltoide posterior frequentemente negligenciado",
+      "Importante para equilíbrio do ombro",
+      "Não use impulso do corpo",
+      "Cotovelos mantêm flexão constante"
+    ],
+    "commonMistakes": [
+      "Subir o tronco ao elevar",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Cotovelos muito flexionados"
+    ],
+    "notes": "Fundamental para saúde e estética do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=elevação+posterior+crucifixo+inverso+rear+delt+fly",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Posterior no Cabo",
+    "description": "Elevação posterior usando cabo cruzado para tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polias na altura do peito",
+      "Cruze os cabos e segure as manoplas opostas",
+      "Fique no centro do crossover",
+      "Puxe os cabos para trás abrindo os braços",
+      "Cotovelos levemente flexionados",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer inclinado",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Peck deck invertido",
+      "Halteres inclinado"
+    ],
+    "tips": [
+      "Tensão constante do cabo",
+      "Excelente conexão mente-músculo",
+      "Pode variar altura das polias",
+      "Controle total"
+    ],
+    "commonMistakes": [
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Flexionar demais cotovelos",
+      "Perder postura"
+    ],
+    "notes": "Cabo oferece tensão constante em toda amplitude.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+rear+delt+fly+posterior",
+    "isPublic": true
+  },
+  {
+    "name": "Peck Deck Invertido (Reverse Fly Machine)",
+    "description": "Exercício para deltoide posterior na máquina peck deck invertida.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente de frente para a máquina (peito no apoio)",
+      "Segure as manoplas com braços à frente",
+      "Abra os braços para trás",
+      "Contraia deltoide posterior e romboides",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Face pulls"
+    ],
+    "tips": [
+      "Máquina isola bem o deltoide posterior",
+      "Ajuste a altura do banco",
+      "Não use impulso",
+      "Foco na contração"
+    ],
+    "commonMistakes": [
+      "Levantar do apoio",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Posição errada no banco"
+    ],
+    "notes": "Excelente para isolar o deltoide posterior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=reverse+fly+machine+peck+deck",
+    "isPublic": true
+  },
+  {
+    "name": "Elevação Posterior no Banco Inclinado",
+    "description": "Elevação posterior deitado de bruços em banco inclinado para eliminar impulso.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços em banco inclinado (30-45°)",
+      "Halteres pendendo com cotovelos levemente flexionados",
+      "Eleve os braços lateralmente",
+      "Suba até altura dos ombros",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Maior inclinação",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor inclinação",
+      "Peck deck invertido"
+    ],
+    "tips": [
+      "Elimina trapaça completamente",
+      "Excelente isolamento",
+      "Use cargas moderadas",
+      "Foco na conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Levantar o peito do banco",
+      "Usar impulso",
+      "Carga muito pesada",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Versão mais estrita da elevação posterior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=chest+supported+rear+delt+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Face Pull",
+    "description": "Puxada para o rosto no cabo para deltoide posterior e rotadores externos.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Back"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com corda",
+      "Segure a corda com pegada neutra",
+      "Puxe em direção ao rosto separando as mãos",
+      "Cotovelos altos, na altura dos ombros",
+      "Rotacione externamente no final",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Face pull com pausa",
+      "Face pull com banda (alta frequência)"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar banda elástica",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Excelente para saúde do ombro",
+      "Pode fazer com alta frequência",
+      "Cotovelos sempre altos",
+      "Rotacione externamente no fim"
+    ],
+    "commonMistakes": [
+      "Cotovelos muito baixos",
+      "Puxar para o pescoço",
+      "Não rotacionar externamente",
+      "Usar muito peso"
+    ],
+    "notes": "Um dos melhores exercícios para saúde e postura do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=face+pull+execução+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Lu Raises",
+    "description": "Elevação lateral com rotação para cima, popularizada pelo halterofilista Lu Xiaojun.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé com halteres leves ao lado",
+      "Eleve lateralmente com polegares para cima",
+      "Continue elevando acima da cabeça",
+      "Braços quase estendidos durante todo movimento",
+      "Desça pelo mesmo caminho"
+    ],
+    "progressions": [
+      "Aumentar carga gradualmente",
+      "Adicionar pausa no topo",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Elevar só até ombros",
+      "Halteres mais leves",
+      "Elevação lateral tradicional"
+    ],
+    "tips": [
+      "Use peso muito leve",
+      "Polegares apontam para cima",
+      "Excelente para manguito rotador",
+      "Popular entre halterofilistas"
+    ],
+    "commonMistakes": [
+      "Usar peso muito pesado",
+      "Polegares para baixo",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Popularizada por Lu Xiaojun para aquecimento e saúde do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lu+raises+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Around the World (Ombros)",
+    "description": "Movimento circular com halteres ao redor da cabeça para trabalho completo do deltoide.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé ou sentado com halteres leves",
+      "Comece com braços ao lado do corpo",
+      "Eleve lateralmente e continue para cima da cabeça",
+      "Desça pela frente",
+      "Complete o círculo voltando à posição inicial",
+      "Pode fazer no sentido inverso também"
+    ],
+    "progressions": [
+      "Aumentar amplitude",
+      "Halteres ligeiramente mais pesados",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Halteres mais leves",
+      "Meio círculo apenas",
+      "Movimentos separados"
+    ],
+    "tips": [
+      "Use peso muito leve",
+      "Movimento fluido e controlado",
+      "Trabalha todas as cabeças do deltoide",
+      "Bom para aquecimento ou finalização"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Movimentos bruscos",
+      "Perder controle",
+      "Arquear a lombar"
+    ],
+    "notes": "Exercício de mobilidade e ativação para o deltoide completo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=around+the+world+shoulders",
+    "isPublic": true
+  },
+  {
+    "name": "Rotação Externa com Halter Deitado",
+    "description": "Exercício para fortalecimento dos rotadores externos do ombro.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de lado com halter leve na mão de cima",
+      "Cotovelo flexionado a 90°, apoiado na cintura",
+      "Antebraço à frente do corpo",
+      "Rotacione o ombro levantando o halter",
+      "Mantenha cotovelo junto ao corpo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga gradualmente",
+      "Fazer com cabo",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Sem peso (apenas movimento)",
+      "Usar banda elástica",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Fundamental para saúde do manguito rotador",
+      "Use peso muito leve",
+      "Movimento lento e controlado",
+      "Pode fazer como aquecimento"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Cotovelo saindo do corpo",
+      "Movimento muito rápido",
+      "Usar impulso"
+    ],
+    "notes": "Exercício preventivo e de reabilitação para o ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=external+rotation+shoulder+deitado",
+    "isPublic": true
+  },
+  {
+    "name": "Rotação Externa no Cabo",
+    "description": "Rotação externa do ombro usando cabo para tensão constante.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia na altura do cotovelo",
+      "Fique de lado para a máquina",
+      "Cotovelo junto ao corpo, flexionado a 90°",
+      "Segure a manopla com a mão mais distante",
+      "Rotacione para fora mantendo cotovelo fixo",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga levemente",
+      "Adicionar pausa",
+      "Fazer com braço elevado a 90°"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar banda",
+      "Fazer deitado"
+    ],
+    "tips": [
+      "Tensão constante do cabo",
+      "Cotovelo SEMPRE junto ao corpo",
+      "Pode colocar toalha entre cotovelo e corpo",
+      "Excelente para manguito rotador"
+    ],
+    "commonMistakes": [
+      "Cotovelo afastando do corpo",
+      "Usar peso muito pesado",
+      "Movimentos rápidos",
+      "Amplitude excessiva"
+    ],
+    "notes": "Essencial para prevenção de lesões no ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+external+rotation+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Rotação Interna no Cabo",
+    "description": "Rotação interna do ombro usando cabo para equilíbrio muscular.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Rehabilitation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia na altura do cotovelo",
+      "Fique de lado para a máquina",
+      "Cotovelo junto ao corpo, flexionado a 90°",
+      "Segure a manopla com a mão mais próxima",
+      "Rotacione para dentro em direção ao abdômen",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga levemente",
+      "Adicionar pausa",
+      "Variações de ângulo"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar banda",
+      "Fazer deitado"
+    ],
+    "tips": [
+      "Complementa a rotação externa",
+      "Cotovelo fixo junto ao corpo",
+      "Peso leve",
+      "Equilíbrio entre rotadores"
+    ],
+    "commonMistakes": [
+      "Cotovelo saindo do corpo",
+      "Peso muito pesado",
+      "Movimentos bruscos",
+      "Negligenciar rotação externa"
+    ],
+    "notes": "Trabalha os rotadores internos para equilíbrio do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+internal+rotation+shoulder",
+    "isPublic": true
+  },
+  {
+    "name": "Desenvolvimento Unilateral com Halter",
+    "description": "Desenvolvimento de ombro um braço de cada vez para correção de assimetrias.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sentado ou em pé, halter em um ombro",
+      "Outro braço pode segurar banco ou ficar ao lado",
+      "Empurre o halter verticalmente",
+      "Estabilize o core para não pender",
+      "Desça controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer sentado com apoio",
+      "Bilateral primeiro"
+    ],
+    "tips": [
+      "Exige muito do core para estabilizar",
+      "Identifica diferenças de força",
+      "Faça igual número de reps dos dois lados",
+      "Excelente para corrigir assimetrias"
+    ],
+    "commonMistakes": [
+      "Pender para o lado",
+      "Não fazer igual dos lados",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Trabalha estabilização além do deltoide.",
+    "videoUrl": "https://www.youtube.com/results?search_query=single+arm+shoulder+press",
+    "isPublic": true
+  },
+  {
+    "name": "Landmine Press para Ombros",
+    "description": "Press no landmine para trabalho do deltoide em ângulo favorável.",
+    "muscleGroup": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Chest", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Barra encaixada no landmine",
+      "Segure a ponta com uma ou duas mãos",
+      "Posicione na altura do ombro",
+      "Empurre para cima e para frente",
+      "Estenda o braço completamente",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Fazer ajoelhado"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer bilateral",
+      "Desenvolvimento tradicional"
+    ],
+    "tips": [
+      "Ângulo favorável para ombros sensíveis",
+      "Menos estresse na articulação",
+      "Pode fazer em pé ou ajoelhado",
+      "Boa alternativa ao overhead press"
+    ],
+    "commonMistakes": [
+      "Posição muito longe da barra",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Não estabilizar core"
+    ],
+    "notes": "Excelente para quem tem desconforto com press tradicional.",
+    "videoUrl": "https://www.youtube.com/results?search_query=landmine+press+shoulder",
+    "isPublic": true
+  }
+]

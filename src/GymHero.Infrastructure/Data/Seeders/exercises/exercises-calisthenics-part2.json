@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Pull-Up",
+    "description": "Pendurado na barra com pegada pronada (palmas para frente), puxe o corpo ate o queixo passar a barra.",
+    "musclesWorked": ["Back", "Biceps", "Shoulders", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pull-up.png"
+  },
+  {
+    "name": "Chin-Up",
+    "description": "Pendurado na barra com pegada supinada (palmas para voce), puxe o corpo ate o queixo passar a barra.",
+    "musclesWorked": ["Biceps", "Back", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chin-up.png"
+  },
+  {
+    "name": "Neutral Grip Pull-Up",
+    "description": "Pull-up com pegada neutra (palmas voltadas uma para outra). Posicao mais natural para ombros.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/neutral-grip-pull-up.png"
+  },
+  {
+    "name": "Wide Grip Pull-Up",
+    "description": "Pull-up com pegada mais larga que largura dos ombros. Maior enfase no latissimo dorsal.",
+    "musclesWorked": ["Back", "Biceps", "Shoulders"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wide-grip-pull-up.png"
+  },
+  {
+    "name": "Close Grip Pull-Up",
+    "description": "Pull-up com maos proximas. Maior enfase em biceps e parte central das costas.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/close-grip-pull-up.png"
+  },
+  {
+    "name": "Commando Pull-Up",
+    "description": "Pull-up com maos na barra uma atras da outra, alternando o lado que a cabeca passa.",
+    "musclesWorked": ["Back", "Biceps", "Core", "Obliques"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/commando-pull-up.png"
+  },
+  {
+    "name": "Around the World Pull-Up",
+    "description": "Pull-up fazendo um arco lateral, subindo por um lado e descendo pelo outro.",
+    "musclesWorked": ["Back", "Biceps", "Core", "Shoulders"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/around-world-pull-up.png"
+  },
+  {
+    "name": "Archer Pull-Up",
+    "description": "Pull-up puxando para um lado enquanto o outro braco se estende. Progressao para one arm.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/archer-pull-up.png"
+  },
+  {
+    "name": "Typewriter Pull-Up",
+    "description": "No topo do pull-up, mova lateralmente de um lado ao outro mantendo queixo acima da barra.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/typewriter-pull-up.png"
+  },
+  {
+    "name": "One Arm Pull-Up",
+    "description": "Pull-up executado com apenas um braco. Requer forca extrema e anos de treino.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/one-arm-pull-up.png"
+  },
+  {
+    "name": "Muscle-Up",
+    "description": "Pull-up explosivo que transiciona para dip acima da barra. Movimento avancado completo.",
+    "musclesWorked": ["Back", "Chest", "Triceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/muscle-up.png"
+  },
+  {
+    "name": "Kipping Pull-Up",
+    "description": "Pull-up usando momentum do quadril para auxiliar. Comum em CrossFit.",
+    "musclesWorked": ["Back", "Biceps", "Core", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/kipping-pull-up.png"
+  },
+  {
+    "name": "Butterfly Pull-Up",
+    "description": "Pull-up com movimento circular continuo para maxima eficiencia. Tecnica de CrossFit.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/butterfly-pull-up.png"
+  },
+  {
+    "name": "Negative Pull-Up",
+    "description": "Pule para o topo e desça lentamente em 5+ segundos. Progressao para pull-up completo.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/negative-pull-up.png"
+  },
+  {
+    "name": "Assisted Pull-Up Band",
+    "description": "Pull-up com band elastica nos pes para assistencia. Progressao para pull-up sem banda.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar", "Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/assisted-pull-up-band.png"
+  },
+  {
+    "name": "Dead Hang",
+    "description": "Fique pendurado na barra com bracos estendidos. Treina grip e descompressao da coluna.",
+    "musclesWorked": ["Forearms", "Shoulders", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/dead-hang.png"
+  },
+  {
+    "name": "Active Hang",
+    "description": "Pendurado com escapulas deprimidas (ombros para baixo, longe das orelhas). Ativa costas.",
+    "musclesWorked": ["Back", "Shoulders", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/active-hang.png"
+  },
+  {
+    "name": "Scapular Pull-Up",
+    "description": "Do dead hang, puxe as escapulas para baixo sem dobrar cotovelos. Ativacao de escapula.",
+    "musclesWorked": ["Back", "Shoulders"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/scapular-pull-up.png"
+  },
+  {
+    "name": "L-Sit Pull-Up",
+    "description": "Pull-up mantendo pernas estendidas a frente do corpo em L. Extremamente desafiador para core.",
+    "musclesWorked": ["Back", "Biceps", "Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/l-sit-pull-up.png"
+  },
+  {
+    "name": "Towel Pull-Up",
+    "description": "Pull-up segurando toalhas penduradas na barra. Trabalho intenso de grip.",
+    "musclesWorked": ["Back", "Biceps", "Forearms"],
+    "equipment": ["Pull-Up Bar", "Towel"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/towel-pull-up.png"
+  },
+  {
+    "name": "Clapping Pull-Up",
+    "description": "Pull-up explosivo onde voce solta a barra e bate palma antes de pegar de novo.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/clapping-pull-up.png"
+  },
+  {
+    "name": "Hanging Knee Raise",
+    "description": "Pendurado na barra, eleve os joelhos ate o peito contraindo abdomen. Desça controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hanging-knee-raise.png"
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "description": "Pendurado na barra, eleve as pernas retas ate a horizontal ou acima. Core intenso.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hanging-leg-raise.png"
+  },
+  {
+    "name": "Toes to Bar",
+    "description": "Pendurado, eleve as pernas retas ate tocar os pes na barra. Amplitude maxima.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Back"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/toes-to-bar.png"
+  },
+  {
+    "name": "Windshield Wiper",
+    "description": "Com pernas elevadas ate a barra, rotacione de lado a lado como limpador de para-brisa.",
+    "musclesWorked": ["Obliques", "Abs", "Core"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/windshield-wiper.png"
+  },
+  {
+    "name": "Skin the Cat",
+    "description": "Pendurado, traga pernas por cima e por tras ate bracos estarem atras do corpo. Retorne.",
+    "musclesWorked": ["Shoulders", "Core", "Back"],
+    "equipment": ["Pull-Up Bar", "Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/skin-the-cat.png"
+  },
+  {
+    "name": "Front Lever Raise",
+    "description": "Do dead hang, eleve o corpo horizontalmente com bracos retos. Movimento avancado.",
+    "musclesWorked": ["Back", "Core", "Shoulders"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/front-lever-raise.png"
+  },
+  {
+    "name": "Front Lever Hold",
+    "description": "Mantenha o corpo horizontal pendurado na barra com bracos retos. Skill avancado.",
+    "musclesWorked": ["Back", "Core", "Shoulders"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/front-lever-hold.png"
+  },
+  {
+    "name": "Inverted Row",
+    "description": "Deitado sob uma barra baixa, puxe o peito ate a barra. Versao horizontal do pull-up.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Low Bar"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/inverted-row.png"
+  },
+  {
+    "name": "Feet Elevated Inverted Row",
+    "description": "Inverted row com pes elevados em superficie. Aumenta a dificuldade e carga.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Low Bar", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/feet-elevated-inverted-row.png"
+  }
+]

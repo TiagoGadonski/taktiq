@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Battle Ropes Alternating Waves",
+    "description": "Crie ondas alternando os bracos rapidamente. Mantenha core contraido e joelhos levemente flexionados.",
+    "musclesWorked": ["Shoulders", "Core", "Back", "Biceps"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/battle-ropes-alternating-waves.png"
+  },
+  {
+    "name": "Battle Ropes Double Waves",
+    "description": "Crie ondas movendo ambos os bracos juntos para cima e para baixo simultaneamente.",
+    "musclesWorked": ["Shoulders", "Core", "Triceps"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/battle-ropes-double-waves.png"
+  },
+  {
+    "name": "Battle Ropes Slams",
+    "description": "Levante as cordas acima da cabeca e bata no chao com forca. Potencia de corpo inteiro.",
+    "musclesWorked": ["Shoulders", "Core", "Back"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/battle-ropes-slams.png"
+  },
+  {
+    "name": "Battle Ropes In and Out Waves",
+    "description": "Abra e feche os bracos criando ondas laterais nas cordas. Trabalha peito e ombros.",
+    "musclesWorked": ["Chest", "Shoulders", "Core"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/battle-ropes-in-out-waves.png"
+  },
+  {
+    "name": "Battle Ropes Jumping Jacks",
+    "description": "Execute jumping jacks enquanto cria ondas com as battle ropes. Cardio total do corpo.",
+    "musclesWorked": ["Shoulders", "Core", "Quadriceps"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/battle-ropes-jumping-jacks.png"
+  },
+  {
+    "name": "Sled Push High Handles",
+    "description": "Empurre o sled com pegada alta, corpo mais ereto. Mais enfase em quadriceps.",
+    "musclesWorked": ["Quadriceps", "Core", "Glutes"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sled-push-high-handles.png"
+  },
+  {
+    "name": "Sled Push Low Handles",
+    "description": "Empurre o sled com pegada baixa, corpo inclinado. Mais potencia de drive.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core", "Calves"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sled-push-low-handles.png"
+  },
+  {
+    "name": "Sled Pull Facing",
+    "description": "Puxe o sled andando de frente para ele, usando cordas. Trabalho de costas e biceps.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sled-pull-facing.png"
+  },
+  {
+    "name": "Sled Pull Backward",
+    "description": "Arraste o sled andando para tras com cinto na cintura. Trabalha toda cadeia posterior.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Calves"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sled-pull-backward.png"
+  },
+  {
+    "name": "Sled Row",
+    "description": "Com corda no sled, reme puxando o sled em sua direcao repetidamente.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sled-row.png"
+  },
+  {
+    "name": "Burpee",
+    "description": "Do em pe, agache, coloque maos no chao, salte para prancha, flexao, salte de volta e pule vertical.",
+    "musclesWorked": ["Chest", "Core", "Quadriceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/burpee.png"
+  },
+  {
+    "name": "Burpee with Push-Up",
+    "description": "Burpee incluindo uma flexao completa antes de saltar de volta. Aumenta trabalho de peito.",
+    "musclesWorked": ["Chest", "Core", "Quadriceps", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/burpee-push-up.png"
+  },
+  {
+    "name": "Burpee Box Jump",
+    "description": "Execute um burpee e termine com salto para cima de uma caixa. Extremamente desafiador.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Chest", "Core"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/burpee-box-jump.png"
+  },
+  {
+    "name": "Burpee Pull-Up",
+    "description": "Execute um burpee sob a barra e termine com uma barra fixa. Combinacao intensa.",
+    "musclesWorked": ["Back", "Chest", "Core", "Quadriceps"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/burpee-pull-up.png"
+  },
+  {
+    "name": "Man Maker",
+    "description": "Com halteres: push-up, renegade row de cada lado, clean para squat, thruster. Corpo inteiro.",
+    "musclesWorked": ["Chest", "Back", "Shoulders", "Quadriceps", "Core"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/man-maker.png"
+  },
+  {
+    "name": "Devil Press",
+    "description": "Burpee com halteres seguido de snatch duplo ou swing para overhead. Intenso e completo.",
+    "musclesWorked": ["Shoulders", "Chest", "Core", "Quadriceps"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/devil-press.png"
+  },
+  {
+    "name": "Box Step-Up",
+    "description": "Suba em uma caixa com um pe, estenda a perna e desça controladamente. Alterne as pernas.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/box-step-up.png"
+  },
+  {
+    "name": "Weighted Box Step-Up",
+    "description": "Step-up segurando halteres ou com barra nas costas. Adiciona resistencia ao movimento.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Plyo Box", "Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/weighted-box-step-up.png"
+  },
+  {
+    "name": "Lateral Box Step-Up",
+    "description": "Step-up lateral na caixa. Enfatiza abdutores e trabalha plano lateral de movimento.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/lateral-box-step-up.png"
+  },
+  {
+    "name": "Jump Squat",
+    "description": "Agachamento seguido de salto explosivo. Aterrisse suavemente e repita imediatamente.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/jump-squat.png"
+  },
+  {
+    "name": "Tuck Jump",
+    "description": "Salte e traga os joelhos ao peito no ar. Aterrisse e repita. Potencia explosiva.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/tuck-jump.png"
+  },
+  {
+    "name": "Broad Jump",
+    "description": "Salto horizontal para frente com aterrissagem controlada. Treina potencia linear.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/broad-jump.png"
+  },
+  {
+    "name": "Lateral Bound",
+    "description": "Salte lateralmente de um pe para o outro, aterrissando em uma perna so. Treina potencia lateral.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/lateral-bound.png"
+  },
+  {
+    "name": "Depth Jump",
+    "description": "Pule de uma caixa, aterrisse e imediatamente salte o mais alto possivel. Treina reatividade.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Advanced",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/depth-jump.png"
+  },
+  {
+    "name": "Split Jump",
+    "description": "Em posicao de afundo, salte e troque as pernas no ar. Aterrisse em afundo oposto.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/split-jump.png"
+  },
+  {
+    "name": "Skater Jump",
+    "description": "Salte lateralmente de uma perna para outra como um patinador. Trabalha estabilidade e potencia.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/skater-jump.png"
+  },
+  {
+    "name": "Single Leg Hop",
+    "description": "Salte para frente em uma perna so repetidamente. Treina potencia e equilibrio unilateral.",
+    "musclesWorked": ["Quadriceps", "Calves", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/single-leg-hop.png"
+  },
+  {
+    "name": "Clapping Push-Up",
+    "description": "Push-up explosivo onde voce bate palma no ar antes de aterrissar. Potencia de empurrao.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/clapping-push-up.png"
+  },
+  {
+    "name": "Plyo Push-Up",
+    "description": "Push-up onde as maos saem do chao no topo do movimento. Versao menos intensa que clapping.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/functional/plyo-push-up.png"
+  },
+  {
+    "name": "Sprawl",
+    "description": "De pe, caia rapidamente para prancha baixa com quadris no chao, depois levante explosivamente.",
+    "musclesWorked": ["Core", "Hip Flexors", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/sprawl.png"
+  }
+]

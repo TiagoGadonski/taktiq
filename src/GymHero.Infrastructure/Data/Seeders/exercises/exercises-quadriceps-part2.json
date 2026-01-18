@@ -1,0 +1,893 @@
+[
+  {
+    "name": "Agachamento Sumo",
+    "description": "Agachamento com pés afastados e dedos apontados para fora.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Adductors", "Glutes", "Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione os pés bem afastados (1.5-2x largura dos ombros)",
+      "Dedos dos pés apontados para fora (45 graus ou mais)",
+      "Barra nas costas como no agachamento tradicional",
+      "Desça mantendo os joelhos na direção dos dedos",
+      "Mantenha o tronco mais vertical que no agachamento tradicional",
+      "Empurre para subir"
+    ],
+    "progressions": ["Agachamento Sumo com Mais Carga"],
+    "regressions": ["Agachamento Sumo com Peso Corporal"],
+    "tips": [
+      "Trabalha mais os adutores que o agachamento tradicional",
+      "Requer boa mobilidade de quadril",
+      "Os joelhos devem seguir a direção dos pés"
+    ],
+    "commonMistakes": [
+      "Joelhos cedendo para dentro",
+      "Pés não virados suficientemente para fora",
+      "Tronco inclinando demais"
+    ],
+    "notes": "Variação que enfatiza adutores e permite tronco mais vertical.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Overhead",
+    "description": "Agachamento com barra mantida acima da cabeça para mobilidade total.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Core", "Shoulders", "Glutes"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Leve a barra acima da cabeça com pegada larga (snatch grip)",
+      "Mantenha os braços estendidos e travados",
+      "Execute o agachamento mantendo a barra acima",
+      "Mantenha o tronco o mais vertical possível",
+      "Desça até a profundidade máxima que conseguir",
+      "Empurre para subir mantendo a barra estável"
+    ],
+    "progressions": ["Overhead Squat com Mais Carga"],
+    "regressions": ["Overhead Squat com Bastão"],
+    "tips": [
+      "Requer excelente mobilidade de ombros, quadril e tornozelos",
+      "Exercício técnico do levantamento olímpico",
+      "Comece com bastão ou barra vazia"
+    ],
+    "commonMistakes": [
+      "Braços flexionando durante o movimento",
+      "Barra indo para frente",
+      "Tronco inclinando demais"
+    ],
+    "notes": "Exercício de mobilidade e técnica além de força.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento com Kettlebell",
+    "description": "Agachamento goblet usando kettlebell.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Kettlebell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure o kettlebell pelos 'chifres' junto ao peito",
+      "Pés na largura dos ombros ou mais afastados",
+      "Execute o agachamento mantendo o peso próximo",
+      "Desça até os cotovelos tocarem as coxas",
+      "Mantenha o peito erguido",
+      "Empurre para subir"
+    ],
+    "progressions": ["Agachamento com Dois Kettlebells"],
+    "regressions": ["Agachamento com Peso Corporal"],
+    "tips": [
+      "Similar ao goblet squat com halter",
+      "A pegada nos chifres é confortável",
+      "Ideal para treinos em casa"
+    ],
+    "commonMistakes": [
+      "Deixar o peso se afastar do corpo",
+      "Não descer suficientemente",
+      "Tronco inclinando para frente"
+    ],
+    "notes": "Alternativa prática ao agachamento goblet.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Double Kettlebell",
+    "description": "Agachamento com dois kettlebells na posição de rack.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Core", "Shoulders", "Glutes"],
+    "equipment": "Kettlebell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Limpe dois kettlebells para a posição de rack (peito)",
+      "Cotovelos junto ao corpo, kettlebells apoiados nos braços",
+      "Execute o agachamento mantendo a posição de rack",
+      "Mantenha o tronco ereto durante todo o movimento",
+      "Desça até profundidade adequada",
+      "Empurre para subir"
+    ],
+    "progressions": ["Double KB Squat com Mais Peso"],
+    "regressions": ["Kettlebell Goblet Squat"],
+    "tips": [
+      "Similar ao front squat mas com kettlebells",
+      "Excelente para trabalho de core",
+      "Requer boa técnica de clean"
+    ],
+    "commonMistakes": [
+      "Kettlebells mal posicionados no rack",
+      "Perder a posição durante o agachamento",
+      "Cotovelos caindo"
+    ],
+    "notes": "Variação versátil para treinos com kettlebells.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Pistol",
+    "description": "Agachamento unilateral com uma perna estendida à frente.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core", "Hamstrings"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé em uma perna",
+      "Estenda a outra perna à frente",
+      "Desça controladamente em uma perna só",
+      "Desça o mais baixo possível mantendo equilíbrio",
+      "A perna estendida fica paralela ao chão",
+      "Empurre para subir usando apenas uma perna"
+    ],
+    "progressions": ["Pistol com Peso"],
+    "regressions": ["Pistol Assistido", "Pistol para Caixa"],
+    "tips": [
+      "Requer excelente força, equilíbrio e mobilidade",
+      "Progrida com versões assistidas primeiro",
+      "Braços à frente ajudam no equilíbrio"
+    ],
+    "commonMistakes": [
+      "Calcanhar saindo do chão",
+      "Joelho cedendo para dentro",
+      "Perder o equilíbrio"
+    ],
+    "notes": "Um dos exercícios unilaterais mais desafiadores.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Pistol Assistido",
+    "description": "Pistol squat com assistência para aprender o movimento.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure em um suporte, TRX ou corda",
+      "Fique em pé em uma perna",
+      "Use o suporte para ajudar no equilíbrio e força",
+      "Desça em pistol usando assistência conforme necessário",
+      "Tente usar cada vez menos assistência",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Pistol Sem Assistência"],
+    "regressions": ["Agachamento Unilateral para Caixa"],
+    "tips": [
+      "Excelente progressão para o pistol completo",
+      "Reduz gradualmente a assistência",
+      "Permite praticar a amplitude completa"
+    ],
+    "commonMistakes": [
+      "Depender demais da assistência",
+      "Não progredir para menos assistência",
+      "Técnica inadequada por confiar no suporte"
+    ],
+    "notes": "Passo essencial na progressão para pistol squat.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Shrimp",
+    "description": "Agachamento unilateral com perna de trás flexionada.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé em uma perna",
+      "Flexione a outra perna atrás, segurando o tornozelo",
+      "Desça controladamente em uma perna só",
+      "O joelho da perna de trás toca o chão",
+      "Mantenha o tronco ereto",
+      "Empurre para subir"
+    ],
+    "progressions": ["Shrimp Squat com Peso"],
+    "regressions": ["Shrimp Squat Assistido"],
+    "tips": [
+      "Diferente do pistol - joelho vai ao chão",
+      "Requer boa flexibilidade de quadríceps",
+      "Comece com versões assistidas"
+    ],
+    "commonMistakes": [
+      "Não tocar o joelho no chão",
+      "Perder o equilíbrio",
+      "Soltar o tornozelo de trás"
+    ],
+    "notes": "Variação avançada de agachamento unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Split",
+    "description": "Agachamento em posição de afundo estacionário.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em posição de afundo com pés fixos",
+      "Segure halteres ao lado do corpo",
+      "Desça flexionando ambos os joelhos",
+      "O joelho de trás quase toca o chão",
+      "Empurre para subir mantendo os pés no lugar",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Split Squat Búlgaro"],
+    "regressions": ["Split Squat com Peso Corporal"],
+    "tips": [
+      "Mais estável que afundo com movimento",
+      "Permite focar na força sem preocupação com equilíbrio",
+      "Boa progressão para afundo búlgaro"
+    ],
+    "commonMistakes": [
+      "Posição muito estreita ou larga",
+      "Joelho da frente passando demais dos dedos",
+      "Tronco inclinando para frente"
+    ],
+    "notes": "Versão estável do afundo para desenvolvimento de força.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Vertical",
+    "description": "Prensa de pernas com plataforma vertical acima do corpo.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite na máquina com as costas no assento",
+      "Pés na plataforma vertical acima de você",
+      "Destrave e suporte a plataforma com as pernas",
+      "Flexione os joelhos trazendo a plataforma para baixo",
+      "Empurre para cima até quase a extensão",
+      "Mantenha a lombar em contato com o assento"
+    ],
+    "progressions": ["Leg Press Vertical com Mais Carga"],
+    "regressions": ["Leg Press 45 Graus"],
+    "tips": [
+      "Permite cargas muito pesadas",
+      "Atenção redobrada à segurança",
+      "Nunca trave os joelhos"
+    ],
+    "commonMistakes": [
+      "Travar os joelhos no topo",
+      "Tirar a lombar do assento",
+      "Descer demais levantando o quadril"
+    ],
+    "notes": "Variação que permite trabalhar com cargas muito elevadas.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Faixas Curtas",
+    "description": "Leg press com amplitude reduzida para trabalho específico.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se no leg press normalmente",
+      "Execute o movimento apenas na metade superior",
+      "Não flexione os joelhos além de 45-60 graus",
+      "Mantenha tensão constante sem travar",
+      "O foco é no trabalho de contração",
+      "Use carga mais pesada que no movimento completo"
+    ],
+    "progressions": ["Leg Press Amplitude Completa"],
+    "regressions": ["Leg Press com Menos Carga"],
+    "tips": [
+      "Trabalha a parte final da contração",
+      "Permite cargas maiores",
+      "Complementa o trabalho de amplitude completa"
+    ],
+    "commonMistakes": [
+      "Travar os joelhos",
+      "Usar como desculpa para não fazer amplitude completa",
+      "Carga excessiva"
+    ],
+    "notes": "Técnica para trabalho específico de uma faixa de movimento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Pés Juntos",
+    "description": "Leg press com pés próximos para maior ênfase em quadríceps.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": [],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione os pés juntos no centro baixo da plataforma",
+      "Execute o leg press normalmente",
+      "A posição dos pés enfatiza mais o quadríceps",
+      "Flexione até 90 graus ou mais",
+      "Empurre de volta sem travar os joelhos",
+      "Use carga menor que na posição normal"
+    ],
+    "progressions": ["Pés Juntos com Mais Carga"],
+    "regressions": ["Leg Press Pés Afastados"],
+    "tips": [
+      "Pés juntos e baixos = máximo quadríceps",
+      "Use menos carga que na posição padrão",
+      "Excelente para isolamento de quadríceps"
+    ],
+    "commonMistakes": [
+      "Usar mesma carga que posição normal",
+      "Joelhos cedendo para dentro",
+      "Não manter os pés no centro"
+    ],
+    "notes": "Variação de posicionamento para foco em quadríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Leg Press Pés Altos",
+    "description": "Leg press com pés na parte alta da plataforma para glúteos e posterior.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione os pés na parte superior da plataforma",
+      "Pés na largura dos ombros ou mais afastados",
+      "Execute o leg press normalmente",
+      "A posição alta trabalha mais glúteos e posterior",
+      "Flexione até 90 graus ou mais",
+      "Empurre de volta mantendo joelhos ligeiramente flexionados"
+    ],
+    "progressions": ["Leg Press Pés Altos com Mais Carga"],
+    "regressions": ["Leg Press Pés no Centro"],
+    "tips": [
+      "Pés altos = mais glúteo e posterior",
+      "Complementa o trabalho com pés baixos",
+      "Varie a posição para desenvolvimento completo"
+    ],
+    "commonMistakes": [
+      "Pés escorregando da plataforma",
+      "Não usar amplitude completa",
+      "Travar os joelhos"
+    ],
+    "notes": "Variação para maior ênfase em posterior da coxa.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Landmine",
+    "description": "Agachamento segurando a extremidade da barra em landmine.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Core", "Glutes"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione a barra no encaixe de landmine",
+      "Segure a extremidade da barra junto ao peito",
+      "Pés na largura dos ombros ou mais afastados",
+      "Execute o agachamento mantendo a barra estável",
+      "O arco natural da landmine guia o movimento",
+      "Empurre para subir"
+    ],
+    "progressions": ["Landmine Squat com Mais Carga"],
+    "regressions": ["Goblet Squat"],
+    "tips": [
+      "O arco da landmine ajuda a manter o tronco ereto",
+      "Mais fácil de aprender que agachamento tradicional",
+      "Excelente para iniciantes"
+    ],
+    "commonMistakes": [
+      "Deixar a barra se afastar do corpo",
+      "Não segurar firmemente",
+      "Postura inadequada"
+    ],
+    "notes": "Variação amigável para iniciantes aprenderem o movimento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Cossack",
+    "description": "Afundo lateral profundo alternando os lados.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Adductors", "Glutes", "Hamstrings"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Fique em pé com os pés bem afastados (2x largura dos ombros)",
+      "Desloque o peso para um lado flexionando esse joelho",
+      "A perna oposta fica estendida com o pé apontando para cima",
+      "Desça o mais baixo possível do lado flexionado",
+      "Empurre para voltar ao centro",
+      "Repita para o outro lado"
+    ],
+    "progressions": ["Cossack Squat com Peso"],
+    "regressions": ["Cossack Squat com Apoio"],
+    "tips": [
+      "Excelente para mobilidade de quadril",
+      "Trabalha adutores intensamente",
+      "Requer boa flexibilidade"
+    ],
+    "commonMistakes": [
+      "Calcanhar da perna flexionada saindo do chão",
+      "Perna estendida flexionando",
+      "Não descer suficientemente"
+    ],
+    "notes": "Combina força com mobilidade de forma única.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Hindu",
+    "description": "Agachamento fluido indo da posição baixa até os calcanhares.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Calves"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com os pés na largura dos ombros",
+      "Desça em agachamento enquanto sobe os calcanhares",
+      "Ao subir, empurre os quadris à frente",
+      "Os braços acompanham o movimento de forma fluida",
+      "O movimento é contínuo e circular",
+      "Alto volume de repetições é comum"
+    ],
+    "progressions": ["Hindu Squat com Peso"],
+    "regressions": ["Hindu Squat Parcial"],
+    "tips": [
+      "Exercício tradicional de condicionamento",
+      "Foco em alto volume e fluidez",
+      "Trabalha resistência muscular"
+    ],
+    "commonMistakes": [
+      "Movimento não fluido",
+      "Não levantar os calcanhares",
+      "Pausar entre repetições"
+    ],
+    "notes": "Exercício tradicional hindu para condicionamento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Sumô com Halter",
+    "description": "Agachamento sumô segurando um halter entre as pernas.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Adductors", "Glutes"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione os pés bem afastados, dedos para fora",
+      "Segure um halter com ambas as mãos pendurado entre as pernas",
+      "Desça em agachamento mantendo o tronco ereto",
+      "Joelhos na direção dos dedos",
+      "Desça até o halter quase tocar o chão",
+      "Empurre para subir"
+    ],
+    "progressions": ["Sumo Squat com Kettlebell", "Sumo com Barra"],
+    "regressions": ["Sumo Squat com Peso Corporal"],
+    "tips": [
+      "Excelente para adutores e glúteos",
+      "Fácil de aprender e executar",
+      "Pode usar halter, kettlebell ou anilha"
+    ],
+    "commonMistakes": [
+      "Joelhos cedendo para dentro",
+      "Tronco inclinando para frente",
+      "Pés não virados suficientemente"
+    ],
+    "notes": "Variação acessível do agachamento sumô.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Wall Sit",
+    "description": "Isometria de agachamento apoiado na parede.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": "Bodyweight",
+    "category": "Isometric",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Apoie as costas em uma parede",
+      "Deslize para baixo até as coxas ficarem paralelas ao chão",
+      "Joelhos em 90 graus, diretamente acima dos tornozelos",
+      "Mantenha as costas completamente encostadas na parede",
+      "Segure a posição pelo tempo determinado",
+      "Não apoie as mãos nas coxas"
+    ],
+    "progressions": ["Wall Sit com Peso", "Wall Sit com Uma Perna"],
+    "regressions": ["Wall Sit Mais Alto"],
+    "tips": [
+      "Exercício isométrico eficaz para quadríceps",
+      "Pode ser feito em qualquer lugar",
+      "Aumente o tempo gradualmente"
+    ],
+    "commonMistakes": [
+      "Coxas não paralelas ao chão",
+      "Costas saindo da parede",
+      "Apoiar mãos nas coxas"
+    ],
+    "notes": "Exercício simples e eficaz para resistência de quadríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Wall Sit com Peso",
+    "description": "Isometria de wall sit com peso adicional no colo.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": "Plate",
+    "category": "Isometric",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Assuma a posição de wall sit normal",
+      "Coloque uma anilha ou halter no colo",
+      "Mantenha a posição com o peso adicional",
+      "Segure pelo tempo determinado",
+      "Mantenha a técnica apesar do peso extra",
+      "Remova o peso antes de sair da posição"
+    ],
+    "progressions": ["Wall Sit com Mais Peso"],
+    "regressions": ["Wall Sit sem Peso"],
+    "tips": [
+      "O peso aumenta a demanda significativamente",
+      "Progrida gradualmente no peso",
+      "Mantenha a técnica perfeita"
+    ],
+    "commonMistakes": [
+      "Peso excessivo comprometendo a posição",
+      "Subir para fugir do esforço",
+      "Não manter a forma correta"
+    ],
+    "notes": "Progressão do wall sit para maior intensidade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento com Elástico",
+    "description": "Agachamento com resistência de banda elástica.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "ResistanceBand",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Pise na banda elástica com os pés na largura dos ombros",
+      "Segure as extremidades na altura dos ombros",
+      "Execute o agachamento normalmente",
+      "A resistência aumenta conforme sobe",
+      "Desça até profundidade adequada",
+      "Empurre contra a resistência crescente para subir"
+    ],
+    "progressions": ["Elástico com Maior Resistência"],
+    "regressions": ["Elástico com Menor Resistência"],
+    "tips": [
+      "Resistência progressiva é única das bandas",
+      "Excelente para treinos em casa",
+      "Pode combinar com peso livre"
+    ],
+    "commonMistakes": [
+      "Banda muito frouxa ou apertada",
+      "Não manter tensão constante",
+      "Técnica comprometida pela banda"
+    ],
+    "notes": "Alternativa versátil para treinos em qualquer lugar.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento TRX",
+    "description": "Agachamento assistido pelo TRX para suporte e equilíbrio.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "TRX",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure as alças do TRX com os braços estendidos",
+      "Fique em pé com os pés na largura dos ombros",
+      "Use o TRX para auxiliar no equilíbrio enquanto agacha",
+      "Desça até profundidade adequada",
+      "Puxe levemente as alças para ajudar a subir",
+      "Progrida para menos assistência"
+    ],
+    "progressions": ["Agachamento sem Assistência"],
+    "regressions": ["TRX Squat com Mais Assistência"],
+    "tips": [
+      "Excelente para aprender a mecânica do agachamento",
+      "Permite trabalhar amplitude mesmo com limitações",
+      "Reduza assistência progressivamente"
+    ],
+    "commonMistakes": [
+      "Depender demais do TRX",
+      "Não manter tensão nas alças",
+      "Não progredir para menos assistência"
+    ],
+    "notes": "Ferramenta útil para aprender e reabilitar.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento TRX Unilateral",
+    "description": "Agachamento em uma perna assistido pelo TRX.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "TRX",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure as alças do TRX",
+      "Fique em uma perna, outra elevada à frente ou atrás",
+      "Use o TRX para equilíbrio e assistência",
+      "Execute o agachamento em uma perna",
+      "Use o TRX conforme necessário para completar",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Pistol Squat"],
+    "regressions": ["TRX Squat Bilateral"],
+    "tips": [
+      "Excelente progressão para pistol squat",
+      "O TRX permite praticar a amplitude",
+      "Reduza assistência gradualmente"
+    ],
+    "commonMistakes": [
+      "Usar demais os braços",
+      "Não trabalhar para reduzir assistência",
+      "Técnica inadequada"
+    ],
+    "notes": "Ponte entre agachamento bilateral e pistol squat.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Salto para Caixa",
+    "description": "Salto explosivo subindo em uma caixa para potência.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
+    "equipment": "Box",
+    "category": "Plyometrics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se em frente à caixa a uma distância confortável",
+      "Flexione rapidamente joelhos e quadris (carregamento)",
+      "Exploda para cima balançando os braços",
+      "Aterrisse suavemente em cima da caixa",
+      "Estenda completamente o quadril no topo",
+      "Desça controladamente (passos ou salto leve)"
+    ],
+    "progressions": ["Caixa Mais Alta", "Box Jump com Peso"],
+    "regressions": ["Caixa Mais Baixa", "Step-Up Explosivo"],
+    "tips": [
+      "Aterrisse suavemente absorvendo o impacto",
+      "Use os braços para impulso",
+      "Progrida gradualmente na altura"
+    ],
+    "commonMistakes": [
+      "Aterrissagem ruidosa/dura",
+      "Não estender no topo",
+      "Caixa muito alta perdendo a forma"
+    ],
+    "notes": "Exercício pliométrico excelente para potência de pernas.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Depth Jump",
+    "description": "Salto reativo descendo de uma caixa e saltando imediatamente.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
+    "equipment": "Box",
+    "category": "Plyometrics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Fique em pé em uma caixa baixa a média",
+      "Dê um passo à frente para sair da caixa (não pule)",
+      "Ao aterrissar, reaja imediatamente saltando para cima",
+      "Minimize o tempo de contato com o chão",
+      "Use a energia elástica do impacto para saltar",
+      "Aterrisse suavemente no final"
+    ],
+    "progressions": ["Depth Jump de Caixa Mais Alta"],
+    "regressions": ["Depth Jump de Caixa Mais Baixa"],
+    "tips": [
+      "Exercício avançado de pliometria",
+      "O tempo de contato deve ser mínimo",
+      "Use caixas de 30-60cm inicialmente"
+    ],
+    "commonMistakes": [
+      "Pular da caixa ao invés de dar um passo",
+      "Tempo de contato muito longo",
+      "Caixa muito alta"
+    ],
+    "notes": "Exercício avançado para desenvolvimento de reatividade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Salto Agachado",
+    "description": "Salto vertical partindo da posição de agachamento.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
+    "equipment": "Bodyweight",
+    "category": "Plyometrics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Desça em posição de agachamento",
+      "Pause brevemente na posição baixa",
+      "Exploda verticalmente saltando o mais alto possível",
+      "Estenda completamente quadris, joelhos e tornozelos",
+      "Use os braços para impulso",
+      "Aterrisse suavemente e repita"
+    ],
+    "progressions": ["Squat Jump com Peso"],
+    "regressions": ["Meio Agachamento com Salto"],
+    "tips": [
+      "A pausa elimina o ciclo alongamento-encurtamento",
+      "Desenvolve potência concêntrica pura",
+      "Aterrisse suavemente absorvendo impacto"
+    ],
+    "commonMistakes": [
+      "Não pausar adequadamente no fundo",
+      "Aterrissagem dura",
+      "Não estender completamente no ar"
+    ],
+    "notes": "Desenvolve potência explosiva concêntrica.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Split Jump",
+    "description": "Afundo com salto trocando as pernas no ar.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Calves"],
+    "equipment": "Bodyweight",
+    "category": "Plyometrics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Comece em posição de afundo",
+      "Salte verticalmente com força",
+      "No ar, troque as pernas de posição",
+      "Aterrisse em afundo com a outra perna na frente",
+      "Imediatamente salte novamente trocando",
+      "Continue alternando"
+    ],
+    "progressions": ["Split Jump com Peso"],
+    "regressions": ["Afundo com Salto sem Troca"],
+    "tips": [
+      "Movimento explosivo e desafiador",
+      "Trabalha potência e coordenação",
+      "Aterrisse suavemente a cada repetição"
+    ],
+    "commonMistakes": [
+      "Aterrissagem instável",
+      "Não completar a troca de pernas",
+      "Perder o equilíbrio"
+    ],
+    "notes": "Exercício pliométrico avançado para pernas.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Drop Set",
+    "description": "Série de agachamento reduzindo carga sem descanso.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute agachamentos até a falha com carga inicial",
+      "Reduza a carga 20-30% imediatamente",
+      "Continue até a falha novamente",
+      "Repita 2-3 quedas de carga",
+      "Não descanse entre as quedas",
+      "Use parceiros ou máquina para trocar rapidamente"
+    ],
+    "progressions": ["Drop Set com Mais Quedas"],
+    "regressions": ["Drop Set com Menos Quedas"],
+    "tips": [
+      "Técnica de intensificação avançada",
+      "Requer parceiros para trocar anilhas rapidamente",
+      "Use como técnica de finalização ocasional"
+    ],
+    "commonMistakes": [
+      "Descansar entre quedas",
+      "Comprometer a técnica",
+      "Usar com muita frequência"
+    ],
+    "notes": "Técnica avançada para máximo estímulo muscular.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Agachamento Excêntrico Lento",
+    "description": "Agachamento com fase de descida controlada e lenta.",
+    "muscleGroup": "Quadriceps",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o agachamento com descida de 4-6 segundos",
+      "Controle totalmente a fase excêntrica",
+      "Pause brevemente no fundo",
+      "Suba em velocidade normal",
+      "Use cerca de 60-70% da carga normal",
+      "Foque na tensão durante a descida"
+    ],
+    "progressions": ["Excêntrica de 8-10 Segundos"],
+    "regressions": ["Excêntrica de 3 Segundos"],
+    "tips": [
+      "A fase excêntrica é altamente estimulante",
+      "Espere mais dor muscular tardia",
+      "Use carga moderada para manter o controle"
+    ],
+    "commonMistakes": [
+      "Acelerar a descida por fadiga",
+      "Usar carga muito pesada",
+      "Não contar o tempo corretamente"
+    ],
+    "notes": "Técnica eficaz para hipertrofia e controle motor.",
+    "videoUrl": ""
+  }
+]

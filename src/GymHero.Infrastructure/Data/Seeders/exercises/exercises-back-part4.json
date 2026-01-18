@@ -1,0 +1,1101 @@
+[
+  {
+    "name": "Seal Row",
+    "description": "Remada deitado em banco elevado para isolamento total das costas sem compensação.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione banco elevado em blocos ou steps",
+      "Deite de bruços com halteres pendendo abaixo",
+      "Peito completamente apoiado",
+      "Puxe os halteres em direção ao quadril",
+      "Contraia escápulas no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer com barra",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Chest supported row em banco inclinado",
+      "Remada na máquina"
+    ],
+    "tips": [
+      "Elimina qualquer compensação de lombar",
+      "Isolamento perfeito das costas",
+      "Excelente conexão mente-músculo",
+      "Banco deve estar alto o suficiente"
+    ],
+    "commonMistakes": [
+      "Banco muito baixo",
+      "Levantar o peito do banco",
+      "Usar impulso",
+      "Amplitude incompleta"
+    ],
+    "notes": "Considerada por muitos a melhor remada para isolamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=seal+row+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Helms Row",
+    "description": "Remada com peito apoiado em banco inclinado para isolamento das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste banco em inclinação de 45-60°",
+      "Deite de bruços com peito no topo do banco",
+      "Pés no chão para estabilidade",
+      "Segure halteres pendendo",
+      "Puxe em direção ao quadril",
+      "Contraia escápulas e desça"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer com barra"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor inclinação",
+      "Remada na máquina"
+    ],
+    "tips": [
+      "Popularizada por Eric Helms",
+      "Excelente para eliminar trapaça",
+      "Mais fácil de montar que seal row",
+      "Foco na contração das costas"
+    ],
+    "commonMistakes": [
+      "Levantar o peito",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Ângulo muito agudo ou obtuso"
+    ],
+    "notes": "Versão mais prática do seal row.",
+    "videoUrl": "https://www.youtube.com/results?search_query=helms+row+chest+supported",
+    "isPublic": true
+  },
+  {
+    "name": "Batwing Row",
+    "description": "Remada com pausa isométrica na posição contraída para retração escapular.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços em banco inclinado",
+      "Segure halteres e puxe até a posição alta",
+      "Mantenha escápulas completamente retraídas",
+      "Segure a posição por 3-5 segundos",
+      "Desça controladamente",
+      "Pause e repita"
+    ],
+    "progressions": [
+      "Aumentar tempo de pausa",
+      "Aumentar carga",
+      "Fazer sem apoio de banco"
+    ],
+    "regressions": [
+      "Menor tempo de pausa",
+      "Reduzir carga",
+      "Fazer na máquina"
+    ],
+    "tips": [
+      "Foco total na retração escapular",
+      "Excelente para postura",
+      "Fortalece estabilizadores",
+      "Ótimo para quem tem ombros enrolados"
+    ],
+    "commonMistakes": [
+      "Pausa muito curta",
+      "Perder retração durante pausa",
+      "Carga muito pesada",
+      "Não manter tensão"
+    ],
+    "notes": "Excelente exercício para saúde escapular e postural.",
+    "videoUrl": "https://www.youtube.com/results?search_query=batwing+row+dan+john",
+    "isPublic": true
+  },
+  {
+    "name": "Kroc Row",
+    "description": "Remada unilateral pesada com amplitude total e algum impulso controlado.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Strength",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Configure como remada unilateral padrão",
+      "Use halter MUITO pesado",
+      "Puxe explosivamente usando leve impulso",
+      "Amplitude completa em cada rep",
+      "Reps altas (15-20+) apesar da carga pesada",
+      "O objetivo é volume e intensidade extremos"
+    ],
+    "progressions": [
+      "Aumentar carga mantendo reps",
+      "Aumentar reps mantendo carga",
+      "Combinar com drop set"
+    ],
+    "regressions": [
+      "Remada unilateral padrão",
+      "Reduzir carga",
+      "Menos reps"
+    ],
+    "tips": [
+      "Criada por Matt Kroczaleski",
+      "Algum impulso é permitido/esperado",
+      "Foco em volume com carga pesada",
+      "Excelente para grip e costas"
+    ],
+    "commonMistakes": [
+      "Impulso excessivo",
+      "Amplitude reduzida",
+      "Carga leve demais",
+      "Poucas reps"
+    ],
+    "notes": "Estilo único de remada para força e hipertrofia extremas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kroc+row",
+    "isPublic": true
+  },
+  {
+    "name": "Lat Pushdown (Cable)",
+    "description": "Pushdown para latíssimo usando a polia alta.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com barra reta ou V",
+      "Segure a barra com braços estendidos acima",
+      "Leve inclinação do tronco para frente",
+      "Puxe a barra para baixo até as coxas",
+      "Braços quase estendidos durante todo movimento",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Usar corda"
+    ],
+    "tips": [
+      "Similar ao straight arm pulldown",
+      "Isola o latíssimo efetivamente",
+      "Mantenha cotovelos fixos",
+      "Excelente pré ou pós-exaustão"
+    ],
+    "commonMistakes": [
+      "Flexionar demais cotovelos",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Postura muito ereta"
+    ],
+    "notes": "Isolamento puro do latíssimo do dorso.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lat+pushdown+cable",
+    "isPublic": true
+  },
+  {
+    "name": "Single Arm Landmine Row",
+    "description": "Remada unilateral usando landmine para ângulo único.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Barra encaixada no landmine",
+      "Fique ao lado da barra em posição de remada",
+      "Segure a barra próximo aos discos",
+      "Puxe em arco em direção ao quadril",
+      "Contraia e desça controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Remada com halter",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Arco de movimento único",
+      "Trabalha latíssimo de ângulo diferente",
+      "Pode fazer em várias posições",
+      "Menos estresse nos punhos"
+    ],
+    "commonMistakes": [
+      "Posição incorreta",
+      "Usar impulso",
+      "Não trabalhar lados iguais",
+      "Amplitude incompleta"
+    ],
+    "notes": "O landmine oferece trajetória em arco única.",
+    "videoUrl": "https://www.youtube.com/results?search_query=landmine+row+unilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Band Pull Apart",
+    "description": "Exercício com elástico para fortalecimento do deltoide posterior e romboides.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure o elástico com ambas as mãos à frente",
+      "Braços estendidos à altura dos ombros",
+      "Afaste as mãos puxando o elástico",
+      "Leve as mãos até ficarem ao lado do corpo",
+      "Contraia escápulas e retorne controladamente"
+    ],
+    "progressions": [
+      "Elástico mais resistente",
+      "Fazer em diferentes alturas",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Elástico mais leve",
+      "Menor amplitude",
+      "Segurar mais afastado"
+    ],
+    "tips": [
+      "Excelente para saúde do ombro",
+      "Pode fazer em alta frequência",
+      "Ótimo aquecimento ou finalizador",
+      "Contrabalança exercícios de empurrar"
+    ],
+    "commonMistakes": [
+      "Elástico muito resistente",
+      "Amplitude incompleta",
+      "Movimentos rápidos demais",
+      "Não retrair escápulas"
+    ],
+    "notes": "Fundamental para saúde postural e dos ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=band+pull+apart",
+    "isPublic": true
+  },
+  {
+    "name": "Prone Y Raise",
+    "description": "Elevação em Y deitado de bruços para trapézio inferior e médio.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços no chão ou banco",
+      "Braços estendidos à frente formando um Y",
+      "Polegares apontando para cima",
+      "Eleve os braços do chão mantendo a posição",
+      "Segure 2-3 segundos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Adicionar peso leve",
+      "Aumentar tempo de sustentação",
+      "Fazer em banco inclinado"
+    ],
+    "regressions": [
+      "Menor amplitude",
+      "Menor tempo",
+      "Apenas um braço de cada vez"
+    ],
+    "tips": [
+      "Trabalha trapézio inferior frequentemente negligenciado",
+      "Excelente para postura",
+      "Use peso muito leve se adicionar",
+      "Parte do combo Y-T-W-L"
+    ],
+    "commonMistakes": [
+      "Usar peso muito pesado",
+      "Não elevar do chão adequadamente",
+      "Movimentos rápidos",
+      "Tensionar o pescoço"
+    ],
+    "notes": "Fundamental para saúde escapular e postura.",
+    "videoUrl": "https://www.youtube.com/results?search_query=prone+y+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Prone T Raise",
+    "description": "Elevação em T deitado de bruços para trapézio médio e romboides.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços no chão ou banco",
+      "Braços abertos aos lados formando um T",
+      "Polegares para cima",
+      "Eleve os braços do chão",
+      "Aperte escápulas juntas",
+      "Segure e desça controladamente"
+    ],
+    "progressions": [
+      "Adicionar peso leve",
+      "Aumentar tempo de sustentação",
+      "Fazer em banco inclinado"
+    ],
+    "regressions": [
+      "Menor amplitude",
+      "Menor tempo",
+      "Um braço por vez"
+    ],
+    "tips": [
+      "Trabalha romboides e trapézio médio",
+      "Polegares para cima ativa rotadores externos",
+      "Movimento controlado",
+      "Excelente para correção postural"
+    ],
+    "commonMistakes": [
+      "Peso excessivo",
+      "Não elevar adequadamente",
+      "Movimentos rápidos",
+      "Não retrair escápulas"
+    ],
+    "notes": "Parte do combo Y-T-W-L para saúde escapular.",
+    "videoUrl": "https://www.youtube.com/results?search_query=prone+t+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Prone W Raise",
+    "description": "Elevação em W deitado de bruços para rotadores externos e trapézio.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços no chão ou banco",
+      "Cotovelos flexionados formando um W",
+      "Polegares para cima",
+      "Eleve braços e antebraços do chão",
+      "Aperte escápulas",
+      "Segure e desça"
+    ],
+    "progressions": [
+      "Adicionar peso leve",
+      "Aumentar sustentação",
+      "Rotação externa no topo"
+    ],
+    "regressions": [
+      "Menor amplitude",
+      "Menor tempo",
+      "Sem elevação"
+    ],
+    "tips": [
+      "Trabalha rotação externa do ombro",
+      "Excelente para saúde do manguito rotador",
+      "Cotovelos em 90°",
+      "Parte do combo Y-T-W-L"
+    ],
+    "commonMistakes": [
+      "Não manter ângulo do cotovelo",
+      "Elevação insuficiente",
+      "Tensionar pescoço",
+      "Movimentos rápidos"
+    ],
+    "notes": "Trabalha rotadores externos frequentemente negligenciados.",
+    "videoUrl": "https://www.youtube.com/results?search_query=prone+w+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Prone I Raise",
+    "description": "Elevação em I deitado de bruços com braços junto ao corpo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços no chão ou banco",
+      "Braços estendidos ao longo do corpo",
+      "Palmas para baixo ou para o corpo",
+      "Eleve os braços do chão",
+      "Aperte escápulas para baixo",
+      "Segure e desça"
+    ],
+    "progressions": [
+      "Adicionar peso leve",
+      "Aumentar sustentação",
+      "Combinar com extensão de tronco"
+    ],
+    "regressions": [
+      "Menor amplitude",
+      "Menor tempo",
+      "Apenas um braço"
+    ],
+    "tips": [
+      "Trabalha depressão escapular",
+      "Fortalece trapézio inferior",
+      "Ombros para trás e para baixo",
+      "Completa o combo Y-T-W-I"
+    ],
+    "commonMistakes": [
+      "Encolher ombros",
+      "Não deprimir escápulas",
+      "Movimentos rápidos",
+      "Tensionar pescoço"
+    ],
+    "notes": "Ensina padrão de depressão escapular correto.",
+    "videoUrl": "https://www.youtube.com/results?search_query=prone+i+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Low Trap Raise",
+    "description": "Exercício específico para trapézio inferior, frequentemente negligenciado.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços em banco inclinado (30-45°)",
+      "Segure halteres leves pendendo",
+      "Eleve os braços em diagonal (Y baixo)",
+      "Polegares para cima",
+      "Aperte escápulas para baixo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar peso gradualmente",
+      "Adicionar pausa",
+      "Fazer em pé inclinado"
+    ],
+    "regressions": [
+      "Sem peso",
+      "Menor amplitude",
+      "Fazer deitado no chão"
+    ],
+    "tips": [
+      "Trapézio inferior crucial para saúde do ombro",
+      "Use peso muito leve",
+      "Foco na depressão escapular",
+      "Exercício corretivo importante"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Encolher ombros ao invés de deprimir",
+      "Movimentos rápidos",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Exercício corretivo para equilíbrio entre trap superior e inferior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lower+trap+raise",
+    "isPublic": true
+  },
+  {
+    "name": "Scapular Wall Slides",
+    "description": "Deslizamento na parede para mobilidade e controle escapular.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Bodyweight",
+    "category": "Mobility",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique de costas para a parede",
+      "Braços em posição de 'W' com costas da mão na parede",
+      "Mantenha lombar e escápulas contra a parede",
+      "Deslize os braços para cima formando 'Y'",
+      "Mantenha contato com a parede",
+      "Deslize de volta para 'W'"
+    ],
+    "progressions": [
+      "Adicionar resistência leve",
+      "Fazer afastado da parede",
+      "Aumentar amplitude"
+    ],
+    "regressions": [
+      "Menor amplitude",
+      "Fazer deitado no chão",
+      "Focar apenas na posição estática"
+    ],
+    "tips": [
+      "Excelente para mobilidade de ombro",
+      "Pode fazer múltiplas vezes ao dia",
+      "Mantenha lombar pressionada na parede",
+      "Movimento lento e controlado"
+    ],
+    "commonMistakes": [
+      "Perder contato com a parede",
+      "Arquear lombar",
+      "Movimento muito rápido",
+      "Amplitude forçada"
+    ],
+    "notes": "Fundamental para quem trabalha sentado.",
+    "videoUrl": "https://www.youtube.com/results?search_query=wall+slides+shoulder+mobility",
+    "isPublic": true
+  },
+  {
+    "name": "Cat-Cow",
+    "description": "Exercício de mobilidade para flexão e extensão da coluna.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core"],
+    "equipment": "Bodyweight",
+    "category": "Mobility",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição de quatro apoios",
+      "Mãos sob os ombros, joelhos sob o quadril",
+      "Cat: Arredonde as costas empurrando para cima, queixo ao peito",
+      "Cow: Arqueie as costas olhando para cima, barriga para baixo",
+      "Alterne fluidamente entre as posições",
+      "Sincronize com a respiração"
+    ],
+    "progressions": [
+      "Movimentos mais lentos e profundos",
+      "Adicionar rotação torácica",
+      "Fazer em pé contra parede"
+    ],
+    "regressions": [
+      "Amplitude menor",
+      "Mais lento",
+      "Fazer sentado"
+    ],
+    "tips": [
+      "Excelente aquecimento para coluna",
+      "Sincronize com respiração",
+      "Cat: expire, Cow: inspire",
+      "Pode fazer várias vezes ao dia"
+    ],
+    "commonMistakes": [
+      "Movimentos muito rápidos",
+      "Não usar toda coluna",
+      "Prender respiração",
+      "Amplitude forçada"
+    ],
+    "notes": "Mobilização fundamental da coluna vertebral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cat+cow+stretch",
+    "isPublic": true
+  },
+  {
+    "name": "Thoracic Rotation",
+    "description": "Exercício de rotação para mobilidade da coluna torácica.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core"],
+    "equipment": "Bodyweight",
+    "category": "Mobility",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição de quatro apoios ou deitado de lado",
+      "Coloque uma mão atrás da cabeça",
+      "Rotacione a coluna levando cotovelo ao teto",
+      "Olhe para o cotovelo que sobe",
+      "Retorne e repita",
+      "Faça dos dois lados"
+    ],
+    "progressions": [
+      "Aumentar amplitude",
+      "Fazer em posição de lunge",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Menor rotação",
+      "Fazer deitado de lado",
+      "Usar parede como guia"
+    ],
+    "tips": [
+      "Mobilidade torácica essencial para ombros saudáveis",
+      "Não rotacione a lombar",
+      "Movimento vem do meio das costas",
+      "Excelente pré-treino"
+    ],
+    "commonMistakes": [
+      "Rotacionar a lombar",
+      "Rotação insuficiente",
+      "Movimentos rápidos",
+      "Não estabilizar quadril"
+    ],
+    "notes": "Crucial para saúde da coluna e ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=thoracic+rotation+mobility",
+    "isPublic": true
+  },
+  {
+    "name": "Jefferson Curl",
+    "description": "Flexão controlada da coluna com carga para mobilidade e força.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Mobility",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé em superfície elevada (step, banco)",
+      "Segure peso leve (kettlebell, halter)",
+      "Comece com queixo no peito",
+      "Desça arredondando uma vértebra de cada vez",
+      "Continue até peso passar dos pés",
+      "Suba desenrolando vértebra por vértebra"
+    ],
+    "progressions": [
+      "Aumentar peso gradualmente",
+      "Aumentar amplitude",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Sem peso",
+      "Menor amplitude",
+      "Fazer no chão"
+    ],
+    "tips": [
+      "Peso muito leve - foco é mobilidade",
+      "Movimento extremamente lento",
+      "Controverso - não para todos",
+      "Consulte profissional se tiver problemas de coluna"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado",
+      "Movimento muito rápido",
+      "Fazer com histórico de lesão",
+      "Não controlar cada vértebra"
+    ],
+    "notes": "Exercício avançado de mobilidade - não para iniciantes ou pessoas com problemas de coluna.",
+    "videoUrl": "https://www.youtube.com/results?search_query=jefferson+curl+mobility",
+    "isPublic": true
+  },
+  {
+    "name": "Seated Cable Row Wide Grip",
+    "description": "Remada sentada com pegada larga para ênfase no latíssimo e trapézio médio.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na remada baixa com barra longa",
+      "Pegada bem mais larga que ombros, pronada",
+      "Tronco ereto, peito alto",
+      "Puxe a barra até o abdômen/peito baixo",
+      "Cotovelos apontam para os lados",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Pegada mais fechada",
+      "Reduzir carga",
+      "Usar triângulo"
+    ],
+    "tips": [
+      "Trabalha mais latíssimo e trapézio médio",
+      "Cotovelos mais abertos que remada fechada",
+      "Complementa a remada fechada",
+      "Varia o estímulo"
+    ],
+    "commonMistakes": [
+      "Inclinar demais",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Subir os ombros"
+    ],
+    "notes": "Variação para trabalhar costas de ângulo diferente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=wide+grip+cable+row",
+    "isPublic": true
+  },
+  {
+    "name": "Underhand Cable Row",
+    "description": "Remada no cabo com pegada supinada para maior envolvimento do bíceps.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na remada baixa com barra reta",
+      "Pegada supinada na largura dos ombros",
+      "Tronco ereto",
+      "Puxe a barra até o abdômen baixo",
+      "Cotovelos junto ao corpo",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Pegada neutra",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Maior ativação de bíceps",
+      "Similar à remada Yates",
+      "Cotovelos ficam mais perto do corpo",
+      "Boa variação para volume de braços"
+    ],
+    "commonMistakes": [
+      "Usar só bíceps",
+      "Inclinar demais",
+      "Usar impulso",
+      "Não retrair escápulas"
+    ],
+    "notes": "Variação que adiciona trabalho de bíceps à remada.",
+    "videoUrl": "https://www.youtube.com/results?search_query=underhand+cable+row",
+    "isPublic": true
+  },
+  {
+    "name": "High Cable Row",
+    "description": "Remada no cabo posicionado alto para ângulo diferente de trabalho.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia posicionada acima da cabeça",
+      "Fique sentado ou de joelhos de frente para máquina",
+      "Segure corda ou barra",
+      "Puxe em direção ao peito ou rosto",
+      "Cotovelos altos",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer sentado",
+      "Usar barra"
+    ],
+    "tips": [
+      "Trabalha trapézio e romboides",
+      "Ângulo similar ao face pull",
+      "Bom para porção superior das costas",
+      "Complementa remada baixa"
+    ],
+    "commonMistakes": [
+      "Puxar muito baixo",
+      "Usar impulso",
+      "Perder postura",
+      "Cotovelos caindo"
+    ],
+    "notes": "Ângulo alto enfatiza porção superior das costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=high+cable+row",
+    "isPublic": true
+  },
+  {
+    "name": "Pronated Pulldown",
+    "description": "Puxada com pegada pronada padrão para desenvolvimento do latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na puxada com barra longa",
+      "Pegada pronada um pouco mais larga que ombros",
+      "Tronco levemente inclinado para trás",
+      "Puxe a barra até o peito superior",
+      "Aperte as escápulas",
+      "Retorne estendendo completamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Progredir para pull-ups",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada assistida",
+      "Pegada mais fechada"
+    ],
+    "tips": [
+      "Base para todos outros pulldowns",
+      "Inicie retraindo escápulas",
+      "Puxe com cotovelos, não mãos",
+      "Peito alto durante todo movimento"
+    ],
+    "commonMistakes": [
+      "Inclinar muito para trás",
+      "Não estender completamente",
+      "Usar impulso",
+      "Ombros subindo"
+    ],
+    "notes": "Exercício fundamental para construção de costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=lat+pulldown+pronated+grip",
+    "isPublic": true
+  },
+  {
+    "name": "V-Bar Pulldown",
+    "description": "Puxada usando acessório em V para pegada neutra fechada.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Conecte acessório V na polia alta",
+      "Sente com almofadas ajustadas",
+      "Pegada neutra no V",
+      "Incline levemente o tronco",
+      "Puxe o V até o peito",
+      "Aperte as costas e retorne"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer mais lento"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar triângulo",
+      "Barra reta"
+    ],
+    "tips": [
+      "Pegada neutra mais confortável",
+      "Trabalha bem latíssimo inferior",
+      "Menor estresse nos ombros",
+      "Boa variação"
+    ],
+    "commonMistakes": [
+      "Inclinar demais",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Perder retração"
+    ],
+    "notes": "Alternativa confortável à barra reta.",
+    "videoUrl": "https://www.youtube.com/results?search_query=v+bar+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Behind the Neck Pulldown",
+    "description": "Puxada para trás do pescoço - variação controversa para atletas avançados.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na puxada com barra longa",
+      "Pegada larga",
+      "Mantenha cabeça levemente para frente",
+      "Puxe a barra atrás do pescoço",
+      "Toque levemente na nuca",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga (com cuidado)",
+      "Adicionar pausa",
+      "Execução mais lenta"
+    ],
+    "regressions": [
+      "Puxada frontal",
+      "Menor amplitude atrás",
+      "Reduzir carga significativamente"
+    ],
+    "tips": [
+      "Requer excelente mobilidade de ombro",
+      "NÃO recomendada para a maioria",
+      "Risco de lesão de ombro",
+      "Se doer, pare imediatamente"
+    ],
+    "commonMistakes": [
+      "Fazer sem mobilidade adequada",
+      "Carga muito pesada",
+      "Bater a barra na nuca",
+      "Projetar cabeça demais"
+    ],
+    "notes": "Exercício controverso - puxada frontal é geralmente mais segura e igualmente efetiva.",
+    "videoUrl": "https://www.youtube.com/results?search_query=behind+neck+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Kneeling Single Arm Pulldown",
+    "description": "Puxada unilateral ajoelhado para maior amplitude e foco.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com manopla única",
+      "Ajoelhe de frente para a máquina",
+      "Segure com uma mão",
+      "Puxe o cotovelo para baixo e para o lado",
+      "Contraia o latíssimo",
+      "Retorne e complete reps, depois troque"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer em pé",
+      "Adicionar rotação"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada bilateral",
+      "Fazer sentado"
+    ],
+    "tips": [
+      "Maior amplitude de movimento",
+      "Excelente conexão mente-músculo",
+      "Permite leve rotação no topo",
+      "Corrige assimetrias"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva do tronco",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Não fazer igual dos lados"
+    ],
+    "notes": "Permite foco individual em cada latíssimo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kneeling+single+arm+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Iso-Lateral High Row Machine",
+    "description": "Remada alta em máquina com braços independentes.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Shoulders"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina high row",
+      "Peito contra o apoio",
+      "Segure as manoplas",
+      "Puxe para trás contraindo escápulas",
+      "Pode fazer bilateral ou unilateral",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer bilateral",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Braços independentes permitem trabalho unilateral",
+      "Peito no apoio elimina trapaça",
+      "Ângulo alto trabalha trapézio",
+      "Excelente para volume"
+    ],
+    "commonMistakes": [
+      "Afastar do apoio",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Não equilibrar os lados"
+    ],
+    "notes": "Máquina excelente para trabalho isolado das costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=high+row+machine",
+    "isPublic": true
+  },
+  {
+    "name": "Iso-Lateral Low Row Machine",
+    "description": "Remada baixa em máquina com braços independentes.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina low row",
+      "Peito contra o apoio",
+      "Segure as manoplas",
+      "Puxe para trás em direção ao quadril",
+      "Contraia escápulas",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer bilateral",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Trabalha mais latíssimo",
+      "Apoio elimina compensações",
+      "Excelente para hipertrofia",
+      "Pode trabalhar até a falha"
+    ],
+    "commonMistakes": [
+      "Levantar do apoio",
+      "Usar impulso",
+      "Não contrair escápulas",
+      "Amplitude incompleta"
+    ],
+    "notes": "Versão máquina da remada baixa com isolamento superior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=iso+lateral+row+machine",
+    "isPublic": true
+  }
+]

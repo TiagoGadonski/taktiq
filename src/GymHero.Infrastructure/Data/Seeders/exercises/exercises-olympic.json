@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Clean",
+    "description": "Do chao, puxe a barra explosivamente e receba-a nos ombros em posicao de agachamento frontal. Levante para completar.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings", "Back", "Shoulders", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean.png"
+  },
+  {
+    "name": "Power Clean",
+    "description": "Clean recebendo a barra com joelhos acima de 90 graus. Requer menos mobilidade que o clean completo.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings", "Back", "Shoulders"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/power-clean.png"
+  },
+  {
+    "name": "Hang Clean",
+    "description": "Clean iniciando com a barra na altura dos joelhos ou acima. Enfatiza a segunda puxada e recepcao.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings", "Back", "Shoulders"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/hang-clean.png"
+  },
+  {
+    "name": "Hang Power Clean",
+    "description": "Power clean iniciando da posicao de hang. Excelente para desenvolver potencia de quadril.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings", "Back"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/hang-power-clean.png"
+  },
+  {
+    "name": "Clean Pull",
+    "description": "Primeira e segunda puxada do clean sem a recepcao. Treina posicoes e potencia do movimento.",
+    "musclesWorked": ["Back", "Glutes", "Hamstrings", "Traps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-pull.png"
+  },
+  {
+    "name": "Clean High Pull",
+    "description": "Puxada do clean levando a barra ate altura do peito com cotovelos altos. Treina extensao tripla.",
+    "musclesWorked": ["Back", "Traps", "Shoulders", "Glutes"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-high-pull.png"
+  },
+  {
+    "name": "Clean Deadlift",
+    "description": "Levantamento terra com posicao de clean. Enfatiza posicoes corretas para o primeiro puxada.",
+    "musclesWorked": ["Back", "Glutes", "Hamstrings", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-deadlift.png"
+  },
+  {
+    "name": "Clean Grip Shrug",
+    "description": "Encolhimento de ombros com pegada de clean. Treina trapecios e elevacao de ombros para o clean.",
+    "musclesWorked": ["Traps", "Shoulders"],
+    "equipment": ["Barbell"],
+    "difficulty": "Beginner",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-grip-shrug.png"
+  },
+  {
+    "name": "Muscle Clean",
+    "description": "Clean sem agachar, puxando a barra diretamente para os ombros apenas com forca de braco. Exercicio de tecnica.",
+    "musclesWorked": ["Shoulders", "Biceps", "Traps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/muscle-clean.png"
+  },
+  {
+    "name": "Clean and Jerk",
+    "description": "Movimento olimpico completo: clean seguido de jerk. Levante a barra do chao aos ombros e depois acima da cabeca.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back", "Core", "Triceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-and-jerk.png"
+  },
+  {
+    "name": "Jerk",
+    "description": "Da posicao de front rack, impulsione a barra acima da cabeca com split ou squat, bracos estendidos.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/jerk.png"
+  },
+  {
+    "name": "Split Jerk",
+    "description": "Jerk aterrissando com pernas em posicao de split (uma frente, uma atras). Variacao mais comum do jerk.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/split-jerk.png"
+  },
+  {
+    "name": "Push Jerk",
+    "description": "Jerk recebendo a barra com pequena flexao de joelhos, sem split. Requer mais potencia de impulso.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/push-jerk.png"
+  },
+  {
+    "name": "Power Jerk",
+    "description": "Jerk recebendo em posicao de quarter squat. Intermediario entre push jerk e squat jerk.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/power-jerk.png"
+  },
+  {
+    "name": "Squat Jerk",
+    "description": "Jerk recebendo em agachamento completo. Requer excelente mobilidade e tecnica avancada.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/squat-jerk.png"
+  },
+  {
+    "name": "Jerk Dip",
+    "description": "Apenas a fase de flexao do jerk sem o impulso. Treina posicao e controle do dip.",
+    "musclesWorked": ["Quadriceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Beginner",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/jerk-dip.png"
+  },
+  {
+    "name": "Jerk Drive",
+    "description": "Dip seguido de impulso explosivo sem soltar os pes do chao. Treina potencia do drive.",
+    "musclesWorked": ["Quadriceps", "Shoulders", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/jerk-drive.png"
+  },
+  {
+    "name": "Behind the Neck Jerk",
+    "description": "Jerk com a barra partindo de tras do pescoco. Usado para treinar tecnica de recepcao.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/behind-neck-jerk.png"
+  },
+  {
+    "name": "Snatch",
+    "description": "Levante a barra do chao diretamente acima da cabeca em um movimento fluido, recebendo em agachamento overhead.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch.png"
+  },
+  {
+    "name": "Power Snatch",
+    "description": "Snatch recebendo a barra acima de agachamento paralelo. Requer menos mobilidade que snatch completo.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/power-snatch.png"
+  },
+  {
+    "name": "Hang Snatch",
+    "description": "Snatch iniciando da posicao de hang (joelhos ou acima). Enfatiza segunda puxada e recepcao.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/hang-snatch.png"
+  },
+  {
+    "name": "Hang Power Snatch",
+    "description": "Power snatch da posicao de hang. Excelente para desenvolver potencia explosiva.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/hang-power-snatch.png"
+  },
+  {
+    "name": "Snatch Pull",
+    "description": "Puxada do snatch sem recepcao overhead. Treina posicoes e potencia do movimento.",
+    "musclesWorked": ["Back", "Glutes", "Hamstrings", "Traps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-pull.png"
+  },
+  {
+    "name": "Snatch High Pull",
+    "description": "Puxada do snatch levando a barra ate o peito com cotovelos altos. Treina extensao tripla.",
+    "musclesWorked": ["Back", "Traps", "Shoulders", "Glutes"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-high-pull.png"
+  },
+  {
+    "name": "Snatch Deadlift",
+    "description": "Levantamento terra com pegada larga de snatch. Treina primeira puxada e posicoes corretas.",
+    "musclesWorked": ["Back", "Glutes", "Hamstrings"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-deadlift.png"
+  },
+  {
+    "name": "Snatch Grip Shrug",
+    "description": "Encolhimento de ombros com pegada larga de snatch. Fortalece trapecios para o snatch.",
+    "musclesWorked": ["Traps", "Shoulders"],
+    "equipment": ["Barbell"],
+    "difficulty": "Beginner",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-grip-shrug.png"
+  },
+  {
+    "name": "Muscle Snatch",
+    "description": "Snatch sem agachar, levando a barra overhead apenas com forca de braco. Exercicio de tecnica.",
+    "musclesWorked": ["Shoulders", "Traps", "Triceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/muscle-snatch.png"
+  },
+  {
+    "name": "Snatch Balance",
+    "description": "Com barra nos ombros, mergulhe sob a barra em agachamento overhead. Treina velocidade de recepcao.",
+    "musclesWorked": ["Quadriceps", "Shoulders", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-balance.png"
+  },
+  {
+    "name": "Overhead Squat",
+    "description": "Agachamento com barra mantida acima da cabeca com bracos estendidos. Treina estabilidade overhead.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/overhead-squat.png"
+  },
+  {
+    "name": "Snatch Grip Behind Neck Press",
+    "description": "Press atras do pescoco com pegada larga de snatch. Fortalece ombros para posicao overhead.",
+    "musclesWorked": ["Shoulders", "Triceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-grip-btn-press.png"
+  },
+  {
+    "name": "Dumbbell Snatch",
+    "description": "Snatch com halter, levando do chao acima da cabeca em um movimento. Unilateral e acessivel.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core", "Back"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/dumbbell-snatch.png"
+  },
+  {
+    "name": "Kettlebell Snatch",
+    "description": "Snatch com kettlebell em um movimento fluido do chao ou swing ate overhead.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core", "Back"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/kettlebell-snatch.png"
+  },
+  {
+    "name": "Dumbbell Clean",
+    "description": "Clean com halteres, trazendo do chao para os ombros. Pode ser feito unilateral ou bilateral.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/dumbbell-clean.png"
+  },
+  {
+    "name": "Kettlebell Clean",
+    "description": "Clean com kettlebell do chao ou swing para posicao de rack. Movimento funcional.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/kettlebell-clean.png"
+  },
+  {
+    "name": "Clean and Press",
+    "description": "Clean seguido de press militar. Alternativa ao clean and jerk com press controlado.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Back", "Triceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-and-press.png"
+  },
+  {
+    "name": "Clean and Push Press",
+    "description": "Clean seguido de push press. Combinacao de potencia de pernas com press.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Triceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/clean-push-press.png"
+  },
+  {
+    "name": "Front Squat",
+    "description": "Agachamento com barra na frente dos ombros em posicao de rack. Essencial para clean.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/front-squat.png"
+  },
+  {
+    "name": "Sotts Press",
+    "description": "Press overhead partindo da posicao de agachamento completo. Treina estabilidade e mobilidade.",
+    "musclesWorked": ["Shoulders", "Core", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Advanced",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/sotts-press.png"
+  },
+  {
+    "name": "Snatch Grip Push Press",
+    "description": "Push press com pegada larga de snatch. Fortalece overhead para o snatch.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/snatch-grip-push-press.png"
+  },
+  {
+    "name": "Tall Clean",
+    "description": "Clean partindo em pe, sem usar pernas na puxada. Treina velocidade de recepcao sob a barra.",
+    "musclesWorked": ["Shoulders", "Biceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Olympic",
+    "imageUrl": "exercises/olympic/tall-clean.png"
+  }
+]

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Sun Salutation A",
+    "description": "Sequencia de yoga: tadasana, uttanasana, plank, chaturanga, upward dog, downward dog.",
+    "musclesWorked": ["Full Body"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/sun-salutation-a.png"
+  },
+  {
+    "name": "Sun Salutation B",
+    "description": "Sequencia de yoga mais longa incluindo chair pose e warrior 1.",
+    "musclesWorked": ["Full Body"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/sun-salutation-b.png"
+  },
+  {
+    "name": "Upward Dog",
+    "description": "Deitado, empurre tronco para cima com bracos retos e coxas elevadas do chao.",
+    "musclesWorked": ["Abs", "Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/upward-dog.png"
+  },
+  {
+    "name": "Low Lunge",
+    "description": "Afundo com joelho traseiro no chao, maos elevadas ou no chao.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/low-lunge.png"
+  },
+  {
+    "name": "High Lunge",
+    "description": "Afundo com joelho traseiro elevado do chao, bracos acima da cabeca.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/high-lunge.png"
+  },
+  {
+    "name": "Crescent Lunge",
+    "description": "High lunge com leve arqueamento das costas e bracos estendidos para cima.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/crescent-lunge.png"
+  },
+  {
+    "name": "Warrior 1",
+    "description": "Afundo com pe traseiro virado 45 graus, quadril para frente, bracos elevados.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/warrior-1.png"
+  },
+  {
+    "name": "Warrior 2",
+    "description": "Afundo lateral com bracos estendidos paralelos ao chao, olhando sobre mao da frente.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/warrior-2.png"
+  },
+  {
+    "name": "Warrior 3",
+    "description": "Equilibrio em uma perna com corpo e perna traseira horizontais, bracos estendidos.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/warrior-3.png"
+  },
+  {
+    "name": "Reverse Warrior",
+    "description": "De warrior 2, incline tronco para tras deslizando mao na perna traseira.",
+    "musclesWorked": ["Obliques", "Hip Flexors", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/reverse-warrior.png"
+  },
+  {
+    "name": "Extended Side Angle",
+    "description": "De warrior 2, incline tronco lateralmente apoiando cotovelo no joelho ou mao no chao.",
+    "musclesWorked": ["Obliques", "Hip Flexors", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/extended-side-angle.png"
+  },
+  {
+    "name": "Triangle Pose",
+    "description": "Pernas afastadas, incline lateralmente tocando canela ou chao, braco oposto ao ceu.",
+    "musclesWorked": ["Hamstrings", "Obliques", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/triangle-pose.png"
+  },
+  {
+    "name": "Revolved Triangle",
+    "description": "Triangle pose com rotacao de tronco, mao oposta tocando a canela.",
+    "musclesWorked": ["Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/revolved-triangle.png"
+  },
+  {
+    "name": "Half Moon Pose",
+    "description": "Equilibrio lateral em uma perna com corpo aberto para o lado, braco e perna estendidos.",
+    "musclesWorked": ["Glutes", "Core", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/half-moon-pose.png"
+  },
+  {
+    "name": "Pyramid Pose",
+    "description": "Pernas em afundo curto, ambas retas, tronco flexionado sobre a perna da frente.",
+    "musclesWorked": ["Hamstrings", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/pyramid-pose.png"
+  },
+  {
+    "name": "Wide Legged Forward Fold",
+    "description": "Pernas bem afastadas, flexione tronco para frente tentando tocar cabeca no chao.",
+    "musclesWorked": ["Hamstrings", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wide-legged-forward-fold.png"
+  },
+  {
+    "name": "Standing Split",
+    "description": "Flexione tronco para frente elevando uma perna para o ceu atras de voce.",
+    "musclesWorked": ["Hamstrings", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-split.png"
+  },
+  {
+    "name": "Tree Pose",
+    "description": "Equilibrio em uma perna com pe oposto no interno da coxa, maos em oracao.",
+    "musclesWorked": ["Glutes", "Core", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/tree-pose.png"
+  },
+  {
+    "name": "Eagle Pose",
+    "description": "Equilibrio com perna e braco enrolados, cotovelos e joelhos dobrados.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/eagle-pose.png"
+  },
+  {
+    "name": "Chair Pose",
+    "description": "Semi-agachamento com bracos elevados, como se sentando em cadeira invisivel.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/chair-pose.png"
+  },
+  {
+    "name": "Twisted Chair",
+    "description": "Chair pose com rotacao de tronco, cotovelo fora do joelho oposto.",
+    "musclesWorked": ["Quadriceps", "Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/twisted-chair.png"
+  },
+  {
+    "name": "Camel Pose",
+    "description": "Ajoelhado, arqueie para tras alcancando os calcanhares com as maos.",
+    "musclesWorked": ["Hip Flexors", "Abs", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/camel-pose.png"
+  },
+  {
+    "name": "Bow Pose",
+    "description": "Deitado de brucos, segure tornozelos e eleve peito e coxas do chao.",
+    "musclesWorked": ["Quadriceps", "Abs", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/bow-pose.png"
+  },
+  {
+    "name": "Bridge Pose",
+    "description": "Deitado de costas, eleve quadril do chao formando ponte com pes e ombros no chao.",
+    "musclesWorked": ["Glutes", "Hip Flexors", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/bridge-pose.png"
+  },
+  {
+    "name": "Wheel Pose",
+    "description": "Ponte completa empurrando com maos e pes, corpo arqueado para cima.",
+    "musclesWorked": ["Hip Flexors", "Shoulders", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wheel-pose.png"
+  },
+  {
+    "name": "Locust Pose",
+    "description": "Deitado de brucos, eleve peito, bracos e pernas do chao simultaneamente.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/locust-pose.png"
+  },
+  {
+    "name": "Boat Pose",
+    "description": "Equilibrio sobre os isquios com pernas e tronco elevados formando V.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/boat-pose.png"
+  },
+  {
+    "name": "Seated Twist",
+    "description": "Sentado com uma perna cruzada, rotacione tronco para o lado da perna cruzada.",
+    "musclesWorked": ["Obliques", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-twist.png"
+  },
+  {
+    "name": "Supine Spinal Twist",
+    "description": "Deitado de costas com joelhos dobrados, deixe joelhos cairem para um lado.",
+    "musclesWorked": ["Lower Back", "Obliques", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/supine-spinal-twist.png"
+  },
+  {
+    "name": "Reclining Hero",
+    "description": "Ajoelhado sentado entre os calcanhares, deite para tras apoiando nas costas.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/reclining-hero.png"
+  }
+]

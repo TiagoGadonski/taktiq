@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Parallel Bar Dip",
+    "description": "Nas paralelas, desça flexionando cotovelos ate 90 graus e empurre de volta. Trabalha peito e triceps.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/parallel-bar-dip.png"
+  },
+  {
+    "name": "Chest Dip",
+    "description": "Dip com tronco inclinado para frente. Maior enfase no peitoral.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/chest-dip.png"
+  },
+  {
+    "name": "Tricep Dip",
+    "description": "Dip com tronco mais vertical. Maior enfase nos triceps.",
+    "musclesWorked": ["Triceps", "Chest", "Shoulders"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tricep-dip.png"
+  },
+  {
+    "name": "Korean Dip",
+    "description": "Dip com barra atras do corpo. Trabalho diferente de ombros e triceps.",
+    "musclesWorked": ["Triceps", "Shoulders", "Chest"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/korean-dip.png"
+  },
+  {
+    "name": "Bench Dip",
+    "description": "Maos no banco atras de voce, pes no chao ou elevados. Desça e empurre usando triceps.",
+    "musclesWorked": ["Triceps", "Shoulders", "Chest"],
+    "equipment": ["Bench"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bench-dip.png"
+  },
+  {
+    "name": "Straight Bar Dip",
+    "description": "Dip executado em uma unica barra reta. Requer mais estabilidade e tecnica.",
+    "musclesWorked": ["Triceps", "Chest", "Core"],
+    "equipment": ["Bar"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/straight-bar-dip.png"
+  },
+  {
+    "name": "Ring Dip",
+    "description": "Dip nas argolas. A instabilidade aumenta drasticamente a dificuldade.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-dip.png"
+  },
+  {
+    "name": "Negative Dip",
+    "description": "Suba com assistencia e desça lentamente em 5+ segundos. Progressao para dip completo.",
+    "musclesWorked": ["Triceps", "Chest", "Shoulders"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/negative-dip.png"
+  },
+  {
+    "name": "Assisted Dip Band",
+    "description": "Dip com band elastica nos pes ou joelhos para assistencia.",
+    "musclesWorked": ["Triceps", "Chest", "Shoulders"],
+    "equipment": ["Parallel Bars", "Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/assisted-dip-band.png"
+  },
+  {
+    "name": "L-Sit Dip",
+    "description": "Dip mantendo as pernas estendidas a frente em posicao de L. Muito desafiador.",
+    "musclesWorked": ["Triceps", "Chest", "Abs", "Hip Flexors"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/l-sit-dip.png"
+  },
+  {
+    "name": "Ring Push-Up",
+    "description": "Push-up nas argolas. Instabilidade trabalha intensamente estabilizadores.",
+    "musclesWorked": ["Chest", "Triceps", "Core", "Shoulders"],
+    "equipment": ["Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-push-up.png"
+  },
+  {
+    "name": "Ring Row",
+    "description": "Inverted row nas argolas. Permite rotacao natural das maos.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-row.png"
+  },
+  {
+    "name": "Ring Support Hold",
+    "description": "Mantenha posicao de suporte nas argolas com bracos retos. Treina estabilidade basica.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-support-hold.png"
+  },
+  {
+    "name": "Ring Turn Out",
+    "description": "No suporte nas argolas, rotacione as argolas para fora (RTO). Base para progressoes avancadas.",
+    "musclesWorked": ["Shoulders", "Biceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-turn-out.png"
+  },
+  {
+    "name": "Ring Muscle-Up",
+    "description": "Muscle-up executado nas argolas. Ainda mais desafiador que na barra.",
+    "musclesWorked": ["Back", "Chest", "Triceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-muscle-up.png"
+  },
+  {
+    "name": "Ring Face Pull",
+    "description": "Puxe as argolas em direcao ao rosto com cotovelos altos. Trabalha ombros posteriores.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-face-pull.png"
+  },
+  {
+    "name": "Ring Fly",
+    "description": "Push-up nas argolas abrindo os bracos lateralmente. Trabalho intenso de peito.",
+    "musclesWorked": ["Chest", "Shoulders", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-fly.png"
+  },
+  {
+    "name": "Ring Tricep Extension",
+    "description": "Inclinado para frente com maos nas argolas, estenda os cotovelos empurrando o corpo.",
+    "musclesWorked": ["Triceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-tricep-extension.png"
+  },
+  {
+    "name": "Ring Bicep Curl",
+    "description": "Inclinado para tras com maos nas argolas, flexione os cotovelos puxando o corpo.",
+    "musclesWorked": ["Biceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ring-bicep-curl.png"
+  },
+  {
+    "name": "L-Sit",
+    "description": "Suspenso em barras, argolas ou chao, mantenha pernas estendidas a frente em L.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Triceps"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/l-sit.png"
+  },
+  {
+    "name": "L-Sit on Floor",
+    "description": "L-sit executado no chao com maos apoiadas. Mais acessivel que paralelas.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/l-sit-floor.png"
+  },
+  {
+    "name": "V-Sit",
+    "description": "L-sit com pernas elevadas acima da horizontal, formando V. Progressao do L-sit.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Triceps"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/v-sit.png"
+  },
+  {
+    "name": "Manna",
+    "description": "V-sit levado ao extremo com pernas estendidas acima e atras. Skill muito avancado.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Triceps", "Shoulders"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/manna.png"
+  },
+  {
+    "name": "Tuck L-Sit",
+    "description": "L-sit com joelhos dobrados junto ao peito. Progressao para L-sit completo.",
+    "musclesWorked": ["Abs", "Hip Flexors", "Triceps"],
+    "equipment": ["Parallel Bars"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tuck-l-sit.png"
+  },
+  {
+    "name": "Planche Lean",
+    "description": "Em prancha, incline o corpo para frente deslocando peso para as maos. Progressao para planche.",
+    "musclesWorked": ["Shoulders", "Core", "Chest"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/planche-lean.png"
+  },
+  {
+    "name": "Tuck Planche",
+    "description": "Planche com joelhos dobrados junto ao peito. Progressao para planche completa.",
+    "musclesWorked": ["Shoulders", "Core", "Chest", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tuck-planche.png"
+  },
+  {
+    "name": "Straddle Planche",
+    "description": "Planche com pernas abertas. Progressao entre tuck e full planche.",
+    "musclesWorked": ["Shoulders", "Core", "Chest", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/straddle-planche.png"
+  },
+  {
+    "name": "Full Planche",
+    "description": "Corpo horizontal suspenso apenas pelas maos com bracos retos. Skill de elite.",
+    "musclesWorked": ["Shoulders", "Core", "Chest", "Triceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/full-planche.png"
+  },
+  {
+    "name": "Back Lever",
+    "description": "Corpo horizontal suspenso por tras com bracos retos. Skill avancado de argolas/barra.",
+    "musclesWorked": ["Shoulders", "Back", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/back-lever.png"
+  },
+  {
+    "name": "Iron Cross",
+    "description": "Suspenso nas argolas com bracos estendidos lateralmente formando cruz. Skill de elite.",
+    "musclesWorked": ["Chest", "Shoulders", "Biceps", "Core"],
+    "equipment": ["Rings"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/iron-cross.png"
+  }
+]

@@ -1,0 +1,728 @@
+[
+  {
+    "name": "Donkey Kick",
+    "description": "Extensão de quadril em quatro apoios para isolamento de glúteo máximo.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em quatro apoios com mãos sob os ombros e joelhos sob os quadris",
+      "Mantenha o joelho flexionado a 90 graus",
+      "Eleve a perna para trás e para cima mantendo o joelho dobrado",
+      "Empurre o calcanhar em direção ao teto",
+      "Contraia o glúteo no topo sem arquear a lombar",
+      "Desça controladamente sem encostar o joelho no chão"
+    ],
+    "progressions": ["Donkey Kick com Caneleira", "Donkey Kick com Banda"],
+    "regressions": ["Donkey Kick Parcial"],
+    "tips": [
+      "Não arquee a lombar para subir mais",
+      "Foque em empurrar o calcanhar para cima",
+      "Mantenha o core ativado"
+    ],
+    "commonMistakes": [
+      "Arquear excessivamente a lombar",
+      "Estender o joelho durante o movimento",
+      "Usar impulso"
+    ],
+    "notes": "Exercício clássico de isolamento para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Donkey Kick com Banda",
+    "description": "Donkey kick com resistência adicional de banda elástica.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Coloque a banda ao redor das coxas ou pé e mãos",
+      "Fique em quatro apoios",
+      "Execute o donkey kick contra a resistência da banda",
+      "Mantenha o joelho flexionado a 90 graus",
+      "Contraia o glúteo no topo",
+      "Retorne controladamente"
+    ],
+    "progressions": ["Banda com Maior Resistência"],
+    "regressions": ["Donkey Kick sem Banda"],
+    "tips": [
+      "A banda adiciona resistência progressiva",
+      "Mantenha a técnica apesar da resistência",
+      "Não arquee a lombar"
+    ],
+    "commonMistakes": [
+      "Arquear a lombar para compensar",
+      "Banda mal posicionada",
+      "Movimento descontrolado"
+    ],
+    "notes": "Progressão eficaz do donkey kick básico.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Donkey Kick na Máquina",
+    "description": "Donkey kick executado na máquina de glúteos.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste a máquina para sua altura",
+      "Apoie os antebraços nos suportes",
+      "Posicione um pé na plataforma",
+      "Empurre a plataforma para trás e para cima",
+      "Contraia o glúteo no topo do movimento",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Máquina com Mais Carga"],
+    "regressions": ["Máquina com Menos Carga"],
+    "tips": [
+      "A máquina guia o movimento corretamente",
+      "Foque na contração do glúteo",
+      "Não use impulso"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Não contrair no pico",
+      "Amplitude incompleta"
+    ],
+    "notes": "Versão guiada do donkey kick para isolamento eficaz.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Frog Pump",
+    "description": "Ponte com solas dos pés juntas para ativação máxima de glúteos.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Adductors"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de costas com as solas dos pés juntas (posição de borboleta)",
+      "Joelhos caídos para os lados",
+      "Braços ao lado do corpo",
+      "Eleve o quadril contraindo fortemente os glúteos",
+      "Mantenha as solas dos pés juntas durante todo o movimento",
+      "Desça controladamente"
+    ],
+    "progressions": ["Frog Pump com Peso"],
+    "regressions": ["Frog Pump Parcial"],
+    "tips": [
+      "Posição reduz a contribuição dos isquiotibiais",
+      "Permite foco máximo nos glúteos",
+      "Alto volume de repetições funciona bem"
+    ],
+    "commonMistakes": [
+      "Não manter as solas juntas",
+      "Usar os isquiotibiais para elevar",
+      "Hiperextender a lombar"
+    ],
+    "notes": "Exercício excelente para ativação isolada de glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Frog Pump com Peso",
+    "description": "Frog pump com carga adicional no quadril.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Adductors"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para frog pump normal",
+      "Coloque um halter ou anilha no quadril",
+      "Segure o peso com as mãos para estabilidade",
+      "Execute o frog pump normalmente",
+      "Contraia os glúteos no topo",
+      "Desça controladamente"
+    ],
+    "progressions": ["Frog Pump com Mais Peso"],
+    "regressions": ["Frog Pump sem Peso"],
+    "tips": [
+      "Adicione peso progressivamente",
+      "Mantenha a técnica perfeita",
+      "Pode usar halter, anilha ou barra"
+    ],
+    "commonMistakes": [
+      "Peso muito pesado comprometendo a forma",
+      "Perder a posição dos pés",
+      "Hiperextender a lombar"
+    ],
+    "notes": "Progressão do frog pump para maior intensidade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Pull Through",
+    "description": "Extensão de quadril puxando cabo entre as pernas.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "LowerBack"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia baixa",
+      "Fique de costas para a máquina",
+      "Segure a corda entre as pernas",
+      "Incline à frente empurrando o quadril para trás",
+      "Estenda o quadril puxando a corda entre as pernas",
+      "Contraia os glúteos fortemente no topo"
+    ],
+    "progressions": ["Pull Through com Mais Carga"],
+    "regressions": ["Pull Through com Menos Carga"],
+    "tips": [
+      "Excelente para aprender extensão de quadril",
+      "O cabo mantém tensão constante",
+      "Foque na contração dos glúteos"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar os braços para puxar",
+      "Não contrair os glúteos no topo"
+    ],
+    "notes": "Exercício eficaz e acessível para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Kettlebell Swing",
+    "description": "Balanço explosivo com kettlebell focando na extensão de quadril.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione o kettlebell à frente",
+      "Agache e segure com ambas as mãos",
+      "Puxe para trás entre as pernas (hike)",
+      "Estenda o quadril explosivamente contraindo os glúteos",
+      "O kettlebell sobe pelo impulso do quadril",
+      "Absorva o retorno flexionando o quadril"
+    ],
+    "progressions": ["Swing Mais Pesado", "Swing Americano"],
+    "regressions": ["Hip Hinge com Kettlebell"],
+    "tips": [
+      "O poder vem dos glúteos, não dos braços",
+      "Contraia os glúteos como se apertasse uma moeda",
+      "Mantenha os braços relaxados"
+    ],
+    "commonMistakes": [
+      "Usar os braços para levantar",
+      "Agachar ao invés de hinge",
+      "Não contrair os glúteos no topo"
+    ],
+    "notes": "Exercício de potência excelente para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Good Morning",
+    "description": "Inclinação à frente com barra para glúteos e cadeia posterior.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra nos ombros como no agachamento",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás inclinando o tronco à frente",
+      "Mantenha a lombar neutra",
+      "Desça até o tronco ficar quase paralelo ao chão",
+      "Estenda o quadril contraindo os glúteos para retornar"
+    ],
+    "progressions": ["Good Morning com Pausa"],
+    "regressions": ["Good Morning com Bastão"],
+    "tips": [
+      "Foque na extensão de quadril ao retornar",
+      "Contraia fortemente os glúteos no topo",
+      "Use cargas moderadas"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Não contrair os glúteos ao subir",
+      "Usar carga excessiva"
+    ],
+    "notes": "Exercício auxiliar eficaz para glúteos e posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Reverse Lunge",
+    "description": "Afundo reverso para trabalho focado em glúteos.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Quadriceps", "Hamstrings"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com halteres ao lado do corpo",
+      "Dê um passo para trás com uma perna",
+      "Desça até o joelho traseiro quase tocar o chão",
+      "Incline levemente o tronco à frente para mais glúteos",
+      "Empurre para retornar contraindo o glúteo",
+      "Alterne as pernas"
+    ],
+    "progressions": ["Reverse Lunge com Déficit"],
+    "regressions": ["Reverse Lunge sem Peso"],
+    "tips": [
+      "O passo para trás dá mais controle",
+      "Inclinação do tronco aumenta ativação de glúteos",
+      "Mais seguro para joelhos que afundo à frente"
+    ],
+    "commonMistakes": [
+      "Tronco muito vertical",
+      "Joelho da frente cedendo",
+      "Passo muito curto"
+    ],
+    "notes": "Variação segura e eficaz para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Curtsy Lunge",
+    "description": "Afundo cruzado para trás trabalhando glúteo médio e máximo.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Quadriceps", "Adductors"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé com halteres ou mãos na cintura",
+      "Dê um passo diagonal para trás, cruzando atrás da perna de apoio",
+      "Desça em afundo mantendo o tronco ereto",
+      "O movimento é como uma reverência (curtsy)",
+      "Empurre para retornar à posição inicial",
+      "Alterne as pernas"
+    ],
+    "progressions": ["Curtsy Lunge com Mais Peso"],
+    "regressions": ["Curtsy Lunge sem Peso"],
+    "tips": [
+      "Trabalha o glúteo médio de forma única",
+      "Mantenha o equilíbrio durante o movimento",
+      "O cruzamento aumenta o trabalho do glúteo médio"
+    ],
+    "commonMistakes": [
+      "Não cruzar suficientemente",
+      "Perder o equilíbrio",
+      "Joelho cedendo para dentro"
+    ],
+    "notes": "Exercício único para glúteo médio e máximo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Single Leg RDL",
+    "description": "RDL unilateral para glúteos e equilíbrio.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé em uma perna segurando halter(es)",
+      "Joelho de apoio levemente flexionado",
+      "Incline à frente estendendo a perna livre para trás",
+      "Mantenha a lombar neutra e quadril nivelado",
+      "Desça até sentir alongamento no posterior",
+      "Retorne contraindo glúteo fortemente"
+    ],
+    "progressions": ["Single Leg RDL com Mais Peso"],
+    "regressions": ["Single Leg RDL com Apoio"],
+    "tips": [
+      "Excelente para propriocepção e equilíbrio",
+      "A perna livre age como contrapeso",
+      "Foque na contração do glúteo ao subir"
+    ],
+    "commonMistakes": [
+      "Quadril girando/abrindo",
+      "Arredondar a lombar",
+      "Não contrair o glúteo ao subir"
+    ],
+    "notes": "Exercício funcional completo para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Sumo Deadlift",
+    "description": "Levantamento terra sumo para glúteos e adutores.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Adductors", "Back", "Quadriceps"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione os pés bem afastados, dedos apontando para fora",
+      "A barra fica entre os pés",
+      "Agache e segure a barra com pegada dentro dos joelhos",
+      "Mantenha o tronco mais vertical que no convencional",
+      "Empurre o chão afastando e estenda o quadril",
+      "Contraia os glúteos fortemente no topo"
+    ],
+    "progressions": ["Sumo com Mais Carga"],
+    "regressions": ["Sumo com Menos Carga"],
+    "tips": [
+      "A posição larga enfatiza glúteos",
+      "O tronco fica mais vertical",
+      "Joelhos empurram para fora"
+    ],
+    "commonMistakes": [
+      "Joelhos cedendo para dentro",
+      "Não contrair os glúteos no topo",
+      "Arredondar a lombar"
+    ],
+    "notes": "Variação do terra que enfatiza glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hip Thrust com Pausa",
+    "description": "Hip thrust com pausa no topo para contração máxima.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o hip thrust normalmente",
+      "No topo do movimento, pause por 2-3 segundos",
+      "Contraia os glúteos o mais forte possível durante a pausa",
+      "Mantenha o corpo em linha reta",
+      "Desça de forma controlada após a pausa",
+      "Repita com a pausa em cada repetição"
+    ],
+    "progressions": ["Pausa de 5 Segundos"],
+    "regressions": ["Hip Thrust sem Pausa"],
+    "tips": [
+      "A pausa aumenta o tempo sob tensão",
+      "Foque na contração máxima durante a pausa",
+      "Use carga mais leve que no hip thrust normal"
+    ],
+    "commonMistakes": [
+      "Pausa muito curta",
+      "Relaxar durante a pausa",
+      "Hiperextender a lombar"
+    ],
+    "notes": "Técnica de intensificação para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hip Thrust 1 e 1/2",
+    "description": "Hip thrust com repetição parcial adicional.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o hip thrust subindo completamente",
+      "Desça até a metade do caminho",
+      "Suba novamente completamente",
+      "Desça totalmente",
+      "Isso conta como 1 repetição",
+      "Continue o padrão"
+    ],
+    "progressions": ["1 e 1/2 com Mais Carga"],
+    "regressions": ["Hip Thrust Normal"],
+    "tips": [
+      "Aumenta drasticamente o tempo sob tensão",
+      "Use carga mais leve que o normal",
+      "Excelente para hipertrofia"
+    ],
+    "commonMistakes": [
+      "Não fazer a meia repetição",
+      "Carga muito pesada",
+      "Perder a contagem"
+    ],
+    "notes": "Técnica para aumentar estímulo sem aumentar carga.",
+    "videoUrl": ""
+  },
+  {
+    "name": "B-Stance Hip Thrust",
+    "description": "Hip thrust com uma perna à frente para trabalho semi-unilateral.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione-se para hip thrust normal",
+      "Coloque um pé ligeiramente à frente, apoiado apenas no calcanhar",
+      "A perna de trabalho fica em posição normal",
+      "Execute o hip thrust focando na perna de trabalho",
+      "A perna à frente fornece apenas estabilidade",
+      "Complete as repetições e troque de perna"
+    ],
+    "progressions": ["Hip Thrust Unilateral"],
+    "regressions": ["Hip Thrust Bilateral"],
+    "tips": [
+      "Ponte entre bilateral e unilateral",
+      "70-80% do trabalho na perna de trás",
+      "Mais estável que unilateral puro"
+    ],
+    "commonMistakes": [
+      "Usar muito a perna da frente",
+      "Não focar na perna de trabalho",
+      "Posição incorreta do pé à frente"
+    ],
+    "notes": "Progressão intermediária para trabalho unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Elevated Hip Thrust",
+    "description": "Hip thrust com pés elevados para maior amplitude.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Configure o hip thrust normalmente",
+      "Posicione os pés em uma superfície elevada (step, banco baixo)",
+      "A elevação aumenta a amplitude do movimento",
+      "Execute o hip thrust normalmente",
+      "O alongamento maior desafia mais os glúteos",
+      "Contraia fortemente no topo"
+    ],
+    "progressions": ["Elevação Maior"],
+    "regressions": ["Hip Thrust com Pés no Chão"],
+    "tips": [
+      "A elevação aumenta o alongamento",
+      "Maior amplitude = maior estímulo",
+      "Use carga moderada inicialmente"
+    ],
+    "commonMistakes": [
+      "Elevação muito alta",
+      "Perder a forma pela amplitude maior",
+      "Hiperextender a lombar"
+    ],
+    "notes": "Variação para maior amplitude de movimento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hip Thrust com Banda",
+    "description": "Hip thrust com banda ao redor dos joelhos para ativação de glúteo médio.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Abductors"],
+    "equipment": "ResistanceBand",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se para hip thrust",
+      "Coloque a banda ao redor dos joelhos",
+      "Execute o hip thrust enquanto empurra os joelhos para fora",
+      "A banda força abdução constante",
+      "Contraia tanto glúteo máximo quanto médio",
+      "Mantenha os joelhos afastados durante todo o movimento"
+    ],
+    "progressions": ["Banda Mais Forte + Barra"],
+    "regressions": ["Hip Thrust sem Banda"],
+    "tips": [
+      "Trabalha glúteo máximo E médio simultaneamente",
+      "Empurre constantemente contra a banda",
+      "Excelente para ativação completa"
+    ],
+    "commonMistakes": [
+      "Deixar os joelhos cederem para dentro",
+      "Não empurrar contra a banda",
+      "Banda muito frouxa"
+    ],
+    "notes": "Variação que adiciona trabalho de glúteo médio.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Marching Hip Thrust",
+    "description": "Hip thrust com marcha alternando as pernas.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Assuma a posição de hip thrust no topo",
+      "Mantenha o quadril elevado durante todo o exercício",
+      "Eleve um joelho em direção ao peito",
+      "Retorne o pé ao chão e eleve o outro joelho",
+      "Continue alternando em movimento de marcha",
+      "Mantenha o quadril estável e elevado"
+    ],
+    "progressions": ["Marching Hip Thrust com Peso"],
+    "regressions": ["Hip Thrust Hold"],
+    "tips": [
+      "Desafia a estabilidade do quadril",
+      "Mantenha o quadril nivelado ao marchar",
+      "Trabalha core além dos glúteos"
+    ],
+    "commonMistakes": [
+      "Quadril caindo durante a marcha",
+      "Quadril girando de um lado para outro",
+      "Movimento muito rápido"
+    ],
+    "notes": "Variação dinâmica que trabalha estabilidade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Cable Pull Through com Pausa",
+    "description": "Pull through com pausa na contração para intensificação.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute o pull through normalmente",
+      "No topo, pause por 2-3 segundos",
+      "Contraia os glúteos o mais forte possível",
+      "Mantenha a tensão durante toda a pausa",
+      "Desça de forma controlada",
+      "Repita com pausa em cada repetição"
+    ],
+    "progressions": ["Pausa de 5 Segundos"],
+    "regressions": ["Pull Through sem Pausa"],
+    "tips": [
+      "A pausa aumenta o tempo de contração",
+      "Foque na contração máxima dos glúteos",
+      "Use carga moderada"
+    ],
+    "commonMistakes": [
+      "Pausa muito curta",
+      "Relaxar durante a pausa",
+      "Carga excessiva"
+    ],
+    "notes": "Técnica de intensificação para o pull through.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Glute Kickback em Quatro Apoios",
+    "description": "Extensão de quadril em quatro apoios com perna estendida.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em quatro apoios com mãos e joelhos no chão",
+      "Estenda uma perna para trás mantendo-a reta",
+      "Eleve a perna estendida para trás e para cima",
+      "Contraia o glúteo no topo sem arquear a lombar",
+      "Desça controladamente sem encostar no chão",
+      "Complete e troque de perna"
+    ],
+    "progressions": ["Kickback com Caneleira"],
+    "regressions": ["Kickback com Joelho Flexionado"],
+    "tips": [
+      "Perna estendida aumenta a alavanca",
+      "Não arquee a lombar para subir mais",
+      "Foque na contração do glúteo"
+    ],
+    "commonMistakes": [
+      "Arquear a lombar",
+      "Flexionar o joelho durante o movimento",
+      "Usar impulso"
+    ],
+    "notes": "Variação do kickback com maior amplitude.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Standing Kickback no Cabo",
+    "description": "Extensão de quadril em pé no cabo para isolamento.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a tornozeleira na polia baixa",
+      "Fique de frente para a máquina em pé",
+      "Apoie as mãos na máquina para estabilidade",
+      "Estenda o quadril empurrando a perna para trás",
+      "Mantenha a perna reta ou levemente flexionada",
+      "Contraia o glúteo no pico e retorne"
+    ],
+    "progressions": ["Kickback com Mais Carga"],
+    "regressions": ["Kickback com Menos Carga"],
+    "tips": [
+      "O cabo mantém tensão constante",
+      "Não arquee a lombar",
+      "Mantenha o core ativado"
+    ],
+    "commonMistakes": [
+      "Arquear a lombar para compensar",
+      "Usar impulso",
+      "Amplitude excessiva"
+    ],
+    "notes": "Exercício de isolamento eficaz para glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Quadruped Hip Extension",
+    "description": "Extensão de quadril em quatro apoios com máxima contração.",
+    "muscleGroup": "Glutes",
+    "secondaryMuscles": ["Hamstrings", "Core"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em quatro apoios",
+      "Mantenha o joelho flexionado a 90 graus",
+      "Eleve a coxa até ficar paralela ao chão",
+      "Empurre o calcanhar em direção ao teto",
+      "Contraia fortemente o glúteo no topo",
+      "Desça controladamente"
+    ],
+    "progressions": ["Com Caneleira ou Banda"],
+    "regressions": ["Amplitude Reduzida"],
+    "tips": [
+      "Foque em empurrar o calcanhar para cima",
+      "Não arquee a lombar",
+      "Mantenha o core ativado"
+    ],
+    "commonMistakes": [
+      "Arquear a lombar",
+      "Não contrair no topo",
+      "Movimento descontrolado"
+    ],
+    "notes": "Exercício básico para isolamento de glúteos.",
+    "videoUrl": ""
+  }
+]

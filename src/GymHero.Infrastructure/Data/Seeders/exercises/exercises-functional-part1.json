@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Kettlebell Goblet Squat",
+    "description": "Segure kettlebell proximo ao peito com cotovelos entre os joelhos. Agache mantendo tronco ereto e retorne.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-goblet-squat.png"
+  },
+  {
+    "name": "Kettlebell Deadlift",
+    "description": "Levantamento terra com kettlebell entre os pes. Mantenha costas retas e impulsione com quadris.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Back", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-deadlift.png"
+  },
+  {
+    "name": "Kettlebell Swing",
+    "description": "Balance o kettlebell entre as pernas e impulsione com os quadris ate altura do peito ou acima da cabeca.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-swing.png"
+  },
+  {
+    "name": "Kettlebell American Swing",
+    "description": "Kettlebell swing levando o peso completamente acima da cabeca. Maior amplitude que o swing russo.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-american-swing.png"
+  },
+  {
+    "name": "Single Arm Kettlebell Swing",
+    "description": "Kettlebell swing executado com uma mao. Adiciona desafio de estabilidade e anti-rotacao.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/single-arm-kettlebell-swing.png"
+  },
+  {
+    "name": "Kettlebell High Pull",
+    "description": "Swing com puxada alta, trazendo o cotovelo alto e kettlebell na altura do ombro.",
+    "musclesWorked": ["Shoulders", "Back", "Glutes", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-high-pull.png"
+  },
+  {
+    "name": "Kettlebell Clean",
+    "description": "Traga o kettlebell do chao ou swing para posicao de rack no ombro em movimento fluido.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core", "Back"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-clean.png"
+  },
+  {
+    "name": "Kettlebell Press",
+    "description": "Da posicao de rack, pressione o kettlebell acima da cabeca. Mantenha core contraido.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-press.png"
+  },
+  {
+    "name": "Kettlebell Push Press",
+    "description": "Press com auxilio de impulso das pernas. Use flexao de joelhos para gerar momentum.",
+    "musclesWorked": ["Shoulders", "Triceps", "Quadriceps", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-push-press.png"
+  },
+  {
+    "name": "Kettlebell Snatch",
+    "description": "Leve o kettlebell do chao ou swing diretamente acima da cabeca em um movimento.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core", "Back"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-snatch.png"
+  },
+  {
+    "name": "Kettlebell Windmill",
+    "description": "Com kettlebell acima da cabeca, flexione lateralmente tocando o pe oposto mantendo braco estendido.",
+    "musclesWorked": ["Core", "Shoulders", "Hamstrings", "Obliques"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-windmill.png"
+  },
+  {
+    "name": "Kettlebell Halo",
+    "description": "Circule o kettlebell ao redor da cabeca alternando direcoes. Trabalha mobilidade e estabilidade de ombros.",
+    "musclesWorked": ["Shoulders", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-halo.png"
+  },
+  {
+    "name": "Kettlebell Figure 8",
+    "description": "Passe o kettlebell entre as pernas em formato de 8. Trabalha coordenacao e core.",
+    "musclesWorked": ["Core", "Shoulders", "Glutes"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-figure-8.png"
+  },
+  {
+    "name": "Kettlebell Thruster",
+    "description": "Goblet squat seguido de press overhead em movimento continuo. Exercicio de corpo inteiro.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-thruster.png"
+  },
+  {
+    "name": "Double Kettlebell Swing",
+    "description": "Kettlebell swing com dois kettlebells simultaneamente. Requer maior estabilidade e forca.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/double-kettlebell-swing.png"
+  },
+  {
+    "name": "Double Kettlebell Clean",
+    "description": "Clean com dois kettlebells para posicao de rack frontal. Base para presses e squats duplos.",
+    "musclesWorked": ["Shoulders", "Glutes", "Core", "Back"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/double-kettlebell-clean.png"
+  },
+  {
+    "name": "Double Kettlebell Front Squat",
+    "description": "Agachamento frontal com dois kettlebells em posicao de rack. Desafia core e membros superiores.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core", "Shoulders"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/double-kettlebell-front-squat.png"
+  },
+  {
+    "name": "Kettlebell Renegade Row",
+    "description": "Em prancha com maos nos kettlebells, alterne remando cada kettlebell mantendo quadril estavel.",
+    "musclesWorked": ["Back", "Core", "Biceps"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-renegade-row.png"
+  },
+  {
+    "name": "Kettlebell Farmer Carry",
+    "description": "Caminhe segurando kettlebells pesados em cada mao. Trabalha grip, core e postura.",
+    "musclesWorked": ["Core", "Forearms", "Traps"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-farmer-carry.png"
+  },
+  {
+    "name": "Kettlebell Rack Carry",
+    "description": "Caminhe com kettlebells em posicao de rack na frente dos ombros. Desafia estabilidade do core.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Kettlebells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-rack-carry.png"
+  },
+  {
+    "name": "Kettlebell Overhead Carry",
+    "description": "Caminhe com kettlebell mantido acima da cabeca. Trabalha estabilidade de ombro e core.",
+    "musclesWorked": ["Shoulders", "Core"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/kettlebell-overhead-carry.png"
+  },
+  {
+    "name": "TRX Row",
+    "description": "Inclinado para tras segurando as alcas do TRX, puxe o peito em direcao as maos e retorne.",
+    "musclesWorked": ["Back", "Biceps", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-row.png"
+  },
+  {
+    "name": "TRX Chest Press",
+    "description": "De frente para o TRX inclinado para frente, empurre o corpo para cima como um push-up suspenso.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-chest-press.png"
+  },
+  {
+    "name": "TRX Push-Up",
+    "description": "Push-up com pes nas alcas do TRX. A instabilidade aumenta trabalho de core e estabilizadores.",
+    "musclesWorked": ["Chest", "Triceps", "Core", "Shoulders"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-push-up.png"
+  },
+  {
+    "name": "TRX Squat",
+    "description": "Agachamento segurando as alcas do TRX para assistencia e equilibrio. Otimo para iniciantes.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["TRX"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-squat.png"
+  },
+  {
+    "name": "TRX Lunge",
+    "description": "Afundo com pe traseiro nas alcas do TRX. Similar ao bulgarian split squat com instabilidade.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-lunge.png"
+  },
+  {
+    "name": "TRX Hamstring Curl",
+    "description": "Deitado de costas com calcanhares nas alcas, eleve o quadril e flexione os joelhos.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-hamstring-curl.png"
+  },
+  {
+    "name": "TRX Bicep Curl",
+    "description": "Inclinado para tras com bracos estendidos, flexione os cotovelos trazendo as maos ao rosto.",
+    "musclesWorked": ["Biceps", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Beginner",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-bicep-curl.png"
+  },
+  {
+    "name": "TRX Tricep Extension",
+    "description": "Inclinado para frente com bracos acima da cabeca, estenda os cotovelos empurrando o corpo para cima.",
+    "musclesWorked": ["Triceps", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-tricep-extension.png"
+  },
+  {
+    "name": "TRX Y Fly",
+    "description": "Inclinado para tras, puxe o corpo para cima abrindo os bracos em forma de Y acima da cabeca.",
+    "musclesWorked": ["Shoulders", "Back", "Core"],
+    "equipment": ["TRX"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/functional/trx-y-fly.png"
+  }
+]

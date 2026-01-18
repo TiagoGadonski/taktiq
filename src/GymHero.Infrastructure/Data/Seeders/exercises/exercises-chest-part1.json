@@ -1,0 +1,1326 @@
+[
+  {
+    "name": "Supino Reto com Barra",
+    "description": "Exercício fundamental para desenvolvimento do peitoral, realizado deitado em banco reto com barra olímpica.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto com os pés firmemente apoiados no chão",
+      "Segure a barra com pegada pronada, um pouco mais larga que a largura dos ombros",
+      "Retire a barra do suporte e posicione-a diretamente acima do peito com os braços estendidos",
+      "Inspire e desça a barra de forma controlada até tocar levemente a parte média do peito",
+      "Pause brevemente e empurre a barra para cima, expirando durante o esforço",
+      "Estenda completamente os braços sem travar os cotovelos"
+    ],
+    "progressions": [
+      "Supino com pausa no peito (2-3 segundos)",
+      "Supino com tempo controlado (3-1-3)",
+      "Supino com banda elástica para resistência variável"
+    ],
+    "regressions": [
+      "Supino no Smith Machine",
+      "Supino com halteres",
+      "Supino com carga reduzida focando na técnica"
+    ],
+    "tips": [
+      "Mantenha as escápulas retraídas e deprimidas durante todo o movimento",
+      "Crie um pequeno arco na lombar, mas mantenha o glúteo no banco",
+      "Mantenha os cotovelos em ângulo de 45-75° em relação ao tronco",
+      "Envolva o core para estabilizar o tronco"
+    ],
+    "commonMistakes": [
+      "Quicar a barra no peito - desça de forma controlada",
+      "Levantar o glúteo do banco - mantenha contato constante",
+      "Cotovelos muito abertos (90°) - aumenta risco de lesão no ombro",
+      "Não completar a amplitude - desça até o peito e suba até extensão completa"
+    ],
+    "notes": "Sempre use presilhas de segurança e tenha spotter para cargas pesadas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+reto+barra+execução+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Inclinado com Barra",
+    "description": "Variação do supino com banco inclinado para enfatizar a porção clavicular (superior) do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste o banco em inclinação de 30-45 graus",
+      "Deite no banco com os pés firmes no chão",
+      "Segure a barra com pegada um pouco mais larga que os ombros",
+      "Retire a barra e posicione sobre a parte superior do peito",
+      "Desça a barra controladamente até tocar a parte alta do peitoral",
+      "Empurre para cima até extensão completa dos braços"
+    ],
+    "progressions": [
+      "Aumentar a inclinação para 45°",
+      "Supino inclinado com pausa",
+      "Supino inclinado com tempo excêntrico lento"
+    ],
+    "regressions": [
+      "Supino inclinado no Smith",
+      "Supino inclinado com halteres",
+      "Reduzir a inclinação para 15-20°"
+    ],
+    "tips": [
+      "Inclinação de 30° é ideal para peitoral superior",
+      "Acima de 45° o trabalho transfere mais para ombros",
+      "Mantenha escápulas retraídas mesmo no banco inclinado",
+      "Desça a barra em direção à clavícula"
+    ],
+    "commonMistakes": [
+      "Banco muito inclinado - acima de 45° trabalha mais ombro",
+      "Trajetória incorreta - a barra deve ir em direção à clavícula",
+      "Perder a retração escapular durante o movimento",
+      "Arquear excessivamente a lombar"
+    ],
+    "notes": "Excelente para desenvolver o peitoral superior que muitos negligenciam.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+inclinado+barra+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Declinado com Barra",
+    "description": "Variação do supino com banco declinado para enfatizar a porção inferior do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste o banco em declinação de 15-30 graus",
+      "Prenda os pés no suporte para estabilidade",
+      "Deite no banco e segure a barra com pegada média",
+      "Retire a barra e posicione sobre a parte inferior do peito",
+      "Desça a barra até tocar a parte baixa do peitoral",
+      "Empurre para cima em linha reta até extensão completa"
+    ],
+    "progressions": [
+      "Aumentar a declinação",
+      "Supino declinado com pausa no peito",
+      "Adicionar bandas elásticas"
+    ],
+    "regressions": [
+      "Supino declinado no Smith",
+      "Supino declinado com halteres",
+      "Reduzir a carga e focar na técnica"
+    ],
+    "tips": [
+      "Declinação de 15-20° é suficiente para a maioria",
+      "Mantenha a cabeça no banco durante todo movimento",
+      "A trajetória da barra é mais reta que no supino reto",
+      "Core contraído para estabilização"
+    ],
+    "commonMistakes": [
+      "Declinação excessiva - causa desconforto e não traz benefício extra",
+      "Soltar a barra muito rápido por causa do ângulo",
+      "Levantar a cabeça do banco",
+      "Não prender bem os pés no suporte"
+    ],
+    "notes": "Permite cargas mais pesadas devido ao menor range de movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+declinado+barra",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Reto com Halteres",
+    "description": "Variação do supino com halteres que permite maior amplitude de movimento e trabalho unilateral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Sente no banco com os halteres apoiados nas coxas",
+      "Deite levando os halteres aos ombros com impulso das pernas",
+      "Posicione os halteres ao lado do peito com cotovelos a 45°",
+      "Empurre os halteres para cima aproximando-os ligeiramente",
+      "Desça controladamente sentindo alongamento no peitoral",
+      "Mantenha os punhos neutros ou ligeiramente pronados"
+    ],
+    "progressions": [
+      "Supino com rotação dos halteres",
+      "Supino com pausa na posição alongada",
+      "Supino alternado mantendo um halter estendido"
+    ],
+    "regressions": [
+      "Reduzir a amplitude do movimento",
+      "Usar halteres mais leves focando na conexão mente-músculo",
+      "Fazer no chão para limitar a amplitude"
+    ],
+    "tips": [
+      "Não deixe os halteres se chocarem no topo",
+      "Amplitude maior que a barra - aproveite o alongamento",
+      "Mantenha tensão constante no peitoral",
+      "Use o impulso das pernas para posicionar os halteres"
+    ],
+    "commonMistakes": [
+      "Deixar os halteres caírem rápido demais",
+      "Amplitude incompleta - aproveite o range total",
+      "Cotovelos muito abertos - mantenha a 45-70°",
+      "Bater os halteres no topo - perde tensão"
+    ],
+    "notes": "Excelente para corrigir assimetrias entre os lados.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+reto+halteres+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Inclinado com Halteres",
+    "description": "Supino inclinado com halteres para trabalho do peitoral superior com maior amplitude.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste o banco entre 30-45° de inclinação",
+      "Sente com os halteres nas coxas e deite com impulso",
+      "Posicione os halteres ao lado do peito superior",
+      "Empurre para cima em arco, aproximando os halteres",
+      "Desça controladamente até sentir alongamento máximo",
+      "Mantenha escápulas retraídas durante todo movimento"
+    ],
+    "progressions": [
+      "Aumentar tempo sob tensão com excêntrica lenta",
+      "Supino inclinado com rotação",
+      "Supino inclinado unilateral alternado"
+    ],
+    "regressions": [
+      "Reduzir inclinação para 15-20°",
+      "Diminuir a amplitude",
+      "Usar halteres mais leves"
+    ],
+    "tips": [
+      "Ângulo de 30-35° é ideal para peitoral superior",
+      "Traga os halteres em arco, não em linha reta",
+      "Sinta o alongamento na parte superior do peito",
+      "Mantenha os pés firmes no chão"
+    ],
+    "commonMistakes": [
+      "Banco muito inclinado - transfere para ombros",
+      "Movimentos rápidos sem controle",
+      "Perder tensão no topo do movimento",
+      "Não retrair as escápulas adequadamente"
+    ],
+    "notes": "Permite maior amplitude que a versão com barra.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+inclinado+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Declinado com Halteres",
+    "description": "Supino declinado com halteres para ênfase no peitoral inferior com amplitude total.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste o banco em declinação de 15-30°",
+      "Prenda os pés e deite segurando os halteres",
+      "Posicione os halteres ao lado do peito inferior",
+      "Empurre para cima aproximando levemente os halteres",
+      "Desça de forma controlada até o alongamento",
+      "Mantenha core contraído para estabilidade"
+    ],
+    "progressions": [
+      "Aumentar tempo excêntrico",
+      "Adicionar pausa na posição alongada",
+      "Fazer de forma alternada"
+    ],
+    "regressions": [
+      "Reduzir declinação",
+      "Diminuir carga",
+      "Limitar amplitude"
+    ],
+    "tips": [
+      "Declinação moderada é suficiente",
+      "Mantenha a cabeça apoiada no banco",
+      "Controle total na descida",
+      "Pés bem presos para segurança"
+    ],
+    "commonMistakes": [
+      "Declinação excessiva - desconfortável e desnecessário",
+      "Deixar os halteres caírem rápido",
+      "Levantar a cabeça do banco",
+      "Perder estabilidade dos pés"
+    ],
+    "notes": "Boa opção para quem tem desconforto com barra na versão declinada.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+declinado+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Reto no Smith Machine",
+    "description": "Supino reto guiado no Smith Machine, ideal para treinar sozinho com segurança.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione o banco reto sob a barra do Smith",
+      "Deite no banco alinhando a barra com a parte média do peito",
+      "Segure a barra com pegada média e destrave os ganchos",
+      "Desça a barra controladamente até tocar o peito",
+      "Empurre para cima até extensão completa",
+      "Trave a barra nos ganchos ao finalizar a série"
+    ],
+    "progressions": [
+      "Adicionar pausa no peito",
+      "Aumentar tempo excêntrico",
+      "Progredir para supino livre"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar os travas de segurança mais altos",
+      "Focar apenas na porção concêntrica"
+    ],
+    "tips": [
+      "Use os travas de segurança sempre",
+      "Posicione o banco para que a barra desça no peito médio",
+      "Mantenha escápulas retraídas",
+      "Ideal para treinar até a falha sozinho"
+    ],
+    "commonMistakes": [
+      "Banco mal posicionado - barra não alinha com peito",
+      "Não usar os travas de segurança",
+      "Movimentos muito rápidos",
+      "Esquecer de retrair escápulas"
+    ],
+    "notes": "Excelente para iniciantes aprenderem o padrão de movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+smith+machine+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Inclinado no Smith Machine",
+    "description": "Supino inclinado guiado no Smith para trabalho seguro do peitoral superior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione banco inclinado 30-45° sob o Smith",
+      "Alinhe a barra com a parte superior do peito",
+      "Deite e segure a barra com pegada média",
+      "Destrave e desça até o peitoral superior",
+      "Empurre para cima até extensão",
+      "Trave ao terminar a série"
+    ],
+    "progressions": [
+      "Adicionar pausa na posição baixa",
+      "Aumentar inclinação",
+      "Progredir para pesos livres"
+    ],
+    "regressions": [
+      "Reduzir inclinação",
+      "Diminuir carga",
+      "Usar amplitude parcial"
+    ],
+    "tips": [
+      "Posicione bem o banco para alinhar barra com clavícula",
+      "Use travas de segurança sempre",
+      "Mantenha escápulas retraídas",
+      "Boa opção para isolar sem preocupar com estabilização"
+    ],
+    "commonMistakes": [
+      "Banco mal posicionado sob a barra",
+      "Inclinação excessiva",
+      "Não usar travas de segurança",
+      "Perder retração escapular"
+    ],
+    "notes": "Permite focar na contração sem se preocupar com equilíbrio.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+inclinado+smith",
+    "isPublic": true
+  },
+  {
+    "name": "Supino Declinado no Smith Machine",
+    "description": "Supino declinado guiado para trabalho seguro do peitoral inferior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione banco declinado 15-30° sob o Smith",
+      "Prenda os pés no suporte",
+      "Alinhe a barra com a parte inferior do peito",
+      "Destrave e desça controladamente",
+      "Empurre para cima até extensão completa",
+      "Trave ao finalizar"
+    ],
+    "progressions": [
+      "Aumentar declinação",
+      "Adicionar pausa",
+      "Progredir para pesos livres"
+    ],
+    "regressions": [
+      "Reduzir declinação",
+      "Diminuir carga",
+      "Amplitude parcial"
+    ],
+    "tips": [
+      "Prenda bem os pés antes de iniciar",
+      "Travas de segurança são essenciais",
+      "Declinação moderada é suficiente",
+      "Cabeça sempre no banco"
+    ],
+    "commonMistakes": [
+      "Não prender os pés adequadamente",
+      "Declinação excessiva",
+      "Esquecer travas de segurança",
+      "Levantar a cabeça"
+    ],
+    "notes": "Muito seguro para trabalhar peitoral inferior pesado.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+declinado+smith",
+    "isPublic": true
+  },
+  {
+    "name": "Supino com Pegada Fechada",
+    "description": "Supino com pegada mais estreita que enfatiza tríceps e porção interna do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto como no supino tradicional",
+      "Segure a barra com pegada na largura dos ombros ou mais estreita",
+      "Retire a barra e posicione sobre o peito",
+      "Desça a barra mantendo cotovelos próximos ao corpo",
+      "Toque a parte inferior do peito",
+      "Empurre para cima estendendo completamente"
+    ],
+    "progressions": [
+      "Supino fechado com pausa",
+      "Aumentar tempo excêntrico",
+      "Adicionar bandas elásticas"
+    ],
+    "regressions": [
+      "Fazer no Smith Machine",
+      "Reduzir carga",
+      "Aumentar ligeiramente a pegada"
+    ],
+    "tips": [
+      "Pegada muito estreita pode estressar os punhos",
+      "Mantenha cotovelos junto ao corpo",
+      "Excelente para desenvolver tríceps e peitoral interno",
+      "Não deixe os cotovelos abrirem"
+    ],
+    "commonMistakes": [
+      "Pegada excessivamente estreita - causa dor nos punhos",
+      "Abrir os cotovelos - perde o foco no tríceps",
+      "Deixar a barra tocar muito alto no peito",
+      "Arquear demais a lombar"
+    ],
+    "notes": "Exercício composto excelente para força de tríceps.",
+    "videoUrl": "https://www.youtube.com/results?search_query=supino+pegada+fechada",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo Reto com Halteres",
+    "description": "Exercício de isolamento para peitoral com ênfase em alongamento e contração máxima.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no banco reto segurando halteres sobre o peito",
+      "Braços estendidos com leve flexão nos cotovelos",
+      "Abra os braços em arco até sentir alongamento no peitoral",
+      "Mantenha a leve flexão dos cotovelos constante",
+      "Retorne em arco apertando o peitoral no topo",
+      "Não deixe os halteres se tocarem em cima"
+    ],
+    "progressions": [
+      "Aumentar pausa na posição alongada",
+      "Crucifixo com rotação no topo",
+      "Aumentar tempo excêntrico"
+    ],
+    "regressions": [
+      "Reduzir amplitude",
+      "Usar halteres mais leves",
+      "Fazer no chão limitando amplitude"
+    ],
+    "tips": [
+      "Mantenha cotovelos levemente flexionados - nunca travados",
+      "Pense em abraçar uma árvore grande",
+      "Sinta o alongamento do peitoral na descida",
+      "Contraia forte no topo sem bater os halteres"
+    ],
+    "commonMistakes": [
+      "Cotovelos muito flexionados - vira supino",
+      "Cotovelos travados - risco de lesão",
+      "Amplitude excessiva - pode lesionar ombro",
+      "Bater os halteres no topo - perde tensão"
+    ],
+    "notes": "Excelente para finalização e bombeamento do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crucifixo+halteres+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo Inclinado com Halteres",
+    "description": "Crucifixo em banco inclinado para isolar a porção superior do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste banco entre 30-45° de inclinação",
+      "Deite segurando halteres sobre o peito superior",
+      "Braços estendidos com leve flexão nos cotovelos",
+      "Abra em arco até alongar o peitoral superior",
+      "Mantenha flexão constante nos cotovelos",
+      "Retorne contraindo o peitoral superior"
+    ],
+    "progressions": [
+      "Pausa na posição alongada",
+      "Aumentar tempo sob tensão",
+      "Combinar com supino inclinado (pré-exaustão)"
+    ],
+    "regressions": [
+      "Reduzir inclinação",
+      "Diminuir amplitude",
+      "Usar halteres mais leves"
+    ],
+    "tips": [
+      "Inclinação de 30° é ideal",
+      "Sinta o alongamento na parte superior do peito",
+      "Movimento em arco, não reto",
+      "Mantenha escápulas retraídas"
+    ],
+    "commonMistakes": [
+      "Banco muito inclinado - trabalha mais ombros",
+      "Abrir demais - risco para ombros",
+      "Flexionar demais os cotovelos",
+      "Perder retração escapular"
+    ],
+    "notes": "Excelente para definir a porção clavicular do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crucifixo+inclinado+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo Declinado com Halteres",
+    "description": "Crucifixo em banco declinado para isolar a porção inferior do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Ajuste banco em declinação de 15-30°",
+      "Prenda os pés no suporte",
+      "Deite segurando halteres sobre o peito inferior",
+      "Abra os braços em arco mantendo cotovelos flexionados",
+      "Desça até sentir alongamento",
+      "Retorne contraindo o peitoral inferior"
+    ],
+    "progressions": [
+      "Aumentar tempo excêntrico",
+      "Adicionar pausa no alongamento",
+      "Aumentar declinação"
+    ],
+    "regressions": [
+      "Reduzir declinação",
+      "Diminuir amplitude",
+      "Usar cargas menores"
+    ],
+    "tips": [
+      "Declinação moderada é suficiente",
+      "Mantenha cabeça no banco",
+      "Controle total na descida",
+      "Prenda bem os pés"
+    ],
+    "commonMistakes": [
+      "Declinação excessiva",
+      "Amplitude muito grande",
+      "Não prender os pés",
+      "Levantar a cabeça"
+    ],
+    "notes": "Isola bem a porção esternal inferior do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crucifixo+declinado+halteres",
+    "isPublic": true
+  },
+  {
+    "name": "Crossover Alto (Polia Alta)",
+    "description": "Exercício de isolamento no cabo cruzado com polias altas para peitoral inferior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na posição mais alta",
+      "Segure os cabos e dê um passo à frente",
+      "Incline levemente o tronco para frente",
+      "Braços abertos com leve flexão nos cotovelos",
+      "Traga os cabos para baixo e para frente em arco",
+      "Cruze levemente as mãos na frente do corpo",
+      "Retorne controladamente à posição inicial"
+    ],
+    "progressions": [
+      "Aumentar pausa na contração",
+      "Fazer unilateral",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Diminuir amplitude",
+      "Fazer sem cruzar as mãos"
+    ],
+    "tips": [
+      "Mantenha cotovelos fixos durante todo movimento",
+      "Pense em abraçar alguém grande",
+      "Contraía forte no ponto de cruzamento",
+      "Tensão constante - cabo nunca relaxa"
+    ],
+    "commonMistakes": [
+      "Usar muito impulso do corpo",
+      "Flexionar e estender cotovelos",
+      "Perder a inclinação do tronco",
+      "Não cruzar na frente - diminui contração"
+    ],
+    "notes": "Excelente para trabalhar a porção inferior e interna do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crossover+alto+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "Crossover Baixo (Polia Baixa)",
+    "description": "Crossover com polias baixas para ênfase na porção superior do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na posição mais baixa",
+      "Segure os cabos e dê um passo à frente",
+      "Mantenha tronco ereto ou leve inclinação para trás",
+      "Braços ao lado do corpo com cotovelos levemente flexionados",
+      "Traga os cabos para cima e para frente em arco",
+      "Cruze as mãos à altura dos olhos ou acima",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Pausa na contração máxima",
+      "Execução unilateral",
+      "Aumentar tempo sob tensão"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Fazer sem cruzar"
+    ],
+    "tips": [
+      "Foco no peitoral superior",
+      "Mantenha cotovelos fixos",
+      "Cruze acima do peito",
+      "Contraia forte na posição final"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Flexionar demais os cotovelos",
+      "Trajetória muito baixa",
+      "Não manter tensão constante"
+    ],
+    "notes": "Excelente complemento ao crossover alto para peitoral completo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crossover+baixo+peitoral+superior",
+    "isPublic": true
+  },
+  {
+    "name": "Crossover Médio (Polia Média)",
+    "description": "Crossover com polias na altura do peito para trabalho geral do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione as polias na altura do peito",
+      "Segure os cabos e posicione-se no centro",
+      "Dê um passo à frente com um pé",
+      "Braços abertos à altura dos ombros",
+      "Traga os cabos para frente em arco horizontal",
+      "Cruze as mãos na frente do peito",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Pausa prolongada na contração",
+      "Execução lenta (4 segundos cada fase)",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer sem cruzar",
+      "Amplitude parcial"
+    ],
+    "tips": [
+      "Mantém trabalho equilibrado de todo peitoral",
+      "Cotovelos fixos durante todo movimento",
+      "Pense em juntar os cotovelos na frente",
+      "Tensão constante"
+    ],
+    "commonMistakes": [
+      "Variar a altura durante a série",
+      "Usar impulso",
+      "Flexionar cotovelos excessivamente",
+      "Perder postura"
+    ],
+    "notes": "Trabalha de forma equilibrada todas as porções do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crossover+peitoral+altura+media",
+    "isPublic": true
+  },
+  {
+    "name": "Crucifixo no Cabo (Cable Fly)",
+    "description": "Crucifixo realizado no cabo cruzado deitado no banco para tensão constante.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione banco reto entre as polias baixas",
+      "Deite no banco segurando os cabos",
+      "Braços estendidos acima do peito com cotovelos flexionados",
+      "Abra os braços em arco até alongar o peitoral",
+      "Mantenha flexão constante nos cotovelos",
+      "Retorne contraindo o peitoral"
+    ],
+    "progressions": [
+      "Fazer em banco inclinado",
+      "Pausa na posição alongada",
+      "Aumentar tempo excêntrico"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Diminuir amplitude",
+      "Fazer em pé no crossover"
+    ],
+    "tips": [
+      "Cabo mantém tensão constante diferente dos halteres",
+      "Excelente para manter o músculo sob tensão",
+      "Controle total em todas as fases",
+      "Escápulas retraídas"
+    ],
+    "commonMistakes": [
+      "Transformar em supino flexionando cotovelos",
+      "Amplitude excessiva",
+      "Perder retração escapular",
+      "Movimentos rápidos sem controle"
+    ],
+    "notes": "A tensão do cabo é constante, diferente dos halteres que perdem tensão no topo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=crucifixo+cabo+deitado",
+    "isPublic": true
+  },
+  {
+    "name": "Peck Deck (Voador)",
+    "description": "Exercício de isolamento para peitoral na máquina voador.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o banco para que os braços fiquem paralelos ao chão",
+      "Sente com as costas apoiadas no encosto",
+      "Segure as manoplas com os cotovelos levemente flexionados",
+      "Traga os braços para frente contraindo o peitoral",
+      "Toque ou aproxime as manoplas na frente",
+      "Retorne controladamente até sentir alongamento"
+    ],
+    "progressions": [
+      "Pausa na contração máxima",
+      "Excêntrica lenta (4-5 segundos)",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Amplitude parcial",
+      "Fazer crossover com cabos"
+    ],
+    "tips": [
+      "Mantenha cotovelos fixos durante todo movimento",
+      "Sinta a contração no centro do peito",
+      "Não jogue o corpo para frente",
+      "Controle na volta - não deixe bater"
+    ],
+    "commonMistakes": [
+      "Usar impulso do corpo",
+      "Flexionar cotovelos durante movimento",
+      "Amplitude incompleta",
+      "Deixar os pesos baterem na volta"
+    ],
+    "notes": "Máquina segura e eficiente para iniciantes isolarem o peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=peck+deck+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Chest Press Máquina (Reto)",
+    "description": "Supino horizontal na máquina para trabalho guiado e seguro do peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o banco para que as manoplas fiquem na altura do peito",
+      "Sente com as costas apoiadas e pés firmes no chão",
+      "Segure as manoplas com pegada neutra ou pronada",
+      "Empurre para frente estendendo os braços",
+      "Não trave completamente os cotovelos",
+      "Retorne controladamente até sentir alongamento"
+    ],
+    "progressions": [
+      "Execução unilateral",
+      "Pausa na extensão",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Amplitude parcial",
+      "Focar apenas na fase concêntrica"
+    ],
+    "tips": [
+      "Excelente para iniciantes aprenderem o movimento",
+      "Mantenha escápulas retraídas",
+      "Controle tanto na ida quanto na volta",
+      "Ideal para treinar até a falha com segurança"
+    ],
+    "commonMistakes": [
+      "Ajuste incorreto da altura",
+      "Soltar o peso rapidamente",
+      "Travar os cotovelos",
+      "Não retrair escápulas"
+    ],
+    "notes": "Máquina excelente para iniciantes e para trabalhar até a falha.",
+    "videoUrl": "https://www.youtube.com/results?search_query=chest+press+máquina",
+    "isPublic": true
+  },
+  {
+    "name": "Chest Press Inclinado (Máquina)",
+    "description": "Supino inclinado na máquina para trabalho guiado do peitoral superior.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o banco inclinado para posição confortável",
+      "Sente com costas apoiadas e pés firmes",
+      "Segure as manoplas na altura dos ombros",
+      "Empurre para frente e para cima",
+      "Estenda os braços sem travar",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Execução unilateral alternada",
+      "Pausa na contração",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Amplitude parcial",
+      "Máquina horizontal primeiro"
+    ],
+    "tips": [
+      "Foco no peitoral superior",
+      "Mantenha escápulas retraídas",
+      "Movimento controlado",
+      "Ideal para finalização"
+    ],
+    "commonMistakes": [
+      "Posição incorreta no banco",
+      "Soltar peso rapidamente",
+      "Perder retração escapular",
+      "Amplitude incompleta"
+    ],
+    "notes": "Boa opção para trabalhar peitoral superior com segurança.",
+    "videoUrl": "https://www.youtube.com/results?search_query=chest+press+inclinado+máquina",
+    "isPublic": true
+  },
+  {
+    "name": "Pullover com Halter",
+    "description": "Exercício que trabalha peitoral, latíssimo e serrátil com grande alongamento.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Back", "Triceps"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite transversalmente no banco apoiando apenas a parte superior das costas",
+      "Segure um halter com ambas as mãos sob a parte interna do disco",
+      "Posicione o halter sobre o peito com braços estendidos",
+      "Baixe o halter para trás da cabeça mantendo leve flexão nos cotovelos",
+      "Alongue bem o peito e latíssimo",
+      "Retorne à posição inicial contraindo o peitoral"
+    ],
+    "progressions": [
+      "Aumentar amplitude",
+      "Fazer com barra EZ",
+      "Pullover no cabo"
+    ],
+    "regressions": [
+      "Deitar completamente no banco",
+      "Reduzir amplitude",
+      "Usar halter mais leve"
+    ],
+    "tips": [
+      "Mantenha o quadril baixo para aumentar o alongamento",
+      "Cotovelos sempre levemente flexionados",
+      "Respire fundo ao alongar",
+      "Foco pode ser peito ou costas dependendo da intenção"
+    ],
+    "commonMistakes": [
+      "Flexionar demais os cotovelos - vira tríceps",
+      "Subir o quadril - diminui alongamento",
+      "Amplitude insuficiente",
+      "Usar carga excessiva comprometendo forma"
+    ],
+    "notes": "Exercício clássico para expansão torácica e desenvolvimento do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pullover+halter+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "Pullover na Máquina",
+    "description": "Pullover guiado na máquina específica para trabalho de peitoral e costas.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Back"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o banco para posição adequada",
+      "Sente com as costas apoiadas",
+      "Posicione os cotovelos nos apoios",
+      "Traga a barra para frente usando os cotovelos",
+      "Contraia peito e costas na posição frontal",
+      "Retorne controladamente ao alongamento"
+    ],
+    "progressions": [
+      "Pausa na contração",
+      "Aumentar tempo excêntrico",
+      "Drop sets"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Amplitude parcial",
+      "Fazer pullover com halter primeiro"
+    ],
+    "tips": [
+      "Máquina elimina a dificuldade de estabilização",
+      "Foco na contração e alongamento",
+      "Excelente para sentir o músculo trabalhando",
+      "Não use impulso"
+    ],
+    "commonMistakes": [
+      "Ajuste incorreto do banco",
+      "Usar impulso do corpo",
+      "Não aproveitar alongamento completo",
+      "Movimentos muito rápidos"
+    ],
+    "notes": "Máquina Nautilus Pullover é a mais clássica para este exercício.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pullover+máquina+nautilus",
+    "isPublic": true
+  },
+  {
+    "name": "Pullover no Cabo",
+    "description": "Pullover realizado no cabo para tensão constante durante todo o movimento.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Back", "Triceps"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione a polia alta e adicione barra reta ou corda",
+      "Fique de costas para a polia com um passo de distância",
+      "Segure a barra com braços estendidos acima da cabeça",
+      "Traga a barra em arco para frente até a altura do quadril",
+      "Mantenha cotovelos levemente flexionados",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Fazer de joelhos para isolar mais",
+      "Pausa na contração",
+      "Execução lenta"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Amplitude parcial",
+      "Fazer em pé com apoio"
+    ],
+    "tips": [
+      "Tensão constante diferente do halter",
+      "Mantenha core contraído",
+      "Não use impulso do corpo",
+      "Pode ser feito de pé ou ajoelhado"
+    ],
+    "commonMistakes": [
+      "Flexionar cotovelos demais",
+      "Usar impulso do corpo",
+      "Posição muito perto da polia",
+      "Perder controle na volta"
+    ],
+    "notes": "A tensão do cabo é constante em toda amplitude do movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=pullover+cabo+polia",
+    "isPublic": true
+  },
+  {
+    "name": "Dips para Peito (Paralelas)",
+    "description": "Mergulho nas paralelas com inclinação para frente enfatizando o peitoral.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "DipBars",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se nas paralelas com os braços estendidos",
+      "Incline o tronco para frente cerca de 30-45°",
+      "Flexione os cotovelos deixando-os abrirem para os lados",
+      "Desça até sentir alongamento no peito (90° ou mais)",
+      "Empurre para cima estendendo os braços",
+      "Mantenha a inclinação durante todo movimento"
+    ],
+    "progressions": [
+      "Adicionar peso com cinto",
+      "Pausa na posição baixa",
+      "Dips com anéis para mais instabilidade"
+    ],
+    "regressions": [
+      "Usar máquina de dips assistida",
+      "Fazer negativas (só a descida)",
+      "Dips no banco"
+    ],
+    "tips": [
+      "A inclinação para frente é crucial para peitoral",
+      "Cotovelos abertos trabalham mais peito",
+      "Desça profundo para alongar o peitoral",
+      "Core contraído para estabilidade"
+    ],
+    "commonMistakes": [
+      "Ficar muito vertical - trabalha mais tríceps",
+      "Cotovelos junto ao corpo - mais tríceps",
+      "Amplitude insuficiente",
+      "Balançar o corpo"
+    ],
+    "notes": "Um dos melhores exercícios compostos para peitoral inferior.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dips+paralelas+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "Dips Assistido na Máquina",
+    "description": "Mergulho na máquina assistida para iniciantes desenvolverem força para dips.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Ajuste o peso de assistência adequado",
+      "Suba na plataforma e segure as barras",
+      "Ajoelhe na almofada de suporte",
+      "Incline o tronco para frente para focar no peito",
+      "Desça até os cotovelos em 90° ou mais",
+      "Empurre para cima até extensão"
+    ],
+    "progressions": [
+      "Reduzir peso de assistência gradualmente",
+      "Progredir para dips livres com negativas",
+      "Adicionar pausa na posição baixa"
+    ],
+    "regressions": [
+      "Aumentar peso de assistência",
+      "Fazer dips no banco",
+      "Focar em flexões primeiro"
+    ],
+    "tips": [
+      "Reduza a assistência progressivamente",
+      "Mantenha inclinação para peito",
+      "Controle a descida - não caia",
+      "Meta é conseguir fazer sem assistência"
+    ],
+    "commonMistakes": [
+      "Usar muita assistência por muito tempo",
+      "Ficar vertical - trabalha tríceps",
+      "Amplitude incompleta",
+      "Descer muito rápido"
+    ],
+    "notes": "Excelente para progredir até dips completos nas paralelas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dips+assistido+máquina",
+    "isPublic": true
+  },
+  {
+    "name": "Svend Press",
+    "description": "Exercício de isolamento apertando anilhas na frente do peito para contração máxima.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Plate",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure duas anilhas (ou uma) entre as palmas das mãos",
+      "Posicione as anilhas contra o peito",
+      "Aperte as anilhas uma contra a outra com força",
+      "Mantenha a pressão e estenda os braços para frente",
+      "Retorne ao peito mantendo a pressão nas anilhas",
+      "A contração do peitoral deve ser constante"
+    ],
+    "progressions": [
+      "Usar anilhas mais pesadas",
+      "Aumentar tempo de contração isométrica",
+      "Fazer em diferentes ângulos (inclinado/declinado)"
+    ],
+    "regressions": [
+      "Usar apenas uma anilha leve",
+      "Fazer isométrico sem movimento",
+      "Reduzir amplitude"
+    ],
+    "tips": [
+      "A pressão nas anilhas é mais importante que o peso",
+      "Sinta o peito contraindo durante todo movimento",
+      "Pode usar halteres ao invés de anilhas",
+      "Excelente para aquecimento ou ativação"
+    ],
+    "commonMistakes": [
+      "Não apertar as anilhas com força suficiente",
+      "Usar peso muito pesado perdendo a contração",
+      "Movimentos rápidos sem foco",
+      "Soltar a pressão durante o movimento"
+    ],
+    "notes": "Exercício popularizado pelo fisiculturista Svend Karlsen.",
+    "videoUrl": "https://www.youtube.com/results?search_query=svend+press+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "Landmine Press",
+    "description": "Press com barra encaixada no landmine para trabalho do peitoral e ombros.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Encaixe uma extremidade da barra no suporte landmine ou canto",
+      "Segure a outra extremidade com ambas as mãos",
+      "Posicione a barra na altura do peito",
+      "Empurre a barra para frente e para cima",
+      "Estenda completamente os braços",
+      "Retorne controladamente ao peito"
+    ],
+    "progressions": [
+      "Fazer unilateral (uma mão)",
+      "Adicionar mais peso",
+      "Fazer ajoelhado para isolar mais"
+    ],
+    "regressions": [
+      "Usar menos peso",
+      "Fazer bilateral",
+      "Amplitude parcial"
+    ],
+    "tips": [
+      "Boa alternativa para quem tem dor no ombro com supino",
+      "Trabalha em arco natural do corpo",
+      "Pode ser feito em pé ou ajoelhado",
+      "Excelente para potência com explosão"
+    ],
+    "commonMistakes": [
+      "Ficar muito longe da barra",
+      "Usar impulso do corpo",
+      "Não estabilizar o core",
+      "Amplitude incompleta"
+    ],
+    "notes": "O ângulo do landmine é mais favorável para ombros sensíveis.",
+    "videoUrl": "https://www.youtube.com/results?search_query=landmine+press+peitoral",
+    "isPublic": true
+  },
+  {
+    "name": "Landmine Press Unilateral",
+    "description": "Press unilateral no landmine para trabalho assimétrico do peitoral e ombro.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps", "Core"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Encaixe a barra no landmine",
+      "Segure a extremidade com uma mão na altura do ombro",
+      "Posicione-se em posição de lunge ou em pé",
+      "Empurre a barra para frente e para cima",
+      "Estenda o braço completamente",
+      "Retorne controladamente e repita",
+      "Faça o mesmo número de reps do outro lado"
+    ],
+    "progressions": [
+      "Adicionar peso",
+      "Fazer em posição ajoelhada",
+      "Adicionar rotação do tronco"
+    ],
+    "regressions": [
+      "Fazer bilateral primeiro",
+      "Reduzir peso",
+      "Usar amplitude parcial"
+    ],
+    "tips": [
+      "Excelente para correção de assimetrias",
+      "Core muito ativo para estabilização",
+      "Pode adicionar rotação para mais trabalho de core",
+      "Alternativa para quem não pode fazer supino tradicional"
+    ],
+    "commonMistakes": [
+      "Rotacionar demais o tronco sem controle",
+      "Não estabilizar o core",
+      "Usar impulso da perna",
+      "Assimetria no número de repetições"
+    ],
+    "notes": "Trabalha estabilização do core além do peitoral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=landmine+press+unilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Floor Press com Barra",
+    "description": "Supino realizado no chão que limita a amplitude protegendo os ombros.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no chão sob um rack ou com ajuda para pegar a barra",
+      "Joelhos flexionados ou pernas estendidas",
+      "Segure a barra com pegada normal de supino",
+      "Desça a barra até os cotovelos tocarem o chão",
+      "Pause brevemente",
+      "Empurre a barra para cima até extensão"
+    ],
+    "progressions": [
+      "Aumentar pausa no chão",
+      "Adicionar bandas ou correntes",
+      "Fazer com pegada fechada"
+    ],
+    "regressions": [
+      "Usar halteres ao invés de barra",
+      "Reduzir carga",
+      "Focar apenas na fase concêntrica"
+    ],
+    "tips": [
+      "Elimina o alongamento excessivo do ombro",
+      "Excelente para lockout do supino",
+      "Ótimo para quem tem dor no ombro",
+      "Foco na força da porção média do movimento"
+    ],
+    "commonMistakes": [
+      "Pular a pausa no chão",
+      "Impulso com os pés",
+      "Não manter cotovelos em ângulo adequado",
+      "Arquear demais a lombar"
+    ],
+    "notes": "Exercício usado em powerlifting para fortalecer lockout.",
+    "videoUrl": "https://www.youtube.com/results?search_query=floor+press+barra",
+    "isPublic": true
+  },
+  {
+    "name": "Floor Press com Halteres",
+    "description": "Supino no chão com halteres para trabalho do peitoral com amplitude controlada.",
+    "muscleGroup": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Deite no chão com joelhos flexionados",
+      "Segure os halteres na posição de supino",
+      "Desça os halteres até cotovelos tocarem o chão",
+      "Pause brevemente",
+      "Empurre para cima até extensão",
+      "Mantenha core contraído"
+    ],
+    "progressions": [
+      "Aumentar pausa",
+      "Fazer alternado",
+      "Adicionar tempo excêntrico"
+    ],
+    "regressions": [
+      "Reduzir peso",
+      "Fazer sem pausa",
+      "Amplitude parcial"
+    ],
+    "tips": [
+      "Pode ser feito em casa sem banco",
+      "Protege ombros de amplitude excessiva",
+      "Bom para treinar força na porção média",
+      "Alternativa quando não tem banco disponível"
+    ],
+    "commonMistakes": [
+      "Não pausar no chão",
+      "Arquear demais a lombar",
+      "Cotovelos em ângulo inadequado",
+      "Movimentos descontrolados"
+    ],
+    "notes": "Excelente exercício para fazer em casa sem equipamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=floor+press+halteres",
+    "isPublic": true
+  }
+]

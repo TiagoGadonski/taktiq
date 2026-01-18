@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Seal Push-Up",
+    "description": "Push-up partindo de posicao de cobra com quadris no chao, empurre apenas tronco.",
+    "musclesWorked": ["Chest", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/seal-push-up.png"
+  },
+  {
+    "name": "Alternating Superman",
+    "description": "De brucos, alterne elevando braco e perna do mesmo lado.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/alternating-superman.png"
+  },
+  {
+    "name": "Prone Cobra",
+    "description": "De brucos, eleve peito e bracos do chao com palmas viradas para baixo.",
+    "musclesWorked": ["Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/prone-cobra.png"
+  },
+  {
+    "name": "Prone YTW",
+    "description": "De brucos, execute Y, T e W raises em sequencia.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/prone-ytw.png"
+  },
+  {
+    "name": "Hip Circle",
+    "description": "Em pe, faca circulos com o quadril mantendo tronco estavel.",
+    "musclesWorked": ["Hip Flexors", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hip-circle.png"
+  },
+  {
+    "name": "Arm Circle",
+    "description": "Faca circulos com os bracos estendidos, variando tamanho e direcao.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/arm-circle.png"
+  },
+  {
+    "name": "Neck Rotation",
+    "description": "Rotacione a cabeca lentamente em circulos para mobilidade cervical.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/neck-rotation.png"
+  },
+  {
+    "name": "Wrist Circle",
+    "description": "Faca circulos com os pulsos em ambas direcoes para mobilidade.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wrist-circle.png"
+  },
+  {
+    "name": "Ankle Circle",
+    "description": "Faca circulos com os tornozelos em ambas direcoes.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/ankle-circle.png"
+  },
+  {
+    "name": "Cat Cow",
+    "description": "Em quatro apoios, alterne entre arquear (gato) e curvar (vaca) a coluna.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/cat-cow.png"
+  },
+  {
+    "name": "Thread the Needle",
+    "description": "Em quatro apoios, passe um braco por baixo do corpo rotacionando tronco.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/thread-the-needle.png"
+  },
+  {
+    "name": "World's Greatest Stretch",
+    "description": "Afundo profundo com rotacao de tronco e braco estendido ao ceu.",
+    "musclesWorked": ["Hip Flexors", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/worlds-greatest-stretch.png"
+  },
+  {
+    "name": "Lying Knee to Chest",
+    "description": "Deitado, puxe um joelho ao peito alongando gluteos e lombar.",
+    "musclesWorked": ["Glutes", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lying-knee-to-chest.png"
+  },
+  {
+    "name": "Figure 4 Stretch",
+    "description": "Deitado, cruze tornozelo sobre joelho oposto e puxe para alongar piriforme.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/figure-4-stretch.png"
+  },
+  {
+    "name": "90/90 Hip Stretch",
+    "description": "Sentado com pernas em angulos de 90 graus, rotacione entre os lados.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/90-90-hip-stretch.png"
+  },
+  {
+    "name": "Seated Forward Fold",
+    "description": "Sentado com pernas estendidas, flexione para frente alcancando os pes.",
+    "musclesWorked": ["Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/seated-forward-fold.png"
+  },
+  {
+    "name": "Butterfly Stretch",
+    "description": "Sentado com solas dos pes juntas, pressione joelhos em direcao ao chao.",
+    "musclesWorked": ["Adductors", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/butterfly-stretch.png"
+  },
+  {
+    "name": "Lunge Stretch",
+    "description": "Em afundo profundo, alongue flexores do quadril da perna traseira.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lunge-stretch.png"
+  },
+  {
+    "name": "Standing Quad Stretch",
+    "description": "Em pe, puxe o pe atras em direcao aos gluteos alongando quadriceps.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standing-quad-stretch.png"
+  },
+  {
+    "name": "Standing Hamstring Stretch",
+    "description": "Em pe, coloque calcanhar elevado e incline tronco para frente.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standing-hamstring-stretch.png"
+  },
+  {
+    "name": "Downward Dog",
+    "description": "Posicao de V invertido com quadril alto, calcanhares pressionando o chao.",
+    "musclesWorked": ["Hamstrings", "Calves", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/downward-dog.png"
+  },
+  {
+    "name": "Upward Dog",
+    "description": "Deitado de brucos, empurre tronco para cima mantendo quadril proximo ao chao.",
+    "musclesWorked": ["Abs", "Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/upward-dog.png"
+  },
+  {
+    "name": "Child's Pose",
+    "description": "Ajoelhado sentado nos calcanhares, estenda bracos a frente relaxando costas.",
+    "musclesWorked": ["Lower Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/childs-pose.png"
+  },
+  {
+    "name": "Pigeon Pose",
+    "description": "Uma perna dobrada a frente, outra estendida atras. Alongamento profundo de gluteos.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pigeon-pose.png"
+  },
+  {
+    "name": "Cobra Stretch",
+    "description": "Deitado de brucos, empurre tronco para cima alongando abdomen.",
+    "musclesWorked": ["Abs", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/cobra-stretch.png"
+  },
+  {
+    "name": "Scorpion Stretch",
+    "description": "De brucos, leve um pe em arco por cima em direcao ao ombro oposto.",
+    "musclesWorked": ["Hip Flexors", "Lower Back", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/scorpion-stretch.png"
+  },
+  {
+    "name": "Thoracic Rotation",
+    "description": "Deitado de lado, rotacione tronco superior abrindo braco para o outro lado.",
+    "musclesWorked": ["Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/thoracic-rotation.png"
+  },
+  {
+    "name": "Prone Scorpion",
+    "description": "De brucos com bracos abertos, rotacione levando pe em direcao a mao oposta.",
+    "musclesWorked": ["Hip Flexors", "Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/prone-scorpion.png"
+  },
+  {
+    "name": "Shoulder Dislocates",
+    "description": "Com bastao ou toalha, passe bracos estendidos por cima da cabeca e por tras.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Stick"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/shoulder-dislocates.png"
+  },
+  {
+    "name": "Door Frame Chest Stretch",
+    "description": "Com braco no batente da porta, gire corpo para alongar peitoral.",
+    "musclesWorked": ["Chest", "Shoulders"],
+    "equipment": ["Door Frame"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/door-frame-chest-stretch.png"
+  }
+]

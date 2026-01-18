@@ -1,0 +1,1057 @@
+[
+  {
+    "name": "Levantamento Terra Convencional",
+    "description": "Exercício composto fundamental que trabalha toda a cadeia posterior e costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Quadriceps", "Core", "Forearms"],
+    "equipment": "Barbell",
+    "category": "Powerlifting",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pés na largura do quadril, barra sobre o meio dos pés",
+      "Flexione e segure a barra com pegada na largura dos ombros",
+      "Costas retas, peito empinado, ombros sobre a barra",
+      "Empurre o chão com os pés enquanto estende quadril e joelhos",
+      "Mantenha a barra próxima ao corpo durante todo movimento",
+      "Finalize com quadril totalmente estendido, ombros para trás",
+      "Desça controladamente revertendo o movimento"
+    ],
+    "progressions": [
+      "Aumentar carga progressivamente",
+      "Deficit deadlift",
+      "Paused deadlift"
+    ],
+    "regressions": [
+      "Trap bar deadlift",
+      "Romanian deadlift",
+      "Block pulls"
+    ],
+    "tips": [
+      "Mantenha a barra próxima ao corpo",
+      "Inicie o movimento empurrando o chão",
+      "Não arredonde a lombar NUNCA",
+      "Core contraído durante todo movimento"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Barra afastando do corpo",
+      "Iniciar com quadril muito alto ou baixo",
+      "Hiperestender no topo"
+    ],
+    "notes": "Rei dos exercícios para força e massa muscular geral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=levantamento+terra+convencional+deadlift",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra Sumô",
+    "description": "Variação do terra com pés afastados e pegada interna, menos estresse na lombar.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Quadriceps", "Hamstrings", "Adductors", "Core"],
+    "equipment": "Barbell",
+    "category": "Powerlifting",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pés bem afastados, apontando para fora (45°)",
+      "Segure a barra por dentro das pernas",
+      "Joelhos apontam na direção dos pés",
+      "Tronco mais ereto que no convencional",
+      "Empurre o chão afastando os joelhos",
+      "Estenda quadril e joelhos simultaneamente",
+      "Finalize com quadril estendido"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Deficit sumo",
+      "Paused sumo"
+    ],
+    "regressions": [
+      "Sumo com kettlebell",
+      "Box sumo",
+      "Convencional primeiro"
+    ],
+    "tips": [
+      "Tronco mais ereto que convencional",
+      "Exige mais mobilidade de quadril",
+      "Afaste os joelhos ativamente",
+      "Bom para pessoas com tronco longo"
+    ],
+    "commonMistakes": [
+      "Joelhos caindo para dentro",
+      "Quadril subindo antes do peito",
+      "Falta de mobilidade de quadril",
+      "Pés muito ou pouco afastados"
+    ],
+    "notes": "Popular no powerlifting, menos estresse na lombar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=levantamento+terra+sumo+deadlift",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra Romeno (Stiff)",
+    "description": "Variação do terra focada nos isquiotibiais e glúteos com joelhos quase estendidos.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Hamstrings", "Glutes", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé segurando a barra à frente das coxas",
+      "Pés na largura do quadril, joelhos levemente flexionados",
+      "Empurre o quadril para trás mantendo costas retas",
+      "Desça a barra próxima às pernas",
+      "Sinta o alongamento nos isquiotibiais",
+      "Retorne contraindo glúteos e isquiotibiais"
+    ],
+    "progressions": [
+      "Deficit RDL",
+      "Single leg RDL",
+      "Paused RDL"
+    ],
+    "regressions": [
+      "RDL com halteres",
+      "RDL com menos amplitude",
+      "Good morning"
+    ],
+    "tips": [
+      "Foco no alongamento e contração dos isquiotibiais",
+      "Mantenha barra próxima ao corpo",
+      "Joelhos com flexão fixa - não dobram mais",
+      "Excelente para isquiotibiais"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Flexionar demais os joelhos",
+      "Barra afastando do corpo",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Exercício fundamental para desenvolvimento de isquiotibiais.",
+    "videoUrl": "https://www.youtube.com/results?search_query=stiff+romeno+romanian+deadlift",
+    "isPublic": true
+  },
+  {
+    "name": "Levantamento Terra com Trap Bar",
+    "description": "Terra usando trap bar hexagonal, mais fácil de aprender e menos estresse na lombar.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Quadriceps", "Glutes", "Hamstrings", "Core"],
+    "equipment": "TrapBar",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Entre na trap bar e posicione os pés",
+      "Flexione e segure as alças laterais",
+      "Costas retas, peito empinado",
+      "Empurre o chão e estenda quadril e joelhos",
+      "Finalize com corpo ereto",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Usar alças baixas",
+      "Progredir para terra convencional"
+    ],
+    "regressions": [
+      "Usar alças altas",
+      "Reduzir carga",
+      "Trap bar RDL"
+    ],
+    "tips": [
+      "Mais fácil manter a técnica",
+      "Centro de gravidade mais favorável",
+      "Excelente para iniciantes no terra",
+      "Menos estresse na lombar"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Não estender completamente o quadril",
+      "Inclinar para frente ou trás",
+      "Descer muito rápido"
+    ],
+    "notes": "Excelente introdução ao levantamento terra.",
+    "videoUrl": "https://www.youtube.com/results?search_query=trap+bar+deadlift+hex+bar",
+    "isPublic": true
+  },
+  {
+    "name": "Rack Pull (Terra Parcial)",
+    "description": "Levantamento terra parcial começando de uma altura elevada.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core", "Forearms"],
+    "equipment": "Barbell",
+    "category": "Powerlifting",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione a barra no rack na altura desejada (joelho ou acima)",
+      "Configure como para deadlift convencional",
+      "Segure a barra e trave o core",
+      "Estenda quadril e joelhos levantando a barra",
+      "Finalize com quadril totalmente estendido",
+      "Retorne a barra ao rack controladamente"
+    ],
+    "progressions": [
+      "Baixar a altura progressivamente",
+      "Aumentar carga",
+      "Deadlift completo"
+    ],
+    "regressions": [
+      "Aumentar altura",
+      "Reduzir carga",
+      "Block pulls mais altos"
+    ],
+    "tips": [
+      "Permite trabalhar com cargas mais pesadas",
+      "Fortalece a porção final do terra",
+      "Excelente para lockout",
+      "Menos estresse na lombar"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas mesmo na posição elevada",
+      "Não estender completamente",
+      "Deixar a barra bater no rack",
+      "Usar só momentum"
+    ],
+    "notes": "Usado para fortalecer pontos fracos no deadlift.",
+    "videoUrl": "https://www.youtube.com/results?search_query=rack+pull+deadlift",
+    "isPublic": true
+  },
+  {
+    "name": "Deficit Deadlift",
+    "description": "Levantamento terra de um déficit para maior amplitude de movimento.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Quadriceps", "Core"],
+    "equipment": "Barbell",
+    "category": "Powerlifting",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Suba em uma plataforma baixa (2-4 polegadas)",
+      "Configure como deadlift normal",
+      "A barra estará mais baixa em relação a você",
+      "Execute o terra com amplitude aumentada",
+      "Mantenha técnica perfeita",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar altura do déficit",
+      "Aumentar carga",
+      "Paused deficit deadlift"
+    ],
+    "regressions": [
+      "Deadlift do chão",
+      "Reduzir déficit",
+      "Reduzir carga"
+    ],
+    "tips": [
+      "Aumenta demanda de força na saída do chão",
+      "Exige excelente mobilidade",
+      "Use cargas menores que no terra normal",
+      "Excelente para fortalecer o início do movimento"
+    ],
+    "commonMistakes": [
+      "Déficit muito alto perdendo forma",
+      "Arredondar as costas",
+      "Usar carga do terra normal",
+      "Falta de mobilidade"
+    ],
+    "notes": "Exercício acessório para melhorar saída do chão.",
+    "videoUrl": "https://www.youtube.com/results?search_query=deficit+deadlift",
+    "isPublic": true
+  },
+  {
+    "name": "Good Morning",
+    "description": "Exercício de flexão do quadril com barra nas costas para isquiotibiais e lombar.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Hamstrings", "Glutes", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione a barra nas costas como para agachamento",
+      "Pés na largura do quadril, joelhos levemente flexionados",
+      "Empurre o quadril para trás flexionando o tronco",
+      "Mantenha costas retas durante todo movimento",
+      "Desça até sentir alongamento nos isquiotibiais",
+      "Retorne contraindo glúteos e isquiotibiais"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Seated good morning",
+      "Paused good morning"
+    ],
+    "regressions": [
+      "Good morning com peso corporal",
+      "Good morning com halter",
+      "Reduzir amplitude"
+    ],
+    "tips": [
+      "Mantenha o peso leve no início",
+      "Foco na técnica e alongamento",
+      "Joelhos com flexão fixa",
+      "Excelente para lombar e isquiotibiais"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Usar carga muito pesada",
+      "Flexionar demais os joelhos",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Exercício excelente quando feito corretamente, perigoso se não.",
+    "videoUrl": "https://www.youtube.com/results?search_query=good+morning+exercise+barra",
+    "isPublic": true
+  },
+  {
+    "name": "Hiperextensão (45° ou 90°)",
+    "description": "Extensão do tronco na cadeira romana para fortalecimento da lombar e glúteos.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se na cadeira romana com quadril no apoio",
+      "Pernas presas no suporte",
+      "Cruze os braços no peito ou atrás da cabeça",
+      "Desça o tronco controladamente",
+      "Suba até o corpo ficar em linha reta ou levemente acima",
+      "Não hiperestenda a lombar"
+    ],
+    "progressions": [
+      "Segurar peso no peito",
+      "Segurar barra nas costas",
+      "Paused reps"
+    ],
+    "regressions": [
+      "Sem peso adicional",
+      "Amplitude menor",
+      "Superman no chão"
+    ],
+    "tips": [
+      "Não hiperestender - apenas alinhe o corpo",
+      "Contraia glúteos no topo",
+      "Movimento controlado",
+      "Excelente para saúde da lombar"
+    ],
+    "commonMistakes": [
+      "Hiperestender demais",
+      "Movimento muito rápido",
+      "Não controlar a descida",
+      "Usar impulso"
+    ],
+    "notes": "Fundamental para saúde e força da região lombar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=hiperextensão+cadeira+romana",
+    "isPublic": true
+  },
+  {
+    "name": "Reverse Hyper",
+    "description": "Extensão de quadril na máquina reverse hyper para glúteos e lombar.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços na máquina reverse hyper",
+      "Segure as alças laterais",
+      "Prenda os tornozelos no suporte",
+      "Eleve as pernas para trás contraindo glúteos",
+      "Desça controladamente até alongamento",
+      "Repita de forma fluida"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Paused reps no topo",
+      "Unilateral"
+    ],
+    "regressions": [
+      "Sem peso",
+      "Amplitude menor",
+      "Superman no chão"
+    ],
+    "tips": [
+      "Inventada por Louie Simmons",
+      "Excelente para reabilitação de lombar",
+      "Tração da coluna na descida",
+      "Movimento controlado"
+    ],
+    "commonMistakes": [
+      "Usar muito momentum",
+      "Hiperestender excessivamente",
+      "Não controlar a descida",
+      "Peso muito pesado"
+    ],
+    "notes": "Considerada por muitos a melhor máquina para saúde da lombar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=reverse+hyper+extension",
+    "isPublic": true
+  },
+  {
+    "name": "Superman (Extensão de Tronco no Chão)",
+    "description": "Exercício no chão para fortalecimento da lombar e cadeia posterior.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": "Bodyweight",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Deite de bruços no chão",
+      "Braços estendidos à frente, pernas estendidas",
+      "Simultaneamente eleve braços e pernas do chão",
+      "Contraia lombar e glúteos",
+      "Mantenha por 2-3 segundos",
+      "Desça controladamente e repita"
+    ],
+    "progressions": [
+      "Aumentar tempo de sustentação",
+      "Superman alternado",
+      "Adicionar peso"
+    ],
+    "regressions": [
+      "Elevar só braços ou só pernas",
+      "Menor amplitude",
+      "Bird dog"
+    ],
+    "tips": [
+      "Não force o pescoço olhando para cima",
+      "Movimento controlado",
+      "Excelente para fortalecimento básico",
+      "Pode ser feito em qualquer lugar"
+    ],
+    "commonMistakes": [
+      "Hiperestender o pescoço",
+      "Movimento muito rápido",
+      "Não contrair adequadamente",
+      "Prender a respiração"
+    ],
+    "notes": "Exercício fundamental para iniciantes fortalecerem a lombar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=superman+exercise+lombar",
+    "isPublic": true
+  },
+  {
+    "name": "Face Pull",
+    "description": "Puxada para o rosto no cabo para deltoide posterior e músculos posturais.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione a polia alta e adicione corda",
+      "Segure a corda com pegada neutra",
+      "Puxe em direção ao rosto separando as mãos",
+      "Cotovelos altos, na altura dos ombros ou acima",
+      "Rotacione externamente os ombros no final",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Face pull com pausa",
+      "Face pull com rotação externa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar banda elástica",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Excelente para saúde do ombro",
+      "Contrabalança exercícios de empurrar",
+      "Mantenha cotovelos altos",
+      "Pode fazer em alta frequência"
+    ],
+    "commonMistakes": [
+      "Cotovelos muito baixos",
+      "Puxar para o pescoço ao invés do rosto",
+      "Usar muito peso",
+      "Não rotacionar externamente"
+    ],
+    "notes": "Um dos melhores exercícios para saúde postural e dos ombros.",
+    "videoUrl": "https://www.youtube.com/results?search_query=face+pull+execução+correta",
+    "isPublic": true
+  },
+  {
+    "name": "Pullover no Cabo",
+    "description": "Pullover realizado no cabo para tensão constante no latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Chest", "Triceps"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione a polia alta com barra reta ou corda",
+      "De costas para a máquina, afaste-se para tensionar",
+      "Braços estendidos acima da cabeça, leve flexão nos cotovelos",
+      "Puxe o cabo para baixo em arco até as coxas",
+      "Contraia latíssimo no ponto baixo",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer ajoelhado",
+      "Pullover com pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Pullover com halter",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Tensão constante durante todo movimento",
+      "Mantenha cotovelos fixos",
+      "Foco no latíssimo, não nos braços",
+      "Excelente para conexão mente-músculo"
+    ],
+    "commonMistakes": [
+      "Flexionar demais os cotovelos",
+      "Usar impulso do corpo",
+      "Não controlar a volta",
+      "Perder postura"
+    ],
+    "notes": "Isolamento excelente para o latíssimo do dorso.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+pullover+costas",
+    "isPublic": true
+  },
+  {
+    "name": "Straight Arm Pulldown",
+    "description": "Pulldown com braços estendidos para isolamento do latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com barra reta",
+      "De frente para a máquina, afaste-se um passo",
+      "Segure a barra com braços estendidos acima",
+      "Incline levemente o tronco para frente",
+      "Puxe a barra para baixo mantendo braços estendidos",
+      "Contraia latíssimo e retorne"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar corda",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Isola bem o latíssimo sem bíceps",
+      "Excelente pré-exaustão",
+      "Mantenha braços quase estendidos",
+      "Movimento em arco"
+    ],
+    "commonMistakes": [
+      "Flexionar demais os cotovelos",
+      "Usar impulso",
+      "Postura muito ereta",
+      "Amplitude incompleta"
+    ],
+    "notes": "Excelente para sentir o latíssimo trabalhando isoladamente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=straight+arm+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Remada na Máquina (Plate Loaded)",
+    "description": "Remada em máquina com anilhas para movimento guiado das costas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina com peito no apoio",
+      "Segure as manoplas",
+      "Puxe em direção ao abdômen",
+      "Contraia escápulas no final",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Progredir para pesos livres"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar máquina com peso seletor",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Movimento guiado, mais seguro",
+      "Bom para iniciantes",
+      "Excelente para trabalhar até a falha",
+      "Mantém peito no apoio"
+    ],
+    "commonMistakes": [
+      "Afastar peito do apoio",
+      "Usar impulso",
+      "Não contrair escápulas",
+      "Amplitude incompleta"
+    ],
+    "notes": "Máquina excelente para consistência no treino de costas.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+máquina+plate+loaded+row",
+    "isPublic": true
+  },
+  {
+    "name": "Lat Pullover Máquina",
+    "description": "Pullover em máquina específica para isolamento do latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Chest", "Triceps"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na máquina e ajuste o banco",
+      "Prenda o cinto se disponível",
+      "Posicione cotovelos nos apoios",
+      "Puxe a barra para baixo usando os cotovelos",
+      "Contraia latíssimo no ponto baixo",
+      "Retorne controladamente ao alongamento"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Fazer unilateral se possível"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Pullover no cabo",
+      "Pullover com halter"
+    ],
+    "tips": [
+      "Máquina isola perfeitamente o latíssimo",
+      "Não envolve bíceps",
+      "Excelente conexão mente-músculo",
+      "Aproveite o alongamento"
+    ],
+    "commonMistakes": [
+      "Usar os braços ao invés dos cotovelos",
+      "Não aproveitar alongamento",
+      "Peso muito pesado",
+      "Movimentos rápidos"
+    ],
+    "notes": "Máquina Nautilus é a clássica para este movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=nautilus+pullover+machine",
+    "isPublic": true
+  },
+  {
+    "name": "Single Arm Lat Pulldown",
+    "description": "Puxada unilateral no cabo para foco individual em cada latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia alta com manopla única",
+      "Sente ou ajoelhe de frente para máquina",
+      "Segure com uma mão",
+      "Puxe o cotovelo para baixo e para o quadril",
+      "Contraia o latíssimo no ponto baixo",
+      "Retorne controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Fazer em pé para mais instabilidade"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Puxada bilateral",
+      "Usar elástico"
+    ],
+    "tips": [
+      "Excelente para conexão mente-músculo",
+      "Permite maior amplitude",
+      "Corrige assimetrias",
+      "Foque em cada repetição"
+    ],
+    "commonMistakes": [
+      "Rotar demais o tronco",
+      "Usar impulso",
+      "Não fazer igual dos dois lados",
+      "Amplitude incompleta"
+    ],
+    "notes": "Permite foco individual e correção de desequilíbrios.",
+    "videoUrl": "https://www.youtube.com/results?search_query=single+arm+lat+pulldown",
+    "isPublic": true
+  },
+  {
+    "name": "Cable Row with Rope",
+    "description": "Remada no cabo usando corda para maior amplitude e rotação.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na remada baixa com corda",
+      "Segure a corda com pegada neutra",
+      "Puxe a corda separando as mãos no final",
+      "Traga as mãos ao lado da cintura",
+      "Contraia escápulas e retorne"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar triângulo",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "A separação das mãos aumenta contração",
+      "Maior amplitude que barra",
+      "Trabalha rotação externa",
+      "Bom para romboides"
+    ],
+    "commonMistakes": [
+      "Não separar as mãos",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Postura ruim"
+    ],
+    "notes": "A corda permite maior variação no movimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=cable+row+rope+corda",
+    "isPublic": true
+  },
+  {
+    "name": "Wide Grip Seated Row",
+    "description": "Remada sentada com pegada larga para ênfase no latíssimo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente na remada com barra longa",
+      "Segure com pegada bem mais larga que ombros",
+      "Tronco ereto, peito empinado",
+      "Puxe a barra até o abdômen",
+      "Cotovelos ficam mais para fora",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa na contração",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Pegada mais fechada",
+      "Reduzir carga",
+      "Usar triângulo"
+    ],
+    "tips": [
+      "Mais ênfase no latíssimo",
+      "Cotovelos abertos",
+      "Diferente da remada fechada",
+      "Varia o estímulo"
+    ],
+    "commonMistakes": [
+      "Inclinar demais para trás",
+      "Amplitude incompleta",
+      "Usar impulso",
+      "Perder postura"
+    ],
+    "notes": "Variação para trabalhar o latíssimo de ângulo diferente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=wide+grip+seated+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada no Smith Machine",
+    "description": "Remada curvada utilizando o Smith para movimento guiado.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "SmithMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Posicione-se curvado sob a barra do Smith",
+      "Segure a barra com pegada desejada",
+      "Destrave e mantenha posição curvada",
+      "Puxe a barra até o abdômen",
+      "Contraia escápulas e desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Progredir para barra livre",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar máquina de remada",
+      "Menor inclinação"
+    ],
+    "tips": [
+      "Barra guiada, mais fácil manter técnica",
+      "Bom para aprender o movimento",
+      "Menos exigência de estabilização",
+      "Foco na contração"
+    ],
+    "commonMistakes": [
+      "Ainda arredondar as costas",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Subir demais o tronco"
+    ],
+    "notes": "Alternativa mais segura para aprender remada.",
+    "videoUrl": "https://www.youtube.com/results?search_query=smith+machine+bent+over+row",
+    "isPublic": true
+  },
+  {
+    "name": "Kayak Row",
+    "description": "Remada alternada no cabo simulando movimento de caiaque.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "CableMachine",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Polia baixa com corda ou manopla dupla",
+      "Sente afastado com joelhos flexionados",
+      "Alterne puxando um lado enquanto o outro estende",
+      "Rotacione levemente o tronco como em caiaque",
+      "Mantenha ritmo constante",
+      "Continue alternando fluidamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Aumentar velocidade",
+      "Fazer em pé"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Fazer mais lento",
+      "Remada bilateral normal"
+    ],
+    "tips": [
+      "Excelente para condicionamento",
+      "Trabalha rotação do core",
+      "Movimento contínuo",
+      "Bom aquecimento ou finalizador"
+    ],
+    "commonMistakes": [
+      "Rotação excessiva",
+      "Perder postura",
+      "Movimentos descoordenados",
+      "Amplitude muito curta"
+    ],
+    "notes": "Exercício funcional que trabalha costas e core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kayak+row+cable",
+    "isPublic": true
+  },
+  {
+    "name": "Renegade Row",
+    "description": "Remada em posição de prancha alta alternando braços, excelente para core.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core", "Biceps", "Shoulders", "Chest"],
+    "equipment": "Dumbbell",
+    "category": "Functional",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição de prancha alta segurando dois halteres",
+      "Halteres no chão, corpo em linha reta",
+      "Pés afastados para estabilidade",
+      "Puxe um halter até a cintura",
+      "Mantenha quadril estável sem rotacionar",
+      "Desça e repita do outro lado"
+    ],
+    "progressions": [
+      "Pés mais juntos",
+      "Halteres mais pesados",
+      "Adicionar flexão entre reps"
+    ],
+    "regressions": [
+      "Pés mais afastados",
+      "Halteres mais leves",
+      "Fazer com joelhos apoiados"
+    ],
+    "tips": [
+      "Anti-rotação é o desafio principal",
+      "Mantenha quadril baixo e estável",
+      "Pés bem afastados no início",
+      "Excelente para core e costas"
+    ],
+    "commonMistakes": [
+      "Rotacionar o quadril",
+      "Elevar demais o quadril",
+      "Halteres instáveis",
+      "Perder posição de prancha"
+    ],
+    "notes": "Exercício composto que desafia costas e core simultaneamente.",
+    "videoUrl": "https://www.youtube.com/results?search_query=renegade+row",
+    "isPublic": true
+  },
+  {
+    "name": "TRX Row",
+    "description": "Remada em suspensão no TRX usando peso corporal.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "TRX",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure as alças do TRX",
+      "Incline o corpo para trás em linha reta",
+      "Braços estendidos",
+      "Puxe o corpo em direção às mãos",
+      "Cotovelos passam ao lado do corpo",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Corpo mais horizontal",
+      "Elevar os pés",
+      "Fazer unilateral"
+    ],
+    "regressions": [
+      "Corpo mais vertical",
+      "Joelhos flexionados",
+      "Pés mais à frente"
+    ],
+    "tips": [
+      "Quanto mais horizontal, mais difícil",
+      "Mantenha corpo em linha reta",
+      "Excelente para viagens",
+      "Ajustável para qualquer nível"
+    ],
+    "commonMistakes": [
+      "Quadril caindo",
+      "Amplitude incompleta",
+      "Perder tensão",
+      "Usar impulso"
+    ],
+    "notes": "Versátil e ajustável para qualquer nível de condicionamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=trx+row+remada",
+    "isPublic": true
+  },
+  {
+    "name": "Resistance Band Row",
+    "description": "Remada usando banda elástica para treino em qualquer lugar.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "ResistanceBand",
+    "category": "Strength",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Sente no chão com pernas estendidas",
+      "Passe a banda ao redor dos pés",
+      "Segure as extremidades da banda",
+      "Puxe em direção ao abdômen",
+      "Contraia escápulas e retorne"
+    ],
+    "progressions": [
+      "Banda mais resistente",
+      "Segurar mais curto",
+      "Fazer em pé com banda ancorada"
+    ],
+    "regressions": [
+      "Banda mais leve",
+      "Segurar mais longo",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Perfeito para viagens",
+      "Resistência aumenta conforme estica",
+      "Mantenha postura ereta",
+      "Pode variar pegadas"
+    ],
+    "commonMistakes": [
+      "Banda escapando dos pés",
+      "Postura ruim",
+      "Amplitude incompleta",
+      "Não controlar o retorno"
+    ],
+    "notes": "Alternativa prática para treinar costas sem equipamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=resistance+band+row+elástico",
+    "isPublic": true
+  },
+  {
+    "name": "Door Row com Toalha",
+    "description": "Remada usando toalha e porta para treino em casa.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "Towel",
+    "category": "Calisthenics",
+    "difficulty": "Beginner",
+    "workoutLocation": "Home",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Amarre uma toalha nas maçanetas de uma porta aberta",
+      "Segure as pontas da toalha",
+      "Pés contra a base da porta",
+      "Incline o corpo para trás",
+      "Puxe o corpo em direção à porta",
+      "Retorne controladamente"
+    ],
+    "progressions": [
+      "Corpo mais horizontal",
+      "Fazer unilateral",
+      "Usar apenas uma mão"
+    ],
+    "regressions": [
+      "Corpo mais vertical",
+      "Joelhos flexionados",
+      "Segurar mais alto"
+    ],
+    "tips": [
+      "Verifique se a porta é resistente",
+      "Ótimo para treinar em casa",
+      "Ajuste o ângulo para dificuldade",
+      "Toalha deve estar bem presa"
+    ],
+    "commonMistakes": [
+      "Porta instável",
+      "Toalha mal presa",
+      "Perder postura",
+      "Amplitude incompleta"
+    ],
+    "notes": "Solução criativa para treinar costas em casa.",
+    "videoUrl": "https://www.youtube.com/results?search_query=door+row+towel+casa",
+    "isPublic": true
+  }
+]

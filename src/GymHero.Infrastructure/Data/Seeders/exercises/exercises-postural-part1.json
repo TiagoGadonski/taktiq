@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Chin Tuck",
+    "description": "Recolha o queixo para tras criando papada. Corrige postura de cabeca para frente.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/chin-tuck.png"
+  },
+  {
+    "name": "Chin Tuck Against Wall",
+    "description": "Execute chin tuck com costas contra parede para feedback de postura.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/chin-tuck-wall.png"
+  },
+  {
+    "name": "Deep Neck Flexor Activation",
+    "description": "Deitado, faca chin tuck e eleve cabeca levemente do chao.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/deep-neck-flexor-activation.png"
+  },
+  {
+    "name": "Neck Retraction Isometric",
+    "description": "Empurre a cabeca para tras contra a mao mantendo posicao isometrica.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/neck-retraction-isometric.png"
+  },
+  {
+    "name": "Wall Angels",
+    "description": "Costas na parede, mova bracos para cima e para baixo mantendo contato.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/wall-angels.png"
+  },
+  {
+    "name": "Floor Angels",
+    "description": "Deitado de costas, mova bracos pelo chao de W para Y mantendo contato.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/floor-angels.png"
+  },
+  {
+    "name": "Band Pull Apart",
+    "description": "Puxe band horizontalmente para os lados trabalhando retracao de escapula.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/band-pull-apart.png"
+  },
+  {
+    "name": "Face Pull",
+    "description": "Puxe band ou cabo em direcao ao rosto com cotovelos altos.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/face-pull.png"
+  },
+  {
+    "name": "Prone Y Raise",
+    "description": "De brucos, eleve bracos em Y fortalecendo trapezio inferior.",
+    "musclesWorked": ["Upper Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/prone-y-raise.png"
+  },
+  {
+    "name": "Prone T Raise",
+    "description": "De brucos, eleve bracos lateralmente em T trabalhando trapezio medio.",
+    "musclesWorked": ["Upper Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/prone-t-raise.png"
+  },
+  {
+    "name": "Prone W Raise",
+    "description": "De brucos com cotovelos dobrados, eleve bracos em W.",
+    "musclesWorked": ["Upper Back", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/prone-w-raise.png"
+  },
+  {
+    "name": "Scapular Squeeze",
+    "description": "Aperte as escapulas juntas como se tentasse segurar lapis entre elas.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/scapular-squeeze.png"
+  },
+  {
+    "name": "Seated Row Scapular Focus",
+    "description": "Execute remada sentada focando na retracao completa das escapulas.",
+    "musclesWorked": ["Upper Back", "Back"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/seated-row-scapular.png"
+  },
+  {
+    "name": "Shoulder External Rotation",
+    "description": "Com cotovelo ao lado, rotacione externamente contra resistencia de band.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/shoulder-external-rotation.png"
+  },
+  {
+    "name": "Shoulder External Rotation 90/90",
+    "description": "Com braco a 90 graus, execute rotacao externa contra resistencia.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/shoulder-external-rotation-90-90.png"
+  },
+  {
+    "name": "Side Lying External Rotation",
+    "description": "Deitado de lado, execute rotacao externa com halter leve.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Dumbbell"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/side-lying-external-rotation.png"
+  },
+  {
+    "name": "Doorway Pec Stretch",
+    "description": "Alongue peitorais no batente da porta em diferentes alturas de braco.",
+    "musclesWorked": ["Chest"],
+    "equipment": ["Door Frame"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/doorway-pec-stretch.png"
+  },
+  {
+    "name": "Pec Minor Release",
+    "description": "Use bola de lacrosse contra parede para liberar peitoral menor.",
+    "musclesWorked": ["Chest"],
+    "equipment": ["Lacrosse Ball"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/pec-minor-release.png"
+  },
+  {
+    "name": "Upper Trap Release",
+    "description": "Use bola para liberar pontos gatilho no trapezio superior.",
+    "musclesWorked": ["Traps"],
+    "equipment": ["Lacrosse Ball"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/upper-trap-release.png"
+  },
+  {
+    "name": "Levator Scapulae Release",
+    "description": "Libere levantador da escapula com bola posicionada entre escapula e coluna.",
+    "musclesWorked": ["Neck", "Shoulders"],
+    "equipment": ["Lacrosse Ball"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/levator-scapulae-release.png"
+  },
+  {
+    "name": "Thoracic Extension on Foam Roller",
+    "description": "Estenda coluna toracica sobre foam roller para corrigir cifose.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/thoracic-extension-foam-roller.png"
+  },
+  {
+    "name": "Cat Camel",
+    "description": "Alterne entre flexao e extensao da coluna para mobilidade e postura.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/cat-camel.png"
+  },
+  {
+    "name": "Brugger Relief Position",
+    "description": "Sente-se ereto com bracos abertos e rodados externamente. Posicao de alinio.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/brugger-relief-position.png"
+  },
+  {
+    "name": "Serratus Anterior Punch",
+    "description": "De costas com braco estendido para cima, empurre punho ao teto protraindo escapula.",
+    "musclesWorked": ["Serratus Anterior"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/serratus-anterior-punch.png"
+  },
+  {
+    "name": "Push-Up Plus",
+    "description": "No topo do push-up, protraia escapulas adicionalmente arredondando costas.",
+    "musclesWorked": ["Serratus Anterior", "Chest"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/push-up-plus.png"
+  },
+  {
+    "name": "Wall Posture Check",
+    "description": "Fique de costas para parede checando se cabeca, costas e gluteos tocam.",
+    "musclesWorked": ["Full Body"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/wall-posture-check.png"
+  },
+  {
+    "name": "Hip Flexor Stretch for APT",
+    "description": "Alongamento de flexores do quadril para corrigir inclinacao pelvica anterior.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/hip-flexor-stretch-apt.png"
+  },
+  {
+    "name": "Glute Bridge for APT",
+    "description": "Glute bridge com enfase em posterior pelvic tilt no topo do movimento.",
+    "musclesWorked": ["Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/glute-bridge-apt.png"
+  },
+  {
+    "name": "Dead Bug for Core Control",
+    "description": "Dead bug mantendo lombar pressionada no chao para controle de core.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/dead-bug-core-control.png"
+  },
+  {
+    "name": "Pelvic Tilt Supine",
+    "description": "Deitado, alterne entre inclinar pelve para frente e para tras.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/pelvic-tilt-supine.png"
+  }
+]

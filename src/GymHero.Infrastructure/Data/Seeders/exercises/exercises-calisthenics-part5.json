@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Glute Bridge",
+    "description": "Deitado de costas com joelhos dobrados, eleve o quadril contraindo gluteos. Mantenha e desça.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/glute-bridge.png"
+  },
+  {
+    "name": "Single Leg Glute Bridge",
+    "description": "Glute bridge com uma perna estendida no ar. Trabalho unilateral intenso.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-glute-bridge.png"
+  },
+  {
+    "name": "Elevated Glute Bridge",
+    "description": "Glute bridge com pes elevados em superficie. Maior amplitude de movimento.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/elevated-glute-bridge.png"
+  },
+  {
+    "name": "Hip Thrust",
+    "description": "Com costas apoiadas em banco, eleve o quadril contraindo gluteos maximamente.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hip-thrust.png"
+  },
+  {
+    "name": "Single Leg Hip Thrust",
+    "description": "Hip thrust executado com uma perna so. Trabalho unilateral de gluteos.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-hip-thrust.png"
+  },
+  {
+    "name": "Frog Pump",
+    "description": "Deitado com solas dos pes juntas e joelhos abertos, eleve o quadril contraindo gluteos.",
+    "musclesWorked": ["Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/frog-pump.png"
+  },
+  {
+    "name": "Fire Hydrant",
+    "description": "Em quatro apoios, eleve a perna lateralmente mantendo joelho a 90 graus.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/fire-hydrant.png"
+  },
+  {
+    "name": "Donkey Kick",
+    "description": "Em quatro apoios, chute uma perna para tras e para cima mantendo joelho dobrado.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/donkey-kick.png"
+  },
+  {
+    "name": "Straight Leg Kickback",
+    "description": "Em quatro apoios, eleve a perna reta para tras contraindo gluteos.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/straight-leg-kickback.png"
+  },
+  {
+    "name": "Clamshell",
+    "description": "Deitado de lado com joelhos dobrados, abra o joelho superior como uma concha.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/clamshell.png"
+  },
+  {
+    "name": "Side Lying Hip Abduction",
+    "description": "Deitado de lado, eleve a perna superior mantendo-a reta. Trabalha abdutores.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/side-lying-hip-abduction.png"
+  },
+  {
+    "name": "Side Lying Hip Adduction",
+    "description": "Deitado de lado, eleve a perna inferior. Trabalha adutores.",
+    "musclesWorked": ["Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/side-lying-hip-adduction.png"
+  },
+  {
+    "name": "Standing Kickback",
+    "description": "Em pe apoiado, chute uma perna para tras contraindo gluteos. Mantenha e retorne.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standing-kickback.png"
+  },
+  {
+    "name": "Standing Hip Abduction",
+    "description": "Em pe apoiado, eleve a perna lateralmente afastando do corpo.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standing-hip-abduction.png"
+  },
+  {
+    "name": "Quadruped Hip Circle",
+    "description": "Em quatro apoios, faca circulos com o joelho elevado. Trabalha mobilidade e gluteos.",
+    "musclesWorked": ["Glutes", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/quadruped-hip-circle.png"
+  },
+  {
+    "name": "Nordic Hamstring Curl",
+    "description": "Ajoelhado com pes fixos, desça controladamente usando apenas os hamstrings. Exercicio intenso.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/nordic-hamstring-curl.png"
+  },
+  {
+    "name": "Sliding Leg Curl",
+    "description": "Deitado com pes em superficie deslizante, puxe os calcanhares em direcao aos gluteos.",
+    "musclesWorked": ["Hamstrings", "Glutes"],
+    "equipment": ["Bodyweight", "Sliders"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sliding-leg-curl.png"
+  },
+  {
+    "name": "Single Leg Deadlift",
+    "description": "Em pe numa perna, flexione o quadril estendendo a outra perna para tras. Mantenha costas retas.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-deadlift.png"
+  },
+  {
+    "name": "Good Morning Bodyweight",
+    "description": "Em pe com maos atras da cabeca, flexione o quadril empurrando gluteos para tras.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/good-morning-bodyweight.png"
+  },
+  {
+    "name": "Reverse Hyperextension",
+    "description": "Apoiado em banco com quadril no canto, eleve as pernas retas contraindo gluteos e lombares.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/reverse-hyperextension.png"
+  },
+  {
+    "name": "Standing Calf Raise",
+    "description": "Em pe na ponta dos pes, eleve os calcanhares o mais alto possivel e desça controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/standing-calf-raise.png"
+  },
+  {
+    "name": "Single Leg Calf Raise",
+    "description": "Elevacao de panturrilha em uma perna so para maior intensidade.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-calf-raise.png"
+  },
+  {
+    "name": "Elevated Calf Raise",
+    "description": "Calf raise com ponta dos pes em degrau para maior amplitude abaixo do nivel.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight", "Step"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/elevated-calf-raise.png"
+  },
+  {
+    "name": "Seated Calf Raise Bodyweight",
+    "description": "Sentado com peso nos joelhos, eleve os calcanhares contraindo panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/seated-calf-raise-bodyweight.png"
+  },
+  {
+    "name": "Tip Toe Walk",
+    "description": "Caminhe na ponta dos pes por distancia ou tempo determinado.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tip-toe-walk.png"
+  },
+  {
+    "name": "Heel Walk",
+    "description": "Caminhe sobre os calcanhares com pontas dos pes elevadas. Trabalha tibial anterior.",
+    "musclesWorked": ["Tibialis Anterior"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/heel-walk.png"
+  },
+  {
+    "name": "Pogo Hop",
+    "description": "Pequenos saltos usando principalmente tornozelos, mantendo joelhos quase retos.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pogo-hop.png"
+  },
+  {
+    "name": "Skater Jump",
+    "description": "Salte lateralmente de uma perna para outra como um patinador no gelo.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/skater-jump.png"
+  },
+  {
+    "name": "Lateral Bound",
+    "description": "Salte lateralmente explosivamente aterrissando em uma perna. Treina potencia lateral.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lateral-bound.png"
+  },
+  {
+    "name": "Tuck Jump",
+    "description": "Salte trazendo os joelhos ao peito no ar. Aterrisse suavemente.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/tuck-jump.png"
+  }
+]

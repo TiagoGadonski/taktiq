@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Bodyweight Squat",
+    "description": "Em pe com pes na largura dos ombros, desça como se fosse sentar mantendo peito ereto. Suba empurrando pelos calcanhares.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bodyweight-squat.png"
+  },
+  {
+    "name": "Wide Stance Squat",
+    "description": "Agachamento com pes mais afastados que largura dos ombros. Maior enfase em adutores.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wide-stance-squat.png"
+  },
+  {
+    "name": "Narrow Stance Squat",
+    "description": "Agachamento com pes juntos. Maior enfase em quadriceps externos.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/narrow-stance-squat.png"
+  },
+  {
+    "name": "Sumo Squat",
+    "description": "Agachamento com pes bem afastados e pontas dos pes viradas para fora.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sumo-squat.png"
+  },
+  {
+    "name": "Prisoner Squat",
+    "description": "Agachamento com maos atras da cabeca. Ajuda a manter peito ereto.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/prisoner-squat.png"
+  },
+  {
+    "name": "Pulse Squat",
+    "description": "Agachamento mantendo posicao baixa e fazendo pequenos movimentos de pulso.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pulse-squat.png"
+  },
+  {
+    "name": "Pause Squat",
+    "description": "Agachamento com pausa de 2-3 segundos no fundo antes de subir.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pause-squat.png"
+  },
+  {
+    "name": "Jump Squat",
+    "description": "Agachamento seguido de salto explosivo. Aterrisse suavemente e repita.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/jump-squat.png"
+  },
+  {
+    "name": "Squat Hold",
+    "description": "Mantenha posicao baixa do agachamento por tempo determinado. Resistencia isometrica.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/squat-hold.png"
+  },
+  {
+    "name": "Wall Sit",
+    "description": "Sentado contra parede com coxas paralelas ao chao. Mantenha posicao por tempo.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight", "Wall"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/wall-sit.png"
+  },
+  {
+    "name": "Bulgarian Split Squat",
+    "description": "Afundo com pe traseiro elevado em banco ou superficie. Trabalho unilateral intenso.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bulgarian-split-squat.png"
+  },
+  {
+    "name": "Pistol Squat",
+    "description": "Agachamento em uma perna so com a outra estendida a frente. Movimento avancado.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/pistol-squat.png"
+  },
+  {
+    "name": "Assisted Pistol Squat",
+    "description": "Pistol squat segurando em suporte para assistencia e equilibrio.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/assisted-pistol-squat.png"
+  },
+  {
+    "name": "Box Pistol Squat",
+    "description": "Pistol squat sentando em caixa ou banco. Progressao para pistol completo.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight", "Box"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/box-pistol-squat.png"
+  },
+  {
+    "name": "Shrimp Squat",
+    "description": "Agachamento em uma perna com a outra dobrada atras segurando o pe.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/shrimp-squat.png"
+  },
+  {
+    "name": "Cossack Squat",
+    "description": "Agachamento lateral profundo em uma perna enquanto a outra permanece reta ao lado.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/cossack-squat.png"
+  },
+  {
+    "name": "Hindu Squat",
+    "description": "Agachamento dinamico ficando na ponta dos pes no fundo com movimento de bracos.",
+    "musclesWorked": ["Quadriceps", "Calves", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/hindu-squat.png"
+  },
+  {
+    "name": "Sissy Squat",
+    "description": "Agachamento inclinando para tras com joelhos avancando muito a frente dos pes.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sissy-squat.png"
+  },
+  {
+    "name": "Forward Lunge",
+    "description": "De um passo a frente e desça ate joelho traseiro quase tocar o chao. Retorne.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/forward-lunge.png"
+  },
+  {
+    "name": "Reverse Lunge",
+    "description": "De um passo para tras e desça controladamente. Menos estresse no joelho frontal.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/reverse-lunge.png"
+  },
+  {
+    "name": "Walking Lunge",
+    "description": "Execute lunges continuos caminhando para frente sem parar entre cada passo.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/walking-lunge.png"
+  },
+  {
+    "name": "Lateral Lunge",
+    "description": "De um passo lateral largo e desça flexionando apenas uma perna. Alterne os lados.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lateral-lunge.png"
+  },
+  {
+    "name": "Curtsy Lunge",
+    "description": "Lunge cruzando a perna traseira por tras da perna frontal como uma reverencia.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/curtsy-lunge.png"
+  },
+  {
+    "name": "Jump Lunge",
+    "description": "Salte de um afundo trocando as pernas no ar. Aterrisse no afundo oposto.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/jump-lunge.png"
+  },
+  {
+    "name": "Step-Up",
+    "description": "Suba em superficie elevada com um pe, estenda a perna e desça controladamente.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Bodyweight", "Step"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/step-up.png"
+  },
+  {
+    "name": "Lateral Step-Up",
+    "description": "Step-up lateral subindo de lado na superficie elevada.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Abductors"],
+    "equipment": ["Bodyweight", "Step"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/lateral-step-up.png"
+  },
+  {
+    "name": "Box Jump",
+    "description": "Salte de pe no chao para cima de uma caixa. Aterrisse suavemente.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight", "Box"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/box-jump.png"
+  },
+  {
+    "name": "Depth Jump",
+    "description": "Pule de caixa, aterrisse e salte imediatamente o mais alto possivel.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight", "Box"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/depth-jump.png"
+  },
+  {
+    "name": "Broad Jump",
+    "description": "Salto horizontal para frente buscando maxima distancia.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/broad-jump.png"
+  },
+  {
+    "name": "Single Leg Box Jump",
+    "description": "Salte para caixa usando apenas uma perna. Requer forca e equilibrio.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight", "Box"],
+    "difficulty": "Advanced",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/single-leg-box-jump.png"
+  }
+]

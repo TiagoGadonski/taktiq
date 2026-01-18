@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Burpee",
+    "description": "Do pe, agache, prancha, flexao (opcional), salte de volta e pule vertical.",
+    "musclesWorked": ["Full Body", "Core", "Chest", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/burpee.png"
+  },
+  {
+    "name": "Jumping Jack",
+    "description": "Salte abrindo pernas e bracos simultaneamente, depois feche. Repita rapidamente.",
+    "musclesWorked": ["Full Body", "Calves", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/jumping-jack.png"
+  },
+  {
+    "name": "Star Jump",
+    "description": "Salte formando uma estrela com bracos e pernas abertos no ar.",
+    "musclesWorked": ["Full Body", "Quadriceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/star-jump.png"
+  },
+  {
+    "name": "High Knees",
+    "description": "Corra no lugar elevando os joelhos alto em direcao ao peito rapidamente.",
+    "musclesWorked": ["Hip Flexors", "Quadriceps", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/high-knees.png"
+  },
+  {
+    "name": "Butt Kicks",
+    "description": "Corra no lugar chutando os calcanhares em direcao aos gluteos.",
+    "musclesWorked": ["Hamstrings", "Quadriceps", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/butt-kicks.png"
+  },
+  {
+    "name": "Inchworm",
+    "description": "De pe, toque o chao, caminhe com maos para prancha, depois caminhe com pes ate as maos.",
+    "musclesWorked": ["Core", "Shoulders", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/inchworm.png"
+  },
+  {
+    "name": "Bear Crawl",
+    "description": "Em quatro apoios com joelhos elevados, caminhe movendo mao e pe opostos.",
+    "musclesWorked": ["Core", "Shoulders", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/bear-crawl.png"
+  },
+  {
+    "name": "Crab Walk",
+    "description": "Sentado com maos e pes no chao, eleve quadril e caminhe em qualquer direcao.",
+    "musclesWorked": ["Triceps", "Core", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/crab-walk.png"
+  },
+  {
+    "name": "Frog Jump",
+    "description": "Agache profundo e salte para frente aterrissando em posicao de agachamento.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/frog-jump.png"
+  },
+  {
+    "name": "Sprawl",
+    "description": "Caia rapidamente para prancha baixa com quadris no chao e levante explosivamente.",
+    "musclesWorked": ["Full Body", "Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/sprawl.png"
+  },
+  {
+    "name": "Squat Thrust",
+    "description": "De pe, agache, salte para prancha, salte de volta para agachamento e fique em pe.",
+    "musclesWorked": ["Full Body", "Core", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/squat-thrust.png"
+  },
+  {
+    "name": "180 Jump Squat",
+    "description": "Execute um jump squat rotacionando 180 graus no ar. Alterne direcoes.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/180-jump-squat.png"
+  },
+  {
+    "name": "Speed Skater",
+    "description": "Salte lateralmente de um pe para outro como patinador, tocando chao com mao oposta.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/speed-skater.png"
+  },
+  {
+    "name": "Jump Rope Bodyweight",
+    "description": "Simule pular corda sem equipamento, saltando e rotacionando pulsos.",
+    "musclesWorked": ["Calves", "Shoulders", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/jump-rope-bodyweight.png"
+  },
+  {
+    "name": "Seal Jack",
+    "description": "Jumping jack com bracos se abrindo e fechando na horizontal como foca.",
+    "musclesWorked": ["Shoulders", "Chest", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/seal-jack.png"
+  },
+  {
+    "name": "Band Pull Apart",
+    "description": "Segure band a frente com bracos estendidos e puxe abrindo ate altura dos ombros.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-pull-apart.png"
+  },
+  {
+    "name": "Band Face Pull",
+    "description": "Com band ancorada, puxe em direcao ao rosto com cotovelos altos.",
+    "musclesWorked": ["Shoulders", "Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-face-pull.png"
+  },
+  {
+    "name": "Band Chest Press",
+    "description": "Com band nas costas, empurre para frente estendendo bracos.",
+    "musclesWorked": ["Chest", "Triceps", "Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-chest-press.png"
+  },
+  {
+    "name": "Band Row",
+    "description": "Com band ancorada a frente, puxe para o abdomen remando.",
+    "musclesWorked": ["Back", "Biceps"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-row.png"
+  },
+  {
+    "name": "Band Bicep Curl",
+    "description": "Pisando na band, flexione os cotovelos curlando.",
+    "musclesWorked": ["Biceps"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-bicep-curl.png"
+  },
+  {
+    "name": "Band Tricep Extension",
+    "description": "Com band atras da cabeca, estenda os cotovelos para cima.",
+    "musclesWorked": ["Triceps"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-tricep-extension.png"
+  },
+  {
+    "name": "Band Lateral Raise",
+    "description": "Pisando na band, eleve bracos lateralmente ate altura dos ombros.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-lateral-raise.png"
+  },
+  {
+    "name": "Band Squat",
+    "description": "Com band sob os pes e nas maos/ombros, execute agachamentos.",
+    "musclesWorked": ["Quadriceps", "Glutes"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-squat.png"
+  },
+  {
+    "name": "Band Deadlift",
+    "description": "Pisando na band, execute levantamento terra contra resistencia.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-deadlift.png"
+  },
+  {
+    "name": "Band Good Morning",
+    "description": "Com band nas costas e sob os pes, execute good mornings.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Lower Back"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-good-morning.png"
+  },
+  {
+    "name": "Band Glute Bridge",
+    "description": "Glute bridge com band ao redor das coxas para resistencia adicional.",
+    "musclesWorked": ["Glutes", "Hamstrings"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-glute-bridge.png"
+  },
+  {
+    "name": "Band Clamshell",
+    "description": "Clamshell com band ao redor das coxas para maior resistencia.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-clamshell.png"
+  },
+  {
+    "name": "Band Monster Walk",
+    "description": "Com band ao redor dos tornozelos ou coxas, caminhe lateralmente.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-monster-walk.png"
+  },
+  {
+    "name": "Band Pallof Press",
+    "description": "Com band ancorada lateralmente, empurre para frente resistindo rotacao.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-pallof-press.png"
+  },
+  {
+    "name": "Band Woodchop",
+    "description": "Com band ancorada alta ou baixa, execute movimento diagonal de corte.",
+    "musclesWorked": ["Core", "Obliques", "Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Calisthenics",
+    "imageUrl": "exercises/calisthenics/band-woodchop.png"
+  }
+]

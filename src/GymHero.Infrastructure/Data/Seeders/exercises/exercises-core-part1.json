@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Crunch",
+    "description": "Deitado de costas com joelhos dobrados e maos atras da cabeca. Eleve os ombros do chao contraindo o abdomen sem puxar o pescoco.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/crunch.png"
+  },
+  {
+    "name": "Reverse Crunch",
+    "description": "Deitado de costas com pernas elevadas e joelhos dobrados a 90 graus. Eleve o quadril do chao trazendo os joelhos em direcao ao peito.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/reverse-crunch.png"
+  },
+  {
+    "name": "Bicycle Crunch",
+    "description": "Deitado com maos atras da cabeca, alterne levando cotovelo ao joelho oposto enquanto estende a outra perna. Movimento continuo de pedalada.",
+    "musclesWorked": ["Abs", "Obliques"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/bicycle-crunch.png"
+  },
+  {
+    "name": "Sit-Up",
+    "description": "Deitado de costas com joelhos dobrados e pes fixos. Eleve o tronco completamente ate posicao sentada e retorne controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/sit-up.png"
+  },
+  {
+    "name": "V-Up",
+    "description": "Deitado com bracos estendidos acima da cabeca. Eleve simultaneamente tronco e pernas formando um V, tocando os pes com as maos.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/v-up.png"
+  },
+  {
+    "name": "Leg Raise",
+    "description": "Deitado de costas com pernas estendidas. Eleve as pernas ate 90 graus mantendo lombar pressionada no chao e desça controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/leg-raise.png"
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "description": "Pendurado na barra com bracos estendidos. Eleve as pernas retas ate a horizontal ou acima, mantendo o corpo estavel.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hanging-leg-raise.png"
+  },
+  {
+    "name": "Hanging Knee Raise",
+    "description": "Pendurado na barra com bracos estendidos. Eleve os joelhos em direcao ao peito contraindo o abdomen e desça controladamente.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Pull-Up Bar"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hanging-knee-raise.png"
+  },
+  {
+    "name": "Captain Chair Leg Raise",
+    "description": "Apoiado na cadeira do capitao com costas no encosto. Eleve as pernas retas ou joelhos ate a horizontal.",
+    "musclesWorked": ["Abs", "Hip Flexors"],
+    "equipment": ["Captain's Chair"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/captain-chair-leg-raise.png"
+  },
+  {
+    "name": "Plank",
+    "description": "Em posicao de prancha com antebracos no chao e corpo reto da cabeca aos calcanhares. Mantenha o core contraido sem deixar o quadril cair.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank.png"
+  },
+  {
+    "name": "Side Plank",
+    "description": "Deitado de lado apoiado no antebraco com corpo reto. Eleve o quadril formando linha reta e mantenha a posicao.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/side-plank.png"
+  },
+  {
+    "name": "Plank with Arm Reach",
+    "description": "Na posicao de prancha, alterne estendendo um braco para frente enquanto mantém o corpo estavel e o core contraido.",
+    "musclesWorked": ["Abs", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank-arm-reach.png"
+  },
+  {
+    "name": "Plank with Leg Lift",
+    "description": "Na posicao de prancha, alterne elevando uma perna do chao sem rotacionar o quadril. Mantenha o core estavel.",
+    "musclesWorked": ["Abs", "Core", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank-leg-lift.png"
+  },
+  {
+    "name": "Plank to Push-Up",
+    "description": "Comece em prancha de antebracos, suba para prancha alta um braco de cada vez, depois desça da mesma forma. Alterne o braco inicial.",
+    "musclesWorked": ["Abs", "Core", "Triceps", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/plank-to-pushup.png"
+  },
+  {
+    "name": "Mountain Climber",
+    "description": "Em posicao de prancha alta, alterne trazendo os joelhos em direcao ao peito em movimento rapido de corrida.",
+    "musclesWorked": ["Abs", "Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/core/mountain-climber.png"
+  },
+  {
+    "name": "Cross-Body Mountain Climber",
+    "description": "Mountain climber trazendo cada joelho em direcao ao cotovelo oposto, adicionando rotacao do tronco.",
+    "musclesWorked": ["Abs", "Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/core/cross-body-mountain-climber.png"
+  },
+  {
+    "name": "Dead Bug",
+    "description": "Deitado de costas com bracos estendidos para cima e joelhos a 90 graus. Alterne estendendo braco e perna oposta mantendo lombar no chao.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/dead-bug.png"
+  },
+  {
+    "name": "Bird Dog",
+    "description": "Em quatro apoios, estenda simultaneamente braco e perna opostos formando linha reta. Alterne os lados mantendo o core estavel.",
+    "musclesWorked": ["Core", "Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/bird-dog.png"
+  },
+  {
+    "name": "Hollow Body Hold",
+    "description": "Deitado de costas com lombar pressionada no chao, bracos acima da cabeca e pernas estendidas levemente elevadas. Mantenha a posicao.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hollow-body-hold.png"
+  },
+  {
+    "name": "Hollow Body Rock",
+    "description": "Na posicao de hollow body, balance suavemente para frente e para tras mantendo a forma rigida.",
+    "musclesWorked": ["Abs", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/core/hollow-body-rock.png"
+  },
+  {
+    "name": "Superman",
+    "description": "Deitado de brucos, eleve simultaneamente bracos e pernas do chao contraindo a lombar. Mantenha a posicao e retorne.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/superman.png"
+  },
+  {
+    "name": "Superman Hold",
+    "description": "Na posicao de superman, mantenha bracos e pernas elevados por tempo determinado. Trabalha resistencia da lombar.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/superman-hold.png"
+  },
+  {
+    "name": "Back Extension Machine",
+    "description": "Na maquina de extensao lombar com quadril apoiado e tornozelos presos. Flexione e estenda o tronco controladamente.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Back Extension Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/core/back-extension-machine.png"
+  },
+  {
+    "name": "45 Degree Back Extension",
+    "description": "No banco romano a 45 graus, flexione o tronco para baixo e estenda ate ficar em linha reta. Mantenha a coluna neutra.",
+    "musclesWorked": ["Lower Back", "Glutes", "Hamstrings"],
+    "equipment": ["Roman Chair"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/45-degree-back-extension.png"
+  },
+  {
+    "name": "Weighted Back Extension",
+    "description": "Extensao lombar segurando disco ou halter contra o peito para adicionar resistencia ao movimento.",
+    "musclesWorked": ["Lower Back", "Glutes"],
+    "equipment": ["Roman Chair", "Weight Plate"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/weighted-back-extension.png"
+  },
+  {
+    "name": "Good Morning",
+    "description": "Em pe com barra nos ombros, flexione o quadril empurrando os gluteos para tras mantendo coluna neutra. Retorne a posicao inicial.",
+    "musclesWorked": ["Lower Back", "Hamstrings", "Glutes"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/good-morning.png"
+  },
+  {
+    "name": "Seated Good Morning",
+    "description": "Sentado no banco com barra nos ombros, flexione o tronco para frente e retorne a posicao inicial. Isola melhor a lombar.",
+    "musclesWorked": ["Lower Back"],
+    "equipment": ["Barbell", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/seated-good-morning.png"
+  },
+  {
+    "name": "Cable Good Morning",
+    "description": "De costas para o cabo baixo com corda nos ombros. Execute o movimento de good morning contra a resistencia do cabo.",
+    "musclesWorked": ["Lower Back", "Hamstrings", "Glutes"],
+    "equipment": ["Cable Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/cable-good-morning.png"
+  },
+  {
+    "name": "Russian Twist",
+    "description": "Sentado com tronco inclinado para tras e pes elevados. Rotacione o tronco de lado a lado tocando o chao com as maos ou peso.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/russian-twist.png"
+  },
+  {
+    "name": "Weighted Russian Twist",
+    "description": "Russian twist segurando medicine ball, halter ou disco. Rotacione controladamente de lado a lado.",
+    "musclesWorked": ["Obliques", "Abs"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/core/weighted-russian-twist.png"
+  }
+]

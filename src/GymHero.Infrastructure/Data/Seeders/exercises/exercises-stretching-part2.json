@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Standing Forward Fold",
+    "description": "Em pe com pernas juntas, flexione tronco para frente tentando tocar o chao.",
+    "musclesWorked": ["Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-forward-fold.png"
+  },
+  {
+    "name": "Standing Side Bend",
+    "description": "Em pe, incline tronco lateralmente com braco estendido acima da cabeca.",
+    "musclesWorked": ["Obliques", "Lats"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-side-bend.png"
+  },
+  {
+    "name": "Seated Forward Fold",
+    "description": "Sentado com pernas estendidas, alcance os pes flexionando tronco para frente.",
+    "musclesWorked": ["Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-forward-fold.png"
+  },
+  {
+    "name": "Seated Single Leg Stretch",
+    "description": "Sentado com uma perna estendida e outra dobrada, alcance o pe estendido.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-single-leg-stretch.png"
+  },
+  {
+    "name": "Standing Hamstring Stretch",
+    "description": "Em pe com calcanhar elevado em superficie, incline tronco sobre a perna reta.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Elevated Surface"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-hamstring-stretch.png"
+  },
+  {
+    "name": "Supine Hamstring Stretch",
+    "description": "Deitado de costas, eleve perna reta e puxe em direcao ao peito.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/supine-hamstring-stretch.png"
+  },
+  {
+    "name": "Towel Hamstring Stretch",
+    "description": "Deitado de costas, use toalha ao redor do pe para puxar perna reta.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Towel"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/towel-hamstring-stretch.png"
+  },
+  {
+    "name": "Standing Quad Stretch",
+    "description": "Em pe, segure pe atras e puxe em direcao aos gluteos alongando quadriceps.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-quad-stretch.png"
+  },
+  {
+    "name": "Side Lying Quad Stretch",
+    "description": "Deitado de lado, puxe o pe de cima em direcao aos gluteos.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/side-lying-quad-stretch.png"
+  },
+  {
+    "name": "Prone Quad Stretch",
+    "description": "Deitado de brucos, puxe o pe em direcao aos gluteos.",
+    "musclesWorked": ["Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/prone-quad-stretch.png"
+  },
+  {
+    "name": "Kneeling Quad Stretch",
+    "description": "De joelhos com um pe a frente, incline-se para tras alongando quad da perna atras.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/kneeling-quad-stretch.png"
+  },
+  {
+    "name": "Couch Stretch",
+    "description": "Joelho no chao com pe apoiado na parede ou sofa atras, tronco ereto.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors"],
+    "equipment": ["Couch"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/couch-stretch.png"
+  },
+  {
+    "name": "Wall Quad Stretch",
+    "description": "De frente para parede, apoie pe atras na parede com joelho no chao.",
+    "musclesWorked": ["Quadriceps", "Hip Flexors"],
+    "equipment": ["Wall"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wall-quad-stretch.png"
+  },
+  {
+    "name": "Standing Calf Stretch",
+    "description": "Com as maos na parede, estenda uma perna para tras mantendo calcanhar no chao.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-calf-stretch.png"
+  },
+  {
+    "name": "Wall Calf Stretch",
+    "description": "Ponta do pe contra parede com calcanhar no chao, incline corpo para frente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wall-calf-stretch.png"
+  },
+  {
+    "name": "Step Calf Stretch",
+    "description": "Em degrau com calcanhar suspenso, deixe o calcanhar cair abaixo do nivel.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Step"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/step-calf-stretch.png"
+  },
+  {
+    "name": "Soleus Stretch",
+    "description": "Calf stretch com joelho da perna traseira levemente dobrado para focar no soleo.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/soleus-stretch.png"
+  },
+  {
+    "name": "Downward Dog",
+    "description": "Posicao de V invertido empurrando calcanhares em direcao ao chao.",
+    "musclesWorked": ["Calves", "Hamstrings", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/downward-dog.png"
+  },
+  {
+    "name": "Tibialis Stretch",
+    "description": "Ajoelhado com dorso do pe no chao, sente-se sobre os calcanhares.",
+    "musclesWorked": ["Tibialis Anterior"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/tibialis-stretch.png"
+  },
+  {
+    "name": "Ankle Dorsiflexion Stretch",
+    "description": "Ajoelhado com um pe a frente, empurre joelho sobre os dedos mantendo calcanhar no chao.",
+    "musclesWorked": ["Calves", "Ankle"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/ankle-dorsiflexion-stretch.png"
+  },
+  {
+    "name": "Standing ITB Stretch",
+    "description": "Em pe, cruze uma perna atras da outra e incline para o lado oposto.",
+    "musclesWorked": ["IT Band", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-itb-stretch.png"
+  },
+  {
+    "name": "Lying ITB Stretch",
+    "description": "Deitado de costas, cruze perna sobre o corpo com joelho reto para alongar ITB.",
+    "musclesWorked": ["IT Band", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lying-itb-stretch.png"
+  },
+  {
+    "name": "Standing Adductor Stretch",
+    "description": "Em pe com pernas bem afastadas, flexione uma perna enquanto a outra permanece reta.",
+    "musclesWorked": ["Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-adductor-stretch.png"
+  },
+  {
+    "name": "Seated Adductor Stretch",
+    "description": "Sentado com pernas abertas em V, incline tronco para frente.",
+    "musclesWorked": ["Adductors", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/seated-adductor-stretch.png"
+  },
+  {
+    "name": "Butterfly Stretch",
+    "description": "Sentado com solas dos pes juntas, pressione joelhos em direcao ao chao.",
+    "musclesWorked": ["Adductors", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/butterfly-stretch.png"
+  },
+  {
+    "name": "Frog Stretch",
+    "description": "Em quatro apoios com joelhos bem afastados, empurre quadril para tras.",
+    "musclesWorked": ["Adductors", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/frog-stretch.png"
+  },
+  {
+    "name": "Wall Straddle Stretch",
+    "description": "Deitado de costas com gluteos na parede, deixe pernas abrirem para os lados.",
+    "musclesWorked": ["Adductors"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/wall-straddle-stretch.png"
+  },
+  {
+    "name": "Supine Adductor Stretch",
+    "description": "Deitado de costas, deixe uma perna cair para o lado mantendo a outra reta.",
+    "musclesWorked": ["Adductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/supine-adductor-stretch.png"
+  },
+  {
+    "name": "Standing Abductor Stretch",
+    "description": "Em pe, cruze uma perna na frente da outra e incline para o lado.",
+    "musclesWorked": ["IT Band", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/standing-abductor-stretch.png"
+  },
+  {
+    "name": "Lying Abductor Stretch",
+    "description": "Deitado de lado, puxe a perna de baixo para cima alongando tensor da fascia lata.",
+    "musclesWorked": ["Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/stretching/lying-abductor-stretch.png"
+  }
+]

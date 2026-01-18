@@ -1,0 +1,959 @@
+[
+  {
+    "name": "Flexora Deitado",
+    "description": "Exercício de isolamento para posterior de coxa na máquina flexora deitada.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Calves"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de bruços na máquina flexora",
+      "Ajuste o pad para ficar logo acima dos calcanhares",
+      "Segure nas alças para estabilidade",
+      "Flexione os joelhos trazendo os calcanhares em direção aos glúteos",
+      "Contraia fortemente os isquiotibiais no pico",
+      "Retorne de forma controlada à posição inicial"
+    ],
+    "progressions": ["Flexora com Mais Carga", "Flexora Unilateral"],
+    "regressions": ["Flexora com Menos Carga"],
+    "tips": [
+      "Mantenha o quadril em contato com o banco",
+      "Não use impulso para levantar a carga",
+      "Foque na contração no pico do movimento"
+    ],
+    "commonMistakes": [
+      "Levantar o quadril do banco",
+      "Usar impulso para mover a carga",
+      "Amplitude incompleta"
+    ],
+    "notes": "Exercício fundamental para isolamento do posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexora Sentado",
+    "description": "Flexão de joelhos sentado para isquiotibiais alongados.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Calves"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se na máquina com as costas apoiadas",
+      "Ajuste o pad superior sobre as coxas",
+      "O pad inferior fica atrás dos tornozelos",
+      "Flexione os joelhos puxando o pad inferior",
+      "Contraia os isquiotibiais no pico",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Flexora Sentado com Mais Carga"],
+    "regressions": ["Flexora Sentado com Menos Carga"],
+    "tips": [
+      "A posição sentada trabalha os isquiotibiais em alongamento",
+      "Pode sentir mais na parte superior do posterior",
+      "Mantenha as costas no encosto"
+    ],
+    "commonMistakes": [
+      "Tirar as costas do encosto",
+      "Usar impulso do corpo",
+      "Não completar a amplitude"
+    ],
+    "notes": "Trabalha os isquiotibiais em posição diferente da flexora deitada.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexora Unilateral",
+    "description": "Flexora executada com uma perna para trabalho focado.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Calves"],
+    "equipment": "Machine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na flexora deitada ou sentada",
+      "Use apenas uma perna no pad",
+      "Execute o movimento normalmente com uma perna",
+      "Mantenha a técnica igual à versão bilateral",
+      "Complete as repetições e troque de perna",
+      "Use cerca de 40-50% da carga bilateral"
+    ],
+    "progressions": ["Flexora Unilateral com Mais Carga"],
+    "regressions": ["Flexora Bilateral"],
+    "tips": [
+      "Permite identificar desequilíbrios",
+      "Maior concentração em uma perna",
+      "Use a mesma carga em ambas as pernas"
+    ],
+    "commonMistakes": [
+      "Usar cargas diferentes entre as pernas",
+      "Girar o quadril durante o movimento",
+      "Amplitude diferente entre as pernas"
+    ],
+    "notes": "Excelente para correção de assimetrias.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Stiff com Barra",
+    "description": "Levantamento terra com pernas estendidas para posterior e lombar.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Fique em pé segurando a barra à frente das coxas",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás enquanto desce a barra",
+      "Mantenha a barra próxima às pernas durante todo o movimento",
+      "Desça até sentir alongamento nos isquiotibiais",
+      "Estenda o quadril para retornar, contraindo glúteos"
+    ],
+    "progressions": ["Stiff com Déficit", "Stiff com Mais Carga"],
+    "regressions": ["Stiff com Halteres"],
+    "tips": [
+      "Mantenha a lombar neutra durante todo o movimento",
+      "O movimento é principalmente no quadril, não na lombar",
+      "Os joelhos ficam levemente flexionados mas fixos"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Flexionar demais os joelhos",
+      "Afastar a barra das pernas"
+    ],
+    "notes": "Exercício clássico e eficaz para toda a cadeia posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Stiff com Halteres",
+    "description": "Stiff leg deadlift com halteres para maior liberdade de movimento.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure os halteres à frente das coxas",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás descendo os halteres",
+      "Mantenha os halteres próximos às pernas",
+      "Desça até sentir alongamento no posterior",
+      "Estenda o quadril para retornar"
+    ],
+    "progressions": ["Stiff com Barra"],
+    "regressions": ["Stiff com Halteres Leves"],
+    "tips": [
+      "Halteres permitem posicionamento mais natural",
+      "Podem ir mais para os lados se necessário",
+      "Ideal para treinos em casa"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Flexionar demais os joelhos",
+      "Não manter os halteres próximos"
+    ],
+    "notes": "Versão versátil do stiff para diversos ambientes.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Stiff Unilateral",
+    "description": "Stiff em uma perna só para trabalho unilateral intenso.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé em uma perna segurando halteres",
+      "A perna de apoio fica com joelho levemente flexionado",
+      "Incline o tronco à frente estendendo a perna livre para trás",
+      "Desça até o tronco ficar quase paralelo ao chão",
+      "Mantenha a lombar neutra durante todo o movimento",
+      "Retorne à posição inicial e repita"
+    ],
+    "progressions": ["Stiff Unilateral com Mais Peso"],
+    "regressions": ["Stiff Unilateral com Apoio"],
+    "tips": [
+      "Excelente para equilíbrio e estabilidade",
+      "Trabalha intensamente o core",
+      "A perna livre age como contrapeso"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Perder o equilíbrio",
+      "Não estender a perna livre"
+    ],
+    "notes": "Exercício funcional que desenvolve equilíbrio e força unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Romeno (RDL)",
+    "description": "Romanian deadlift para isquiotibiais com maior controle excêntrico.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Comece em pé com a barra nas mãos (não do chão)",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás descendo a barra",
+      "Mantenha a barra sempre em contato com as pernas",
+      "Desça até sentir forte alongamento nos isquiotibiais",
+      "Estenda o quadril contraindo glúteos para subir"
+    ],
+    "progressions": ["RDL com Pausa", "RDL com Déficit"],
+    "regressions": ["RDL com Halteres"],
+    "tips": [
+      "Diferente do stiff - joelhos flexionam um pouco mais",
+      "Não toque a barra no chão entre repetições",
+      "O foco é no alongamento excêntrico dos isquiotibiais"
+    ],
+    "commonMistakes": [
+      "Descer a barra até o chão",
+      "Arredondar a lombar",
+      "Não manter a barra junto às pernas"
+    ],
+    "notes": "Variação do stiff com mais foco no alongamento controlado.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Romeno com Halteres",
+    "description": "RDL com halteres para maior liberdade de movimento.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure os halteres à frente das coxas",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás descendo os halteres",
+      "Os halteres descem junto às pernas",
+      "Desça até sentir alongamento e retorne",
+      "Não toque os halteres no chão"
+    ],
+    "progressions": ["RDL com Barra"],
+    "regressions": ["RDL com Halteres Leves"],
+    "tips": [
+      "Halteres permitem movimento mais natural",
+      "Podem contornar os joelhos se necessário",
+      "Ideal para casa ou variação"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Afastar os halteres das pernas",
+      "Flexionar demais os joelhos"
+    ],
+    "notes": "Versão acessível do RDL para diversos ambientes.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Romeno Unilateral (Single Leg RDL)",
+    "description": "RDL em uma perna para trabalho unilateral e equilíbrio.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé em uma perna segurando halter(es)",
+      "Joelho de apoio levemente flexionado",
+      "Incline à frente estendendo a perna livre para trás",
+      "Mantenha a lombar neutra e quadril nivelado",
+      "Desça até sentir alongamento no posterior",
+      "Retorne contraindo glúteo e isquiotibiais"
+    ],
+    "progressions": ["Single Leg RDL com Barra"],
+    "regressions": ["Single Leg RDL com Apoio"],
+    "tips": [
+      "Excelente para propriocepção e equilíbrio",
+      "Pode segurar peso em uma ou duas mãos",
+      "O corpo forma uma linha reta no ponto baixo"
+    ],
+    "commonMistakes": [
+      "Quadril girando/abrindo",
+      "Arredondar a lombar",
+      "Não estender a perna livre"
+    ],
+    "notes": "Exercício funcional completo para cadeia posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Good Morning",
+    "description": "Inclinação à frente com barra para posterior e lombar.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione a barra nos ombros como no agachamento",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás inclinando o tronco à frente",
+      "Mantenha a lombar neutra durante todo o movimento",
+      "Desça até o tronco ficar quase paralelo ao chão",
+      "Estenda o quadril para retornar"
+    ],
+    "progressions": ["Good Morning com Pausa", "Good Morning Sentado"],
+    "regressions": ["Good Morning com Bastão"],
+    "tips": [
+      "Exercício auxiliar excelente para fortalecimento da cadeia posterior",
+      "Use cargas moderadas para manter a técnica",
+      "Muito popular entre powerlifters"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar carga excessiva",
+      "Flexionar demais os joelhos"
+    ],
+    "notes": "Exercício auxiliar clássico para desenvolvimento da cadeia posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Good Morning Sentado",
+    "description": "Good morning executado sentado para maior isolamento.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["LowerBack"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Sente-se em um banco com a barra nas costas",
+      "Pés firmemente apoiados no chão",
+      "Incline o tronco à frente mantendo a lombar neutra",
+      "Desça até sentir alongamento no posterior",
+      "Estenda o tronco para retornar",
+      "Mantenha os pés fixos durante todo o movimento"
+    ],
+    "progressions": ["Good Morning Sentado com Mais Carga"],
+    "regressions": ["Good Morning em Pé"],
+    "tips": [
+      "Remove as pernas da equação",
+      "Foca mais na lombar e isquiotibiais superiores",
+      "Use cargas mais leves que em pé"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar carga excessiva",
+      "Amplitude muito curta"
+    ],
+    "notes": "Variação que isola mais a cadeia posterior superior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Nordic Curl",
+    "description": "Flexão nórdica para isquiotibiais com peso corporal.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Calves"],
+    "equipment": "Bodyweight",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajoelhe-se com os tornozelos presos (parceiro ou equipamento)",
+      "Corpo reto do joelho aos ombros",
+      "Lentamente incline o corpo à frente mantendo-o reto",
+      "Resista à queda usando os isquiotibiais",
+      "Desça o mais controladamente possível",
+      "Use as mãos para ajudar a voltar se necessário"
+    ],
+    "progressions": ["Nordic Curl Completo Sem Mãos"],
+    "regressions": ["Nordic Curl com Banda Assistida"],
+    "tips": [
+      "Um dos melhores exercícios para isquiotibiais",
+      "Foco na fase excêntrica inicialmente",
+      "Excelente para prevenção de lesões"
+    ],
+    "commonMistakes": [
+      "Flexionar o quadril durante a descida",
+      "Descer muito rápido",
+      "Não prender os tornozelos adequadamente"
+    ],
+    "notes": "Exercício padrão-ouro para força excêntrica dos isquiotibiais.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Nordic Curl Assistido",
+    "description": "Nordic curl com assistência de banda para progressão.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Prenda uma banda em ponto alto",
+      "Coloque a banda ao redor do peito ou axilas",
+      "Execute o nordic curl com a assistência da banda",
+      "A banda ajuda na subida e controla a descida",
+      "Progrida para bandas mais finas",
+      "Eventualmente remova a banda"
+    ],
+    "progressions": ["Nordic Curl Sem Assistência"],
+    "regressions": ["Nordic Curl com Banda Mais Forte"],
+    "tips": [
+      "Excelente progressão para o nordic completo",
+      "Reduz a banda gradualmente",
+      "Permite praticar a amplitude completa"
+    ],
+    "commonMistakes": [
+      "Depender demais da banda",
+      "Não progredir para menos assistência",
+      "Flexionar o quadril"
+    ],
+    "notes": "Método progressivo para dominar o nordic curl.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Glute Ham Raise (GHR)",
+    "description": "Extensão de quadril e flexão de joelho na máquina GHD.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na máquina GHD com coxas no pad",
+      "Tornozelos presos, joelhos atrás do pad",
+      "Comece com o corpo horizontal",
+      "Flexione os joelhos trazendo o corpo para cima",
+      "Use os isquiotibiais para puxar o corpo",
+      "Estenda de volta à posição horizontal"
+    ],
+    "progressions": ["GHR com Peso"],
+    "regressions": ["GHR com Banda Assistida"],
+    "tips": [
+      "Exercício completo para isquiotibiais e glúteos",
+      "O pad deve ficar acima dos joelhos",
+      "Comece com assistência se necessário"
+    ],
+    "commonMistakes": [
+      "Pad posicionado incorretamente",
+      "Usar demais a extensão de quadril",
+      "Não controlar a fase excêntrica"
+    ],
+    "notes": "Um dos exercícios mais completos para cadeia posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Glute Ham Raise com Banda",
+    "description": "GHR com assistência de banda elástica.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "ResistanceBand",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Configure a banda presa em ponto alto",
+      "Coloque a banda ao redor do peito",
+      "Execute o GHR com a assistência da banda",
+      "A banda ajuda a completar o movimento",
+      "Progrida para bandas mais finas",
+      "Eventualmente remova a assistência"
+    ],
+    "progressions": ["GHR Sem Banda"],
+    "regressions": ["GHR com Banda Mais Forte"],
+    "tips": [
+      "Permite aprender o movimento com assistência",
+      "Reduza a assistência progressivamente",
+      "Foque na técnica correta"
+    ],
+    "commonMistakes": [
+      "Usar banda muito forte",
+      "Não progredir adequadamente",
+      "Técnica inadequada"
+    ],
+    "notes": "Progressão eficaz para dominar o GHR.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hip Hinge com Kettlebell",
+    "description": "Padrão de dobradiça de quadril com kettlebell.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Kettlebell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure o kettlebell com ambas as mãos",
+      "Pés na largura dos ombros, joelhos levemente flexionados",
+      "Empurre o quadril para trás mantendo as costas retas",
+      "O kettlebell desce entre as pernas",
+      "Estenda o quadril contraindo glúteos para subir",
+      "Mantenha os braços retos durante todo o movimento"
+    ],
+    "progressions": ["Swing com Kettlebell"],
+    "regressions": ["Hip Hinge sem Peso"],
+    "tips": [
+      "Base para aprender o padrão de hinge",
+      "O movimento é no quadril, não nas costas",
+      "Excelente para iniciantes"
+    ],
+    "commonMistakes": [
+      "Arredondar as costas",
+      "Agachar ao invés de hinge",
+      "Não empurrar o quadril para trás"
+    ],
+    "notes": "Exercício fundamental para aprender o padrão de movimento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Swing com Kettlebell",
+    "description": "Balanço explosivo com kettlebell para potência de quadril.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione o kettlebell à sua frente no chão",
+      "Agache e segure o kettlebell com ambas as mãos",
+      "Puxe o kettlebell para trás entre as pernas (hike)",
+      "Estenda o quadril explosivamente projetando o kettlebell à frente",
+      "Deixe o kettlebell subir até a altura dos ombros",
+      "Absorva o retorno flexionando o quadril"
+    ],
+    "progressions": ["Swing Americano", "Swing com Uma Mão"],
+    "regressions": ["Hip Hinge com Kettlebell"],
+    "tips": [
+      "O poder vem do quadril, não dos braços",
+      "Mantenha os braços retos e relaxados",
+      "Contraia os glúteos no topo"
+    ],
+    "commonMistakes": [
+      "Usar os braços para levantar",
+      "Agachar ao invés de hinge",
+      "Arredondar as costas"
+    ],
+    "notes": "Exercício de potência fundamental com kettlebell.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Swing Americano",
+    "description": "Swing com kettlebell indo até acima da cabeça.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o swing russo normalmente",
+      "Ao invés de parar na altura dos ombros, continue",
+      "Leve o kettlebell até acima da cabeça",
+      "Braços ficam retos no topo",
+      "Absorva o retorno flexionando o quadril",
+      "Requer mais potência que o swing russo"
+    ],
+    "progressions": ["Swing Americano Mais Pesado"],
+    "regressions": ["Swing Russo"],
+    "tips": [
+      "Requer maior potência de quadril",
+      "Mantenha o core muito firme",
+      "Popular no CrossFit"
+    ],
+    "commonMistakes": [
+      "Usar os braços para completar",
+      "Arquear a lombar no topo",
+      "Não ter potência suficiente"
+    ],
+    "notes": "Variação mais avançada do swing tradicional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Swing Unilateral",
+    "description": "Swing com kettlebell usando apenas uma mão.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Execute o swing segurando o kettlebell com uma mão",
+      "A mão livre pode ficar ao lado ou na frente",
+      "O movimento é idêntico ao bilateral",
+      "Mantenha o tronco estável sem girar",
+      "Alterne as mãos a cada série ou set",
+      "Use carga mais leve que no bilateral"
+    ],
+    "progressions": ["Swing Unilateral Mais Pesado"],
+    "regressions": ["Swing Bilateral"],
+    "tips": [
+      "Trabalha mais anti-rotação do core",
+      "Desenvolve força unilateral",
+      "Pode alternar mãos no ar"
+    ],
+    "commonMistakes": [
+      "Girar o tronco",
+      "Usar carga muito pesada",
+      "Técnica diferente do bilateral"
+    ],
+    "notes": "Variação que adiciona desafio de estabilização.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Pull Through com Cabo",
+    "description": "Extensão de quadril puxando cabo entre as pernas.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "CableMachine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia baixa",
+      "Fique de costas para a máquina",
+      "Segure a corda entre as pernas",
+      "Incline à frente empurrando o quadril para trás",
+      "Estenda o quadril puxando a corda entre as pernas",
+      "Contraia os glúteos no topo"
+    ],
+    "progressions": ["Pull Through com Mais Carga"],
+    "regressions": ["Pull Through com Menos Carga"],
+    "tips": [
+      "Excelente para aprender o padrão de hinge",
+      "O cabo fornece tensão constante",
+      "Foque na extensão de quadril"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Usar os braços para puxar",
+      "Não estender completamente o quadril"
+    ],
+    "notes": "Exercício acessível para desenvolver o padrão de hinge.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hiperextensão",
+    "description": "Extensão de quadril e tronco na cadeira romana.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na cadeira romana com coxas no pad",
+      "Tornozelos presos nos apoios",
+      "Cruze os braços no peito ou atrás da cabeça",
+      "Incline o tronco à frente de forma controlada",
+      "Estenda o quadril e tronco para retornar",
+      "Não hiperextenda a lombar no topo"
+    ],
+    "progressions": ["Hiperextensão com Peso"],
+    "regressions": ["Hiperextensão Parcial"],
+    "tips": [
+      "Não eleve acima da linha horizontal",
+      "Movimento controlado em ambas as fases",
+      "Pode adicionar peso segurando no peito"
+    ],
+    "commonMistakes": [
+      "Hiperextender a lombar",
+      "Movimento muito rápido",
+      "Não controlar a descida"
+    ],
+    "notes": "Exercício versátil para toda a cadeia posterior.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hiperextensão com Peso",
+    "description": "Hiperextensão segurando peso adicional.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se na cadeira romana",
+      "Segure uma anilha ou halter contra o peito",
+      "Execute a hiperextensão normalmente",
+      "Mantenha o peso próximo ao corpo",
+      "Não altere a técnica por causa do peso",
+      "Use cargas que permitam técnica perfeita"
+    ],
+    "progressions": ["Hiperextensão com Mais Peso"],
+    "regressions": ["Hiperextensão sem Peso"],
+    "tips": [
+      "Adicione peso progressivamente",
+      "Mantenha a mesma técnica",
+      "Não hiperextenda mesmo com peso"
+    ],
+    "commonMistakes": [
+      "Peso excessivo comprometendo técnica",
+      "Hiperextender a lombar",
+      "Movimento descontrolado"
+    ],
+    "notes": "Progressão da hiperextensão para maior intensidade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Hiperextensão Inversa",
+    "description": "Extensão de quadril com as pernas elevando atrás.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "LowerBack"],
+    "equipment": "Machine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de bruços na máquina de hiperextensão inversa",
+      "O tronco fica fixo, pernas penduradas atrás",
+      "Segure nas alças para estabilidade",
+      "Eleve as pernas estendendo o quadril",
+      "Suba até as pernas ficarem alinhadas com o corpo",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Hiperextensão Inversa com Peso"],
+    "regressions": ["Hiperextensão Normal"],
+    "tips": [
+      "Trabalha glúteos e isquiotibiais de forma única",
+      "O tronco fica estável enquanto as pernas movem",
+      "Excelente para descompressão da coluna"
+    ],
+    "commonMistakes": [
+      "Usar impulso para elevar",
+      "Elevar demais causando hiperextensão",
+      "Não controlar a descida"
+    ],
+    "notes": "Exercício que inverte o padrão da hiperextensão tradicional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Ponte de Glúteos com Barra",
+    "description": "Elevação de quadril no chão com barra para glúteos e isquiotibiais.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de costas com os joelhos flexionados",
+      "Posicione a barra sobre o quadril (use pad)",
+      "Pés apoiados no chão, largura dos ombros",
+      "Eleve o quadril contraindo glúteos e isquiotibiais",
+      "Suba até formar uma linha reta do joelho aos ombros",
+      "Desça de forma controlada"
+    ],
+    "progressions": ["Hip Thrust"],
+    "regressions": ["Ponte sem Peso"],
+    "tips": [
+      "Use pad para proteger o quadril",
+      "Contraia fortemente os glúteos no topo",
+      "Os pés devem estar em posição confortável"
+    ],
+    "commonMistakes": [
+      "Hiperextender a lombar",
+      "Não contrair os glúteos no topo",
+      "Pés muito longe ou muito perto"
+    ],
+    "notes": "Base para o hip thrust e trabalho de glúteos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexora com Bola Suíça",
+    "description": "Flexão de joelhos usando bola suíça para instabilidade.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "SwissBall",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de costas com os calcanhares na bola suíça",
+      "Eleve o quadril do chão (posição de ponte)",
+      "Role a bola em direção aos glúteos flexionando os joelhos",
+      "Mantenha o quadril elevado durante todo o movimento",
+      "Estenda as pernas rolando a bola de volta",
+      "Mantenha a estabilidade durante todo o exercício"
+    ],
+    "progressions": ["Flexora Unilateral com Bola"],
+    "regressions": ["Ponte na Bola sem Flexão"],
+    "tips": [
+      "A instabilidade aumenta o trabalho de core",
+      "Mantenha o quadril elevado constantemente",
+      "Excelente exercício funcional"
+    ],
+    "commonMistakes": [
+      "Deixar o quadril cair",
+      "Perder o equilíbrio",
+      "Não completar a flexão"
+    ],
+    "notes": "Exercício funcional que trabalha estabilidade e força.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Flexora Unilateral com Bola",
+    "description": "Flexão na bola suíça com uma perna.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "SwissBall",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite com um calcanhar na bola, outra perna elevada",
+      "Eleve o quadril mantendo uma perna no ar",
+      "Role a bola com a perna de apoio",
+      "Flexione e estenda o joelho mantendo equilíbrio",
+      "Complete as repetições e troque de perna",
+      "Mantenha o quadril elevado e estável"
+    ],
+    "progressions": ["Flexora Unilateral com Pausa"],
+    "regressions": ["Flexora Bilateral com Bola"],
+    "tips": [
+      "Muito desafiador para equilíbrio",
+      "Trabalho intenso de core",
+      "Use inicialmente com apoio"
+    ],
+    "commonMistakes": [
+      "Quadril caindo",
+      "Perder a bola",
+      "Girar o corpo"
+    ],
+    "notes": "Progressão avançada da flexora com bola.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Slider Leg Curl",
+    "description": "Flexão de joelhos usando discos deslizantes.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite de costas com os calcanhares nos sliders",
+      "Use toalhas em piso liso se não tiver sliders",
+      "Eleve o quadril em posição de ponte",
+      "Deslize os pés em direção aos glúteos",
+      "Mantenha o quadril elevado durante o movimento",
+      "Deslize de volta estendendo as pernas"
+    ],
+    "progressions": ["Slider Curl Unilateral"],
+    "regressions": ["Ponte sem Slider"],
+    "tips": [
+      "Funciona em pisos lisos com toalhas",
+      "Mantenha o quadril sempre elevado",
+      "Excelente para treinos em casa"
+    ],
+    "commonMistakes": [
+      "Deixar o quadril cair",
+      "Não deslizar completamente",
+      "Superfície inadequada"
+    ],
+    "notes": "Alternativa caseira eficaz para flexora.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Slider Curl Unilateral",
+    "description": "Slider leg curl com uma perna.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": "None",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite com um calcanhar no slider",
+      "Outra perna elevada ou apoiada na perna de trabalho",
+      "Eleve o quadril em ponte",
+      "Deslize o pé em direção ao glúteo",
+      "Mantenha o quadril elevado e estável",
+      "Complete e troque de perna"
+    ],
+    "progressions": ["Slider Curl Unilateral com Pausa"],
+    "regressions": ["Slider Curl Bilateral"],
+    "tips": [
+      "Muito desafiador para uma perna",
+      "Trabalho intenso de core",
+      "Progrida do bilateral"
+    ],
+    "commonMistakes": [
+      "Quadril caindo",
+      "Girar o corpo",
+      "Não completar o deslizamento"
+    ],
+    "notes": "Versão avançada para desenvolvimento unilateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Levantamento Terra Convencional",
+    "description": "Levantamento terra clássico para desenvolvimento total de posterior.",
+    "muscleGroup": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Back", "Core", "Quadriceps"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Posicione-se com os pés sob a barra, largura dos ombros",
+      "Agache e segure a barra fora dos joelhos",
+      "Lombar neutra, peito erguido, ombros sobre a barra",
+      "Empurre o chão e estenda quadris simultaneamente",
+      "Mantenha a barra junto ao corpo durante toda a subida",
+      "No topo, fique em pé com glúteos contraídos"
+    ],
+    "progressions": ["Levantamento Terra com Mais Carga"],
+    "regressions": ["Levantamento Terra com Trap Bar"],
+    "tips": [
+      "Exercício completo para força total",
+      "Mantenha a barra sempre junto ao corpo",
+      "A técnica é fundamental - nunca arredonde as costas"
+    ],
+    "commonMistakes": [
+      "Arredondar a lombar",
+      "Barra se afastando do corpo",
+      "Quadril subindo antes do tronco"
+    ],
+    "notes": "Um dos exercícios mais completos para força e desenvolvimento.",
+    "videoUrl": ""
+  }
+]

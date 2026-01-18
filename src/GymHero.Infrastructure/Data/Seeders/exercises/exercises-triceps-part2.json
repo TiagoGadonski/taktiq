@@ -1,0 +1,959 @@
+[
+  {
+    "name": "Tríceps Testa no Cabo",
+    "description": "Extensão de tríceps deitado usando cabo para tensão constante.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione um banco plano na frente da polia baixa",
+      "Conecte uma barra ou corda na polia",
+      "Deite no banco com a cabeça próxima à máquina",
+      "Segure o acessório com os braços estendidos",
+      "Flexione os cotovelos trazendo o acessório em direção à testa",
+      "Estenda os cotovelos de forma controlada"
+    ],
+    "progressions": ["Tríceps Testa no Cabo com Drop Set"],
+    "regressions": ["Tríceps Francês com Barra EZ"],
+    "tips": [
+      "O cabo mantém tensão em toda a amplitude",
+      "Diferente da barra, a tensão é constante",
+      "Excelente para hipertrofia"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se moverem",
+      "Posicionar o banco muito longe",
+      "Usar carga excessiva"
+    ],
+    "notes": "Combina os benefícios do skull crusher com tensão constante.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps JM Press",
+    "description": "Híbrido entre supino fechado e skull crusher para desenvolvimento máximo.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco de supino com pegada fechada",
+      "Desça a barra em direção ao queixo/pescoço",
+      "Os cotovelos vão para baixo e para frente simultaneamente",
+      "É uma combinação de supino fechado com skull crusher",
+      "Empurre a barra de volta em arco até a posição inicial",
+      "Mantenha controle total do movimento"
+    ],
+    "progressions": ["JM Press com Carga Maior"],
+    "regressions": ["Supino Fechado"],
+    "tips": [
+      "Criado pelo powerlifter JM Blakley",
+      "Excelente para força de lockout",
+      "Requer prática para dominar a técnica"
+    ],
+    "commonMistakes": [
+      "Fazer supino fechado normal",
+      "Não deixar os cotovelos irem para frente",
+      "Usar carga excessiva antes de dominar"
+    ],
+    "notes": "Exercício avançado favorito de powerlifters.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Floor Press Fechado",
+    "description": "Supino fechado no chão para limitar amplitude e focar no tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Moderate",
+    "instructions": [
+      "Deite no chão sob o rack ou com ajuda de parceiro",
+      "Segure a barra com pegada fechada",
+      "Desça a barra até os cotovelos tocarem o chão",
+      "Pause brevemente com os cotovelos apoiados",
+      "Empurre a barra de volta à extensão completa",
+      "Mantenha os cotovelos próximos ao corpo"
+    ],
+    "progressions": ["Floor Press com Carga Maior"],
+    "regressions": ["Floor Press com Halteres"],
+    "tips": [
+      "O chão limita a amplitude eliminando impulso",
+      "Excelente para desenvolver força de lockout",
+      "A pausa elimina o reflexo de estiramento"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Não pausar no chão",
+      "Usar pegada muito estreita"
+    ],
+    "notes": "Variação eficaz para desenvolvimento de força de tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Extensão de Pé",
+    "description": "Extensão de tríceps com barra acima da cabeça em pé.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Core"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fique em pé segurando a barra EZ acima da cabeça",
+      "Cotovelos próximos às orelhas, apontando para cima",
+      "Flexione os cotovelos levando a barra atrás da cabeça",
+      "Desça até sentir o alongamento nos tríceps",
+      "Estenda os cotovelos de volta à posição inicial",
+      "Mantenha o core ativado"
+    ],
+    "progressions": ["Extensão de Pé com Barra Reta"],
+    "regressions": ["Extensão Sentado"],
+    "tips": [
+      "O alongamento desenvolve a cabeça longa",
+      "Mantenha os cotovelos fixos",
+      "Não arquee excessivamente as costas"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Arquear demais a lombar",
+      "Usar carga que comprometa a forma"
+    ],
+    "notes": "Trabalha intensamente a cabeça longa do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps PJR Pullover",
+    "description": "Combinação de pullover com extensão de tríceps para trabalho completo.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Back"],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite em banco plano segurando a barra EZ",
+      "Braços estendidos acima do peito",
+      "Flexione os cotovelos e deixe a barra ir para trás da cabeça",
+      "Os cotovelos se movem para trás enquanto flexionam",
+      "Estenda os cotovelos trazendo a barra de volta",
+      "Combine a extensão dos cotovelos com o movimento de pullover"
+    ],
+    "progressions": ["PJR Pullover com Carga Maior"],
+    "regressions": ["Pullover Tradicional"],
+    "tips": [
+      "Combina extensão e pullover em um movimento",
+      "Trabalha a cabeça longa extensivamente",
+      "Requer boa mobilidade de ombros"
+    ],
+    "commonMistakes": [
+      "Separar os movimentos ao invés de combinar",
+      "Usar carga excessiva",
+      "Não permitir que os cotovelos vão para trás"
+    ],
+    "notes": "Exercício único que maximiza o alongamento do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps na Argola",
+    "description": "Extensão de tríceps usando argolas de ginástica.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": "Rings",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste as argolas em altura média-baixa",
+      "Segure as argolas e incline o corpo para frente",
+      "Cotovelos flexionados, corpo em linha reta",
+      "Estenda os cotovelos empurrando contra as argolas",
+      "Mantenha o corpo reto como uma prancha",
+      "Flexione os cotovelos de forma controlada"
+    ],
+    "progressions": ["Tríceps na Argola com Maior Inclinação"],
+    "regressions": ["Tríceps na Argola com Menos Inclinação"],
+    "tips": [
+      "A instabilidade das argolas aumenta a dificuldade",
+      "Trabalha estabilizadores além do tríceps",
+      "Comece com pouca inclinação"
+    ],
+    "commonMistakes": [
+      "Deixar o corpo desalinhar",
+      "Usar inclinação excessiva inicialmente",
+      "Não controlar as argolas"
+    ],
+    "notes": "Exercício avançado que desenvolve força e estabilidade.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Mergulho na Argola",
+    "description": "Mergulho executado em argolas para máximo desafio de estabilidade.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders", "Core"],
+    "equipment": "Rings",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Segure as argolas e eleve o corpo com braços estendidos",
+      "Estabilize as argolas contra o corpo (RTO para avançados)",
+      "Flexione os cotovelos descendo o corpo",
+      "Mantenha as argolas estáveis durante todo o movimento",
+      "Desça até os cotovelos passarem de 90 graus",
+      "Empurre de volta à extensão completa"
+    ],
+    "progressions": ["Mergulho RTO (Rings Turned Out)"],
+    "regressions": ["Mergulho nas Paralelas"],
+    "tips": [
+      "Muito mais difícil que paralelas fixas",
+      "Desenvolve grande força de estabilização",
+      "Mantenha as argolas sob controle constante"
+    ],
+    "commonMistakes": [
+      "Deixar as argolas balançarem",
+      "Não estabilizar antes de descer",
+      "Perder o controle na subida"
+    ],
+    "notes": "Um dos exercícios mais desafiadores para tríceps e ombros.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps com Banda Elástica Overhead",
+    "description": "Extensão de tríceps com banda elástica acima da cabeça.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Pise na banda e segure a outra extremidade atrás da cabeça",
+      "Cotovelos apontados para cima, próximos às orelhas",
+      "Estenda os cotovelos levantando as mãos",
+      "Contraia os tríceps no topo",
+      "Flexione os cotovelos de forma controlada",
+      "A resistência aumenta conforme estica"
+    ],
+    "progressions": ["Banda Overhead com Maior Resistência"],
+    "regressions": ["Banda com Menor Resistência"],
+    "tips": [
+      "Excelente para treinos em casa ou viagens",
+      "A resistência progressiva é única das bandas",
+      "Mantenha os cotovelos fixos"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Perder a tensão no final do movimento",
+      "Usar banda muito resistente"
+    ],
+    "notes": "Alternativa prática para treinos sem academia.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps com Banda Elástica Pushdown",
+    "description": "Extensão de tríceps para baixo usando banda elástica.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "ResistanceBand",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Fixe a banda em ponto alto (porta, barra)",
+      "Segure as extremidades com os cotovelos flexionados",
+      "Mantenha os cotovelos junto ao corpo",
+      "Estenda os cotovelos puxando a banda para baixo",
+      "Contraia os tríceps na extensão",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Pushdown com Banda Mais Resistente"],
+    "regressions": ["Pushdown com Banda Leve"],
+    "tips": [
+      "Simula o tríceps pulley em casa",
+      "Fixe a banda em altura adequada",
+      "Mantenha os cotovelos fixos"
+    ],
+    "commonMistakes": [
+      "Fixar a banda muito baixo",
+      "Deixar os cotovelos se moverem",
+      "Usar impulso do corpo"
+    ],
+    "notes": "Excelente substituto caseiro para o tríceps no cabo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps TRX",
+    "description": "Extensão de tríceps usando o sistema TRX.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": "TRX",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Ajuste o TRX em altura média",
+      "Segure as alças com os braços estendidos à frente",
+      "Incline o corpo para frente",
+      "Flexione os cotovelos levando a testa em direção às mãos",
+      "Mantenha os cotovelos fixos apontando para frente",
+      "Estenda os cotovelos de volta à posição inicial"
+    ],
+    "progressions": ["TRX Tríceps com Maior Inclinação"],
+    "regressions": ["TRX Tríceps com Menos Inclinação"],
+    "tips": [
+      "A inclinação determina a dificuldade",
+      "Mantenha o corpo reto como prancha",
+      "Excelente para treinos funcionais"
+    ],
+    "commonMistakes": [
+      "Deixar o quadril cair",
+      "Mover os cotovelos durante a execução",
+      "Usar inclinação excessiva inicialmente"
+    ],
+    "notes": "Exercício funcional que trabalha tríceps e core.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps California Press",
+    "description": "Combinação de supino fechado com skull crusher em um movimento.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco segurando a barra com pegada fechada",
+      "Desça a barra em direção ao peito/pescoço",
+      "Os cotovelos flexionam e vão para baixo junto ao corpo",
+      "Combine elementos de supino fechado e skull crusher",
+      "Empurre a barra de volta à extensão",
+      "O movimento é um híbrido dos dois exercícios"
+    ],
+    "progressions": ["California Press com Carga Maior"],
+    "regressions": ["Supino Fechado ou Skull Crusher separados"],
+    "tips": [
+      "Similar ao JM Press mas com diferenças sutis",
+      "Excelente para desenvolvimento completo do tríceps",
+      "Requer prática para dominar"
+    ],
+    "commonMistakes": [
+      "Fazer apenas supino fechado",
+      "Fazer apenas skull crusher",
+      "Não combinar os movimentos"
+    ],
+    "notes": "Exercício híbrido eficaz para tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Drop Set no Cabo",
+    "description": "Série de extensões reduzindo carga sem descanso para fadiga total.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Comece com carga pesada no tríceps pulley",
+      "Execute até a falha ou próximo dela",
+      "Reduza a carga 20-30% imediatamente",
+      "Continue até a falha novamente",
+      "Repita 2-4 quedas de carga",
+      "Não descanse entre as quedas"
+    ],
+    "progressions": ["Drop Set com Mais Quedas"],
+    "regressions": ["Drop Set com Menos Quedas"],
+    "tips": [
+      "A máquina facilita a troca rápida de carga",
+      "Excelente técnica de finalização",
+      "Use ocasionalmente para não sobrecarregar"
+    ],
+    "commonMistakes": [
+      "Descansar entre quedas",
+      "Não reduzir carga suficientemente",
+      "Usar com muita frequência"
+    ],
+    "notes": "Técnica de intensificação para pump máximo.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Rest-Pause",
+    "description": "Extensão de tríceps com pausas curtas para estender a série.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute extensões até próximo da falha",
+      "Descanse 10-15 segundos",
+      "Execute mais algumas repetições",
+      "Descanse novamente 10-15 segundos",
+      "Repita até completar o volume desejado",
+      "Geralmente 2-3 mini-séries"
+    ],
+    "progressions": ["Rest-Pause com Mais Mini-Séries"],
+    "regressions": ["Série Tradicional"],
+    "tips": [
+      "Permite maior volume com mesma carga",
+      "As pausas curtas mantêm a fadiga acumulada",
+      "Excelente para força e hipertrofia"
+    ],
+    "commonMistakes": [
+      "Descansar tempo demais",
+      "Ir à falha total na primeira série",
+      "Usar frequentemente"
+    ],
+    "notes": "Técnica eficaz para aumentar o volume de treino.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Mecânica Drop Set",
+    "description": "Série de extensões mudando a variação para continuar após a falha.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Comece com extensão overhead (mais difícil)",
+      "Vá até a falha",
+      "Mude para kickback (posição mais forte)",
+      "Continue até a falha",
+      "Finalize com pulley ou dip no banco",
+      "Use a mesma carga em todas as variações"
+    ],
+    "progressions": ["Adicionar Mais Variações"],
+    "regressions": ["Usar Menos Variações"],
+    "tips": [
+      "A mudança de posição altera a vantagem mecânica",
+      "Permite continuar trabalhando com mesma carga",
+      "Fadiga extrema nos tríceps"
+    ],
+    "commonMistakes": [
+      "Descansar entre variações",
+      "Não escolher variações adequadas",
+      "Usar carga muito pesada"
+    ],
+    "notes": "Técnica avançada para estimulação máxima.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Isométrico",
+    "description": "Extensão de tríceps mantendo posição estática.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isometric",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione-se no cabo como para extensão normal",
+      "Estenda os cotovelos até 90 graus ou extensão total",
+      "Mantenha a posição por 15-30 segundos",
+      "Contraia fortemente os tríceps",
+      "Respire normalmente durante a contração",
+      "Descanse e repita"
+    ],
+    "progressions": ["Isometria em Múltiplos Ângulos"],
+    "regressions": ["Isometria com Menor Duração"],
+    "tips": [
+      "Desenvolve força em ângulos específicos",
+      "Excelente para conexão mente-músculo",
+      "Pode ser feito em diferentes posições"
+    ],
+    "commonMistakes": [
+      "Prender a respiração",
+      "Não manter contração máxima",
+      "Posição inadequada"
+    ],
+    "notes": "Complemento eficaz ao treino dinâmico tradicional.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Excêntrico Lento",
+    "description": "Extensão de tríceps com ênfase na fase negativa.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute a extensão normalmente na fase concêntrica",
+      "Na fase excêntrica (descida), leve 4-6 segundos",
+      "Controle totalmente o movimento",
+      "Resista ativamente à gravidade",
+      "Repita mantendo a excêntrica lenta",
+      "Use carga moderada"
+    ],
+    "progressions": ["Excêntrica de 8-10 Segundos"],
+    "regressions": ["Excêntrica de 3 Segundos"],
+    "tips": [
+      "A fase excêntrica causa maior dano muscular",
+      "Excelente para hipertrofia",
+      "Espere mais dor muscular tardia"
+    ],
+    "commonMistakes": [
+      "Acelerar a descida por fadiga",
+      "Usar carga muito pesada",
+      "Não contar o tempo"
+    ],
+    "notes": "Técnica eficaz para quebrar platôs de desenvolvimento.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps 21s",
+    "description": "Técnica intensificadora com três fases de 7 repetições.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute 7 repetições parciais na metade inferior",
+      "Execute 7 repetições parciais na metade superior",
+      "Execute 7 repetições completas",
+      "Total de 21 repetições sem descanso",
+      "Use carga mais leve que o normal",
+      "Mantenha a técnica em todas as fases"
+    ],
+    "progressions": ["21s com Carga Maior"],
+    "regressions": ["15s (5+5+5)"],
+    "tips": [
+      "Aumenta drasticamente o tempo sob tensão",
+      "Use cerca de 50-60% da carga normal",
+      "Excelente para pump máximo"
+    ],
+    "commonMistakes": [
+      "Usar carga muito pesada",
+      "Não completar todas as 21 reps",
+      "Perder a técnica nas finais"
+    ],
+    "notes": "Técnica clássica de intensificação aplicada ao tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Landmine Press",
+    "description": "Pressão com landmine focada no tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders", "Chest"],
+    "equipment": "Landmine",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Posicione a barra no encaixe de landmine",
+      "Segure a extremidade da barra com ambas as mãos",
+      "Cotovelos flexionados, barra na altura do peito",
+      "Empurre a barra para cima e à frente",
+      "Estenda completamente os cotovelos",
+      "Retorne de forma controlada"
+    ],
+    "progressions": ["Landmine Press com Mais Carga"],
+    "regressions": ["Landmine Press sem Peso Adicional"],
+    "tips": [
+      "O ângulo único trabalha o tríceps diferentemente",
+      "Mantenha o core ativado",
+      "Excelente para variação de treino"
+    ],
+    "commonMistakes": [
+      "Deixar os cotovelos se abrirem",
+      "Usar impulso do corpo",
+      "Não completar a extensão"
+    ],
+    "notes": "Variação interessante para trabalho de tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Dead Stop",
+    "description": "Extensão de tríceps com pausa completa no ponto mais baixo.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "EZBar",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute skull crusher normal",
+      "No ponto mais baixo, pause por 1-2 segundos",
+      "Elimine completamente o momentum",
+      "Inicie a subida apenas com força muscular",
+      "Contraia fortemente os tríceps",
+      "Repita com pausas completas"
+    ],
+    "progressions": ["Dead Stop com Pausa Maior"],
+    "regressions": ["Skull Crusher Normal"],
+    "tips": [
+      "A pausa elimina o reflexo de estiramento",
+      "Desenvolve força a partir de parado",
+      "Use carga mais leve que o normal"
+    ],
+    "commonMistakes": [
+      "Não pausar tempo suficiente",
+      "Usar impulso para iniciar",
+      "Carga excessiva"
+    ],
+    "notes": "Técnica eficaz para desenvolver força de partida.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Pushdown Unilateral com Rotação",
+    "description": "Extensão unilateral com rotação do punho para contração máxima.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte uma manopla na polia alta",
+      "Segure com pegada neutra no início",
+      "Estenda o cotovelo empurrando para baixo",
+      "Durante a extensão, gire o punho para pronação",
+      "Termine com a palma voltada para baixo",
+      "Retorne girando de volta para neutro"
+    ],
+    "progressions": ["Com Pausa na Pronação"],
+    "regressions": ["Pushdown sem Rotação"],
+    "tips": [
+      "A rotação aumenta a contração do tríceps",
+      "Trabalha também os pronadores do antebraço",
+      "Foco na sensação de contração"
+    ],
+    "commonMistakes": [
+      "Girar muito cedo",
+      "Não completar a rotação",
+      "Mover o cotovelo"
+    ],
+    "notes": "Variação que aumenta a ativação da cabeça lateral.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Gironda Dips",
+    "description": "Mergulho com técnica específica de Vince Gironda para tríceps.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "DipBars",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Nas paralelas, mantenha o tronco totalmente vertical",
+      "Cabeça para cima, olhando para frente",
+      "Cotovelos apontando diretamente para trás",
+      "Desça mantendo o corpo perfeitamente vertical",
+      "Não incline para frente em momento algum",
+      "Empurre para cima mantendo a posição vertical"
+    ],
+    "progressions": ["Gironda Dips com Peso"],
+    "regressions": ["Mergulho Tradicional"],
+    "tips": [
+      "Criado pelo lendário Vince Gironda",
+      "A verticalidade isola completamente o tríceps",
+      "Elimina quase toda ativação do peitoral"
+    ],
+    "commonMistakes": [
+      "Inclinar para frente",
+      "Deixar os cotovelos se abrirem",
+      "Descer demais"
+    ],
+    "notes": "Técnica específica para máximo isolamento do tríceps.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Board Press",
+    "description": "Supino fechado com prancha no peito para limitar amplitude.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco de supino",
+      "Um parceiro posiciona a prancha no peito",
+      "Execute o supino fechado parando na prancha",
+      "A prancha limita a amplitude do movimento",
+      "Pause na prancha e empurre de volta",
+      "Use pranchas de diferentes espessuras"
+    ],
+    "progressions": ["Board Press com 1 Prancha", "Board Press com 2 Pranchas"],
+    "regressions": ["Supino Fechado Normal"],
+    "tips": [
+      "Técnica de powerlifting para lockout",
+      "Pranchas mais grossas = menor amplitude",
+      "Permite usar cargas maiores"
+    ],
+    "commonMistakes": [
+      "Não pausar adequadamente na prancha",
+      "Prancha mal posicionada",
+      "Quicar na prancha"
+    ],
+    "notes": "Técnica de powerlifting para desenvolver força de lockout.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Slingshot Press",
+    "description": "Supino fechado usando slingshot para sobrecarga controlada.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Coloque o slingshot nos braços sobre os cotovelos",
+      "Execute o supino fechado normalmente",
+      "O slingshot ajuda na parte inferior do movimento",
+      "A assistência diminui conforme sobe",
+      "Permite usar cargas 10-20% maiores",
+      "Foque no lockout sem assistência"
+    ],
+    "progressions": ["Slingshot com Cargas Maiores"],
+    "regressions": ["Supino Fechado Normal"],
+    "tips": [
+      "O slingshot é um acessório elástico",
+      "Permite sobrecarga na porção final",
+      "Excelente para força de lockout"
+    ],
+    "commonMistakes": [
+      "Depender demais do slingshot",
+      "Usar carga muito superior ao normal",
+      "Não treinar também sem slingshot"
+    ],
+    "notes": "Ferramenta de powerlifting para desenvolvimento de força.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Tate Press",
+    "description": "Extensão de tríceps com halteres movendo para dentro.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco segurando halteres acima do peito",
+      "Palmas voltadas para os pés",
+      "Flexione os cotovelos levando os halteres para dentro",
+      "Os halteres vão em direção ao peito",
+      "Os cotovelos apontam para fora durante o movimento",
+      "Estenda os cotovelos de volta ao início"
+    ],
+    "progressions": ["Tate Press com Carga Maior"],
+    "regressions": ["Skull Crusher com Halteres"],
+    "tips": [
+      "Movimento único que trabalha diferentemente",
+      "Os cotovelos se movem para fora ao invés de para trás",
+      "Use cargas moderadas"
+    ],
+    "commonMistakes": [
+      "Fazer movimento de skull crusher",
+      "Deixar os halteres irem muito para fora",
+      "Usar carga excessiva"
+    ],
+    "notes": "Variação interessante para estímulo diferente.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Rolling Triceps Extension",
+    "description": "Extensão de tríceps com rolamento dos halteres no topo.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Deite no banco segurando halteres",
+      "Execute skull crusher levando halteres atrás da cabeça",
+      "No ponto baixo, 'role' os halteres para trás",
+      "O movimento estende os ombros ligeiramente",
+      "Reverta o rolamento e estenda os cotovelos",
+      "O 'roll' adiciona alongamento extra"
+    ],
+    "progressions": ["Rolling Extension com Carga Maior"],
+    "regressions": ["Skull Crusher Tradicional"],
+    "tips": [
+      "O rolamento aumenta o alongamento da cabeça longa",
+      "Movimento mais fluido que tradicional",
+      "Excelente para desenvolvimento completo"
+    ],
+    "commonMistakes": [
+      "Rolar demais perdendo tensão",
+      "Não coordenar o movimento",
+      "Usar carga excessiva"
+    ],
+    "notes": "Combina extensão de cotovelo com leve extensão de ombro.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Close Grip Pin Press",
+    "description": "Supino fechado partindo de pinos para força a partir de parado.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Configure os pinos do rack na altura desejada",
+      "A barra descansa nos pinos antes de cada rep",
+      "Deite sob a barra com pegada fechada",
+      "Empurre a barra dos pinos até a extensão",
+      "Desça controladamente até os pinos",
+      "Pause nos pinos antes da próxima rep"
+    ],
+    "progressions": ["Pin Press com Pinos Mais Baixos"],
+    "regressions": ["Supino Fechado Normal"],
+    "tips": [
+      "Elimina o reflexo de estiramento",
+      "Desenvolve força a partir de parado",
+      "Permite treinar ângulos específicos"
+    ],
+    "commonMistakes": [
+      "Quicar a barra nos pinos",
+      "Não pausar adequadamente",
+      "Configurar pinos na altura errada"
+    ],
+    "notes": "Técnica de powerlifting para força em ângulos específicos.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Band Assisted Dips",
+    "description": "Mergulho com assistência de banda elástica.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": "ResistanceBand",
+    "category": "Compound",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Prenda uma banda elástica nas paralelas",
+      "Coloque os joelhos ou pés na banda",
+      "A banda fornece assistência na subida",
+      "Execute o mergulho normalmente",
+      "A assistência é maior no ponto mais baixo",
+      "Progrida para bandas mais finas"
+    ],
+    "progressions": ["Banda Mais Fina", "Mergulho sem Assistência"],
+    "regressions": ["Banda Mais Grossa"],
+    "tips": [
+      "Excelente para aprender o movimento",
+      "Permite progressão gradual de força",
+      "Use bandas de diferentes resistências"
+    ],
+    "commonMistakes": [
+      "Depender demais da banda",
+      "Não progredir para menor assistência",
+      "Posição incorreta da banda"
+    ],
+    "notes": "Método progressivo para dominar o mergulho.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Tempo Extension",
+    "description": "Extensão de tríceps com tempo controlado em cada fase.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": [],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Execute extensão overhead ou outro movimento de tríceps",
+      "Use tempo específico: 3 segundos excêntrico",
+      "Pause 1 segundo na posição alongada",
+      "3 segundos na fase concêntrica",
+      "Pause 1 segundo na contração",
+      "Use carga mais leve que o normal"
+    ],
+    "progressions": ["Tempo 4-1-4-1"],
+    "regressions": ["Tempo 2-0-2-0"],
+    "tips": [
+      "O tempo controlado aumenta o tempo sob tensão",
+      "Excelente para hipertrofia",
+      "Use cerca de 60-70% da carga normal"
+    ],
+    "commonMistakes": [
+      "Não seguir o tempo prescrito",
+      "Usar carga muito pesada",
+      "Acelerar quando fatigado"
+    ],
+    "notes": "Técnica eficaz para maximizar o estímulo muscular.",
+    "videoUrl": ""
+  },
+  {
+    "name": "Tríceps Cable Overhead com Corda",
+    "description": "Extensão overhead no cabo usando corda para máxima contração.",
+    "muscleGroup": "Triceps",
+    "secondaryMuscles": ["Core"],
+    "equipment": "CableMachine",
+    "category": "Isolation",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Minimal",
+    "instructions": [
+      "Conecte a corda na polia baixa",
+      "Fique de costas para a máquina",
+      "Segure a corda atrás da cabeça",
+      "Estenda os cotovelos acima e à frente",
+      "Separe a corda no topo para contração máxima",
+      "Flexione os cotovelos de forma controlada"
+    ],
+    "progressions": ["Com Maior Carga"],
+    "regressions": ["Overhead com Barra"],
+    "tips": [
+      "A corda permite separar no topo",
+      "O cabo mantém tensão constante",
+      "Excelente para cabeça longa"
+    ],
+    "commonMistakes": [
+      "Não separar a corda no topo",
+      "Deixar os cotovelos caírem",
+      "Arquear demais as costas"
+    ],
+    "notes": "Combina os benefícios do overhead com tensão constante.",
+    "videoUrl": ""
+  }
+]

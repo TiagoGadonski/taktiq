@@ -1,0 +1,443 @@
+[
+  {
+    "name": "Treadmill Walking",
+    "description": "Caminhada na esteira em velocidade moderada. Aquecimento ideal ou cardio de baixa intensidade para recuperacao ativa.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Calves"],
+    "equipment": ["Treadmill"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/treadmill-walking.png"
+  },
+  {
+    "name": "Treadmill Running",
+    "description": "Corrida na esteira em velocidade escolhida. Ajuste inclinacao para aumentar intensidade e simular terreno variado.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Calves", "Core"],
+    "equipment": ["Treadmill"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/treadmill-running.png"
+  },
+  {
+    "name": "Treadmill Incline Walk",
+    "description": "Caminhada na esteira com inclinacao elevada (10-15%). Aumenta significativamente o trabalho cardiovascular e de gluteos.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Treadmill"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/treadmill-incline-walk.png"
+  },
+  {
+    "name": "Treadmill Sprint Intervals",
+    "description": "Alterne entre sprints de alta velocidade e periodos de recuperacao na esteira. Excelente para HIIT.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Calves", "Core"],
+    "equipment": ["Treadmill"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/treadmill-sprint-intervals.png"
+  },
+  {
+    "name": "Treadmill Side Shuffle",
+    "description": "Caminhada lateral na esteira em baixa velocidade. Trabalha adutores e abdutores enquanto melhora agilidade.",
+    "musclesWorked": ["Quadriceps", "Adductors", "Abductors"],
+    "equipment": ["Treadmill"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/treadmill-side-shuffle.png"
+  },
+  {
+    "name": "Stationary Bike",
+    "description": "Pedalada na bicicleta ergometrica em ritmo constante. Cardio de baixo impacto ideal para iniciantes ou recuperacao.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Calves"],
+    "equipment": ["Stationary Bike"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/stationary-bike.png"
+  },
+  {
+    "name": "Recumbent Bike",
+    "description": "Bicicleta ergometrica reclinada com apoio lombar. Excelente para pessoas com problemas de coluna ou iniciantes.",
+    "musclesWorked": ["Quadriceps", "Hamstrings"],
+    "equipment": ["Recumbent Bike"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/recumbent-bike.png"
+  },
+  {
+    "name": "Spin Bike Intervals",
+    "description": "Treino intervalado na spin bike alternando entre resistencias altas e baixas com diferentes cadencias.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Glutes", "Calves"],
+    "equipment": ["Spin Bike"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/spin-bike-intervals.png"
+  },
+  {
+    "name": "Spin Bike Hill Climb",
+    "description": "Simulacao de subida na spin bike com resistencia alta e cadencia baixa. Trabalho intenso de pernas.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Spin Bike"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/spin-bike-hill-climb.png"
+  },
+  {
+    "name": "Spin Bike Sprint",
+    "description": "Sprints de alta cadencia na spin bike com resistencia moderada. Excelente para potencia e condicionamento.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Calves"],
+    "equipment": ["Spin Bike"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/spin-bike-sprint.png"
+  },
+  {
+    "name": "Elliptical Trainer",
+    "description": "Treino no eliptico em movimento fluido. Cardio de baixo impacto que trabalha membros superiores e inferiores.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Glutes", "Back", "Chest"],
+    "equipment": ["Elliptical"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/elliptical-trainer.png"
+  },
+  {
+    "name": "Elliptical Reverse",
+    "description": "Movimento reverso no eliptico para enfatizar diferentes musculos. Foco maior em hamstrings e gluteos.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Calves"],
+    "equipment": ["Elliptical"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/elliptical-reverse.png"
+  },
+  {
+    "name": "Elliptical High Intensity",
+    "description": "Treino de alta intensidade no eliptico com resistencia elevada e velocidade aumentada.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Glutes", "Core"],
+    "equipment": ["Elliptical"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/elliptical-high-intensity.png"
+  },
+  {
+    "name": "Stair Climber",
+    "description": "Treino na maquina de escada. Simula subir escadas continuamente para trabalho cardiovascular e de pernas.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Stair Climber"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/stair-climber.png"
+  },
+  {
+    "name": "Stair Climber Skip Step",
+    "description": "Pule um degrau a cada passo na maquina de escada para aumentar a amplitude e intensidade do movimento.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Hamstrings"],
+    "equipment": ["Stair Climber"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/stair-climber-skip-step.png"
+  },
+  {
+    "name": "Stair Climber Side Step",
+    "description": "Vire de lado na maquina de escada e suba lateralmente. Alterne os lados para trabalhar adutores e abdutores.",
+    "musclesWorked": ["Quadriceps", "Adductors", "Abductors", "Glutes"],
+    "equipment": ["Stair Climber"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/stair-climber-side-step.png"
+  },
+  {
+    "name": "Rowing Machine",
+    "description": "Remo ergometrico em ritmo constante. Treino de corpo inteiro combinando cardio com trabalho de forca.",
+    "musclesWorked": ["Back", "Shoulders", "Biceps", "Core", "Quadriceps"],
+    "equipment": ["Rowing Machine"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/rowing-machine.png"
+  },
+  {
+    "name": "Rowing Machine Intervals",
+    "description": "Alterne entre remadas de alta intensidade e periodos de recuperacao no remo ergometrico.",
+    "musclesWorked": ["Back", "Shoulders", "Biceps", "Core", "Quadriceps"],
+    "equipment": ["Rowing Machine"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/rowing-machine-intervals.png"
+  },
+  {
+    "name": "Rowing Machine Power Strokes",
+    "description": "Remadas explosivas com maxima potencia no remo ergometrico. Foco em gerar watts elevados.",
+    "musclesWorked": ["Back", "Shoulders", "Biceps", "Core", "Quadriceps"],
+    "equipment": ["Rowing Machine"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/rowing-machine-power-strokes.png"
+  },
+  {
+    "name": "Assault Bike",
+    "description": "Bicicleta com bracos moveis que trabalha corpo inteiro. Conhecida por ser extremamente desafiadora.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Shoulders", "Biceps", "Core"],
+    "equipment": ["Assault Bike"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/assault-bike.png"
+  },
+  {
+    "name": "Assault Bike Intervals",
+    "description": "Treino intervalado na assault bike alternando entre esforco maximo e recuperacao.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Shoulders", "Biceps", "Core"],
+    "equipment": ["Assault Bike"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/assault-bike-intervals.png"
+  },
+  {
+    "name": "Assault Bike Calorie Sprint",
+    "description": "Sprint para queimar calorias o mais rapido possivel na assault bike. Teste de capacidade anaerobica.",
+    "musclesWorked": ["Quadriceps", "Hamstrings", "Shoulders", "Biceps", "Core"],
+    "equipment": ["Assault Bike"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/assault-bike-calorie-sprint.png"
+  },
+  {
+    "name": "Ski Erg",
+    "description": "Maquina que simula esqui cross-country. Puxa alcancas para baixo em movimento coordenado de corpo inteiro.",
+    "musclesWorked": ["Back", "Triceps", "Core", "Shoulders"],
+    "equipment": ["Ski Erg"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/ski-erg.png"
+  },
+  {
+    "name": "Ski Erg Intervals",
+    "description": "Treino intervalado no ski erg alternando entre alta e baixa intensidade.",
+    "musclesWorked": ["Back", "Triceps", "Core", "Shoulders"],
+    "equipment": ["Ski Erg"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/ski-erg-intervals.png"
+  },
+  {
+    "name": "Battle Ropes Wave",
+    "description": "Segure as cordas e crie ondas alternando os bracos rapidamente. Cardio intenso para membros superiores.",
+    "musclesWorked": ["Shoulders", "Biceps", "Core", "Back"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/battle-ropes-wave.png"
+  },
+  {
+    "name": "Battle Ropes Double Wave",
+    "description": "Crie ondas movendo ambos os bracos simultaneamente nas battle ropes. Movimento mais explosivo.",
+    "musclesWorked": ["Shoulders", "Triceps", "Core"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/battle-ropes-double-wave.png"
+  },
+  {
+    "name": "Battle Ropes Slam",
+    "description": "Levante as cordas acima da cabeca e bata no chao com forca. Movimento explosivo de corpo inteiro.",
+    "musclesWorked": ["Shoulders", "Core", "Back"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/battle-ropes-slam.png"
+  },
+  {
+    "name": "Battle Ropes Circles",
+    "description": "Faca movimentos circulares com as cordas, alternando direcoes. Trabalha rotacao e estabilidade.",
+    "musclesWorked": ["Shoulders", "Core", "Biceps"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/battle-ropes-circles.png"
+  },
+  {
+    "name": "Battle Ropes Snakes",
+    "description": "Movimente as cordas lateralmente criando ondas horizontais no chao como cobras.",
+    "musclesWorked": ["Shoulders", "Core", "Chest"],
+    "equipment": ["Battle Ropes"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/battle-ropes-snakes.png"
+  },
+  {
+    "name": "Jump Rope Basic",
+    "description": "Pular corda em ritmo constante com saltos simples. Excelente cardio que melhora coordenacao.",
+    "musclesWorked": ["Calves", "Core", "Shoulders"],
+    "equipment": ["Jump Rope"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/jump-rope-basic.png"
+  },
+  {
+    "name": "Jump Rope Double Under",
+    "description": "Pule alto enquanto a corda passa duas vezes sob os pes em cada salto. Tecnica avancada.",
+    "musclesWorked": ["Calves", "Core", "Shoulders"],
+    "equipment": ["Jump Rope"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/jump-rope-double-under.png"
+  },
+  {
+    "name": "Jump Rope High Knees",
+    "description": "Pular corda elevando os joelhos alto a cada salto. Aumenta intensidade cardiovascular.",
+    "musclesWorked": ["Calves", "Core", "Hip Flexors", "Quadriceps"],
+    "equipment": ["Jump Rope"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/jump-rope-high-knees.png"
+  },
+  {
+    "name": "Jump Rope Criss Cross",
+    "description": "Cruze os bracos a frente do corpo enquanto pula, alternando a cada salto.",
+    "musclesWorked": ["Calves", "Core", "Shoulders"],
+    "equipment": ["Jump Rope"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/jump-rope-criss-cross.png"
+  },
+  {
+    "name": "Sled Push",
+    "description": "Empurre o treno com peso pela pista. Excelente para potencia, forca e condicionamento.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core", "Calves"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/sled-push.png"
+  },
+  {
+    "name": "Sled Push Sprint",
+    "description": "Empurre o treno o mais rapido possivel em distancias curtas. Treino de potencia maxima.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Core", "Calves"],
+    "equipment": ["Sled"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/sled-push-sprint.png"
+  },
+  {
+    "name": "Sled Pull",
+    "description": "Puxe o treno com corda ou alcas andando para tras ou de frente. Trabalho de pernas e core.",
+    "musclesWorked": ["Back", "Hamstrings", "Glutes", "Core"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/sled-pull.png"
+  },
+  {
+    "name": "Sled Drag",
+    "description": "Arraste o treno preso a cintura caminhando para frente. Treino de resistencia para pernas.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Calves"],
+    "equipment": ["Sled"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/sled-drag.png"
+  },
+  {
+    "name": "Prowler Push",
+    "description": "Empurre o prowler com bracos estendidos e corpo inclinado. Similar ao sled push com pegada alta.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Prowler"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/prowler-push.png"
+  },
+  {
+    "name": "Box Jump",
+    "description": "Salte de pe no chao para cima de uma caixa plyo. Aterrisse suavemente com joelhos flexionados.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/cardio/box-jump.png"
+  },
+  {
+    "name": "Box Jump Over",
+    "description": "Salte sobre a caixa aterrissando do outro lado. Movimento continuo de ida e volta.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/cardio/box-jump-over.png"
+  },
+  {
+    "name": "Lateral Box Jump",
+    "description": "Salte lateralmente para cima da caixa. Trabalha potencia lateral e estabilidade.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Adductors", "Abductors"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/cardio/lateral-box-jump.png"
+  },
+  {
+    "name": "Step Up Jump",
+    "description": "Suba na caixa com um pe e salte explosivamente trocando as pernas no ar.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Calves"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/cardio/step-up-jump.png"
+  },
+  {
+    "name": "Burpee Box Jump",
+    "description": "Execute um burpee e termine com salto para cima da caixa. Combinacao desafiadora.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Chest", "Core"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Advanced",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/burpee-box-jump.png"
+  },
+  {
+    "name": "Tire Flip",
+    "description": "Vire um pneu pesado usando quadril, pernas e bracos. Movimento funcional de forca total.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Back", "Biceps", "Core"],
+    "equipment": ["Tire"],
+    "difficulty": "Advanced",
+    "category": "Functional",
+    "imageUrl": "exercises/cardio/tire-flip.png"
+  },
+  {
+    "name": "Tire Sledgehammer",
+    "description": "Bata um pneu com marreta alternando os lados. Treino de potencia rotacional e cardio.",
+    "musclesWorked": ["Core", "Shoulders", "Back", "Obliques"],
+    "equipment": ["Tire", "Sledgehammer"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/tire-sledgehammer.png"
+  },
+  {
+    "name": "Wall Ball",
+    "description": "Agache segurando medicine ball, levante explosivamente e arremesse na parede. Pegue e repita.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Core"],
+    "equipment": ["Medicine Ball"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/wall-ball.png"
+  },
+  {
+    "name": "Thruster",
+    "description": "Agachamento frontal seguido de press acima da cabeca em um movimento fluido. Exercicio de corpo inteiro.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Triceps", "Core"],
+    "equipment": ["Barbell"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/thruster.png"
+  },
+  {
+    "name": "Dumbbell Thruster",
+    "description": "Thruster com halteres permite maior amplitude de movimento e trabalho unilateral.",
+    "musclesWorked": ["Quadriceps", "Glutes", "Shoulders", "Triceps", "Core"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/dumbbell-thruster.png"
+  },
+  {
+    "name": "Kettlebell Swing",
+    "description": "Balance o kettlebell entre as pernas e impulsione com os quadris ate altura do peito ou acima da cabeca.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Cardio",
+    "imageUrl": "exercises/cardio/kettlebell-swing.png"
+  }
+]

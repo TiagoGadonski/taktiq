@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Shoulder Circles",
+    "description": "Faca circulos com os ombros para frente e para tras, gradualmente aumentando amplitude.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/shoulder-circles.png"
+  },
+  {
+    "name": "Arm Circles",
+    "description": "Com bracos estendidos, faca circulos variando tamanho e direcao.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/arm-circles.png"
+  },
+  {
+    "name": "Shoulder CARs",
+    "description": "Controlled Articular Rotations - circulos lentos e controlados maximizando amplitude.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/shoulder-cars.png"
+  },
+  {
+    "name": "Hip CARs",
+    "description": "Circulos controlados do quadril em toda amplitude de movimento possivel.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/hip-cars.png"
+  },
+  {
+    "name": "Ankle CARs",
+    "description": "Circulos controlados do tornozelo explorando toda amplitude articular.",
+    "musclesWorked": ["Calves", "Ankle"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/ankle-cars.png"
+  },
+  {
+    "name": "Wrist CARs",
+    "description": "Circulos controlados dos pulsos em toda amplitude de movimento.",
+    "musclesWorked": ["Forearms"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/wrist-cars.png"
+  },
+  {
+    "name": "Neck CARs",
+    "description": "Circulos lentos e controlados do pescoco em toda amplitude segura.",
+    "musclesWorked": ["Neck"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/neck-cars.png"
+  },
+  {
+    "name": "Spine CARs",
+    "description": "Articulacao segmentar da coluna em movimentos controlados de flexao, extensao e rotacao.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/spine-cars.png"
+  },
+  {
+    "name": "Thoracic Spine Rotation",
+    "description": "Em quatro apoios, rotacione coluna toracica levando mao ao ceu.",
+    "musclesWorked": ["Upper Back", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/thoracic-spine-rotation.png"
+  },
+  {
+    "name": "Thoracic Extension over Foam Roller",
+    "description": "Deite com foam roller sob coluna toracica e arqueie sobre ele.",
+    "musclesWorked": ["Upper Back"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/thoracic-extension-foam-roller.png"
+  },
+  {
+    "name": "Cat Cow Flow",
+    "description": "Alterne fluidamente entre posicoes de gato e vaca para mobilidade da coluna.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/cat-cow-flow.png"
+  },
+  {
+    "name": "Segmental Cat Cow",
+    "description": "Cat cow focando em mover uma vertebra de cada vez sequencialmente.",
+    "musclesWorked": ["Core", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/segmental-cat-cow.png"
+  },
+  {
+    "name": "Quadruped Rock Back",
+    "description": "Em quatro apoios, sente em direcao aos calcanhares mantendo maos no lugar.",
+    "musclesWorked": ["Hips", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/quadruped-rock-back.png"
+  },
+  {
+    "name": "Kneeling Hip Flexor Mobilization",
+    "description": "Em afundo ajoelhado, balance quadril para frente e para tras mobilizando flexores.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/kneeling-hip-flexor-mobilization.png"
+  },
+  {
+    "name": "90/90 Hip Flow",
+    "description": "Transicione entre posicoes 90/90 de cada lado sem usar as maos.",
+    "musclesWorked": ["Hip Flexors", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/90-90-hip-flow.png"
+  },
+  {
+    "name": "Hip Airplane",
+    "description": "Em single leg deadlift, rotacione quadril abrindo e fechando enquanto equilibra.",
+    "musclesWorked": ["Hip Flexors", "Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/hip-airplane.png"
+  },
+  {
+    "name": "Leg Swings Sagittal",
+    "description": "Balance perna para frente e para tras em amplitude crescente.",
+    "musclesWorked": ["Hip Flexors", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/leg-swings-sagittal.png"
+  },
+  {
+    "name": "Leg Swings Frontal",
+    "description": "Balance perna de lado a lado cruzando na frente do corpo.",
+    "musclesWorked": ["Adductors", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/leg-swings-frontal.png"
+  },
+  {
+    "name": "Deep Squat Mobility",
+    "description": "Sente em agachamento profundo e mova-se explorando diferentes posicoes.",
+    "musclesWorked": ["Hip Flexors", "Ankles", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/deep-squat-mobility.png"
+  },
+  {
+    "name": "Goblet Squat Pry",
+    "description": "Em agachamento profundo com peso, use cotovelos para empurrar joelhos para fora.",
+    "musclesWorked": ["Hip Flexors", "Adductors"],
+    "equipment": ["Kettlebell"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/goblet-squat-pry.png"
+  },
+  {
+    "name": "Cossack Squat Flow",
+    "description": "Alterne de lado a lado em agachamento cossaco de forma fluida.",
+    "musclesWorked": ["Adductors", "Glutes", "Quadriceps"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/cossack-squat-flow.png"
+  },
+  {
+    "name": "World's Greatest Stretch Flow",
+    "description": "Sequencia fluida do maior alongamento do mundo com multiplas posicoes.",
+    "musclesWorked": ["Hip Flexors", "Core", "Shoulders"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/worlds-greatest-stretch-flow.png"
+  },
+  {
+    "name": "Ankle Dorsiflexion Mobilization",
+    "description": "Ajoelhado com um pe a frente, empurre joelho sobre os dedos do pe.",
+    "musclesWorked": ["Ankles", "Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/ankle-dorsiflexion-mobilization.png"
+  },
+  {
+    "name": "Band Assisted Ankle Mobilization",
+    "description": "Use band ao redor do tornozelo para adicionar distracao durante mobilizacao.",
+    "musclesWorked": ["Ankles"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/band-assisted-ankle-mobilization.png"
+  },
+  {
+    "name": "Ankle Alphabet",
+    "description": "Desenhe o alfabeto no ar com o pe para mobilidade de tornozelo.",
+    "musclesWorked": ["Ankles"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/ankle-alphabet.png"
+  },
+  {
+    "name": "Band Assisted Hip Distraction",
+    "description": "Use band para criar distracao articular do quadril durante mobilizacao.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/band-assisted-hip-distraction.png"
+  },
+  {
+    "name": "Band Assisted Shoulder Mobilization",
+    "description": "Use band para criar distracao do ombro durante movimentos de mobilidade.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/band-assisted-shoulder-mobilization.png"
+  },
+  {
+    "name": "Wall Slides",
+    "description": "De costas para parede, deslize bracos para cima e para baixo mantendo contato.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/wall-slides.png"
+  },
+  {
+    "name": "Floor Slides",
+    "description": "Deitado de costas, deslize bracos pelo chao de posicao W para Y.",
+    "musclesWorked": ["Shoulders", "Upper Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/floor-slides.png"
+  },
+  {
+    "name": "Shoulder Pass Through",
+    "description": "Com bastao, passe bracos por cima da cabeca e por tras do corpo.",
+    "musclesWorked": ["Shoulders"],
+    "equipment": ["Stick"],
+    "difficulty": "Beginner",
+    "category": "Mobility",
+    "imageUrl": "exercises/mobility/shoulder-pass-through.png"
+  }
+]

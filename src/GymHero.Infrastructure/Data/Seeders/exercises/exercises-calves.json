@@ -1,0 +1,317 @@
+[
+  {
+    "name": "Standing Calf Raise Machine",
+    "description": "Panturrilha em pe na maquina com apoio nos ombros. Eleve os calcanhares do chao contraindo as panturrilhas, segure no topo e desça controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/standing-calf-raise-machine.png"
+  },
+  {
+    "name": "Seated Calf Raise",
+    "description": "Sentado na maquina com joelhos dobrados a 90 graus e almofada sobre as coxas. Eleve os calcanhares contraindo as panturrilhas e retorne controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Seated Calf Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/seated-calf-raise.png"
+  },
+  {
+    "name": "Smith Machine Calf Raise",
+    "description": "Em pe no Smith Machine com barra nos ombros e pontas dos pes em plataforma elevada. Eleve os calcanhares maximamente e desça abaixo do nivel da plataforma.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Smith Machine", "Step Platform"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/smith-machine-calf-raise.png"
+  },
+  {
+    "name": "Leg Press Calf Raise",
+    "description": "No leg press com apenas as pontas dos pes na plataforma. Empurre a plataforma estendendo os tornozelos e retorne controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Leg Press Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/leg-press-calf-raise.png"
+  },
+  {
+    "name": "Donkey Calf Raise",
+    "description": "Inclinado para frente com peso nas costas ou parceiro sentado. Eleve os calcanhares de uma plataforma elevada e desça abaixo do nivel.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Donkey Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/donkey-calf-raise.png"
+  },
+  {
+    "name": "Single Leg Standing Calf Raise",
+    "description": "Em pe em uma perna so com halter na mao do mesmo lado. Eleve o calcanhar do chao contraindo a panturrilha e desça controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Dumbbell", "Step Platform"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/single-leg-standing-calf-raise.png"
+  },
+  {
+    "name": "Dumbbell Standing Calf Raise",
+    "description": "Em pe segurando halteres ao lado do corpo com pontas dos pes em plataforma elevada. Eleve os calcanhares maximamente e desça controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Dumbbells", "Step Platform"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/dumbbell-standing-calf-raise.png"
+  },
+  {
+    "name": "Barbell Standing Calf Raise",
+    "description": "Em pe com barra nos ombros e pontas dos pes em plataforma elevada. Eleve os calcanhares contraindo as panturrilhas e desça abaixo do nivel.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Barbell", "Step Platform"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/barbell-standing-calf-raise.png"
+  },
+  {
+    "name": "Hack Squat Calf Raise",
+    "description": "No hack squat com apenas as pontas dos pes na plataforma. Empurre a plataforma estendendo os tornozelos e retorne controladamente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Hack Squat Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/hack-squat-calf-raise.png"
+  },
+  {
+    "name": "Toes In Calf Raise",
+    "description": "Panturrilha em pe com pontas dos pes viradas para dentro. Esta variacao enfatiza a cabeca lateral das panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/toes-in-calf-raise.png"
+  },
+  {
+    "name": "Toes Out Calf Raise",
+    "description": "Panturrilha em pe com pontas dos pes viradas para fora. Esta variacao enfatiza a cabeca medial das panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/toes-out-calf-raise.png"
+  },
+  {
+    "name": "Calf Raise 21s",
+    "description": "Realize 7 repeticoes na metade inferior, 7 na metade superior e 7 completas sem descanso. Tecnica de intensidade para panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/calf-raise-21s.png"
+  },
+  {
+    "name": "Pause Calf Raise",
+    "description": "Panturrilha com pausa de 2-3 segundos no topo da contracao. Aumenta o tempo sob tensao e a ativacao muscular.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/pause-calf-raise.png"
+  },
+  {
+    "name": "Eccentric Calf Raise",
+    "description": "Suba com as duas pernas e desça lentamente com uma perna so em 4-5 segundos. Excelente para fortalecimento excentrico.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Step Platform"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/eccentric-calf-raise.png"
+  },
+  {
+    "name": "Tibialis Raise",
+    "description": "Sentado com calcanhares no chao e pontas dos pes elevadas. Eleve as pontas dos pes contraindo o tibial anterior.",
+    "musclesWorked": ["Tibialis Anterior", "Calves"],
+    "equipment": ["Tibialis Machine"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/tibialis-raise.png"
+  },
+  {
+    "name": "Band Dorsiflexion",
+    "description": "Sentado com band presa a frente do pe. Puxe a ponta do pe em direcao a canela contra a resistencia da band.",
+    "musclesWorked": ["Tibialis Anterior", "Calves"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/band-dorsiflexion.png"
+  },
+  {
+    "name": "Calf Raise Drop Set",
+    "description": "Execute panturrilhas ate a falha, reduza o peso 20-30% e continue ate a falha novamente. Repita 2-3 vezes.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Advanced",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/calf-raise-drop-set.png"
+  },
+  {
+    "name": "Bent Knee Calf Raise",
+    "description": "Em pe com joelhos levemente dobrados. Esta posicao enfatiza o soleo, muscolo mais profundo das panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/bent-knee-calf-raise.png"
+  },
+  {
+    "name": "Cable Standing Calf Raise",
+    "description": "Em pe de frente para o cabo baixo com cinto na cintura. Eleve os calcanhares contra a resistencia do cabo.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Cable Machine", "Step Platform"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/cable-standing-calf-raise.png"
+  },
+  {
+    "name": "Stair Calf Raise",
+    "description": "Em pe no degrau de uma escada com calcanhares suspensos. Eleve os calcanhares e desça abaixo do nivel do degrau.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Stairs"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/stair-calf-raise.png"
+  },
+  {
+    "name": "Farmer Walk on Toes",
+    "description": "Caminhada do fazendeiro na ponta dos pes segurando halteres pesados. Trabalha panturrilhas isometricamente enquanto caminha.",
+    "musclesWorked": ["Calves", "Core", "Forearms"],
+    "equipment": ["Dumbbells"],
+    "difficulty": "Intermediate",
+    "category": "Functional",
+    "imageUrl": "exercises/calves/farmer-walk-on-toes.png"
+  },
+  {
+    "name": "Jump Rope",
+    "description": "Pular corda mantendo os calcanhares levemente elevados do chao. Excelente para condicionamento e trabalho de panturrilhas.",
+    "musclesWorked": ["Calves", "Core"],
+    "equipment": ["Jump Rope"],
+    "difficulty": "Beginner",
+    "category": "Cardio",
+    "imageUrl": "exercises/calves/jump-rope.png"
+  },
+  {
+    "name": "Box Jump Calf Focus",
+    "description": "Saltos no box enfatizando a extensao dos tornozelos no impulso. Foque em empurrar atraves das panturrilhas.",
+    "musclesWorked": ["Calves", "Quadriceps", "Glutes"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/calves/box-jump-calf-focus.png"
+  },
+  {
+    "name": "Pogo Hops",
+    "description": "Pequenos saltos rapidos usando principalmente os tornozelos, mantendo joelhos quase retos. Desenvolve potencia das panturrilhas.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/calves/pogo-hops.png"
+  },
+  {
+    "name": "Ankle Bounces",
+    "description": "Saltos continuos usando apenas a flexao plantar, sem dobrar os joelhos significativamente. Treina reflexo e potencia.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Plyometric",
+    "imageUrl": "exercises/calves/ankle-bounces.png"
+  },
+  {
+    "name": "Depth Drop to Calf Raise",
+    "description": "Pule de uma caixa, aterrisse e imediatamente execute uma elevacao de panturrilha explosiva.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Plyo Box"],
+    "difficulty": "Advanced",
+    "category": "Plyometric",
+    "imageUrl": "exercises/calves/depth-drop-calf-raise.png"
+  },
+  {
+    "name": "Walking Calf Raise",
+    "description": "Caminhe em ponta dos pes por uma distancia determinada. Mantenha os calcanhares elevados durante todo o percurso.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/walking-calf-raise.png"
+  },
+  {
+    "name": "Isometric Calf Hold",
+    "description": "Mantenha a posicao elevada da panturrilha por 30-60 segundos. Treina resistencia e forca isometrica.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Calf Machine"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/isometric-calf-hold.png"
+  },
+  {
+    "name": "Single Leg Seated Calf Raise",
+    "description": "Panturrilha sentado unilateral com halter sobre o joelho. Trabalha cada panturrilha independentemente.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Dumbbell", "Bench"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/single-leg-seated-calf-raise.png"
+  },
+  {
+    "name": "Banded Calf Raise",
+    "description": "Panturrilha com band de resistencia adicional sobre os ombros. Adiciona resistencia progressiva ao movimento.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Resistance Band", "Step Platform"],
+    "difficulty": "Intermediate",
+    "category": "Strength",
+    "imageUrl": "exercises/calves/banded-calf-raise.png"
+  },
+  {
+    "name": "Wall Calf Stretch",
+    "description": "De frente para parede com pe atras esticado e calcanhar no chao. Empurre o quadril para frente alongando a panturrilha.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/calves/wall-calf-stretch.png"
+  },
+  {
+    "name": "Downward Dog Calf Stretch",
+    "description": "Na posicao de cachorro olhando para baixo, alterne pressionando cada calcanhar em direcao ao chao.",
+    "musclesWorked": ["Calves", "Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/calves/downward-dog-calf-stretch.png"
+  },
+  {
+    "name": "Step Drop Calf Stretch",
+    "description": "Em pe no degrau com calcanhares suspensos, deixe os calcanhares cairem abaixo do nivel do degrau para alongar.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Step Platform"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/calves/step-drop-calf-stretch.png"
+  },
+  {
+    "name": "Foam Roll Calves",
+    "description": "Sentado com panturrilha sobre o foam roller. Role do tornozelo ate abaixo do joelho aplicando pressao.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Recovery",
+    "imageUrl": "exercises/calves/foam-roll-calves.png"
+  },
+  {
+    "name": "Achilles Tendon Stretch",
+    "description": "Em posicao de lunge com joelho traseiro dobrado proximo ao chao. Mantenha calcanhar no chao para alongar o tendao de Aquiles.",
+    "musclesWorked": ["Calves"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Stretching",
+    "imageUrl": "exercises/calves/achilles-tendon-stretch.png"
+  }
+]

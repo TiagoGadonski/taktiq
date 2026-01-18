@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Pelvic Tilt Standing",
+    "description": "Em pe, pratique inclinar pelve para frente e para tras conscientizando posicao neutra.",
+    "musclesWorked": ["Core", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/pelvic-tilt-standing.png"
+  },
+  {
+    "name": "Clam Shell for Hip Stability",
+    "description": "Clamshell focando em ativacao de gluteo medio para estabilidade pelvica.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/clam-shell-hip-stability.png"
+  },
+  {
+    "name": "Side Lying Hip Abduction",
+    "description": "Abdução lateral de quadril para fortalecer gluteo medio e estabilizar pelve.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/side-lying-hip-abduction.png"
+  },
+  {
+    "name": "Monster Walk",
+    "description": "Caminhada lateral com band para ativacao de gluteo medio.",
+    "musclesWorked": ["Glutes", "Abductors"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/monster-walk.png"
+  },
+  {
+    "name": "Single Leg Stance",
+    "description": "Equilibrio em uma perna para treinar estabilidade de quadril e pelve.",
+    "musclesWorked": ["Glutes", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/single-leg-stance.png"
+  },
+  {
+    "name": "Bird Dog for Core Stability",
+    "description": "Bird dog focando em manter pelve nivelada durante o movimento.",
+    "musclesWorked": ["Core", "Lower Back", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/bird-dog-core-stability.png"
+  },
+  {
+    "name": "Plank for Core Endurance",
+    "description": "Prancha focando em posicao neutra da coluna e pelve.",
+    "musclesWorked": ["Core", "Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/plank-core-endurance.png"
+  },
+  {
+    "name": "Side Plank for Lateral Core",
+    "description": "Prancha lateral para fortalecer obliquos e quadrado lombar.",
+    "musclesWorked": ["Obliques", "Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Intermediate",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/side-plank-lateral-core.png"
+  },
+  {
+    "name": "McGill Curl Up",
+    "description": "Abdominal seguro para coluna focando em contracao isometrica do core.",
+    "musclesWorked": ["Abs"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/mcgill-curl-up.png"
+  },
+  {
+    "name": "Pallof Press",
+    "description": "Anti-rotacao com band para estabilidade do core.",
+    "musclesWorked": ["Core", "Obliques"],
+    "equipment": ["Resistance Band"],
+    "difficulty": "Intermediate",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/pallof-press.png"
+  },
+  {
+    "name": "Quadruped Hip Extension",
+    "description": "Extensao de quadril em quatro apoios sem arquear a lombar.",
+    "musclesWorked": ["Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/quadruped-hip-extension.png"
+  },
+  {
+    "name": "Psoas Release",
+    "description": "Auto-liberacao do psoas com bola posicionada no abdomen inferior.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Massage Ball"],
+    "difficulty": "Intermediate",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/psoas-release.png"
+  },
+  {
+    "name": "TFL Release",
+    "description": "Liberacao do tensor da fascia lata com foam roller ou bola.",
+    "musclesWorked": ["Hip Flexors"],
+    "equipment": ["Foam Roller"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/tfl-release.png"
+  },
+  {
+    "name": "Piriformis Stretch",
+    "description": "Alongamento do piriforme para aliviar tensao e melhorar funcao do quadril.",
+    "musclesWorked": ["Piriformis", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/piriformis-stretch.png"
+  },
+  {
+    "name": "Hamstring Active Stretch",
+    "description": "Alongamento ativo de posteriores com perna elevada controladamente.",
+    "musclesWorked": ["Hamstrings"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/hamstring-active-stretch.png"
+  },
+  {
+    "name": "Standing Posture Reset",
+    "description": "Sequencia rapida para resetar postura: chin tuck, ombros para tras, core ativado.",
+    "musclesWorked": ["Full Body"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/standing-posture-reset.png"
+  },
+  {
+    "name": "Seated Posture Reset",
+    "description": "Reset de postura sentado: sentar nos isquios, chin tuck, ombros para tras.",
+    "musclesWorked": ["Core", "Upper Back"],
+    "equipment": ["Chair"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/seated-posture-reset.png"
+  },
+  {
+    "name": "Hip Hinge Pattern",
+    "description": "Pratica do padrao de movimento de hip hinge mantendo coluna neutra.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/hip-hinge-pattern.png"
+  },
+  {
+    "name": "Wall Hip Hinge",
+    "description": "Hip hinge com gluteos tocando parede para feedback de movimento correto.",
+    "musclesWorked": ["Hamstrings", "Glutes"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/wall-hip-hinge.png"
+  },
+  {
+    "name": "Dowel Hip Hinge",
+    "description": "Hip hinge com bastao nas costas para feedback de coluna neutra.",
+    "musclesWorked": ["Hamstrings", "Glutes", "Lower Back"],
+    "equipment": ["Stick"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/dowel-hip-hinge.png"
+  },
+  {
+    "name": "Glute Squeeze Standing",
+    "description": "Em pe, contraia gluteos maximamente mantendo posicao neutra.",
+    "musclesWorked": ["Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/glute-squeeze-standing.png"
+  },
+  {
+    "name": "Posterior Chain Activation",
+    "description": "Sequencia para ativar cadeia posterior: gluteos, hamstrings, extensores.",
+    "musclesWorked": ["Glutes", "Hamstrings", "Lower Back"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/posterior-chain-activation.png"
+  },
+  {
+    "name": "Diaphragmatic Breathing",
+    "description": "Respiracao diafragmatica para ativacao do core e relaxamento.",
+    "musclesWorked": ["Core", "Diaphragm"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/diaphragmatic-breathing.png"
+  },
+  {
+    "name": "Crocodile Breathing",
+    "description": "Respiracao de brucos para treinar expansao lateral do torax.",
+    "musclesWorked": ["Core", "Diaphragm"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/crocodile-breathing.png"
+  },
+  {
+    "name": "90/90 Breathing",
+    "description": "Respiracao com quadris e joelhos a 90 graus para posicao neutra da pelve.",
+    "musclesWorked": ["Core", "Diaphragm"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/90-90-breathing.png"
+  },
+  {
+    "name": "Wall Sit Posture",
+    "description": "Sentado contra parede com postura perfeita: chin tuck, escapulas retraidas.",
+    "musclesWorked": ["Quadriceps", "Core"],
+    "equipment": ["Wall"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/wall-sit-posture.png"
+  },
+  {
+    "name": "Tall Kneeling Hold",
+    "description": "Ajoelhado ereto ativando gluteos e core para alinhamento pelvico.",
+    "musclesWorked": ["Core", "Glutes"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/tall-kneeling-hold.png"
+  },
+  {
+    "name": "Half Kneeling Hold",
+    "description": "Posicao de semi-ajoelhado com foco em alinhamento pelvico e ativacao de core.",
+    "musclesWorked": ["Core", "Hip Flexors"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/half-kneeling-hold.png"
+  },
+  {
+    "name": "Supine Rib Cage Reset",
+    "description": "Deitado, expire completamente descendo caixa toracica para posicao neutra.",
+    "musclesWorked": ["Core"],
+    "equipment": ["Bodyweight"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/supine-rib-cage-reset.png"
+  },
+  {
+    "name": "Active Sitting",
+    "description": "Pratica de sentar ativamente sobre isquios com core levemente ativado.",
+    "musclesWorked": ["Core"],
+    "equipment": ["Chair"],
+    "difficulty": "Beginner",
+    "category": "Postural",
+    "imageUrl": "exercises/postural/active-sitting.png"
+  }
+]

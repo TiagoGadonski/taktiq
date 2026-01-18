@@ -1,0 +1,1047 @@
+[
+  {
+    "name": "Encolhimento com Barra",
+    "description": "Exercício para desenvolvimento do trapézio superior com barra.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Barbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé, segure a barra à frente das coxas",
+      "Pegada na largura dos ombros ou ligeiramente mais larga",
+      "Braços estendidos ao longo do corpo",
+      "Eleve os ombros em direção às orelhas",
+      "Segure a contração por 1-2 segundos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Pausa mais longa no topo",
+      "Behind the back shrugs"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Não rotacione os ombros - apenas suba e desça",
+      "Mantenha braços estendidos",
+      "Contraia forte no topo",
+      "Movimento vertical puro"
+    ],
+    "commonMistakes": [
+      "Rotacionar os ombros",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Flexionar os cotovelos"
+    ],
+    "notes": "Exercício fundamental para trapézio volumoso.",
+    "videoUrl": "https://www.youtube.com/results?search_query=encolhimento+barra+shrugs",
+    "isPublic": true
+  },
+  {
+    "name": "Encolhimento com Halteres",
+    "description": "Encolhimento para trapézio usando halteres para maior liberdade.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "Dumbbell",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé com halteres ao lado do corpo",
+      "Braços estendidos, palmas para dentro",
+      "Eleve os ombros verticalmente",
+      "Contraia no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer unilateral",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Usar máquina"
+    ],
+    "tips": [
+      "Halteres permitem posição mais natural",
+      "Podem ficar ao lado ou ligeiramente à frente",
+      "Movimento puro de encolhimento",
+      "Braços sempre estendidos"
+    ],
+    "commonMistakes": [
+      "Rotacionar os ombros",
+      "Flexionar cotovelos",
+      "Usar impulso",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Alternativa à barra com maior conforto.",
+    "videoUrl": "https://www.youtube.com/results?search_query=encolhimento+halteres+shrugs",
+    "isPublic": true
+  },
+  {
+    "name": "Encolhimento no Smith",
+    "description": "Encolhimento de ombros no Smith Machine para foco no trapézio.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "SmithMachine",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posicione-se no Smith com barra à frente",
+      "Destrave e segure a barra com braços estendidos",
+      "Eleve os ombros em linha reta",
+      "Segure a contração",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer atrás das costas",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Barra guiada elimina balanço",
+      "Permite cargas mais pesadas",
+      "Foco total na contração",
+      "Não precisa estabilizar"
+    ],
+    "commonMistakes": [
+      "Ainda rotacionar os ombros",
+      "Usar impulso",
+      "Amplitude incompleta",
+      "Flexionar cotovelos"
+    ],
+    "notes": "Barra guiada permite foco puro no trapézio.",
+    "videoUrl": "https://www.youtube.com/results?search_query=encolhimento+smith+machine+shrugs",
+    "isPublic": true
+  },
+  {
+    "name": "Encolhimento com Trap Bar",
+    "description": "Encolhimento usando trap bar para posição de mãos mais natural.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": "TrapBar",
+    "category": "Isolation",
+    "difficulty": "Beginner",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Entre na trap bar e segure as alças",
+      "Fique em pé com braços estendidos",
+      "Eleve os ombros verticalmente",
+      "Contraia no topo",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Adicionar pausa",
+      "Combinar com carries"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Pegada neutra é mais confortável",
+      "Centro de gravidade ideal",
+      "Menos estresse nos punhos",
+      "Permite cargas pesadas"
+    ],
+    "commonMistakes": [
+      "Rotacionar ombros",
+      "Usar impulso",
+      "Amplitude insuficiente",
+      "Inclinar o corpo"
+    ],
+    "notes": "Muitos consideram a melhor variação de encolhimento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=trap+bar+shrugs",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Alta com Barra",
+    "description": "Puxada da barra até altura do queixo para trapézio e deltoides.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders", "Biceps"],
+    "equipment": "Barbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé segurando a barra à frente das coxas",
+      "Pegada mais estreita que ombros",
+      "Puxe a barra para cima levando cotovelos ao alto",
+      "Barra sobe próxima ao corpo",
+      "Cotovelos sempre mais altos que as mãos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Remada alta com cabos",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Usar halteres",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Controversa para saúde do ombro",
+      "Se doer, use pegada mais larga",
+      "Cotovelos sempre acima das mãos",
+      "Alternativa: fazer com halteres"
+    ],
+    "commonMistakes": [
+      "Pegada muito estreita",
+      "Ombros subindo demais",
+      "Usar impulso",
+      "Mãos mais altas que cotovelos"
+    ],
+    "notes": "Excelente para trapézio, mas cuide com ombros sensíveis.",
+    "videoUrl": "https://www.youtube.com/results?search_query=remada+alta+upright+row",
+    "isPublic": true
+  },
+  {
+    "name": "Remada Alta com Halteres",
+    "description": "Remada alta com halteres para maior liberdade de movimento.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders", "Biceps"],
+    "equipment": "Dumbbell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Em pé com halteres à frente das coxas",
+      "Puxe os halteres para cima levando cotovelos ao alto",
+      "Halteres sobem próximos ao corpo",
+      "Cotovelos sempre mais altos que mãos",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Aumentar carga",
+      "Fazer alternado",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Reduzir carga",
+      "Menor amplitude",
+      "Usar cabos"
+    ],
+    "tips": [
+      "Halteres permitem caminho natural",
+      "Mais confortável para ombros",
+      "Pode afastar mais do corpo se necessário",
+      "Boa alternativa à barra"
+    ],
+    "commonMistakes": [
+      "Subir muito alto causando impingement",
+      "Usar impulso",
+      "Mãos mais altas que cotovelos",
+      "Movimentos desiguais"
+    ],
+    "notes": "Mais amigável para ombros que a versão com barra.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dumbbell+upright+row",
+    "isPublic": true
+  },
+  {
+    "name": "Farmer's Walk",
+    "description": "Caminhada carregando pesos pesados para grip, trapézio e core.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms", "Core", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Pegue dois halteres ou kettlebells pesados",
+      "Fique em pé com postura ereta",
+      "Ombros para trás, core contraído",
+      "Caminhe com passos controlados",
+      "Mantenha a postura durante toda distância",
+      "Complete a distância ou tempo prescrito"
+    ],
+    "progressions": [
+      "Aumentar peso",
+      "Aumentar distância",
+      "Farmer's walk com trap bar"
+    ],
+    "regressions": [
+      "Reduzir peso",
+      "Diminuir distância",
+      "Fazer parado (static hold)"
+    ],
+    "tips": [
+      "Ombros para trás e para baixo",
+      "Core sempre contraído",
+      "Passos curtos e controlados",
+      "Grip vai ser o limitador inicialmente"
+    ],
+    "commonMistakes": [
+      "Postura ruim",
+      "Passos muito longos",
+      "Deixar ombros caírem",
+      "Prender a respiração"
+    ],
+    "notes": "Exercício funcional excepcional para força geral.",
+    "videoUrl": "https://www.youtube.com/results?search_query=farmer+walk+execução",
+    "isPublic": true
+  },
+  {
+    "name": "Suitcase Carry",
+    "description": "Farmer's walk unilateral para trabalho anti-lateral do core.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core", "Forearms", "Shoulders"],
+    "equipment": "Dumbbell",
+    "category": "Functional",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Large",
+    "instructions": [
+      "Pegue um halter ou kettlebell pesado",
+      "Segure em apenas um lado",
+      "Mantenha o corpo ereto sem inclinar",
+      "Caminhe sem deixar o corpo pender",
+      "Complete a distância e troque de lado"
+    ],
+    "progressions": [
+      "Aumentar peso",
+      "Aumentar distância",
+      "Combinar com overhead carry"
+    ],
+    "regressions": [
+      "Reduzir peso",
+      "Diminuir distância",
+      "Fazer parado"
+    ],
+    "tips": [
+      "Desafio principal é não inclinar",
+      "Core trabalha intensamente",
+      "Mantenha ombros nivelados",
+      "Excelente para oblíquos"
+    ],
+    "commonMistakes": [
+      "Inclinar para o lado",
+      "Elevar ombro do lado do peso",
+      "Passos irregulares",
+      "Não fazer dos dois lados"
+    ],
+    "notes": "Excelente exercício anti-lateral para core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=suitcase+carry",
+    "isPublic": true
+  },
+  {
+    "name": "Dead Hang",
+    "description": "Suspensão passiva na barra para alongamento e força de grip.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms", "Shoulders"],
+    "equipment": "PullUpBar",
+    "category": "Stretching",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra com pegada pronada",
+      "Deixe o corpo pendurar completamente",
+      "Braços totalmente estendidos",
+      "Ombros relaxados (não retraia escápulas)",
+      "Mantenha por tempo determinado",
+      "Respire normalmente"
+    ],
+    "progressions": [
+      "Aumentar tempo",
+      "Adicionar peso",
+      "Fazer com uma mão"
+    ],
+    "regressions": [
+      "Pés no chão assistindo",
+      "Menor tempo",
+      "Usar straps"
+    ],
+    "tips": [
+      "Excelente para descompressão da coluna",
+      "Fortalece grip passivamente",
+      "Alongamento do latíssimo e ombros",
+      "Pode fazer diariamente"
+    ],
+    "commonMistakes": [
+      "Não relaxar completamente",
+      "Retrair escápulas",
+      "Tempo muito curto",
+      "Prender respiração"
+    ],
+    "notes": "Simples mas extremamente efetivo para saúde articular.",
+    "videoUrl": "https://www.youtube.com/results?search_query=dead+hang+barra",
+    "isPublic": true
+  },
+  {
+    "name": "Active Hang",
+    "description": "Suspensão ativa na barra com escápulas retraídas.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Forearms", "Shoulders"],
+    "equipment": "PullUpBar",
+    "category": "Strength",
+    "difficulty": "Beginner",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Segure a barra em dead hang",
+      "Retraia as escápulas (ombros para baixo e para trás)",
+      "O corpo sobe ligeiramente",
+      "Mantenha os braços estendidos",
+      "Segure a posição ativa",
+      "Alterne com dead hang se desejar"
+    ],
+    "progressions": [
+      "Aumentar tempo",
+      "Active hang com uma mão assistida",
+      "Progredir para scapular pull-ups"
+    ],
+    "regressions": [
+      "Dead hang primeiro",
+      "Assistido com pés",
+      "Menor tempo"
+    ],
+    "tips": [
+      "Fortalece estabilizadores da escápula",
+      "Primeiro passo para pull-ups",
+      "Ombros ficam para baixo e para trás",
+      "Braços permanecem estendidos"
+    ],
+    "commonMistakes": [
+      "Flexionar os cotovelos",
+      "Não retrair adequadamente",
+      "Tempo muito curto",
+      "Confundir com scapular pull"
+    ],
+    "notes": "Ensina ativação escapular essencial para pull-ups.",
+    "videoUrl": "https://www.youtube.com/results?search_query=active+hang+scapula",
+    "isPublic": true
+  },
+  {
+    "name": "Weighted Pull-up",
+    "description": "Pull-up com peso adicional para atletas avançados.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Use cinto de peso ou segure halter entre os pés",
+      "Execute pull-up normal com o peso adicional",
+      "Dead hang até queixo sobre a barra",
+      "Desça controladamente",
+      "Mantenha técnica perfeita"
+    ],
+    "progressions": [
+      "Aumentar peso progressivamente",
+      "Adicionar pausa",
+      "Tempo excêntrico lento"
+    ],
+    "regressions": [
+      "Reduzir peso",
+      "Pull-up sem peso",
+      "Assistido com elástico"
+    ],
+    "tips": [
+      "Só adicione peso após dominar bodyweight",
+      "Progrida gradualmente",
+      "Forma perfeita é essencial",
+      "Cinto é mais seguro que halter"
+    ],
+    "commonMistakes": [
+      "Adicionar peso cedo demais",
+      "Perder técnica com peso",
+      "Amplitude incompleta",
+      "Peso excessivo"
+    ],
+    "notes": "Marco importante na progressão de calistenia.",
+    "videoUrl": "https://www.youtube.com/results?search_query=weighted+pull+up+peso",
+    "isPublic": true
+  },
+  {
+    "name": "L-Sit Pull-up",
+    "description": "Pull-up mantendo as pernas estendidas à frente em L.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core", "Quadriceps"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra e eleve as pernas retas à frente",
+      "Corpo forma um L",
+      "Mantenha a posição das pernas",
+      "Execute pull-up nessa posição",
+      "Core extremamente ativo",
+      "Desça controladamente mantendo o L"
+    ],
+    "progressions": [
+      "L-sit pull-up com peso",
+      "V-sit pull-up (pernas mais altas)",
+      "Adicionar pausa"
+    ],
+    "regressions": [
+      "Tuck pull-up (joelhos flexionados)",
+      "L-sit hang",
+      "Pull-up normal"
+    ],
+    "tips": [
+      "Exige excelente força de core",
+      "Domine L-sit antes",
+      "Mantenha pernas paralelas ao chão",
+      "Respiração consistente"
+    ],
+    "commonMistakes": [
+      "Pernas caindo",
+      "L incompleto",
+      "Compensar com balanço",
+      "Amplitude insuficiente"
+    ],
+    "notes": "Combina força de pull com força de core.",
+    "videoUrl": "https://www.youtube.com/results?search_query=l+sit+pull+up",
+    "isPublic": true
+  },
+  {
+    "name": "Muscle-up (Barra)",
+    "description": "Movimento combinando pull-up com dip para subir sobre a barra.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pendure na barra com pegada pronada (false grip ajuda)",
+      "Execute pull-up explosivo trazendo peito acima da barra",
+      "Na transição, rode os punhos sobre a barra",
+      "Empurre para cima como um dip",
+      "Finalize com braços estendidos sobre a barra",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Muscle-up strict (sem kipping)",
+      "Muscle-up com peso",
+      "Muscle-up em argolas"
+    ],
+    "regressions": [
+      "Explosive pull-up alto",
+      "Muscle-up negativo",
+      "Jumping muscle-up"
+    ],
+    "tips": [
+      "Pull-up explosivo é essencial",
+      "A transição é a parte mais difícil",
+      "False grip facilita",
+      "Pratique cada fase separadamente"
+    ],
+    "commonMistakes": [
+      "Pull-up não alto o suficiente",
+      "Transição ruim",
+      "Cotovelos abrindo demais",
+      "Falta de explosão"
+    ],
+    "notes": "Marco significativo na jornada de calistenia.",
+    "videoUrl": "https://www.youtube.com/results?search_query=muscle+up+tutorial",
+    "isPublic": true
+  },
+  {
+    "name": "Muscle-up (Argolas)",
+    "description": "Muscle-up nas argolas, mais desafiador que na barra fixa.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Chest", "Triceps", "Shoulders", "Core"],
+    "equipment": "Rings",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pendure nas argolas com false grip",
+      "Execute pull-up explosivo puxando argolas ao peito",
+      "Na transição, rode os punhos para cima",
+      "Empurre para cima estendendo braços",
+      "Finalize em ring support hold",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Muscle-up strict nas argolas",
+      "Múltiplos muscle-ups consecutivos",
+      "Muscle-up com pausa"
+    ],
+    "regressions": [
+      "Muscle-up na barra primeiro",
+      "Ring muscle-up negativo",
+      "False grip hold"
+    ],
+    "tips": [
+      "False grip é essencial nas argolas",
+      "Argolas instáveis aumentam dificuldade",
+      "A transição é ainda mais difícil",
+      "Domine barra primeiro"
+    ],
+    "commonMistakes": [
+      "Perder false grip",
+      "Argolas afastando do corpo",
+      "Falta de explosão",
+      "Transição ruim"
+    ],
+    "notes": "Considerado mais difícil que muscle-up na barra.",
+    "videoUrl": "https://www.youtube.com/results?search_query=ring+muscle+up+tutorial",
+    "isPublic": true
+  },
+  {
+    "name": "One Arm Pull-up",
+    "description": "Pull-up usando apenas um braço - exercício elite de calistenia.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra com uma mão",
+      "O outro braço pode ficar ao lado ou no peito",
+      "Puxe o corpo para cima usando apenas um braço",
+      "Queixo deve passar da barra",
+      "Desça controladamente",
+      "Alguma rotação do corpo é normal"
+    ],
+    "progressions": [
+      "One arm pull-up strict (menos rotação)",
+      "One arm pull-up com peso",
+      "One arm chin-up"
+    ],
+    "regressions": [
+      "Assisted one arm (dedo no pulso oposto)",
+      "Archer pull-up",
+      "Typewriter pull-up"
+    ],
+    "tips": [
+      "Requer anos de treino",
+      "Progrida através das variações",
+      "Força de grip é crucial",
+      "Alguma rotação é aceitável no início"
+    ],
+    "commonMistakes": [
+      "Tentar sem progressão adequada",
+      "Usar muito impulso",
+      "Amplitude incompleta",
+      "Não treinar ambos os lados"
+    ],
+    "notes": "Uma das maiores conquistas da calistenia.",
+    "videoUrl": "https://www.youtube.com/results?search_query=one+arm+pull+up+tutorial",
+    "isPublic": true
+  },
+  {
+    "name": "Front Lever",
+    "description": "Posição horizontal de frente para baixo segurando na barra - movimento avançado.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pendure na barra com pegada pronada",
+      "Eleve as pernas e baixe o tronco até ficar horizontal",
+      "Corpo paralelo ao chão, de frente para baixo",
+      "Braços estendidos, latíssimo contraído",
+      "Mantenha a posição por tempo determinado"
+    ],
+    "progressions": [
+      "Front lever pulls",
+      "Front lever touch",
+      "Front lever raise"
+    ],
+    "regressions": [
+      "Tuck front lever",
+      "Advanced tuck",
+      "One leg front lever"
+    ],
+    "tips": [
+      "Progressão através de tucked versions",
+      "Força extrema de latíssimo necessária",
+      "Core ativo durante toda posição",
+      "Escápulas deprimidas"
+    ],
+    "commonMistakes": [
+      "Quadril caindo",
+      "Cotovelos flexionando",
+      "Pular progressões",
+      "Não manter corpo reto"
+    ],
+    "notes": "Movimento icônico de calistenia que leva anos para dominar.",
+    "videoUrl": "https://www.youtube.com/results?search_query=front+lever+tutorial+progressão",
+    "isPublic": true
+  },
+  {
+    "name": "Tuck Front Lever",
+    "description": "Progressão para front lever com joelhos junto ao peito.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure na barra",
+      "Eleve os joelhos ao peito (posição tuck)",
+      "Baixe o tronco até ficar horizontal",
+      "Corpo dobrado, mas tronco paralelo ao chão",
+      "Mantenha a posição"
+    ],
+    "progressions": [
+      "Advanced tuck (pernas mais estendidas)",
+      "One leg front lever",
+      "Straddle front lever"
+    ],
+    "regressions": [
+      "Tuck front lever raises",
+      "Inverted hang",
+      "Skin the cat"
+    ],
+    "tips": [
+      "Primeiro passo para front lever completo",
+      "Mantenha tronco paralelo ao chão",
+      "Escápulas deprimidas",
+      "Ative bem o latíssimo"
+    ],
+    "commonMistakes": [
+      "Quadril muito alto",
+      "Tronco não horizontal",
+      "Cotovelos flexionando",
+      "Falta de ativação do lat"
+    ],
+    "notes": "Progressão fundamental para o front lever completo.",
+    "videoUrl": "https://www.youtube.com/results?search_query=tuck+front+lever",
+    "isPublic": true
+  },
+  {
+    "name": "Back Lever",
+    "description": "Posição horizontal com costas para baixo segurando na barra.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Shoulders", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Entre na posição invertida (inverted hang)",
+      "Baixe o corpo lentamente para trás",
+      "Estenda até corpo ficar horizontal",
+      "Costas para o chão, braços retos",
+      "Mantenha a posição"
+    ],
+    "progressions": [
+      "Back lever pulls",
+      "Back lever com amplitude total",
+      "Combinar com front lever"
+    ],
+    "regressions": [
+      "Tuck back lever",
+      "German hang",
+      "Skin the cat"
+    ],
+    "tips": [
+      "Mais acessível que front lever para muitos",
+      "Requer bíceps fortes",
+      "Protraia os ombros",
+      "Corpo completamente estendido"
+    ],
+    "commonMistakes": [
+      "Não manter corpo reto",
+      "Cotovelos flexionando",
+      "Pular progressões",
+      "Ombros não protraídos"
+    ],
+    "notes": "Posição espetacular que demonstra força e controle.",
+    "videoUrl": "https://www.youtube.com/results?search_query=back+lever+tutorial",
+    "isPublic": true
+  },
+  {
+    "name": "Skin the Cat",
+    "description": "Rotação completa do corpo através da posição invertida.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders", "Biceps", "Core"],
+    "equipment": "PullUpBar",
+    "category": "Mobility",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Pendure na barra",
+      "Eleve as pernas e passe-as entre os braços",
+      "Continue rotacionando até ficar em german hang",
+      "Pode parar aqui ou continuar de volta",
+      "Retorne pelo mesmo caminho ou continue rotacionando"
+    ],
+    "progressions": [
+      "Skin the cat com pausa em cada posição",
+      "Skin the cat com pernas estendidas",
+      "Múltiplas rotações"
+    ],
+    "regressions": [
+      "Fazer em argolas mais baixas",
+      "Assistido com pés",
+      "Tuck version"
+    ],
+    "tips": [
+      "Excelente para mobilidade de ombro",
+      "Progressão para back lever",
+      "Controle total é essencial",
+      "Não faça se ombros doerem"
+    ],
+    "commonMistakes": [
+      "Ir rápido demais",
+      "Não ter controle",
+      "Ignorar dor nos ombros",
+      "Perder a pegada"
+    ],
+    "notes": "Excelente exercício de mobilidade e preparação.",
+    "videoUrl": "https://www.youtube.com/results?search_query=skin+the+cat+exercise",
+    "isPublic": true
+  },
+  {
+    "name": "German Hang",
+    "description": "Posição suspensa com braços atrás do corpo para mobilidade.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Shoulders", "Biceps", "Chest"],
+    "equipment": "PullUpBar",
+    "category": "Mobility",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Entre através do skin the cat ou monte assistido",
+      "Pendure com braços atrás do corpo",
+      "Corpo estendido para baixo",
+      "Ombros em extensão máxima",
+      "Mantenha por tempo determinado"
+    ],
+    "progressions": [
+      "Aumentar tempo",
+      "German hang ativo (retrair escápulas)",
+      "Entrar e sair em back lever"
+    ],
+    "regressions": [
+      "Pés no chão",
+      "Argolas mais baixas",
+      "Menor tempo"
+    ],
+    "tips": [
+      "Excelente alongamento de ombro",
+      "Vá gradualmente em profundidade",
+      "Não force se doer",
+      "Preparação para back lever"
+    ],
+    "commonMistakes": [
+      "Ir fundo demais no início",
+      "Ignorar dor",
+      "Não ter controle para sair",
+      "Tempo excessivo no início"
+    ],
+    "notes": "Posição extrema de alongamento do ombro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=german+hang",
+    "isPublic": true
+  },
+  {
+    "name": "Kettlebell Swing",
+    "description": "Movimento explosivo de quadril usando kettlebell para posterior chain.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Glutes", "Hamstrings", "Core", "Shoulders"],
+    "equipment": "Kettlebell",
+    "category": "Power",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Em pé com kettlebell no chão à frente",
+      "Flexione quadril e pegue o kettlebell",
+      "Hike o KB para trás entre as pernas",
+      "Explosivamente estenda quadril projetando KB à frente",
+      "Braços são apenas guias - força vem do quadril",
+      "KB sobe até altura do peito ou acima",
+      "Deixe voltar e repita em movimento fluido"
+    ],
+    "progressions": [
+      "Kettlebell mais pesado",
+      "Single arm swing",
+      "American swing (acima da cabeça)"
+    ],
+    "regressions": [
+      "Kettlebell mais leve",
+      "Dead stop swings",
+      "Hip hinge practice"
+    ],
+    "tips": [
+      "Força vem do quadril, não dos braços",
+      "Core contraído durante todo movimento",
+      "Glúteos apertam no topo",
+      "Padrão de hinge, não agachamento"
+    ],
+    "commonMistakes": [
+      "Usar os braços para levantar",
+      "Agachar ao invés de hinge",
+      "Lombar arredondando",
+      "KB não atingindo altura"
+    ],
+    "notes": "Exercício fundamental de kettlebell para condicionamento.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kettlebell+swing+técnica",
+    "isPublic": true
+  },
+  {
+    "name": "Single Arm Kettlebell Row",
+    "description": "Remada unilateral com kettlebell para variação do estímulo.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Core"],
+    "equipment": "Kettlebell",
+    "category": "Compound",
+    "difficulty": "Intermediate",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Posição similar à remada com halter",
+      "Segure o kettlebell por baixo da alça",
+      "Puxe o KB em direção ao quadril",
+      "Contraia escápula no topo",
+      "Desça controladamente",
+      "Complete reps e troque de lado"
+    ],
+    "progressions": [
+      "KB mais pesado",
+      "Renegade row com KB",
+      "Double KB row"
+    ],
+    "regressions": [
+      "KB mais leve",
+      "Remada com halter",
+      "Menor amplitude"
+    ],
+    "tips": [
+      "Centro de massa diferente do halter",
+      "Trabalha grip de forma diferente",
+      "Mantenha core estável",
+      "Boa variação para costas"
+    ],
+    "commonMistakes": [
+      "Rotacionar o tronco",
+      "Usar impulso",
+      "Posição ruim",
+      "Não fazer igual dos dois lados"
+    ],
+    "notes": "Alternativa ao halter com desafio diferente para grip.",
+    "videoUrl": "https://www.youtube.com/results?search_query=kettlebell+row+unilateral",
+    "isPublic": true
+  },
+  {
+    "name": "Rope Climb",
+    "description": "Escalada de corda usando braços e pernas para subir.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms", "Core"],
+    "equipment": "Rope",
+    "category": "Functional",
+    "difficulty": "Advanced",
+    "workoutLocation": "Gym",
+    "spaceRequired": "Medium",
+    "instructions": [
+      "Segure a corda acima da cabeça",
+      "Use técnica de pé para segurar (J-hook ou S-wrap)",
+      "Alcance mais alto e trave os pés",
+      "Empurre com as pernas enquanto puxa com braços",
+      "Continue alternando até subir",
+      "Desça controladamente"
+    ],
+    "progressions": [
+      "Legless rope climb",
+      "Rope climb mais rápido",
+      "L-sit rope climb"
+    ],
+    "regressions": [
+      "Rope climb assistido",
+      "Apenas puxar sem subir",
+      "Praticar técnica de pé no chão"
+    ],
+    "tips": [
+      "Técnica de pé é crucial",
+      "Pernas fazem maior parte do trabalho",
+      "Grip vai cansar rapidamente sem técnica",
+      "Pratique descida controlada"
+    ],
+    "commonMistakes": [
+      "Não usar os pés",
+      "Depender só dos braços",
+      "Descer muito rápido (queima mãos)",
+      "Técnica de pé ruim"
+    ],
+    "notes": "Exercício clássico de força funcional.",
+    "videoUrl": "https://www.youtube.com/results?search_query=rope+climb+tutorial+técnica",
+    "isPublic": true
+  },
+  {
+    "name": "Towel Pull-up",
+    "description": "Pull-up segurando em toalhas para desafio extremo de grip.",
+    "muscleGroup": "Back",
+    "secondaryMuscles": ["Biceps", "Forearms"],
+    "equipment": "PullUpBar",
+    "category": "Calisthenics",
+    "difficulty": "Advanced",
+    "workoutLocation": "Both",
+    "spaceRequired": "Small",
+    "instructions": [
+      "Pendure duas toalhas na barra",
+      "Segure uma toalha em cada mão",
+      "Execute pull-up normal",
+      "O grip nas toalhas é o desafio principal",
+      "Complete as repetições"
+    ],
+    "progressions": [
+      "Toalhas mais finas",
+      "Uma toalha apenas (duas mãos juntas)",
+      "Towel pull-up com peso"
+    ],
+    "regressions": [
+      "Toalhas mais grossas (mais fácil segurar)",
+      "Pull-up normal",
+      "Apenas dead hang nas toalhas"
+    ],
+    "tips": [
+      "Excelente para força de grip",
+      "Popular entre escaladores",
+      "Comece com menos repetições",
+      "Grip será o limitador"
+    ],
+    "commonMistakes": [
+      "Toalhas escorregando",
+      "Não segurar adequadamente",
+      "Muitas reps quando grip fraco",
+      "Cair por perda de grip"
+    ],
+    "notes": "Ferramenta excelente para desenvolver grip de ferro.",
+    "videoUrl": "https://www.youtube.com/results?search_query=towel+pull+up+grip",
+    "isPublic": true
+  }
+]
