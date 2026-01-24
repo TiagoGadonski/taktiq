@@ -50,8 +50,9 @@ public static class DiagnosticsEndpoints
         group.MapGet("/ping", () => Results.Ok(new
         {
             status = "healthy",
-            message = "API is responding",
-            version = "2.0.0-exercises",
+            message = "API is responding - NEW DEPLOY TEST",
+            version = "3.0.0-2026-01-24-21h",
+            deployedAt = "2026-01-24T21:10:00Z",
             timestamp = DateTime.UtcNow,
             environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
         }))
