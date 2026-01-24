@@ -1391,6 +1391,16 @@ public static class AdminEndpoints
         // EXERCISE ANALYSIS AND FIX ENDPOINTS
         // ========================================
 
+        // Simple test endpoint to verify deployment
+        group.MapGet("/test-deploy", () => Results.Ok(new
+        {
+            message = "Novo deploy funcionando!",
+            version = "2026-01-24-v2",
+            timestamp = DateTime.UtcNow
+        }))
+        .WithName("TestDeploy")
+        .WithSummary("Endpoint de teste para verificar se o deploy foi bem sucedido");
+
         group.MapGet("/exercise-stats", async (
             ApplicationDbContext context,
             ILogger<Program> logger) =>
