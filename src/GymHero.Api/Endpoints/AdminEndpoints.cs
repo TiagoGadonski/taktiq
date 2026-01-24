@@ -7,6 +7,7 @@ using GymHero.Infrastructure.Services;
 using GymHero.Infrastructure.Data;
 using GymHero.Infrastructure.Data.Seeders;
 using DomainChallengeTargetType = GymHero.Domain.Enums.ChallengeTargetType;
+using ExerciseTranslations = GymHero.Infrastructure.Data.ExerciseTranslations;
 
 namespace GymHero.Api.Endpoints;
 
@@ -1385,5 +1386,246 @@ public static class AdminEndpoints
         })
         .WithName("SeedAllData")
         .WithSummary("Importa TODOS os dados: exercícios (academia + calistenia) + protocolos de avaliação");
+
+        // ========================================
+        // EXERCISE ANALYSIS AND FIX ENDPOINTS
+        // ========================================
+
+        group.MapGet("/exercise-stats", async (
+            ApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            try
+            {
+                var exercises = await context.Exercises.ToListAsync();
+
+                var semTraducao = exercises.Where(e => ExerciseTranslations.NeedsTranslation(e.Name)).ToList();
+                var semDescricao = exercises.Where(e => string.IsNullOrWhiteSpace(e.Description)).ToList();
+                var semVideo = exercises.Where(e => string.IsNullOrWhiteSpace(e.VideoUrl)).ToList();
+                var semImagem = exercises.Where(e => string.IsNullOrWhiteSpace(e.ImageUrl)).ToList();
+                var semInstrucoes = exercises.Where(e => e.Instructions == null || e.Instructions.Count < 3).ToList();
+
+                var completos = exercises.Where(e =>
+                    !ExerciseTranslations.NeedsTranslation(e.Name) &&
+                    !string.IsNullOrWhiteSpace(e.Description) &&
+                    !string.IsNullOrWhiteSpace(e.VideoUrl) &&
+                    !string.IsNullOrWhiteSpace(e.ImageUrl) &&
+                    e.Instructions != null && e.Instructions.Count >= 3).ToList();
+
+                // Agrupar por grupo muscular
+                var porGrupoMuscular = exercises
+                    .GroupBy(e => e.MuscleGroup.ToString())
+                    .Select(g => new { muscleGroup = g.Key, count = g.Count() })
+                    .OrderByDescending(x => x.count)
+                    .ToList();
+
+                // Agrupar por categoria
+                var porCategoria = exercises
+                    .GroupBy(e => e.Category.ToString())
+                    .Select(g => new { category = g.Key, count = g.Count() })
+                    .OrderByDescending(x => x.count)
+                    .ToList();
+
+                // Lista de exercicios que precisam de traducao
+                var exerciciosSemTraducao = semTraducao
+                    .Take(50)
+                    .Select(e => new { e.Id, e.Name, e.MuscleGroup })
+                    .ToList();
+
+                logger.LogInformation("Exercise stats: Total={Total}, NeedsTranslation={NeedsTranslation}, NoDesc={NoDesc}, NoVideo={NoVideo}, NoImage={NoImage}, Complete={Complete}",
+                    exercises.Count, semTraducao.Count, semDescricao.Count, semVideo.Count, semImagem.Count, completos.Count);
+
+                return Results.Ok(new
+                {
+                    total = exercises.Count,
+                    semTraducao = semTraducao.Count,
+                    semDescricao = semDescricao.Count,
+                    semVideo = semVideo.Count,
+                    semImagem = semImagem.Count,
+                    semInstrucoes = semInstrucoes.Count,
+                    completos = completos.Count,
+                    porGrupoMuscular,
+                    porCategoria,
+                    exerciciosSemTraducao,
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to get exercise stats");
+                return Results.Problem(
+                    title: "Failed to get exercise stats",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("GetExerciseStats")
+        .WithSummary("Retorna estatisticas dos exercicios (traducao, imagens, videos, etc.)");
+
+        group.MapPost("/fix-exercises", async (
+            ApplicationDbContext context,
+            ILogger<Program> logger,
+            [FromQuery] bool dryRun = false) =>
+        {
+            try
+            {
+                logger.LogInformation("Starting exercise fix process (dryRun={DryRun})...", dryRun);
+
+                var exercises = await context.Exercises.ToListAsync();
+                var fixes = new List<object>();
+                int traduzidos = 0, descricoes = 0, videos = 0, imagens = 0;
+
+                foreach (var exercise in exercises)
+                {
+                    var changes = new List<string>();
+
+                    // 1. Traduzir nome se estiver em ingles
+                    if (ExerciseTranslations.NeedsTranslation(exercise.Name))
+                    {
+                        var translated = ExerciseTranslations.Translate(exercise.Name);
+                        if (translated != exercise.Name)
+                        {
+                            changes.Add($"Nome: '{exercise.Name}' -> '{translated}'");
+                            if (!dryRun) exercise.Name = translated;
+                            traduzidos++;
+                        }
+                    }
+
+                    // 2. Adicionar descricao se nao tiver
+                    if (string.IsNullOrWhiteSpace(exercise.Description))
+                    {
+                        var description = ExerciseTranslations.GenerateDescription(exercise.Name, exercise.MuscleGroup.ToString());
+                        changes.Add($"Descricao adicionada");
+                        if (!dryRun) exercise.Description = description;
+                        descricoes++;
+                    }
+
+                    // 3. Adicionar URL de video do YouTube se nao tiver
+                    if (string.IsNullOrWhiteSpace(exercise.VideoUrl))
+                    {
+                        var videoUrl = ExerciseTranslations.GenerateYouTubeSearchUrl(exercise.Name);
+                        changes.Add($"Video URL adicionada");
+                        if (!dryRun) exercise.VideoUrl = videoUrl;
+                        videos++;
+                    }
+
+                    // 4. Adicionar URL de imagem placeholder se nao tiver
+                    if (string.IsNullOrWhiteSpace(exercise.ImageUrl))
+                    {
+                        var imageUrl = ExerciseTranslations.GeneratePlaceholderImageUrl(exercise.Name, exercise.MuscleGroup.ToString());
+                        changes.Add($"Imagem URL adicionada");
+                        if (!dryRun) exercise.ImageUrl = imageUrl;
+                        imagens++;
+                    }
+
+                    if (changes.Count > 0)
+                    {
+                        fixes.Add(new { id = exercise.Id, name = exercise.Name, changes });
+                    }
+                }
+
+                if (!dryRun && (traduzidos > 0 || descricoes > 0 || videos > 0 || imagens > 0))
+                {
+                    await context.SaveChangesAsync();
+                }
+
+                logger.LogInformation("Exercise fix completed: {Traduzidos} traduzidos, {Descricoes} descricoes, {Videos} videos, {Imagens} imagens",
+                    traduzidos, descricoes, videos, imagens);
+
+                return Results.Ok(new
+                {
+                    message = dryRun ? "Simulacao concluida (nenhuma alteracao salva)" : "Exercicios corrigidos com sucesso!",
+                    dryRun,
+                    traduzidos,
+                    descricoes,
+                    videos,
+                    imagens,
+                    totalAlteracoes = traduzidos + descricoes + videos + imagens,
+                    fixes = fixes.Take(100), // Limitar a 100 para nao sobrecarregar a resposta
+                    timestamp = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to fix exercises");
+                return Results.Problem(
+                    title: "Fix failed",
+                    detail: ex.Message,
+                    statusCode: 500
+                );
+            }
+        })
+        .WithName("FixExercises")
+        .WithSummary("Corrige exercicios: traduz nomes, adiciona descricoes, videos e imagens. Use dryRun=true para simular.");
+
+        group.MapGet("/exercises-needing-translation", async (
+            ApplicationDbContext context,
+            [FromQuery] int limit = 100) =>
+        {
+            var exercises = await context.Exercises
+                .OrderBy(e => e.Name)
+                .ToListAsync();
+
+            var needingTranslation = exercises
+                .Where(e => ExerciseTranslations.NeedsTranslation(e.Name))
+                .Take(limit)
+                .Select(e => new
+                {
+                    e.Id,
+                    currentName = e.Name,
+                    suggestedTranslation = ExerciseTranslations.Translate(e.Name),
+                    muscleGroup = e.MuscleGroup.ToString(),
+                    hasDescription = !string.IsNullOrWhiteSpace(e.Description),
+                    hasVideo = !string.IsNullOrWhiteSpace(e.VideoUrl),
+                    hasImage = !string.IsNullOrWhiteSpace(e.ImageUrl)
+                })
+                .ToList();
+
+            return Results.Ok(new
+            {
+                total = needingTranslation.Count,
+                exercises = needingTranslation
+            });
+        })
+        .WithName("GetExercisesNeedingTranslation")
+        .WithSummary("Lista exercicios que precisam de traducao com sugestoes");
+
+        group.MapPost("/translate-exercise/{id}", async (
+            Guid id,
+            [FromBody] TranslateExerciseRequest request,
+            ApplicationDbContext context,
+            ILogger<Program> logger) =>
+        {
+            var exercise = await context.Exercises.FindAsync(id);
+            if (exercise == null)
+            {
+                return Results.NotFound("Exercicio nao encontrado");
+            }
+
+            var oldName = exercise.Name;
+            exercise.Name = request.NewName;
+
+            if (!string.IsNullOrWhiteSpace(request.NewDescription))
+            {
+                exercise.Description = request.NewDescription;
+            }
+
+            await context.SaveChangesAsync();
+
+            logger.LogInformation("Exercise translated: {OldName} -> {NewName}", oldName, request.NewName);
+
+            return Results.Ok(new
+            {
+                message = "Exercicio traduzido com sucesso",
+                id = exercise.Id,
+                oldName,
+                newName = exercise.Name
+            });
+        })
+        .WithName("TranslateExercise")
+        .WithSummary("Traduz manualmente um exercicio especifico");
     }
 }
+
+public record TranslateExerciseRequest(string NewName, string? NewDescription = null);

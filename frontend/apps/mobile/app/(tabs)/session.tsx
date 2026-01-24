@@ -14,7 +14,7 @@ import * as Haptics from 'expo-haptics';
 import { api } from '@/lib/api';
 import { useSession } from '@/hooks/use-session';
 import { useSets } from '@/hooks/use-sets';
-import type { CreateSetInput, WorkoutExercise } from '@gymhero/shared';
+import type { CreateSetInput, WorkoutExercise, WorkoutSet } from '@gymhero/shared';
 
 export default function SessionScreen() {
   const { currentSession, hasActiveSession, startSession, completeSession, cancelSession, isStarting } =
@@ -31,7 +31,7 @@ export default function SessionScreen() {
 
   const handleStartSession = async (workoutId?: string) => {
     try {
-      await startSession(workoutId);
+      await startSession({ workoutId });
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (error: any) {
       Alert.alert('Erro', error.message);
@@ -88,7 +88,7 @@ export default function SessionScreen() {
     if (!currentSession) return;
 
     const setNumber =
-      (currentSession.sets?.filter((s) => s.exerciseId === exerciseId).length || 0) + 1;
+      (currentSession.sets?.filter((s: WorkoutSet) => s.exerciseId === exerciseId).length || 0) + 1;
 
     const setData: CreateSetInput = {
       sessionId: currentSession.id,
@@ -161,8 +161,8 @@ export default function SessionScreen() {
   const activeExercises: WorkoutExercise[] = [];
   const completedExercises: WorkoutExercise[] = [];
 
-  exercises.forEach((exercise) => {
-    const exerciseSets = currentSession.sets?.filter((s) => s.exerciseId === exercise.exerciseId) || [];
+  exercises.forEach((exercise: WorkoutExercise) => {
+    const exerciseSets = currentSession.sets?.filter((s: WorkoutSet) => s.exerciseId === exercise.exerciseId) || [];
     const isCompleted = exerciseSets.length >= exercise.targetSets;
 
     if (isCompleted) {

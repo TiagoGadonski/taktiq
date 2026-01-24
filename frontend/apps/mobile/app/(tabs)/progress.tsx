@@ -86,23 +86,23 @@ export default function ProgressScreen() {
         <View className="px-6 mt-6">
           <Text className="text-foreground text-xl font-bold mb-4">Recordes Recentes</Text>
           <View className="space-y-3">
-            {dashboard.recentPRs.map((pr) => (
-              <View key={pr.id} className="bg-card rounded-xl p-4 border border-border">
+            {dashboard.recentPRs.map((pr, index) => (
+              <View key={pr.exerciseId + index} className="bg-card rounded-xl p-4 border border-border">
                 <View className="flex-row items-center justify-between">
                   <View className="flex-row items-center gap-3 flex-1">
                     <View className="bg-primary/10 rounded-full h-10 w-10 items-center justify-center">
                       <Ionicons name="trophy" size={20} color="#3b82f6" />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-foreground font-bold">{pr.exercise.name}</Text>
+                      <Text className="text-foreground font-bold">{pr.exerciseName}</Text>
                       <Text className="text-muted-foreground text-sm">
-                        {new Date(pr.achievedAt).toLocaleDateString('pt-BR')}
+                        {new Date(pr.achievedAt || pr.dateAchieved || '').toLocaleDateString('pt-BR')}
                       </Text>
                     </View>
                   </View>
                   <View className="items-end">
                     <Text className="text-primary text-lg font-bold">
-                      {pr.weight} kg
+                      {pr.weight || pr.maxLoad} kg
                     </Text>
                     <Text className="text-muted-foreground text-sm">{pr.reps} reps</Text>
                   </View>
@@ -143,7 +143,7 @@ export default function ProgressScreen() {
               .sort((a, b) => b.volume - a.volume)
               .slice(0, 5)
               .map((muscle, index) => {
-                const maxVolume = Math.max(...dashboard.volumeByMuscle.map((m) => m.volume));
+                const maxVolume = Math.max(...(dashboard.volumeByMuscle || []).map((m) => m.volume));
                 const percentage = (muscle.volume / maxVolume) * 100;
 
                 const muscleLabels: Record<string, string> = {
@@ -159,7 +159,7 @@ export default function ProgressScreen() {
                 return (
                   <View
                     key={muscle.muscleGroup}
-                    className={`py-3 ${index !== 4 && index !== dashboard.volumeByMuscle.length - 1 ? 'border-b border-border' : ''}`}
+                    className={`py-3 ${index !== 4 && index !== (dashboard.volumeByMuscle || []).length - 1 ? 'border-b border-border' : ''}`}
                   >
                     <View className="flex-row items-center justify-between mb-2">
                       <Text className="text-foreground font-medium">

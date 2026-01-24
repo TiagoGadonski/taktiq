@@ -10,14 +10,29 @@ using Microsoft.EntityFrameworkCore;
 namespace GymHero.Api.Endpoints;
 
 public record AIWorkoutRequest(
-    string Prompt,
-    string? FitnessLevel,
-    int? Duration,
-    List<string>? Equipment,
-    string? WorkoutLocation,  // ✅ "gym", "home", or "both" - overrides user profile preference
-    bool IncludeWarmup = false,        // ✅ Include warmup exercises (5-10 min)
-    bool IncludeCooldown = false,      // ✅ Include cooldown/stretching (5-10 min)
-    bool IncludeMobility = false       // ✅ Include mobility exercises
+    string Prompt,                              // Descricao livre do treino desejado
+    string? FitnessLevel,                       // "beginner", "intermediate", "advanced"
+    int? Duration,                              // Duracao em minutos
+    List<string>? Equipment,                    // Lista de equipamentos disponiveis
+    string? WorkoutLocation,                    // "gym", "home", or "both"
+    bool IncludeWarmup = false,                 // Incluir aquecimento (5-10 min)
+    bool IncludeCooldown = false,               // Incluir alongamento (5-10 min)
+    bool IncludeMobility = false,               // Incluir exercicios de mobilidade
+
+    // NOVOS CAMPOS ESTRUTURADOS
+    string? Goal = null,                        // "hipertrofia", "forca", "emagrecimento", "condicionamento", "saude"
+    string? SecondaryGoal = null,               // Objetivo secundario
+    List<string>? TargetMuscles = null,         // Musculos alvo especificos: ["peito", "triceps", "ombros"]
+    List<string>? PriorityMuscles = null,       // Musculos para priorizar
+    List<string>? AvoidMuscles = null,          // Musculos para evitar (lesao)
+    List<string>? Injuries = null,              // Lesoes/restricoes: ["ombro", "joelho", "lombar"]
+    List<string>? RestrictedExercises = null,   // Exercicios especificos a evitar
+    List<string>? FavoriteExercises = null,     // Exercicios favoritos (incluir se possivel)
+    string? TrainingSplit = null,               // Divisao: "fullbody", "upper_lower", "push_pull_legs", "abc"
+    string? IntensityPreference = null,         // "baixa", "moderada", "alta", "muito_alta"
+    int? SetsPerMuscle = null,                  // Numero de series por grupo muscular
+    string? RestPreference = null,              // "curto" (30-45s), "medio" (60-90s), "longo" (2-3min)
+    string? AdditionalNotes = null              // Notas adicionais do usuario/PT
 );
 
 public record AIWorkoutPlanRequest(
@@ -2395,6 +2410,244 @@ IMPORTANTE: Este é um plano de 4 semanas com periodização. Inclua instruçõe
         }
     }
 
+    // ========================================
+    // STRUCTURED CONTEXT BUILDERS
+    // ========================================
+
+    private static string BuildGoalContext(AIWorkoutRequest request)
+    {
+        if (string.IsNullOrWhiteSpace(request.Goal)) return "";
+
+        var sb = new StringBuilder();
+        sb.AppendLine("## 🎯 OBJETIVO DO TREINO (OBRIGATÓRIO SEGUIR)");
+        sb.AppendLine($"**OBJETIVO PRINCIPAL: {request.Goal.ToUpper()}**");
+
+        if (!string.IsNullOrWhiteSpace(request.SecondaryGoal))
+            sb.AppendLine($"- Objetivo secundário: {request.SecondaryGoal}");
+
+        // Adicionar diretrizes específicas por objetivo
+        var guidelines = request.Goal.ToLower() switch
+        {
+            "hipertrofia" => @"
+DIRETRIZES PARA HIPERTROFIA:
+- Volume: 10-20 séries por grupo muscular por semana
+- Repetições: 8-12 reps para maioria dos exercícios
+- Intensidade: 60-75% de 1RM
+- Descanso: 60-90 segundos entre séries
+- Priorizar exercícios compostos + isoladores
+- Tempo sob tensão: 40-70 segundos por série",
+
+            "força" or "forca" => @"
+DIRETRIZES PARA FORÇA:
+- Volume: 4-8 séries por exercício principal
+- Repetições: 3-6 reps para exercícios principais
+- Intensidade: 80-90% de 1RM
+- Descanso: 2-5 minutos entre séries pesadas
+- Priorizar exercícios compostos (agachamento, supino, terra, desenvolvimento)
+- Progressão de carga semanal",
+
+            "emagrecimento" or "perda de peso" or "definição" or "definicao" => @"
+DIRETRIZES PARA EMAGRECIMENTO/DEFINIÇÃO:
+- Volume: Alto (12-20 séries por sessão)
+- Repetições: 12-20 reps
+- Intensidade: 50-70% de 1RM
+- Descanso: 30-60 segundos (manter frequência cardíaca elevada)
+- Circuitos e superséries são bem-vindos
+- Incluir exercícios compostos para maior gasto calórico",
+
+            "condicionamento" or "resistencia" or "resistência" => @"
+DIRETRIZES PARA CONDICIONAMENTO:
+- Volume: Moderado a alto
+- Repetições: 15-25 reps ou por tempo
+- Intensidade: 40-60% de 1RM
+- Descanso: 30-45 segundos
+- Incluir circuitos funcionais
+- Misturar força e cardio
+- Exercícios dinâmicos e explosivos",
+
+            "saúde" or "saude" or "qualidade de vida" => @"
+DIRETRIZES PARA SAÚDE/QUALIDADE DE VIDA:
+- Volume: Moderado (8-15 séries por sessão)
+- Repetições: 10-15 reps
+- Intensidade: 50-70% de 1RM
+- Descanso: 60-90 segundos
+- Equilíbrio entre todos os grupos musculares
+- Incluir mobilidade e flexibilidade",
+
+            _ => ""
+        };
+
+        if (!string.IsNullOrEmpty(guidelines))
+            sb.AppendLine(guidelines);
+
+        return sb.ToString();
+    }
+
+    private static string BuildMuscleContext(AIWorkoutRequest request)
+    {
+        var sb = new StringBuilder();
+
+        if (request.TargetMuscles != null && request.TargetMuscles.Any())
+        {
+            sb.AppendLine("## 💪 MÚSCULOS ALVO (OBRIGATÓRIO - 100% dos exercícios devem ser para estes músculos)");
+            sb.AppendLine($"**MÚSCULOS: {string.Join(", ", request.TargetMuscles).ToUpper()}**");
+            sb.AppendLine("⚠️ TODOS os exercícios principais DEVEM trabalhar estes grupos musculares");
+            sb.AppendLine("⚠️ NÃO inclua exercícios para outros grupos musculares");
+            sb.AppendLine();
+        }
+
+        if (request.PriorityMuscles != null && request.PriorityMuscles.Any())
+        {
+            sb.AppendLine("## ⭐ MÚSCULOS PRIORITÁRIOS (Dar ênfase extra)");
+            sb.AppendLine($"Priorizar: {string.Join(", ", request.PriorityMuscles)}");
+            sb.AppendLine("- Incluir mais exercícios e volume para estes grupos");
+            sb.AppendLine();
+        }
+
+        if (request.AvoidMuscles != null && request.AvoidMuscles.Any())
+        {
+            sb.AppendLine("## ⛔ MÚSCULOS A EVITAR/REDUZIR");
+            sb.AppendLine($"Evitar: {string.Join(", ", request.AvoidMuscles)}");
+            sb.AppendLine("- Reduzir ou eliminar exercícios para estes grupos");
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    private static string BuildRestrictionContext(AIWorkoutRequest request)
+    {
+        var sb = new StringBuilder();
+        var hasRestrictions = false;
+
+        if ((request.Injuries != null && request.Injuries.Any()) ||
+            (request.RestrictedExercises != null && request.RestrictedExercises.Any()))
+        {
+            sb.AppendLine("## ⚠️ RESTRIÇÕES E LESÕES (CRÍTICO - OBRIGATÓRIO RESPEITAR)");
+            hasRestrictions = true;
+        }
+
+        if (request.Injuries != null && request.Injuries.Any())
+        {
+            sb.AppendLine($"🚫 **LESÕES/RESTRIÇÕES:** {string.Join(", ", request.Injuries)}");
+            sb.AppendLine("- NÃO inclua exercícios que possam agravar essas lesões");
+            sb.AppendLine("- Sugira alternativas seguras para cada região afetada");
+
+            // Mapeamento de lesões para exercícios a evitar
+            foreach (var injury in request.Injuries)
+            {
+                var injuryLower = injury.ToLower();
+                var avoidExercises = GetExercisesToAvoidForInjury(injuryLower);
+                if (avoidExercises.Any())
+                {
+                    sb.AppendLine($"  → Para {injury}: EVITAR {string.Join(", ", avoidExercises)}");
+                }
+            }
+            sb.AppendLine();
+        }
+
+        if (request.RestrictedExercises != null && request.RestrictedExercises.Any())
+        {
+            sb.AppendLine($"🚫 **EXERCÍCIOS PROIBIDOS:** {string.Join(", ", request.RestrictedExercises)}");
+            sb.AppendLine("- NÃO inclua NENHUM destes exercícios ou variações similares");
+            sb.AppendLine();
+        }
+
+        if (request.FavoriteExercises != null && request.FavoriteExercises.Any())
+        {
+            sb.AppendLine("## ✅ EXERCÍCIOS FAVORITOS (Incluir se possível)");
+            sb.AppendLine($"Favoritos: {string.Join(", ", request.FavoriteExercises)}");
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    private static List<string> GetExercisesToAvoidForInjury(string injury)
+    {
+        var avoidMap = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["ombro"] = new() { "Desenvolvimento atrás da nuca", "Remada alta", "Mergulho profundo", "Supino com pegada muito larga" },
+            ["shoulder"] = new() { "Behind neck press", "Upright row", "Deep dips" },
+            ["joelho"] = new() { "Agachamento profundo", "Leg extension com carga alta", "Saltos", "Corrida de impacto" },
+            ["knee"] = new() { "Deep squat", "Heavy leg extension", "Jumping exercises" },
+            ["lombar"] = new() { "Levantamento terra com lombar arqueada", "Good morning pesado", "Abdominal tradicional", "Russian twist com carga" },
+            ["lower back"] = new() { "Heavy deadlift", "Good morning", "Sit-ups", "Russian twist" },
+            ["cotovelo"] = new() { "Tríceps testa pesado", "Rosca concentrada com supinação forçada" },
+            ["elbow"] = new() { "Heavy skull crushers", "Forced supination curls" },
+            ["punho"] = new() { "Exercícios com pegada supinada pesada", "Flexão com punho dobrado" },
+            ["wrist"] = new() { "Heavy supinated grip exercises" },
+            ["cervical"] = new() { "Encolhimento com rotação", "Exercícios com pescoço em posição forçada" },
+            ["neck"] = new() { "Shrugs with rotation", "Forced neck positions" },
+            ["quadril"] = new() { "Agachamento muito profundo", "Leg press com amplitude excessiva" },
+            ["hip"] = new() { "Very deep squats", "Excessive range leg press" },
+        };
+
+        foreach (var (key, exercises) in avoidMap)
+        {
+            if (injury.Contains(key))
+                return exercises;
+        }
+
+        return new List<string>();
+    }
+
+    private static string BuildIntensityContext(AIWorkoutRequest request)
+    {
+        var sb = new StringBuilder();
+
+        if (!string.IsNullOrWhiteSpace(request.IntensityPreference) ||
+            request.SetsPerMuscle.HasValue ||
+            !string.IsNullOrWhiteSpace(request.RestPreference) ||
+            !string.IsNullOrWhiteSpace(request.TrainingSplit))
+        {
+            sb.AppendLine("## 📊 CONFIGURAÇÕES DE INTENSIDADE E VOLUME");
+
+            if (!string.IsNullOrWhiteSpace(request.IntensityPreference))
+            {
+                var intensityDesc = request.IntensityPreference.ToLower() switch
+                {
+                    "baixa" => "Intensidade BAIXA - cargas leves, foco em técnica, ideal para recuperação",
+                    "moderada" => "Intensidade MODERADA - cargas médias, bom equilíbrio entre volume e intensidade",
+                    "alta" => "Intensidade ALTA - cargas pesadas, menos repetições, mais descanso",
+                    "muito_alta" or "muito alta" => "Intensidade MUITO ALTA - cargas máximas, técnicas avançadas (drop sets, rest-pause)",
+                    _ => $"Intensidade: {request.IntensityPreference}"
+                };
+                sb.AppendLine($"- {intensityDesc}");
+            }
+
+            if (request.SetsPerMuscle.HasValue)
+            {
+                sb.AppendLine($"- Séries por grupo muscular: {request.SetsPerMuscle} séries");
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.RestPreference))
+            {
+                var restDesc = request.RestPreference.ToLower() switch
+                {
+                    "curto" => "Descanso CURTO (30-45 segundos) - ideal para definição/circuitos",
+                    "medio" or "médio" => "Descanso MÉDIO (60-90 segundos) - ideal para hipertrofia",
+                    "longo" => "Descanso LONGO (2-3 minutos) - ideal para força/cargas pesadas",
+                    _ => $"Descanso: {request.RestPreference}"
+                };
+                sb.AppendLine($"- {restDesc}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.TrainingSplit))
+            {
+                sb.AppendLine($"- Divisão de treino: {request.TrainingSplit}");
+            }
+
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    // ========================================
+    // USER PROFILE CONTEXT BUILDERS
+    // ========================================
+
     private static string BuildUserProfileContext(dynamic? userProfile)
     {
         if (userProfile == null) return "";
@@ -3214,12 +3467,24 @@ Retorne APENAS um JSON válido no seguinte formato:
         var fitnessLevel = request.FitnessLevel ?? "intermediário";
         var duration = request.Duration ?? 60;
 
+        // Build structured goal context
+        var goalContext = BuildGoalContext(request);
+        var muscleContext = BuildMuscleContext(request);
+        var restrictionContext = BuildRestrictionContext(request);
+        var intensityContext = BuildIntensityContext(request);
+
         var userPrompt = $@"Crie um treino personalizado COMPLETO seguindo EXATAMENTE estas especificações:
 
-REQUISITOS DO USUÁRIO:
+DESCRIÇÃO DO USUÁRIO:
 {request.Prompt}
 
 {profileContext}
+
+{goalContext}
+
+{muscleContext}
+
+{restrictionContext}
 
 {exerciseListContext}
 
@@ -3231,19 +3496,25 @@ $@"- EQUIPAMENTOS DISPONÍVEIS: {string.Join(", ", request.Equipment)}
   RESTRIÇÃO: Use APENAS os equipamentos listados acima." :
 "")}
 
+{intensityContext}
+
 OPÇÕES DE ESTRUTURA DO TREINO SELECIONADAS PELO USUÁRIO:
 - Incluir Aquecimento: {request.IncludeWarmup} {(request.IncludeWarmup ? "✅ (OBRIGATÓRIO - incluir aquecimento dinâmico de 5-10 min)" : "❌ (NÃO incluir)")}
 - Incluir Mobilidade Articular: {request.IncludeMobility} {(request.IncludeMobility ? "✅ (OBRIGATÓRIO - incluir 5-8 exercícios de mobilidade)" : "❌ (NÃO incluir)")}
 - Incluir Alongamento Final: {request.IncludeCooldown} {(request.IncludeCooldown ? "✅ (OBRIGATÓRIO - incluir alongamento estático de 5-10 min)" : "❌ (NÃO incluir)")}
 
+{(string.IsNullOrWhiteSpace(request.AdditionalNotes) ? "" : $@"OBSERVAÇÕES ADICIONAIS DO USUÁRIO/PERSONAL:
+{request.AdditionalNotes}")}
+
 INSTRUÇÕES CRÍTICAS:
 1. ⚠️⚠️⚠️ PRIORIDADE ABSOLUTA: Verifique o LOCAL DE TREINO PREFERIDO no perfil do usuário acima e RESPEITE 100%
 2. PERSONALIZE o treino baseado no perfil do usuário acima (idade, peso, altura, etc.)
-3. Se o usuário mencionar exercícios para EVITAR ou EXCLUIR, você DEVE respeitar isso COMPLETAMENTE
-3. Calcule o número adequado de exercícios para caber no tempo especificado
-4. Mantenha o treino balanceado e eficiente
-5. Inclua sempre instruções de segurança e técnica correta
-6. Considere possíveis limitações físicas baseadas na idade e condição física do usuário";
+3. Se houver exercícios para EVITAR ou EXCLUIR listados acima, você DEVE respeitar COMPLETAMENTE
+4. Se houver MÚSCULOS ALVO especificados, 100% dos exercícios principais DEVEM ser para esses músculos
+5. Calcule o número adequado de exercícios para caber no tempo especificado
+6. Mantenha o treino balanceado e eficiente
+7. Inclua sempre instruções de segurança e técnica correta
+8. Considere possíveis limitações físicas baseadas na idade e condição física do usuário";
 
         var payload = new
         {

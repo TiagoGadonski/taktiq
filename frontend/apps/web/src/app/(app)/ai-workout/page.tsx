@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { GenerateWorkoutForm, StructuredWorkoutRequest } from '@/components/ai-workout/generate-workout-form';
 
 // Types
 interface Exercise {
@@ -404,14 +405,7 @@ export default function AIWorkoutPage() {
 
   // Single workout mutation
   const generateWorkoutMutation = useMutation({
-    mutationFn: async (request: {
-      prompt: string;
-      fitnessLevel?: string;
-      workoutLocation?: string;
-      includeWarmup?: boolean;
-      includeCooldown?: boolean;
-      includeMobility?: boolean;
-    }) => {
+    mutationFn: async (request: StructuredWorkoutRequest) => {
       return apiClient.post<AIWorkoutResponse>('/ai/generate-workout', request);
     },
     onSuccess: (data) => {
@@ -461,6 +455,11 @@ export default function AIWorkoutPage() {
       });
     },
   });
+
+  // Handler for the new structured form
+  const handleStructuredGenerate = (request: StructuredWorkoutRequest) => {
+    generateWorkoutMutation.mutate(request);
+  };
 
   const handleGenerateWorkout = () => {
     if (!prompt.trim()) {
@@ -1114,242 +1113,94 @@ export default function AIWorkoutPage() {
 
         {/* Single Workout Tab */}
         <TabsContent value="workout" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Crie um treino personalizado</CardTitle>
-              <CardDescription>
-                Descreva o treino que você quer e a IA criará um plano detalhado com exercícios e instruções
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="prompt">Descreva seu treino ideal</Label>
-                <textarea
-                  id="prompt"
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="Ex: Treino de peito e tríceps para hipertrofia..."
-                  className="w-full min-h-[120px] p-3 rounded-md border border-input bg-background text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                  disabled={generateWorkoutMutation.isPending}
-                />
-              </div>
+          <GenerateWorkoutForm
+            onGenerate={handleStructuredGenerate}
+            isLoading={generateWorkoutMutation.isPending}
+            initialPrompt={todaysSplit ? `Treino de ${todaysSplit}` : ''}
+          />
 
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">Duração do Treino</Label>
-                <div className="grid grid-cols-4 gap-2">
-                  {[30, 45, 60, 90].map((mins) => (
-                    <button
-                      key={mins}
-                      onClick={() => setDuration(mins)}
-                      disabled={generateWorkoutMutation.isPending}
-                      className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
-                        duration === mins
-                          ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                          : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
-                      }`}
-                    >
-                      {mins} min
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label className="text-sm font-medium">Nível de Condicionamento</Label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {(['beginner', 'intermediate', 'advanced'] as const).map((level) => (
-                      <button
-                        key={level}
-                        onClick={() => setFitnessLevel(level)}
-                        disabled={generateWorkoutMutation.isPending}
-                        className={`px-2 py-1.5 text-xs rounded-md border transition-all ${
-                          fitnessLevel === level
-                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
-                        }`}
-                      >
-                        {level === 'beginner' && 'Iniciante'}
-                        {level === 'intermediate' && 'Interm.'}
-                        {level === 'advanced' && 'Avançado'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label className="text-sm font-medium">Local do Treino</Label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {(['gym', 'home', 'both'] as const).map((location) => (
-                      <button
-                        key={location}
-                        onClick={() => setWorkoutLocation(location)}
-                        disabled={generateWorkoutMutation.isPending}
-                        title={location === 'gym' ? 'Academia' : location === 'home' ? 'Casa' : 'Ambos'}
-                        className={`px-2 py-1.5 text-xs rounded-md border transition-all flex items-center justify-center ${
-                          workoutLocation === location
-                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
-                            : 'bg-background border-input hover:border-primary/50 hover:bg-accent/50'
-                        }`}
-                      >
-                        {location === 'gym' && <Building2 className="h-4 w-4" />}
-                        {location === 'home' && <Home className="h-4 w-4" />}
-                        {location === 'both' && <span className="text-xs">🏠🏋️</span>}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Warmup/Cooldown/Mobility Options */}
-              <Card>
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-sm">Opções do Treino</CardTitle>
-                  <CardDescription className="text-xs">
-                    Personalize a estrutura do seu treino
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
+          {/* Personal Trainer Configuration for Single Workout */}
+          {isPersonalTrainer && generatedWorkout && (
+            <Card className="border-2 border-primary/20 bg-primary/5">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  Configurações de Personal Trainer
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <RadioGroup value={singleWorkoutType} onValueChange={(value: 'personal' | 'student') => setSingleWorkoutType(value)}>
                   <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="warmup"
-                      checked={includeWarmup}
-                      onCheckedChange={(checked) => setIncludeWarmup(checked as boolean)}
-                      disabled={generateWorkoutMutation.isPending}
-                    />
-                    <Label htmlFor="warmup" className="text-sm font-normal cursor-pointer">
-                      Incluir aquecimento (5-10 min)
+                    <RadioGroupItem value="personal" id="single-personal" />
+                    <Label htmlFor="single-personal" className="font-normal cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <FileText className="h-4 w-4 text-muted-foreground" />
+                        <span>Treino Pessoal (para mim ou template)</span>
+                      </div>
                     </Label>
                   </div>
-
                   <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="mobility"
-                      checked={includeMobility}
-                      onCheckedChange={(checked) => setIncludeMobility(checked as boolean)}
-                      disabled={generateWorkoutMutation.isPending}
-                    />
-                    <Label htmlFor="mobility" className="text-sm font-normal cursor-pointer">
-                      Incluir mobilidade articular
+                    <RadioGroupItem value="student" id="single-student" />
+                    <Label htmlFor="single-student" className="font-normal cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span>Para Aluno Específico</span>
+                      </div>
                     </Label>
                   </div>
+                </RadioGroup>
 
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id="cooldown"
-                      checked={includeCooldown}
-                      onCheckedChange={(checked) => setIncludeCooldown(checked as boolean)}
-                      disabled={generateWorkoutMutation.isPending}
-                    />
-                    <Label htmlFor="cooldown" className="text-sm font-normal cursor-pointer">
-                      Incluir alongamento final (5-10 min)
-                    </Label>
+                {singleWorkoutType === 'student' && (
+                  <div className="space-y-3 pl-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="single-student-select" className="text-sm">Selecionar Aluno</Label>
+                      <Select value={singleWorkoutStudentId} onValueChange={setSingleWorkoutStudentId}>
+                        <SelectTrigger id="single-student-select">
+                          <SelectValue placeholder="Escolha um aluno" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {students?.map((student: any) => (
+                            <SelectItem key={student.id} value={student.id}>
+                              {student.name || student.email}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="single-expiration-weeks" className="text-sm">Expiração (semanas) *</Label>
+                      <input
+                        id="single-expiration-weeks"
+                        type="number"
+                        min="1"
+                        value={singleWorkoutExpirationWeeks}
+                        onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
+                        placeholder="Ex: 4"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      />
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-
-              {/* Personal Trainer Configuration for Single Workout */}
-              {isPersonalTrainer && (
-                <Card className="border-2 border-primary/20 bg-primary/5">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <User className="h-4 w-4" />
-                      Configurações de Personal Trainer
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <RadioGroup value={singleWorkoutType} onValueChange={(value: 'personal' | 'student') => setSingleWorkoutType(value)}>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="personal" id="single-personal" />
-                        <Label htmlFor="single-personal" className="font-normal cursor-pointer">
-                          <div className="flex items-center gap-2">
-                            <FileText className="h-4 w-4 text-muted-foreground" />
-                            <span>Treino Pessoal (para mim ou template)</span>
-                          </div>
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="student" id="single-student" />
-                        <Label htmlFor="single-student" className="font-normal cursor-pointer">
-                          <div className="flex items-center gap-2">
-                            <User className="h-4 w-4 text-muted-foreground" />
-                            <span>Para Aluno Específico</span>
-                          </div>
-                        </Label>
-                      </div>
-                    </RadioGroup>
-
-                    {singleWorkoutType === 'student' && (
-                      <div className="space-y-3 pl-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="single-student-select" className="text-sm">Selecionar Aluno</Label>
-                          <Select value={singleWorkoutStudentId} onValueChange={setSingleWorkoutStudentId}>
-                            <SelectTrigger id="single-student-select">
-                              <SelectValue placeholder="Escolha um aluno" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {students?.map((student: any) => (
-                                <SelectItem key={student.id} value={student.id}>
-                                  {student.name || student.email}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="single-expiration-weeks" className="text-sm">Expiração (semanas) *</Label>
-                          <input
-                            id="single-expiration-weeks"
-                            type="number"
-                            min="1"
-                            value={singleWorkoutExpirationWeeks}
-                            onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
-                            placeholder="Ex: 4"
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {singleWorkoutType === 'personal' && (
-                      <div className="pl-6 space-y-2">
-                        <div className="space-y-2">
-                          <Label htmlFor="single-expiration-weeks-optional" className="text-sm">Expiração (semanas) - Opcional</Label>
-                          <input
-                            id="single-expiration-weeks-optional"
-                            type="number"
-                            min="1"
-                            value={singleWorkoutExpirationWeeks}
-                            onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
-                            placeholder="Ex: 8"
-                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
-
-              <Button
-                onClick={handleGenerateWorkout}
-                disabled={generateWorkoutMutation.isPending}
-                className="w-full h-10"
-              >
-                {generateWorkoutMutation.isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Gerando treino...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Gerar Treino
-                  </>
                 )}
-              </Button>
-            </CardContent>
-          </Card>
+
+                {singleWorkoutType === 'personal' && (
+                  <div className="pl-6 space-y-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="single-expiration-weeks-optional" className="text-sm">Expiração (semanas) - Opcional</Label>
+                      <input
+                        id="single-expiration-weeks-optional"
+                        type="number"
+                        min="1"
+                        value={singleWorkoutExpirationWeeks}
+                        onChange={(e) => setSingleWorkoutExpirationWeeks(e.target.value)}
+                        placeholder="Ex: 8"
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      />
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Display generated workout */}
           {generatedWorkout && (

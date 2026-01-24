@@ -108,19 +108,19 @@ export default function HomeScreen() {
         {progress?.recentPRs && progress.recentPRs.length > 0 && (
           <View className="bg-card rounded-xl p-4 mt-4">
             <Text className="text-foreground text-lg font-bold mb-4">Recordes Recentes</Text>
-            {progress.recentPRs.slice(0, 3).map((pr) => (
+            {progress.recentPRs.slice(0, 3).map((pr, index) => (
               <View
-                key={pr.id}
+                key={pr.exerciseId + index}
                 className="flex-row items-center justify-between py-3 border-b border-muted"
               >
                 <View className="flex-1">
-                  <Text className="text-foreground font-medium">{pr.exercise.name}</Text>
+                  <Text className="text-foreground font-medium">{pr.exerciseName}</Text>
                   <Text className="text-muted-foreground text-sm">
-                    {new Date(pr.achievedAt).toLocaleDateString('pt-BR')}
+                    {new Date(pr.achievedAt || pr.dateAchieved || '').toLocaleDateString('pt-BR')}
                   </Text>
                 </View>
                 <Text className="text-primary font-bold">
-                  {pr.weight} kg × {pr.reps}
+                  {pr.weight || pr.maxLoad} kg × {pr.reps}
                 </Text>
               </View>
             ))}

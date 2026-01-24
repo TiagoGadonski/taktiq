@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '@/lib/api';
-import type { Challenge, ChallengeStatus } from '@gymhero/shared';
+import { ChallengeStatus, type Challenge } from '@gymhero/shared';
 
 export default function ChallengesScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -64,21 +64,21 @@ export default function ChallengesScreen() {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className={`px-4 py-2 rounded-lg ${filter === 'active' ? 'bg-primary' : 'bg-card border border-border'}`}
-            onPress={() => setFilter('active')}
+            className={`px-4 py-2 rounded-lg ${filter === ChallengeStatus.Active ? 'bg-primary' : 'bg-card border border-border'}`}
+            onPress={() => setFilter(ChallengeStatus.Active)}
           >
             <Text
-              className={`font-medium ${filter === 'active' ? 'text-primary-foreground' : 'text-foreground'}`}
+              className={`font-medium ${filter === ChallengeStatus.Active ? 'text-primary-foreground' : 'text-foreground'}`}
             >
               Ativos
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className={`px-4 py-2 rounded-lg ${filter === 'completed' ? 'bg-primary' : 'bg-card border border-border'}`}
-            onPress={() => setFilter('completed')}
+            className={`px-4 py-2 rounded-lg ${filter === ChallengeStatus.Completed ? 'bg-primary' : 'bg-card border border-border'}`}
+            onPress={() => setFilter(ChallengeStatus.Completed)}
           >
             <Text
-              className={`font-medium ${filter === 'completed' ? 'text-primary-foreground' : 'text-foreground'}`}
+              className={`font-medium ${filter === ChallengeStatus.Completed ? 'text-primary-foreground' : 'text-foreground'}`}
             >
               Concluídos
             </Text>
