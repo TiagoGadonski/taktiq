@@ -180,7 +180,6 @@ public static class ExerciseTranslations
         { "Tricep Kickback", "Triceps Coice" },
         { "Kickback", "Triceps Coice" },
         { "JM Press", "JM Press" },
-        { "Diamond Push Up", "Flexao Diamante" },
         { "Close Grip Push Up", "Flexao Pegada Fechada" },
 
         // PERNAS - QUADRICEPS
@@ -248,7 +247,6 @@ public static class ExerciseTranslations
         { "Cable Pull Through", "Pull Through no Cabo" },
         { "Cable Pull Through Sumo", "Pull Through Sumo no Cabo" },
         { "Frog Pump", "Frog Pump" },
-        { "Sumo Deadlift", "Levantamento Terra Sumo" },
 
         // PERNAS - PANTURRILHA
         { "Calf Raise", "Elevacao de Panturrilha" },
