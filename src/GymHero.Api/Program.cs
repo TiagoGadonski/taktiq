@@ -342,6 +342,14 @@ app.UseAuthorization();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
    .AllowAnonymous();
 
+// DEPLOY TEST - Added 2026-01-25 01:55
+app.MapGet("/deploy-test-v4", () => Results.Ok(new {
+    message = "Deploy v4 funcionando!",
+    deployedAt = "2026-01-25T01:55:00Z",
+    codeVersion = "4.0.0"
+}))
+   .AllowAnonymous();
+
 // Diagnostics endpoints for troubleshooting
 app.MapDiagnosticsEndpoints();
 
