@@ -384,6 +384,7 @@ app.MapFriendsEndpoints();
 app.MapUsersEndpoints();
 app.MapPublicEndpoints();
 app.MapAIEndpoints(); // AI-powered workout generation
+app.MapSimplifiedAIEndpoints(); // AI v2 - Simplified workout generation (quick workout & weekly plan)
 app.MapNotificationEndpoints();
 app.MapPostEndpoints(); // Personal Trainer blog posts
 app.MapCertificationEndpoints(); // Trainer certifications

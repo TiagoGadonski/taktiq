@@ -4657,4 +4657,805 @@ SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qu
             _ => ExerciseCategory.Strength
         };
     }
+
+    // ===========================================================================
+    // SIMPLIFIED AI WORKOUT GENERATION (v2) - Quick Workout & Weekly Plan
+    // ===========================================================================
+
+    public static void MapSimplifiedAIEndpoints(this IEndpointRouteBuilder app)
+    {
+        var group = app.MapGroup("/api/ai/v2")
+                       .WithTags("AI Features v2 - Simplified")
+                       .RequireAuthorization();
+
+        // Quick single workout generator (4 required fields)
+        group.MapPost("/quick-workout", GenerateQuickWorkout);
+
+        // Weekly plan generator (5 required fields)
+        group.MapPost("/weekly-plan", GenerateWeeklyPlan);
+
+        // Get available exercises with videos for a muscle group
+        group.MapGet("/exercises-with-video", GetExercisesWithVideo);
+    }
+
+    private static async Task<IResult> GenerateQuickWorkout(
+        [FromBody] GymHero.Shared.DTOs.QuickWorkoutRequest request,
+        ClaimsPrincipal user,
+        IConfiguration configuration,
+        IApplicationDbContext context,
+        ILogger<Program> logger,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Validation
+            if (string.IsNullOrEmpty(request.Goal) ||
+                string.IsNullOrEmpty(request.Level) ||
+                string.IsNullOrEmpty(request.Location) ||
+                request.MuscleGroups == null || !request.MuscleGroups.Any())
+            {
+                return Results.BadRequest(new { error = "Preencha objetivo, nível, local e músculos" });
+            }
+
+            logger.LogInformation("Generating quick workout: Goal={Goal}, Level={Level}, Location={Location}, Muscles={Muscles}",
+                request.Goal, request.Level, request.Location, string.Join(",", request.MuscleGroups));
+
+            // Get exercises from database WITH VIDEO ONLY
+            var exercisesWithVideo = await GetExercisesWithVideoFromDb(
+                context,
+                request.Location,
+                request.MuscleGroups,
+                request.Injuries,
+                logger);
+
+            if (!exercisesWithVideo.Any())
+            {
+                logger.LogWarning("No exercises with video found for the criteria");
+                return Results.BadRequest(new { error = "Não encontramos exercícios com vídeo para os critérios selecionados" });
+            }
+
+            logger.LogInformation("Found {Count} exercises with video for AI to use", exercisesWithVideo.Count);
+
+            var geminiApiKey = configuration["Gemini:ApiKey"];
+            if (string.IsNullOrEmpty(geminiApiKey))
+            {
+                return Results.BadRequest(new { error = "AI service not configured" });
+            }
+
+            // Build prompt with ONLY exercises that have video
+            var workout = await GenerateQuickWorkoutWithGemini(
+                request,
+                geminiApiKey,
+                exercisesWithVideo,
+                logger,
+                cancellationToken);
+
+            return Results.Ok(workout);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error generating quick workout");
+            return Results.BadRequest(new { error = ex.Message });
+        }
+    }
+
+    private static async Task<IResult> GenerateWeeklyPlan(
+        [FromBody] GymHero.Shared.DTOs.WeeklyPlanRequest request,
+        ClaimsPrincipal user,
+        IConfiguration configuration,
+        IApplicationDbContext context,
+        ILogger<Program> logger,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Validation
+            if (string.IsNullOrEmpty(request.Goal) ||
+                string.IsNullOrEmpty(request.Level) ||
+                string.IsNullOrEmpty(request.Location) ||
+                request.DaysPerWeek < 2 || request.DaysPerWeek > 6 ||
+                request.Weeks < 1 || request.Weeks > 12)
+            {
+                return Results.BadRequest(new { error = "Preencha objetivo, nível, local, dias por semana (2-6) e duração (1-12 semanas)" });
+            }
+
+            logger.LogInformation("Generating weekly plan: Goal={Goal}, Level={Level}, Days={Days}, Weeks={Weeks}",
+                request.Goal, request.Level, request.DaysPerWeek, request.Weeks);
+
+            // Get ALL exercises from database WITH VIDEO ONLY
+            var exercisesWithVideo = await GetExercisesWithVideoFromDb(
+                context,
+                request.Location,
+                null, // All muscle groups for a plan
+                request.Injuries,
+                logger);
+
+            if (exercisesWithVideo.Count < 20)
+            {
+                logger.LogWarning("Not enough exercises with video found: {Count}", exercisesWithVideo.Count);
+                return Results.BadRequest(new { error = "Não temos exercícios suficientes com vídeo. Execute o fix de exercícios primeiro." });
+            }
+
+            logger.LogInformation("Found {Count} exercises with video for weekly plan", exercisesWithVideo.Count);
+
+            var geminiApiKey = configuration["Gemini:ApiKey"];
+            if (string.IsNullOrEmpty(geminiApiKey))
+            {
+                return Results.BadRequest(new { error = "AI service not configured" });
+            }
+
+            var plan = await GenerateWeeklyPlanWithGemini(
+                request,
+                geminiApiKey,
+                exercisesWithVideo,
+                logger,
+                cancellationToken);
+
+            return Results.Ok(plan);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error generating weekly plan");
+            return Results.BadRequest(new { error = ex.Message });
+        }
+    }
+
+    private static async Task<IResult> GetExercisesWithVideo(
+        [FromQuery] string? location,
+        [FromQuery] string? muscleGroup,
+        IApplicationDbContext context,
+        ILogger<Program> logger)
+    {
+        var exercises = await GetExercisesWithVideoFromDb(
+            context,
+            location,
+            muscleGroup != null ? new List<string> { muscleGroup } : null,
+            null,
+            logger);
+
+        return Results.Ok(new
+        {
+            total = exercises.Count,
+            exercises = exercises.Select(e => new
+            {
+                e.Id,
+                e.Name,
+                e.MuscleGroup,
+                e.Equipment,
+                e.VideoUrl
+            })
+        });
+    }
+
+    // Get exercises from DB that have video URLs
+    private static async Task<List<ExerciseDbInfo>> GetExercisesWithVideoFromDb(
+        IApplicationDbContext context,
+        string? location,
+        List<string>? muscleGroups,
+        string? injuries,
+        ILogger logger)
+    {
+        var query = context.Exercises
+            .Where(e => e.VideoUrl != null && e.VideoUrl != ""); // ONLY exercises with video
+
+        // Filter by location
+        if (!string.IsNullOrEmpty(location))
+        {
+            var locationEnum = location.ToLower() switch
+            {
+                "casa" or "home" => WorkoutLocation.Home,
+                "academia" or "gym" => WorkoutLocation.Gym,
+                _ => WorkoutLocation.Both
+            };
+
+            if (locationEnum == WorkoutLocation.Home)
+            {
+                query = query.Where(e =>
+                    e.WorkoutLocation == WorkoutLocation.Home ||
+                    e.WorkoutLocation == WorkoutLocation.Both ||
+                    e.Equipment == Equipment.None);
+            }
+            else if (locationEnum == WorkoutLocation.Gym)
+            {
+                query = query.Where(e =>
+                    e.WorkoutLocation == WorkoutLocation.Gym ||
+                    e.WorkoutLocation == WorkoutLocation.Both);
+            }
+        }
+
+        // Filter by muscle groups (if not "Corpo Todo")
+        if (muscleGroups != null && muscleGroups.Any() && !muscleGroups.Contains("Corpo Todo"))
+        {
+            var muscleEnums = muscleGroups
+                .Select(m => ParseMuscleGroupForV2(m))
+                .Where(m => m.HasValue)
+                .Select(m => m!.Value)
+                .ToList();
+
+            if (muscleEnums.Any())
+            {
+                query = query.Where(e => muscleEnums.Contains(e.MuscleGroup));
+            }
+        }
+
+        var exercises = await query
+            .Select(e => new ExerciseDbInfo
+            {
+                Id = e.Id,
+                Name = e.Name,
+                MuscleGroup = e.MuscleGroup.ToString(),
+                Equipment = e.Equipment.ToString(),
+                Description = e.Description,
+                VideoUrl = e.VideoUrl,
+                ImageUrl = e.ImageUrl,
+                Difficulty = e.Difficulty.ToString()
+            })
+            .ToListAsync();
+
+        // Filter out exercises that might be contraindicated
+        if (!string.IsNullOrEmpty(injuries))
+        {
+            var lowerInjuries = injuries.ToLower();
+            exercises = exercises.Where(e =>
+            {
+                var lowerName = e.Name.ToLower();
+                // Simple filter - can be expanded
+                if (lowerInjuries.Contains("ombro") && (lowerName.Contains("desenvolvimento") || lowerName.Contains("shoulder press")))
+                    return false;
+                if (lowerInjuries.Contains("joelho") && (lowerName.Contains("agachamento") || lowerName.Contains("leg press")))
+                    return false;
+                if (lowerInjuries.Contains("lombar") && (lowerName.Contains("terra") || lowerName.Contains("deadlift")))
+                    return false;
+                return true;
+            }).ToList();
+        }
+
+        logger.LogInformation("Found {Count} exercises with video matching criteria", exercises.Count);
+        return exercises;
+    }
+
+    private static MuscleGroup? ParseMuscleGroupForV2(string muscle)
+    {
+        return muscle.ToLower().Trim() switch
+        {
+            "peito" or "chest" => MuscleGroup.Chest,
+            "costas" or "back" => MuscleGroup.Back,
+            "ombros" or "shoulders" => MuscleGroup.Shoulders,
+            "bíceps" or "biceps" => MuscleGroup.Biceps,
+            "tríceps" or "triceps" => MuscleGroup.Triceps,
+            "pernas" or "legs" or "quadríceps" or "quadriceps" => MuscleGroup.Quadriceps,
+            "posterior" or "hamstrings" => MuscleGroup.Hamstrings,
+            "glúteos" or "gluteos" or "glutes" => MuscleGroup.Glutes,
+            "panturrilha" or "calves" => MuscleGroup.Calves,
+            "abdômen" or "abdomen" or "core" => MuscleGroup.Core,
+            "antebraço" or "forearms" => MuscleGroup.Forearms,
+            "trapézio" or "trapezio" or "traps" => MuscleGroup.Back, // Trapezio maps to Back
+            "lombar" or "lower back" => MuscleGroup.LowerBack,
+            "corpo todo" or "full body" => MuscleGroup.FullBody,
+            _ => null
+        };
+    }
+
+    // Helper class to hold exercise info
+    private class ExerciseDbInfo
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = "";
+        public string MuscleGroup { get; set; } = "";
+        public string Equipment { get; set; } = "";
+        public string? Description { get; set; }
+        public string? VideoUrl { get; set; }
+        public string? ImageUrl { get; set; }
+        public string Difficulty { get; set; } = "";
+    }
+
+    private static async Task<GymHero.Shared.DTOs.QuickWorkoutResponse> GenerateQuickWorkoutWithGemini(
+        GymHero.Shared.DTOs.QuickWorkoutRequest request,
+        string apiKey,
+        List<ExerciseDbInfo> availableExercises,
+        ILogger logger,
+        CancellationToken cancellationToken)
+    {
+        using var httpClient = new HttpClient();
+        httpClient.Timeout = TimeSpan.FromSeconds(60);
+
+        // Build a focused exercise list grouped by muscle
+        var exercisesByMuscle = availableExercises
+            .GroupBy(e => e.MuscleGroup)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        var exerciseListText = new StringBuilder();
+        exerciseListText.AppendLine("EXERCÍCIOS DISPONÍVEIS (USE APENAS ESTES - CADA UM TEM VÍDEO):");
+        foreach (var group in exercisesByMuscle)
+        {
+            exerciseListText.AppendLine($"\n## {group.Key}:");
+            foreach (var ex in group.Value.Take(20)) // Limit to avoid token overflow
+            {
+                exerciseListText.AppendLine($"- ID: {ex.Id} | {ex.Name} ({ex.Equipment})");
+            }
+        }
+
+        var goalRules = request.Goal.ToLower() switch
+        {
+            "hipertrofia" => "HIPERTROFIA: 3-4 séries, 8-12 repetições, descanso 60-90s, foco em tempo sob tensão",
+            "emagrecimento" => "EMAGRECIMENTO: 3 séries, 12-15 repetições, descanso 30-45s, ritmo acelerado",
+            "força" or "forca" => "FORÇA: 4-5 séries, 4-6 repetições, descanso 2-3min, cargas pesadas",
+            "condicionamento" => "CONDICIONAMENTO: 2-3 séries, 15-20 repetições, descanso 30s, circuito",
+            _ => "3-4 séries, 10-12 repetições, descanso 60s"
+        };
+
+        var levelRules = request.Level.ToLower() switch
+        {
+            "iniciante" => "INICIANTE: máximo 5 exercícios principais, preferir máquinas, evitar exercícios complexos",
+            "intermediário" or "intermediario" => "INTERMEDIÁRIO: 6-7 exercícios principais, mistura de livres e máquinas",
+            "avançado" or "avancado" => "AVANÇADO: 7-8 exercícios principais, exercícios livres, pode incluir técnicas avançadas",
+            _ => "6 exercícios principais"
+        };
+
+        var systemPrompt = $@"Você é um personal trainer brasileiro criando um treino para HOJE.
+
+REGRAS CRÍTICAS:
+1. Use APENAS os exercícios da lista abaixo (com ID exato)
+2. {goalRules}
+3. {levelRules}
+4. Local: {request.Location} - respeite os equipamentos disponíveis
+5. Músculos alvo: {string.Join(", ", request.MuscleGroups)}
+{(!string.IsNullOrEmpty(request.Injuries) ? $"6. ⚠️ LESÕES - EVITAR: {request.Injuries}" : "")}
+
+{exerciseListText}
+
+FORMATO DE RESPOSTA (JSON VÁLIDO):
+{{
+  ""name"": ""Nome do treino (ex: Treino de Peito e Tríceps)"",
+  ""description"": ""Descrição curta do treino"",
+  ""estimatedDuration"": {request.Duration ?? 45},
+  ""goal"": ""{request.Goal}"",
+  ""level"": ""{request.Level}"",
+  ""warmup"": [
+    {{ ""exerciseId"": ""guid-aqui"", ""exerciseName"": ""nome"", ""sets"": 2, ""reps"": ""15"", ""restSeconds"": 30 }}
+  ],
+  ""main"": [
+    {{ ""exerciseId"": ""guid-aqui"", ""exerciseName"": ""nome"", ""muscleGroup"": ""grupo"", ""equipment"": ""equip"", ""sets"": 3, ""reps"": ""10-12"", ""restSeconds"": 60 }}
+  ],
+  ""cooldown"": [
+    {{ ""exerciseId"": ""guid-aqui"", ""exerciseName"": ""nome"", ""sets"": 1, ""reps"": ""30s"", ""restSeconds"": 0 }}
+  ]
+}}
+
+IMPORTANTE:
+- Use exerciseId EXATAMENTE como está na lista (é um GUID)
+- Inclua 2-3 exercícios de aquecimento dinâmico
+- Inclua o número de exercícios principais conforme o nível
+- Inclua 2-3 alongamentos no cooldown
+- Responda APENAS com JSON válido, sem texto adicional";
+
+        var payload = new
+        {
+            contents = new[]
+            {
+                new
+                {
+                    parts = new[]
+                    {
+                        new { text = systemPrompt }
+                    }
+                }
+            },
+            generationConfig = new
+            {
+                temperature = 0.7,
+                maxOutputTokens = 2048,
+                responseMimeType = "application/json"
+            }
+        };
+
+        var response = await httpClient.PostAsync(
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
+            new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"),
+            cancellationToken
+        );
+
+        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            logger.LogError("Gemini API error: {Error}", responseBody);
+            throw new Exception($"Gemini API error: {response.StatusCode}");
+        }
+
+        var jsonResponse = JsonDocument.Parse(responseBody);
+        var content = jsonResponse.RootElement
+            .GetProperty("candidates")[0]
+            .GetProperty("content")
+            .GetProperty("parts")[0]
+            .GetProperty("text")
+            .GetString();
+
+        if (string.IsNullOrEmpty(content))
+        {
+            throw new Exception("Gemini returned empty response");
+        }
+
+        // Clean up JSON
+        content = content.Trim();
+        if (content.StartsWith("```json")) content = content.Substring(7);
+        else if (content.StartsWith("```")) content = content.Substring(3);
+        if (content.EndsWith("```")) content = content.Substring(0, content.Length - 3);
+        content = content.Trim();
+
+        logger.LogInformation("Gemini response: {Content}", content.Substring(0, Math.Min(500, content.Length)));
+
+        // Parse the response
+        var workoutJson = JsonDocument.Parse(content);
+        var root = workoutJson.RootElement;
+
+        // Build response with validation
+        var warmupList = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+        var mainList = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+        var cooldownList = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+
+        // Parse warmup
+        if (root.TryGetProperty("warmup", out var warmup))
+        {
+            warmupList = ParseExerciseArray(warmup, availableExercises, "warmup", logger);
+        }
+
+        // Parse main
+        if (root.TryGetProperty("main", out var main))
+        {
+            mainList = ParseExerciseArray(main, availableExercises, "main", logger);
+        }
+
+        // Parse cooldown
+        if (root.TryGetProperty("cooldown", out var cooldown))
+        {
+            cooldownList = ParseExerciseArray(cooldown, availableExercises, "cooldown", logger);
+        }
+
+        // Ensure we have some exercises
+        if (!mainList.Any())
+        {
+            // Fallback: create workout from available exercises
+            logger.LogWarning("AI returned no valid main exercises, generating fallback");
+            mainList = GenerateFallbackExercises(availableExercises, request.MuscleGroups, request.Level, "main");
+        }
+
+        return new GymHero.Shared.DTOs.QuickWorkoutResponse(
+            Name: root.TryGetProperty("name", out var name) ? name.GetString() ?? "Treino Personalizado" : "Treino Personalizado",
+            Description: root.TryGetProperty("description", out var desc) ? desc.GetString() ?? "" : "",
+            EstimatedDuration: root.TryGetProperty("estimatedDuration", out var dur) ? dur.GetInt32() : request.Duration ?? 45,
+            Goal: request.Goal,
+            Level: request.Level,
+            Warmup: warmupList,
+            Main: mainList,
+            Cooldown: cooldownList
+        );
+    }
+
+    private static List<GymHero.Shared.DTOs.GeneratedExercise> ParseExerciseArray(
+        JsonElement array,
+        List<ExerciseDbInfo> availableExercises,
+        string exerciseType,
+        ILogger logger)
+    {
+        var result = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+        var exerciseDict = availableExercises.ToDictionary(e => e.Id, e => e);
+
+        foreach (var item in array.EnumerateArray())
+        {
+            try
+            {
+                var exerciseIdStr = item.TryGetProperty("exerciseId", out var idProp) ? idProp.GetString() : null;
+
+                if (string.IsNullOrEmpty(exerciseIdStr) || !Guid.TryParse(exerciseIdStr, out var exerciseId))
+                {
+                    // Try to find exercise by name
+                    var exName = item.TryGetProperty("exerciseName", out var nameProp) ? nameProp.GetString() : null;
+                    if (!string.IsNullOrEmpty(exName))
+                    {
+                        var matchedEx = availableExercises.FirstOrDefault(e =>
+                            e.Name.Equals(exName, StringComparison.OrdinalIgnoreCase) ||
+                            e.Name.Contains(exName, StringComparison.OrdinalIgnoreCase));
+
+                        if (matchedEx != null)
+                        {
+                            exerciseId = matchedEx.Id;
+                        }
+                        else
+                        {
+                            logger.LogWarning("Exercise not found by name: {Name}", exName);
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (!exerciseDict.TryGetValue(exerciseId, out var exerciseInfo))
+                {
+                    logger.LogWarning("Exercise ID not found in available exercises: {Id}", exerciseId);
+                    continue;
+                }
+
+                var sets = item.TryGetProperty("sets", out var setsProp) ? setsProp.GetInt32() : 3;
+                var reps = item.TryGetProperty("reps", out var repsProp) ? repsProp.GetString() ?? "12" : "12";
+                var rest = item.TryGetProperty("restSeconds", out var restProp) ? restProp.GetInt32() : 60;
+
+                result.Add(new GymHero.Shared.DTOs.GeneratedExercise(
+                    ExerciseId: exerciseId,
+                    ExerciseName: exerciseInfo.Name,
+                    MuscleGroup: exerciseInfo.MuscleGroup,
+                    Equipment: exerciseInfo.Equipment,
+                    Sets: sets,
+                    Reps: reps,
+                    RestSeconds: rest,
+                    VideoUrl: exerciseInfo.VideoUrl,
+                    ImageUrl: exerciseInfo.ImageUrl,
+                    Notes: null,
+                    ExerciseType: exerciseType
+                ));
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Error parsing exercise from AI response");
+            }
+        }
+
+        return result;
+    }
+
+    private static List<GymHero.Shared.DTOs.GeneratedExercise> GenerateFallbackExercises(
+        List<ExerciseDbInfo> availableExercises,
+        List<string> muscleGroups,
+        string level,
+        string exerciseType)
+    {
+        var result = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+        var count = level.ToLower() switch
+        {
+            "iniciante" => 5,
+            "avançado" or "avancado" => 8,
+            _ => 6
+        };
+
+        // Filter by muscle groups if specified
+        var filtered = muscleGroups.Contains("Corpo Todo")
+            ? availableExercises
+            : availableExercises.Where(e =>
+                muscleGroups.Any(m =>
+                    e.MuscleGroup.Contains(m, StringComparison.OrdinalIgnoreCase) ||
+                    ParseMuscleGroupForV2(m)?.ToString() == e.MuscleGroup)).ToList();
+
+        foreach (var ex in filtered.Take(count))
+        {
+            result.Add(new GymHero.Shared.DTOs.GeneratedExercise(
+                ExerciseId: ex.Id,
+                ExerciseName: ex.Name,
+                MuscleGroup: ex.MuscleGroup,
+                Equipment: ex.Equipment,
+                Sets: 3,
+                Reps: "10-12",
+                RestSeconds: 60,
+                VideoUrl: ex.VideoUrl,
+                ImageUrl: ex.ImageUrl,
+                Notes: null,
+                ExerciseType: exerciseType
+            ));
+        }
+
+        return result;
+    }
+
+    private static async Task<GymHero.Shared.DTOs.WeeklyPlanResponse> GenerateWeeklyPlanWithGemini(
+        GymHero.Shared.DTOs.WeeklyPlanRequest request,
+        string apiKey,
+        List<ExerciseDbInfo> availableExercises,
+        ILogger logger,
+        CancellationToken cancellationToken)
+    {
+        using var httpClient = new HttpClient();
+        httpClient.Timeout = TimeSpan.FromSeconds(120); // Longer timeout for plans
+
+        // Build exercise list grouped by muscle
+        var exercisesByMuscle = availableExercises
+            .GroupBy(e => e.MuscleGroup)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        var exerciseListText = new StringBuilder();
+        exerciseListText.AppendLine("EXERCÍCIOS DISPONÍVEIS (USE APENAS ESTES):");
+        foreach (var group in exercisesByMuscle)
+        {
+            exerciseListText.AppendLine($"\n## {group.Key}:");
+            foreach (var ex in group.Value.Take(15))
+            {
+                exerciseListText.AppendLine($"- ID: {ex.Id} | {ex.Name} ({ex.Equipment})");
+            }
+        }
+
+        var splitRecommendation = request.DaysPerWeek switch
+        {
+            2 => "Full Body (2 treinos de corpo inteiro)",
+            3 => "Full Body ou Push/Pull/Legs",
+            4 => "Upper/Lower (2x cada) ou ABCD",
+            5 => "Push/Pull/Legs + Upper/Lower ou ABCDE",
+            6 => "Push/Pull/Legs (2x cada)",
+            _ => "Adapte ao número de dias"
+        };
+
+        var goalRules = request.Goal.ToLower() switch
+        {
+            "hipertrofia" => "HIPERTROFIA: 3-4 séries, 8-12 reps, 60-90s descanso",
+            "emagrecimento" => "EMAGRECIMENTO: 3 séries, 12-15 reps, 30-45s descanso",
+            "força" or "forca" => "FORÇA: 4-5 séries, 4-6 reps, 2-3min descanso",
+            "condicionamento" => "CONDICIONAMENTO: 2-3 séries, 15-20 reps, 30s descanso",
+            _ => "3-4 séries, 10-12 reps, 60s descanso"
+        };
+
+        var systemPrompt = $@"Você é um personal trainer brasileiro criando um plano de treino de {request.Weeks} semanas.
+
+DADOS DO PLANO:
+- Objetivo: {request.Goal}
+- Nível: {request.Level}
+- Local: {request.Location}
+- Dias por semana: {request.DaysPerWeek}
+- Duração: {request.Weeks} semanas
+- Divisão sugerida: {(!string.IsNullOrEmpty(request.SplitType) ? request.SplitType : splitRecommendation)}
+{(request.PriorityMuscles?.Any() == true ? $"- Músculos para priorizar: {string.Join(", ", request.PriorityMuscles)}" : "")}
+{(!string.IsNullOrEmpty(request.Injuries) ? $"- ⚠️ LESÕES - EVITAR: {request.Injuries}" : "")}
+
+REGRAS:
+1. {goalRules}
+2. Use APENAS exercícios da lista abaixo (com ID exato)
+3. Progressão: aumente volume/intensidade a cada semana
+4. Última semana deve ser deload (volume reduzido em 40%)
+
+{exerciseListText}
+
+FORMATO DE RESPOSTA (JSON):
+{{
+  ""name"": ""Plano de {request.Weeks} Semanas - {request.Goal}"",
+  ""description"": ""Descrição do plano"",
+  ""goal"": ""{request.Goal}"",
+  ""level"": ""{request.Level}"",
+  ""splitType"": ""Nome da divisão"",
+  ""weeksCount"": {request.Weeks},
+  ""daysPerWeek"": {request.DaysPerWeek},
+  ""weeks"": [
+    {{
+      ""weekNumber"": 1,
+      ""focus"": ""Adaptação"",
+      ""workouts"": [
+        {{
+          ""dayNumber"": 1,
+          ""dayName"": ""Segunda"",
+          ""focus"": ""Peito e Tríceps"",
+          ""exercises"": [
+            {{ ""exerciseId"": ""guid"", ""exerciseName"": ""nome"", ""muscleGroup"": ""grupo"", ""equipment"": ""equip"", ""sets"": 3, ""reps"": ""10-12"", ""restSeconds"": 60 }}
+          ]
+        }}
+      ]
+    }}
+  ],
+  ""progressionNotes"": ""Notas sobre como progredir""
+}}
+
+IMPORTANTE: Responda APENAS JSON válido. Use exerciseId como GUID da lista.";
+
+        var payload = new
+        {
+            contents = new[]
+            {
+                new
+                {
+                    parts = new[]
+                    {
+                        new { text = systemPrompt }
+                    }
+                }
+            },
+            generationConfig = new
+            {
+                temperature = 0.7,
+                maxOutputTokens = 8192, // More tokens for full plan
+                responseMimeType = "application/json"
+            }
+        };
+
+        var response = await httpClient.PostAsync(
+            $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={apiKey}",
+            new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"),
+            cancellationToken
+        );
+
+        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            logger.LogError("Gemini API error: {Error}", responseBody);
+            throw new Exception($"Gemini API error: {response.StatusCode}");
+        }
+
+        var jsonResponse = JsonDocument.Parse(responseBody);
+        var content = jsonResponse.RootElement
+            .GetProperty("candidates")[0]
+            .GetProperty("content")
+            .GetProperty("parts")[0]
+            .GetProperty("text")
+            .GetString();
+
+        if (string.IsNullOrEmpty(content))
+        {
+            throw new Exception("Gemini returned empty response");
+        }
+
+        // Clean up JSON
+        content = content.Trim();
+        if (content.StartsWith("```json")) content = content.Substring(7);
+        else if (content.StartsWith("```")) content = content.Substring(3);
+        if (content.EndsWith("```")) content = content.Substring(0, content.Length - 3);
+        content = content.Trim();
+
+        logger.LogInformation("Gemini plan response length: {Length}", content.Length);
+
+        // Parse the response
+        var planJson = JsonDocument.Parse(content);
+        var root = planJson.RootElement;
+
+        // Build weeks list
+        var weeksList = new List<GymHero.Shared.DTOs.PlanWeek>();
+
+        if (root.TryGetProperty("weeks", out var weeks))
+        {
+            foreach (var weekEl in weeks.EnumerateArray())
+            {
+                var weekNumber = weekEl.TryGetProperty("weekNumber", out var wn) ? wn.GetInt32() : weeksList.Count + 1;
+                var weekFocus = weekEl.TryGetProperty("focus", out var wf) ? wf.GetString() ?? "" : "";
+
+                var workoutDays = new List<GymHero.Shared.DTOs.PlanWorkoutDay>();
+
+                if (weekEl.TryGetProperty("workouts", out var workouts))
+                {
+                    foreach (var workoutEl in workouts.EnumerateArray())
+                    {
+                        var dayNumber = workoutEl.TryGetProperty("dayNumber", out var dn) ? dn.GetInt32() : workoutDays.Count + 1;
+                        var dayName = workoutEl.TryGetProperty("dayName", out var dname) ? dname.GetString() ?? "" : "";
+                        var dayFocus = workoutEl.TryGetProperty("focus", out var df) ? df.GetString() ?? "" : "";
+
+                        var exercises = new List<GymHero.Shared.DTOs.GeneratedExercise>();
+                        if (workoutEl.TryGetProperty("exercises", out var exArray))
+                        {
+                            exercises = ParseExerciseArray(exArray, availableExercises, "main", logger);
+                        }
+
+                        workoutDays.Add(new GymHero.Shared.DTOs.PlanWorkoutDay(
+                            DayNumber: dayNumber,
+                            DayName: dayName,
+                            Focus: dayFocus,
+                            Exercises: exercises
+                        ));
+                    }
+                }
+
+                weeksList.Add(new GymHero.Shared.DTOs.PlanWeek(
+                    WeekNumber: weekNumber,
+                    Focus: weekFocus,
+                    Workouts: workoutDays
+                ));
+            }
+        }
+
+        return new GymHero.Shared.DTOs.WeeklyPlanResponse(
+            Name: root.TryGetProperty("name", out var name) ? name.GetString() ?? "Plano de Treino" : "Plano de Treino",
+            Description: root.TryGetProperty("description", out var desc) ? desc.GetString() ?? "" : "",
+            Goal: request.Goal,
+            Level: request.Level,
+            SplitType: root.TryGetProperty("splitType", out var split) ? split.GetString() ?? "" : "",
+            WeeksCount: request.Weeks,
+            DaysPerWeek: request.DaysPerWeek,
+            Weeks: weeksList,
+            ProgressionNotes: root.TryGetProperty("progressionNotes", out var prog) ? prog.GetString() ?? "" : ""
+        );
+    }
 }
