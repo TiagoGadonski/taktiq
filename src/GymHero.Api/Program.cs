@@ -88,6 +88,13 @@ else
 
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<GymHero.Api.Services.ExerciseMediaService>();
+
+// Configure JSON serialization to accept camelCase from frontend
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNameCaseInsensitive = true;
+    options.SerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+});
 builder.Services.AddSingleton<GymHero.Api.Services.IExerciseMediaService, GymHero.Api.Services.ExerciseMediaService>(sp =>
 {
     var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
