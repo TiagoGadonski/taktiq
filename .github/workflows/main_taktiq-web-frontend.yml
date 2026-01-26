@@ -208,7 +208,7 @@ jobs:
         run: |
           az webapp config set \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend \
+            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
             --startup-file "./start.sh"
 
       # Deploy using az CLI with zip (skip health check wait)
@@ -219,12 +219,12 @@ jobs:
           # Deploy without waiting for full startup (--async skips health check)
           az webapp deploy \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend \
+            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
             --src-path deploy.zip \
             --type zip \
             --timeout 300 || {
             echo "Deploy command timed out, but deployment may still be processing..."
-            echo "Check deployment status at: https://taktiq-web-frontend.scm.azurewebsites.net"
+            echo "Check deployment status at: https://taktiq-web-frontend-fzetgjhvhqbpdtc4.scm.brazilsouth-01.azurewebsites.net"
             exit 0
           }
 
@@ -235,8 +235,8 @@ jobs:
         run: |
           echo "=== Deployment initiated ==="
           echo "The app may take a few minutes to fully start."
-          echo "Monitor at: https://taktiq-web-frontend.scm.azurewebsites.net/api/deployments"
-          echo "App URL: https://taktiq-web-frontend.azurewebsites.net"
+          echo "Monitor at: https://taktiq-web-frontend-fzetgjhvhqbpdtc4.scm.brazilsouth-01.azurewebsites.net/api/deployments"
+          echo "App URL: https://taktiq-web-frontend-fzetgjhvhqbpdtc4.brazilsouth-01.azurewebsites.net"
 
           # Give it some time to start
           echo "Waiting 60 seconds for initial startup..."
@@ -245,5 +245,5 @@ jobs:
           # Try to check app status (non-blocking)
           az webapp show \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend \
+            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
             --query "state" -o tsv || echo "Could not check app state"
