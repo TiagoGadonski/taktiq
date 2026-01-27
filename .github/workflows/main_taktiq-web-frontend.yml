@@ -208,7 +208,7 @@ jobs:
         run: |
           az webapp config set \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
+            --name taktiq-web-frontend \
             --startup-file "./start.sh"
 
       # Deploy using az CLI with zip (skip health check wait)
@@ -219,7 +219,7 @@ jobs:
           # Deploy without waiting for full startup (--async skips health check)
           az webapp deploy \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
+            --name taktiq-web-frontend \
             --src-path deploy.zip \
             --type zip \
             --timeout 300 || {
@@ -245,5 +245,5 @@ jobs:
           # Try to check app status (non-blocking)
           az webapp show \
             --resource-group taktiqRecursos \
-            --name taktiq-web-frontend-fzetgjhvhqbpdtc4 \
+            --name taktiq-web-frontend \
             --query "state" -o tsv || echo "Could not check app state"
