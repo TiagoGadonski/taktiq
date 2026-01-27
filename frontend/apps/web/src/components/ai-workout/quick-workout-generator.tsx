@@ -567,34 +567,48 @@ function ExerciseSection({
 
 // Exercise Card Component
 function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index: number }) {
-  const [showVideo, setShowVideo] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  // Check if URL is a YouTube search URL (not an actual video)
+  const isYoutubeSearchUrl = exercise.videoUrl?.includes('youtube.com/results');
 
-  // Convert YouTube URL to embed format using youtube-nocookie.com for privacy
-  const getEmbedUrl = (url: string) => {
-    if (!url) return null;
-    // Handle various YouTube URL formats
+  // Check if URL is an actual embeddable video
+  const getVideoInfo = (url: string | undefined) => {
+    if (!url) return { canEmbed: false, embedUrl: null, searchUrl: null };
+
+    // YouTube search URLs - not embeddable
+    if (url.includes('youtube.com/results')) {
+      return { canEmbed: false, embedUrl: null, searchUrl: url };
+    }
+
+    // Extract video ID from actual video URLs
     const patterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
       /^([a-zA-Z0-9_-]{11})$/ // Just the video ID
     ];
+
     for (const pattern of patterns) {
       const match = url.match(pattern);
       if (match) {
-        return `https://www.youtube-nocookie.com/embed/${match[1]}?rel=0`;
+        return {
+          canEmbed: true,
+          embedUrl: `https://www.youtube-nocookie.com/embed/${match[1]}?rel=0`,
+          searchUrl: url
+        };
       }
     }
-    // If it's already an embed URL, just replace with nocookie domain
+
+    // Already an embed URL
     if (url.includes('youtube.com/embed/')) {
-      return url.replace('youtube.com', 'youtube-nocookie.com');
+      return {
+        canEmbed: true,
+        embedUrl: url.replace('youtube.com', 'youtube-nocookie.com'),
+        searchUrl: url
+      };
     }
-    return url;
+
+    return { canEmbed: false, embedUrl: null, searchUrl: url };
   };
 
-  const embedUrl = exercise.videoUrl ? getEmbedUrl(exercise.videoUrl) : null;
-  const directYoutubeUrl = exercise.videoUrl?.includes('youtube') || exercise.videoUrl?.includes('youtu.be')
-    ? exercise.videoUrl
-    : null;
+  const videoInfo = getVideoInfo(exercise.videoUrl);
 
   return (
     <div className="p-3 border rounded-xl bg-card hover:shadow-sm transition-shadow">
@@ -617,45 +631,25 @@ function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index:
           </div>
         </div>
         {exercise.videoUrl && (
-          <Button
-            variant={showVideo ? "default" : "outline"}
-            size="sm"
-            onClick={() => { setShowVideo(!showVideo); setVideoError(false); }}
+          <a
+            href={exercise.videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="shrink-0"
           >
-            <Video className="h-4 w-4" />
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1"
+            >
+              <Video className="h-4 w-4" />
+              <span className="text-xs hidden sm:inline">
+                {isYoutubeSearchUrl ? 'Pesquisar' : 'Ver'}
+              </span>
+            </Button>
+          </a>
         )}
       </div>
-
-      {showVideo && exercise.videoUrl && (
-        <div className="mt-3 pt-3 border-t">
-          {!videoError && embedUrl ? (
-            <iframe
-              src={embedUrl}
-              className="w-full aspect-video rounded-lg"
-              allowFullScreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              onError={() => setVideoError(true)}
-            />
-          ) : (
-            <div className="w-full aspect-video rounded-lg bg-muted flex flex-col items-center justify-center gap-2">
-              <Video className="h-8 w-8 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">Video nao pode ser carregado</p>
-              {directYoutubeUrl && (
-                <a
-                  href={directYoutubeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
-                >
-                  Abrir no YouTube
-                </a>
-              )}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
