@@ -4733,97 +4733,17 @@ SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qu
 
             logger.LogInformation("Found {Count} exercises with video for AI to use", exercisesWithVideo.Count);
 
-            // Get API keys
-            var geminiApiKey = configuration["Gemini:ApiKey"];
-            var openAiApiKey = configuration["OpenAI:ApiKey"];
-            var hasGemini = !string.IsNullOrEmpty(geminiApiKey);
-            var hasOpenAI = !string.IsNullOrEmpty(openAiApiKey);
+            // TEMPORARY: Skip AI and use database directly to test deployment
+            // TODO: Re-enable AI when API keys are working
+            logger.LogInformation("[V2-MOCK-ONLY] Generating workout directly from database (AI disabled for testing)");
 
-            logger.LogInformation("API Keys configured: Gemini={HasGemini}, OpenAI={HasOpenAI}", hasGemini, hasOpenAI);
+            var workout = GenerateMockQuickWorkout(request, exercisesWithVideo, logger);
 
-            GymHero.Shared.DTOs.QuickWorkoutResponse? workout = null;
-
-            // ===== TRY 1: GEMINI =====
-            if (hasGemini && workout == null)
-            {
-                try
-                {
-                    logger.LogInformation("[GEMINI] Starting API call...");
-                    workout = await GenerateQuickWorkoutWithGemini(
-                        request,
-                        geminiApiKey!,
-                        exercisesWithVideo,
-                        logger,
-                        cancellationToken);
-                    logger.LogInformation("[GEMINI] SUCCESS - workout generated");
-                }
-                catch (Exception geminiEx)
-                {
-                    logger.LogWarning("[GEMINI] FAILED: {Error}", geminiEx.Message);
-                    // Continue to next option
-                }
-            }
-
-            // ===== TRY 2: OPENAI =====
-            if (hasOpenAI && workout == null)
-            {
-                try
-                {
-                    logger.LogInformation("[OPENAI] Starting API call...");
-                    workout = await GenerateQuickWorkoutWithOpenAI(
-                        request,
-                        openAiApiKey!,
-                        exercisesWithVideo,
-                        logger,
-                        cancellationToken);
-                    logger.LogInformation("[OPENAI] SUCCESS - workout generated");
-                }
-                catch (Exception openAiEx)
-                {
-                    logger.LogWarning("[OPENAI] FAILED: {Error}", openAiEx.Message);
-                    // Continue to fallback
-                }
-            }
-
-            // ===== FALLBACK: DATABASE MOCK =====
-            if (workout == null)
-            {
-                try
-                {
-                    logger.LogInformation("[MOCK] Generating workout from database exercises...");
-                    workout = GenerateMockQuickWorkout(request, exercisesWithVideo, logger);
-                    logger.LogInformation("[MOCK] SUCCESS - workout generated from {Count} exercises",
-                        (workout.Warmup?.Count ?? 0) + (workout.Main?.Count ?? 0) + (workout.Cooldown?.Count ?? 0));
-                }
-                catch (Exception mockEx)
-                {
-                    logger.LogError(mockEx, "[MOCK] FAILED to generate mock workout!");
-                    // Return a minimal workout as absolute last resort
-                    workout = new GymHero.Shared.DTOs.QuickWorkoutResponse(
-                        Name: $"Treino de {string.Join(" e ", request.MuscleGroups)}",
-                        Description: "Treino gerado automaticamente",
-                        EstimatedDuration: request.Duration ?? 45,
-                        Goal: request.Goal,
-                        Level: request.Level,
-                        Warmup: new List<GymHero.Shared.DTOs.GeneratedExercise>(),
-                        Main: exercisesWithVideo.Take(6).Select(e => new GymHero.Shared.DTOs.GeneratedExercise(
-                            ExerciseId: e.Id,
-                            ExerciseName: e.Name,
-                            MuscleGroup: e.MuscleGroup,
-                            Equipment: e.Equipment,
-                            Sets: 3,
-                            Reps: "10-12",
-                            RestSeconds: 60,
-                            VideoUrl: e.VideoUrl,
-                            ImageUrl: e.ImageUrl,
-                            Notes: null,
-                            ExerciseType: "main"
-                        )).ToList(),
-                        Cooldown: new List<GymHero.Shared.DTOs.GeneratedExercise>()
-                    );
-                    logger.LogInformation("[FALLBACK] Created minimal workout with {Count} exercises", workout.Main.Count);
-                }
-            }
+            logger.LogInformation("[V2-MOCK-ONLY] SUCCESS - workout generated with {Total} exercises (warmup={W}, main={M}, cooldown={C})",
+                (workout.Warmup?.Count ?? 0) + (workout.Main?.Count ?? 0) + (workout.Cooldown?.Count ?? 0),
+                workout.Warmup?.Count ?? 0,
+                workout.Main?.Count ?? 0,
+                workout.Cooldown?.Count ?? 0);
 
             return Results.Ok(workout);
         }
