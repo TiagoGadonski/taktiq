@@ -112,9 +112,64 @@ public static class ExerciseSeeder
                 logger?.LogWarning("Exercises folder not found at: {Path}", exercisesFolderPath);
             }
 
+            // Also read legacy format files from the Seeders root folder
+            var seedersRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Seeders");
+            var legacyFiles = new[] { "exercises-seed.json", "calisthenics-exercises-seed.json", "calisthenics-exercises-complete.json" };
+
+            foreach (var legacyFileName in legacyFiles)
+            {
+                var legacyFilePath = Path.Combine(seedersRootPath, legacyFileName);
+                if (File.Exists(legacyFilePath))
+                {
+                    try
+                    {
+                        var jsonContent = await File.ReadAllTextAsync(legacyFilePath);
+                        var exercises = JsonSerializer.Deserialize<List<ExerciseJsonModelLegacy>>(jsonContent, new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
+
+                        if (exercises != null && exercises.Any())
+                        {
+                            var addedCount = 0;
+                            foreach (var model in exercises)
+                            {
+                                // Skip if exercise already exists
+                                if (existingExerciseNames.Contains(model.Name.ToLower()))
+                                    continue;
+
+                                try
+                                {
+                                    var exercise = ConvertLegacyModelToExercise(model);
+                                    allExercises.Add(exercise);
+                                    existingExerciseNames.Add(model.Name.ToLower());
+                                    addedCount++;
+                                }
+                                catch (Exception ex)
+                                {
+                                    logger?.LogWarning(ex, "Error converting legacy exercise: {Name} from {File}", model.Name, legacyFileName);
+                                }
+                            }
+                            logger?.LogInformation("Loaded {Added}/{Total} exercises from legacy file {File}", addedCount, exercises.Count, legacyFileName);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger?.LogWarning(ex, "Error reading legacy file: {File}", legacyFileName);
+                    }
+                }
+                else
+                {
+                    logger?.LogWarning("Legacy file not found: {File}", legacyFilePath);
+                }
+            }
+
+            // Update video URLs for existing exercises that have real YouTube video URLs
+            await UpdateExistingExerciseVideoUrls(context, exercisesFolderPath, logger);
+
             if (!allExercises.Any())
             {
-                logger?.LogWarning("No new exercises found to add.");
+                logger?.LogInformation("No new exercises found to add.");
                 return;
             }
 
@@ -154,6 +209,98 @@ public static class ExerciseSeeder
         }
     }
 
+    private static async Task UpdateExistingExerciseVideoUrls(ApplicationDbContext context, string exercisesFolderPath, ILogger? logger)
+    {
+        try
+        {
+            logger?.LogInformation("Checking for video URL updates for existing exercises...");
+
+            var videoUrlUpdates = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            // Read all JSON files to collect video URLs
+            if (Directory.Exists(exercisesFolderPath))
+            {
+                var jsonFiles = Directory.GetFiles(exercisesFolderPath, "*.json");
+
+                foreach (var jsonFile in jsonFiles)
+                {
+                    try
+                    {
+                        var jsonContent = await File.ReadAllTextAsync(jsonFile);
+                        var exercises = JsonSerializer.Deserialize<List<ExerciseJsonModelLegacy>>(jsonContent, new JsonSerializerOptions
+                        {
+                            PropertyNameCaseInsensitive = true
+                        });
+
+                        if (exercises != null)
+                        {
+                            foreach (var model in exercises)
+                            {
+                                // Only collect real YouTube video URLs (not search URLs)
+                                if (!string.IsNullOrEmpty(model.VideoUrl) &&
+                                    (model.VideoUrl.Contains("youtu.be/") ||
+                                     model.VideoUrl.Contains("youtube.com/watch") ||
+                                     model.VideoUrl.Contains("youtube.com/embed/")) &&
+                                    !model.VideoUrl.Contains("youtube.com/results"))
+                                {
+                                    videoUrlUpdates[model.Name] = model.VideoUrl;
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // Ignore parse errors for individual files
+                    }
+                }
+            }
+
+            if (!videoUrlUpdates.Any())
+            {
+                logger?.LogInformation("No real YouTube video URLs found in JSON files.");
+                return;
+            }
+
+            logger?.LogInformation("Found {Count} exercises with real YouTube video URLs to update", videoUrlUpdates.Count);
+
+            // Update existing exercises in database
+            var exerciseNames = videoUrlUpdates.Keys.ToList();
+            var existingExercises = await context.Exercises
+                .Where(e => exerciseNames.Contains(e.Name))
+                .ToListAsync();
+
+            var updatedCount = 0;
+            foreach (var exercise in existingExercises)
+            {
+                if (videoUrlUpdates.TryGetValue(exercise.Name, out var newVideoUrl))
+                {
+                    // Only update if the current URL is different and is a search URL
+                    if (exercise.VideoUrl != newVideoUrl &&
+                        (string.IsNullOrEmpty(exercise.VideoUrl) ||
+                         exercise.VideoUrl.Contains("youtube.com/results")))
+                    {
+                        exercise.VideoUrl = newVideoUrl;
+                        updatedCount++;
+                    }
+                }
+            }
+
+            if (updatedCount > 0)
+            {
+                await context.SaveChangesAsync();
+                logger?.LogInformation("Updated video URLs for {Count} existing exercises", updatedCount);
+            }
+            else
+            {
+                logger?.LogInformation("No video URL updates needed for existing exercises");
+            }
+        }
+        catch (Exception ex)
+        {
+            logger?.LogWarning(ex, "Error updating video URLs for existing exercises");
+        }
+    }
+
     private static Exercise ConvertNewModelToExercise(ExerciseJsonModelNew model)
     {
         // Get primary muscle group from first item in MusclesWorked list
@@ -179,6 +326,31 @@ public static class ExerciseSeeder
             ImageUrl = model.ImageUrl,
             WorkoutLocation = workoutLocation,
             IsPublic = true,
+            CreatedAt = DateTime.UtcNow
+        };
+    }
+
+    private static Exercise ConvertLegacyModelToExercise(ExerciseJsonModelLegacy model)
+    {
+        return new Exercise
+        {
+            Id = Guid.NewGuid(),
+            Name = model.Name,
+            Description = model.Description,
+            MuscleGroup = ParseMuscleGroup(model.MuscleGroup),
+            SecondaryMuscles = model.SecondaryMuscles?.Select(m => ParseMuscleGroup(m)).ToList(),
+            Equipment = ParseEquipment(model.Equipment),
+            Category = ParseCategory(model.Category),
+            Difficulty = ParseEnum<DifficultyLevel>(model.Difficulty),
+            Instructions = model.Instructions,
+            Tips = model.Tips,
+            CommonMistakes = model.CommonMistakes,
+            Notes = model.Notes,
+            VideoUrl = model.VideoUrl,
+            ImageUrl = model.ImageUrl,
+            ThumbnailUrl = model.ThumbnailUrl,
+            WorkoutLocation = ParseEnum<WorkoutLocation>(model.WorkoutLocation),
+            IsPublic = model.IsPublic,
             CreatedAt = DateTime.UtcNow
         };
     }
@@ -289,7 +461,7 @@ public static class ExerciseSeeder
 
         return normalized switch
         {
-            "strength" => ExerciseCategory.Strength,
+            "strength" or "compound" or "isolation" => ExerciseCategory.Strength,
             "cardio" => ExerciseCategory.Cardio,
             "stretching" or "stretch" => ExerciseCategory.Stretching,
             "plyometric" or "plyometrics" => ExerciseCategory.Plyometrics,
