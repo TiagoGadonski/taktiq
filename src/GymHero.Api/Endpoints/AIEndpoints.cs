@@ -4688,13 +4688,30 @@ SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qu
     {
         try
         {
-            // Validation
-            if (string.IsNullOrEmpty(request.Goal) ||
-                string.IsNullOrEmpty(request.Level) ||
-                string.IsNullOrEmpty(request.Location) ||
-                request.MuscleGroups == null || !request.MuscleGroups.Any())
+            // Debug logging - show what we received
+            logger.LogInformation("=== QuickWorkout Request Received ===");
+            logger.LogInformation("Goal: '{Goal}' | Level: '{Level}' | Location: '{Location}'",
+                request?.Goal ?? "NULL", request?.Level ?? "NULL", request?.Location ?? "NULL");
+            logger.LogInformation("MuscleGroups: {MuscleGroups}",
+                request?.MuscleGroups != null ? string.Join(",", request.MuscleGroups) : "NULL");
+
+            // Validation with detailed error
+            if (request == null)
             {
-                return Results.BadRequest(new { error = "Preencha objetivo, nível, local e músculos" });
+                logger.LogWarning("Request body is null!");
+                return Results.BadRequest(new { error = "Request body is null" });
+            }
+
+            var errors = new List<string>();
+            if (string.IsNullOrEmpty(request.Goal)) errors.Add("goal is empty");
+            if (string.IsNullOrEmpty(request.Level)) errors.Add("level is empty");
+            if (string.IsNullOrEmpty(request.Location)) errors.Add("location is empty");
+            if (request.MuscleGroups == null || !request.MuscleGroups.Any()) errors.Add("muscleGroups is empty or null");
+
+            if (errors.Any())
+            {
+                logger.LogWarning("Validation failed: {Errors}", string.Join(", ", errors));
+                return Results.BadRequest(new { error = "Preencha objetivo, nível, local e músculos", details = errors });
             }
 
             logger.LogInformation("Generating quick workout: Goal={Goal}, Level={Level}, Location={Location}, Muscles={Muscles}",
