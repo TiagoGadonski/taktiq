@@ -567,14 +567,13 @@ function ExerciseSection({
 
 // Exercise Card Component
 function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index: number }) {
-  // Check if URL is a YouTube search URL (not an actual video)
-  const isYoutubeSearchUrl = exercise.videoUrl?.includes('youtube.com/results');
+  const [showVideo, setShowVideo] = useState(false);
 
-  // Check if URL is an actual embeddable video
+  // Check if URL is an actual embeddable video (has video ID)
   const getVideoInfo = (url: string | undefined) => {
     if (!url) return { canEmbed: false, embedUrl: null, searchUrl: null };
 
-    // YouTube search URLs - not embeddable
+    // YouTube search URLs - not embeddable, but we can use them
     if (url.includes('youtube.com/results')) {
       return { canEmbed: false, embedUrl: null, searchUrl: url };
     }
@@ -591,17 +590,18 @@ function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index:
         return {
           canEmbed: true,
           embedUrl: `https://www.youtube-nocookie.com/embed/${match[1]}?rel=0`,
-          searchUrl: url
+          searchUrl: `https://www.youtube.com/watch?v=${match[1]}`
         };
       }
     }
 
     // Already an embed URL
     if (url.includes('youtube.com/embed/')) {
+      const idMatch = url.match(/embed\/([a-zA-Z0-9_-]{11})/);
       return {
         canEmbed: true,
         embedUrl: url.replace('youtube.com', 'youtube-nocookie.com'),
-        searchUrl: url
+        searchUrl: idMatch ? `https://www.youtube.com/watch?v=${idMatch[1]}` : url
       };
     }
 
@@ -631,25 +631,47 @@ function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index:
           </div>
         </div>
         {exercise.videoUrl && (
-          <a
-            href={exercise.videoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0"
-          >
+          videoInfo.canEmbed ? (
             <Button
-              variant="outline"
+              variant={showVideo ? "default" : "outline"}
               size="sm"
-              className="gap-1"
+              onClick={() => setShowVideo(!showVideo)}
+              className="shrink-0 gap-1"
             >
               <Video className="h-4 w-4" />
               <span className="text-xs hidden sm:inline">
-                {isYoutubeSearchUrl ? 'Pesquisar' : 'Ver'}
+                {showVideo ? 'Ocultar' : 'Ver'}
               </span>
             </Button>
-          </a>
+          ) : (
+            <a
+              href={videoInfo.searchUrl || exercise.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0"
+            >
+              <Button variant="outline" size="sm" className="gap-1">
+                <Video className="h-4 w-4" />
+                <span className="text-xs hidden sm:inline">Pesquisar</span>
+              </Button>
+            </a>
+          )
         )}
       </div>
+
+      {/* Embedded video player */}
+      {showVideo && videoInfo.canEmbed && videoInfo.embedUrl && (
+        <div className="mt-3 pt-3 border-t">
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              src={videoInfo.embedUrl}
+              className="absolute inset-0 w-full h-full rounded-lg"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
