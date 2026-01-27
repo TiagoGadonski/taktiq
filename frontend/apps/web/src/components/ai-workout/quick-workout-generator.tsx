@@ -568,6 +568,33 @@ function ExerciseSection({
 // Exercise Card Component
 function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index: number }) {
   const [showVideo, setShowVideo] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  // Convert YouTube URL to embed format using youtube-nocookie.com for privacy
+  const getEmbedUrl = (url: string) => {
+    if (!url) return null;
+    // Handle various YouTube URL formats
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+      /^([a-zA-Z0-9_-]{11})$/ // Just the video ID
+    ];
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match) {
+        return `https://www.youtube-nocookie.com/embed/${match[1]}?rel=0`;
+      }
+    }
+    // If it's already an embed URL, just replace with nocookie domain
+    if (url.includes('youtube.com/embed/')) {
+      return url.replace('youtube.com', 'youtube-nocookie.com');
+    }
+    return url;
+  };
+
+  const embedUrl = exercise.videoUrl ? getEmbedUrl(exercise.videoUrl) : null;
+  const directYoutubeUrl = exercise.videoUrl?.includes('youtube') || exercise.videoUrl?.includes('youtu.be')
+    ? exercise.videoUrl
+    : null;
 
   return (
     <div className="p-3 border rounded-xl bg-card hover:shadow-sm transition-shadow">
@@ -581,13 +608,19 @@ function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index:
             <span>{exercise.sets} x {exercise.reps}</span>
             <span>•</span>
             <span>{exercise.restSeconds}s descanso</span>
+            {exercise.equipment && (
+              <>
+                <span>•</span>
+                <span>{exercise.equipment}</span>
+              </>
+            )}
           </div>
         </div>
         {exercise.videoUrl && (
           <Button
             variant={showVideo ? "default" : "outline"}
             size="sm"
-            onClick={() => setShowVideo(!showVideo)}
+            onClick={() => { setShowVideo(!showVideo); setVideoError(false); }}
             className="shrink-0"
           >
             <Video className="h-4 w-4" />
@@ -597,11 +630,30 @@ function ExerciseCard({ exercise, index }: { exercise: GeneratedExercise; index:
 
       {showVideo && exercise.videoUrl && (
         <div className="mt-3 pt-3 border-t">
-          <iframe
-            src={exercise.videoUrl.replace('watch?v=', 'embed/')}
-            className="w-full aspect-video rounded-lg"
-            allowFullScreen
-          />
+          {!videoError && embedUrl ? (
+            <iframe
+              src={embedUrl}
+              className="w-full aspect-video rounded-lg"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              onError={() => setVideoError(true)}
+            />
+          ) : (
+            <div className="w-full aspect-video rounded-lg bg-muted flex flex-col items-center justify-center gap-2">
+              <Video className="h-8 w-8 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">Video nao pode ser carregado</p>
+              {directYoutubeUrl && (
+                <a
+                  href={directYoutubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline"
+                >
+                  Abrir no YouTube
+                </a>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
