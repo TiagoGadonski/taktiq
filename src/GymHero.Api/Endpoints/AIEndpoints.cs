@@ -4739,56 +4739,90 @@ SEJA ESPECÍFICO: Nas observações, mencione exatamente o que você viu e em qu
             var hasGemini = !string.IsNullOrEmpty(geminiApiKey);
             var hasOpenAI = !string.IsNullOrEmpty(openAiApiKey);
 
-            GymHero.Shared.DTOs.QuickWorkoutResponse? workout = null;
-            var generated = false;
+            logger.LogInformation("API Keys configured: Gemini={HasGemini}, OpenAI={HasOpenAI}", hasGemini, hasOpenAI);
 
-            // Try Gemini first
-            if (hasGemini)
+            GymHero.Shared.DTOs.QuickWorkoutResponse? workout = null;
+
+            // ===== TRY 1: GEMINI =====
+            if (hasGemini && workout == null)
             {
                 try
                 {
-                    logger.LogInformation("Calling Gemini API for quick workout generation...");
+                    logger.LogInformation("[GEMINI] Starting API call...");
                     workout = await GenerateQuickWorkoutWithGemini(
                         request,
                         geminiApiKey!,
                         exercisesWithVideo,
                         logger,
                         cancellationToken);
-                    logger.LogInformation("Successfully generated quick workout with Gemini");
-                    generated = true;
+                    logger.LogInformation("[GEMINI] SUCCESS - workout generated");
                 }
                 catch (Exception geminiEx)
                 {
-                    logger.LogWarning(geminiEx, "Gemini API call failed for quick workout. Trying OpenAI...");
+                    logger.LogWarning("[GEMINI] FAILED: {Error}", geminiEx.Message);
+                    // Continue to next option
                 }
             }
 
-            // Try OpenAI if Gemini failed
-            if (!generated && hasOpenAI)
+            // ===== TRY 2: OPENAI =====
+            if (hasOpenAI && workout == null)
             {
                 try
                 {
-                    logger.LogInformation("Calling OpenAI API for quick workout generation...");
+                    logger.LogInformation("[OPENAI] Starting API call...");
                     workout = await GenerateQuickWorkoutWithOpenAI(
                         request,
                         openAiApiKey!,
                         exercisesWithVideo,
                         logger,
                         cancellationToken);
-                    logger.LogInformation("Successfully generated quick workout with OpenAI");
-                    generated = true;
+                    logger.LogInformation("[OPENAI] SUCCESS - workout generated");
                 }
                 catch (Exception openAiEx)
                 {
-                    logger.LogWarning(openAiEx, "OpenAI API call failed for quick workout. Falling back to database generation...");
+                    logger.LogWarning("[OPENAI] FAILED: {Error}", openAiEx.Message);
+                    // Continue to fallback
                 }
             }
 
-            // Fallback: Generate directly from database exercises
-            if (!generated)
+            // ===== FALLBACK: DATABASE MOCK =====
+            if (workout == null)
             {
-                logger.LogWarning("All AI APIs failed or not configured. Using database-based generation.");
-                workout = GenerateMockQuickWorkout(request, exercisesWithVideo, logger);
+                try
+                {
+                    logger.LogInformation("[MOCK] Generating workout from database exercises...");
+                    workout = GenerateMockQuickWorkout(request, exercisesWithVideo, logger);
+                    logger.LogInformation("[MOCK] SUCCESS - workout generated from {Count} exercises",
+                        (workout.Warmup?.Count ?? 0) + (workout.Main?.Count ?? 0) + (workout.Cooldown?.Count ?? 0));
+                }
+                catch (Exception mockEx)
+                {
+                    logger.LogError(mockEx, "[MOCK] FAILED to generate mock workout!");
+                    // Return a minimal workout as absolute last resort
+                    workout = new GymHero.Shared.DTOs.QuickWorkoutResponse(
+                        Name: $"Treino de {string.Join(" e ", request.MuscleGroups)}",
+                        Description: "Treino gerado automaticamente",
+                        EstimatedDuration: request.Duration ?? 45,
+                        Goal: request.Goal,
+                        Level: request.Level,
+                        Warmup: new List<GymHero.Shared.DTOs.GeneratedExercise>(),
+                        Main: exercisesWithVideo.Take(6).Select(e => new GymHero.Shared.DTOs.GeneratedExercise(
+                            ExerciseId: e.Id,
+                            ExerciseName: e.Name,
+                            MuscleGroup: e.MuscleGroup,
+                            Equipment: e.Equipment,
+                            Sets: 3,
+                            Reps: "10-12",
+                            RestSeconds: 60,
+                            VideoUrl: e.VideoUrl,
+                            ImageUrl: e.ImageUrl,
+                            Notes: null,
+                            ExerciseType: "main"
+                        )).ToList(),
+                        Cooldown: new List<GymHero.Shared.DTOs.GeneratedExercise>()
+                    );
+                    logger.LogInformation("[FALLBACK] Created minimal workout with {Count} exercises", workout.Main.Count);
+                }
             }
 
             return Results.Ok(workout);
