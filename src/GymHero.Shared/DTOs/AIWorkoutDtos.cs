@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GymHero.Shared.DTOs;
 
 // ==========================================
@@ -7,92 +9,124 @@ namespace GymHero.Shared.DTOs;
 /// <summary>
 /// Request para gerar um treino unico (rapido, 4 campos obrigatorios)
 /// </summary>
-public record QuickWorkoutRequest(
-    string Goal,              // Hipertrofia, Emagrecimento, Forca, Condicionamento
-    string Level,             // Iniciante, Intermediario, Avancado
-    string Location,          // Academia, Casa
-    List<string> MuscleGroups, // Peito, Costas, Pernas, etc. ou "Corpo Todo"
-    int? Duration = null,      // Opcional: 30, 45, 60, 90 minutos
-    string? Injuries = null,   // Opcional: texto livre
-    string? Notes = null       // Opcional: texto livre
-);
+public class QuickWorkoutRequest
+{
+    [JsonPropertyName("goal")]
+    public string Goal { get; set; } = string.Empty;
+
+    [JsonPropertyName("level")]
+    public string Level { get; set; } = string.Empty;
+
+    [JsonPropertyName("location")]
+    public string Location { get; set; } = string.Empty;
+
+    [JsonPropertyName("muscleGroups")]
+    public List<string> MuscleGroups { get; set; } = new();
+
+    [JsonPropertyName("duration")]
+    public int? Duration { get; set; }
+
+    [JsonPropertyName("injuries")]
+    public string? Injuries { get; set; }
+
+    [JsonPropertyName("notes")]
+    public string? Notes { get; set; }
+}
 
 /// <summary>
 /// Request para gerar um plano semanal (5 campos obrigatorios)
 /// </summary>
-public record WeeklyPlanRequest(
-    string Goal,               // Hipertrofia, Emagrecimento, Forca, Condicionamento
-    string Level,              // Iniciante, Intermediario, Avancado
-    string Location,           // Academia, Casa
-    int DaysPerWeek,           // 2-6
-    int Weeks,                 // 4, 8, 12
-    string? SplitType = null,  // Opcional: Full Body, Upper/Lower, Push/Pull/Legs, ABC
-    List<string>? PriorityMuscles = null, // Opcional
-    string? Injuries = null,
-    string? Notes = null
-);
+public class WeeklyPlanRequest
+{
+    [JsonPropertyName("goal")]
+    public string Goal { get; set; } = string.Empty;
+
+    [JsonPropertyName("level")]
+    public string Level { get; set; } = string.Empty;
+
+    [JsonPropertyName("location")]
+    public string Location { get; set; } = string.Empty;
+
+    [JsonPropertyName("daysPerWeek")]
+    public int DaysPerWeek { get; set; }
+
+    [JsonPropertyName("weeks")]
+    public int Weeks { get; set; }
+
+    [JsonPropertyName("splitType")]
+    public string? SplitType { get; set; }
+
+    [JsonPropertyName("priorityMuscles")]
+    public List<string>? PriorityMuscles { get; set; }
+
+    [JsonPropertyName("injuries")]
+    public string? Injuries { get; set; }
+
+    [JsonPropertyName("notes")]
+    public string? Notes { get; set; }
+}
 
 /// <summary>
 /// Exercicio gerado pela IA com ID do banco
 /// </summary>
 public record GeneratedExercise(
-    Guid ExerciseId,
-    string ExerciseName,
-    string MuscleGroup,
-    string Equipment,
-    int Sets,
-    string Reps,
-    int RestSeconds,
-    string? VideoUrl = null,
-    string? ImageUrl = null,
-    string? Notes = null,
-    string? ExerciseType = null  // warmup, main, cooldown
+    [property: JsonPropertyName("exerciseId")] Guid ExerciseId,
+    [property: JsonPropertyName("exerciseName")] string ExerciseName,
+    [property: JsonPropertyName("muscleGroup")] string MuscleGroup,
+    [property: JsonPropertyName("equipment")] string Equipment,
+    [property: JsonPropertyName("sets")] int Sets,
+    [property: JsonPropertyName("reps")] string Reps,
+    [property: JsonPropertyName("restSeconds")] int RestSeconds,
+    [property: JsonPropertyName("videoUrl")] string? VideoUrl = null,
+    [property: JsonPropertyName("imageUrl")] string? ImageUrl = null,
+    [property: JsonPropertyName("notes")] string? Notes = null,
+    [property: JsonPropertyName("exerciseType")] string? ExerciseType = null
 );
 
 /// <summary>
 /// Response do treino gerado
 /// </summary>
 public record QuickWorkoutResponse(
-    string Name,
-    string Description,
-    int EstimatedDuration,
-    string Goal,
-    string Level,
-    List<GeneratedExercise> Warmup,
-    List<GeneratedExercise> Main,
-    List<GeneratedExercise> Cooldown
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("description")] string Description,
+    [property: JsonPropertyName("estimatedDuration")] int EstimatedDuration,
+    [property: JsonPropertyName("goal")] string Goal,
+    [property: JsonPropertyName("level")] string Level,
+    [property: JsonPropertyName("warmup")] List<GeneratedExercise> Warmup,
+    [property: JsonPropertyName("main")] List<GeneratedExercise> Main,
+    [property: JsonPropertyName("cooldown")] List<GeneratedExercise> Cooldown
 );
 
 /// <summary>
 /// Um dia de treino no plano semanal
 /// </summary>
 public record PlanWorkoutDay(
-    int DayNumber,
-    string DayName,
-    string Focus,
-    List<GeneratedExercise> Exercises
+    [property: JsonPropertyName("dayNumber")] int DayNumber,
+    [property: JsonPropertyName("dayName")] string DayName,
+    [property: JsonPropertyName("focus")] string Focus,
+    [property: JsonPropertyName("exercises")] List<GeneratedExercise> Exercises
 );
 
 /// <summary>
 /// Uma semana do plano
 /// </summary>
 public record PlanWeek(
-    int WeekNumber,
-    string Focus,  // Adaptacao, Volume, Intensidade, Deload
-    List<PlanWorkoutDay> Workouts
+    [property: JsonPropertyName("weekNumber")] int WeekNumber,
+    [property: JsonPropertyName("focus")] string Focus,
+    [property: JsonPropertyName("workouts")] List<PlanWorkoutDay> Workouts
 );
 
 /// <summary>
 /// Response do plano semanal gerado
 /// </summary>
 public record WeeklyPlanResponse(
-    string Name,
-    string Description,
-    string Goal,
-    string Level,
-    string SplitType,
-    int WeeksCount,
-    int DaysPerWeek,
-    List<PlanWeek> Weeks,
-    string ProgressionNotes
+    [property: JsonPropertyName("name")] string Name,
+    [property: JsonPropertyName("description")] string Description,
+    [property: JsonPropertyName("goal")] string Goal,
+    [property: JsonPropertyName("level")] string Level,
+    [property: JsonPropertyName("splitType")] string SplitType,
+    [property: JsonPropertyName("weeksCount")] int WeeksCount,
+    [property: JsonPropertyName("daysPerWeek")] int DaysPerWeek,
+    [property: JsonPropertyName("weeks")] List<PlanWeek> Weeks,
+    [property: JsonPropertyName("progressionNotes")] string ProgressionNotes
 );
