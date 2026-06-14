@@ -56,8 +56,7 @@ export default function AboutPage() {
     
   ];
 
-  // TODO: Atualize esta chave Pix com a sua chave real (pode ser email, CPF, CNPJ, telefone ou chave aleatória)
-  const pixKey = '[REDACTED]';
+  const pixKey = process.env.NEXT_PUBLIC_PIX_KEY ?? '';
 
   const copyPixKey = () => {
     navigator.clipboard.writeText(pixKey);
