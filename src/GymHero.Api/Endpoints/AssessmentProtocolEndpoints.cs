@@ -144,7 +144,6 @@ public static class AssessmentProtocolEndpoints
             catch (Exception ex)
             {
                 // Log but don't fail - store the raw measurements
-                Console.WriteLine($"Error calculating score: {ex.Message}");
             }
 
             // Create the result

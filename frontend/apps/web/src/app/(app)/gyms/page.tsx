@@ -183,7 +183,7 @@ export default function GymsNearMePage() {
   const getPhotoUrl = (photoReference?: string) => {
     if (!photoReference) return null;
     // In production, use actual Google Places Photo API
-    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoReference}&key=YOUR_API_KEY`;
+    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoReference}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""}`;
   };
 
   const openGymDetails = (gym: Gym) => {

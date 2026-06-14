@@ -89,7 +89,6 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Header */}
       <div className="glass rounded-xl p-6 border hover-lift">
         <div className="flex items-center gap-3 mb-2">
           <Button
@@ -111,7 +110,6 @@ export default function SettingsPage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Security Settings */}
         <Card className="glass border-primary/20 hover-lift">
           <CardHeader>
             <div className="flex items-center gap-2">
@@ -182,7 +180,6 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        {/* Appearance Settings */}
         <Card className="glass border-primary/20 hover-lift">
           <CardHeader>
             <div className="flex items-center gap-2">
@@ -212,7 +209,6 @@ export default function SettingsPage() {
         </Card>
       </div>
 
-      {/* Notification Preferences */}
       <Card className="glass border-primary/20 hover-lift">
         <CardHeader>
           <div className="flex items-center gap-2">

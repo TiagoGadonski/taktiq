@@ -10,12 +10,10 @@ public record CreateProgressPhotoRequest(
     BodyAngle BodyAngle,
     DateTime PhotoDate,
 
-    // Optional measurements
     double? WeightKg,
     double? BodyFatPercentage,
     double? MuscleMassKg,
 
-    // Optional circumferences
     double? ChestCm,
     double? WaistCm,
     double? HipsCm,
@@ -35,11 +33,9 @@ public record CreateProgressPhotoRequest(
     bool IsVisibleToStudent,
     bool IsPublic,
 
-    // Optional link to assessment
     Guid? StudentAssessmentId
 );
 
-// Response for progress photo
 public record ProgressPhotoResponse(
     Guid Id,
     Guid StudentId,

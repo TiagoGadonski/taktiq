@@ -48,8 +48,7 @@ public class ActivityLogService : IActivityLogService
         }
         catch (Exception ex)
         {
-            // Log to console but don't throw - we don't want logging failures to break the app
-            Console.WriteLine($"Failed to log activity: {ex.Message}");
+            // Swallow silently - logging failures must not break the caller
         }
     }
 

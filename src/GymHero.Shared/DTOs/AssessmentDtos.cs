@@ -1,13 +1,11 @@
 namespace GymHero.Shared.DTOs;
 
-// DTO para campos customizados
 public record CustomFieldDto(
     string FieldName,
     string FieldValue,
     string? FieldType  // "text", "number", "select"
 );
 
-// Request para criar nova avaliação
 public record CreateAssessmentRequest(
     Guid StudentId,
     string AssessmentType,  // "Postural", "Physical", "Neuromotor", "Custom"
@@ -36,7 +34,6 @@ public record CreateAssessmentRequest(
     string? TrainerNotes
 );
 
-// Request para atualizar avaliação existente
 public record UpdateAssessmentRequest(
     string AssessmentType,
 
@@ -64,7 +61,6 @@ public record UpdateAssessmentRequest(
     string? TrainerNotes
 );
 
-// Response resumido para lista de avaliações
 public record AssessmentResponse(
     Guid Id,
     Guid StudentId,
@@ -76,7 +72,6 @@ public record AssessmentResponse(
     string? Summary  // Resumo dos principais achados
 );
 
-// Response detalhado com todos os campos
 public record AssessmentDetailResponse(
     Guid Id,
     Guid StudentId,

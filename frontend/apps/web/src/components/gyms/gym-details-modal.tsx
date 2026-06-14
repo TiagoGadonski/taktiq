@@ -39,8 +39,7 @@ export function GymDetailsModal({ gym, open, onOpenChange }: GymDetailsModalProp
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${gym.geometry.location.lat},${gym.geometry.location.lng}&query_place_id=${gym.place_id}`;
 
   // Google Maps Embed API
-  // Note: Replace YOUR_GOOGLE_MAPS_API_KEY with actual API key in production
-  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY'}&q=place_id:${gym.place_id}&zoom=15`;
+  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""}&q=place_id:${gym.place_id}&zoom=15`;
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 

@@ -535,7 +535,6 @@ public static class AdminEndpoints
         .WithName("CreateCustomAdmin")
         .WithSummary("[DEV ONLY] Creates a custom admin user - DISABLED IN PRODUCTION");
 
-        // TODO: Temporarily disabled - will be replaced in TAREFA 2.3
         /*
         group.MapPost("/seed-exercises", async (ExerciseSeederService seeder, CancellationToken ct) =>
 {
@@ -615,7 +614,6 @@ public static class AdminEndpoints
         .WithName("EnhanceExercises")
         .WithSummary("Aprimora exercícios existentes com fotos, vídeos, descrições detalhadas e traduções para português");
 
-        // TODO: Temporarily disabled - will be replaced in TAREFA 2.3
         /*
         // Seed development data (ONLY FOR DEVELOPMENT)
         group.MapPost("/seed-dev-data", async (
