@@ -15,6 +15,7 @@ export const signupSchema = z.object({
     .regex(/[0-9]/, 'Senha deve conter pelo menos um número'),
   name: z.string().min(2, 'Nome deve ter no mínimo 2 caracteres'),
   preferredWorkoutLocation: z.number().int().min(0).max(2).default(0), // 0 = Gym, 1 = Home, 2 = Both
+  isPersonalTrainer: z.boolean().default(false),
 });
 
 export const resetPasswordSchema = z.object({
