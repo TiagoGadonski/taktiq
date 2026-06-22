@@ -21,6 +21,28 @@ interface VideoPlayerProps {
   muted?: boolean;
 }
 
+function getYouTubeEmbedUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    let videoId: string | null = null;
+
+    if (parsed.hostname.includes('youtube.com')) {
+      videoId = parsed.searchParams.get('v');
+      // handle /embed/ID and /shorts/ID
+      if (!videoId) {
+        const match = parsed.pathname.match(/\/(embed|shorts)\/([^/?]+)/);
+        if (match) videoId = match[2];
+      }
+    } else if (parsed.hostname === 'youtu.be') {
+      videoId = parsed.pathname.slice(1).split('?')[0];
+    }
+
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  } catch {
+    return null;
+  }
+}
+
 export function VideoPlayer({
   src,
   poster,
@@ -40,7 +62,11 @@ export function VideoPlayer({
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
 
+  const youtubeEmbedUrl = getYouTubeEmbedUrl(src);
+
   useEffect(() => {
+    if (youtubeEmbedUrl) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -72,7 +98,7 @@ export function VideoPlayer({
       video.removeEventListener('ended', handleEnded);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
-  }, []);
+  }, [youtubeEmbedUrl]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -132,6 +158,24 @@ export function VideoPlayer({
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  if (youtubeEmbedUrl) {
+    return (
+      <div
+        ref={containerRef}
+        className={`relative bg-black rounded-lg overflow-hidden ${className}`}
+        style={{ aspectRatio: '16/9' }}
+      >
+        <iframe
+          src={youtubeEmbedUrl}
+          title="Exercise video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full border-0"
+        />
+      </div>
+    );
+  }
 
   return (
     <div
