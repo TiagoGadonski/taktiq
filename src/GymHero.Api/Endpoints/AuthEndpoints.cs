@@ -38,7 +38,7 @@ public static class AuthEndpoints
             try
             {
                 var workoutLocation = (WorkoutLocation)request.PreferredWorkoutLocation;
-                var command = new RegisterCommand(request.Name, request.Email, request.Password, workoutLocation);
+                var command = new RegisterCommand(request.Name, request.Email, request.Password, workoutLocation, request.IsPersonalTrainer);
                 var result = await sender.Send(command);
 
                 logger.LogInformation("New user registered: {Email}", request.Email);

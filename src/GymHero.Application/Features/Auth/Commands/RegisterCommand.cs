@@ -4,5 +4,9 @@ using MediatR;
 
 namespace GymHero.Application.Features.Auth.Commands;
 
-// O comando encapsula os dados da requisição. Ele retorna uma AuthResponse.
-public record RegisterCommand(string Name, string Email, string Password, WorkoutLocation PreferredWorkoutLocation) : IRequest<AuthResponse>;
+public record RegisterCommand(
+    string Name,
+    string Email,
+    string Password,
+    WorkoutLocation PreferredWorkoutLocation,
+    bool IsPersonalTrainer = false) : IRequest<AuthResponse>;

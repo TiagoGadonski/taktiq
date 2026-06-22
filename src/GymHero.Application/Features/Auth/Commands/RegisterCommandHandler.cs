@@ -2,7 +2,10 @@ using GymHero.Application.Common.Interfaces;
 using GymHero.Shared.DTOs;
 using GymHero.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore; // Usamos extensões como 'AnyAsync'
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace GymHero.Application.Features.Auth.Commands;
 
@@ -21,47 +24,85 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
 
     public async Task<AuthResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        // 1. Regra de Negócio: Validar se o email já existe
         var userExists = await _context.Users.AnyAsync(u => u.Email == request.Email, cancellationToken);
         if (userExists)
-        {
-            // Poderíamos usar uma exceção customizada aqui.
             throw new Exception("User with this email already exists.");
-        }
 
-        // 2. Criar a entidade de domínio
         var user = new User
         {
             Name = request.Name,
             Email = request.Email,
             PasswordHash = _passwordHasher.Hash(request.Password),
-            PreferredWorkoutLocation = request.PreferredWorkoutLocation
+            PreferredWorkoutLocation = request.PreferredWorkoutLocation,
+            Role = request.IsPersonalTrainer ? "PersonalTrainer" : "Aluno",
         };
 
-        // 3. Adicionar ao DbContext e salvar no banco
+        if (request.IsPersonalTrainer)
+        {
+            user.ProfileSlug = await GenerateUniqueSlugAsync(request.Name, request.Email, cancellationToken);
+            user.IsPublicProfile = true;
+        }
+
         await _context.Users.AddAsync(user, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        // 3.1. Auto-atribuir desafios padrão ao novo utilizador
         await AssignDefaultChallenges(user, cancellationToken);
 
-        // 4. Gerar o token JWT
         var token = _jwtTokenGenerator.GenerateToken(user);
-
-        // 5. Retornar a resposta
         return new AuthResponse(user.Id, user.Name, user.Email, token);
+    }
+
+    private async Task<string> GenerateUniqueSlugAsync(string name, string email, CancellationToken cancellationToken)
+    {
+        var baseSlug = ToSlug(name);
+
+        if (string.IsNullOrEmpty(baseSlug) || baseSlug.Length < 2)
+            baseSlug = ToSlug(email.Split('@')[0]);
+
+        if (string.IsNullOrEmpty(baseSlug) || baseSlug.Length < 2)
+            baseSlug = "personal";
+
+        var candidate = baseSlug;
+        var suffix = 2;
+
+        while (await _context.Users.AnyAsync(u => u.ProfileSlug == candidate, cancellationToken))
+        {
+            candidate = $"{baseSlug}-{suffix}";
+            suffix++;
+        }
+
+        return candidate;
+    }
+
+    private static string ToSlug(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return string.Empty;
+
+        var normalized = input.Normalize(NormalizationForm.FormD);
+        var sb = new StringBuilder();
+
+        foreach (var c in normalized)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                sb.Append(c);
+        }
+
+        var slug = sb.ToString().Normalize(NormalizationForm.FormC).ToLowerInvariant();
+        slug = Regex.Replace(slug, @"[^a-z0-9\s-]", "");
+        slug = Regex.Replace(slug, @"[\s]+", "-");
+        slug = slug.Trim('-');
+        return slug;
     }
 
     private async Task AssignDefaultChallenges(User user, CancellationToken cancellationToken)
     {
-        // Obter todos os desafios padrão que se aplicam a este utilizador
         var defaultChallenges = await _context.Challenges
             .Where(c => c.IsDefault &&
                        (c.TargetType == Domain.Enums.ChallengeTargetType.AllUsers ||
                         (c.TargetType == Domain.Enums.ChallengeTargetType.AllTrainers && user.Role == "PersonalTrainer")))
             .ToListAsync(cancellationToken);
 
-        // Criar registos de progresso para cada desafio padrão
         foreach (var challenge in defaultChallenges)
         {
             var progress = new ChallengeProgress
@@ -75,10 +116,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthRespo
             await _context.ChallengeProgresses.AddAsync(progress, cancellationToken);
         }
 
-        // Guardar as alterações
         if (defaultChallenges.Any())
-        {
             await _context.SaveChangesAsync(cancellationToken);
-        }
     }
 }

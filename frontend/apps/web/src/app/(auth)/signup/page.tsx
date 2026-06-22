@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Dumbbell, Home } from 'lucide-react';
+import { Loader2, Dumbbell, Home, UserCheck, Users } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TaktIQLogo } from '@/components/taktiq-logo';
 import { useAuth } from '@/hooks/use-auth';
@@ -23,6 +23,7 @@ export default function SignupPage() {
     password: '',
     confirmPassword: '',
     preferredWorkoutLocation: 0, // 0 = Gym, 1 = Home
+    isPersonalTrainer: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,6 +63,7 @@ export default function SignupPage() {
         email: formData.email,
         password: formData.password,
         preferredWorkoutLocation: formData.preferredWorkoutLocation,
+        isPersonalTrainer: formData.isPersonalTrainer,
       });
       // The signup mutation handles token storage, redirect to dashboard, and success toast
     } catch (error) {
@@ -201,6 +203,60 @@ export default function SignupPage() {
               <p className="text-xs text-muted-foreground text-center">
                 Você poderá alterar isso depois nas configurações
               </p>
+            </div>
+
+
+            <div className="space-y-3">
+              <Label>Você é...</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, isPersonalTrainer: false })}
+                  disabled={isSignupPending}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    !formData.isPersonalTrainer
+                      ? "border-primary bg-primary/10 shadow-lg"
+                      : "border-border/50 hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <Users className={cn(
+                    "h-8 w-8 mb-2",
+                    !formData.isPersonalTrainer ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "font-semibold text-sm",
+                    !formData.isPersonalTrainer ? "text-primary" : "text-foreground"
+                  )}>
+                    Sou Aluno
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1">Quero treinar</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, isPersonalTrainer: true })}
+                  disabled={isSignupPending}
+                  className={cn(
+                    "relative flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all hover:scale-[1.02] active:scale-[0.98]",
+                    formData.isPersonalTrainer
+                      ? "border-primary bg-primary/10 shadow-lg"
+                      : "border-border/50 hover:border-primary/50 bg-muted/30"
+                  )}
+                >
+                  <UserCheck className={cn(
+                    "h-8 w-8 mb-2",
+                    formData.isPersonalTrainer ? "text-primary" : "text-muted-foreground"
+                  )} />
+                  <span className={cn(
+                    "font-semibold text-sm",
+                    formData.isPersonalTrainer ? "text-primary" : "text-foreground"
+                  )}>
+                    Sou Personal Trainer
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1">Quero ensinar</span>
+                </button>
+              </div>
             </div>
 
             <div className="flex items-start space-x-2 rounded-lg border border-border/50 p-4 bg-muted/30">

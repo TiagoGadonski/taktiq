@@ -19,6 +19,8 @@ public record RegisterRequest
 
     // Workout Location: 0 = Gym, 1 = Home, 2 = Both
     public int PreferredWorkoutLocation { get; set; } = 0;
+
+    public bool IsPersonalTrainer { get; set; } = false;
 }
 
 public record LoginRequest
