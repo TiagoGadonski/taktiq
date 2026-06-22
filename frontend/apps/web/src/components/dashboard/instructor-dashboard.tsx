@@ -18,6 +18,7 @@ import { api, apiClient } from '@/lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { FEATURE_FLAGS } from '@/lib/feature-flags';
 
 interface InstructorAnalytics {
   totalClients: number;
@@ -98,6 +99,7 @@ export function InstructorDashboard() {
           </Card>
         </Link>
 
+        {FEATURE_FLAGS.social && (
         <Link href="/instructor?tab=posts">
           <Card className="hover-lift tap-scale cursor-pointer border-primary/20 transition-all hover:border-primary/50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -114,7 +116,9 @@ export function InstructorDashboard() {
             </CardContent>
           </Card>
         </Link>
+        )}
 
+        {FEATURE_FLAGS.marketplace && (
         <Link href="/marketplace">
           <Card className="hover-lift tap-scale cursor-pointer border-primary/20 transition-all hover:border-primary/50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -131,6 +135,7 @@ export function InstructorDashboard() {
             </CardContent>
           </Card>
         </Link>
+        )}
       </div>
 
       {/* Main Actions */}
@@ -175,6 +180,7 @@ export function InstructorDashboard() {
           </CardContent>
         </Card>
 
+        {FEATURE_FLAGS.social && (
         <Card className="border-primary/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -194,6 +200,7 @@ export function InstructorDashboard() {
             </Link>
           </CardContent>
         </Card>
+        )}
 
         <Card className="border-primary/20">
           <CardHeader>

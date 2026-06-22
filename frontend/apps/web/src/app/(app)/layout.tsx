@@ -47,6 +47,7 @@ import { ChatDrawer } from '@/components/chat/chat-drawer';
 import { getAssetUrl } from '@/lib/env';
 import { useTheme } from 'next-themes';
 import { useChat } from '@/hooks/use-chat';
+import { FEATURE_FLAGS } from '@/lib/feature-flags';
 
 // Main navigation - 5 clean, intuitive tabs
 const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
@@ -54,7 +55,7 @@ const navigation: Array<{ name: string; href: string; icon: LucideIcon }> = [
   { name: 'Treinar', href: '/ai-workout', icon: Dumbbell },
   { name: 'Planos', href: '/plans', icon: Target },
   { name: 'Atividade', href: '/activity', icon: Activity },
-  { name: 'Comunidade', href: '/friends', icon: Users },
+  ...(FEATURE_FLAGS.social ? [{ name: 'Comunidade', href: '/friends', icon: Users }] : []),
 ];
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -205,7 +206,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 {/* Hide certain options for Personal Trainers */}
-                {user?.role !== 'PersonalTrainer' && (
+                {user?.role !== 'PersonalTrainer' && FEATURE_FLAGS.marketplace && (
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -363,7 +364,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 </DropdownMenuItem>
                 {/* Hide certain options for Personal Trainers */}
-                {user?.role !== 'PersonalTrainer' && (
+                {user?.role !== 'PersonalTrainer' && FEATURE_FLAGS.marketplace && (
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
